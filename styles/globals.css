@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+html {
+  scroll-behavior: auto;
+  background: var(--mist);
+}
+
+body {
+  background: var(--mist);
+  color: var(--navy);
+  font-family: var(--font-sans), "Inter", system-ui, sans-serif;
+  font-feature-settings: "ss01" on, "cv11" on;
+}
+
+.font-display {
+  font-family: var(--font-display), "Geist", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.035em;
+}
+
+.font-mono-label {
+  font-family: var(--font-mono), "Space Mono", ui-monospace, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--navy);
+  color: var(--mist);
+  padding: 0.75rem 1rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+html.is-loading body {
+  overflow: hidden;
+}
+
+html.is-loading [data-nav] {
+  opacity: 0;
+}
+
+html.is-loading .site-content {
+  opacity: 0;
+}
+
+html.motion-ready .site-content {
+  opacity: 1;
+}
+
+.line-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.split-line {
+  display: block;
+  transform: translate3d(0, 110%, 0);
+}
+
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+}
+
+.cover-grid {
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.is-loading .site-content,
+  .site-content,
+  [data-hero-line],
+  [data-hero-copy],
+  [data-hero-cta],
+  [data-reveal],
+  [data-image-reveal] {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .split-line {
+    transform: none;
+  }
+
+  .grain,
+  [data-cursor],
+  [data-ambient] {
+    display: none !important;
+  }
+}
+
+@media (pointer: coarse) {
+  [data-cursor] {
+    display: none !important;
+  }
+}

@@ -1,0 +1,89 @@
+import type { Metadata } from "next";
+import { Geist, Inter, Space_Mono } from "next/font/google";
+import "@/styles/globals.css";
+import ExperienceProvider from "@/components/providers/ExperienceProvider";
+import { site } from "@/lib/site";
+import { jsonLdScript, personJsonLd } from "@/lib/seo";
+
+const geist = Geist({
+  variable: "--font-display",
+  subsets: ["latin"],
+  display: "swap",
+  adjustFontFallback: true,
+});
+
+const inter = Inter({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  display: "swap",
+  adjustFontFallback: true,
+});
+
+const mono = Space_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  adjustFontFallback: true,
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: {
+    default: site.title,
+    template: `%s — ${site.name}`,
+  },
+  description: site.description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: site.title,
+    description: site.description,
+    url: site.url,
+    siteName: site.name,
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: site.title,
+    description: site.description,
+  },
+  icons: {
+    icon: "/favicon.svg",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="en"
+      className={`${geist.variable} ${inter.variable} ${mono.variable} h-full antialiased`}
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(!sessionStorage.getItem("rs-v8-visited")&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("is-loading")}}catch(e){}`,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLdScript(personJsonLd()) }}
+        />
+      </head>
+      <body className="flex min-h-full flex-col bg-mist text-navy">
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
+        <ExperienceProvider>{children}</ExperienceProvider>
+      </body>
+    </html>
+  );
+}

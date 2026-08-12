@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-hidden="true">
+  <rect width="1600" height="1000" fill="#0B1849"/>
+  <g stroke="#EBEDE3" stroke-opacity="0.14" fill="none"><line x1="0" y1="0" x2="0" y2="1000"/><line x1="80" y1="0" x2="80" y2="1000"/><line x1="160" y1="0" x2="160" y2="1000"/><line x1="240" y1="0" x2="240" y2="1000"/><line x1="320" y1="0" x2="320" y2="1000"/><line x1="400" y1="0" x2="400" y2="1000"/><line x1="480" y1="0" x2="480" y2="1000"/><line x1="560" y1="0" x2="560" y2="1000"/><line x1="640" y1="0" x2="640" y2="1000"/><line x1="720" y1="0" x2="720" y2="1000"/><line x1="800" y1="0" x2="800" y2="1000"/><line x1="880" y1="0" x2="880" y2="1000"/><line x1="960" y1="0" x2="960" y2="1000"/><line x1="1040" y1="0" x2="1040" y2="1000"/><line x1="1120" y1="0" x2="1120" y2="1000"/><line x1="1200" y1="0" x2="1200" y2="1000"/><line x1="1280" y1="0" x2="1280" y2="1000"/><line x1="1360" y1="0" x2="1360" y2="1000"/><line x1="1440" y1="0" x2="1440" y2="1000"/><line x1="1520" y1="0" x2="1520" y2="1000"/><line x1="1600" y1="0" x2="1600" y2="1000"/><line x1="0" y1="0" x2="1600" y2="0"/><line x1="0" y1="80" x2="1600" y2="80"/><line x1="0" y1="160" x2="1600" y2="160"/><line x1="0" y1="240" x2="1600" y2="240"/><line x1="0" y1="320" x2="1600" y2="320"/><line x1="0" y1="400" x2="1600" y2="400"/><line x1="0" y1="480" x2="1600" y2="480"/><line x1="0" y1="560" x2="1600" y2="560"/><line x1="0" y1="640" x2="1600" y2="640"/><line x1="0" y1="720" x2="1600" y2="720"/><line x1="0" y1="800" x2="1600" y2="800"/><line x1="0" y1="880" x2="1600" y2="880"/><line x1="0" y1="960" x2="1600" y2="960"/></g>
+  <rect x="80" y="80" width="48" height="4" fill="#E4B028"/>
+  <text x="80" y="140" font-family="ui-monospace, monospace" font-size="18" letter-spacing="6" fill="#E4B028">AI</text>
+  
+  <rect x="80" y="210" width="1100" height="112" fill="none" stroke="#EBEDE3" stroke-opacity="0.7"/>
+    <text x="104" y="278" font-family="ui-monospace, monospace" font-size="20" fill="#E4B028">01</text>
+    <text x="180" y="280" font-family="Georgia, serif" font-size="32" fill="#EBEDE3">Useful</text><rect x="128" y="350" width="1004" height="112" fill="none" stroke="#EBEDE3" stroke-opacity="0.6"/>
+    <text x="152" y="418" font-family="ui-monospace, monospace" font-size="20" fill="#E4B028">02</text>
+    <text x="228" y="420" font-family="Georgia, serif" font-size="32" fill="#EBEDE3">Understandable</text><rect x="176" y="490" width="908" height="112" fill="none" stroke="#EBEDE3" stroke-opacity="0.49999999999999994"/>
+    <text x="200" y="558" font-family="ui-monospace, monospace" font-size="20" fill="#E4B028">03</text>
+    <text x="276" y="560" font-family="Georgia, serif" font-size="32" fill="#EBEDE3">Correct enough</text><rect x="224" y="630" width="812" height="112" fill="none" stroke="#EBEDE3" stroke-opacity="0.3999999999999999"/>
+    <text x="248" y="698" font-family="ui-monospace, monospace" font-size="20" fill="#E4B028">04</text>
+    <text x="324" y="700" font-family="Georgia, serif" font-size="32" fill="#EBEDE3">Controllable</text>
+  <text x="80" y="900" font-family="Georgia, serif" font-size="42" fill="#EBEDE3">AI Trust Stack</text>
+  <text x="80" y="940" font-family="ui-monospace, monospace" font-size="16" letter-spacing="4" fill="#EBEDE3" fill-opacity="0.55">FIELD NOTE</text>
+</svg>

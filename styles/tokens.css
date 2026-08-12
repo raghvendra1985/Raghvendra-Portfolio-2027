@@ -1,0 +1,45 @@
+:root {
+  --navy: #0b1849;
+  --green: #124d1c;
+  --gold: #e4b028;
+  --mist: #ebede3;
+
+  --navy-soft: color-mix(in srgb, var(--navy) 72%, var(--mist));
+  --ink: var(--navy);
+  --ink-soft: color-mix(in srgb, var(--navy) 58%, var(--mist));
+  --line: color-mix(in srgb, var(--navy) 12%, transparent);
+  --line-strong: color-mix(in srgb, var(--navy) 28%, transparent);
+  --surface: var(--mist);
+  --surface-dim: color-mix(in srgb, var(--navy) 4%, var(--mist));
+
+  --duration-xs: 0.15s;
+  --duration-sm: 0.3s;
+  --duration-md: 0.6s;
+  --duration-lg: 1s;
+  --duration-xl: 1.6s;
+
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --focus: var(--gold);
+
+  --nav-height: 88px;
+  --nav-height-compact: 64px;
+  --page-pad: clamp(1.25rem, 4vw, 4.5rem);
+  --max-width: 1440px;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-green: var(--green);
+  --color-gold: var(--gold);
+  --color-mist: var(--mist);
+  --color-navy-soft: var(--navy-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
