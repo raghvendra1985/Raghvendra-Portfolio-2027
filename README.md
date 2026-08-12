@@ -1,6 +1,6 @@
-# raghvendra-portfolio-v8
+# Raghvendra-Portfolio-2027
 
-Sprint 1: cinematic experience engine for raghvendrasingh.com.
+Portfolio V8 for raghvendrasingh.com.
 
 Architecture: [PROJECT.md](./PROJECT.md). Motion modules: [animations/README.md](./animations/README.md).
 
@@ -9,4 +9,4 @@ npm install
 npm run dev
 ```
 
-Drop Neue Montreal `.woff2` files into `public/fonts/` when licensed. Geist is the active display fallback.
+Geist is the active display font via `next/font`.
