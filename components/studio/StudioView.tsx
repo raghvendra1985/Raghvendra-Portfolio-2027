@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/reveal/PageHero";
 import SectionReveal from "@/components/reveal/SectionReveal";
@@ -12,43 +13,96 @@ import {
   type StudioResource,
   type StudioTopic,
 } from "@/studio";
+import { amazonProductUrl } from "@/lib/site";
+
+function ResourceCover({
+  item,
+  href,
+  rel,
+  label,
+}: {
+  item: StudioResource;
+  href?: string;
+  rel: string;
+  label?: string;
+}) {
+  if (!item.image) return null;
+
+  const image = (
+    <Image
+      src={item.image}
+      alt={item.imageAlt ?? item.title}
+      width={280}
+      height={373}
+      unoptimized
+      className="h-auto w-[112px] bg-surface-dim sm:w-[140px]"
+    />
+  );
+
+  if (!href) return image;
+
+  return (
+    <a
+      href={href}
+      className="shrink-0"
+      data-cursor="Open"
+      target="_blank"
+      rel={rel}
+      aria-label={label ? `${label}: ${item.title}` : item.title}
+    >
+      {image}
+    </a>
+  );
+}
 
 function ResourceRow({ item }: { item: StudioResource }) {
   const meta = `${item.shelf} · ${item.topic}${item.current ? " · Currently reading" : ""}`;
-  const inner = (
-    <>
-      <p className="font-mono-label text-[11px] text-gold">{meta}</p>
-      <h3 className="mt-3 font-display text-xl sm:text-2xl">{item.title}</h3>
-      <p className="mt-1 text-sm text-green">{item.creator}</p>
-      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">{item.note}</p>
-    </>
+  const amazonHref = item.amazonAsin ? amazonProductUrl(item.amazonAsin) : undefined;
+  const buyHref = amazonHref ?? (item.buyLabel ? item.href : undefined);
+  const buyLabel = item.buyLabel ?? (amazonHref ? "Buy on Amazon" : undefined);
+  const imageRel = amazonHref ? "sponsored noopener noreferrer" : "noreferrer";
+
+  return (
+    <article className="flex items-start gap-5 border-t border-line py-8 sm:gap-8">
+      <ResourceCover item={item} href={buyHref} rel={imageRel} label={buyLabel} />
+      <div className="min-w-0 flex-1">
+        <p className="font-mono-label text-[11px] text-gold">{meta}</p>
+        <h3 className="mt-3 font-display text-xl sm:text-2xl">{item.title}</h3>
+        <p className="mt-1 text-sm text-green">{item.creator}</p>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">{item.note}</p>
+        <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+          {item.href && !item.buyLabel ? (
+            item.href.startsWith("http") ? (
+              <a
+                href={item.href}
+                className="font-mono-label text-[11px] text-navy"
+                data-cursor="Open"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open →
+              </a>
+            ) : (
+              <Link href={item.href} className="font-mono-label text-[11px] text-navy" data-cursor="Open">
+                Read note →
+              </Link>
+            )
+          ) : null}
+          {buyHref ? (
+            <a
+              href={buyHref}
+              className="font-mono-label text-[11px] text-navy"
+              data-cursor="Open"
+              target="_blank"
+              rel={amazonHref ? "sponsored noopener noreferrer" : "noreferrer"}
+            >
+              {buyLabel} →
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </article>
   );
-
-  const className = "block border-t border-line py-8";
-
-  if (item.href) {
-    const external = item.href.startsWith("http");
-    if (external) {
-      return (
-        <a
-          href={item.href}
-          className={className}
-          data-cursor="Open"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {inner}
-        </a>
-      );
-    }
-    return (
-      <Link href={item.href} className={className} data-cursor="Open">
-        {inner}
-      </Link>
-    );
-  }
-
-  return <article className={className}>{inner}</article>;
 }
 
 function OptionalPhotos({
@@ -117,6 +171,9 @@ export default function StudioView() {
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink-soft" data-reveal-item>
             A working shelf — books, essays, podcasts, and a few objects that changed how I work
             or live. Replace as the shelf changes.
+          </p>
+          <p className="mt-3 max-w-xl font-mono-label text-[11px] text-ink-soft" data-reveal-item>
+            Book links to Amazon are affiliate links. I earn from qualifying purchases.
           </p>
 
           <div

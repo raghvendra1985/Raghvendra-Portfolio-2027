@@ -20,6 +20,10 @@ export type StudioResource = {
   note: string;
   href?: string;
   current?: boolean;
+  image?: string;
+  imageAlt?: string;
+  amazonAsin?: string;
+  buyLabel?: string;
 };
 
 export type StudioCompanion = {
@@ -127,6 +131,9 @@ export const studioPage: StudioPage = {
       shelf: "Book",
       topic: "Design",
       note: "Still the cleanest argument that the interface is a model of human error, not decoration.",
+      image: "/assets/studio/books/design-of-everyday-things.png",
+      imageAlt: "The Design of Everyday Things by Don Norman — yellow revised edition with the teapot.",
+      amazonAsin: "0465050654",
     },
     {
       title: "Thinking in Systems",
@@ -134,6 +141,9 @@ export const studioPage: StudioPage = {
       shelf: "Book",
       topic: "Build & product",
       note: "The book I hand people who want more screens. Leverage points beat more artefacts.",
+      image: "/assets/studio/books/thinking-in-systems.png",
+      imageAlt: "Thinking in Systems: A Primer by Donella Meadows — white cover with a rainbow slinky.",
+      amazonAsin: "1603580557",
     },
     {
       title: "The Timeless Way of Building",
@@ -141,6 +151,9 @@ export const studioPage: StudioPage = {
       shelf: "Book",
       topic: "Design",
       note: "Pattern language as a way of seeing. Useful far beyond architecture.",
+      image: "/assets/studio/books/timeless-way-of-building.png",
+      imageAlt: "The Timeless Way of Building by Christopher Alexander — cream hardcover with a red circular drawing.",
+      amazonAsin: "0195024028",
     },
     {
       title: "Deep Work",
@@ -149,6 +162,9 @@ export const studioPage: StudioPage = {
       topic: "Productivity",
       current: true,
       note: "Not a productivity hack shelf. A reminder that attention is the scarce material.",
+      image: "/assets/studio/books/deep-work.png",
+      imageAlt: "Deep Work by Cal Newport — white cover with a desk lamp and a cone of yellow light.",
+      amazonAsin: "0349413681",
     },
     {
       title: "Four Thousand Weeks",
@@ -156,6 +172,9 @@ export const studioPage: StudioPage = {
       shelf: "Book",
       topic: "Self-awareness",
       note: "Finite time, without the optimisation theatre. Keeps the garden and the job in one life.",
+      image: "/assets/studio/books/four-thousand-weeks.png",
+      imageAlt: "Four Thousand Weeks by Oliver Burkeman — landscape cover with a lakeside bench.",
+      amazonAsin: "1784704008",
     },
     {
       title: "The Intelligence Illusion",
@@ -163,7 +182,10 @@ export const studioPage: StudioPage = {
       shelf: "Book",
       topic: "AI",
       note: "A useful counterweight when AI products start sounding more intelligent than they are.",
-      href: "https://www.theintelligenceillusion.com/",
+      image: "/assets/studio/books/intelligence-illusion.png",
+      imageAlt: "The Intelligence Illusion, Second Edition — black cover with a wireframe head.",
+      href: "https://illusion.baldurbjarnason.com/",
+      buyLabel: "Buy from the author",
     },
     {
       title: "Stop designing screens. Start designing decisions.",

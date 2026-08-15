@@ -10,7 +10,18 @@ export const site = {
   status: "Open to selected opportunities",
   statusDetail:
     "Available for remote product leadership, advisory, and selected collaborations.",
+  /** Amazon.in Associates tracking ID. Set NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG on Vercel. */
+  amazonAssociatesTag: process.env.NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG ?? "",
+  amazonStore: "https://www.amazon.in",
 };
+
+export function amazonProductUrl(asin: string) {
+  const url = new URL(`/dp/${asin}`, site.amazonStore);
+  if (site.amazonAssociatesTag) {
+    url.searchParams.set("tag", site.amazonAssociatesTag);
+  }
+  return url.toString();
+}
 
 export const navLinks = [
   { label: "Work", href: "/work" },
