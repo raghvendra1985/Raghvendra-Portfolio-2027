@@ -48,7 +48,7 @@ export default function PageHero({
       </p>
       <h1
         data-hero-headline
-        className="mt-6 max-w-4xl font-display text-4xl leading-[1.05] text-navy sm:text-6xl"
+        className="mt-6 max-w-4xl font-display text-[clamp(2rem,7vw,3.75rem)] leading-[1.12] text-navy lg:text-6xl lg:leading-[1.05]"
       >
         {title}
       </h1>

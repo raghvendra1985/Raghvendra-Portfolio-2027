@@ -55,7 +55,7 @@ export default function ContactPage() {
             </a>
           </div>
         </div>
-        <div data-reveal-item className="border border-line p-8">
+        <div data-reveal-item className="border border-line p-5 sm:p-8">
           <ContactForm />
         </div>
       </SectionReveal>

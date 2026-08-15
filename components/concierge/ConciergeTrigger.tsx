@@ -57,7 +57,7 @@ export default function ConciergeTrigger({
         variant="float"
         source="float"
         cursor
-        className={`fixed bottom-8 right-6 z-[55] hidden border border-navy/20 bg-mist/95 px-4 py-3 font-mono-label text-[11px] text-navy shadow-sm backdrop-blur md:inline-flex ${className}`}
+        className={`fixed bottom-8 right-6 z-[55] hidden min-h-11 border border-navy/20 bg-mist/95 px-4 py-3 font-mono-label text-navy shadow-sm backdrop-blur lg:inline-flex ${className}`}
       >
         Ask
         <span className="ml-3 text-ink-soft" aria-hidden="true">
@@ -72,7 +72,7 @@ export default function ConciergeTrigger({
       <TriggerButton
         variant="mobile-bar"
         source="mobile-bar"
-        className={`fixed bottom-5 right-4 z-[55] border border-navy/20 bg-mist/95 px-3 py-2.5 font-mono-label text-[11px] text-navy shadow-sm backdrop-blur md:hidden ${className}`}
+        className={`fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 z-[55] min-h-11 border border-navy/20 bg-mist/95 px-4 py-3 font-mono-label text-navy shadow-sm backdrop-blur lg:hidden ${className}`}
       >
         Ask
       </TriggerButton>
@@ -96,7 +96,7 @@ export default function ConciergeTrigger({
       variant="nav"
       source="nav"
       cursor
-      className={`hidden items-center gap-2 font-mono-label text-[11px] text-ink-soft hover:text-navy md:inline-flex ${className}`}
+      className={`hidden min-h-11 items-center gap-2 font-mono-label text-ink-soft hover:text-navy lg:inline-flex ${className}`}
     >
       Ask
       <kbd className="border border-line px-1.5 py-0.5 text-[10px] text-ink-soft">⌘K</kbd>

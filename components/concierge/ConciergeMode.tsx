@@ -31,7 +31,7 @@ export default function ConciergeMode({
             data-concierge-mode-btn
             aria-pressed={pressed}
             onClick={() => onChange(mode.id)}
-            className={`border px-3 py-2 font-mono-label text-[11px] ${
+            className={`min-h-11 border px-3 py-2 font-mono-label ${
               pressed
                 ? "border-navy bg-navy text-mist"
                 : "border-line text-ink-soft hover:border-navy hover:text-navy"

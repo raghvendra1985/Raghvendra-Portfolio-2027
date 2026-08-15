@@ -23,8 +23,14 @@
 
   --nav-height: 88px;
   --nav-height-compact: 64px;
-  --page-pad: clamp(1.25rem, 4vw, 4.5rem);
+  --page-pad: clamp(1.5rem, 4.5vw, 4.5rem);
   --max-width: 1440px;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --ink-soft: color-mix(in srgb, var(--navy) 70%, var(--mist));
+  }
 }
 
 @theme inline {

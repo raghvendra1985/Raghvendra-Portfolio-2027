@@ -149,7 +149,7 @@ export default function WorkIndex() {
               type="button"
               aria-pressed={pressed}
               onClick={() => setFilter(category)}
-              className={`border px-4 py-2 font-mono-label text-[11px] ${
+              className={`min-h-11 border px-4 py-2 font-mono-label ${
                 pressed
                   ? "border-navy bg-navy text-mist"
                   : "border-line text-ink-soft hover:border-navy hover:text-navy"

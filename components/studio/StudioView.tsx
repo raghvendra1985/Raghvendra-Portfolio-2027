@@ -52,7 +52,7 @@ function ResourceMedia({
       className={
         layout === "grid"
           ? "library-cover h-auto w-full bg-surface-dim"
-          : "library-cover h-auto w-[112px] bg-surface-dim sm:w-[140px]"
+          : "library-cover h-auto w-[88px] shrink-0 bg-surface-dim sm:w-[112px] lg:w-[140px]"
       }
     />
   ) : (
@@ -60,7 +60,7 @@ function ResourceMedia({
       className={
         layout === "grid"
           ? "library-cover flex aspect-[3/4] w-full items-end bg-navy p-4"
-          : "library-cover flex h-[149px] w-[112px] shrink-0 items-end bg-navy p-3 sm:h-[187px] sm:w-[140px]"
+          : "library-cover flex h-[117px] w-[88px] shrink-0 items-end bg-navy p-3 sm:h-[149px] sm:w-[112px] lg:h-[187px] lg:w-[140px]"
       }
       aria-hidden="true"
     >
@@ -101,7 +101,7 @@ function ResourceActions({
         item.href.startsWith("http") ? (
           <a
             href={item.href}
-            className="font-mono-label text-[11px] text-navy"
+            className="inline-flex min-h-11 items-center font-mono-label text-navy"
             data-cursor="Open"
             target="_blank"
             rel="noreferrer"
@@ -109,7 +109,11 @@ function ResourceActions({
             Open →
           </a>
         ) : (
-          <Link href={item.href} className="font-mono-label text-[11px] text-navy" data-cursor="Open">
+          <Link
+            href={item.href}
+            className="inline-flex min-h-11 items-center font-mono-label text-navy"
+            data-cursor="Open"
+          >
             Read note →
           </Link>
         )
@@ -117,7 +121,7 @@ function ResourceActions({
       {buyHref ? (
         <a
           href={buyHref}
-          className="font-mono-label text-[11px] text-navy"
+          className="inline-flex min-h-11 items-center font-mono-label text-navy"
           data-cursor="Open"
           target="_blank"
           rel={amazonHref ? "sponsored noopener noreferrer" : "noreferrer"}
@@ -299,7 +303,7 @@ export default function StudioView() {
                     type="button"
                     aria-pressed={pressed}
                     onClick={() => setFilter(topic)}
-                    className={`border px-4 py-2 font-mono-label text-[11px] ${
+                    className={`min-h-11 border px-4 py-2 font-mono-label ${
                       pressed
                         ? "border-navy bg-navy text-mist"
                         : "border-line text-ink-soft hover:border-navy hover:text-navy"
@@ -319,7 +323,7 @@ export default function StudioView() {
                     type="button"
                     aria-pressed={pressed}
                     onClick={() => setView(mode)}
-                    className={`border px-4 py-2 font-mono-label text-[11px] ${
+                    className={`min-h-11 border px-4 py-2 font-mono-label ${
                       pressed
                         ? "border-navy bg-navy text-mist"
                         : "border-line text-ink-soft hover:border-navy hover:text-navy"
@@ -474,7 +478,7 @@ export default function StudioView() {
           <div data-reveal-item>
             <Link
               href={teaching.href}
-              className="font-mono-label text-[11px]"
+              className="inline-flex min-h-11 items-center font-mono-label"
               data-cursor="Open"
             >
               {teaching.cta}
@@ -486,7 +490,7 @@ export default function StudioView() {
       <SectionReveal className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24">
         <div
           data-reveal-item
-          className="flex flex-col items-start justify-between gap-8 border border-line p-10 sm:flex-row sm:items-end"
+          className="flex flex-col items-start justify-between gap-8 border border-line p-6 sm:flex-row sm:items-end sm:p-10"
         >
           <div>
             <p className="font-mono-label text-[11px] text-ink-soft">Work with Singh</p>

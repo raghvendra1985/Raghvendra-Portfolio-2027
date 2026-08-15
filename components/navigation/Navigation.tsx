@@ -33,6 +33,13 @@ export default function Navigation() {
     if (conciergeOpen) setOpen(false);
   }, [conciergeOpen]);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header
       ref={rootRef}
@@ -43,13 +50,13 @@ export default function Navigation() {
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3">
         <Link
           href="/"
-          className="font-display text-lg text-navy"
+          className="min-w-0 truncate font-display text-base text-navy sm:text-lg"
           data-cursor="Open"
         >
           Raghvendra Singh
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-5 lg:gap-8 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex lg:gap-8">
           {navLinks.map((link) => {
             const active =
               pathname === link.href || pathname.startsWith(`${link.href}/`);
@@ -74,14 +81,14 @@ export default function Navigation() {
             {site.status}
           </p>
           <ConciergeTrigger variant="nav" />
-          <div className="hidden sm:block">
+          <div className="hidden lg:block">
             <MagneticButton href="/contact" size="sm">
               Start a conversation
             </MagneticButton>
           </div>
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center border border-navy/20 md:hidden"
+            className="flex h-11 w-11 shrink-0 items-center justify-center border border-navy/20 lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -101,7 +108,7 @@ export default function Navigation() {
           <motion.nav
             id="mobile-nav"
             aria-label="Mobile"
-            className="border-t border-line bg-mist px-[var(--page-pad)] py-6 md:hidden"
+            className="border-t border-line bg-mist px-[var(--page-pad)] py-6 lg:hidden"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -116,7 +123,7 @@ export default function Navigation() {
                     <Link
                       href={link.href}
                       aria-current={active ? "page" : undefined}
-                      className="font-display text-2xl"
+                      className="inline-flex min-h-11 items-center font-display text-2xl"
                     >
                       {link.label}
                     </Link>
@@ -130,7 +137,7 @@ export default function Navigation() {
                 />
               </li>
               <li>
-                <Link href="/contact" className="font-mono-label text-[12px] text-green">
+                <Link href="/contact" className="inline-flex min-h-11 items-center font-mono-label text-green">
                   Start a conversation →
                 </Link>
               </li>

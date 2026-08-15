@@ -15,8 +15,8 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  sm: "px-4 py-2 text-[11px]",
-  md: "px-6 py-3 text-[12px]",
+  sm: "min-h-11 px-4 py-2.5 text-[12px]",
+  md: "min-h-12 px-6 py-3 text-[12px]",
 };
 
 export default function MagneticButton({

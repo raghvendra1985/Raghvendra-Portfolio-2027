@@ -31,7 +31,7 @@ const ConciergeSearch = forwardRef<
         onChange={(event) => onChange(event.target.value)}
         placeholder="Ask about work, AI, leadership, teaching…"
         autoComplete="off"
-        className="w-full bg-transparent font-display text-2xl text-navy outline-none placeholder:text-ink-soft/50 sm:text-3xl"
+        className="w-full bg-transparent font-display text-xl leading-snug text-navy outline-none placeholder:text-ink-soft/50 sm:text-3xl"
         aria-label="Ask Raghvendra"
       />
     </form>

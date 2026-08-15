@@ -6,7 +6,7 @@ import { useExperience } from "@/components/providers/ExperienceProvider";
 import MagneticButton from "@/components/buttons/MagneticButton";
 
 const fieldBase =
-  "mt-2 w-full border bg-mist px-4 py-3 text-sm text-navy placeholder:text-ink-soft/60 focus:border-navy";
+  "mt-2 min-h-12 w-full border bg-mist px-4 py-3 text-base text-navy placeholder:text-ink-soft/70 focus:border-navy";
 
 export default function ContactForm() {
   const rootRef = useRef<HTMLFormElement>(null);
@@ -32,7 +32,7 @@ export default function ContactForm() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       next.email = "Enter a valid email address.";
     }
-    if (!message.trim()) next.message = "Tell me what you are looking to build.";
+    if (!message.trim()) next.message = "Tell me what you would like to discuss.";
     else if (message.trim().length < 20) {
       next.message = "Add a little more detail (at least 20 characters).";
     }
@@ -124,7 +124,7 @@ export default function ContactForm() {
       </div>
       <div data-form-item>
         <label htmlFor="message" className="font-mono-label text-[11px] text-ink-soft">
-          What are you looking to build?
+          What would you like to discuss?
         </label>
         <textarea
           id="message"

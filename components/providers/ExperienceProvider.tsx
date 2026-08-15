@@ -140,7 +140,7 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
         <PageTransition />
         <Navigation />
         <ConciergeHost />
-        <div className="site-content flex min-h-full flex-1 flex-col">
+        <div className="site-content flex min-h-full flex-1 flex-col pb-20 lg:pb-0">
           <main id="main" className="flex-1">
             {children}
           </main>

@@ -4,11 +4,13 @@ import { useEffect, useRef } from "react";
 import { animateHero } from "@/animations/hero";
 import { animateParallax } from "@/animations/parallax";
 import { useExperience } from "@/components/providers/ExperienceProvider";
+import { useConcierge } from "@/components/concierge/ConciergeProvider";
 import MagneticButton from "@/components/buttons/MagneticButton";
 
 export default function Hero() {
   const rootRef = useRef<HTMLElement>(null);
   const { config, pageReady } = useExperience();
+  const { openConcierge } = useConcierge();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -35,7 +37,7 @@ export default function Hero() {
   return (
     <section
       ref={rootRef}
-      className="relative isolate overflow-hidden px-[var(--page-pad)] pb-24 pt-36 sm:pt-44"
+      className="relative isolate overflow-hidden px-[var(--page-pad)] pb-14 pt-28 sm:pb-16 sm:pt-32"
     >
       <div
         data-hero-drift
@@ -51,35 +53,47 @@ export default function Hero() {
       />
 
       <div className="relative mx-auto max-w-[1440px]">
-        <p data-hero-copy className="font-mono-label text-[11px] text-ink-soft">
-          Product Design Leader | Systems Thinker | AI Product Builder
+        <p
+          data-hero-copy
+          className="font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-tight text-navy"
+        >
+          Raghvendra Singh
         </p>
 
         <h1
           data-hero-headline
-          className="mt-8 max-w-5xl font-display text-[clamp(2.8rem,8vw,7.5rem)] leading-[0.92] text-navy"
+          className="mt-6 max-w-4xl font-display text-[clamp(2.15rem,8vw,5.5rem)] leading-[1.08] text-navy sm:leading-[0.95]"
         >
-          Product design for systems that have to last.
+          I design products, systems,{" "}
+          <br className="hidden sm:block" />
+          and teams that scale.
         </h1>
+
+        <p data-hero-copy className="mt-6 font-mono-label text-[11px] text-ink-soft">
+          Product Design Leader · Systems Thinker · AI Product Builder
+        </p>
 
         <p
           data-hero-copy
-          className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg"
+          className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg"
         >
-          Current work: EQTY, Growing With Kid, Bolo Buddy, and 2886. Career
-          depth behind that — enterprise systems for Verizon, Crowley, Hempel,
-          and the organisations that came before.
+          20 years across enterprise products, fintech, AI, founder-led ventures, and design
+          education.
         </p>
 
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <div data-hero-cta>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div data-hero-cta className="w-full sm:w-auto">
             <MagneticButton href="/work" cursor="View">
               View selected work
             </MagneticButton>
           </div>
-          <div data-hero-cta>
-            <MagneticButton href="/contact" variant="secondary">
-              Start a conversation
+          <div data-hero-cta className="w-full sm:w-auto">
+            <MagneticButton
+              variant="secondary"
+              cursor="Ask"
+              onClick={() => openConcierge("hero")}
+            >
+              Ask Raghvendra
             </MagneticButton>
           </div>
         </div>

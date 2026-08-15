@@ -4,6 +4,9 @@
 html {
   scroll-behavior: auto;
   background: var(--mist);
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -11,6 +14,16 @@ body {
   color: var(--navy);
   font-family: var(--font-sans), "Inter", system-ui, sans-serif;
   font-feature-settings: "ss01" on, "cv11" on;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  overflow-x: clip;
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
 }
 
 .font-display {
@@ -20,8 +33,31 @@ body {
 
 .font-mono-label {
   font-family: var(--font-mono), "Space Mono", ui-monospace, monospace;
-  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  line-height: 1.45;
   text-transform: uppercase;
+}
+
+@media (min-width: 1024px) {
+  .font-mono-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+  }
+}
+
+@media (max-width: 1023px) {
+  .text-sm {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .text-\[10px\],
+  .text-\[11px\],
+  .text-\[12px\] {
+    font-size: 0.75rem;
+    line-height: 1.45;
+  }
 }
 
 ::selection {
@@ -164,8 +200,21 @@ html.motion-ready [data-loader-root] {
   }
 }
 
+@media (max-width: 639px) {
+  [data-hero-cta] a,
+  [data-hero-cta] button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 @media (pointer: coarse) {
   [data-cursor] {
     display: none !important;
+  }
+
+  [data-library-item]:hover .library-cover,
+  [data-library-item][data-in-view="true"] .library-cover {
+    transform: translate3d(0, -4px, 0) scale(1);
   }
 }

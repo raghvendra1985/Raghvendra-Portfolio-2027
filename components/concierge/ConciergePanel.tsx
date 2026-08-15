@@ -198,9 +198,9 @@ export default function ConciergePanel() {
           <button
             type="button"
             onClick={closeConcierge}
-            className="font-mono-label text-[11px] text-ink-soft hover:text-navy"
+            className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center font-mono-label text-ink-soft hover:text-navy"
           >
-            Esc
+            Close
           </button>
         </div>
 

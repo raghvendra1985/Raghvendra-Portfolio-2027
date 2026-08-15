@@ -30,18 +30,18 @@ export default function SiteFooter() {
 
         <div className="mt-16 grid gap-10 border-t border-mist/15 pt-10 md:grid-cols-4">
           <div data-footer-link>
-            <p className="max-w-xs text-sm leading-relaxed text-mist/65">
-              Product design leader, systems thinker, and AI product builder.
-              Associate Professor at IIAD.
+            <p className="max-w-xs text-base leading-relaxed text-mist/80">
+              Product Design Leader, Systems Thinker, and AI Product Builder. Building products,
+              systems, and ventures across design and technology.
             </p>
           </div>
 
           <div>
-            <p className="font-mono-label text-[11px] text-mist/40">Explore</p>
+            <p className="font-mono-label text-mist/70">Explore</p>
             <ul className="mt-4 space-y-2">
               {footerLinks.sitemap.map((link) => (
                 <li key={link.href} data-footer-link>
-                  <Link href={link.href} className="text-sm text-mist/80 hover:text-gold">
+                  <Link href={link.href} className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold">
                     {link.label}
                   </Link>
                 </li>
@@ -50,13 +50,13 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <p className="font-mono-label text-[11px] text-mist/40">Connect</p>
+            <p className="font-mono-label text-mist/70">Connect</p>
             <ul className="mt-4 space-y-2">
               {footerLinks.social.map((link) => (
                 <li key={link.label} data-footer-link>
                   <a
                     href={link.href}
-                    className="text-sm text-mist/80 hover:text-gold"
+                    className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
                     {...(link.href.startsWith("http")
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
@@ -70,8 +70,8 @@ export default function SiteFooter() {
 
           <div data-footer-status className="flex flex-col justify-between">
             <div>
-              <p className="font-mono-label text-[11px] text-mist/40">Status</p>
-              <p className="mt-4 flex items-center gap-2 text-sm">
+              <p className="font-mono-label text-mist/70">Status</p>
+              <p className="mt-4 flex items-center gap-2 text-base">
                 <span
                   data-status-dot
                   className="h-2 w-2 rounded-full bg-green"
@@ -79,15 +79,15 @@ export default function SiteFooter() {
                 />
                 {site.status}
               </p>
-              <p className="mt-2 text-sm text-mist/55">{site.statusDetail}</p>
+              <p className="mt-2 text-base text-mist/75">{site.statusDetail}</p>
             </div>
-            <p className="mt-8 font-mono-label text-[10px] text-mist/35">
+            <p className="mt-8 font-mono-label text-mist/60">
               {site.location}
             </p>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-2 border-t border-mist/15 pt-6 font-mono-label text-[10px] text-mist/35 sm:flex-row sm:justify-between">
+        <div className="mt-16 flex flex-col gap-2 border-t border-mist/15 pt-6 font-mono-label text-mist/60 sm:flex-row sm:justify-between">
           <span>© {new Date().getFullYear()} Raghvendra Singh</span>
           <span>Motion supports the story. It never becomes the story.</span>
         </div>
