@@ -36,7 +36,7 @@ function TriggerButton({
       type="button"
       onClick={() => openConcierge(source)}
       className={className}
-      aria-label="Ask Raghvendra"
+      aria-label="Ask the portfolio"
       data-cursor={cursor ? "Ask" : undefined}
     >
       {children}
@@ -59,7 +59,7 @@ export default function ConciergeTrigger({
         cursor
         className={`fixed bottom-8 right-6 z-[55] hidden min-h-11 border border-navy/20 bg-mist/95 px-4 py-3 font-mono-label text-navy shadow-sm backdrop-blur lg:inline-flex ${className}`}
       >
-        Ask
+        Ask the portfolio
         <span className="ml-3 text-ink-soft" aria-hidden="true">
           ⌘K
         </span>
@@ -86,7 +86,7 @@ export default function ConciergeTrigger({
         source="mobile-menu"
         className={`font-display text-2xl text-left ${className}`}
       >
-        Ask Raghvendra
+        Ask the portfolio
       </TriggerButton>
     );
   }

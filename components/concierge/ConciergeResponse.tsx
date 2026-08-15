@@ -8,18 +8,34 @@ export default function ConciergeResponse({
   onNextQuestion,
   optionOffset = 0,
   activeIndex = -1,
+  onSpeak,
+  speaking = false,
 }: {
   answer: ConciergeAnswer;
   onNextQuestion: (question: string) => void;
   optionOffset?: number;
   activeIndex?: number;
+  onSpeak?: () => void;
+  speaking?: boolean;
 }) {
   let optionIndex = optionOffset;
 
   return (
     <div className="space-y-10" aria-live="polite">
       <section data-concierge-result>
-        <p className="font-mono-label text-[11px] text-gold">Answer</p>
+        <div className="flex items-start justify-between gap-4">
+          <p className="font-mono-label text-gold">Answer</p>
+          {onSpeak ? (
+            <button
+              type="button"
+              onClick={onSpeak}
+              aria-pressed={speaking}
+              className="inline-flex min-h-11 items-center font-mono-label text-ink-soft hover:text-navy"
+            >
+              {speaking ? "Stop" : "Listen"}
+            </button>
+          ) : null}
+        </div>
         <p className="mt-3 max-w-2xl font-display text-2xl leading-snug sm:text-3xl">
           {answer.answer}
         </p>

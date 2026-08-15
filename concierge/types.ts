@@ -36,10 +36,14 @@ export type ConciergeAnswer = {
   related: ConciergeEvidence[];
   nextQuestions: string[];
   noResult: boolean;
+  closest?: boolean;
 };
 
 export type ConciergeEvent =
   | "concierge_open"
   | "concierge_query"
   | "concierge_result_click"
-  | "concierge_no_result";
+  | "concierge_no_result"
+  | "concierge_voice_start"
+  | "concierge_voice_result"
+  | "concierge_speak";

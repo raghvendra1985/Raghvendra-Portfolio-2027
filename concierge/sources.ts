@@ -7,6 +7,7 @@ import {
   knowledgeFrameworks,
 } from "@/knowledge";
 import { services } from "@/services";
+import { site } from "@/lib/site";
 import type { ConciergeEntry } from "./types";
 
 function uniq(topics: string[]) {
@@ -228,6 +229,26 @@ function buildAboutEntries(): ConciergeEntry[] {
     url: "/about",
   };
 
+  const contact: ConciergeEntry = {
+    id: "about:contact",
+    source: "about",
+    type: "contact",
+    title: "Start a conversation",
+    slug: "contact",
+    topics: [
+      "contact",
+      "available",
+      "availability",
+      "hire",
+      "email",
+      "open",
+      "opportunities",
+    ],
+    summary: `${site.status}. ${site.statusDetail}`,
+    content: `${site.status}. ${site.statusDetail}. ${site.email}. ${site.location}`,
+    url: "/contact",
+  };
+
   const beliefs: ConciergeEntry[] = aboutPage.beliefs.map((belief) => ({
     id: `about:belief:${belief.index}`,
     source: "about" as const,
@@ -240,7 +261,7 @@ function buildAboutEntries(): ConciergeEntry[] {
     url: "/about#beliefs",
   }));
 
-  return [overview, ...beliefs];
+  return [overview, contact, ...beliefs];
 }
 
 function buildExperienceEntries(): ConciergeEntry[] {

@@ -1,32 +1,46 @@
 "use client";
 
-import { suggestedQuestions } from "@/concierge";
+import { suggestedQuestions, matchSuggestedQuestion } from "@/concierge";
 
 export default function SuggestedQuestions({
   onSelect,
   activeIndex = -1,
+  query = "",
 }: {
   onSelect: (label: string) => void;
   activeIndex?: number;
+  query?: string;
 }) {
+  const matchedId = query.trim() ? matchSuggestedQuestion(query)?.id : undefined;
+  const needle = query.trim().toLowerCase();
+
   return (
     <div data-concierge-item>
-      <p className="font-mono-label text-[11px] text-ink-soft">Suggested</p>
+      <p className="mt-8 font-mono-label text-ink-soft">Suggested</p>
       <ul className="mt-4" role="listbox" aria-label="Suggested questions">
-        {suggestedQuestions.map((item, index) => (
-          <li key={item.id} role="option" aria-selected={activeIndex === index}>
-            <button
-              type="button"
-              data-concierge-option
-              onClick={() => onSelect(item.label)}
-              className={`w-full border-t border-line py-4 text-left font-display text-lg leading-snug sm:text-xl ${
-                activeIndex === index ? "text-navy" : "text-ink-soft hover:text-navy"
-              }`}
-            >
-              {item.label}
-            </button>
-          </li>
-        ))}
+        {suggestedQuestions.map((item, index) => {
+          const highlighted =
+            matchedId === item.id ||
+            (needle.length > 1 &&
+              (item.label.toLowerCase().includes(needle) ||
+                item.query.toLowerCase().includes(needle)));
+          return (
+            <li key={item.id} role="option" aria-selected={activeIndex === index}>
+              <button
+                type="button"
+                data-concierge-option
+                onClick={() => onSelect(item.label)}
+                className={`w-full border-t border-line py-4 text-left font-display text-lg leading-snug sm:text-xl ${
+                  highlighted || activeIndex === index
+                    ? "text-navy"
+                    : "text-ink-soft hover:text-navy"
+                }`}
+              >
+                {item.label}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

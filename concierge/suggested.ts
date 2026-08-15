@@ -144,6 +144,67 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     ],
     modeHint: "hiring",
   },
+  {
+    id: "start-here",
+    label: "Where should I start?",
+    query: "where should I start flagship EQTY GWK Ghostwriter Growing With Kid Bolo Buddy about",
+    preferIds: [
+      "work:eqty",
+      "work:gwk-ghostwriter",
+      "work:growing-with-kid",
+      "work:bolo-buddy",
+      "about:overview",
+    ],
+    modeHint: "hiring",
+  },
+  {
+    id: "about-who",
+    label: "Who is Raghvendra?",
+    query: "who are you about product design leader systems AI",
+    preferIds: ["about:overview", "experience:leadership-arc", "system:identity", "about:contact"],
+    modeHint: "hiring",
+  },
+  {
+    id: "availability",
+    label: "Are you available to work together?",
+    query: "available availability contact hire open opportunities email",
+    preferIds: ["about:contact", "about:overview", "services:product-leadership"],
+    modeHint: "hiring",
+  },
+  {
+    id: "parenting-gwk",
+    label: "Show Growing With Kid",
+    query: "kids parenting children Growing With Kid GWK community",
+    preferIds: ["work:growing-with-kid", "knowledge:building-growing-with-kid", "system:products"],
+    modeHint: "hiring",
+  },
+  {
+    id: "ghostwriter",
+    label: "What is GWK Ghostwriter?",
+    query: "ghostwriter GWK Ghostwriter AI writing product",
+    preferIds: ["work:gwk-ghostwriter", "system:products", "system:focus"],
+    modeHint: "hiring",
+  },
+  {
+    id: "nye-money",
+    label: "Show NYE Money / Rapipay",
+    query: "NYE money Rapipay fintech payments",
+    preferIds: ["work:nye", "work:eqty", "experience:leadership-arc"],
+    modeHint: "hiring",
+  },
+  {
+    id: "resume",
+    label: "Where is your experience / CV?",
+    query: "resume CV curriculum vitae experience career about",
+    preferIds: [
+      "about:overview",
+      "experience:leadership-arc",
+      "experience:ux-lead-arc",
+      "experience:founder",
+      "about:contact",
+    ],
+    modeHint: "hiring",
+  },
 ];
 
 export function matchSuggestedQuestion(query: string) {
@@ -189,6 +250,52 @@ export function matchSuggestedQuestion(query: string) {
     return suggestedQuestions.find((item) => item.id === "leadership");
   }
   if (
+    normalized.includes("available") ||
+    normalized.includes("availability") ||
+    normalized.includes("open to") ||
+    normalized.includes("contact") ||
+    normalized.includes("email") ||
+    normalized.includes("work together")
+  ) {
+    return suggestedQuestions.find((item) => item.id === "availability");
+  }
+  if (
+    normalized.includes("who are you") ||
+    normalized.includes("who is") ||
+    normalized.includes("about you") ||
+    normalized === "about"
+  ) {
+    return suggestedQuestions.find((item) => item.id === "about-who");
+  }
+  if (
+    normalized.includes("resume") ||
+    normalized.includes("cv") ||
+    normalized.includes("curriculum")
+  ) {
+    return suggestedQuestions.find((item) => item.id === "resume");
+  }
+  if (normalized.includes("ghostwriter")) {
+    return suggestedQuestions.find((item) => item.id === "ghostwriter");
+  }
+  if (
+    (normalized.includes("kid") ||
+      normalized.includes("parent") ||
+      normalized.includes("gwk")) &&
+    !normalized.includes("ghost")
+  ) {
+    return suggestedQuestions.find((item) => item.id === "parenting-gwk");
+  }
+  if (normalized.includes("nye") || normalized.includes("rapipay") || normalized.includes("money app")) {
+    return suggestedQuestions.find((item) => item.id === "nye-money");
+  }
+  if (
+    normalized.includes("where should i start") ||
+    normalized.includes("start here") ||
+    normalized.includes("getting started")
+  ) {
+    return suggestedQuestions.find((item) => item.id === "start-here");
+  }
+  if (
     normalized.includes("strongest") ||
     (normalized.includes("product work") && !normalized.includes("ai"))
   ) {
@@ -196,6 +303,15 @@ export function matchSuggestedQuestion(query: string) {
   }
 
   return undefined;
+}
+
+export function inferModeFromQuery(query: string): ConciergeMode {
+  const suggested = matchSuggestedQuestion(query);
+  if (suggested?.modeHint) return suggested.modeHint;
+  const q = query.toLowerCase();
+  if (/teach|speak|workshop|iiad|curriculum/.test(q)) return "speaking";
+  if (/advisory|designops|design system|project|engagement/.test(q)) return "project";
+  return "hiring";
 }
 
 export function nextQuestionsFor(currentId?: string, limit = 2) {

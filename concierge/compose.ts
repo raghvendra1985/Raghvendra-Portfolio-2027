@@ -1,5 +1,6 @@
 import { retrieve } from "./retrieve";
 import {
+  inferModeFromQuery,
   matchSuggestedQuestion,
   nextQuestionsFor,
   suggestedQuestions,
@@ -26,7 +27,7 @@ function evidenceLabel(entry: RankedEntry): string {
     case "system":
       return entry.slug === "system" ? "Explore Founder OS →" : `Explore ${entry.title} →`;
     case "about":
-      return "About Raghvendra →";
+      return entry.slug === "contact" ? "Open contact →" : "About Raghvendra →";
     case "experience":
       return `See experience →`;
     case "services":
@@ -45,17 +46,37 @@ function toEvidence(entry: RankedEntry): ConciergeEvidence {
   };
 }
 
-function directAnswer(query: string, results: RankedEntry[], intentId?: string): string {
-  const titles = results.slice(0, 3).map((r) => {
+function listTitles(results: RankedEntry[], count = 3) {
+  return results.slice(0, count).map((r) => {
     if (r.source === "work") return r.title.split(" — ")[0];
     return r.title;
   });
+}
+
+function joinTitles(titles: string[]) {
+  if (titles.length <= 1) return titles[0] ?? "";
+  if (titles.length === 2) return `${titles[0]} and ${titles[1]}`;
+  return `${titles.slice(0, -1).join(", ")}, and ${titles[titles.length - 1]}`;
+}
+
+function directAnswer(
+  query: string,
+  results: RankedEntry[],
+  intentId?: string,
+  closest?: boolean,
+): string {
+  const titles = listTitles(results);
+  const named = joinTitles(titles);
+
+  if (closest) {
+    return `I don’t have a precise match for that wording. Closest published matches: ${named}. Ask a follow-up to narrow it.`;
+  }
 
   switch (intentId) {
     case "strongest-product":
-      return `The strongest published product work is in the primary flagships — especially ${titles.slice(0, 3).join(", ")}.`;
+      return `Start with the flagships — ${named}. Each one shows a different scale of product problem.`;
     case "ai-products-built":
-      return `Published AI product work includes ${titles.slice(0, 3).join(", ")}. Trust and judgment boundaries are covered in the AI Trust Stack.`;
+      return `Published AI product work includes ${named}. Trust and judgment boundaries live in the AI Trust Stack.`;
     case "fintech":
       return `Fintech evidence spans EQTY, NYE Money at Rapipay, and related financial product work.`;
     case "design-systems":
@@ -63,7 +84,7 @@ function directAnswer(query: string, results: RankedEntry[], intentId?: string):
     case "leadership":
       return `Leadership evidence covers Design Lead work, enterprise architecture, critique systems, and Founder OS decision practice.`;
     case "founder-products":
-      return `Founder-led products in the portfolio include GWK Ghostwriter, Growing With Kid, Bolo Buddy, and 2886 — held inside Founder OS.`;
+      return `Founder-led products include GWK Ghostwriter, Growing With Kid, Bolo Buddy, and 2886 — held inside Founder OS.`;
     case "ai-in-design":
       return `AI is used as product craft: trust surfaces, human judgment boundaries, and AI Blueprint engagements — not as theatre.`;
     case "teach":
@@ -72,29 +93,43 @@ function directAnswer(query: string, results: RankedEntry[], intentId?: string):
       return `Published frameworks include Decision Stack, Critique System, AI Trust Stack, Product Operating Model, Visible Learning Loop, and Product Filter.`;
     case "why-hire":
       return `Hire for product leadership, systems thinking, and AI product craft — evidenced in flagship work, career eras, and Founder OS.`;
+    case "start-here":
+      return `Start with ${named}. Then ask about AI, fintech, or leadership if you want a narrower path.`;
+    case "about-who":
+      return `Raghvendra is a product design leader working across systems, fintech, AI products, and founder-led ventures. About and the career timeline hold the published evidence.`;
+    case "availability":
+      return `Open to selected product leadership, advisory, and collaborations. Contact is the next step if the work looks like a fit.`;
+    case "parenting-gwk":
+      return `Growing With Kid is the parenting community product — one clear job for parents, shipped as a live founder product.`;
+    case "ghostwriter":
+      return `GWK Ghostwriter is the AI writing product in the same family as Growing With Kid. The case study holds the published evidence.`;
+    case "nye-money":
+      return `NYE Money at Rapipay is the published fintech product work alongside EQTY.`;
+    case "resume":
+      return `The published career path is on About — leadership, enterprise systems, founder products, and teaching. Contact if you need a conversation, not a PDF.`;
     default:
       break;
   }
 
   const q = query.toLowerCase();
   if (q.includes("ai")) {
-    return `AI product experience shows up in ${titles.slice(0, 3).join(", ")} — with methods in Knowledge and Founder OS.`;
+    return `AI product experience shows up in ${named} — with methods in Knowledge and Founder OS.`;
   }
   if (q.includes("fintech") || q.includes("finance")) {
-    return `Fintech experience is documented in ${titles.slice(0, 3).join(", ")}.`;
+    return `Fintech experience is documented in ${named}.`;
   }
   if (q.includes("teach") || q.includes("speak")) {
-    return `Teaching and speaking evidence includes ${titles.slice(0, 3).join(", ")}.`;
+    return `Teaching and speaking evidence includes ${named}.`;
   }
   if (q.includes("hire") || q.includes("leadership")) {
-    return `Relevant leadership and hiring evidence includes ${titles.slice(0, 3).join(", ")}.`;
+    return `Relevant leadership and hiring evidence includes ${named}.`;
   }
 
   if (results.length === 1) {
-    return `The strongest published match is ${titles[0]}.`;
+    return `The strongest published match is ${titles[0]}. Open it, or ask a follow-up.`;
   }
 
-  return `Here’s the published evidence that matches: ${titles.join("; ")}.`;
+  return `${named} are the published matches. Open one, or ask a follow-up to go narrower.`;
 }
 
 /**
@@ -111,7 +146,7 @@ export function composeResponse(
       answer: "Ask a specific question about work, AI, leadership, teaching, or frameworks.",
       evidence: [],
       related: [],
-      nextQuestions: suggestedQuestions.slice(0, 2).map((q) => q.label),
+      nextQuestions: suggestedQuestions.slice(0, 3).map((q) => q.label),
       noResult: false,
     };
   }
@@ -119,14 +154,25 @@ export function composeResponse(
   const suggested = matchSuggestedQuestion(trimmed);
   const searchQuery = suggested?.query ?? trimmed;
   const preferIds = suggested?.preferIds ?? [];
-  const effectiveMode = suggested?.modeHint ?? mode;
+  const effectiveMode = suggested?.modeHint ?? inferModeFromQuery(trimmed) ?? mode;
 
-  const results = retrieve(searchQuery, {
+  let closest = false;
+  let results = retrieve(searchQuery, {
     mode: effectiveMode,
     preferIds,
     limit: 8,
-    threshold: preferIds.length ? 1.5 : 2.5,
+    threshold: preferIds.length ? 1.5 : 1.2,
   });
+
+  if (!results.length) {
+    closest = true;
+    results = retrieve(searchQuery, {
+      mode: effectiveMode,
+      preferIds,
+      limit: 3,
+      threshold: 0,
+    });
+  }
 
   if (!results.length) {
     return {
@@ -153,11 +199,12 @@ export function composeResponse(
   const related = ordered.slice(4, 7).map(toEvidence);
 
   return {
-    answer: directAnswer(trimmed, ordered, suggested?.id),
+    answer: directAnswer(trimmed, ordered, suggested?.id, closest),
     evidence,
     related,
-    nextQuestions: nextQuestionsFor(suggested?.id),
+    nextQuestions: nextQuestionsFor(suggested?.id, 3),
     noResult: false,
+    closest,
   };
 }
 

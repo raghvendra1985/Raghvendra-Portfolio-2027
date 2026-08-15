@@ -109,6 +109,32 @@ export function tokenize(input: string): string[] {
     .filter((token) => token.length > 1 && !STOPWORDS.has(token));
 }
 
+const QUERY_ALIASES: [string, string][] = [
+  ["kids", "growing with kid gwk parenting"],
+  ["kid", "growing with kid gwk"],
+  ["parenting", "growing with kid gwk"],
+  ["parents", "growing with kid"],
+  ["ghostwriter", "gwk ghostwriter ai writing"],
+  ["money", "fintech nye eqty rapipay"],
+  ["payments", "nye rapipay fintech"],
+  ["resume", "about experience leadership career"],
+  ["cv", "about experience career"],
+  ["available", "contact hire open opportunities"],
+  ["availability", "contact hire"],
+  ["hire me", "why hire leadership about"],
+  ["who are you", "about raghvendra product design leader"],
+  ["start", "flagship eqty ghostwriter bolo buddy"],
+];
+
+export function expandQuery(query: string): string {
+  const q = query.toLowerCase();
+  const extra: string[] = [];
+  for (const [needle, aliases] of QUERY_ALIASES) {
+    if (q.includes(needle)) extra.push(aliases);
+  }
+  return extra.length ? `${query} ${extra.join(" ")}` : query;
+}
+
 function fieldScore(haystack: string, tokens: string[], weight: number) {
   if (!haystack || !tokens.length) return 0;
   const text = haystack.toLowerCase();
@@ -132,10 +158,10 @@ export function retrieve(query: string, options: RetrieveOptions = {}): RankedEn
     mode = "hiring",
     limit = 8,
     preferIds = [],
-    threshold = 2.5,
+    threshold = 1.2,
   } = options;
 
-  const tokens = tokenize(query);
+  const tokens = tokenize(expandQuery(query));
   if (!tokens.length && !preferIds.length) return [];
 
   const index = buildConciergeIndex();
