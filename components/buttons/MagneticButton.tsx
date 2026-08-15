@@ -26,6 +26,7 @@ export default function MagneticButton({
   size = "md",
   type,
   cursor = "Open",
+  onClick,
 }: {
   href?: string;
   children: ReactNode;
@@ -33,6 +34,7 @@ export default function MagneticButton({
   size?: Size;
   type?: "button" | "submit";
   cursor?: string;
+  onClick?: () => void;
 }) {
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
   const { config } = useExperience();
@@ -63,7 +65,10 @@ export default function MagneticButton({
   );
 
   if (href) {
-    const external = href.startsWith("http") || href.startsWith("mailto:");
+    const documentHref =
+      href.endsWith(".html") || href.includes("/prototypes/");
+    const external =
+      href.startsWith("http") || href.startsWith("mailto:") || documentHref;
     if (external) {
       return (
         <a
@@ -71,7 +76,7 @@ export default function MagneticButton({
           href={href}
           className={className}
           data-cursor={cursor}
-          {...(href.startsWith("http")
+          {...(href.startsWith("http") || documentHref
             ? { target: "_blank", rel: "noopener noreferrer" }
             : {})}
         >
@@ -97,6 +102,7 @@ export default function MagneticButton({
       type={type ?? "button"}
       className={className}
       data-cursor={cursor}
+      onClick={onClick}
     >
       {inner}
     </button>

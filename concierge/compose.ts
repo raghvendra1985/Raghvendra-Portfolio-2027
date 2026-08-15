@@ -57,13 +57,13 @@ function directAnswer(query: string, results: RankedEntry[], intentId?: string):
     case "ai-products-built":
       return `Published AI product work includes ${titles.slice(0, 3).join(", ")}. Trust and judgment boundaries are covered in the AI Trust Stack.`;
     case "fintech":
-      return `Fintech evidence spans EQTY, Rapipay / NYE Financial leadership, and related financial product work.`;
+      return `Fintech evidence spans EQTY, NYE Money at Rapipay, and related financial product work.`;
     case "design-systems":
       return `Design systems are treated as operating infrastructure — DesignOps, critique standards, and visible decision paths.`;
     case "leadership":
       return `Leadership evidence covers Design Lead work, enterprise architecture, critique systems, and Founder OS decision practice.`;
     case "founder-products":
-      return `Founder-led products in the portfolio include Growing With Kid, Bolo Buddy, and 2886 — held inside Founder OS.`;
+      return `Founder-led products in the portfolio include GWK Ghostwriter, Growing With Kid, Bolo Buddy, and 2886 — held inside Founder OS.`;
     case "ai-in-design":
       return `AI is used as product craft: trust surfaces, human judgment boundaries, and AI Blueprint engagements — not as theatre.`;
     case "teach":

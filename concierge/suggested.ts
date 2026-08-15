@@ -12,15 +12,16 @@ export const suggestedQuestions: SuggestedQuestion[] = [
   {
     id: "strongest-product",
     label: "Show me your strongest product work",
-    query: "strongest product work flagship EQTY Growing With Kid Bolo Buddy",
-    preferIds: ["work:eqty", "work:growing-with-kid", "work:bolo-buddy", "work:2886"],
+    query: "strongest product work flagship EQTY GWK Ghostwriter Growing With Kid Bolo Buddy",
+    preferIds: ["work:eqty", "work:gwk-ghostwriter", "work:growing-with-kid", "work:bolo-buddy"],
     modeHint: "hiring",
   },
   {
     id: "ai-products-built",
     label: "What AI products have you built?",
-    query: "AI products built Bolo Buddy EQTY Sagacito Ethiqly AI Trust Stack",
+    query: "AI products built GWK Ghostwriter Bolo Buddy EQTY Sagacito Ethiqly AI Trust Stack",
     preferIds: [
+      "work:gwk-ghostwriter",
       "work:bolo-buddy",
       "work:eqty",
       "work:sagacito",
@@ -34,10 +35,11 @@ export const suggestedQuestions: SuggestedQuestion[] = [
   {
     id: "fintech",
     label: "Show me fintech experience",
-    query: "fintech financial EQTY Rapipay Strike currency",
+    query: "fintech financial EQTY NYE Rapipay Strike currency",
     preferIds: [
       "work:eqty",
-      "experience:rapipay",
+      "work:nye",
+      "experience:leadership-arc",
       "work:strike",
       "work:smart-currency-exchange",
       "system:products",
@@ -49,8 +51,8 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     label: "How do you approach design systems?",
     query: "design systems DesignOps operating model critique system infrastructure",
     preferIds: [
-      "services:designops-360",
-      "services:design-practice",
+      "services:systems-designops",
+      "services:product-leadership",
       "knowledge:operating-model-invisible",
       "framework:product-operating-model",
       "knowledge:critique-system",
@@ -63,8 +65,8 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     label: "What leadership experience do you have?",
     query: "leadership design lead product leadership critique system experience",
     preferIds: [
-      "experience:rapipay",
-      "experience:enterprise",
+      "experience:leadership-arc",
+      "experience:ux-lead-arc",
       "knowledge:critique-system",
       "system:principles",
       "system:decisions",
@@ -75,8 +77,9 @@ export const suggestedQuestions: SuggestedQuestion[] = [
   {
     id: "founder-products",
     label: "Show founder-led products",
-    query: "founder products Growing With Kid Bolo Buddy 2886 Founder OS",
+    query: "founder products GWK Ghostwriter Growing With Kid Bolo Buddy 2886 Founder OS",
     preferIds: [
+      "work:gwk-ghostwriter",
       "work:growing-with-kid",
       "work:bolo-buddy",
       "work:2886",
@@ -91,10 +94,11 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     label: "How do you use AI in product design?",
     query: "AI in product design trust judgment AI Blueprint AI Trust Stack",
     preferIds: [
-      "services:ai-blueprint",
+      "services:ai-product-building",
       "framework:ai-trust-stack",
       "knowledge:ai-products-earn-trust",
       "about:belief:03",
+      "work:gwk-ghostwriter",
       "work:bolo-buddy",
       "work:eqty",
     ],
@@ -106,7 +110,7 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     query: "teach teaching IIAD curriculum workshops learning decisions",
     preferIds: [
       "system:teaching",
-      "experience:iiad",
+      "experience:founder",
       "knowledge:teaching-design-through-decisions",
       "framework:visible-learning-loop",
     ],
@@ -134,7 +138,7 @@ export const suggestedQuestions: SuggestedQuestion[] = [
       "about:overview",
       "work:eqty",
       "work:bolo-buddy",
-      "experience:rapipay",
+      "experience:leadership-arc",
       "system:principles",
       "system:focus",
     ],

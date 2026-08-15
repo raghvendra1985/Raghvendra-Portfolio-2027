@@ -134,7 +134,7 @@ function buildSystemEntries(): ConciergeEntry[] {
         content = founderOs.focus
           .map((f) => `${f.name}. ${f.role}. ${f.status}`)
           .join(" ");
-        topics.push("EQTY", "Growing With Kid", "Bolo Buddy", "teaching", "product leadership");
+        topics.push("EQTY", "GWK Ghostwriter", "Growing With Kid", "Bolo Buddy", "teaching", "product leadership");
         break;
       case "products":
         summary = "Founder products and the fintech OS partnership.";
@@ -256,9 +256,9 @@ function buildExperienceEntries(): ConciergeEntry[] {
       "leadership",
       era.role,
       era.org,
-      era.id === "iiad" ? "teaching" : "",
-      era.id === "rapipay" ? "fintech" : "",
-      era.id === "enterprise" ? "enterprise systems" : "",
+      era.id === "founder" ? "teaching" : "",
+      era.id === "leadership-arc" ? "fintech" : "",
+      era.id === "ux-lead-arc" || era.id === "product-industrial" ? "enterprise systems" : "",
     ]),
     summary: era.description,
     content: `${era.range}. ${era.role}. ${era.org}. ${era.description}`,

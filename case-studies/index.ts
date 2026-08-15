@@ -30,6 +30,8 @@ export type CaseStudy = {
   approachSteps?: string[];
   outcomes?: { title: string; body: string }[];
   href?: string;
+  /** Extra live destinations (site, App Store, Play Store, etc.). Falls back to `href`. */
+  links?: { label: string; href: string }[];
   cover?: string;
   gallery?: string[];
 };
@@ -101,6 +103,70 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     index: "02",
+    slug: "nye",
+    client: "NYE",
+    title: "A financial super app — payments, banking, and investments in one system",
+    summary:
+      "Product design leadership for NYE Money at Rapipay — prepaid wallet & RuPay card, UPI, NCMC, Jana accounts, digital gold, and mutual funds.",
+    year: "2022",
+    category: "SaaS Products",
+    industry: "Fintech · Payments",
+    tags: ["Product", "Fintech", "Mobile"],
+    tone: "navy",
+    tier: "flagship",
+    lane: "enterprise",
+    role: "Senior Manager UX",
+    timeline: "Rapipay Fintech tenure",
+    engagement: "Product design leadership",
+    href: "https://nye.money/",
+    links: [
+      { label: "Visit live site", href: "https://nye.money/" },
+      {
+        label: "App Store",
+        href: "https://apps.apple.com/in/app/nye-money/id1662431820",
+      },
+      {
+        label: "Google Play",
+        href: "https://play.google.com/store/apps/details?id=com.rapipay.nye",
+      },
+    ],
+    cover: "/assets/work/nye/cover.png",
+    gallery: [
+      "/assets/work/nye/gallery-01.jpg",
+      "/assets/work/nye/gallery-02.jpg",
+      "/assets/work/nye/gallery-03.jpg",
+      "/assets/work/nye/gallery-04.jpg",
+      "/assets/work/nye/gallery-05.jpg",
+      "/assets/work/nye/gallery-06.jpg",
+      "/assets/work/nye/gallery-07.jpg",
+      "/assets/work/nye/gallery-08.jpg",
+    ],
+    challenge:
+      "NYE needed one consumer surface that could hold prepaid wallet and RuPay Platinum card, UPI payments, NCMC transit, partner bank accounts, digital gold, and mutual funds — without reading like a pile of disconnected fintech features.",
+    approachSteps: [
+      "Framed the product as a financial operating layer for everyday money: spend, move, save, and invest — with security and compliance visible in the experience, not only in the fine print.",
+      "Designed payment journeys around Scan & Pay, UPI transfer, Autopay, and payment requests, with prepaid and NCMC states held in the same mental model.",
+      "Structured banking onboarding for Jana Savings and Current accounts as progress-led journeys, so unfinished account opening stayed recoverable instead of abandoned.",
+      "Brought investments into the same app grammar — digital gold vault and mutual fund baskets — so growth products did not feel like a second brand bolted on.",
+      "Kept trust cues close to money moments: biometric unlock, PIN recovery, and compliance signals (including PCI DSS / ISO framing) where users decide to continue.",
+    ],
+    outcomes: [
+      {
+        title: "A live financial super app",
+        body: "NYE ships on the web and on iOS and Android as Rapipay’s consumer finance product — wallet, card, UPI, banking, and investments in one place.",
+      },
+      {
+        title: "Payments that hold transit",
+        body: "Prepaid and NCMC sit beside UPI actions, so metro and bus top-ups are part of the money system rather than a side utility.",
+      },
+      {
+        title: "Banking and invest in the same OS",
+        body: "Partner account opening, digital gold, and mutual funds share the product’s structure instead of splintering into separate apps.",
+      },
+    ],
+  },
+  {
+    index: "03",
     slug: "growing-with-kid",
     client: "Growing With Kid",
     title: "A parenting community built around one clear job",
@@ -116,6 +182,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Founder / product builder",
     timeline: "2020–present",
     engagement: "Founder venture",
+    href: "https://www.growingwithkid.com",
     cover: "/assets/work/growing-with-kid/cover.svg",
     gallery: [
       "/assets/work/growing-with-kid/gallery-01.svg",
@@ -146,7 +213,60 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "03",
+    index: "04",
+    slug: "gwk-ghostwriter",
+    client: "GWK Ghostwriter",
+    title: "A personal AI LinkedIn studio — memory, voice, and a research-to-post workflow",
+    summary:
+      "An AI content engine built for Growing With Kid: LinkedIn posts in a personal voice, using long-term memory, source material, idea scoring, calendar, and analytics. Open the product.",
+    year: "2026",
+    category: "Founder & Ventures",
+    industry: "AI · Content",
+    tags: ["Founder", "AI", "Content"],
+    tone: "gold",
+    tier: "flagship",
+    lane: "primary",
+    role: "Founder / product builder",
+    timeline: "2026",
+    engagement: "Founder product",
+    href: "/prototypes/gwk-ghostwriter/app.html",
+    links: [
+      { label: "Open product", href: "/prototypes/gwk-ghostwriter/app.html" },
+      { label: "View landing", href: "/prototypes/gwk-ghostwriter/landing.html" },
+    ],
+    cover: "/assets/work/gwk-ghostwriter/cover.svg",
+    gallery: [
+      "/assets/work/gwk-ghostwriter/gallery-01.png",
+      "/assets/work/gwk-ghostwriter/gallery-02.png",
+      "/assets/work/gwk-ghostwriter/gallery-03.png",
+      "/assets/work/gwk-ghostwriter/gallery-04.png",
+      "/assets/work/gwk-ghostwriter/gallery-05.png",
+    ],
+    challenge:
+      "Generic LinkedIn tools write like everyone else. This studio had to remember voice rules, source material, and what actually worked — not another prompt box.",
+    approachSteps: [
+      "Built a full product surface first: dashboard, post editor with live LinkedIn preview, ideas, calendar, knowledge base, memory, analytics, and voice profile.",
+      "Made memory the core — preferences, style, feedback, and topics persist across sessions, so the next draft already knows the rules.",
+      "Connected research to post: scored ideas from source material, draft, preview, schedule, then read performance back into the studio.",
+      "Wrote a landing page as the product’s own conversion path, not a separate moodboard.",
+    ],
+    outcomes: [
+      {
+        title: "A studio you can open",
+        body: "The product is live in the portfolio — dashboard through analytics — not a deck of screens.",
+      },
+      {
+        title: "Voice as a system",
+        body: "Writing rules, beliefs, and source material sit in memory and the knowledge base, not in a one-off prompt.",
+      },
+      {
+        title: "A pattern that can extend",
+        body: "The same studio grammar can serve Growing With Kid, Bolo Buddy, and client tools without becoming a generic content mill.",
+      },
+    ],
+  },
+  {
+    index: "05",
     slug: "bolo-buddy",
     client: "Bolo Buddy",
     title: "Culturally rooted bedtime stories for Indian children",
@@ -162,6 +282,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Cofounder",
     timeline: "1.5+ years, ongoing",
     engagement: "Founder venture",
+    href: "https://www.bolobuddy.in",
     cover: "/assets/work/bolo-buddy/cover.svg",
     gallery: [
       "/assets/work/bolo-buddy/gallery-01.svg",
@@ -192,7 +313,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "04",
+    index: "06",
     slug: "2886",
     client: "2886",
     title: "Craft technique, modern cut",
@@ -208,6 +329,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Designer",
     timeline: "Project engagement",
     engagement: "Brand and web",
+    href: "https://www.2886.in",
     cover: "/assets/work/2886/cover.svg",
     gallery: [
       "/assets/work/2886/gallery-01.svg",
@@ -238,7 +360,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "05",
+    index: "07",
     slug: "pacific-design-house",
     client: "Pacific Design House",
     title: "Ethical garment manufacturing, on the web",
@@ -254,6 +376,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Designer",
     timeline: "Project engagement",
     engagement: "Brand and web",
+    href: "https://www.pacificdesignhouse.com",
     cover: "/assets/work/pacific-design-house/cover.svg",
     gallery: [
       "/assets/work/pacific-design-house/gallery-01.svg",
@@ -284,7 +407,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "06",
+    index: "08",
     slug: "viralops",
     client: "Viralops",
     title: "A complete redesign against an extended feedback cycle",
@@ -326,7 +449,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "07",
+    index: "09",
     slug: "verizon",
     client: "Verizon",
     title: "Turnkey digital signage across distributed locations",
@@ -377,7 +500,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "08",
+    index: "10",
     slug: "crowley",
     client: "Crowley Maritime",
     title: "Unifying freight quoting across a fragmented supply chain",
@@ -431,7 +554,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "09",
+    index: "11",
     slug: "sagacito",
     client: "Sagacito",
     title: "An AI-driven revenue suite for perishable media inventory",
@@ -474,7 +597,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "10",
+    index: "12",
     slug: "shuttl",
     client: "Shuttl",
     title: "An end-to-end design system for urban mobility at scale",
@@ -520,7 +643,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "11",
+    index: "13",
     slug: "hempel",
     client: "Hempel",
     title: "Workshop insights into digitized coatings procurement",
@@ -566,7 +689,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "12",
+    index: "14",
     slug: "urban-prakriti",
     client: "Urban Prakriti",
     title: "A health brand for city residents, built as a founder",
@@ -612,7 +735,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "13",
+    index: "15",
     slug: "obzrv",
     client: "Obzrv",
     title: "A real-time F&B analytics MVP for the Gulf",
@@ -658,7 +781,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "14",
+    index: "16",
     slug: "tannins",
     client: "Tannins",
     title: "Crafting quality tannin solutions",
@@ -673,7 +796,7 @@ export const caseStudies: CaseStudy[] = [
     lane: "archive",
   },
   {
-    index: "15",
+    index: "17",
     slug: "omf",
     client: "OMF",
     title: "Sleep retail, redesigned for a pitch",
@@ -688,7 +811,7 @@ export const caseStudies: CaseStudy[] = [
     lane: "archive",
   },
   {
-    index: "16",
+    index: "18",
     slug: "udbodhan",
     client: "Udbodhan",
     title: "India’s oldest continuously published Bengali magazine",
@@ -703,7 +826,7 @@ export const caseStudies: CaseStudy[] = [
     lane: "archive",
   },
   {
-    index: "17",
+    index: "19",
     slug: "strike",
     client: "Strike",
     title: "Market analytics for retail investors",
@@ -719,7 +842,7 @@ export const caseStudies: CaseStudy[] = [
     href: "https://strike.money",
   },
   {
-    index: "18",
+    index: "20",
     slug: "ethiqly",
     client: "Ethiqly",
     title: "AI writing support for literature classrooms",
@@ -734,7 +857,7 @@ export const caseStudies: CaseStudy[] = [
     lane: "archive",
   },
   {
-    index: "19",
+    index: "21",
     slug: "smart-currency-exchange",
     client: "Smart Currency Exchange",
     title: "Live conversion, simple selection",
@@ -754,7 +877,7 @@ export const flagshipStudies = caseStudies.filter((study) => study.tier === "fla
 
 export const primaryStudies = caseStudies.filter((study) => study.lane === "primary");
 
-const featuredSlugs = ["eqty", "growing-with-kid", "bolo-buddy", "2886"] as const;
+const featuredSlugs = ["eqty", "gwk-ghostwriter", "growing-with-kid", "bolo-buddy"] as const;
 
 export const featuredWork = featuredSlugs.map((slug) => {
   const study = caseStudies.find((item) => item.slug === slug);

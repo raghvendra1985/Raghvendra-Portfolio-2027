@@ -165,13 +165,13 @@ export function retrieve(query: string, options: RetrieveOptions = {}): RankedEn
 
     // Phrase-ish boosts for common recruiter intents
     const q = query.toLowerCase();
-    if (q.includes("ai") && /ai|trust|bolo|eqty|blueprint/.test(`${entry.title} ${entry.topics.join(" ")}`.toLowerCase())) {
+    if (q.includes("ai") && /ai|trust|bolo|eqty|blueprint|ghostwriter/.test(`${entry.title} ${entry.topics.join(" ")}`.toLowerCase())) {
       score += 3;
     }
-    if (q.includes("fintech") && /fintech|eqty|rapipay|currency|strike/.test(`${entry.title} ${entry.topics.join(" ")}`.toLowerCase())) {
+    if (q.includes("fintech") && /fintech|eqty|nye|rapipay|currency|strike/.test(`${entry.title} ${entry.topics.join(" ")}`.toLowerCase())) {
       score += 3;
     }
-    if ((q.includes("founder") || q.includes("venture")) && /founder|growing|bolo|2886/.test(`${entry.title} ${entry.topics.join(" ")}`.toLowerCase())) {
+    if ((q.includes("founder") || q.includes("venture")) && /founder|growing|bolo|2886|ghostwriter/.test(`${entry.title} ${entry.topics.join(" ")}`.toLowerCase())) {
       score += 2.5;
     }
     if ((q.includes("teach") || q.includes("speak") || q.includes("iiad")) && /teach|iiad|learning|workshop/.test(`${entry.title} ${entry.topics.join(" ")} ${entry.content}`.toLowerCase())) {

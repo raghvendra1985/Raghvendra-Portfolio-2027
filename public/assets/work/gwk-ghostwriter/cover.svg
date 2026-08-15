@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="GWK Ghostwriter AI LinkedIn studio">
+  <rect width="1200" height="1500" fill="#E4B028"/>
+  <!-- App shell -->
+  <rect x="70" y="110" width="1060" height="1280" rx="8" fill="#0B1849"/>
+  <rect x="70" y="110" width="1060" height="64" fill="#07102E"/>
+  <circle cx="108" cy="142" r="7" fill="#E4B028"/>
+  <circle cx="134" cy="142" r="7" fill="#124D1C"/>
+  <circle cx="160" cy="142" r="7" fill="#EBEDE3" fill-opacity="0.35"/>
+  <text x="196" y="148" font-family="ui-monospace, monospace" font-size="16" letter-spacing="3" fill="#EBEDE3">GWK GHOSTWRITER</text>
+  <text x="820" y="148" font-family="ui-monospace, monospace" font-size="13" letter-spacing="2" fill="#E4B028">AI CLONE · ACTIVE</text>
+  <!-- Sidebar -->
+  <rect x="70" y="174" width="210" height="1216" fill="#07102E"/>
+  <rect x="92" y="214" width="166" height="34" rx="2" fill="#E4B028"/>
+  <text x="108" y="236" font-family="ui-monospace, monospace" font-size="13" fill="#0B1849">Dashboard</text>
+  <text x="108" y="286" font-family="ui-monospace, monospace" font-size="13" fill="#EBEDE3" fill-opacity="0.7">New Post</text>
+  <text x="108" y="328" font-family="ui-monospace, monospace" font-size="13" fill="#EBEDE3" fill-opacity="0.55">Ideas</text>
+  <text x="108" y="370" font-family="ui-monospace, monospace" font-size="13" fill="#EBEDE3" fill-opacity="0.55">Calendar</text>
+  <text x="108" y="412" font-family="ui-monospace, monospace" font-size="13" fill="#EBEDE3" fill-opacity="0.55">Knowledge</text>
+  <text x="108" y="454" font-family="ui-monospace, monospace" font-size="13" fill="#EBEDE3" fill-opacity="0.55">Memory</text>
+  <text x="108" y="496" font-family="ui-monospace, monospace" font-size="13" fill="#EBEDE3" fill-opacity="0.55">Analytics</text>
+  <!-- Editor -->
+  <text x="310" y="230" font-family="Georgia, serif" font-size="36" fill="#EBEDE3">Write in your voice.</text>
+  <text x="310" y="268" font-family="ui-monospace, monospace" font-size="14" letter-spacing="3" fill="#E4B028">MEMORY ON · STORY-FIRST</text>
+  <rect x="310" y="300" width="430" height="520" fill="#EBEDE3"/>
+  <text x="330" y="340" font-family="ui-monospace, monospace" font-size="12" letter-spacing="2" fill="#0B1849" fill-opacity="0.45">PROMPT</text>
+  <text x="330" y="380" font-family="Georgia, serif" font-size="20" fill="#0B1849">A parent messaged before</text>
+  <text x="330" y="408" font-family="Georgia, serif" font-size="20" fill="#0B1849">surgery  record a voice</text>
+  <text x="330" y="436" font-family="Georgia, serif" font-size="20" fill="#0B1849">for his daughter.</text>
+  <rect x="330" y="470" width="280" height="28" rx="4" fill="#0B1849" fill-opacity="0.08"/>
+  <text x="342" y="489" font-family="ui-monospace, monospace" font-size="11" fill="#124D1C">no em dashes · story-first</text>
+  <text x="330" y="540" font-family="ui-monospace, monospace" font-size="12" letter-spacing="2" fill="#0B1849" fill-opacity="0.45">DRAFT</text>
+  <text x="330" y="580" font-family="Georgia, serif" font-size="18" fill="#0B1849">A father messaged me at</text>
+  <text x="330" y="608" font-family="Georgia, serif" font-size="18" fill="#0B1849">11pm on a Tuesday.</text>
+  <rect x="330" y="740" width="72" height="28" rx="4" fill="#0B1849"/>
+  <text x="342" y="759" font-family="ui-monospace, monospace" font-size="11" fill="#E4B028">/story</text>
+  <rect x="412" y="740" width="80" height="28" rx="4" fill="none" stroke="#0B1849" stroke-opacity="0.25"/>
+  <text x="424" y="759" font-family="ui-monospace, monospace" font-size="11" fill="#0B1849" fill-opacity="0.55">/hinglish</text>
+  <!-- LinkedIn preview -->
+  <rect x="760" y="300" width="330" height="520" fill="#EBEDE3"/>
+  <text x="780" y="336" font-family="ui-monospace, monospace" font-size="11" letter-spacing="2" fill="#0B1849" fill-opacity="0.45">LINKEDIN PREVIEW</text>
+  <circle cx="804" cy="380" r="18" fill="#E4B028"/>
+  <text x="834" y="376" font-family="Georgia, serif" font-size="16" fill="#0B1849">Raghvendra Singh</text>
+  <text x="834" y="396" font-family="ui-monospace, monospace" font-size="11" fill="#0B1849" fill-opacity="0.5">Founder · GWK</text>
+  <text x="780" y="450" font-family="Georgia, serif" font-size="16" fill="#0B1849">A father messaged me</text>
+  <text x="780" y="474" font-family="Georgia, serif" font-size="16" fill="#0B1849">at 11pm on a Tuesday.</text>
+  <text x="780" y="514" font-family="Georgia, serif" font-size="16" fill="#0B1849">He had surgery in 3 days.</text>
+  <text x="780" y="538" font-family="Georgia, serif" font-size="16" fill="#0B1849">His daughter was 4.</text>
+  <rect x="780" y="580" width="290" height="1" fill="#0B1849" fill-opacity="0.12"/>
+  <text x="780" y="612" font-family="ui-monospace, monospace" font-size="12" fill="#0B1849" fill-opacity="0.55">Voice match 98%</text>
+  <text x="780" y="640" font-family="ui-monospace, monospace" font-size="12" fill="#124D1C">KB: Bolo Buddy research</text>
+  <!-- Memory strip -->
+  <rect x="310" y="850" width="780" height="160" fill="none" stroke="#EBEDE3" stroke-opacity="0.25"/>
+  <text x="330" y="890" font-family="ui-monospace, monospace" font-size="12" letter-spacing="3" fill="#E4B028">MEMORY</text>
+  <text x="330" y="940" font-family="Georgia, serif" font-size="22" fill="#EBEDE3">Open with a scene. Never a statistic.</text>
+  <text x="330" y="978" font-family="ui-monospace, monospace" font-size="14" fill="#EBEDE3" fill-opacity="0.55">Preference · Style · Feedback · Topic</text>
+  <rect x="310" y="1040" width="240" height="100" fill="#E4B028"/>
+  <text x="330" y="1084" font-family="Georgia, serif" font-size="20" fill="#0B1849">Research</text>
+  <text x="330" y="1114" font-family="ui-monospace, monospace" font-size="13" fill="#0B1849" fill-opacity="0.7">Idea scoring</text>
+  <rect x="570" y="1040" width="240" height="100" fill="#EBEDE3"/>
+  <text x="590" y="1084" font-family="Georgia, serif" font-size="20" fill="#0B1849">Draft</text>
+  <text x="590" y="1114" font-family="ui-monospace, monospace" font-size="13" fill="#0B1849" fill-opacity="0.7">Voice rules in</text>
+  <rect x="830" y="1040" width="260" height="100" fill="#124D1C"/>
+  <text x="850" y="1084" font-family="Georgia, serif" font-size="20" fill="#EBEDE3">Schedule</text>
+  <text x="850" y="1114" font-family="ui-monospace, monospace" font-size="13" fill="#EBEDE3" fill-opacity="0.7">Then read it back</text>
+  <text x="70" y="1450" font-family="ui-monospace, monospace" font-size="18" letter-spacing="6" fill="#0B1849" fill-opacity="0.55">04 · GWK GHOSTWRITER</text>
+</svg>

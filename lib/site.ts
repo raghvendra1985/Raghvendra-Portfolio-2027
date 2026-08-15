@@ -2,13 +2,14 @@ export const site = {
   name: "Raghvendra Singh",
   title: "Raghvendra Singh — Product Design Leader",
   description:
-    "Product Design Leader | Systems Thinker | AI Product Builder. Current work with EQTY, Growing With Kid, Bolo Buddy, and 2886 — with enterprise systems experience for Verizon, Crowley, Hempel, and more.",
+    "Product Design Leader | Systems Thinker | AI Product Builder. Current work with EQTY, GWK Ghostwriter, Growing With Kid, and Bolo Buddy — with enterprise systems experience for Verizon, Crowley, Hempel, and more.",
   url: "https://raghvendrasingh.com",
   email: "hello@raghvendrasingh.com",
   linkedin: "https://www.linkedin.com/in/raghvendrasingh23/",
   location: "Faridabad, India · Remote worldwide",
-  status: "Open for advisory",
-  statusDetail: "2 active workstreams, room for one more.",
+  status: "Open to selected opportunities",
+  statusDetail:
+    "Available for remote product leadership, advisory, and selected collaborations.",
 };
 
 export const navLinks = [

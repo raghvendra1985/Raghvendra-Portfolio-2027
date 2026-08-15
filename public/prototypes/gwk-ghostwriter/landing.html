@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GWK Ghostwriter AI — LinkedIn Content That Actually Sounds Like You</title>
+<meta name="description" content="India's first personal AI LinkedIn ghostwriter. Built on your voice, your stories, your beliefs. Powered by long-term memory. Try free for 7 days.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+:root {
+  --bg:        #131008;
+  --bg-2:      #1C1810;
+  --bg-3:      #252018;
+  --bg-4:      #2E2820;
+  --bg-card:   #1A1610;
+
+  --gold:      #E8920A;
+  --gold-lt:   #F5A623;
+  --gold-dk:   #B86F05;
+  --gold-dim:  rgba(232,146,10,0.12);
+  --gold-glow: rgba(232,146,10,0.06);
+
+  --sage:      #5A8A6A;
+  --sage-lt:   #7DB88A;
+  --rose:      #C46A5A;
+
+  --text-1:    #F0EAE0;
+  --text-2:    #A09278;
+  --text-3:    #6B5E48;
+  --text-4:    #3A3228;
+
+  --border-1:  rgba(240,234,224,0.06);
+  --border-2:  rgba(240,234,224,0.10);
+  --border-3:  rgba(240,234,224,0.16);
+
+  --serif:     'Fraunces', Georgia, serif;
+  --sans:      'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono:      'JetBrains Mono', monospace;
+
+  --max:       1160px;
+  --r-s:       6px;
+  --r-m:       12px;
+  --r-l:       20px;
+  --r-xl:      32px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: var(--sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 4px; }
+
+/* ─────────────────────────────────────
+   NAV
+───────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  background: rgba(19,16,8,0.90);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-1);
+  transition: border-color 300ms;
+}
+
+.nav.scrolled { border-bottom-color: var(--border-2); }
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-logo-mark {
+  width: 32px; height: 32px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--bg);
+}
+
+.nav-logo-text {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-1);
+  line-height: 1;
+}
+
+.nav-logo-text small {
+  display: block;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-left: auto;
+  margin-right: 28px;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color 150ms;
+}
+
+.nav-links a:hover { color: var(--text-1); }
+
+.nav-actions { display: flex; gap: 10px; align-items: center; }
+
+.case-study-back {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-s);
+  white-space: nowrap;
+  transition: color 150ms, border-color 150ms;
+}
+.case-study-back:hover { color: var(--text-1); border-color: var(--border-3); }
+
+.btn-ghost-nav {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: var(--r-s);
+  transition: all 150ms;
+}
+
+.btn-ghost-nav:hover { color: var(--text-1); background: var(--bg-3); }
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: var(--gold);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: var(--r-s);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 160ms;
+  white-space: nowrap;
+}
+
+.btn-cta:hover {
+  background: var(--gold-lt);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(232,146,10,0.35);
+}
+
+.btn-cta-lg {
+  padding: 16px 36px;
+  font-size: 15px;
+  border-radius: var(--r-m);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--text-1);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--r-m);
+  text-decoration: none;
+  border: 1px solid var(--border-3);
+  cursor: pointer;
+  transition: all 160ms;
+}
+
+.btn-outline:hover { background: var(--bg-3); border-color: var(--border-3); }
+
+/* ─────────────────────────────────────
+   HERO
+───────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient warm radial — the one visual risk */
+.hero-glow {
+  position: absolute;
+  width: 900px; height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,146,10,0.07) 0%, transparent 65%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -52%);
+  pointer-events: none;
+}
+
+/* Fine diagonal grain pattern — distinctive texture */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(240,234,224,1) 0px,
+    rgba(240,234,224,1) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(232,146,10,0.28);
+  border-radius: 99px;
+  padding: 6px 18px;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.7s ease both;
+}
+
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 7vw, 6.4rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+  max-width: 860px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.7s ease 0.08s both;
+}
+
+.hero-h1 em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-2);
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.7s ease 0.16s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.7s ease 0.24s both;
+}
+
+.hero-fine-print {
+  font-size: 12px;
+  color: var(--text-3);
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.7s ease 0.3s both;
+}
+
+/* ─────────────────────────────────────
+   LIVE TYPING DEMO
+───────────────────────────────────── */
+.demo-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 820px;
+  margin-top: 64px;
+  animation: fadeUp 0.8s ease 0.36s both;
+}
+
+.demo-shell {
+  background: var(--bg-2);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px var(--border-1),
+    0 48px 96px rgba(0,0,0,0.7),
+    0 0 80px rgba(232,146,10,0.04);
+}
+
+.demo-titlebar {
+  background: var(--bg-3);
+  border-bottom: 1px solid var(--border-1);
+  padding: 13px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.demo-dots { display: flex; gap: 6px; }
+.demo-dot  { width: 10px; height: 10px; border-radius: 50%; }
+.demo-dot:nth-child(1) { background: #FF5F57; }
+.demo-dot:nth-child(2) { background: #FFBD2E; }
+.demo-dot:nth-child(3) { background: #28C840; }
+.demo-url {
+  flex: 1;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.demo-body {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  min-height: 360px;
+}
+
+.demo-editor {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-right: 1px solid var(--border-1);
+}
+
+.demo-prompt-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.demo-prompt-box {
+  background: var(--bg-3);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-s);
+  padding: 10px 13px;
+  font-size: 12px;
+  color: var(--text-2);
+  font-style: italic;
+}
+
+.demo-memory {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  background: var(--gold-glow);
+  border: 1px solid rgba(232,146,10,0.15);
+  border-radius: var(--r-s);
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gold);
+}
+
+.demo-output {
+  flex: 1;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-1);
+  white-space: pre-wrap;
+  min-height: 140px;
+}
+
+.demo-cursor {
+  display: inline-block;
+  width: 2px; height: 1.1em;
+  background: var(--gold);
+  vertical-align: text-bottom;
+  margin-left: 1px;
+  animation: blink 0.85s ease-in-out infinite;
+}
+
+.demo-slash-row {
+  display: flex; gap: 5px; flex-wrap: wrap;
+}
+
+.demo-slash {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 3px 8px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-1);
+  border-radius: 4px;
+  color: var(--text-3);
+}
+
+.demo-slash.hl { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+
+/* LinkedIn Preview panel */
+.demo-preview {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.demo-preview-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.li-mini {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  flex: 1;
+}
+
+.li-mini-head {
+  padding: 10px 12px 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.li-mini-av {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0077B5, #004B75);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 11px;
+  flex-shrink: 0;
+}
+
+.li-mini-name { font-size: 11px; font-weight: 700; color: #000; font-family: var(--sans); line-height: 1.2; }
+.li-mini-hl   { font-size: 9px; color: #555; font-family: var(--sans); }
+
+.li-mini-body {
+  padding: 4px 12px 10px;
+  font-size: 10px;
+  color: #111;
+  font-family: var(--sans);
+  line-height: 1.55;
+  min-height: 80px;
+}
+
+.li-mini-footer {
+  padding: 7px 12px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #666;
+  font-family: var(--sans);
+}
+
+.demo-mem-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mem-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-1);
+  border-radius: 6px;
+  font-size: 10px;
+  color: var(--text-2);
+}
+
+.mem-chip-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────
+   SOCIAL PROOF BANNER
+───────────────────────────────────── */
+.proof-banner {
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+  background: var(--bg-2);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.proof-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.proof-num {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-1);
+  line-height: 1;
+}
+
+.proof-num span { color: var(--gold); }
+
+.proof-label {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.proof-divider {
+  width: 1px; height: 36px;
+  background: var(--border-1);
+}
+
+/* ─────────────────────────────────────
+   SECTION BASE
+───────────────────────────────────── */
+.section {
+  padding: 96px 24px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+  margin-bottom: 14px;
+}
+
+.h2 em { font-style: italic; color: var(--gold); font-weight: 600; }
+
+.lead {
+  font-size: 16px;
+  color: var(--text-2);
+  max-width: 560px;
+  line-height: 1.75;
+  margin-bottom: 56px;
+}
+
+hr.divider {
+  border: none;
+  border-top: 1px solid var(--border-1);
+}
+
+/* ─────────────────────────────────────
+   HOW IT WORKS
+───────────────────────────────────── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: var(--border-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+}
+
+.step-cell {
+  background: var(--bg);
+  padding: 44px 36px;
+  position: relative;
+  transition: background 200ms;
+}
+
+.step-cell:hover { background: var(--bg-2); }
+
+.step-num {
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--bg-4);
+  line-height: 1;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.step-icon { font-size: 28px; display: block; margin-bottom: 16px; }
+
+.step-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.step-desc { font-size: 14px; color: var(--text-2); line-height: 1.7; }
+
+/* ─────────────────────────────────────
+   FEATURES GRID
+───────────────────────────────────── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  gap: 12px;
+}
+
+.feat {
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-l);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 200ms, transform 200ms;
+}
+
+.feat:hover { border-color: var(--border-2); transform: translateY(-2px); }
+
+.feat::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 250ms;
+}
+
+.feat:hover::after { opacity: 0.5; }
+
+.f1 { grid-column: span 7; }
+.f2 { grid-column: span 5; }
+.f3 { grid-column: span 4; }
+.f4 { grid-column: span 4; }
+.f5 { grid-column: span 4; }
+.f6 { grid-column: span 6; }
+.f7 { grid-column: span 6; }
+
+.feat-icon { font-size: 28px; margin-bottom: 18px; display: block; }
+
+.feat-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: 10px;
+  line-height: 1.15;
+}
+
+.feat-desc { font-size: 13px; color: var(--text-2); line-height: 1.7; }
+
+/* Memory stream visual */
+.mem-stream { display: flex; flex-direction: column; gap: 7px; margin-top: 20px; }
+
+.mem-row {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 9px 11px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+}
+
+.mem-badge {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.mb-p { background: var(--gold-dim); color: var(--gold); }
+.mb-s { background: rgba(90,130,168,0.15); color: #7AADCC; }
+.mb-f { background: rgba(196,106,90,0.15); color: var(--rose); }
+.mb-t { background: rgba(90,138,106,0.15); color: var(--sage-lt); }
+
+.mem-text { font-size: 11px; color: var(--text-2); line-height: 1.5; }
+
+/* ideas mini */
+.ideas-mini { display: flex; flex-direction: column; gap: 6px; margin-top: 18px; }
+
+.idea-row {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 11px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-1);
+  border-radius: 7px;
+}
+
+.idea-score {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  color: var(--gold); width: 26px; flex-shrink: 0;
+}
+
+.idea-bar { width: 36px; height: 3px; background: var(--bg-4); border-radius: 99px; overflow: hidden; flex-shrink: 0; }
+.idea-fill { height: 100%; background: var(--gold); border-radius: 99px; }
+.idea-text { font-size: 11px; color: var(--text-2); flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+.idea-src {
+  font-family: var(--mono); font-size: 8px;
+  padding: 2px 6px; border-radius: 4px; flex-shrink: 0;
+}
+
+.src-r { background: rgba(255,86,0,0.12); color: #FF5600; }
+.src-x { background: var(--bg-4); color: var(--text-3); }
+.src-n { background: rgba(90,130,168,0.14); color: #7AADCC; }
+
+/* ─────────────────────────────────────
+   TESTIMONIALS
+───────────────────────────────────── */
+.testimonials-bg {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+  padding: 80px 24px;
+}
+
+.testimonials-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
+}
+
+.testi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-l);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 200ms;
+}
+
+.testi-card:hover { border-color: var(--border-2); }
+
+.testi-stars {
+  display: flex; gap: 2px;
+  color: var(--gold);
+  font-size: 13px;
+}
+
+.testi-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-1);
+  flex: 1;
+}
+
+.testi-author {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.testi-av {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px; color: var(--bg);
+  flex-shrink: 0;
+}
+
+.testi-name { font-size: 13px; font-weight: 600; color: var(--text-1); }
+.testi-role { font-size: 11px; color: var(--text-3); }
+
+/* ─────────────────────────────────────
+   PRICING
+───────────────────────────────────── */
+.pricing-section {
+  padding: 96px 24px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.pricing-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.toggle-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.toggle-label.active { color: var(--text-1); }
+
+.toggle-switch {
+  width: 44px; height: 24px;
+  background: var(--bg-4);
+  border-radius: 99px;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid var(--border-2);
+  transition: background 200ms;
+}
+
+.toggle-switch.on { background: var(--gold); }
+
+.toggle-knob {
+  width: 18px; height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px; left: 2px;
+  transition: left 200ms;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.toggle-switch.on .toggle-knob { left: 22px; }
+
+.toggle-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  background: var(--gold-dim);
+  color: var(--gold);
+  border-radius: 99px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.price-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-xl);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+}
+
+.price-card.popular {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, var(--bg-2) 0%, rgba(232,146,10,0.04) 100%);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--gold);
+  padding: 4px 14px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.price-plan {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.price-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.price-currency {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.price-num {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--text-1);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.price-period {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.price-inr {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-4);
+  margin-top: -10px;
+}
+
+.price-desc {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.price-features {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+}
+
+.price-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+
+.price-check {
+  color: var(--sage-lt);
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 13px;
+}
+
+.price-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.price-trial-note {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* ─────────────────────────────────────
+   FAQ
+───────────────────────────────────── */
+.faq-section {
+  padding: 80px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border-1);
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 20px 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: color 150ms;
+}
+
+.faq-question:hover { color: var(--gold); }
+
+.faq-icon {
+  font-size: 18px;
+  color: var(--text-3);
+  flex-shrink: 0;
+  transition: transform 250ms, color 150ms;
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(45deg);
+  color: var(--gold);
+}
+
+.faq-answer {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.75;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 350ms ease, padding 250ms;
+  padding-bottom: 0;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 300px;
+  padding-bottom: 20px;
+}
+
+/* ─────────────────────────────────────
+   FINAL CTA
+───────────────────────────────────── */
+.final-cta {
+  padding: 120px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.final-cta::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,146,10,0.07) 0%, transparent 68%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.final-cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.final-cta-h {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+  margin-bottom: 20px;
+}
+
+.final-cta-h em { font-style: italic; color: var(--gold); }
+
+.final-cta-sub {
+  font-size: 16px;
+  color: var(--text-2);
+  line-height: 1.75;
+  margin-bottom: 40px;
+}
+
+.final-cta-actions {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+/* ─────────────────────────────────────
+   FOOTER
+───────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border-1);
+  padding: 40px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max);
+  margin: 0 auto;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--text-3);
+}
+
+.footer-links {
+  display: flex; gap: 24px; flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 12px; color: var(--text-3);
+  text-decoration: none;
+  transition: color 150ms;
+}
+
+.footer-links a:hover { color: var(--text-1); }
+
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-4);
+  letter-spacing: 0.05em;
+}
+
+/* ─────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger > * {
+  transition-delay: calc(var(--i,0) * 70ms);
+}
+
+/* ─────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────── */
+@media (max-width: 1024px) {
+  .demo-body { grid-template-columns: 1fr; }
+  .demo-preview { display: none; }
+  .features-grid { grid-template-columns: repeat(6,1fr); }
+  .f1,.f2 { grid-column: span 3; }
+  .f3,.f4,.f5 { grid-column: span 2; }
+  .f6,.f7 { grid-column: span 3; }
+  .testi-grid { grid-template-columns: repeat(2,1fr); }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .steps-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav { padding: 0 20px; }
+  .btn-ghost-nav { display: none; }
+
+  .hero-h1 { font-size: 2.8rem; }
+
+  .demo-body { min-height: auto; }
+  .demo-shell { border-radius: var(--r-l); }
+
+  .section { padding: 64px 20px; }
+
+  .features-grid { grid-template-columns: 1fr; }
+  .f1,.f2,.f3,.f4,.f5,.f6,.f7 { grid-column: span 1; }
+
+  .testi-grid { grid-template-columns: 1fr; }
+
+  .proof-banner { gap: 24px; }
+  .proof-divider { display: none; }
+
+  .hero-actions, .final-cta-actions { flex-direction: column; align-items: center; }
+  .hero-actions .btn-cta, .hero-actions .btn-outline,
+  .final-cta-actions .btn-cta, .final-cta-actions .btn-outline { width: 100%; justify-content: center; }
+
+  footer { flex-direction: column; gap: 16px; }
+
+  .h2 { font-size: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-h1 { font-size: 2.2rem; }
+  .proof-banner { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+/* Colour avatars */
+.av-saffron { background: linear-gradient(135deg,#E8920A,#C46A0A); }
+.av-sage    { background: linear-gradient(135deg,#4E7A5C,#2A5840); }
+.av-sky     { background: linear-gradient(135deg,#3A6EA8,#1A4A80); }
+.av-rose    { background: linear-gradient(135deg,#C46A5A,#8A3828); }
+.av-violet  { background: linear-gradient(135deg,#7A5AA8,#4A2A80); }
+.av-teal    { background: linear-gradient(135deg,#3A8A7A,#1A6058); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">G</div>
+    <div class="nav-logo-text">
+      GWK Ghostwriter
+      <small>AI Content Engine</small>
+    </div>
+  </a>
+
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </div>
+
+  <div class="nav-actions">
+    <a href="/work/gwk-ghostwriter" class="case-study-back">← Case study</a>
+    <a href="app.html" class="btn-ghost-nav">Log in</a>
+    <a href="app.html" class="btn-cta">Open product →</a>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grain"></div>
+
+  <div class="hero-eyebrow">✦ Built for Indian Founders &amp; Creators · LinkedIn Edition</div>
+
+  <h1 class="hero-h1">
+    LinkedIn posts that sound<br>
+    <em>exactly</em> like you.
+  </h1>
+
+  <p class="hero-sub">Papa pehle. Founder baad mein. — every post, every time.</p>
+
+  <div class="hero-actions">
+    <a href="app.html" class="btn-cta btn-cta-lg">Open the product →</a>
+    <a href="#how" class="btn-outline">See how it works ↓</a>
+  </div>
+
+  <p class="hero-fine-print">No credit card required · Cancel anytime · Works with your existing LinkedIn</p>
+
+  <!-- LIVE TYPING DEMO -->
+  <div class="demo-wrap">
+    <div class="demo-shell">
+      <div class="demo-titlebar">
+        <div class="demo-dots">
+          <div class="demo-dot"></div>
+          <div class="demo-dot"></div>
+          <div class="demo-dot"></div>
+        </div>
+        <div class="demo-url">gwk-ghostwriter.app · Post Editor · Your AI Clone Active</div>
+      </div>
+
+      <div class="demo-body">
+        <div class="demo-editor">
+          <div class="demo-prompt-label">Your prompt</div>
+          <div class="demo-prompt-box">A parent messaged me before surgery — asked if he could record his voice in Bolo Buddy for his daughter…</div>
+
+          <div class="demo-memory">💾 Remembered: no em dashes · story-first · end with a question</div>
+
+          <div class="demo-output" id="heroTyping"></div>
+
+          <div class="demo-slash-row">
+            <span class="demo-slash hl">/story</span>
+            <span class="demo-slash">/longer</span>
+            <span class="demo-slash">/hook</span>
+            <span class="demo-slash">/hinglish</span>
+            <span class="demo-slash">/cta</span>
+            <span class="demo-slash">/shorter</span>
+          </div>
+        </div>
+
+        <div class="demo-preview">
+          <div class="demo-preview-label">LinkedIn Preview</div>
+
+          <div class="li-mini">
+            <div class="li-mini-head">
+              <div class="li-mini-av">RS</div>
+              <div>
+                <div class="li-mini-name">Raghvendra Singh</div>
+                <div class="li-mini-hl">Founder · GWK &amp; Bolo Buddy</div>
+              </div>
+            </div>
+            <div class="li-mini-body">A father messaged me at 11pm on a Tuesday.<br><br>He had surgery in 3 days. His daughter was 4. She couldn't sleep without his voice…<br><br><span style="color:#0077B5;">…see more</span></div>
+            <div class="li-mini-footer">
+              <span>❤️ 💡 👏 <strong>284</strong></span>
+              <span>47 comments</span>
+            </div>
+          </div>
+
+          <div class="demo-mem-chips">
+            <div class="mem-chip">
+              <div class="mem-chip-dot" style="background:var(--gold)"></div>
+              Story-first hook detected
+            </div>
+            <div class="mem-chip">
+              <div class="mem-chip-dot" style="background:var(--sage-lt)"></div>
+              Voice profile: 98% match
+            </div>
+            <div class="mem-chip">
+              <div class="mem-chip-dot" style="background:#7AADCC"></div>
+              KB chunk used: Bolo Buddy research
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ PROOF BANNER ═══════════════════ -->
+<div class="proof-banner reveal">
+  <div class="proof-stat">
+    <div class="proof-num">4,500<span>+</span></div>
+    <div class="proof-label">GWK Newsletter Subscribers</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-stat">
+    <div class="proof-num">24.2<span>K</span></div>
+    <div class="proof-label">Impressions · One Post</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-stat">
+    <div class="proof-num">6.8<span>%</span></div>
+    <div class="proof-label">Avg Engagement Rate</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-stat">
+    <div class="proof-num">34</div>
+    <div class="proof-label">Voice Memories Stored</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-stat">
+    <div class="proof-num">₹400<span>/mo</span></div>
+    <div class="proof-label">Total API Cost at Personal Scale</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+<section class="section reveal" id="how">
+  <span class="eyebrow">How it works</span>
+  <h2 class="h2">Your AI twin, live<br>in <em>60 seconds.</em></h2>
+  <p class="lead">Not a template filler. Not generic ChatGPT output. A system that reads you, learns from you, and sounds like you — then gets sharper every time you write.</p>
+
+  <div class="steps-grid stagger">
+    <div class="step-cell">
+      <span class="step-num">01</span>
+      <span class="step-icon">🧬</span>
+      <div class="step-title">Build your AI Clone</div>
+      <div class="step-desc">Paste your LinkedIn URL and website. In 60 seconds, the system reads your posts, bio, and writing across the web and builds a 3,000-word persona document — your tone, beliefs, vocabulary, what you never say, and how you open stories. This is the DNA of every post.</div>
+    </div>
+    <div class="step-cell">
+      <span class="step-num">02</span>
+      <span class="step-icon">✍️</span>
+      <div class="step-title">Write, dictate &amp; refine</div>
+      <div class="step-desc">Type a prompt, speak via voice dictation, or pick from trending ideas. Claude generates in your voice. Every edit, every slash command, every "remember this" is captured as memory and injected into the next generation. The AI gets sharper with every session.</div>
+    </div>
+    <div class="step-cell">
+      <span class="step-num">03</span>
+      <span class="step-icon">📡</span>
+      <div class="step-title">Schedule &amp; close the loop</div>
+      <div class="step-desc">Preview in a live LinkedIn mockup. Publish via official LinkedIn API to personal profile or company page. Analytics pulls performance back in — which hooks worked, when to post, what your audience actually responds to — and feeds it all into memory.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ═══════════════════ FEATURES ═══════════════════ -->
+<section class="section reveal" id="features">
+  <span class="eyebrow">Features</span>
+  <h2 class="h2">Everything in one<br><em>personal studio.</em></h2>
+  <p class="lead">Built to replace Oiti, Taplio, and half your content workflow — in a private tool you own completely.</p>
+
+  <div class="features-grid stagger">
+    <div class="feat f1">
+      <span class="feat-icon">🧠</span>
+      <div class="feat-title">Long-Term Memory System</div>
+      <div class="feat-desc">Every edit, preference, and piece of feedback is stored and injected into future generations. Explicit ("Remember: no em dashes") and implicit (inferred from your editing patterns). The AI remembers what sounds like you and what doesn't — across every session, forever.</div>
+      <div class="mem-stream">
+        <div class="mem-row"><span class="mem-badge mb-p">Preference</span><span class="mem-text">Avoid em dashes — doesn't sound natural, breaks rhythm</span></div>
+        <div class="mem-row"><span class="mem-badge mb-s">Style</span><span class="mem-text">Open with a scene or moment — never a fact or statistic</span></div>
+        <div class="mem-row"><span class="mem-badge mb-f">Feedback</span><span class="mem-text">Hinglish feels right only when it adds warmth, not for effect</span></div>
+        <div class="mem-row"><span class="mem-badge mb-t">Topic</span><span class="mem-text">Personal family stories get 3× more engagement than product posts</span></div>
+      </div>
+    </div>
+
+    <div class="feat f2">
+      <span class="feat-icon">🔥</span>
+      <div class="feat-title">Trending Ideas Agent</div>
+      <div class="feat-desc">Scans Reddit, X, and NewsAPI every 6 hours for your content pillars. Scores virality. Writes your LinkedIn angle automatically.</div>
+      <div class="ideas-mini">
+        <div class="idea-row"><div class="idea-score">94</div><div class="idea-bar"><div class="idea-fill" style="width:94%"></div></div><div class="idea-text">"AI apps replacing parents" — fight back</div><span class="idea-src src-r">Reddit</span></div>
+        <div class="idea-row"><div class="idea-score">88</div><div class="idea-bar"><div class="idea-fill" style="width:88%"></div></div><div class="idea-text">Founders who are parents: how do you not lose yourself?</div><span class="idea-src src-x">X</span></div>
+        <div class="idea-row"><div class="idea-score">77</div><div class="idea-bar"><div class="idea-fill" style="width:77%"></div></div><div class="idea-text">Screen time crisis for children under 5</div><span class="idea-src src-n">News</span></div>
+      </div>
+    </div>
+
+    <div class="feat f3">
+      <span class="feat-icon">🎙️</span>
+      <div class="feat-title">Voice Tech</div>
+      <div class="feat-desc">Dictate an idea on the go. Hear your draft read back. Web Speech API — works natively in Chrome, Edge, Safari. Hinglish-aware.</div>
+    </div>
+
+    <div class="feat f4">
+      <span class="feat-icon">📚</span>
+      <div class="feat-title">Knowledge Base</div>
+      <div class="feat-desc">Upload PDFs, YouTube links, articles, LinkedIn posts. Your knowledge becomes semantic context for every generation via RAG.</div>
+    </div>
+
+    <div class="feat f5">
+      <span class="feat-icon">📅</span>
+      <div class="feat-title">Content Calendar</div>
+      <div class="feat-desc">Monthly view. Colour-coded by status. Gap analysis shows empty days. Drag to reschedule. Full editorial overview at a glance.</div>
+    </div>
+
+    <div class="feat f6">
+      <span class="feat-icon">📊</span>
+      <div class="feat-title">Analytics + AI Insight</div>
+      <div class="feat-desc">Real LinkedIn analytics via official API. Impressions, engagement rate, hook-type performance. Claude analyses patterns and tells you what's working and why — then feeds that back into memory so future posts improve automatically. Best time to post, hook performance chart, export CSV.</div>
+    </div>
+
+    <div class="feat f7">
+      <span class="feat-icon">🇮🇳</span>
+      <div class="feat-title">Hinglish-Ready · Multi-Brand Output</div>
+      <div class="feat-desc">The <code style="font-family:var(--mono);font-size:12px;color:var(--gold);background:var(--bg-3);padding:1px 6px;border-radius:4px;">/hinglish</code> command adds warmth only you can pull off — never translated, just felt. Adapt any LinkedIn post for Instagram, your newsletter, or your product blog in one click. One post. Four formats. The kind of reach that used to require a full content team.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
+<div class="testimonials-bg reveal" id="testimonials">
+  <div class="testimonials-inner">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span class="eyebrow" style="display:block;text-align:center;">Real results</span>
+      <h2 class="h2" style="text-align:center;">What founders say<br>after the <em>first week.</em></h2>
+    </div>
+
+    <div class="testi-grid stagger">
+
+      <!-- Card 1: 4 stars, honest about onboarding friction -->
+      <div class="testi-card">
+        <div class="testi-stars" style="letter-spacing:1px;">★★★★<span style="color:var(--text-4);">★</span></div>
+        <div class="testi-quote">"Takes a few sessions to really click — the first two posts it generated were good but not quite right. By the third I stopped editing. By the fifth I was forwarding them to my team saying 'see this is how I want to write.' The learning curve is real but short."</div>
+        <div class="testi-author">
+          <div class="testi-av av-saffron">VK</div>
+          <div>
+            <div class="testi-name">Vikram K.</div>
+            <div class="testi-role">Founder, EdTech SaaS · Delhi NCR · using 6 weeks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: 5 stars, short and blunt — not flowery -->
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"My first post got 11K impressions. I've never crossed 2K before. I don't know if it's the tool or the consistency it gave me but honestly — does it matter?"</div>
+        <div class="testi-author">
+          <div class="testi-av av-rose">PS</div>
+          <div>
+            <div class="testi-name">Priya S.</div>
+            <div class="testi-role">Parenting Coach · Mumbai · using 3 weeks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: 5 stars, almost didn't buy -->
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"Almost didn't sign up — I've been burned by Taplio, Jasper, and two other LinkedIn tools. All of them made me sound like a Forbes contributor. This one remembered I said 'don't use the word leverage' and never used it again. Small thing. Big difference."</div>
+        <div class="testi-author">
+          <div class="testi-av av-sage">RN</div>
+          <div>
+            <div class="testi-name">Rahul N.</div>
+            <div class="testi-role">UX Consultant · Bangalore · using 2 months</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: 4 stars, specific gripe, still recommends -->
+      <div class="testi-card">
+        <div class="testi-stars" style="letter-spacing:1px;">★★★★<span style="color:var(--text-4);">★</span></div>
+        <div class="testi-quote">"Wish the mobile experience was smoother — I do most of my thinking on my phone and the editor can feel a bit cramped. That said the voice dictation feature basically solves this. I just talk, it writes. My cofounder asked who wrote my last three posts. I said me. Which is true."</div>
+        <div class="testi-author">
+          <div class="testi-av av-sky">AM</div>
+          <div>
+            <div class="testi-name">Ananya M.</div>
+            <div class="testi-role">Co-founder, B2B SaaS · Hyderabad · using 5 weeks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: 5 stars, KB power user, technical -->
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"I uploaded 6 months of my newsletter, three research papers I cite constantly, and my own old LinkedIn posts. Now when I write about creator monetisation it references my actual arguments — not generic stats it pulled from somewhere. That's the only thing that matters to me."</div>
+        <div class="testi-author">
+          <div class="testi-av av-violet">SK</div>
+          <div>
+            <div class="testi-name">Siddharth K.</div>
+            <div class="testi-role">Founder, Creator Economy · Pune · using 7 weeks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6: 3 stars turned 5 — after-support story -->
+      <div class="testi-card" style="border-color:rgba(232,146,10,0.18);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+          <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);">Updated review</div>
+        </div>
+        <div class="testi-stars" style="letter-spacing:1px;"><span style="color:var(--text-4);text-decoration:line-through;font-size:11px;margin-right:4px;">★★★</span>★★★★★</div>
+        <div class="testi-quote">"Left 3 stars initially because the voice clone felt off. Raghvendra personally replied, walked me through re-seeding with better content, and the next generation was completely different. Updating this to 5. The tool and the support are both real."</div>
+        <div class="testi-author">
+          <div class="testi-av av-teal">DM</div>
+          <div>
+            <div class="testi-name">Deepak M.</div>
+            <div class="testi-role">Angel Investor · Chennai · using 10 weeks</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ PRICING ═══════════════════ -->
+<div class="pricing-section reveal" id="pricing">
+  <div style="text-align:center;margin-bottom:8px;">
+    <span class="eyebrow" style="display:block;text-align:center;">Pricing</span>
+    <h2 class="h2" style="text-align:center;">Pay once. Own<br>your <em>voice forever.</em></h2>
+    <p style="font-size:15px;color:var(--text-2);margin-top:10px;margin-bottom:36px;">7-day free trial. No credit card required. Cancel anytime.</p>
+  </div>
+
+  <!-- Billing toggle -->
+  <div class="pricing-toggle">
+    <span class="toggle-label active" id="monthlyLabel">Monthly</span>
+    <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()">
+      <div class="toggle-knob"></div>
+    </div>
+    <span class="toggle-label" id="yearlyLabel">Yearly</span>
+    <span class="toggle-badge" id="savingsBadge">Save 50%</span>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- Starter -->
+    <div class="price-card">
+      <div>
+        <div class="price-plan">Starter</div>
+        <div style="margin-top:12px;" class="price-amount">
+          <span class="price-currency">$</span>
+          <span class="price-num" id="starter-usd">29</span>
+          <span class="price-period">/mo</span>
+        </div>
+        <div class="price-inr" id="starter-inr">≈ ₹2,420/month · billed monthly</div>
+      </div>
+      <div class="price-desc">For founders who post 1–2× a week and want to stop sounding like AI.</div>
+      <div class="price-features">
+        <div class="price-feature"><span class="price-check">✓</span>Unlimited post generation</div>
+        <div class="price-feature"><span class="price-check">✓</span>1 AI Voice Clone</div>
+        <div class="price-feature"><span class="price-check">✓</span>Long-term memory (30 memories)</div>
+        <div class="price-feature"><span class="price-check">✓</span>Knowledge Base · 500 MB</div>
+        <div class="price-feature"><span class="price-check">✓</span>Trending ideas agent · 3 sources</div>
+        <div class="price-feature"><span class="price-check">✓</span>Content calendar</div>
+        <div class="price-feature"><span class="price-check">✓</span>Voice dictation + TTS</div>
+        <div class="price-feature"><span class="price-check">✓</span>LinkedIn publish (personal)</div>
+        <div class="price-feature" style="opacity:0.4;"><span style="color:var(--text-4);">✕</span> Infographic generation</div>
+        <div class="price-feature" style="opacity:0.4;"><span style="color:var(--text-4);">✕</span> Company page publishing</div>
+      </div>
+      <div class="price-cta">
+        <a href="#start" class="btn-outline" style="width:100%;justify-content:center;" onclick="startTrial('starter')">Start 7-Day Free Trial</a>
+        <div class="price-trial-note">No credit card · cancel anytime</div>
+      </div>
+    </div>
+
+    <!-- Creator — Popular -->
+    <div class="price-card popular">
+      <div class="popular-badge">🔥 Most Popular</div>
+      <div>
+        <div class="price-plan">Creator</div>
+        <div style="margin-top:12px;" class="price-amount">
+          <span class="price-currency">$</span>
+          <span class="price-num" id="creator-usd">49</span>
+          <span class="price-period">/mo</span>
+        </div>
+        <div class="price-inr" id="creator-inr">≈ ₹4,090/month · billed monthly</div>
+      </div>
+      <div class="price-desc">For active founders posting 3–5× a week, building a brand they're proud of.</div>
+      <div class="price-features">
+        <div class="price-feature"><span class="price-check">✓</span>Everything in Starter</div>
+        <div class="price-feature"><span class="price-check">✓</span>Unlimited memory</div>
+        <div class="price-feature"><span class="price-check">✓</span>Knowledge Base · 2 GB</div>
+        <div class="price-feature"><span class="price-check">✓</span>All 9 idea sources (Reddit, X, News, HN)</div>
+        <div class="price-feature"><span class="price-check">✓</span>AI Infographic generator</div>
+        <div class="price-feature"><span class="price-check">✓</span>Company page publishing</div>
+        <div class="price-feature"><span class="price-check">✓</span>Analytics + hook performance</div>
+        <div class="price-feature"><span class="price-check">✓</span>Multi-brand output (Instagram, Newsletter, Blog)</div>
+        <div class="price-feature"><span class="price-check">✓</span>claude-opus-4-6 (best quality model)</div>
+        <div class="price-feature"><span class="price-check">✓</span>Daily 8am briefing email</div>
+      </div>
+      <div class="price-cta">
+        <a href="#start" class="btn-cta btn-cta-lg" style="width:100%;justify-content:center;" onclick="startTrial('creator')">Start 7-Day Free Trial →</a>
+        <div class="price-trial-note">No credit card · cancel anytime</div>
+      </div>
+    </div>
+
+    <!-- Pro -->
+    <div class="price-card">
+      <div>
+        <div class="price-plan">Pro</div>
+        <div style="margin-top:12px;" class="price-amount">
+          <span class="price-currency">$</span>
+          <span class="price-num" id="pro-usd">79</span>
+          <span class="price-period">/mo</span>
+        </div>
+        <div class="price-inr" id="pro-inr">≈ ₹6,590/month · billed monthly</div>
+      </div>
+      <div class="price-desc">For agencies, coaches, and founders managing content for multiple brands or clients.</div>
+      <div class="price-features">
+        <div class="price-feature"><span class="price-check">✓</span>Everything in Creator</div>
+        <div class="price-feature"><span class="price-check">✓</span>3 AI Voice Clones / personas</div>
+        <div class="price-feature"><span class="price-check">✓</span>Knowledge Base · unlimited</div>
+        <div class="price-feature"><span class="price-check">✓</span>3 personal LinkedIn accounts</div>
+        <div class="price-feature"><span class="price-check">✓</span>10+ company page accounts</div>
+        <div class="price-feature"><span class="price-check">✓</span>Priority support</div>
+        <div class="price-feature"><span class="price-check">✓</span>White-label output</div>
+        <div class="price-feature"><span class="price-check">✓</span>API access for automation</div>
+        <div class="price-feature"><span class="price-check">✓</span>Team seat (1 included, +$15/seat)</div>
+        <div class="price-feature"><span class="price-check">✓</span>Custom voice profile onboarding call</div>
+      </div>
+      <div class="price-cta">
+        <a href="#start" class="btn-outline" style="width:100%;justify-content:center;" onclick="startTrial('pro')">Start 7-Day Free Trial</a>
+        <div class="price-trial-note">No credit card · cancel anytime</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Guarantee -->
+  <div style="margin-top:40px;padding:24px 32px;background:var(--bg-2);border:1px solid var(--border-1);border-radius:var(--r-l);display:flex;align-items:center;gap:20px;max-width:640px;margin-left:auto;margin-right:auto;flex-wrap:wrap;">
+    <div style="font-size:32px;flex-shrink:0;">🛡️</div>
+    <div>
+      <div style="font-family:var(--serif);font-size:17px;font-weight:600;color:var(--text-1);margin-bottom:5px;">14-day money-back guarantee</div>
+      <div style="font-size:13px;color:var(--text-2);line-height:1.6;">If GWK Ghostwriter doesn't make your LinkedIn content sound more like you within 14 days, we'll refund every rupee. No questions asked. Email us at <span style="color:var(--gold);">hello@gwk-ghostwriter.app</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+
+<!-- ═══════════════════ FAQ ═══════════════════ -->
+<div class="faq-section reveal" id="faq">
+  <div style="text-align:center;margin-bottom:48px;">
+    <span class="eyebrow" style="display:block;text-align:center;">FAQ</span>
+    <h2 class="h2" style="text-align:center;">Everything you<br>need to <em>know.</em></h2>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      How is this different from ChatGPT or Claude for LinkedIn?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">ChatGPT and Claude are blank slates — they don't know who you are. GWK Ghostwriter reads your LinkedIn, builds a 3,000-word persona document from your actual writing, and maintains long-term memory of every preference you've ever expressed. Every generation is grounded in your actual voice, your actual knowledge base, and your actual history. Generic AI tools write posts. This writes your posts.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      How quickly does it learn my voice?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">The initial voice clone is built in 60 seconds from your LinkedIn profile and website. It's already good on day one. But every edit you make, every piece of feedback you give, every slash command you run is captured as memory and injected into future generations. By your 10th post, the AI sounds more like you than a ghostwriter who's worked with you for 6 months. By your 30th, it's uncanny.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      Is my LinkedIn account safe?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">Yes. We publish through LinkedIn's official v2 API using OAuth 2.0 — the same authentication used by Buffer, Hootsuite, and every approved LinkedIn partner. We never ask for your password. Your LinkedIn credentials are encrypted at rest using AES-256. We comply with LinkedIn's terms of service fully.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      What can I add to my Knowledge Base?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">PDFs (research papers, reports, your own writing), YouTube videos (auto-transcribed), articles and blog post URLs (auto-scraped), your existing LinkedIn posts (scraped and embedded), and plain text. Everything is embedded using semantic search so the most relevant chunks surface automatically when you generate a post on a related topic.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      Does the Hinglish mode actually work for Indian audiences?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">Yes, and it's unlike what any other tool does. The /hinglish command doesn't translate — it adds warmth and cultural texture to English prose in the way Indian founders naturally write. It knows the difference between "Vanika ne kaha" (which lands) and "Founder ke taur pe" (which doesn't). The voice profile calibrates how much and when to use it based on your existing writing patterns.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      Can I use it for Instagram, newsletters, or my blog too?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">Yes. The Creator and Pro tiers include multi-brand output. Any LinkedIn post can be adapted to Instagram carousel brief, newsletter intro section, or blog post format in one click. Each adaptation is tuned for the platform's format and the brand's voice — not just a copy-paste with different hashtags.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      What's the refund policy?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">14-day money-back guarantee, no questions asked. If the tool doesn't make your LinkedIn content sound more like you within 14 days of your first paid charge, email hello@gwk-ghostwriter.app and we'll refund you immediately. We'd rather you leave happy than stay unhappy.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      How much does it actually cost in rupees?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">Starter: ~₹2,420/month. Creator: ~₹4,090/month. Pro: ~₹6,590/month (at current exchange rates). Annual billing saves 50%. For comparison — a professional LinkedIn ghostwriter in India charges ₹15,000–50,000/month and doesn't sound like you either.</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ FINAL CTA ═══════════════════ -->
+<div class="final-cta reveal">
+  <div class="final-cta-inner">
+    <h2 class="final-cta-h">
+      Stop sounding<br>like <em>everyone else.</em>
+    </h2>
+    <p class="final-cta-sub">
+      You've spent years building something worth saying. Start saying it in a voice that's actually yours — not a confident robot's approximation of you.
+    </p>
+    <div class="final-cta-actions">
+      <a href="app.html" class="btn-cta btn-cta-lg">Open the product →</a>
+      <a href="#how" class="btn-outline">See how it works</a>
+    </div>
+    <p style="font-size:12px;color:var(--text-4);margin-top:14px;">No credit card · 14-day money back · Cancel anytime</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-brand">GWK Ghostwriter AI</div>
+  <div class="footer-links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="app.html">Open App</a>
+    <a href="mailto:hello@gwk-ghostwriter.app">Contact</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#terms">Terms</a>
+    <a href="#refund">Refunds</a>
+  </div>
+  <div class="footer-copy">© 2026 Growing with Kid OPC Pvt Ltd</div>
+</footer>
+
+
+<script>
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20)
+}, { passive: true })
+
+// ── SCROLL REVEAL ──
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target) }
+  }),
+  { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
+)
+document.querySelectorAll('.reveal').forEach(el => io.observe(el))
+
+// Stagger children
+document.querySelectorAll('.stagger > *').forEach((el, i) => el.style.setProperty('--i', i))
+
+// ── TYPING DEMO ──
+const demoLines = [
+  "A father messaged me at 11pm on a Tuesday.\n\n",
+  "He had surgery in 3 days.\n\n",
+  "His daughter was 4. She couldn't fall asleep without his voice telling a story.\n\n",
+  "He asked: \"Can I record my voice in Bolo Buddy before I go in?\"\n\n",
+  "Nobody told us it would be used for this.\n\n",
+  "We said yes, fixed the recording that night. He recorded 7 stories.\n\n",
+  "Not an app. A voice. Preserved.\n\n",
+  "What moment would you want to preserve for your child?"
+]
+
+let lineIdx = 0, charIdx = 0, isDeleting = false, typingTimer = null
+
+function typeDemo() {
+  const el = document.getElementById('heroTyping')
+  if (!el) return
+
+  const cursor = '<span class="demo-cursor"></span>'
+  const current = demoLines.slice(0, lineIdx).join('') + (lineIdx < demoLines.length ? demoLines[lineIdx].slice(0, charIdx) : '')
+
+  el.innerHTML = current.replace(/\n/g, '<br>') + cursor
+
+  if (!isDeleting) {
+    if (lineIdx < demoLines.length) {
+      charIdx++
+      if (charIdx > demoLines[lineIdx].length) { lineIdx++; charIdx = 0 }
+      typingTimer = setTimeout(typeDemo, lineIdx === 0 ? 60 : 55 + Math.random() * 60)
+    } else {
+      // Pause then restart
+      setTimeout(() => { lineIdx = 0; charIdx = 0; typeDemo() }, 4000)
+    }
+  }
+}
+
+// Start after a small delay
+setTimeout(typeDemo, 800)
+
+// ── FAQ ──
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item')
+  const isOpen = item.classList.contains('open')
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'))
+  if (!isOpen) item.classList.add('open')
+}
+
+// ── BILLING TOGGLE ──
+let isYearly = false
+
+const prices = {
+  starter:  { monthly: { usd: 29, inr: 2420 }, yearly: { usd: 14, inr: 1168 } },
+  creator:  { monthly: { usd: 49, inr: 4090 }, yearly: { usd: 24, inr: 2002 } },
+  pro:      { monthly: { usd: 79, inr: 6590 }, yearly: { usd: 39, inr: 3254 } }
+}
+
+function toggleBilling() {
+  isYearly = !isYearly
+  const sw = document.getElementById('billingToggle')
+  sw.classList.toggle('on', isYearly)
+
+  document.getElementById('monthlyLabel').classList.toggle('active', !isYearly)
+  document.getElementById('yearlyLabel').classList.toggle('active', isYearly)
+  document.getElementById('savingsBadge').textContent = isYearly ? '✓ 50% off applied' : 'Save 50%'
+
+  const period = isYearly ? 'yearly' : 'monthly'
+  const billing = isYearly ? 'billed annually' : 'billed monthly'
+
+  for (const plan of ['starter', 'creator', 'pro']) {
+    const d = prices[plan][period]
+    document.getElementById(`${plan}-usd`).textContent = d.usd
+    document.getElementById(`${plan}-inr`).textContent =
+      `≈ ₹${d.inr.toLocaleString('en-IN')}/month · ${billing}`
+  }
+}
+
+// ── START TRIAL ──
+function startTrial(plan) {
+  window.location.href = 'app.html'
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1)
+    const target = document.getElementById(id)
+    if (target) {
+      e.preventDefault()
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  })
+})
+</script>
+</body>
+</html>

@@ -29,6 +29,12 @@ export default function CaseStudyView({
   const steps = study.approachSteps ?? [];
   const outcomes = study.outcomes ?? [];
   const gallery = study.gallery ?? [];
+  const liveLinks =
+    study.links?.length
+      ? study.links
+      : study.href
+        ? [{ label: "Visit live site", href: study.href }]
+        : [];
 
   return (
     <div ref={rootRef}>
@@ -43,6 +49,20 @@ export default function CaseStudyView({
         <h1 className="mt-6 max-w-4xl font-display text-4xl leading-[1.05] sm:text-6xl">
           {study.title}
         </h1>
+        {liveLinks.length ? (
+          <div className="mt-6 flex flex-wrap gap-3">
+            {liveLinks.map((link) => (
+              <MagneticButton
+                key={link.href}
+                href={link.href}
+                variant="secondary"
+                cursor="Live"
+              >
+                {link.label}
+              </MagneticButton>
+            ))}
+          </div>
+        ) : null}
         <dl
           data-case-chapter
           className="mt-10 grid gap-6 border-t border-line pt-6 sm:grid-cols-3"
@@ -128,11 +148,17 @@ export default function CaseStudyView({
           <p className="font-mono-label text-[11px] text-ink-soft" data-case-chapter>
             Frames
           </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {gallery.map((src, index) => (
               <div key={src} data-case-gallery>
                 <ImageReveal
-                  className="relative aspect-[3/2]"
+                  className={`relative ${
+                    src.endsWith(".jpg")
+                      ? "aspect-[3/4]"
+                      : src.endsWith(".png") || src.endsWith(".webp")
+                        ? "aspect-[16/10]"
+                        : "aspect-[3/2]"
+                  }`}
                   src={src}
                   alt={`${study.client} diagram ${index + 1}`}
                   sizes="(min-width: 768px) 33vw, 100vw"

@@ -120,7 +120,7 @@ export const founderOs: FounderOs = {
     {
       name: "Growing With Kid",
       role: "Founder / product builder",
-      status: "A parenting community that says one thing well — fewer features, sharper jobs.",
+      status: "A parenting community that says one thing well — and GWK Ghostwriter, a live AI writing studio.",
       href: "/work/growing-with-kid",
     },
     {
@@ -136,6 +136,13 @@ export const founderOs: FounderOs = {
     },
   ],
   products: [
+    {
+      name: "GWK Ghostwriter",
+      kind: "AI product",
+      summary:
+        "A personal LinkedIn studio: memory, source material, idea scoring, and a research-to-post workflow. Open the product from Work.",
+      href: "/work/gwk-ghostwriter",
+    },
     {
       name: "Growing With Kid",
       kind: "Community product",

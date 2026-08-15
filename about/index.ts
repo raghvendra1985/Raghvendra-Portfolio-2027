@@ -25,13 +25,13 @@ export type AboutPage = {
 export const aboutPage: AboutPage = {
   title: "About",
   description:
-    "Design leader and AI strategist. Associate Professor at IIAD. 20 years at the intersection of architecture, logic, and humanism.",
+    "Product design leader, systems thinker, and AI product builder. I work across complex products, operating systems, AI experiences, and founder-led ventures.",
   heroTitle: "20 years at the intersection of architecture, logic, and humanism.",
   heroDescription:
-    "Design leader and AI strategist. Associate Professor at IIAD. I build product ecosystems and DesignOps frameworks where structural logic governs every interface.",
+    "Product design leader, systems thinker, and AI product builder. I work across complex products, operating systems, AI experiences, and founder-led ventures. Alongside product work, I teach design and AI, using the classroom as another environment for testing methods, frameworks, and ways of working.",
   stats: [
-    { label: "Years active", value: "20+" },
-    { label: "Enterprise clients", value: "9" },
+    { label: "Years in product & design", value: "14+" },
+    { label: "Product experience", value: "Enterprise + startup" },
     { label: "Students taught", value: "500+" },
   ],
   beliefs: [
@@ -74,34 +74,42 @@ export const aboutPage: AboutPage = {
   ],
   timeline: [
     {
-      id: "iiad",
-      range: "2022 — Present",
-      role: "Associate Professor",
-      org: "IIAD · New Delhi",
+      id: "founder",
+      range: "2023 — Now",
+      role: "Founder / Product Design Leader",
+      org: "EQTY · GWK Ghostwriter · Growing With Kid · Bolo Buddy",
       description:
-        "Leading industrial design pedagogy and AI implementation research. Teaching as research — students are the fastest feedback loop for what actually matters in practice.",
+        "Building products, systems, and ventures. Teaching continues alongside founder and product leadership work.",
     },
     {
-      id: "rapipay",
-      range: "2018 — 2023",
-      role: "Design Lead",
-      org: "Rapipay · NYE Financial",
+      id: "leadership-arc",
+      range: "2019 — 2023",
+      role: "Staff UX Consultant → Senior Manager UX",
+      org: "Nagarro Technology · Rapipay Fintech",
       description:
-        "Design strategy for financial inclusion tools serving tens of millions of users. Modular design system architecture from zero to one, with WCAG built in.",
+        "From staff consulting across enterprise delivery to senior UX management in fintech — systems, product practice, and cross-functional leadership.",
     },
     {
-      id: "enterprise",
-      range: "2012 — 2018",
-      role: "Principal Architect",
-      org: "UX · Enterprise Systems",
+      id: "ux-lead-arc",
+      range: "2015 — 2019",
+      role: "UX Designer → UX Lead",
+      org: "Product & enterprise practice",
       description:
-        "Complex enterprise systems for global logistics and transit. Data visualisation and information hierarchy for critical infrastructure.",
+        "Growing from hands-on UX into lead responsibility — interaction design, product clarity, and team craft.",
+    },
+    {
+      id: "product-industrial",
+      range: "2011 — 2015",
+      role: "Product & Industrial Design",
+      org: "Practice building toward systems work",
+      description:
+        "Product and industrial design practice that built the foundation for systems thinking and product leadership.",
     },
     {
       id: "foundations",
-      range: "2004 — 2012",
-      role: "Foundations",
-      org: "Digital India · Early Web",
+      range: "2004 — 2011",
+      role: "Design Foundations",
+      org: "Early web · typographic craft",
       description:
         "Exploring the International Typographic Style in India’s early digital landscape — before design systems had a name.",
     },
