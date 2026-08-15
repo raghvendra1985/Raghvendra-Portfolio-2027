@@ -5,7 +5,7 @@ import { knowledgeArticles } from "@/knowledge";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticRoutes = ["", "/about", "/work", "/system", "/knowledge", "/contact"].map((path) => ({
+  const staticRoutes = ["", "/about", "/work", "/system", "/studio", "/knowledge", "/contact"].map((path) => ({
     url: `${site.url}${path || "/"}`,
     lastModified: now,
   }));

@@ -69,10 +69,14 @@ export default function ImageReveal({
           children
         ) : (
           <div
-            className="absolute inset-0 bg-surface-dim"
+            className="absolute inset-0 flex items-end bg-surface-dim p-4"
             role="img"
             aria-label={alt || "Image unavailable"}
-          />
+          >
+            {alt ? (
+              <p className="font-mono-label text-[11px] text-ink-soft">{alt}</p>
+            ) : null}
+          </div>
         )}
       </div>
     </div>

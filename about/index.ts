@@ -20,6 +20,12 @@ export type AboutPage = {
   beliefs: Belief[];
   timeline: TimelineEra[];
   stats: { label: string; value: string }[];
+  glimpse: {
+    body: string;
+    beats: readonly string[];
+    cta: string;
+    href: string;
+  };
 };
 
 export const aboutPage: AboutPage = {
@@ -114,4 +120,10 @@ export const aboutPage: AboutPage = {
         "Exploring the International Typographic Style in India’s early digital landscape — before design systems had a name.",
     },
   ],
+  glimpse: {
+    body: "I design systems for products. At home I keep living ones: animals, a balcony garden, a bike, and a shelf that changes what I notice.",
+    beats: ["Pets", "Garden", "Cycling", "Reading"],
+    cta: "Inside the studio",
+    href: "/studio",
+  },
 };

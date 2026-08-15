@@ -16,6 +16,7 @@ export const navLinks = [
   { label: "Work", href: "/work" },
   { label: "System", href: "/system" },
   { label: "About", href: "/about" },
+  { label: "Studio", href: "/studio" },
   { label: "Knowledge", href: "/knowledge" },
   { label: "Contact", href: "/contact" },
 ];
@@ -26,6 +27,7 @@ export const footerLinks = {
     { label: "Work", href: "/work" },
     { label: "System", href: "/system" },
     { label: "About", href: "/about" },
+    { label: "Studio", href: "/studio" },
     { label: "Knowledge", href: "/knowledge" },
     { label: "Contact", href: "/contact" },
   ],

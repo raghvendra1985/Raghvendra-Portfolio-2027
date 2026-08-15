@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/reveal/PageHero";
 import SectionReveal from "@/components/reveal/SectionReveal";
+import ImageReveal from "@/components/reveal/ImageReveal";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import { aboutPage } from "@/about";
 import { pageMetadataExtras } from "@/lib/seo";
@@ -24,6 +25,25 @@ export default function AboutPage() {
         title={aboutPage.heroTitle}
         description={aboutPage.heroDescription}
       />
+
+      <SectionReveal className="mx-auto grid max-w-[1440px] gap-10 px-[var(--page-pad)] pb-16 lg:grid-cols-[minmax(0,320px)_1fr] lg:items-end lg:gap-16">
+        <div data-reveal-item>
+          <ImageReveal
+            src="/assets/about/raghvendra-singh.png"
+            alt="Raghvendra Singh"
+            className="aspect-square w-full max-w-[320px]"
+            sizes="(max-width: 1024px) 80vw, 320px"
+            objectFit="cover"
+            parallax={0.06}
+            priority
+          />
+        </div>
+        <div data-reveal-item className="max-w-xl">
+          <p className="font-display text-2xl leading-snug text-navy sm:text-3xl">
+            Product Design Leader · Systems Thinker · AI Product Builder
+          </p>
+        </div>
+      </SectionReveal>
 
       <SectionReveal className="mx-auto grid max-w-[1440px] gap-8 px-[var(--page-pad)] pb-20 sm:grid-cols-3">
         {aboutPage.stats.map((stat) => (
@@ -61,7 +81,7 @@ export default function AboutPage() {
         className="scroll-mt-28 mx-auto max-w-[1440px] px-[var(--page-pad)] py-24"
       >
         <h2 className="font-display text-3xl sm:text-4xl" data-reveal-item>
-          20 years · 4 eras · 1 direction
+          20 years · 5 chapters · 1 direction
         </h2>
         <ol className="mt-12">
           {aboutPage.timeline.map((era) => (
@@ -82,6 +102,34 @@ export default function AboutPage() {
             </li>
           ))}
         </ol>
+      </SectionReveal>
+
+      <SectionReveal
+        id="studio"
+        className="scroll-mt-28 border-t border-line bg-surface-dim px-[var(--page-pad)] py-24"
+      >
+        <div className="mx-auto max-w-[1440px]">
+          <p className="font-mono-label text-[11px] text-ink-soft" data-reveal-item>
+            Also
+          </p>
+          <p
+            data-reveal-item
+            className="mt-4 max-w-2xl font-display text-2xl leading-snug sm:text-3xl"
+          >
+            {aboutPage.glimpse.body}
+          </p>
+          <p
+            data-reveal-item
+            className="mt-8 font-mono-label text-[11px] text-green"
+          >
+            {aboutPage.glimpse.beats.join(" · ")}
+          </p>
+          <div className="mt-10" data-reveal-item>
+            <MagneticButton href={aboutPage.glimpse.href} variant="secondary" cursor="Open">
+              {aboutPage.glimpse.cta}
+            </MagneticButton>
+          </div>
+        </div>
       </SectionReveal>
 
       <SectionReveal className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24">
