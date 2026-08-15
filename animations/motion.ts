@@ -60,7 +60,6 @@ let registered = false;
 export function registerMotion() {
   if (registered || typeof window === "undefined") return;
   gsap.registerPlugin(ScrollTrigger);
-  gsap.ticker.lagSmoothing(0);
   registered = true;
 }
 

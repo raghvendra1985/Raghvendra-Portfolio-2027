@@ -70,7 +70,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(!sessionStorage.getItem("rs-v8-visited")&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("is-loading")}}catch(e){}`,
+            __html: `try{if(!sessionStorage.getItem("rs-v8-visited")&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("is-loading");setTimeout(function(){document.documentElement.classList.remove("is-loading");document.documentElement.classList.add("motion-ready");try{sessionStorage.setItem("rs-v8-visited","1")}catch(e){}},2500)}}catch(e){}`,
           }}
         />
         <script

@@ -12,13 +12,12 @@ import {
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import {
-  gsap,
   registerMotion,
   ScrollTrigger,
   type MotionConfig,
 } from "@/animations/motion";
 import { useMotionConfig } from "@/hooks/useMotionConfig";
-import { hasVisited } from "@/animations/loader";
+import { hasVisited, markVisited } from "@/animations/loader";
 import { setLenis, getLenis } from "@/hooks/useLenis";
 import Loader from "@/components/loader/Loader";
 import Cursor from "@/components/cursor/Cursor";
@@ -82,18 +81,15 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
       touchMultiplier: config.isMobile ? 1 : 1.05,
       wheelMultiplier: config.isMobile ? 0.85 : 1,
       anchors: true,
-      autoRaf: false,
+      autoRaf: true,
       allowNestedScroll: true,
       prevent: (node) =>
         Boolean(node.closest("input, textarea, select, [contenteditable='true']")),
     });
     setLenis(lenis);
     lenis.on("scroll", ScrollTrigger.update);
-    const raf = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(raf);
 
     return () => {
-      gsap.ticker.remove(raf);
       lenis.destroy();
       setLenis(null);
     };
@@ -118,6 +114,16 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
   const finishLoader = useCallback(() => {
     setShowLoader(false);
   }, []);
+
+  useEffect(() => {
+    if (pageReady) return;
+    const id = window.setTimeout(() => {
+      markVisited();
+      markPageReady();
+      finishLoader();
+    }, 2000);
+    return () => window.clearTimeout(id);
+  }, [pageReady, markPageReady, finishLoader]);
 
   const value = useMemo(
     () => ({ config, pageReady, markPageReady, finishLoader }),

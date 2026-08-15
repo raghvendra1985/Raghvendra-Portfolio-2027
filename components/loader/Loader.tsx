@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { animateLoader } from "@/animations/loader";
+import { animateLoader, markVisited } from "@/animations/loader";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 
 export default function Loader() {
@@ -23,15 +23,24 @@ export default function Loader() {
       },
     });
 
+    const failsafe = window.setTimeout(() => {
+      if (cancelled) return;
+      markVisited();
+      markPageReady();
+      finishLoader();
+    }, 2000);
+
     return () => {
       cancelled = true;
+      window.clearTimeout(failsafe);
       timeline?.kill();
     };
-  }, [config, markPageReady, finishLoader]);
+  }, [config.reducedMotion, config.isMobile, markPageReady, finishLoader]);
 
   return (
     <div
       ref={rootRef}
+      data-loader-root
       className="fixed inset-0 z-[90] flex items-center justify-center bg-navy text-mist"
       role="status"
       aria-live="polite"

@@ -67,10 +67,24 @@ html.is-loading [data-nav] {
 
 html.is-loading .site-content {
   opacity: 0;
+  animation: rs-loader-failsafe 0.25s ease 2.4s forwards;
 }
 
 html.motion-ready .site-content {
   opacity: 1;
+  animation: none;
+}
+
+html.motion-ready [data-loader-root] {
+  opacity: 0 !important;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+@keyframes rs-loader-failsafe {
+  to {
+    opacity: 1;
+  }
 }
 
 .line-mask {

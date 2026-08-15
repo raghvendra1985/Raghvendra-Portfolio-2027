@@ -70,11 +70,10 @@ export function animateLoader(
   tl.add(() => onPhase?.("wordmark"), 0);
   tl.fromTo(
     wordmark,
-    { autoAlpha: 0, y: 18, filter: config.isMobile ? "none" : "blur(10px)" },
+    { autoAlpha: 0, y: 18 },
     {
       autoAlpha: 1,
       y: 0,
-      filter: "none",
       duration: DURATION.sm,
     },
     0.08,

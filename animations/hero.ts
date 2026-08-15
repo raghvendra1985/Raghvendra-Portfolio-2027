@@ -44,7 +44,10 @@ export async function animateHero(
   const opts = { ...defaults, ...options };
 
   if (typeof document !== "undefined" && document.fonts?.ready) {
-    await document.fonts.ready;
+    await Promise.race([
+      document.fonts.ready,
+      new Promise((resolve) => window.setTimeout(resolve, 600)),
+    ]);
   }
 
   return createScope(root, () => {
@@ -73,6 +76,20 @@ export async function animateHero(
         mask.appendChild(line);
       });
     }
+
+    const revealNow = () => {
+      if (split?.lines?.length) {
+        gsap.set(split.lines, { yPercent: 0, y: 0, autoAlpha: 1 });
+      }
+      if (copy.length) {
+        gsap.set(copy, { autoAlpha: 1, y: 0, filter: "none" });
+      }
+      if (ctas.length) {
+        gsap.set(ctas, { autoAlpha: 1, y: 0, scale: 1 });
+      }
+    };
+
+    const failsafe = window.setTimeout(revealNow, 1400);
 
     const tl = gsap.timeline({ delay: opts.delay, defaults: { ease: EASE } });
 
@@ -136,11 +153,15 @@ export async function animateHero(
       };
       root.addEventListener("mousemove", onMove);
       return () => {
+        window.clearTimeout(failsafe);
         root.removeEventListener("mousemove", onMove);
         split?.revert();
       };
     }
 
-    return () => split?.revert();
+    return () => {
+      window.clearTimeout(failsafe);
+      split?.revert();
+    };
   });
 }
