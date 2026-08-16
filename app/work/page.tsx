@@ -5,7 +5,7 @@ import { pageMetadataExtras } from "@/lib/seo";
 
 const title = "Selected Work";
 const description =
-  "Primary case studies first, then enterprise experience, founder work, and archive. Filter by the kind of problem.";
+  "Enterprise leadership and founder-built products. Verizon, Rapipay, EQTY, and more — filter by Enterprise, Startup, Founder, AI, Product, or Systems.";
 
 export const metadata: Metadata = {
   title,
@@ -19,8 +19,8 @@ export default function WorkPage() {
       <PageHero
         index="05"
         label="Selected work"
-        title="Selected work, in depth."
-        description="Primary studies first. Enterprise experience, founder work, and archive stay on this page. Filter by the kind of problem."
+        title="Selected work across products, systems, and ventures."
+        description="Enterprise leadership and founder-built products. Filter by Enterprise, Startup, Founder, AI, Product, or Systems."
       />
       <WorkIndex />
     </>

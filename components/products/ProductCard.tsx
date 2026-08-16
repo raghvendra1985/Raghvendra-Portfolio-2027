@@ -60,13 +60,18 @@ export default function ProductCard({ product }: { product: Product }) {
         <p className="relative mt-4 max-w-sm text-base leading-relaxed text-mist/70">
           {product.hook}
         </p>
+        {product.description ? (
+          <p className="relative mt-3 max-w-sm text-sm leading-relaxed text-mist/55">
+            {product.description}
+          </p>
+        ) : null}
         <p className="relative mt-8 font-mono-label text-[11px] text-mist">{formatInr(product.price)}</p>
         <p className="relative mt-3 font-mono-label text-[11px] text-mist/50">
           {formatCategories(product)}
         </p>
         <div className="relative mt-10 flex items-end justify-between gap-4">
           <p className="font-mono-label text-[11px] text-gold group-hover:text-mist">
-            {product.cta} →
+            View Product →
           </p>
           <p className="font-mono-label text-[11px] text-mist/45">{product.attribution}</p>
         </div>

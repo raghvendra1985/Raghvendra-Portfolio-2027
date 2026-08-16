@@ -1,8 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="2886 case study cover">
-  <rect width="1200" height="1500" fill="#0B1849"/>
-  <g stroke="#EBEDE3" stroke-opacity="0.18" fill="none"><line x1="0" y1="0" x2="0" y2="1500"/><line x1="75" y1="0" x2="75" y2="1500"/><line x1="150" y1="0" x2="150" y2="1500"/><line x1="225" y1="0" x2="225" y2="1500"/><line x1="300" y1="0" x2="300" y2="1500"/><line x1="375" y1="0" x2="375" y2="1500"/><line x1="450" y1="0" x2="450" y2="1500"/><line x1="525" y1="0" x2="525" y2="1500"/><line x1="600" y1="0" x2="600" y2="1500"/><line x1="675" y1="0" x2="675" y2="1500"/><line x1="750" y1="0" x2="750" y2="1500"/><line x1="825" y1="0" x2="825" y2="1500"/><line x1="900" y1="0" x2="900" y2="1500"/><line x1="975" y1="0" x2="975" y2="1500"/><line x1="1050" y1="0" x2="1050" y2="1500"/><line x1="1125" y1="0" x2="1125" y2="1500"/><line x1="0" y1="0" x2="1200" y2="0"/><line x1="0" y1="75" x2="1200" y2="75"/><line x1="0" y1="150" x2="1200" y2="150"/><line x1="0" y1="225" x2="1200" y2="225"/><line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="375" x2="1200" y2="375"/><line x1="0" y1="450" x2="1200" y2="450"/><line x1="0" y1="525" x2="1200" y2="525"/><line x1="0" y1="600" x2="1200" y2="600"/><line x1="0" y1="675" x2="1200" y2="675"/><line x1="0" y1="750" x2="1200" y2="750"/><line x1="0" y1="825" x2="1200" y2="825"/><line x1="0" y1="900" x2="1200" y2="900"/><line x1="0" y1="975" x2="1200" y2="975"/><line x1="0" y1="1050" x2="1200" y2="1050"/><line x1="0" y1="1125" x2="1200" y2="1125"/><line x1="0" y1="1200" x2="1200" y2="1200"/><line x1="0" y1="1275" x2="1200" y2="1275"/><line x1="0" y1="1350" x2="1200" y2="1350"/><line x1="0" y1="1425" x2="1200" y2="1425"/></g>
-  <rect x="72" y="72" width="48" height="4" fill="#E4B028"/>
-  <text x="72" y="160" font-family="Georgia, serif" font-size="28" letter-spacing="8" fill="#EBEDE3" fill-opacity="0.7">CRAFT</text>
-  <text x="72" y="1280" font-family="Georgia, serif" font-size="96" fill="#EBEDE3">2886</text>
-  <text x="72" y="1360" font-family="ui-monospace, monospace" font-size="22" letter-spacing="4" fill="#EBEDE3" fill-opacity="0.65">CASE STUDY</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="2886 fashion editorial craft presentation">
+  <rect width="1200" height="1500" fill="#EBEDE3"/>
+  <!-- Editorial frame -->
+  <rect x="80" y="80" width="1040" height="1340" fill="none" stroke="#0B1849" stroke-width="2"/>
+  <rect x="80" y="80" width="1040" height="80" fill="#0B1849"/>
+  <text x="110" y="130" font-family="ui-monospace, monospace" font-size="18" letter-spacing="6" fill="#E4B028">2886</text>
+  <text x="900" y="130" font-family="ui-monospace, monospace" font-size="16" letter-spacing="3" fill="#EBEDE3" fill-opacity="0.6">CRAFT</text>
+  <!-- Large editorial panel -->
+  <rect x="120" y="200" width="620" height="900" fill="#0B1849"/>
+  <rect x="160" y="260" width="80" height="6" fill="#E4B028"/>
+  <text x="160" y="360" font-family="Georgia, serif" font-size="64" fill="#EBEDE3">Craft</text>
+  <text x="160" y="440" font-family="Georgia, serif" font-size="64" fill="#EBEDE3">technique,</text>
+  <text x="160" y="520" font-family="Georgia, serif" font-size="64" fill="#EBEDE3">modern cut.</text>
+  <text x="160" y="620" font-family="ui-monospace, monospace" font-size="16" letter-spacing="3" fill="#EBEDE3" fill-opacity="0.5">EDITORIAL · LOOKBOOK</text>
+  <!-- Side stack -->
+  <rect x="780" y="200" width="300" height="280" fill="#124D1C"/>
+  <text x="810" y="280" font-family="Georgia, serif" font-size="28" fill="#EBEDE3">Silhouette</text>
+  <text x="810" y="320" font-family="ui-monospace, monospace" font-size="14" fill="#EBEDE3" fill-opacity="0.55">Structure</text>
+  <rect x="780" y="510" width="300" height="280" fill="#E4B028"/>
+  <text x="810" y="590" font-family="Georgia, serif" font-size="28" fill="#0B1849">Material</text>
+  <text x="810" y="630" font-family="ui-monospace, monospace" font-size="14" fill="#0B1849" fill-opacity="0.55">Handwork</text>
+  <rect x="780" y="820" width="300" height="280" fill="#0B1849"/>
+  <text x="810" y="900" font-family="Georgia, serif" font-size="28" fill="#EBEDE3">Cut</text>
+  <text x="810" y="940" font-family="ui-monospace, monospace" font-size="14" fill="#EBEDE3" fill-opacity="0.55">Modern line</text>
+  <!-- Caption rule -->
+  <line x1="120" y1="1160" x2="1080" y2="1160" stroke="#0B1849" stroke-opacity="0.25"/>
+  <text x="120" y="1220" font-family="Georgia, serif" font-size="28" fill="#0B1849">Fashion on the web with a point of view.</text>
+  <text x="120" y="1280" font-family="ui-monospace, monospace" font-size="16" letter-spacing="3" fill="#0B1849" fill-opacity="0.5">DESIGNER · CLIENT WORK</text>
+  <text x="80" y="1460" font-family="ui-monospace, monospace" font-size="18" letter-spacing="6" fill="#0B1849" fill-opacity="0.4">04 · 2886</text>
 </svg>

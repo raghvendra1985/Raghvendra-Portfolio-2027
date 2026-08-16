@@ -5,6 +5,7 @@ import Link from "next/link";
 import { animateFooter } from "@/animations/footer";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { footerLinks, site } from "@/lib/site";
+import ResumeCta from "@/components/cta/ResumeCta";
 
 export default function SiteFooter() {
   const rootRef = useRef<HTMLElement>(null);
@@ -31,8 +32,7 @@ export default function SiteFooter() {
         <div className="mt-16 grid gap-10 border-t border-mist/15 pt-10 md:grid-cols-4">
           <div data-footer-link>
             <p className="max-w-xs text-base leading-relaxed text-mist/80">
-              Product Design Leader, Systems Thinker, and AI Product Builder. Building products,
-              systems, and ventures across design and technology.
+              {site.positioning}. {site.experienceLine}.
             </p>
           </div>
 
@@ -65,6 +65,12 @@ export default function SiteFooter() {
                   </a>
                 </li>
               ))}
+              <li data-footer-link>
+                <ResumeCta
+                  appearance="text"
+                  className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
+                />
+              </li>
             </ul>
           </div>
 
@@ -87,8 +93,9 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-2 border-t border-mist/15 pt-6 font-mono-label text-mist/60 sm:flex-row sm:justify-between">
+        <div className="mt-16 flex flex-col gap-2 border-t border-mist/15 pt-6 font-mono-label text-mist/60 sm:flex-row sm:flex-wrap sm:justify-between">
           <span>© {new Date().getFullYear()} Raghvendra Singh</span>
+          <span>Charms inspired by Karthik Mahadevan</span>
           <span>Motion supports the story. It never becomes the story.</span>
         </div>
       </div>

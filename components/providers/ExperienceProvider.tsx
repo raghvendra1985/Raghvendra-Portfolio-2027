@@ -29,6 +29,7 @@ import Navigation from "@/components/navigation/Navigation";
 import SiteFooter from "@/components/footer/SiteFooter";
 import { ConciergeProvider } from "@/components/concierge/ConciergeProvider";
 import ConciergeHost from "@/components/concierge/ConciergeHost";
+import HangingCharm from "@/components/delight/HangingCharm";
 
 type ExperienceValue = {
   config: MotionConfig;
@@ -144,6 +145,7 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
         <ProgressBar />
         <PageTransition />
         <Navigation />
+        <HangingCharm />
         <ConciergeHost />
         <div className="site-content flex min-h-full flex-1 flex-col pb-20 lg:pb-0">
           <main id="main" className="flex-1">

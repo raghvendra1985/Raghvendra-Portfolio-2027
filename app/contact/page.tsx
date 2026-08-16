@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import PageHero from "@/components/reveal/PageHero";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import ContactForm from "@/components/forms/ContactForm";
+import ResumeCta from "@/components/cta/ResumeCta";
+import { Suspense } from "react";
 import { site } from "@/lib/site";
 import { pageMetadataExtras } from "@/lib/seo";
 
 const title = "Contact";
 const description =
-  "Start a conversation about DesignOps, AI strategy, or design practice.";
+  "Open to senior product design opportunities, product leadership, AI product work, advisory, workshops, and selected collaborations.";
 
 export const metadata: Metadata = {
   title,
@@ -21,8 +23,8 @@ export default function ContactPage() {
       <PageHero
         index="06"
         label="Contact"
-        title="Start a conversation."
-        description="DesignOps, AI product strategy, and design practice — scoped clearly, priced without theatre."
+        title="Let’s build something worth solving."
+        description="Open to senior product design opportunities, product leadership, AI product work, advisory, workshops, and selected collaborations."
       />
 
       <SectionReveal className="mx-auto grid max-w-[1440px] gap-16 px-[var(--page-pad)] pb-24 lg:grid-cols-[0.8fr_1.2fr]">
@@ -54,9 +56,17 @@ export default function ContactPage() {
               LinkedIn
             </a>
           </div>
+          <div>
+            <p className="font-mono-label text-[11px] text-ink-soft">Resume</p>
+            <div className="mt-3">
+              <ResumeCta size="sm" />
+            </div>
+          </div>
         </div>
         <div data-reveal-item className="border border-line p-5 sm:p-8">
-          <ContactForm />
+          <Suspense>
+            <ContactForm />
+          </Suspense>
         </div>
       </SectionReveal>
     </>

@@ -7,6 +7,7 @@ import { animateKnowledgeIndex, refreshKnowledgeIndexItems } from "@/animations/
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import ImageReveal from "@/components/reveal/ImageReveal";
 import MagneticButton from "@/components/buttons/MagneticButton";
+import { track } from "@/lib/analytics";
 import {
   getFrameworkArticle,
   knowledgeCategories,
@@ -27,6 +28,7 @@ function ArticleRow({ article }: { article: KnowledgeArticle }) {
       href={`/knowledge/${article.slug}`}
       data-knowledge-item
       data-cursor="Open"
+      onClick={() => track("knowledge_article_clicked", { slug: article.slug })}
       className="grid items-start gap-6 border-t border-line py-10 md:grid-cols-[minmax(0,280px)_minmax(0,1fr)] md:gap-10"
     >
       <ImageReveal
@@ -144,12 +146,21 @@ export default function KnowledgeIndex({
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft">{featured.deck}</p>
               <div className="mt-8">
-                <MagneticButton href={`/knowledge/${featured.slug}`} cursor="Open">
+                <MagneticButton
+                  href={`/knowledge/${featured.slug}`}
+                  cursor="Open"
+                  onClick={() => track("knowledge_article_clicked", { slug: featured.slug })}
+                >
                   Read the note
                 </MagneticButton>
               </div>
             </div>
-            <Link href={`/knowledge/${featured.slug}`} data-cursor="Open" data-knowledge-item>
+            <Link
+              href={`/knowledge/${featured.slug}`}
+              data-cursor="Open"
+              data-knowledge-item
+              onClick={() => track("knowledge_article_clicked", { slug: featured.slug })}
+            >
               <ImageReveal
                 className="aspect-[16/10] bg-navy"
                 src={featured.cover}

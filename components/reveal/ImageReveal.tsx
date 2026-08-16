@@ -26,26 +26,26 @@ export default function ImageReveal({
   objectFit?: "cover" | "contain";
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { config } = useExperience();
+  const { config, pageReady } = useExperience();
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const root = ref.current;
-    if (!root) return;
+    if (!root || !pageReady) return;
     const reveal = animateImageReveal(root, config);
     const drift = animateParallax(root, config);
     return () => {
       reveal.revert();
       drift.revert();
     };
-  }, [config]);
+  }, [config, pageReady]);
 
   const isSvg = Boolean(src?.endsWith(".svg"));
 
   return (
     <div
       ref={ref}
-      className={`relative overflow-hidden ${className ?? ""}`}
+      className={`relative w-full overflow-hidden ${className ?? ""}`}
       data-image-reveal
       data-shared-image
     >

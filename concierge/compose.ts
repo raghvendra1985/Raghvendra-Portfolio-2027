@@ -108,7 +108,7 @@ function directAnswer(
     case "nye-money":
       return `NYE Money at Rapipay is the published fintech product work alongside EQTY.`;
     case "resume":
-      return `The published career path is on About — leadership, enterprise systems, founder products, and teaching. Contact if you need a conversation, not a PDF.`;
+      return `The published career path is on About — 20 years in design · 14+ years in digital product and UX. Read the experience timeline, or request a resume from Contact.`;
     default:
       break;
   }

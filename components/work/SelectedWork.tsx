@@ -6,6 +6,7 @@ import Link from "next/link";
 import { animateSelectedWork, crossfadeWorkVisual } from "@/animations/caseStudy";
 import { animateParallax } from "@/animations/parallax";
 import { useExperience } from "@/components/providers/ExperienceProvider";
+import { track } from "@/lib/analytics";
 import type { CaseStudy } from "@/case-studies";
 
 function StudyCover({
@@ -83,16 +84,14 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
       <p id="selected-work-keys" className="sr-only">
         Use arrow keys to move between projects.
       </p>
-      <div className="flex items-end justify-between gap-6">
+      <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="font-mono-label text-[11px] text-ink-soft">05 / Selected work</p>
           <h2
             id="selected-work-heading"
             className="mt-4 font-display text-[1.85rem] leading-[1.12] sm:text-5xl sm:leading-[1.05]"
           >
-            Current work, then{" "}
-            <br className="hidden sm:block" />
-            the systems behind it.
+            Current / founder work
           </h2>
         </div>
         <Link
@@ -137,6 +136,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                 href={`/work/${study.slug}`}
                 data-work-row
                 data-cursor="View"
+                onClick={() => track("project_clicked", { slug: study.slug, from: "home" })}
                 className={`block border-t border-line py-8 ${
                   index === active ? "opacity-100" : "opacity-80 hover:opacity-100 lg:opacity-55 lg:hover:opacity-100"
                 }`}

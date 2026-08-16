@@ -45,6 +45,48 @@ export const workCategories: Array<"All" | WorkCategory> = [
   "Freelance MVPs",
 ];
 
+export const workAudiences = [
+  "All",
+  "Enterprise",
+  "Startup",
+  "Founder",
+  "AI",
+  "Product",
+  "Systems",
+] as const;
+
+export type WorkAudience = (typeof workAudiences)[number];
+
+export function matchesWorkAudience(study: CaseStudy, audience: WorkAudience) {
+  if (audience === "All") return true;
+  const tags = study.tags.join(" ").toLowerCase();
+  const haystack = `${study.category} ${study.industry} ${study.summary} ${tags}`.toLowerCase();
+  if (audience === "Enterprise") {
+    return study.lane === "enterprise" || study.category === "Enterprise Systems";
+  }
+  if (audience === "Startup") {
+    return study.category === "SaaS Products" || study.lane === "founder";
+  }
+  if (audience === "Founder") {
+    return (
+      study.lane === "founder" ||
+      study.category === "Founder & Ventures" ||
+      ["eqty", "gwk-ghostwriter", "growing-with-kid", "bolo-buddy"].includes(study.slug)
+    );
+  }
+  if (audience === "AI") {
+    return haystack.includes("ai");
+  }
+  if (audience === "Product") {
+    return study.tags.includes("Product") || study.category === "SaaS Products";
+  }
+  return (
+    study.category === "Enterprise Systems" ||
+    tags.includes("ops") ||
+    haystack.includes("system")
+  );
+}
+
 export const workLanes: WorkLane[] = ["primary", "enterprise", "founder", "archive"];
 
 export const laneLabels: Record<WorkLane, string> = {
@@ -271,7 +313,7 @@ export const caseStudies: CaseStudy[] = [
     client: "Bolo Buddy",
     title: "Culturally rooted bedtime stories for Indian children",
     summary:
-      "An AI storytelling platform — audio-first, screen-free, in Hindi, English, Hinglish, and Tamil.",
+      "An AI-powered, audio-first storytelling companion creating culturally rooted stories for Indian children.",
     year: "2023",
     category: "Founder & Ventures",
     industry: "AI · Children’s products",
@@ -882,6 +924,15 @@ const featuredSlugs = ["eqty", "gwk-ghostwriter", "growing-with-kid", "bolo-budd
 export const featuredWork = featuredSlugs.map((slug) => {
   const study = caseStudies.find((item) => item.slug === slug);
   if (!study) throw new Error(`Missing featured study: ${slug}`);
+  return study;
+});
+
+/** Published enterprise studies for homepage credibility. Porsche is not in the case-study set. */
+const enterpriseLeadershipSlugs = ["verizon", "nye", "crowley"] as const;
+
+export const enterpriseLeadership = enterpriseLeadershipSlugs.map((slug) => {
+  const study = caseStudies.find((item) => item.slug === slug);
+  if (!study) throw new Error(`Missing enterprise study: ${slug}`);
   return study;
 });
 

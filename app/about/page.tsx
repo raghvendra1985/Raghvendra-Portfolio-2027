@@ -3,6 +3,7 @@ import PageHero from "@/components/reveal/PageHero";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import ImageReveal from "@/components/reveal/ImageReveal";
 import MagneticButton from "@/components/buttons/MagneticButton";
+import ResumeCta from "@/components/cta/ResumeCta";
 import { aboutPage } from "@/about";
 import { pageMetadataExtras } from "@/lib/seo";
 
@@ -45,13 +46,30 @@ export default function AboutPage() {
         </div>
       </SectionReveal>
 
-      <SectionReveal className="mx-auto grid max-w-[1440px] gap-8 px-[var(--page-pad)] pb-20 sm:grid-cols-3">
+      <SectionReveal className="mx-auto grid max-w-[1440px] gap-8 px-[var(--page-pad)] pb-20 md:grid-cols-3">
         {aboutPage.stats.map((stat) => (
           <div key={stat.label} data-reveal-item className="border-t border-navy pt-4">
             <p className="font-display text-4xl">{stat.value}</p>
             <p className="mt-2 font-mono-label text-[11px] text-ink-soft">{stat.label}</p>
           </div>
         ))}
+      </SectionReveal>
+
+      <SectionReveal className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
+        <h2 className="font-display text-3xl sm:text-4xl" data-reveal-item>
+          How the work is organised.
+        </h2>
+        <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {aboutPage.chapters.map((chapter, index) => (
+            <li key={chapter.title} data-reveal-item className="border-t border-navy pt-4">
+              <p className="font-mono-label text-[11px] text-green">
+                {String(index + 1).padStart(2, "0")}
+              </p>
+              <h3 className="mt-3 font-display text-xl">{chapter.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft">{chapter.body}</p>
+            </li>
+          ))}
+        </ol>
       </SectionReveal>
 
       <SectionReveal
@@ -81,7 +99,7 @@ export default function AboutPage() {
         className="scroll-mt-28 mx-auto max-w-[1440px] px-[var(--page-pad)] py-24"
       >
         <h2 className="font-display text-3xl sm:text-4xl" data-reveal-item>
-          20 years · 5 chapters · 1 direction
+          Five chapters. One direction.
         </h2>
         <ol className="mt-12">
           {aboutPage.timeline.map((era) => (
@@ -135,15 +153,26 @@ export default function AboutPage() {
       <SectionReveal className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24">
         <div
           data-reveal-item
-          className="flex flex-col items-start justify-between gap-8 border border-line p-10 sm:flex-row sm:items-end"
+          className="flex flex-col items-start justify-between gap-8 border border-line p-6 sm:flex-row sm:items-end sm:p-10"
         >
           <div>
-            <p className="font-mono-label text-[11px] text-ink-soft">Work with Singh</p>
+            <p className="font-mono-label text-[11px] text-ink-soft">Hiring &amp; work</p>
             <h2 className="mt-3 max-w-lg font-display text-2xl sm:text-3xl">
-              20 years of design leadership, condensed into clear engagements.
+              Product design leadership, with evidence attached.
             </h2>
+            <p className="mt-3 max-w-lg text-sm leading-relaxed text-ink-soft">
+              {aboutPage.heroTitle.replace(/\.$/, "")}.
+            </p>
           </div>
-          <MagneticButton href="/contact">Initiate inquiry</MagneticButton>
+          <div data-cta-row className="flex w-full flex-col gap-3 sm:w-auto">
+            <ResumeCta className="w-full justify-center sm:w-auto" />
+            <MagneticButton href="/work" variant="secondary" cursor="View" className="w-full justify-center sm:w-auto">
+              View Selected Work
+            </MagneticButton>
+            <MagneticButton href="/contact" variant="secondary" className="w-full justify-center sm:w-auto">
+              Contact
+            </MagneticButton>
+          </div>
         </div>
       </SectionReveal>
     </>

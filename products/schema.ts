@@ -61,8 +61,18 @@ export function productsIndexJsonLd() {
       itemListElement: items.map((product, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `${site.url}/products/${product.slug}`,
-        name: product.name,
+        item: {
+          "@type": "Product",
+          name: product.name,
+          description: product.seoDescription ?? product.description ?? product.hook,
+          url: `${site.url}/products/${product.slug}`,
+          offers: {
+            "@type": "Offer",
+            url: `${site.url}/products/${product.slug}`,
+            price: product.price,
+            priceCurrency: product.currency,
+          },
+        },
       })),
     },
   };
@@ -75,7 +85,7 @@ export function productJsonLd(product: Product) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    description: product.seoDescription ?? product.hook,
+    description: product.seoDescription ?? product.description ?? product.hook,
     sku: product.id,
     url,
     image: image ? `${site.url}${image}` : undefined,
@@ -90,10 +100,6 @@ export function productJsonLd(product: Product) {
       url,
       price: product.price,
       priceCurrency: product.currency,
-      availability:
-        product.status === "live"
-          ? "https://schema.org/InStock"
-          : "https://schema.org/PreOrder",
       priceSpecification: {
         "@type": "UnitPriceSpecification",
         price: product.price,

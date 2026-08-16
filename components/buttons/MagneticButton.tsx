@@ -26,7 +26,9 @@ export default function MagneticButton({
   size = "md",
   type,
   cursor = "Open",
+  download,
   onClick,
+  className: extraClassName = "",
 }: {
   href?: string;
   children: ReactNode;
@@ -34,7 +36,9 @@ export default function MagneticButton({
   size?: Size;
   type?: "button" | "submit";
   cursor?: string;
+  download?: boolean | string;
   onClick?: () => void;
+  className?: string;
 }) {
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
   const { config } = useExperience();
@@ -46,7 +50,7 @@ export default function MagneticButton({
     return () => ctx.revert();
   }, [config]);
 
-  const className = `relative isolate inline-flex items-center gap-3 overflow-hidden font-mono-label ${sizes[size]} ${variants[variant]}`;
+  const className = `relative isolate inline-flex items-center gap-3 overflow-hidden font-mono-label ${sizes[size]} ${variants[variant]} ${extraClassName}`;
 
   const inner = (
     <>
@@ -66,7 +70,7 @@ export default function MagneticButton({
 
   if (href) {
     const documentHref =
-      href.endsWith(".html") || href.includes("/prototypes/");
+      href.endsWith(".html") || href.includes("/prototypes/") || href.endsWith(".pdf");
     const external =
       href.startsWith("http") || href.startsWith("mailto:") || documentHref;
     if (external) {
@@ -76,6 +80,10 @@ export default function MagneticButton({
           href={href}
           className={className}
           data-cursor={cursor}
+          onClick={onClick}
+          {...(download
+            ? { download: typeof download === "string" ? download : true }
+            : {})}
           {...(href.startsWith("http") || documentHref
             ? { target: "_blank", rel: "noopener noreferrer" }
             : {})}
@@ -90,6 +98,7 @@ export default function MagneticButton({
         href={href}
         className={className}
         data-cursor={cursor}
+        onClick={onClick}
       >
         {inner}
       </Link>

@@ -10,6 +10,8 @@ import {
 } from "@/animations/menu";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import ConciergeTrigger from "@/components/concierge/ConciergeTrigger";
+import CharmPicker from "@/components/delight/CharmPicker";
+import ResumeCta from "@/components/cta/ResumeCta";
 import { footerLinks, navLinks, site } from "@/lib/site";
 
 export default function MenuOverlay({
@@ -58,7 +60,7 @@ export default function MenuOverlay({
     >
       <div
         data-menu-panel
-        className="absolute inset-0 flex flex-col bg-navy px-[var(--page-pad)] pb-10 pt-28 text-mist opacity-0"
+        className="absolute inset-0 flex flex-col overflow-y-auto bg-navy px-[var(--page-pad)] pb-10 pt-28 text-mist opacity-0"
       >
         <h2 id="site-menu-title" className="sr-only">
           Site menu
@@ -100,30 +102,36 @@ export default function MenuOverlay({
 
         <div
           data-menu-item
-          className="mx-auto mt-10 flex w-full max-w-[1440px] flex-col gap-8 border-t border-mist/15 pt-8 sm:flex-row sm:items-end sm:justify-between"
+          className="mx-auto mt-10 flex w-full max-w-[1440px] flex-col gap-8 border-t border-mist/15 pt-8"
         >
-          <div>
-            <p className="flex items-center gap-2 font-mono-label text-[11px] text-mist/70">
-              <span className="h-1.5 w-1.5 rounded-full bg-green" aria-hidden="true" />
-              {site.status}
-            </p>
-            <ul className="mt-4 flex flex-wrap gap-6">
-              {footerLinks.social.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-mist/80 hover:text-gold"
-                    {...(link.href.startsWith("http")
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                  >
-                    {link.label}
-                  </a>
+          <CharmPicker onHang={onClose} />
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="flex items-center gap-2 font-mono-label text-[11px] text-mist/70">
+                <span className="h-1.5 w-1.5 rounded-full bg-green" aria-hidden="true" />
+                {site.status}
+              </p>
+              <ul className="mt-4 flex flex-wrap gap-6">
+                {footerLinks.social.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-mist/80 hover:text-gold"
+                      {...(link.href.startsWith("http")
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <ResumeCta appearance="text" onNavigate={onClose} />
                 </li>
-              ))}
-            </ul>
+              </ul>
+            </div>
+            <ConciergeTrigger variant="mobile-menu" />
           </div>
-          <ConciergeTrigger variant="mobile-menu" />
         </div>
       </div>
     </div>

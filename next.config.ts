@@ -8,7 +8,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/work/porsche", destination: "/work", permanent: true },
-      { source: "/work/rapipay", destination: "/work", permanent: true },
+      { source: "/work/rapipay", destination: "/work/nye", permanent: true },
+      { source: "/work/nye-money", destination: "/work/nye", permanent: true },
       { source: "/work/nagarro", destination: "/work", permanent: true },
       { source: "/work/iiad", destination: "/work", permanent: true },
       { source: "/work/omf", destination: "/work", permanent: true },

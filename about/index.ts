@@ -20,6 +20,7 @@ export type AboutPage = {
   beliefs: Belief[];
   timeline: TimelineEra[];
   stats: { label: string; value: string }[];
+  chapters: { title: string; body: string }[];
   glimpse: {
     body: string;
     beats: readonly string[];
@@ -31,14 +32,36 @@ export type AboutPage = {
 export const aboutPage: AboutPage = {
   title: "About",
   description:
-    "Product design leader, systems thinker, and AI product builder. I work across complex products, operating systems, AI experiences, and founder-led ventures.",
-  heroTitle: "20 years at the intersection of architecture, logic, and humanism.",
+    "Product design leader, systems thinker, and AI product builder. 20 years in design · 14+ years in digital product and UX. I work across complex products, operating systems, AI experiences, and founder-led ventures.",
+  heroTitle: "20 years in design · 14+ years in digital product and UX.",
   heroDescription:
-    "Product design leader, systems thinker, and AI product builder. I work across complex products, operating systems, AI experiences, and founder-led ventures. Alongside product work, I teach design and AI, using the classroom as another environment for testing methods, frameworks, and ways of working.",
+    "Product design leader first. Then systems thinker and AI product builder — with founder work and teaching as supporting proof. I work across product strategy, systems, AI products, design operations, and hands-on product building.",
   stats: [
-    { label: "Years in product & design", value: "14+" },
-    { label: "Product experience", value: "Enterprise + startup" },
+    { label: "Years in design", value: "20" },
+    { label: "Years in digital product & UX", value: "14+" },
     { label: "Students taught", value: "500+" },
+  ],
+  chapters: [
+    {
+      title: "Product design leadership",
+      body: "Strategy, systems, DesignOps, and hands-on product execution — the primary identity.",
+    },
+    {
+      title: "Enterprise experience",
+      body: "Staff consulting and product leadership inside large organisations — Verizon, Rapipay, Crowley, and related systems work.",
+    },
+    {
+      title: "AI product building",
+      body: "AI used as product craft: workflows, trust, and judgment boundaries in live products such as GWK Ghostwriter and Bolo Buddy.",
+    },
+    {
+      title: "Founder experience",
+      body: "EQTY, Growing With Kid, Bolo Buddy, and other founder-led products shipped alongside client work.",
+    },
+    {
+      title: "Teaching and mentoring",
+      body: "500+ students taught. Workshops, critique practice, and design leadership development.",
+    },
   ],
   beliefs: [
     {

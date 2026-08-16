@@ -4,6 +4,7 @@ export type ProductCopy = {
   exampleOutput: string;
   whatYouGet: string[];
   demoNote: string;
+  whoFor?: string;
 };
 
 export const productCopy: Record<string, ProductCopy> = {

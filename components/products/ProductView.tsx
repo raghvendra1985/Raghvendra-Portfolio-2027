@@ -56,7 +56,7 @@ export default function ProductView({ product }: { product: Product }) {
         <div className="mt-8 scroll-mt-28" id="buy">
           {purchasable ? (
             <MagneticButton variant="primary" cursor="Buy" onClick={buy}>
-              {product.cta}
+              Buy Now
             </MagneticButton>
           ) : (
             <MagneticButton href={notifyHref} variant="secondary" cursor="Open">
@@ -93,18 +93,32 @@ export default function ProductView({ product }: { product: Product }) {
                 <p className="mt-4 max-w-xl text-lg leading-relaxed text-navy">{copy.problem}</p>
               </div>
               <div data-reveal-item>
-                <p className="font-mono-label text-[11px] text-ink-soft">How it works</p>
-                <ol className="mt-4 space-y-4">
-                  {copy.howItWorks.map((step, index) => (
-                    <li key={step} className="flex gap-4 text-base leading-relaxed text-ink-soft">
-                      <span className="font-mono-label text-[11px] text-green">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span>{step}</span>
-                    </li>
-                  ))}
-                </ol>
+                <p className="font-mono-label text-[11px] text-ink-soft">What this tool does</p>
+                <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
+                  {product.description ?? product.hook}
+                </p>
+                <p className="mt-6 font-mono-label text-[11px] text-ink-soft">Who it is for</p>
+                <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
+                  {copy.whoFor ??
+                    `Design students working on ${formatCategories(product).toLowerCase()}. Buy once. Use when you need it.`}
+                </p>
               </div>
+            </div>
+          </SectionReveal>
+
+          <SectionReveal className="border-t border-line px-[var(--page-pad)] py-20">
+            <div className="mx-auto max-w-[1440px]" data-reveal-item>
+              <p className="font-mono-label text-[11px] text-ink-soft">How it works</p>
+              <ol className="mt-4 max-w-2xl space-y-4">
+                {copy.howItWorks.map((step, index) => (
+                  <li key={step} className="flex gap-4 text-base leading-relaxed text-ink-soft">
+                    <span className="font-mono-label text-[11px] text-green">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
           </SectionReveal>
 
@@ -146,7 +160,7 @@ export default function ProductView({ product }: { product: Product }) {
           </div>
           {purchasable ? (
             <MagneticButton variant="gold" cursor="Buy" onClick={buy}>
-              {product.cta}
+              Buy Now
             </MagneticButton>
           ) : (
             <MagneticButton href={notifyHref} variant="gold" cursor="Open">
@@ -168,7 +182,7 @@ export default function ProductView({ product }: { product: Product }) {
               }}
               className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-green"
             >
-              {product.cta} →
+              Buy Now →
             </button>
           </div>
         </div>

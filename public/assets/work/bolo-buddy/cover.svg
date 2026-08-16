@@ -1,11 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="Bolo Buddy case study cover">
-  <rect width="1200" height="1500" fill="#0B1849"/>
-  <g stroke="#EBEDE3" stroke-opacity="0.18" fill="none">
-    <line x1="0" y1="0" x2="0" y2="1500"/><line x1="75" y1="0" x2="75" y2="1500"/><line x1="150" y1="0" x2="150" y2="1500"/><line x1="225" y1="0" x2="225" y2="1500"/><line x1="300" y1="0" x2="300" y2="1500"/><line x1="375" y1="0" x2="375" y2="1500"/><line x1="450" y1="0" x2="450" y2="1500"/><line x1="525" y1="0" x2="525" y2="1500"/><line x1="600" y1="0" x2="600" y2="1500"/><line x1="675" y1="0" x2="675" y2="1500"/><line x1="750" y1="0" x2="750" y2="1500"/><line x1="825" y1="0" x2="825" y2="1500"/><line x1="900" y1="0" x2="900" y2="1500"/><line x1="975" y1="0" x2="975" y2="1500"/><line x1="1050" y1="0" x2="1050" y2="1500"/><line x1="1125" y1="0" x2="1125" y2="1500"/>
-    <line x1="0" y1="0" x2="1200" y2="0"/><line x1="0" y1="75" x2="1200" y2="75"/><line x1="0" y1="150" x2="1200" y2="150"/><line x1="0" y1="225" x2="1200" y2="225"/><line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="375" x2="1200" y2="375"/><line x1="0" y1="450" x2="1200" y2="450"/><line x1="0" y1="525" x2="1200" y2="525"/><line x1="0" y1="600" x2="1200" y2="600"/><line x1="0" y1="675" x2="1200" y2="675"/><line x1="0" y1="750" x2="1200" y2="750"/><line x1="0" y1="825" x2="1200" y2="825"/><line x1="0" y1="900" x2="1200" y2="900"/><line x1="0" y1="975" x2="1200" y2="975"/><line x1="0" y1="1050" x2="1200" y2="1050"/><line x1="0" y1="1125" x2="1200" y2="1125"/><line x1="0" y1="1200" x2="1200" y2="1200"/><line x1="0" y1="1275" x2="1200" y2="1275"/><line x1="0" y1="1350" x2="1200" y2="1350"/><line x1="0" y1="1425" x2="1200" y2="1425"/>
-  </g>
-  <rect x="72" y="72" width="48" height="4" fill="#E4B028"/>
-  <text x="72" y="160" font-family="Georgia, serif" font-size="28" letter-spacing="8" fill="#EBEDE3" fill-opacity="0.7">AI STORIES</text>
-  <text x="72" y="1280" font-family="Georgia, serif" font-size="96" fill="#EBEDE3">Bolo Buddy</text>
-  <text x="72" y="1360" font-family="ui-monospace, monospace" font-size="22" letter-spacing="4" fill="#EBEDE3" fill-opacity="0.65">CASE STUDY</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="Bolo Buddy bedtime stories product experience">
+  <rect width="1200" height="1500" fill="#E4B028"/>
+  <!-- Story stage -->
+  <rect x="100" y="160" width="1000" height="1100" fill="#0B1849"/>
+  <rect x="140" y="220" width="920" height="60" fill="none" stroke="#EBEDE3" stroke-opacity="0.25"/>
+  <text x="170" y="258" font-family="ui-monospace, monospace" font-size="16" letter-spacing="4" fill="#E4B028">BOLO BUDDY</text>
+  <text x="170" y="380" font-family="Georgia, serif" font-size="56" fill="#EBEDE3">Bedtime stories</text>
+  <text x="170" y="450" font-family="Georgia, serif" font-size="56" fill="#EBEDE3">rooted in culture.</text>
+  <!-- Story cards row -->
+  <rect x="170" y="540" width="260" height="360" fill="#EBEDE3"/>
+  <rect x="190" y="570" width="220" height="140" fill="#124D1C"/>
+  <text x="210" y="750" font-family="Georgia, serif" font-size="24" fill="#0B1849">Folk tale</text>
+  <text x="210" y="790" font-family="ui-monospace, monospace" font-size="14" fill="#0B1849" fill-opacity="0.55">Hindi · English</text>
+  <rect x="470" y="540" width="260" height="360" fill="#EBEDE3"/>
+  <rect x="490" y="570" width="220" height="140" fill="#0B1849"/>
+  <text x="510" y="750" font-family="Georgia, serif" font-size="24" fill="#0B1849">Voice</text>
+  <text x="510" y="790" font-family="ui-monospace, monospace" font-size="14" fill="#0B1849" fill-opacity="0.55">Family reading</text>
+  <rect x="770" y="540" width="260" height="360" fill="#EBEDE3"/>
+  <rect x="790" y="570" width="220" height="140" fill="#E4B028"/>
+  <text x="810" y="750" font-family="Georgia, serif" font-size="24" fill="#0B1849">Ritual</text>
+  <text x="810" y="790" font-family="ui-monospace, monospace" font-size="14" fill="#0B1849" fill-opacity="0.55">Nightly habit</text>
+  <!-- Progress -->
+  <rect x="170" y="960" width="920" height="8" fill="#EBEDE3" fill-opacity="0.2"/>
+  <rect x="170" y="960" width="420" height="8" fill="#E4B028"/>
+  <text x="170" y="1020" font-family="ui-monospace, monospace" font-size="16" letter-spacing="3" fill="#EBEDE3" fill-opacity="0.55">ACTIVE PLATFORM · COFOUNDER</text>
+  <text x="100" y="1410" font-family="ui-monospace, monospace" font-size="18" letter-spacing="6" fill="#0B1849" fill-opacity="0.55">03 · BOLO BUDDY</text>
 </svg>

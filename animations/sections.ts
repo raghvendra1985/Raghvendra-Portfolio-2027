@@ -95,5 +95,11 @@ export function animateImageReveal(
         },
       },
     );
+
+    const failsafe = window.setTimeout(() => {
+      gsap.set(media, { autoAlpha: 1, scale: 1, filter: "none" });
+    }, 1400);
+
+    return () => window.clearTimeout(failsafe);
   });
 }

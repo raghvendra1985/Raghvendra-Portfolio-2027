@@ -1,22 +1,48 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { animateContactForm } from "@/animations/forms";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import MagneticButton from "@/components/buttons/MagneticButton";
+import { track } from "@/lib/analytics";
 
 const fieldBase =
   "mt-2 min-h-12 w-full border bg-mist px-4 py-3 text-base text-navy placeholder:text-ink-soft/70 focus:border-navy";
 
+export const contactIntents = [
+  { id: "general", label: "General inquiry" },
+  { id: "hiring", label: "I’m hiring for a senior product design role" },
+  { id: "ai", label: "I need help with an AI product" },
+  { id: "strategy", label: "I need product strategy / DesignOps support" },
+  { id: "workshop", label: "I want to discuss a workshop" },
+  { id: "product", label: "I’m interested in a student product" },
+] as const;
+
+export type ContactIntent = (typeof contactIntents)[number]["id"];
+
+function isIntent(value: string | null): value is ContactIntent {
+  return Boolean(value && contactIntents.some((intent) => intent.id === value));
+}
+
 export default function ContactForm() {
   const rootRef = useRef<HTMLFormElement>(null);
   const { config } = useExperience();
+  const searchParams = useSearchParams();
+  const requested = searchParams.get("intent");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
+  const [intent, setIntent] = useState<ContactIntent>(
+    isIntent(requested) ? requested : "general",
+  );
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (isIntent(requested)) setIntent(requested);
+  }, [requested]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -45,9 +71,13 @@ export default function ContactForm() {
     setSubmitted(true);
     if (!validate()) return;
 
-    const subject = encodeURIComponent(`Inquiry — ${company || name || "New engagement"}`);
+    const intentLabel = contactIntents.find((item) => item.id === intent)?.label ?? intent;
+    track("contact_form_submitted", { intent });
+    const subject = encodeURIComponent(
+      `${intent === "general" ? "Inquiry" : intentLabel} — ${company || name || "New conversation"}`,
+    );
     const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\n${message}`,
+      `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nIntent: ${intentLabel}\n\n${message}`,
     );
     window.location.href = `mailto:hello@raghvendrasingh.com?subject=${subject}&body=${body}`;
   }
@@ -121,6 +151,24 @@ export default function ContactForm() {
           onChange={(event) => setCompany(event.target.value)}
           className={fieldClass("company")}
         />
+      </div>
+      <div data-form-item>
+        <label htmlFor="intent" className="font-mono-label text-[11px] text-ink-soft">
+          Why are you writing?
+        </label>
+        <select
+          id="intent"
+          value={intent}
+          onChange={(event) => setIntent(event.target.value as ContactIntent)}
+          className={`${fieldClass("intent")} appearance-none`}
+        >
+          {contactIntents.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.label}
+            </option>
+          ))}
+        </select>
+        <p className="mt-2 text-sm text-ink-soft">Optional. You can still send a simple message.</p>
       </div>
       <div data-form-item>
         <label htmlFor="message" className="font-mono-label text-[11px] text-ink-soft">

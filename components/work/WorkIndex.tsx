@@ -7,13 +7,15 @@ import { DURATION, EASE, gsap } from "@/animations/motion";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import ImageReveal from "@/components/reveal/ImageReveal";
 import WorkCover from "@/components/work/WorkCover";
+import { track } from "@/lib/analytics";
 import {
   caseStudies,
   laneLabels,
-  workCategories,
+  matchesWorkAudience,
+  workAudiences,
   workLanes,
   type CaseStudy,
-  type WorkCategory,
+  type WorkAudience,
   type WorkLane,
 } from "@/case-studies";
 
@@ -50,7 +52,12 @@ function Card({ study }: { study: CaseStudy }) {
 
   if (study.tier === "flagship") {
     return (
-      <Link href={`/work/${study.slug}`} data-cursor="View" className="group block">
+      <Link
+        href={`/work/${study.slug}`}
+        data-cursor="View"
+        className="group block"
+        onClick={() => track("project_clicked", { slug: study.slug, from: "work" })}
+      >
         {body}
       </Link>
     );
@@ -88,13 +95,10 @@ function StudyGrid({ studies }: { studies: CaseStudy[] }) {
 export default function WorkIndex() {
   const rootRef = useRef<HTMLDivElement>(null);
   const { config } = useExperience();
-  const [filter, setFilter] = useState<"All" | WorkCategory>("All");
+  const [filter, setFilter] = useState<WorkAudience>("All");
 
   const visible = useMemo(
-    () =>
-      filter === "All"
-        ? caseStudies
-        : caseStudies.filter((study) => study.category === filter),
+    () => caseStudies.filter((study) => matchesWorkAudience(study, filter)),
     [filter],
   );
 
@@ -136,29 +140,31 @@ export default function WorkIndex() {
 
   return (
     <div ref={rootRef} className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24">
-      <div
-        className="flex flex-wrap gap-2"
-        role="toolbar"
-        aria-label="Filter selected work"
-      >
-        {workCategories.map((category) => {
-          const pressed = filter === category;
+      <div className="-mx-[var(--page-pad)] overflow-x-auto px-[var(--page-pad)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:overflow-visible md:px-0">
+        <div
+          className="flex w-max gap-2 md:w-auto md:flex-wrap"
+          role="toolbar"
+          aria-label="Filter selected work"
+        >
+        {workAudiences.map((audience) => {
+          const pressed = filter === audience;
           return (
             <button
-              key={category}
+              key={audience}
               type="button"
               aria-pressed={pressed}
-              onClick={() => setFilter(category)}
-              className={`min-h-11 border px-4 py-2 font-mono-label ${
+              onClick={() => setFilter(audience)}
+              className={`min-h-11 shrink-0 border px-4 py-2 font-mono-label ${
                 pressed
                   ? "border-navy bg-navy text-mist"
                   : "border-line text-ink-soft hover:border-navy hover:text-navy"
               }`}
             >
-              {category}
+              {audience}
             </button>
           );
         })}
+        </div>
       </div>
 
       {filter === "All" ? (

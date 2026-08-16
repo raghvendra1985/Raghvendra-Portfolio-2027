@@ -4,13 +4,14 @@ import { useEffect, useRef } from "react";
 import { animateHero } from "@/animations/hero";
 import { animateParallax } from "@/animations/parallax";
 import { useExperience } from "@/components/providers/ExperienceProvider";
-import { useConcierge } from "@/components/concierge/ConciergeProvider";
 import MagneticButton from "@/components/buttons/MagneticButton";
+import ResumeCta from "@/components/cta/ResumeCta";
+import { track } from "@/lib/analytics";
+import { site } from "@/lib/site";
 
 export default function Hero() {
   const rootRef = useRef<HTMLElement>(null);
   const { config, pageReady } = useExperience();
-  const { openConcierge } = useConcierge();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -77,23 +78,28 @@ export default function Hero() {
           data-hero-copy
           className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg"
         >
-          20 years across enterprise products, fintech, AI, founder-led ventures, and design
-          education.
+          {site.experienceLine}. Product strategy, systems,
+          AI products, design operations, and hands-on product building.
         </p>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <div data-cta-row className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <div data-hero-cta className="w-full sm:w-auto">
-            <MagneticButton href="/work" cursor="View">
-              View selected work
+            <MagneticButton href="/work" cursor="View" className="w-full justify-center sm:w-auto">
+              View Selected Work
             </MagneticButton>
           </div>
           <div data-hero-cta className="w-full sm:w-auto">
+            <ResumeCta className="w-full justify-center sm:w-auto" />
+          </div>
+          <div data-hero-cta className="w-full sm:w-auto">
             <MagneticButton
+              href="/contact"
               variant="secondary"
-              cursor="Ask"
-              onClick={() => openConcierge("hero")}
+              cursor="Open"
+              onClick={() => track("contact_cta_clicked", { from: "hero" })}
+              className="w-full justify-center sm:w-auto"
             >
-              Ask Raghvendra
+              Start a Conversation
             </MagneticButton>
           </div>
         </div>
