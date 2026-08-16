@@ -6,6 +6,7 @@ import { animateContactForm } from "@/animations/forms";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import { track } from "@/lib/analytics";
+import { site, whatsappHref } from "@/lib/site";
 
 const fieldBase =
   "mt-2 min-h-12 w-full border bg-mist px-4 py-3 text-base text-navy placeholder:text-ink-soft/70 focus:border-navy";
@@ -66,20 +67,33 @@ export default function ContactForm() {
     return Object.keys(next).length === 0;
   }
 
+  function composeMessage() {
+    const intentLabel = contactIntents.find((item) => item.id === intent)?.label ?? intent;
+    return {
+      intentLabel,
+      body: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nIntent: ${intentLabel}\n\n${message}`,
+    };
+  }
+
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setSubmitted(true);
     if (!validate()) return;
 
-    const intentLabel = contactIntents.find((item) => item.id === intent)?.label ?? intent;
-    track("contact_form_submitted", { intent });
+    const { intentLabel, body } = composeMessage();
+    track("contact_form_submitted", { intent, channel: "email" });
     const subject = encodeURIComponent(
       `${intent === "general" ? "Inquiry" : intentLabel} — ${company || name || "New conversation"}`,
     );
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nIntent: ${intentLabel}\n\n${message}`,
-    );
-    window.location.href = `mailto:hello@raghvendrasingh.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${site.email}?subject=${subject}&body=${encodeURIComponent(body)}`;
+  }
+
+  function handleWhatsApp() {
+    setSubmitted(true);
+    if (!validate()) return;
+
+    track("contact_form_submitted", { intent, channel: "whatsapp" });
+    window.open(whatsappHref(composeMessage().body), "_blank", "noopener,noreferrer");
   }
 
   function fieldClass(key: string) {
@@ -194,8 +208,13 @@ export default function ContactForm() {
           </p>
         ) : null}
       </div>
-      <div data-form-item>
+      <div data-form-item className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <MagneticButton type="submit">Send message</MagneticButton>
+        {intent === "product" ? (
+          <MagneticButton type="button" variant="secondary" onClick={handleWhatsApp}>
+            WhatsApp
+          </MagneticButton>
+        ) : null}
       </div>
     </form>
   );

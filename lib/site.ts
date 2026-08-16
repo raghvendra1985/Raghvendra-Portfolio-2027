@@ -6,6 +6,7 @@ export const site = {
   url: "https://raghvendrasingh.com",
   email: "hello@raghvendrasingh.com",
   linkedin: "https://www.linkedin.com/in/raghvendrasingh23/",
+  whatsapp: "https://wa.me/919555909094",
   location: "Faridabad, India · Remote worldwide",
   status: "Open to selected opportunities",
   statusDetail:
@@ -24,6 +25,13 @@ export function amazonProductUrl(asin: string) {
   if (site.amazonAssociatesTag) {
     url.searchParams.set("tag", site.amazonAssociatesTag);
   }
+  return url.toString();
+}
+
+export function whatsappHref(text?: string) {
+  if (!text) return site.whatsapp;
+  const url = new URL(site.whatsapp);
+  url.searchParams.set("text", text);
   return url.toString();
 }
 
@@ -57,5 +65,6 @@ export const footerLinks = {
   social: [
     { label: "LinkedIn", href: site.linkedin },
     { label: "Email", href: `mailto:${site.email}` },
+    { label: "WhatsApp", href: site.whatsapp },
   ],
 };

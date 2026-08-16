@@ -8,8 +8,7 @@ import ProductStatusMark from "@/components/products/ProductStatusMark";
 import DesignIqDemo from "@/components/products/DesignIqDemo";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import { track } from "@/lib/analytics";
-import { site } from "@/lib/site";
-import { createCheckoutIntent, isPurchasable, notifyMailto } from "@/products/commerce";
+import { createCheckoutIntent, isPurchasable, notifyWhatsApp } from "@/products/commerce";
 import { formatCategories, formatInr, getAdjacentProducts, type Product } from "@/products";
 import { getProductCopy } from "@/products/copy";
 
@@ -31,7 +30,7 @@ export default function ProductView({ product }: { product: Product }) {
     }
   }
 
-  const notifyHref = notifyMailto(product, site.email);
+  const notifyHref = notifyWhatsApp(product);
 
   return (
     <article className={purchasable ? "pb-28 lg:pb-0" : undefined}>
@@ -67,7 +66,12 @@ export default function ProductView({ product }: { product: Product }) {
               Buy Now
             </MagneticButton>
           ) : (
-            <MagneticButton href={notifyHref} variant="secondary" cursor="Open">
+            <MagneticButton
+              href={notifyHref}
+              variant="secondary"
+              cursor="Open"
+              onClick={() => track("contact_cta_clicked", { from: "product_notify", channel: "whatsapp", slug: product.slug })}
+            >
               Notify me
             </MagneticButton>
           )}
@@ -171,7 +175,12 @@ export default function ProductView({ product }: { product: Product }) {
               Buy Now
             </MagneticButton>
           ) : (
-            <MagneticButton href={notifyHref} variant="gold" cursor="Open">
+            <MagneticButton
+              href={notifyHref}
+              variant="gold"
+              cursor="Open"
+              onClick={() => track("contact_cta_clicked", { from: "product_notify", channel: "whatsapp", slug: product.slug })}
+            >
               Notify me
             </MagneticButton>
           )}

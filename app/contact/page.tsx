@@ -36,6 +36,17 @@ export default function ContactPage() {
             </a>
           </div>
           <div>
+            <p className="font-mono-label text-[11px] text-ink-soft">WhatsApp</p>
+            <a
+              href={site.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 block text-lg"
+            >
+              Message on WhatsApp
+            </a>
+          </div>
+          <div>
             <p className="font-mono-label text-[11px] text-ink-soft">Based in</p>
             <p className="mt-2 text-lg">{site.location}</p>
           </div>

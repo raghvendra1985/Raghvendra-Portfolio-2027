@@ -14,7 +14,7 @@ export function personJsonLd() {
     email: site.email,
     jobTitle: "Product Design Leader",
     description: site.description,
-    sameAs: [site.linkedin],
+    sameAs: [site.linkedin, site.whatsapp],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Faridabad",

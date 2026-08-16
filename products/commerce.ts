@@ -1,4 +1,5 @@
 import { formatInr, type Product } from "./index";
+import { site, whatsappHref } from "@/lib/site";
 import { getStoredUtm } from "@/lib/utm";
 
 export { formatInr };
@@ -33,12 +34,10 @@ export function createCheckoutIntent(product: Product): CheckoutIntent {
   };
 }
 
-export function notifyMailto(product: Product, email: string) {
-  const subject = encodeURIComponent(`Notify me — ${product.name}`);
-  const body = encodeURIComponent(
-    `Please tell me when ${product.name} is available to buy.\n\nhttps://raghvendrasingh.com/products/${product.slug}\n`,
+export function notifyWhatsApp(product: Product) {
+  return whatsappHref(
+    `Please tell me when ${product.name} is available to buy.\n\n${site.url}/products/${product.slug}`,
   );
-  return `mailto:${email}?subject=${subject}&body=${body}`;
 }
 
 /**
