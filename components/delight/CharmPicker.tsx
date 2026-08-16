@@ -64,7 +64,7 @@ export default function CharmPicker({
     onHang?.();
   }
 
-  function useEmoji() {
+  function hangEmoji() {
     const emoji = draftEmoji.trim() ? normalizeEmoji(draftEmoji) : state.emoji;
     update({ id: "emoji", hidden: false, emoji });
     track("charm_hung", { id: "emoji" });
@@ -154,7 +154,7 @@ export default function CharmPicker({
                           onKeyDown={(event) => {
                             if (event.key === "Enter") {
                               event.preventDefault();
-                              useEmoji();
+                              hangEmoji();
                             }
                           }}
                         />
@@ -163,7 +163,7 @@ export default function CharmPicker({
                           className="emoji-done"
                           id="emoji-done"
                           aria-label="Use this emoji"
-                          onClick={useEmoji}
+                          onClick={hangEmoji}
                         >
                           <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
                             <path

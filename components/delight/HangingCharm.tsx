@@ -208,7 +208,7 @@ export default function HangingCharm() {
               ["faience", "#9ef0e3", "#29a69e", "#084f54", "rgba(140,242,230,0.45)"],
               ["red", "#ff7a66", "#9f1239", "#5c0b20", "rgba(255,115,89,0.45)"],
             ] as const
-          ).map(([kind, light, mid, dark, rim]) => (
+          ).map(([kind, light, mid, dark]) => (
             <radialGradient key={`g-${kind}`} id={`charm-g-${kind}`} cx="0.37" cy="0.30" r="0.75">
               <stop offset="0" stopColor={light} />
               <stop offset="0.55" stopColor={mid} />
