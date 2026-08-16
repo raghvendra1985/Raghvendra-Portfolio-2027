@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import ProductStatusMark from "@/components/products/ProductStatusMark";
 import DesignIqDemo from "@/components/products/DesignIqDemo";
@@ -9,12 +10,13 @@ import SectionReveal from "@/components/reveal/SectionReveal";
 import { track } from "@/lib/analytics";
 import { site } from "@/lib/site";
 import { createCheckoutIntent, isPurchasable, notifyMailto } from "@/products/commerce";
-import { formatCategories, formatInr, type Product } from "@/products";
+import { formatCategories, formatInr, getAdjacentProducts, type Product } from "@/products";
 import { getProductCopy } from "@/products/copy";
 
 export default function ProductView({ product }: { product: Product }) {
   const copy = getProductCopy(product.slug);
   const purchasable = isPurchasable(product);
+  const { prev, next } = getAdjacentProducts(product.slug);
   const [note, setNote] = useState(false);
 
   useEffect(() => {
@@ -34,7 +36,13 @@ export default function ProductView({ product }: { product: Product }) {
   return (
     <article className={purchasable ? "pb-28 lg:pb-0" : undefined}>
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-12 pt-32 sm:pt-40">
-        <p className="font-mono-label text-[11px] text-ink-soft">
+        <Link
+          href="/products"
+          className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-ink-soft hover:text-navy"
+        >
+          ← All products
+        </Link>
+        <p className="mt-8 font-mono-label text-[11px] text-ink-soft">
           {product.number} / Secret Products
         </p>
         <div className="mt-4">
@@ -170,6 +178,48 @@ export default function ProductView({ product }: { product: Product }) {
         </div>
       </SectionReveal>
 
+      {prev || next ? (
+        <SectionReveal className="border-t border-line px-[var(--page-pad)] py-16 sm:py-20">
+          <div
+            className="mx-auto flex max-w-[1440px] flex-col gap-4 sm:flex-row sm:items-stretch sm:justify-between"
+            data-reveal-item
+          >
+            {prev ? (
+              <Link
+                href={`/products/${prev.slug}`}
+                data-cursor="Open"
+                onClick={() => track("product_card_clicked", { slug: prev.slug, from: "prev" })}
+                className="flex min-h-11 flex-1 flex-col justify-center border border-line px-5 py-4 hover:border-navy"
+              >
+                <span className="font-mono-label text-[11px] text-ink-soft">← Previous</span>
+                <span className="mt-2 font-display text-xl">{prev.name}</span>
+              </Link>
+            ) : (
+              <span className="hidden flex-1 sm:block" />
+            )}
+            {next ? (
+              <Link
+                href={`/products/${next.slug}`}
+                data-cursor="Next"
+                onClick={() => track("product_card_clicked", { slug: next.slug, from: "next" })}
+                className="flex min-h-11 flex-1 flex-col justify-center border border-line px-5 py-4 text-left hover:border-navy sm:text-right"
+              >
+                <span className="font-mono-label text-[11px] text-ink-soft">Next →</span>
+                <span className="mt-2 font-display text-xl">{next.name}</span>
+              </Link>
+            ) : null}
+          </div>
+          <div className="mx-auto mt-6 max-w-[1440px]" data-reveal-item>
+            <Link
+              href="/products"
+              className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-ink-soft hover:text-navy"
+            >
+              ← All products
+            </Link>
+          </div>
+        </SectionReveal>
+      ) : null}
+
       {purchasable ? (
         <div className="fixed inset-x-0 bottom-[max(5.5rem,calc(env(safe-area-inset-bottom)+4.5rem))] z-30 border-t border-line bg-mist/95 px-[var(--page-pad)] py-3 backdrop-blur lg:hidden">
           <div className="flex items-center justify-between gap-4">
@@ -195,7 +245,7 @@ function ProductDemoSlot({ product, note }: { product: Product; note?: string })
   return (
     <figure>
       {product.cover ? (
-        <div className="relative aspect-[4/5] max-h-[640px] w-full max-w-md overflow-hidden bg-navy sm:aspect-[16/10] sm:max-h-none sm:max-w-none">
+        <div className="relative aspect-[4/5] min-h-[240px] w-full overflow-hidden bg-navy md:aspect-[16/10]">
           <Image
             src={product.cover}
             alt={`${product.name} preview`}

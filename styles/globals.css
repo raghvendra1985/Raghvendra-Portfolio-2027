@@ -204,6 +204,14 @@ html.motion-ready [data-loader-root] {
   }
 }
 
+@media (max-width: 1023px) {
+  [data-product-card] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html.is-loading .site-content,
   .site-content,

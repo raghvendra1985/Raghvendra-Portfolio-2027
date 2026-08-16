@@ -1,9 +1,15 @@
 import { DURATION, EASE, createScope, gsap, showImmediately, type MotionConfig } from "./motion";
 
+function skipScrollHide(config: MotionConfig) {
+  if (config.reducedMotion || config.isMobile) return true;
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(max-width: 1023px)").matches;
+}
+
 export function animateProductCards(root: HTMLElement, config: MotionConfig) {
   return createScope(root, () => {
     const items = root.querySelectorAll("[data-product-card]");
-    if (config.reducedMotion) {
+    if (skipScrollHide(config)) {
       showImmediately(items);
       return;
     }
@@ -30,7 +36,7 @@ export function animateProductCards(root: HTMLElement, config: MotionConfig) {
 
 export function refreshProductCards(root: HTMLElement, config: MotionConfig) {
   const items = root.querySelectorAll("[data-product-card]");
-  if (config.reducedMotion) {
+  if (skipScrollHide(config)) {
     showImmediately(items);
     return;
   }

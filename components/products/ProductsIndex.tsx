@@ -61,7 +61,7 @@ export default function ProductsIndex() {
       <ProductFilters value={filter} onChange={setFilter} />
 
       {list.length ? (
-        <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:gap-8">
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:gap-8">
           {list.map((product) => (
             <ProductCard key={product.slug} product={product} />
           ))}

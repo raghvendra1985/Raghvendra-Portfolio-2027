@@ -1,14 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
 import ProductStatusMark from "@/components/products/ProductStatusMark";
-import {
-  formatCategories,
-  formatInr,
-  type Product,
-} from "@/products";
+import { formatInr, type Product } from "@/products";
 
 export default function ProductCard({ product }: { product: Product }) {
   const ref = useRef<HTMLLIElement>(null);
@@ -43,37 +40,42 @@ export default function ProductCard({ product }: { product: Product }) {
         data-product-plate
         data-cursor="Open"
         onClick={() => track("product_card_clicked", { slug: product.slug })}
-        className="group relative block overflow-hidden bg-navy p-6 text-mist sm:p-8"
+        className="group relative block overflow-hidden bg-navy text-mist"
         aria-label={`${product.name}. ${product.hook}. ${formatInr(product.price)}. ${product.status === "live" ? "Live" : "Coming soon"}.`}
       >
-        <span
-          className="product-plate-grid pointer-events-none absolute inset-0 text-mist"
-          aria-hidden="true"
-        />
-        <div className="relative flex items-start justify-between gap-4">
-          <p className="font-mono-label text-[11px] text-gold">{product.number}</p>
-          <ProductStatusMark status={product.status} inverted />
-        </div>
-        <h2 className="relative mt-8 font-display text-2xl leading-[1.08] sm:text-3xl">
-          {product.name}
-        </h2>
-        <p className="relative mt-4 max-w-sm text-base leading-relaxed text-mist/70">
-          {product.hook}
-        </p>
-        {product.description ? (
-          <p className="relative mt-3 max-w-sm text-sm leading-relaxed text-mist/55">
-            {product.description}
+        {product.cover ? (
+          <>
+            <div className="relative aspect-[4/3] w-full bg-navy">
+              <Image
+                src={product.cover}
+                alt=""
+                fill
+                sizes="(min-width: 640px) 50vw, 100vw"
+                unoptimized={product.cover.endsWith(".svg")}
+                className="object-cover object-top"
+              />
+            </div>
+            <h2 className="sr-only">{product.name}</h2>
+          </>
+        ) : (
+          <div className="relative aspect-[4/3] bg-navy p-6">
+            <span
+              className="product-plate-grid pointer-events-none absolute inset-0 text-mist"
+              aria-hidden="true"
+            />
+            <p className="relative font-mono-label text-[11px] text-gold">{product.number}</p>
+            <h2 className="relative mt-6 font-display text-2xl leading-[1.08]">{product.name}</h2>
+            <p className="relative mt-3 text-sm leading-relaxed text-mist/70">{product.hook}</p>
+          </div>
+        )}
+        <div className="relative flex items-center justify-between gap-4 px-5 py-4">
+          <div className="min-w-0">
+            <ProductStatusMark status={product.status} inverted />
+            <p className="mt-1 font-mono-label text-[11px] text-mist">{formatInr(product.price)}</p>
+          </div>
+          <p className="shrink-0 font-mono-label text-[11px] text-gold group-hover:text-mist">
+            View →
           </p>
-        ) : null}
-        <p className="relative mt-8 font-mono-label text-[11px] text-mist">{formatInr(product.price)}</p>
-        <p className="relative mt-3 font-mono-label text-[11px] text-mist/50">
-          {formatCategories(product)}
-        </p>
-        <div className="relative mt-10 flex items-end justify-between gap-4">
-          <p className="font-mono-label text-[11px] text-gold group-hover:text-mist">
-            View Product →
-          </p>
-          <p className="font-mono-label text-[11px] text-mist/45">{product.attribution}</p>
         </div>
       </Link>
     </li>

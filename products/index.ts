@@ -303,6 +303,16 @@ export function formatCategories(product: Product) {
   return product.categories.map((category) => productCategoryLabels[category]).join(" · ");
 }
 
+export function getAdjacentProducts(slug: string) {
+  const list = visibleProducts();
+  const index = list.findIndex((product) => product.slug === slug);
+  if (index < 0 || list.length < 2) return { prev: null, next: null };
+  return {
+    prev: list[(index - 1 + list.length) % list.length],
+    next: list[(index + 1) % list.length],
+  };
+}
+
 export const secretProductsIntro = {
   index: "/",
   label: "Secret Products",
