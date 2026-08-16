@@ -104,8 +104,11 @@ export default function ConciergePanel() {
   }, [open, cancelSpeech, stopListening]);
 
   useEffect(() => {
-    if (!open) cancelSpeech();
-  }, [open, cancelSpeech]);
+    if (!open) {
+      cancelSpeech();
+      stopListening();
+    }
+  }, [open, cancelSpeech, stopListening]);
 
   useEffect(() => {
     if (!open) return;

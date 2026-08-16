@@ -23,6 +23,8 @@ type SpeechRecognitionEventLike = {
   }>;
 };
 
+const LANGS = ["en-IN", "en-GB", "en-US"];
+
 function getRecognitionCtor(): (new () => SpeechRecognitionLike) | null {
   if (typeof window === "undefined") return null;
   const w = window as Window & {
@@ -30,6 +32,17 @@ function getRecognitionCtor(): (new () => SpeechRecognitionLike) | null {
     webkitSpeechRecognition?: new () => SpeechRecognitionLike;
   };
   return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
+}
+
+function readTranscript(event: SpeechRecognitionEventLike) {
+  let interim = "";
+  let finalText = "";
+  for (let i = event.resultIndex; i < event.results.length; i += 1) {
+    const piece = event.results[i][0]?.transcript ?? "";
+    if (event.results[i].isFinal) finalText += piece;
+    else interim += piece;
+  }
+  return { interim, finalText };
 }
 
 export function useSpeechRecognition({
@@ -42,87 +55,150 @@ export function useSpeechRecognition({
   const [interim, setInterim] = useState("");
   const [error, setError] = useState<string | null>(null);
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
+  const sessionRef = useRef(0);
+  const submittedRef = useRef(false);
+  const lastTextRef = useRef("");
   const onFinalRef = useRef(onFinal);
   onFinalRef.current = onFinal;
 
   useEffect(() => {
-    setSupported(Boolean(getRecognitionCtor()));
+    setSupported(Boolean(getRecognitionCtor()) && window.isSecureContext);
+  }, []);
+
+  const detach = useCallback((recognition: SpeechRecognitionLike | null) => {
+    if (!recognition) return;
+    recognition.onresult = null;
+    recognition.onerror = null;
+    recognition.onend = null;
+    try {
+      recognition.abort();
+    } catch {
+      /* already idle */
+    }
+  }, []);
+
+  const commit = useCallback((text: string) => {
+    const trimmed = text.trim();
+    if (!trimmed || submittedRef.current) return;
+    submittedRef.current = true;
+    setInterim("");
+    onFinalRef.current(trimmed);
   }, []);
 
   const stop = useCallback(() => {
-    recognitionRef.current?.stop();
-  }, []);
+    commit(lastTextRef.current);
+    sessionRef.current += 1;
+    const current = recognitionRef.current;
+    recognitionRef.current = null;
+    setListening(false);
+    if (current) {
+      current.onend = null;
+      current.onresult = null;
+      current.onerror = null;
+      try {
+        current.stop();
+      } catch {
+        try {
+          current.abort();
+        } catch {
+          /* already idle */
+        }
+      }
+    }
+  }, [commit]);
 
   const start = useCallback(() => {
     const Ctor = getRecognitionCtor();
     if (!Ctor) {
+      setSupported(false);
       setError("Voice input isn’t available in this browser. Type your question instead.");
       return;
     }
+    if (typeof window !== "undefined" && !window.isSecureContext) {
+      setError("Voice needs HTTPS. Type your question instead.");
+      return;
+    }
 
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
+    const session = sessionRef.current + 1;
+    sessionRef.current = session;
+    submittedRef.current = false;
+    lastTextRef.current = "";
     setError(null);
     setInterim("");
-    try {
-      recognitionRef.current?.abort();
-    } catch {
-      /* already idle */
-    }
+    detach(recognitionRef.current);
+    recognitionRef.current = null;
 
-    const recognition = new Ctor();
-    recognition.lang = "en-IN";
-    recognition.interimResults = true;
-    recognition.continuous = false;
-    recognition.maxAlternatives = 1;
+    let langIndex = 0;
 
-    recognition.onresult = (event) => {
-      let nextInterim = "";
-      let finalText = "";
-      for (let i = event.resultIndex; i < event.results.length; i += 1) {
-        const piece = event.results[i][0]?.transcript ?? "";
-        if (event.results[i].isFinal) finalText += piece;
-        else nextInterim += piece;
-      }
-      if (nextInterim) setInterim(nextInterim);
-      if (finalText.trim()) {
-        setInterim("");
-        onFinalRef.current(finalText.trim());
+    const begin = (lang: string) => {
+      if (session !== sessionRef.current) return;
+      const recognition = new Ctor();
+      recognition.lang = lang;
+      recognition.interimResults = true;
+      recognition.continuous = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = (event) => {
+        if (session !== sessionRef.current) return;
+        const { interim: nextInterim, finalText } = readTranscript(event);
+        const spoken = (finalText || nextInterim).trim();
+        if (spoken) lastTextRef.current = spoken;
+        if (nextInterim) setInterim(nextInterim);
+        if (finalText.trim()) commit(finalText);
+      };
+
+      recognition.onerror = (event) => {
+        if (session !== sessionRef.current) return;
+        const code = event.error ?? "";
+        if (code === "language-not-supported" && langIndex < LANGS.length - 1) {
+          langIndex += 1;
+          detach(recognition);
+          begin(LANGS[langIndex]);
+          return;
+        }
+        if (code === "not-allowed" || code === "service-not-allowed") {
+          setError("Microphone permission is needed to ask out loud.");
+        } else if (code === "network") {
+          setError("Voice needs a network connection in this browser. Try again, or type.");
+        } else if (code !== "aborted" && code !== "no-speech") {
+          setError("Voice input didn’t catch that. Try again, or type.");
+        }
+        setListening(false);
+      };
+
+      recognition.onend = () => {
+        if (session !== sessionRef.current) return;
+        if (recognitionRef.current === recognition) {
+          recognitionRef.current = null;
+        }
+        setListening(false);
+        commit(lastTextRef.current);
+      };
+
+      recognitionRef.current = recognition;
+      try {
+        recognition.start();
+        setListening(true);
+      } catch {
+        setError("Voice input didn’t start. Type your question instead.");
+        setListening(false);
+        recognitionRef.current = null;
       }
     };
 
-    recognition.onerror = (event) => {
-      const code = event.error ?? "";
-      if (code === "not-allowed" || code === "service-not-allowed") {
-        setError("Microphone permission is needed to ask out loud.");
-      } else if (code !== "aborted" && code !== "no-speech") {
-        setError("Voice input didn’t catch that. Try again, or type.");
-      }
-      setListening(false);
-    };
-
-    recognition.onend = () => {
-      setListening(false);
-      recognitionRef.current = null;
-    };
-
-    recognitionRef.current = recognition;
-    try {
-      recognition.start();
-      setListening(true);
-    } catch {
-      setError("Voice input didn’t start. Type your question instead.");
-      setListening(false);
-    }
-  }, []);
+    begin(LANGS[langIndex]);
+  }, [commit, detach]);
 
   useEffect(() => {
     return () => {
-      try {
-        recognitionRef.current?.abort();
-      } catch {
-        /* unmount */
-      }
+      sessionRef.current += 1;
+      detach(recognitionRef.current);
     };
-  }, []);
+  }, [detach]);
 
   return { supported, listening, interim, error, start, stop };
 }

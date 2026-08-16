@@ -27,7 +27,6 @@ const ConciergeSearch = forwardRef<
 ) {
   return (
     <form
-      data-concierge-item
       onSubmit={(event) => {
         event.preventDefault();
         onSubmit();
@@ -41,12 +40,13 @@ const ConciergeSearch = forwardRef<
         <input
           ref={ref}
           id="concierge-search"
-          type="search"
+          type="text"
           role="searchbox"
           value={value}
           onChange={(event) => onChange(event.target.value)}
           placeholder="Ask about work, AI, leadership, teaching…"
           autoComplete="off"
+          enterKeyHint="search"
           className="min-h-11 w-full bg-transparent font-display text-xl leading-snug text-navy outline-none placeholder:text-ink-soft/50 sm:text-3xl"
           aria-label="Ask the portfolio"
           aria-describedby={speechError ? "concierge-speech-status" : "concierge-listen-status"}
@@ -54,7 +54,7 @@ const ConciergeSearch = forwardRef<
         <button
           type="button"
           onClick={onToggleListen}
-          disabled={!speechSupported}
+          disabled={speechSupported === false}
           aria-pressed={listening}
           aria-label={listening ? "Stop listening" : "Ask out loud"}
           title={
@@ -64,7 +64,7 @@ const ConciergeSearch = forwardRef<
                 : "Ask out loud"
               : "Voice input isn’t available in this browser"
           }
-          className={`inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center border font-mono-label ${
+          className={`relative z-10 inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center border font-mono-label ${
             listening
               ? "border-navy bg-navy text-mist"
               : "border-line text-navy hover:border-navy disabled:cursor-not-allowed disabled:opacity-40"
