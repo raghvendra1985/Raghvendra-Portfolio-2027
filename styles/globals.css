@@ -246,6 +246,335 @@ html.motion-ready [data-loader-root] {
   }
 }
 
+.charm-gallery {
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg: #0f1322;
+  --card: #171d30;
+  --ink: #e9edf8;
+  --muted: #9aa3bd;
+  --line: #283049;
+  --accent: #8ba3f8;
+  --accent-bg: #3a5ae0;
+  --accent-ink: #ffffff;
+  --gold: #d8a844;
+  --title-metal-gradient: linear-gradient(
+    108deg,
+    #76500d 0%,
+    #b78319 18%,
+    #f2cf67 31%,
+    #fff4bd 39%,
+    #c28b1d 51%,
+    #f0ca5d 68%,
+    #9b6a12 84%,
+    #e3b744 100%
+  );
+  --supporter-metal-gradient: linear-gradient(108deg, #8a5d0d, #edc85b 38%, #fff1aa 52%, #b47b15 72%, #e2b442);
+  --supporter-border-gradient: linear-gradient(
+    110deg,
+    #a8791f 0%,
+    #a8791f 32%,
+    #f2c65d 43%,
+    #fff6d5 50%,
+    #f2c65d 57%,
+    #a8791f 68%,
+    #a8791f 100%
+  );
+  --metal-stroke: color-mix(in srgb, #6f4a08 76%, var(--ink));
+  --metal-shadow: 0 1px 0 color-mix(in srgb, #fff3b0 22%, transparent);
+  --metal-sheen: rgba(255, 255, 244, 0.96);
+  --metal-sheen-warm: rgba(255, 225, 125, 0.68);
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+}
+
+.charm-title-metal {
+  font-family: var(--serif), "Iowan Old Style", Palatino, Georgia, serif;
+  background-image: var(--title-metal-gradient);
+  background-size: 240% 100%;
+  background-position: 18% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.select-charm {
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg: #0f1322;
+  --card: #171d30;
+  --ink: #e9edf8;
+  --muted: #9aa3bd;
+  --line: #283049;
+  --accent: #8ba3f8;
+  --accent-bg: #3a5ae0;
+  --accent-ink: #ffffff;
+  --gold: #d8a844;
+  --title-metal-gradient: linear-gradient(
+    108deg,
+    #76500d 0%,
+    #b78319 18%,
+    #f2cf67 31%,
+    #fff4bd 39%,
+    #c28b1d 51%,
+    #f0ca5d 68%,
+    #9b6a12 84%,
+    #e3b744 100%
+  );
+  --supporter-metal-gradient: linear-gradient(108deg, #8a5d0d, #edc85b 38%, #fff1aa 52%, #b47b15 72%, #e2b442);
+  --supporter-border-gradient: linear-gradient(
+    110deg,
+    #a8791f 0%,
+    #a8791f 32%,
+    #f2c65d 43%,
+    #fff6d5 50%,
+    #f2c65d 57%,
+    #a8791f 68%,
+    #a8791f 100%
+  );
+  --metal-stroke: color-mix(in srgb, #6f4a08 76%, var(--ink));
+  --metal-shadow: 0 1px 0 color-mix(in srgb, #fff3b0 22%, transparent);
+  --metal-sheen: rgba(255, 255, 244, 0.96);
+  --metal-sheen-warm: rgba(255, 225, 125, 0.68);
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
+.select-charm:focus,
+.select-charm:focus-visible {
+  outline: none;
+}
+
+.charm-plate {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #f4f0e6;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 0 0 1px color-mix(in srgb, var(--bg) 10%, transparent);
+}
+
+.charm-plate img,
+.charm-plate svg,
+.charm-plate span {
+  position: relative;
+  z-index: 1;
+  height: 108px;
+  width: auto;
+  max-width: 108px;
+  object-fit: contain;
+}
+
+.charm-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+  color: var(--ink);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.15s;
+}
+
+.charm-card::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background-image: var(--supporter-border-gradient);
+  background-size: 240% 100%;
+  background-position: 108% 0;
+  pointer-events: none;
+  opacity: 0.34;
+  transition:
+    opacity 0.24s,
+    background-position 0.55s;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+
+.charm-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--bg) 35%, transparent);
+}
+
+.charm-card:hover::after {
+  opacity: 0.9;
+  background-position: 42% 0;
+}
+
+.charm-card.selected {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 6px 18px color-mix(in srgb, var(--accent-bg) 12%, transparent),
+    0 0 24px color-mix(in srgb, var(--gold) 16%, transparent);
+}
+
+.charm-card.selected::after {
+  opacity: 0.94;
+  background-position: 58% 0;
+}
+
+.charm-card:has(.select-charm:focus-visible) {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.charm-card .charm-name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.12rem;
+  line-height: 1.15;
+  background-image: var(--title-metal-gradient);
+  background-size: 240% 100%;
+  background-position: 18% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.charm-card .origin {
+  display: inline-block;
+  align-self: center;
+  padding: 4px 9px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--card) 82%, var(--bg));
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.charm-card .description {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.charm-card .ritual-btn {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  align-self: center;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--sans);
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.charm-card .ritual-btn:hover {
+  background: var(--accent-bg);
+  color: var(--accent-ink);
+}
+
+.charm-card .ritual-btn:focus-visible,
+.charm-card .emoji-done:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.charm-card .emoji-editor {
+  position: relative;
+  z-index: 2;
+}
+
+.charm-card .emoji-editor-bar {
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 4px 3px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: var(--card);
+}
+
+.charm-card .emoji-editor-bar input {
+  width: 84px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  text-align: center;
+  outline: none;
+}
+
+.charm-card .emoji-editor-bar input::placeholder {
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+.charm-card .emoji-done {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent-ink);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .charm-card,
+  .charm-card::after {
+    transition: none;
+  }
+
+  .charm-card:hover {
+    transform: none;
+  }
+
+  .charm-card::after,
+  .charm-card:hover::after,
+  .charm-card.selected::after {
+    background-position: 58% 0;
+  }
+}
+
 @media (pointer: coarse) {
   [data-cursor] {
     display: none !important;

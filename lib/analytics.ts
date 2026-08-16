@@ -18,7 +18,22 @@ export type AnalyticsEvent =
   | "concierge_no_result"
   | "concierge_voice_start"
   | "concierge_voice_result"
-  | "concierge_speak";
+  | "concierge_speak"
+  | "charm_hung"
+  | "charm_flicked"
+  | "charm_ritual"
+  | "charm_hidden"
+  | "charm_switched"
+  | "resume_download"
+  | "resume_requested"
+  | "project_clicked"
+  | "enterprise_case_clicked"
+  | "service_clicked"
+  | "contact_cta_clicked"
+  | "contact_form_submitted"
+  | "knowledge_article_clicked"
+  | "hiring_path_clicked"
+  | "problem_route_clicked";
 
 /**
  * Site-wide analytics hook. No provider yet — swap this body later
