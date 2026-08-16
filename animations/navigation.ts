@@ -27,6 +27,15 @@ export function animateNavigation(
     const goingUp = y < lastY - 2;
     lastY = y;
 
+    if (root.dataset.menuOpen === "true") {
+      if (hidden) {
+        hidden = false;
+        gsap.set(root, { yPercent: 0 });
+      }
+      gsap.set(root, { backdropFilter: "blur(0px)" });
+      return;
+    }
+
     const shouldCompact = y > compactAfter;
     if (shouldCompact !== compact) {
       compact = shouldCompact;

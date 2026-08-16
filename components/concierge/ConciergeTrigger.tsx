@@ -47,9 +47,11 @@ function TriggerButton({
 export default function ConciergeTrigger({
   variant = "nav",
   className = "",
+  inverted = false,
 }: {
   variant?: "nav" | "float" | "mobile-menu" | "mobile-bar";
   className?: string;
+  inverted?: boolean;
 }) {
   if (variant === "float") {
     return (
@@ -84,9 +86,9 @@ export default function ConciergeTrigger({
       <TriggerButton
         variant="mobile-menu"
         source="mobile-menu"
-        className={`font-display text-2xl text-left ${className}`}
+        className={`inline-flex min-h-11 items-center font-mono-label text-[11px] text-gold hover:text-mist ${className}`}
       >
-        Ask the portfolio
+        Ask the portfolio →
       </TriggerButton>
     );
   }
@@ -96,10 +98,18 @@ export default function ConciergeTrigger({
       variant="nav"
       source="nav"
       cursor
-      className={`hidden min-h-11 items-center gap-2 font-mono-label text-ink-soft hover:text-navy lg:inline-flex ${className}`}
+      className={`hidden min-h-11 items-center gap-2 font-mono-label lg:inline-flex ${
+        inverted ? "text-mist/70 hover:text-mist" : "text-ink-soft hover:text-navy"
+      } ${className}`}
     >
       Ask
-      <kbd className="border border-line px-1.5 py-0.5 text-[10px] text-ink-soft">⌘K</kbd>
+      <kbd
+        className={`border px-1.5 py-0.5 text-[10px] ${
+          inverted ? "border-mist/30 text-mist/70" : "border-line text-ink-soft"
+        }`}
+      >
+        ⌘K
+      </kbd>
     </TriggerButton>
   );
 }

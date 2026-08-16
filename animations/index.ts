@@ -36,6 +36,8 @@ export {
   crossfadeWorkVisual,
 } from "./caseStudy";
 export { animateNavigation } from "./navigation";
+export { animateMenuOpen, animateMenuClose, menuOriginFromToggle } from "./menu";
+export type { MenuOrigin } from "./menu";
 export { animateSystem } from "./system";
 export type { SystemOptions } from "./system";
 export {

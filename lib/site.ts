@@ -33,6 +33,12 @@ export const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+const primaryHrefs = ["/work", "/products", "/about", "/contact"] as const;
+
+export const primaryNavLinks = primaryHrefs.map(
+  (href) => navLinks.find((link) => link.href === href)!,
+);
+
 export const footerLinks = {
   sitemap: [
     { label: "Home", href: "/" },

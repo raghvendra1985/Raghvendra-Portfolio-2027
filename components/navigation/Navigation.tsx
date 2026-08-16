@@ -3,20 +3,30 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
 import { animateNavigation } from "@/animations/navigation";
+import { gsap } from "@/animations/motion";
+import { menuOriginFromToggle, type MenuOrigin } from "@/animations/menu";
 import { useExperience } from "@/components/providers/ExperienceProvider";
-import { navLinks, site } from "@/lib/site";
-import MagneticButton from "@/components/buttons/MagneticButton";
+import { getLenis } from "@/hooks/useLenis";
+import { primaryNavLinks, site } from "@/lib/site";
 import ConciergeTrigger from "@/components/concierge/ConciergeTrigger";
 import { useConcierge } from "@/components/concierge/ConciergeProvider";
+import MenuToggle from "@/components/navigation/MenuToggle";
+import MenuOverlay from "@/components/navigation/MenuOverlay";
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export default function Navigation() {
   const rootRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const { config, pageReady } = useExperience();
   const { open: conciergeOpen } = useConcierge();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [origin, setOrigin] = useState<MenuOrigin>({ x: "100%", y: "0%" });
+
+  const wasOpen = useRef(false);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -34,30 +44,91 @@ export default function Navigation() {
   }, [conciergeOpen]);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    const lenis = getLenis();
+    if (open) {
+      document.body.style.overflow = "hidden";
+      lenis?.stop();
+      gsap.set(rootRef.current, { yPercent: 0 });
+    } else {
+      document.body.style.overflow = "";
+      lenis?.start();
+    }
     return () => {
       document.body.style.overflow = "";
+      lenis?.start();
     };
   }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const root = rootRef.current;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !root) return;
+      const nodes = Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
+        (node) => node.getClientRects().length > 0 && !node.closest("[inert]"),
+      );
+      if (!nodes.length) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  useEffect(() => {
+    if (open) {
+      wasOpen.current = true;
+      return;
+    }
+    if (!wasOpen.current) return;
+    wasOpen.current = false;
+    toggleRef.current?.focus();
+  }, [open]);
+
+  function toggleMenu() {
+    if (!open) setOrigin(menuOriginFromToggle(toggleRef.current));
+    setOpen((value) => !value);
+  }
 
   return (
     <header
       ref={rootRef}
       data-nav
       data-compact="false"
-      className="group fixed inset-x-0 top-0 z-50 border-b border-transparent bg-transparent data-[compact=true]:border-line data-[compact=true]:bg-mist/70"
+      data-menu-open={open ? "true" : "false"}
+      className={`group fixed inset-x-0 top-0 z-50 border-b ${
+        open
+          ? "border-transparent bg-transparent"
+          : "border-transparent bg-transparent data-[compact=true]:border-line data-[compact=true]:bg-mist/70"
+      }`}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3">
+      <MenuOverlay open={open} origin={origin} onClose={() => setOpen(false)} />
+
+      <div className="relative z-10 mx-auto flex max-w-[1440px] items-center justify-between px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3">
         <Link
           href="/"
-          className="min-w-0 truncate font-display text-base text-navy sm:text-lg"
+          className={`min-w-0 truncate font-display text-base sm:text-lg ${
+            open ? "text-mist" : "text-navy"
+          }`}
           data-cursor="Open"
         >
           Raghvendra Singh
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-4 lg:flex xl:gap-8">
-          {navLinks.map((link) => {
+        <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex xl:gap-8">
+          {primaryNavLinks.map((link) => {
             const active =
               pathname === link.href || pathname.startsWith(`${link.href}/`);
             return (
@@ -66,7 +137,13 @@ export default function Navigation() {
                 href={link.href}
                 aria-current={active ? "page" : undefined}
                 className={`font-mono-label text-[11px] ${
-                  active ? "text-green" : "text-ink-soft hover:text-navy"
+                  open
+                    ? active
+                      ? "text-gold"
+                      : "text-mist/70 hover:text-mist"
+                    : active
+                      ? "text-green"
+                      : "text-ink-soft hover:text-navy"
                 }`}
               >
                 {link.label}
@@ -76,75 +153,18 @@ export default function Navigation() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <p className="hidden items-center gap-2 font-mono-label text-[10px] text-ink-soft lg:flex">
+          <p
+            className={`hidden items-center gap-2 font-mono-label text-[10px] lg:flex ${
+              open ? "text-mist/70" : "text-ink-soft"
+            }`}
+          >
             <span className="h-1.5 w-1.5 rounded-full bg-green" aria-hidden="true" />
             {site.status}
           </p>
-          <ConciergeTrigger variant="nav" />
-          <div className="hidden lg:block">
-            <MagneticButton href="/contact" size="sm">
-              Start a conversation
-            </MagneticButton>
-          </div>
-          <button
-            type="button"
-            className="flex h-11 w-11 shrink-0 items-center justify-center border border-navy/20 lg:hidden"
-            aria-expanded={open}
-            aria-controls="mobile-nav"
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((value) => !value)}
-          >
-            <span className="sr-only">Menu</span>
-            <span className="flex flex-col gap-1.5" aria-hidden="true">
-              <span className={`h-px w-4 bg-navy ${open ? "translate-y-[3.5px] rotate-45" : ""}`} />
-              <span className={`h-px w-4 bg-navy ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`} />
-            </span>
-          </button>
+          <ConciergeTrigger variant="nav" inverted={open} />
+          <MenuToggle ref={toggleRef} open={open} inverted={open} onClick={toggleMenu} />
         </div>
       </div>
-
-      <AnimatePresence>
-        {open ? (
-          <motion.nav
-            id="mobile-nav"
-            aria-label="Mobile"
-            className="border-t border-line bg-mist px-[var(--page-pad)] py-6 lg:hidden"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3, ease: [0.19, 1, 0.22, 1] }}
-          >
-            <ul className="flex flex-col gap-4">
-              {navLinks.map((link) => {
-                const active =
-                  pathname === link.href || pathname.startsWith(`${link.href}/`);
-                return (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      aria-current={active ? "page" : undefined}
-                      className="inline-flex min-h-11 items-center font-display text-2xl"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
-              <li>
-                <ConciergeTrigger
-                  variant="mobile-menu"
-                  className="w-full"
-                />
-              </li>
-              <li>
-                <Link href="/contact" className="inline-flex min-h-11 items-center font-mono-label text-green">
-                  Start a conversation →
-                </Link>
-              </li>
-            </ul>
-          </motion.nav>
-        ) : null}
-      </AnimatePresence>
     </header>
   );
 }
