@@ -54,7 +54,7 @@ export default function MenuOverlay({
       aria-labelledby="site-menu-title"
       aria-hidden={!open}
       inert={!open}
-      className={`fixed inset-0 z-0 ${open ? "pointer-events-auto" : "pointer-events-none"}`}
+      className={`fixed inset-0 z-[45] ${open ? "pointer-events-auto" : "pointer-events-none"}`}
     >
       <div
         data-menu-panel

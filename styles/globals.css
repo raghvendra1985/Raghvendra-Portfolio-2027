@@ -101,6 +101,13 @@ html.is-loading [data-nav] {
   opacity: 0;
 }
 
+[data-nav][data-menu-open="true"] {
+  background-color: var(--navy) !important;
+  border-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 html.is-loading .site-content {
   opacity: 0;
   animation: rs-loader-failsafe 0.25s ease 2.4s forwards;

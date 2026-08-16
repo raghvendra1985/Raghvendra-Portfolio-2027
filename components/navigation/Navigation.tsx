@@ -48,7 +48,11 @@ export default function Navigation() {
     if (open) {
       document.body.style.overflow = "hidden";
       lenis?.stop();
-      gsap.set(rootRef.current, { yPercent: 0 });
+      gsap.set(rootRef.current, {
+        yPercent: 0,
+        backdropFilter: "none",
+        webkitBackdropFilter: "none",
+      });
     } else {
       document.body.style.overflow = "";
       lenis?.start();
@@ -68,9 +72,12 @@ export default function Navigation() {
         setOpen(false);
         return;
       }
-      if (event.key !== "Tab" || !root) return;
-      const nodes = Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
-        (node) => node.getClientRects().length > 0 && !node.closest("[inert]"),
+      if (event.key !== "Tab") return;
+      const scope = [root, document.getElementById("site-menu")].filter(Boolean) as HTMLElement[];
+      const nodes = scope.flatMap((el) =>
+        Array.from(el.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
+          (node) => node.getClientRects().length > 0 && !node.closest("[inert]"),
+        ),
       );
       if (!nodes.length) return;
       const first = nodes[0];
@@ -103,20 +110,20 @@ export default function Navigation() {
   }
 
   return (
-    <header
-      ref={rootRef}
-      data-nav
-      data-compact="false"
-      data-menu-open={open ? "true" : "false"}
-      className={`group fixed inset-x-0 top-0 z-50 border-b ${
-        open
-          ? "border-transparent bg-transparent"
-          : "border-transparent bg-transparent data-[compact=true]:border-line data-[compact=true]:bg-mist/70"
-      }`}
-    >
+    <>
       <MenuOverlay open={open} origin={origin} onClose={() => setOpen(false)} />
-
-      <div className="relative z-10 mx-auto flex max-w-[1440px] items-center justify-between px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3">
+      <header
+        ref={rootRef}
+        data-nav
+        data-compact="false"
+        data-menu-open={open ? "true" : "false"}
+        className={`group fixed inset-x-0 top-0 z-50 border-b ${
+          open
+            ? "border-transparent bg-navy"
+            : "border-transparent bg-transparent data-[compact=true]:border-line data-[compact=true]:bg-mist/70"
+        }`}
+      >
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3">
         <Link
           href="/"
           className={`min-w-0 truncate font-display text-base sm:text-lg ${
@@ -164,7 +171,8 @@ export default function Navigation() {
           <ConciergeTrigger variant="nav" inverted={open} />
           <MenuToggle ref={toggleRef} open={open} inverted={open} onClick={toggleMenu} />
         </div>
-      </div>
-    </header>
+        </div>
+      </header>
+    </>
   );
 }
