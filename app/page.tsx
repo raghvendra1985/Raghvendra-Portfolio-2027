@@ -2,6 +2,7 @@ import Hero from "@/components/hero/Hero";
 import SelectedWork from "@/components/work/SelectedWork";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import MagneticButton from "@/components/buttons/MagneticButton";
+import ProductShelf from "@/components/products/ProductShelf";
 import { featuredWork } from "@/case-studies";
 import { services } from "@/services";
 import { knowledgeArticles } from "@/knowledge";
@@ -97,6 +98,8 @@ export default function HomePage() {
           </div>
         </div>
       </SectionReveal>
+
+      <ProductShelf />
 
       <SectionReveal className="border-t border-navy bg-navy px-[var(--page-pad)] py-24 text-mist">
         <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-8 sm:flex-row sm:items-end">

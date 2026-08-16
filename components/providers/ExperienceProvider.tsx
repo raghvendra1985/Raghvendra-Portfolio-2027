@@ -19,6 +19,7 @@ import {
 import { useMotionConfig } from "@/hooks/useMotionConfig";
 import { hasVisited, markVisited } from "@/animations/loader";
 import { setLenis, getLenis } from "@/hooks/useLenis";
+import { captureUtmFromLocation } from "@/lib/utm";
 import Loader from "@/components/loader/Loader";
 import Cursor from "@/components/cursor/Cursor";
 import AmbientLayer from "@/components/ambient/AmbientLayer";
@@ -94,6 +95,10 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
       setLenis(null);
     };
   }, [config.reducedMotion, config.isMobile]);
+
+  useEffect(() => {
+    captureUtmFromLocation();
+  }, [pathname]);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {

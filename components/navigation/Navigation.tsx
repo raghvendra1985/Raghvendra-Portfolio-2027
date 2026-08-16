@@ -56,7 +56,7 @@ export default function Navigation() {
           Raghvendra Singh
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex lg:gap-8">
+        <nav aria-label="Primary" className="hidden items-center gap-4 lg:flex xl:gap-8">
           {navLinks.map((link) => {
             const active =
               pathname === link.href || pathname.startsWith(`${link.href}/`);

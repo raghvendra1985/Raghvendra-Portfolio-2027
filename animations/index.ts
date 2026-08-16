@@ -46,3 +46,4 @@ export {
 } from "./concierge";
 export { animateContactForm } from "./forms";
 export { animateNotFound } from "./notFound";
+export { animateProductCards, refreshProductCards } from "./products";

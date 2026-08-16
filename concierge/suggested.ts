@@ -117,6 +117,20 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     modeHint: "speaking",
   },
   {
+    id: "student-tools",
+    label: "What tools do you make for design students?",
+    query:
+      "design student tools secret products design practice jury portfolio entrance prompts Design IQ",
+    preferIds: [
+      "products:shelf",
+      "products:design-iq",
+      "products:design-roulette",
+      "products:jury-me",
+      "products:portfolio-roast",
+    ],
+    modeHint: "speaking",
+  },
+  {
     id: "frameworks",
     label: "Show relevant frameworks",
     query: "frameworks Decision Stack Critique System AI Trust Stack Product Filter",
@@ -239,6 +253,14 @@ export function matchSuggestedQuestion(query: string) {
   }
   if (normalized.includes("teach") || normalized.includes("speak") || normalized.includes("iiad")) {
     return suggestedQuestions.find((item) => item.id === "teach");
+  }
+  if (
+    normalized.includes("student tool") ||
+    normalized.includes("design student") ||
+    normalized.includes("secret product") ||
+    normalized.includes("design iq")
+  ) {
+    return suggestedQuestions.find((item) => item.id === "student-tools");
   }
   if (normalized.includes("founder")) {
     return suggestedQuestions.find((item) => item.id === "founder-products");

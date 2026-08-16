@@ -8,6 +8,7 @@ import {
 } from "@/knowledge";
 import { services } from "@/services";
 import { site } from "@/lib/site";
+import { visibleProducts } from "@/products";
 import type { ConciergeEntry } from "./types";
 
 function uniq(topics: string[]) {
@@ -301,6 +302,56 @@ function buildServiceEntries(): ConciergeEntry[] {
   }));
 }
 
+function buildProductEntries(): ConciergeEntry[] {
+  const shelf: ConciergeEntry = {
+    id: "products:shelf",
+    source: "products",
+    type: "product-shelf",
+    title: "Secret Products",
+    slug: "products",
+    topics: [
+      "secret products",
+      "student tools",
+      "design students",
+      "design practice",
+      "one-time",
+      "tools",
+    ],
+    summary: "Small, focused tools for design students. Buy once. Use when you need them.",
+    content:
+      "Standalone digital tools for people learning to design. Not a platform, bundle, or membership. One problem. One product. One price. One clear outcome. By Raghvendra Singh.",
+    url: "/products",
+  };
+
+  const items = visibleProducts().map((product) => ({
+    id: `products:${product.slug}`,
+    source: "products" as const,
+    type: product.status === "live" ? "student-tool" : "coming-soon-tool",
+    title: product.name,
+    slug: product.slug,
+    topics: uniq([
+      "secret products",
+      "student tools",
+      "design students",
+      product.name,
+      product.status,
+      ...product.categories,
+    ]),
+    summary: product.hook,
+    content: [
+      product.description,
+      product.hook,
+      `A standalone Raghvendra Singh product. One-time ${product.price} INR.`,
+      product.status === "live" ? "Available now." : "Coming soon.",
+    ]
+      .filter(Boolean)
+      .join(" "),
+    url: `/products/${product.slug}`,
+  }));
+
+  return [shelf, ...items];
+}
+
 let cached: ConciergeEntry[] | null = null;
 
 export function buildConciergeIndex(): ConciergeEntry[] {
@@ -313,6 +364,7 @@ export function buildConciergeIndex(): ConciergeEntry[] {
     ...buildAboutEntries(),
     ...buildExperienceEntries(),
     ...buildServiceEntries(),
+    ...buildProductEntries(),
   ];
   return cached;
 }

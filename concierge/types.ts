@@ -5,7 +5,8 @@ export type ConciergeSource =
   | "system"
   | "about"
   | "experience"
-  | "services";
+  | "services"
+  | "products";
 
 export type ConciergeMode = "hiring" | "project" | "speaking";
 
