@@ -40,6 +40,12 @@ export function notifyWhatsApp(product: Product) {
   );
 }
 
+export function buyWhatsApp(product: Product) {
+  return whatsappHref(
+    `I'd like to buy ${product.name} (${formatInr(product.price)}).\n\n${site.url}/products/${product.slug}`,
+  );
+}
+
 /**
  * Later checkout (not in this ship):
  * - POST /api/checkout creates a Razorpay order from CheckoutIntent

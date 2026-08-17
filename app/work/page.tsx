@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import PageHero from "@/components/reveal/PageHero";
 import WorkIndex from "@/components/work/WorkIndex";
 import { pageMetadataExtras } from "@/lib/seo";
@@ -22,7 +23,9 @@ export default function WorkPage() {
         title="Selected work across products, systems, and ventures."
         description="Enterprise leadership and founder-built products. Filter by Enterprise, Startup, Founder, AI, Product, or Systems."
       />
-      <WorkIndex />
+      <Suspense>
+        <WorkIndex />
+      </Suspense>
     </>
   );
 }

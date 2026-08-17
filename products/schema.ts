@@ -71,6 +71,7 @@ export function productsIndexJsonLd() {
             url: `${site.url}/products/${product.slug}`,
             price: product.price,
             priceCurrency: product.currency,
+            availability: "https://schema.org/PreOrder",
           },
         },
       })),
@@ -100,6 +101,7 @@ export function productJsonLd(product: Product) {
       url,
       price: product.price,
       priceCurrency: product.currency,
+      availability: "https://schema.org/PreOrder",
       priceSpecification: {
         "@type": "UnitPriceSpecification",
         price: product.price,

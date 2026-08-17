@@ -10,7 +10,7 @@ export type Service = {
   engagement: string;
   outputs: string[];
   cta: string;
-  intent: "strategy" | "ai" | "workshop" | "hiring";
+  intent: "ai-product" | "designops" | "workshop" | "hiring";
 };
 
 export const services: Service[] = [
@@ -38,7 +38,7 @@ export const services: Service[] = [
       "Experience architecture",
     ],
     cta: "Discuss this problem",
-    intent: "strategy",
+    intent: "ai-product",
   },
   {
     index: "02",
@@ -64,7 +64,7 @@ export const services: Service[] = [
       "Practice notes a team can keep",
     ],
     cta: "Discuss this problem",
-    intent: "strategy",
+    intent: "designops",
   },
   {
     index: "03",
@@ -92,7 +92,7 @@ export const services: Service[] = [
       "Experiment plan",
     ],
     cta: "Discuss this problem",
-    intent: "ai",
+    intent: "ai-product",
   },
   {
     index: "04",
@@ -129,25 +129,25 @@ export const problemRoutes = [
   {
     id: "ai",
     label: "I need help shaping an AI product",
-    href: "/contact?intent=ai",
+    href: "/contact?intent=ai-product",
     service: "ai-product-building",
   },
   {
     id: "strategy",
     label: "I need product strategy",
-    href: "/contact?intent=strategy",
+    href: "/contact?intent=ai-product",
     service: "product-leadership",
   },
   {
     id: "system",
     label: "I need a scalable design system",
-    href: "/contact?intent=strategy",
+    href: "/contact?intent=designops",
     service: "systems-designops",
   },
   {
     id: "designops",
     label: "I need DesignOps support",
-    href: "/contact?intent=strategy",
+    href: "/contact?intent=designops",
     service: "systems-designops",
   },
   {

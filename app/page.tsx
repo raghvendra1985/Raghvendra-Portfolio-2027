@@ -8,6 +8,7 @@ import MagneticButton from "@/components/buttons/MagneticButton";
 import { TrackedLink, TrackedMagneticButton } from "@/components/analytics/TrackedCta";
 import ProductShelf from "@/components/products/ProductShelf";
 import CharmGallery from "@/components/delight/CharmGallery";
+import ServiceViewTracker from "@/components/analytics/ServiceViewTracker";
 import { enterpriseLeadership, featuredWork } from "@/case-studies";
 import { services } from "@/services";
 import { knowledgeArticles } from "@/knowledge";
@@ -54,6 +55,7 @@ export default function HomePage() {
         id="practice"
         className="scroll-mt-28 border-t border-line bg-surface-dim px-[var(--page-pad)] py-24"
       >
+        <ServiceViewTracker />
         <div className="mx-auto max-w-[1440px]">
           <p className="font-mono-label text-[11px] text-ink-soft" data-reveal-item>
             03 / Practice

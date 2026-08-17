@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Inter, Space_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import ExperienceProvider from "@/components/providers/ExperienceProvider";
 import { site } from "@/lib/site";
@@ -83,6 +84,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <ExperienceProvider>{children}</ExperienceProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
 import ProductStatusMark from "@/components/products/ProductStatusMark";
-import { formatInr, type Product } from "@/products";
+import { formatCategories, formatInr, type Product } from "@/products";
 
 export default function ProductCard({ product }: { product: Product }) {
   const ref = useRef<HTMLLIElement>(null);
@@ -48,7 +48,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <div className="relative aspect-[4/3] w-full bg-navy">
               <Image
                 src={product.cover}
-                alt=""
+                alt={product.name}
                 fill
                 sizes="(min-width: 640px) 50vw, 100vw"
                 unoptimized={product.cover.endsWith(".svg")}
@@ -72,6 +72,9 @@ export default function ProductCard({ product }: { product: Product }) {
           <div className="min-w-0">
             <ProductStatusMark status={product.status} inverted />
             <p className="mt-1 font-mono-label text-[11px] text-mist">{formatInr(product.price)}</p>
+            <p className="mt-1 truncate font-mono-label text-[11px] text-mist/50">
+              {formatCategories(product)}
+            </p>
           </div>
           <p className="shrink-0 font-mono-label text-[11px] text-gold group-hover:text-mist">
             View →

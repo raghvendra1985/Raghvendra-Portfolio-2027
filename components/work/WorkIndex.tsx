@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { animateSection } from "@/animations/sections";
 import { DURATION, EASE, gsap } from "@/animations/motion";
 import { useExperience } from "@/components/providers/ExperienceProvider";
@@ -18,6 +19,11 @@ import {
   type WorkAudience,
   type WorkLane,
 } from "@/case-studies";
+
+function parseAudience(raw: string | null): WorkAudience {
+  if (!raw) return "All";
+  return workAudiences.find((audience) => audience.toLowerCase() === raw.toLowerCase()) ?? "All";
+}
 
 function Card({ study }: { study: CaseStudy }) {
   const media = (
@@ -95,7 +101,10 @@ function StudyGrid({ studies }: { studies: CaseStudy[] }) {
 export default function WorkIndex() {
   const rootRef = useRef<HTMLDivElement>(null);
   const { config } = useExperience();
-  const [filter, setFilter] = useState<WorkAudience>("All");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const filter = parseAudience(searchParams.get("audience"));
 
   const visible = useMemo(
     () => caseStudies.filter((study) => matchesWorkAudience(study, filter)),
@@ -137,6 +146,14 @@ export default function WorkIndex() {
       },
     );
   }, [filter, config.reducedMotion]);
+
+  function setFilter(next: WorkAudience) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (next === "All") params.delete("audience");
+    else params.set("audience", next.toLowerCase());
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  }
 
   return (
     <div ref={rootRef} className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24">

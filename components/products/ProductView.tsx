@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MagneticButton from "@/components/buttons/MagneticButton";
@@ -8,32 +8,48 @@ import ProductStatusMark from "@/components/products/ProductStatusMark";
 import DesignIqDemo from "@/components/products/DesignIqDemo";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import { track } from "@/lib/analytics";
-import { createCheckoutIntent, isPurchasable, notifyWhatsApp } from "@/products/commerce";
+import { buyWhatsApp, isPurchasable, notifyWhatsApp } from "@/products/commerce";
 import { formatCategories, formatInr, getAdjacentProducts, type Product } from "@/products";
 import { getProductCopy } from "@/products/copy";
 
+function ProductCta({
+  product,
+  variant,
+}: {
+  product: Product;
+  variant: "primary" | "secondary" | "gold";
+}) {
+  const live = isPurchasable(product);
+  const href = live ? buyWhatsApp(product) : notifyWhatsApp(product);
+  return (
+    <MagneticButton
+      href={href}
+      variant={variant}
+      cursor="Open"
+      onClick={() =>
+        track(live ? "buy_cta_clicked" : "contact_cta_clicked", {
+          from: live ? "product_buy" : "product_notify",
+          channel: "whatsapp",
+          slug: product.slug,
+          price: product.price,
+        })
+      }
+    >
+      {live ? "Message to buy" : "Notify me"}
+    </MagneticButton>
+  );
+}
+
 export default function ProductView({ product }: { product: Product }) {
   const copy = getProductCopy(product.slug);
-  const purchasable = isPurchasable(product);
   const { prev, next } = getAdjacentProducts(product.slug);
-  const [note, setNote] = useState(false);
 
   useEffect(() => {
     track("product_page_viewed", { slug: product.slug, status: product.status });
   }, [product.slug, product.status]);
 
-  function buy() {
-    track("buy_cta_clicked", { slug: product.slug, price: product.price });
-    if (purchasable) {
-      createCheckoutIntent(product);
-      setNote(true);
-    }
-  }
-
-  const notifyHref = notifyWhatsApp(product);
-
   return (
-    <article className={purchasable ? "pb-28 lg:pb-0" : undefined}>
+    <article>
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-12 pt-32 sm:pt-40">
         <Link
           href="/products"
@@ -61,25 +77,7 @@ export default function ProductView({ product }: { product: Product }) {
           <p className="font-mono-label text-[11px] text-ink-soft">{formatCategories(product)}</p>
         </div>
         <div className="mt-8 scroll-mt-28" id="buy">
-          {purchasable ? (
-            <MagneticButton variant="primary" cursor="Buy" onClick={buy}>
-              Buy Now
-            </MagneticButton>
-          ) : (
-            <MagneticButton
-              href={notifyHref}
-              variant="secondary"
-              cursor="Open"
-              onClick={() => track("contact_cta_clicked", { from: "product_notify", channel: "whatsapp", slug: product.slug })}
-            >
-              Notify me
-            </MagneticButton>
-          )}
-          {note ? (
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-soft" role="status">
-              One-time purchase. Payments open shortly — UPI and cards, once. No subscription.
-            </p>
-          ) : null}
+          <ProductCta product={product} variant={isPurchasable(product) ? "primary" : "secondary"} />
         </div>
       </header>
 
@@ -170,20 +168,7 @@ export default function ProductView({ product }: { product: Product }) {
             </p>
             <p className="mt-6 font-mono-label text-[11px] text-mist/45">{product.attribution}</p>
           </div>
-          {purchasable ? (
-            <MagneticButton variant="gold" cursor="Buy" onClick={buy}>
-              Buy Now
-            </MagneticButton>
-          ) : (
-            <MagneticButton
-              href={notifyHref}
-              variant="gold"
-              cursor="Open"
-              onClick={() => track("contact_cta_clicked", { from: "product_notify", channel: "whatsapp", slug: product.slug })}
-            >
-              Notify me
-            </MagneticButton>
-          )}
+          <ProductCta product={product} variant="gold" />
         </div>
       </SectionReveal>
 
@@ -227,24 +212,6 @@ export default function ProductView({ product }: { product: Product }) {
             </Link>
           </div>
         </SectionReveal>
-      ) : null}
-
-      {purchasable ? (
-        <div className="fixed inset-x-0 bottom-[max(5.5rem,calc(env(safe-area-inset-bottom)+4.5rem))] z-30 border-t border-line bg-mist/95 px-[var(--page-pad)] py-3 backdrop-blur lg:hidden">
-          <div className="flex items-center justify-between gap-4">
-            <p className="font-mono-label text-[11px] text-navy">{formatInr(product.price)}</p>
-            <button
-              type="button"
-              onClick={() => {
-                buy();
-                document.getElementById("buy")?.scrollIntoView({ behavior: "smooth", block: "start" });
-              }}
-              className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-green"
-            >
-              Buy Now →
-            </button>
-          </div>
-        </div>
       ) : null}
     </article>
   );

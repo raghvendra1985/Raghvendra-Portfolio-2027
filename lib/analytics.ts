@@ -1,3 +1,4 @@
+import { track as vercelTrack } from "@vercel/analytics";
 import { getStoredUtm } from "./utm";
 
 type Payload = Record<string, string | number | boolean | undefined | null>;
@@ -29,18 +30,25 @@ export type AnalyticsEvent =
   | "project_clicked"
   | "enterprise_case_clicked"
   | "service_clicked"
+  | "service_view"
   | "contact_cta_clicked"
+  | "contact_intent_selected"
   | "contact_form_submitted"
   | "knowledge_article_clicked"
   | "hiring_path_clicked"
   | "problem_route_clicked";
 
 /**
- * Site-wide analytics hook. No provider yet — swap this body later
- * without changing call sites. Always attaches stored UTMs.
+ * Site-wide analytics hook. Sinks to Vercel Analytics and logs in development.
+ * Always attaches stored UTMs. Does not send PII.
  */
 export function track(event: AnalyticsEvent, payload: Payload = {}) {
   const merged = { ...getStoredUtm(), ...payload };
+  const properties: Record<string, string | number | boolean | null> = {};
+  for (const [key, value] of Object.entries(merged)) {
+    if (value !== undefined) properties[key] = value;
+  }
+  vercelTrack(event, properties);
   if (process.env.NODE_ENV === "development") {
     console.debug(`[analytics] ${event}`, merged);
   }

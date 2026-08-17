@@ -6,25 +6,11 @@ import { animateContactForm } from "@/animations/forms";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import { track } from "@/lib/analytics";
+import { contactIntents, resolveContactIntent, type ContactIntent } from "@/lib/contact";
 import { site, whatsappHref } from "@/lib/site";
 
 const fieldBase =
   "mt-2 min-h-12 w-full border bg-mist px-4 py-3 text-base text-navy placeholder:text-ink-soft/70 focus:border-navy";
-
-export const contactIntents = [
-  { id: "general", label: "General inquiry" },
-  { id: "hiring", label: "I’m hiring for a senior product design role" },
-  { id: "ai", label: "I need help with an AI product" },
-  { id: "strategy", label: "I need product strategy / DesignOps support" },
-  { id: "workshop", label: "I want to discuss a workshop" },
-  { id: "product", label: "I’m interested in a student product" },
-] as const;
-
-export type ContactIntent = (typeof contactIntents)[number]["id"];
-
-function isIntent(value: string | null): value is ContactIntent {
-  return Boolean(value && contactIntents.some((intent) => intent.id === value));
-}
 
 export default function ContactForm() {
   const rootRef = useRef<HTMLFormElement>(null);
@@ -34,15 +20,13 @@ export default function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
-  const [intent, setIntent] = useState<ContactIntent>(
-    isIntent(requested) ? requested : "general",
-  );
+  const [intent, setIntent] = useState<ContactIntent>(resolveContactIntent(requested));
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    if (isIntent(requested)) setIntent(requested);
+    setIntent(resolveContactIntent(requested));
   }, [requested]);
 
   useEffect(() => {
@@ -83,7 +67,7 @@ export default function ContactForm() {
     const { intentLabel, body } = composeMessage();
     track("contact_form_submitted", { intent, channel: "email" });
     const subject = encodeURIComponent(
-      `${intent === "general" ? "Inquiry" : intentLabel} — ${company || name || "New conversation"}`,
+      `${intent === "other" ? "Inquiry" : intentLabel} — ${company || name || "New conversation"}`,
     );
     window.location.href = `mailto:${site.email}?subject=${subject}&body=${encodeURIComponent(body)}`;
   }
@@ -167,22 +151,36 @@ export default function ContactForm() {
         />
       </div>
       <div data-form-item>
-        <label htmlFor="intent" className="font-mono-label text-[11px] text-ink-soft">
-          Why are you writing?
-        </label>
-        <select
-          id="intent"
-          value={intent}
-          onChange={(event) => setIntent(event.target.value as ContactIntent)}
-          className={`${fieldClass("intent")} appearance-none`}
+        <p id="intent-label" className="font-mono-label text-[11px] text-ink-soft">
+          I’m reaching out about
+        </p>
+        <div
+          className="-mx-1 mt-2 flex flex-wrap"
+          role="toolbar"
+          aria-labelledby="intent-label"
         >
-          {contactIntents.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.label}
-            </option>
-          ))}
-        </select>
-        <p className="mt-2 text-sm text-ink-soft">Optional. You can still send a simple message.</p>
+          {contactIntents.map((item) => {
+            const pressed = intent === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                aria-pressed={pressed}
+                onClick={() => {
+                  setIntent(item.id);
+                  track("contact_intent_selected", { intent: item.id });
+                }}
+                className={`min-h-11 px-2 font-mono-label text-[11px] ${
+                  pressed
+                    ? "text-navy underline decoration-gold decoration-2 underline-offset-8"
+                    : "text-ink-soft hover:text-navy"
+                }`}
+              >
+                {item.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <div data-form-item>
         <label htmlFor="message" className="font-mono-label text-[11px] text-ink-soft">
@@ -210,7 +208,7 @@ export default function ContactForm() {
       </div>
       <div data-form-item className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <MagneticButton type="submit">Send message</MagneticButton>
-        {intent === "product" ? (
+        {intent === "student-product" ? (
           <MagneticButton type="button" variant="secondary" onClick={handleWhatsApp}>
             WhatsApp
           </MagneticButton>
