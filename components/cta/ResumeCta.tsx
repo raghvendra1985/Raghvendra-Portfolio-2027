@@ -1,35 +1,73 @@
 "use client";
 
-import Link from "next/link";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import { track } from "@/lib/analytics";
 import { site } from "@/lib/site";
+
+export type ResumeDownloadSource =
+  | "home_hero"
+  | "home_recruiter"
+  | "about"
+  | "contact"
+  | "mobile_nav"
+  | "footer";
 
 export default function ResumeCta({
   variant = "secondary",
   size = "md",
   appearance = "button",
+  source,
   onNavigate,
   className,
 }: {
   variant?: "primary" | "secondary" | "gold";
   size?: "sm" | "md";
   appearance?: "button" | "text";
+  source: ResumeDownloadSource;
   onNavigate?: () => void;
   className?: string;
 }) {
+  const downloading = Boolean(site.resumeHref);
   const href = site.resumeHref ?? "/contact?intent=hiring";
-  const label = site.resumeHref ? "Download Resume" : "Request resume";
+  const label = downloading ? "Download Resume" : "Request resume";
+  const accessible = downloading ? "Download Resume, PDF, 2 pages" : "Request resume";
+
   const onTrack = () => {
-    track(site.resumeHref ? "resume_download" : "resume_requested");
+    if (downloading) {
+      track("resume_download", { source });
+    } else {
+      track("resume_requested", { source });
+    }
     onNavigate?.();
   };
 
   if (appearance === "text") {
+    if (downloading) {
+      return (
+        <a
+          href={href}
+          onClick={onTrack}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={accessible}
+          title="PDF · 2 pages"
+          data-cursor="View"
+          className={
+            className ??
+            "inline-flex min-h-11 items-center font-mono-label text-[11px] text-mist/80 hover:text-gold"
+          }
+        >
+          {label}
+          <span className="sr-only"> PDF · 2 pages</span>
+        </a>
+      );
+    }
+
     return (
-      <Link
+      <a
         href={href}
         onClick={onTrack}
+        aria-label={accessible}
         data-cursor="Open"
         className={
           className ??
@@ -37,22 +75,23 @@ export default function ResumeCta({
         }
       >
         {label}
-      </Link>
+      </a>
     );
   }
 
-  if (site.resumeHref) {
+  if (downloading) {
     return (
       <MagneticButton
-        href={site.resumeHref}
+        href={href}
         variant={variant}
         size={size}
         cursor="View"
-        download
+        ariaLabel={accessible}
         onClick={onTrack}
         className={className}
       >
         {label}
+        <span className="sr-only"> PDF · 2 pages</span>
       </MagneticButton>
     );
   }
@@ -63,6 +102,7 @@ export default function ResumeCta({
       variant={variant}
       size={size}
       cursor="Open"
+      ariaLabel={accessible}
       onClick={onTrack}
       className={className}
     >

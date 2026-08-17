@@ -165,7 +165,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div data-cta-row className="flex w-full flex-col gap-3 sm:w-auto">
-            <ResumeCta className="w-full justify-center sm:w-auto" />
+            <ResumeCta className="w-full justify-center sm:w-auto" source="about" />
             <MagneticButton href="/work" variant="secondary" cursor="View" className="w-full justify-center sm:w-auto">
               View Selected Work
             </MagneticButton>

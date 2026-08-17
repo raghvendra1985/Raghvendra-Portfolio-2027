@@ -34,7 +34,7 @@ export default function HiringPath() {
           >
             View Experience
           </MagneticButton>
-          <ResumeCta className="w-full justify-center sm:w-auto" />
+          <ResumeCta className="w-full justify-center sm:w-auto" source="home_recruiter" />
         </div>
       </div>
     </SectionReveal>

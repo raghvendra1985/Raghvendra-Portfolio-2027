@@ -29,6 +29,7 @@ export default function MagneticButton({
   download,
   onClick,
   className: extraClassName = "",
+  ariaLabel,
 }: {
   href?: string;
   children: ReactNode;
@@ -39,6 +40,7 @@ export default function MagneticButton({
   download?: boolean | string;
   onClick?: () => void;
   className?: string;
+  ariaLabel?: string;
 }) {
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
   const { config } = useExperience();
@@ -81,6 +83,7 @@ export default function MagneticButton({
           className={className}
           data-cursor={cursor}
           onClick={onClick}
+          {...(ariaLabel ? { "aria-label": ariaLabel } : {})}
           {...(download
             ? { download: typeof download === "string" ? download : true }
             : {})}
@@ -99,6 +102,7 @@ export default function MagneticButton({
         className={className}
         data-cursor={cursor}
         onClick={onClick}
+        {...(ariaLabel ? { "aria-label": ariaLabel } : {})}
       >
         {inner}
       </Link>
@@ -112,6 +116,7 @@ export default function MagneticButton({
       className={className}
       data-cursor={cursor}
       onClick={onClick}
+      {...(ariaLabel ? { "aria-label": ariaLabel } : {})}
     >
       {inner}
     </button>

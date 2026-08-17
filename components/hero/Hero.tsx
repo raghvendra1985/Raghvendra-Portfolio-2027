@@ -89,7 +89,7 @@ export default function Hero() {
             </MagneticButton>
           </div>
           <div data-hero-cta className="w-full sm:w-auto">
-            <ResumeCta className="w-full justify-center sm:w-auto" />
+            <ResumeCta className="w-full justify-center sm:w-auto" source="home_hero" />
           </div>
           <div data-hero-cta className="w-full sm:w-auto">
             <MagneticButton

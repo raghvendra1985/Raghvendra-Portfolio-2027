@@ -12,12 +12,9 @@ export const site = {
   statusDetail:
     "Available for remote product leadership, advisory, and selected collaborations.",
   /**
-   * One-line flip when the PDF exists:
-   * 1. Save as public/raghvendra-singh-resume.pdf
-   * 2. Set resumeHref: "/raghvendra-singh-resume.pdf"
-   * Until then, Request resume → /contact?intent=hiring.
+   * Recruiter PDF. Generated from /resume via `npm run resume:pdf`.
    */
-  resumeHref: null as string | null,
+  resumeHref: "/raghvendra-singh-resume.pdf",
   experienceLine: "20 years in design · 14+ years in digital product and UX",
   positioning: "Product Design Leader · Systems Thinker · AI Product Builder",
   /** Amazon.in Associates tracking ID. Set NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG on Vercel. */

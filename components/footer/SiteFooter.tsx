@@ -68,6 +68,7 @@ export default function SiteFooter() {
               <li data-footer-link>
                 <ResumeCta
                   appearance="text"
+                  source="footer"
                   className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
                 />
               </li>

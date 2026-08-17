@@ -126,7 +126,7 @@ export default function MenuOverlay({
                   </li>
                 ))}
                 <li>
-                  <ResumeCta appearance="text" onNavigate={onClose} />
+                  <ResumeCta appearance="text" source="mobile_nav" onNavigate={onClose} />
                 </li>
               </ul>
             </div>

@@ -70,7 +70,7 @@ export default function ContactPage() {
           <div>
             <p className="font-mono-label text-[11px] text-ink-soft">Resume</p>
             <div className="mt-3">
-              <ResumeCta size="sm" />
+              <ResumeCta size="sm" source="contact" />
             </div>
           </div>
         </div>
