@@ -6,7 +6,7 @@ export default function ProductHeader({ product }: { product: Product }) {
     <header>
       <Link
         href="/account/library"
-        className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-ink-soft hover:text-navy"
+        className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-ink-soft hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
       >
         ← My Library
       </Link>

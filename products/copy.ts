@@ -46,9 +46,9 @@ export const productCopy: Record<string, ProductCopy> = {
     problem:
       "Students prepare slides. Juries ask about decisions. The gap is where people freeze — not because they cannot design, but because they never rehearsed the questions.",
     howItWorks: [
-      "You pick the kind of project you are defending.",
-      "The tool throws jury questions in the order a panel actually uses them.",
-      "You answer out loud against a clock. Then you see what a stronger answer sounds like.",
+      "You get a jury question. Ninety seconds. Answer out loud.",
+      "The questions follow the order a panel actually uses.",
+      "After you have tried, a stronger angle is revealed.",
     ],
     exampleOutput:
       "Question 04 of 12: ‘What did you cut, and who lost because of that cut?’ You have 90 seconds. A sample answer sits behind a reveal — after you have tried.",

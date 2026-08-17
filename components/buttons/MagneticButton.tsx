@@ -50,7 +50,7 @@ export default function MagneticButton({
     return () => ctx.revert();
   }, [config]);
 
-  const className = `relative isolate inline-flex items-center gap-3 overflow-hidden font-mono-label ${sizes[size]} ${variants[variant]} ${extraClassName}`;
+  const className = `relative isolate inline-flex items-center gap-3 overflow-hidden font-mono-label focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${sizes[size]} ${variants[variant]} ${extraClassName}`;
 
   const inner = (
     <>

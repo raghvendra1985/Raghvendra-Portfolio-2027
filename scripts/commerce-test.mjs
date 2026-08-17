@@ -36,6 +36,33 @@ test("implementation matrix covers all 13 catalog slugs", () => {
   assert.equal(matrixSlugs.length, 13);
   assert.deepEqual(matrixSlugs, catalogSlugs);
   assert.match(matrix, /canSwitchToLive/);
+  assert.match(matrix, /releaseReadiness/);
+  assert.match(matrix, /qa-ready/);
+  assert.match(matrix, /content-blocked/);
+});
+
+test("checkout prices come from the catalog, not the browser", () => {
+  const source = readFileSync(join(root, "app/api/checkout/create-order/route.ts"), "utf8");
+  assert.match(source, /getProductById/);
+  assert.match(source, /product\.price \* 100/);
+  assert.doesNotMatch(source, /amount:\s*parsed/);
+  assert.doesNotMatch(source, /price:\s*parsed/);
+});
+
+test("qa-ready products are still coming-soon in the catalogue", () => {
+  const source = readFileSync(join(root, "products/index.ts"), "utf8");
+  for (const slug of [
+    "jury-me",
+    "brief-me",
+    "portfolio-roast",
+    "idea-gym",
+    "sketch-roulette",
+    "what-should-i-design",
+    "crit-card",
+  ]) {
+    const block = source.slice(source.indexOf(`slug: "${slug}"`), source.indexOf(`slug: "${slug}"`) + 700);
+    assert.match(block, /status: "coming-soon"/, slug);
+  }
 });
 
 test("100 design prompts", () => {

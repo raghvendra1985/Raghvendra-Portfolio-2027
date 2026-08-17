@@ -14,25 +14,28 @@ export default function AdminProductsPage() {
       </Link>
       <h1 className="mt-6 font-display text-4xl">Products</h1>
       <p className="mt-4 max-w-xl text-sm text-ink-soft">
-        Repository catalog is the source of truth. Do not switch coming-soon to live until every content gate on the row is met. Commerce keys are platform-wide, not per product.
+        Catalogue status is what customers see. Release readiness is internal. Do not flip coming-soon to live until readiness is qa-ready or live, and never because content merely exists.
       </p>
       <ul className="mt-10 divide-y divide-line border-y border-line">
         {products.map((product) => {
           const row = matrix.find((item) => item.slug === product.slug);
           const blockers = liveSwitchBlockers(product.slug);
           return (
-            <li key={product.id} className="grid gap-2 py-4 lg:grid-cols-[8rem_1fr_8rem_6rem]">
+            <li key={product.id} className="grid gap-2 py-4 lg:grid-cols-[8rem_1fr_9rem_8rem_6rem]">
               <span className="font-mono-label text-[11px]">{product.number}</span>
               <span>
                 {product.name} · {product.deliveryType}
-                {row && !row.canSwitchToLive ? (
+                {row?.releaseReadiness === "content-blocked" ? (
                   <span className="mt-1 block text-sm text-ink-soft">{blockers.join(" · ")}</span>
-                ) : (
+                ) : row?.releaseReadiness === "qa-ready" ? (
                   <span className="mt-1 block text-sm text-ink-soft">
-                    Content gate met. Flip status in products/index.ts when you intend to sell.
+                    QA-ready. Flip status in products/index.ts after you accept the release report.
                   </span>
+                ) : (
+                  <span className="mt-1 block text-sm text-ink-soft">Live in the catalogue.</span>
                 )}
               </span>
+              <span>{row?.releaseReadiness ?? "—"}</span>
               <span>{product.status}</span>
               <span>v{product.version}</span>
             </li>

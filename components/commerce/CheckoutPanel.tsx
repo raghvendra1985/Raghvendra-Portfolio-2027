@@ -49,7 +49,13 @@ export default function CheckoutPanel({
   useEffect(() => {
     if (!open) return;
     track("product_buy_click", { slug: product.slug, productId: product.id });
-  }, [open, product.id, product.slug]);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    document.getElementById("buy-name")?.focus();
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose, product.id, product.slug]);
 
   if (!open) return null;
 
@@ -131,6 +137,8 @@ export default function CheckoutPanel({
     <div className="fixed inset-0 z-[60] flex items-end justify-center bg-navy/40 p-4 sm:items-center">
       <form
         onSubmit={onSubmit}
+        role="dialog"
+        aria-modal="true"
         className="w-full max-w-md border border-navy bg-mist p-6 sm:p-8"
         aria-labelledby="checkout-title"
       >

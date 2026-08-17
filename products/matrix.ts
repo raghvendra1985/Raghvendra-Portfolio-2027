@@ -12,10 +12,14 @@ import {
 } from "./runtime/sets";
 import { constraints, domains, objects, users } from "./runtime/wheels";
 
+export type ReleaseReadiness = "live" | "qa-ready" | "content-blocked";
+
 export type LiveRequirement = {
   id: string;
   label: string;
   met: boolean;
+  /** Action-oriented blocker when unmet. Empty when the gate has passed. */
+  blocker?: string;
 };
 
 export type ProductMatrixRow = {
@@ -26,12 +30,24 @@ export type ProductMatrixRow = {
   studentReceives: string;
   mustContain: string[];
   requirements: LiveRequirement[];
+  blockers: string[];
+  /**
+   * Internal team state. Independent of catalogue `status`:
+   * customers see status; the team uses readiness.
+   */
+  releaseReadiness: ReleaseReadiness;
   /** Content + pack gates only. Commerce keys are platform-wide, not per product. */
   canSwitchToLive: boolean;
 };
 
-function req(id: string, label: string, met: boolean): LiveRequirement {
-  return { id, label, met };
+function req(id: string, label: string, met: boolean, blocker?: string): LiveRequirement {
+  return { id, label, met, blocker: met ? undefined : blocker };
+}
+
+function readinessFor(status: Product["status"], canSwitchToLive: boolean): ReleaseReadiness {
+  if (!canSwitchToLive) return "content-blocked";
+  if (status === "live") return "live";
+  return "qa-ready";
 }
 
 function wheelCombos() {
@@ -45,7 +61,9 @@ function sketchCombos() {
 export function productMatrix(): ProductMatrixRow[] {
   const bySlug = Object.fromEntries(products.map((product) => [product.slug, product]));
 
-  const rows: Array<Omit<ProductMatrixRow, "status" | "deliveryType" | "name" | "canSwitchToLive">> = [
+  const rows: Array<
+    Omit<ProductMatrixRow, "status" | "deliveryType" | "name" | "canSwitchToLive" | "releaseReadiness" | "blockers">
+  > = [
     {
       slug: "design-dare",
       studentReceives: "A timed dare, a made artefact, and a five-line defence. Hybrid: app + downloadable deck/template.",
@@ -55,9 +73,9 @@ export function productMatrix(): ProductMatrixRow[] {
         "Private pack at product-deliverables/design-dare/v1/pack.pdf",
       ],
       requirements: [
-        req("deck", `Dare deck ≥ 24 (now ${dares.length})`, dares.length >= 24),
+        req("deck", `Dare deck ≥ 24 (now ${dares.length})`, dares.length >= 24, `${Math.max(0, 24 - dares.length)} dare cards missing`),
         req("defence", "Five-line defence template in the app", true),
-        req("pack", "Private PDF pack uploaded", false),
+        req("pack", "Private PDF pack uploaded", false, "private PDF pack missing"),
       ],
     },
     {
@@ -153,7 +171,7 @@ export function productMatrix(): ProductMatrixRow[] {
         "Entitled /tools/design-detective",
       ],
       requirements: [
-        req("cases", `Field cases ≥ 6 (now ${detectiveCases.length})`, detectiveCases.length >= 6),
+        req("cases", `Field cases ≥ 6 (now ${detectiveCases.length})`, detectiveCases.length >= 6, `${Math.max(0, 6 - detectiveCases.length)} field cases missing`),
         req("crime", "Crime / mismatch write-up per case", true),
         req("route", "Entitled app route", true),
       ],
@@ -183,9 +201,9 @@ export function productMatrix(): ProductMatrixRow[] {
       ],
       requirements: [
         req("parts", `Paper has 3 parts (now ${entrancePaper.parts.length})`, entrancePaper.parts.length >= 3),
-        req("clock", "Real countdown (not start/submit only)", false),
+        req("clock", "Real countdown (not start/submit only)", false, "real countdown missing"),
         req("debrief", "Debrief / mark scheme after submit", entrancePaper.markScheme.length >= 3),
-        req("pack", "Private paper PDF uploaded", false),
+        req("pack", "Private paper PDF uploaded", false, "private paper PDF missing"),
       ],
     },
     {
@@ -227,7 +245,7 @@ export function productMatrix(): ProductMatrixRow[] {
       requirements: [
         req("hundred", `100 prompts (now ${designPrompts.length})`, designPrompts.length === 100),
         req("browse", "In-app list the student can return to", true),
-        req("pack", "Private PDF pack uploaded", false),
+        req("pack", "Private PDF pack uploaded", false, "private PDF pack missing"),
       ],
     },
   ];
@@ -235,12 +253,18 @@ export function productMatrix(): ProductMatrixRow[] {
   return rows.map((row) => {
     const product = bySlug[row.slug];
     if (!product) throw new Error(`Matrix slug missing from catalog: ${row.slug}`);
+    const canSwitchToLive = row.requirements.every((item) => item.met);
+    const blockers = row.requirements
+      .filter((item) => !item.met)
+      .map((item) => item.blocker ?? item.label);
     return {
       ...row,
       name: product.name,
       status: product.status,
       deliveryType: product.deliveryType,
-      canSwitchToLive: row.requirements.every((item) => item.met),
+      blockers,
+      canSwitchToLive,
+      releaseReadiness: readinessFor(product.status, canSwitchToLive),
     };
   });
 }
@@ -248,5 +272,5 @@ export function productMatrix(): ProductMatrixRow[] {
 export function liveSwitchBlockers(slug: string) {
   const row = productMatrix().find((item) => item.slug === slug);
   if (!row) return [`Unknown product ${slug}`];
-  return row.requirements.filter((item) => !item.met).map((item) => item.label);
+  return row.blockers.length ? row.blockers : row.requirements.filter((item) => !item.met).map((item) => item.label);
 }

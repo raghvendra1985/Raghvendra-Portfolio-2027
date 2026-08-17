@@ -47,7 +47,7 @@ function offerUrl(product: Product) {
 }
 
 function offerAvailability(product: Product) {
-  return product.status === "live" ? "https://schema.org/InStock" : "https://schema.org/PreOrder";
+  return product.status === "live" ? "https://schema.org/InStock" : "https://schema.org/OutOfStock";
 }
 
 export function productsIndexJsonLd() {
