@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 import ProductView from "@/components/products/ProductView";
 import { jsonLdScript } from "@/lib/seo";
 import { getProduct, isPublicStatus, visibleProducts } from "@/products";
@@ -38,9 +37,7 @@ export default async function ProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(productJsonLd(product)) }}
       />
-      <Suspense>
-        <ProductView product={product} />
-      </Suspense>
+      <ProductView product={product} />
     </>
   );
 }

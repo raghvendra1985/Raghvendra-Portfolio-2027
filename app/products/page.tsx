@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import PageHero from "@/components/reveal/PageHero";
 import ProductsIndex from "@/components/products/ProductsIndex";
 import { jsonLdScript } from "@/lib/seo";
@@ -21,9 +20,7 @@ export default function ProductsPage() {
         title={secretProductsIntro.title}
         description={secretProductsIntro.description}
       />
-      <Suspense>
-        <ProductsIndex />
-      </Suspense>
+      <ProductsIndex />
     </>
   );
 }

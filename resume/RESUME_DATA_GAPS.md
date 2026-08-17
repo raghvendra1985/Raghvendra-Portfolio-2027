@@ -4,10 +4,9 @@ Facts the recruiter PDF does **not** invent. Confirm or correct these before tre
 
 ## Location
 
-- Portfolio (`lib/site.ts`) publishes **Faridabad, India · Remote worldwide**.
-- Resume brief asked for **New Delhi, India · Remote**.
-- PDF uses the published site location so positioning does not conflict.
-- Confirm the line recruiters should see.
+- Public professional line is now **Delhi NCR, India · Remote worldwide** (`lib/site.ts`, JSON-LD, resume).
+- Studio copy still uses Faridabad as a personal/home note. Case-study New Delhi (Pacific Design House) is company place, not biography.
+- Confirm if a more specific city should appear on the PDF later.
 
 ## Porsche
 

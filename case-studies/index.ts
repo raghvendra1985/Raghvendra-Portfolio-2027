@@ -672,7 +672,7 @@ export const caseStudies: CaseStudy[] = [
     outcomes: [
       {
         title: "System at scale",
-        body: "The design system remains operational across B2C and B2B products for a platform that served 1M+ daily riders and 80+ enterprise clients.",
+        body: "The design system was built to hold rider, driver, and corporate surfaces on a platform that — in company context — served 1M+ daily riders and 80+ enterprise clients. Those figures describe Shuttl’s scale, not a personal KPI.",
       },
       {
         title: "Innovation that stuck",

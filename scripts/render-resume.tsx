@@ -21,6 +21,7 @@ const required = [
   "National Institute of Design",
   "Pearl Academy",
   "hello@raghvendrasingh.com",
+  "Delhi NCR",
   "Figma",
   "2023",
   "2019",

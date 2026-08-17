@@ -10,6 +10,8 @@ export type Currency = "INR";
 
 export type DeliveryType = "download" | "app" | "hybrid";
 
+export type ProductShelf = "featured" | "quick-tools" | "practice" | "coming-soon";
+
 export type Product = {
   id: string;
   slug: string;
@@ -21,6 +23,7 @@ export type Product = {
   currency: Currency;
   categories: ProductCategory[];
   status: ProductStatus;
+  shelf: ProductShelf;
   featured?: boolean;
   cta: string;
   attribution: "By Raghvendra Singh";
@@ -63,7 +66,7 @@ export const productFilterLabels: Record<"all" | ProductCategory, string> = {
 
 const attribution = "By Raghvendra Singh" as const;
 
-const catalog: Array<Omit<Product, "deliveryType" | "version" | "appPath" | "downloadAsset">> = [
+const catalog: Array<Omit<Product, "deliveryType" | "version" | "appPath" | "downloadAsset" | "shelf">> = [
   {
     id: "sp-design-dare",
     slug: "design-dare",
@@ -143,7 +146,6 @@ const catalog: Array<Omit<Product, "deliveryType" | "version" | "appPath" | "dow
     currency: "INR",
     categories: ["get-into-design"],
     status: "live",
-    featured: true,
     cta: "Take the test",
     attribution,
     cover: "/assets/products/design-iq/cover.svg",
@@ -288,6 +290,38 @@ const catalog: Array<Omit<Product, "deliveryType" | "version" | "appPath" | "dow
   },
 ];
 
+const shelfBySlug: Record<string, ProductShelf> = {
+  "jury-me": "featured",
+  "portfolio-roast": "featured",
+  "brief-me": "featured",
+  "design-roulette": "quick-tools",
+  "design-iq": "quick-tools",
+  "sketch-roulette": "quick-tools",
+  "crit-card": "quick-tools",
+  "idea-gym": "practice",
+  "what-should-i-design": "practice",
+  "design-dare": "coming-soon",
+  "design-detective": "coming-soon",
+  "design-entrance-simulator": "coming-soon",
+  "100-design-prompts": "coming-soon",
+};
+
+export const productShelfOrder: ProductShelf[] = ["featured", "quick-tools", "practice", "coming-soon"];
+
+export const productShelfLabels: Record<ProductShelf, string> = {
+  featured: "Featured",
+  "quick-tools": "Quick Tools",
+  practice: "Practice",
+  "coming-soon": "Coming Soon",
+};
+
+export const productShelfCopy: Record<ProductShelf, string> = {
+  featured: "Start here if you have a jury, a case study, or a vague brief.",
+  "quick-tools": "A spin, a diagnostic, a draw, or one question. Buy once. Open when you need it.",
+  practice: "Timed sets and a next-project decision. Range, not a new identity.",
+  "coming-soon": "Not for sale yet. Content still has to pass the release gate.",
+};
+
 const deliveryBySlug: Record<string, DeliveryType> = {
   "design-dare": "hybrid",
   "design-roulette": "app",
@@ -306,12 +340,18 @@ const deliveryBySlug: Record<string, DeliveryType> = {
 
 export const products: Product[] = catalog.map((product) => {
   const deliveryType = deliveryBySlug[product.slug];
+  const shelf = shelfBySlug[product.slug];
   if (!deliveryType) {
     throw new Error(`Missing delivery type for ${product.slug}`);
+  }
+  if (!shelf) {
+    throw new Error(`Missing catalogue shelf for ${product.slug}`);
   }
   return {
     ...product,
     deliveryType,
+    shelf,
+    featured: shelf === "featured",
     version: "1.0",
     appPath: deliveryType === "download" ? undefined : `/tools/${product.slug}`,
     downloadAsset:
@@ -360,8 +400,22 @@ export function formatCategories(product: Product) {
   return product.categories.map((category) => productCategoryLabels[category]).join(" · ");
 }
 
+export function productsOnShelf(shelf: ProductShelf) {
+  return Object.entries(shelfBySlug)
+    .filter(([, value]) => value === shelf)
+    .map(([slug]) => getProduct(slug))
+    .filter((product): product is Product => {
+      if (!product) return false;
+      return isPublicStatus(product.status);
+    });
+}
+
+export function catalogDisplayOrder() {
+  return productShelfOrder.flatMap((shelf) => productsOnShelf(shelf));
+}
+
 export function getAdjacentProducts(slug: string) {
-  const list = visibleProducts();
+  const list = catalogDisplayOrder();
   const index = list.findIndex((product) => product.slug === slug);
   if (index < 0 || list.length < 2) return { prev: null, next: null };
   return {

@@ -68,7 +68,7 @@ export const aboutPage: AboutPage = {
       index: "01",
       title: "Design is infrastructure, not decoration.",
       description:
-        "The visual layer is the last 10%. The preceding 90% is architecture, governance, and intent.",
+        "The visual layer comes late. Architecture, governance and intent come first.",
     },
     {
       index: "02",

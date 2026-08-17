@@ -1,92 +1,23 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import MagneticButton from "@/components/buttons/MagneticButton";
-import CheckoutPanel from "@/components/commerce/CheckoutPanel";
+import { Suspense } from "react";
+import ProductCta from "@/components/products/ProductCta";
 import ProductStatusMark from "@/components/products/ProductStatusMark";
+import ProductViewTracker from "@/components/products/ProductViewTracker";
 import DesignIqDemo from "@/components/products/DesignIqDemo";
 import SectionReveal from "@/components/reveal/SectionReveal";
-import { track } from "@/lib/analytics";
-import { isPurchasable, productCta } from "@/products/commerce";
+import { TrackedLink } from "@/components/analytics/TrackedCta";
+import { isPurchasable } from "@/products/commerce";
 import { formatCategories, formatInr, getAdjacentProducts, type Product } from "@/products";
 import { getProductCopy } from "@/products/copy";
-
-function ProductCta({
-  product,
-  variant,
-}: {
-  product: Product;
-  variant: "primary" | "secondary" | "gold";
-}) {
-  const cta = productCta(product);
-  const [open, setOpen] = useState(false);
-
-  if (cta.kind === "checkout") {
-    return (
-      <>
-        <MagneticButton
-          variant={variant}
-          cursor="Open"
-          onClick={() => {
-            track("buy_cta_clicked", {
-              from: "product_buy",
-              channel: "razorpay",
-              slug: product.slug,
-              productId: product.id,
-              price: product.price,
-            });
-            setOpen(true);
-          }}
-        >
-          {cta.label}
-        </MagneticButton>
-        <CheckoutPanel product={product} open={open} onClose={() => setOpen(false)} />
-      </>
-    );
-  }
-
-  return (
-    <MagneticButton
-      href={cta.href ?? undefined}
-      variant={variant}
-      cursor="Open"
-      onClick={() => {
-        if (cta.kind === "external-checkout") {
-          track("buy_cta_clicked", {
-            from: "product_buy",
-            channel: "checkout",
-            slug: product.slug,
-            price: product.price,
-          });
-          track("checkout_started", { slug: product.slug, price: product.price });
-          return;
-        }
-        track(cta.kind === "whatsapp-buy" ? "buy_cta_clicked" : "contact_cta_clicked", {
-          from: cta.kind === "whatsapp-buy" ? "product_buy" : "product_notify",
-          channel: "whatsapp",
-          slug: product.slug,
-          price: product.price,
-        });
-      }}
-    >
-      {cta.label}
-    </MagneticButton>
-  );
-}
 
 export default function ProductView({ product }: { product: Product }) {
   const copy = getProductCopy(product.slug);
   const { prev, next } = getAdjacentProducts(product.slug);
 
-  useEffect(() => {
-    track("product_page_viewed", { slug: product.slug, status: product.status });
-    track("product_view", { slug: product.slug, productId: product.id });
-  }, [product.slug, product.status, product.id]);
-
   return (
     <article>
+      <ProductViewTracker slug={product.slug} productId={product.id} />
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-12 pt-32 sm:pt-40">
         <Link
           href="/products"
@@ -123,7 +54,9 @@ export default function ProductView({ product }: { product: Product }) {
           <p className="font-mono-label text-[11px] text-mist/50">Preview</p>
           <div className="mt-6">
             {product.slug === "design-iq" ? (
-              <DesignIqDemo previewLimit={2} />
+              <Suspense fallback={<p className="font-mono-label text-[11px] text-mist/50">Loading preview</p>}>
+                <DesignIqDemo previewLimit={2} />
+              </Suspense>
             ) : (
               <ProductDemoSlot product={product} note={copy?.demoNote} />
             )}
@@ -216,28 +149,30 @@ export default function ProductView({ product }: { product: Product }) {
             data-reveal-item
           >
             {prev ? (
-              <Link
+              <TrackedLink
                 href={`/products/${prev.slug}`}
+                event="product_card_clicked"
+                payload={{ slug: prev.slug, from: "prev" }}
                 data-cursor="Open"
-                onClick={() => track("product_card_clicked", { slug: prev.slug, from: "prev" })}
                 className="flex min-h-11 flex-1 flex-col justify-center border border-line px-5 py-4 hover:border-navy"
               >
                 <span className="font-mono-label text-[11px] text-ink-soft">← Previous</span>
                 <span className="mt-2 font-display text-xl">{prev.name}</span>
-              </Link>
+              </TrackedLink>
             ) : (
               <span className="hidden flex-1 sm:block" />
             )}
             {next ? (
-              <Link
+              <TrackedLink
                 href={`/products/${next.slug}`}
+                event="product_card_clicked"
+                payload={{ slug: next.slug, from: "next" }}
                 data-cursor="Next"
-                onClick={() => track("product_card_clicked", { slug: next.slug, from: "next" })}
                 className="flex min-h-11 flex-1 flex-col justify-center border border-line px-5 py-4 text-left hover:border-navy sm:text-right"
               >
                 <span className="font-mono-label text-[11px] text-ink-soft">Next →</span>
                 <span className="mt-2 font-display text-xl">{next.name}</span>
-              </Link>
+              </TrackedLink>
             ) : null}
           </div>
           <div className="mx-auto mt-6 max-w-[1440px]" data-reveal-item>

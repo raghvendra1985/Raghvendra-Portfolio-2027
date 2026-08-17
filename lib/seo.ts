@@ -17,7 +17,7 @@ export function personJsonLd() {
     sameAs: [site.linkedin, site.whatsapp],
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Faridabad",
+      addressLocality: "Delhi NCR",
       addressCountry: "IN",
     },
   };

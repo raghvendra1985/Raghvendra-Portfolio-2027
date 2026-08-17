@@ -1,80 +1,36 @@
-"use client";
-
-import { useEffect, useMemo, useRef } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { animateProductCards, refreshProductCards } from "@/animations/products";
-import { useExperience } from "@/components/providers/ExperienceProvider";
 import ProductCard from "@/components/products/ProductCard";
 import ProductFilters from "@/components/products/ProductFilters";
-import { track } from "@/lib/analytics";
+import ProductsIndexMotion from "@/components/products/ProductsIndexMotion";
 import {
-  isProductFilter,
-  visibleProducts,
-  type ProductCategory,
+  productShelfCopy,
+  productShelfLabels,
+  productShelfOrder,
+  productsOnShelf,
 } from "@/products";
 
 export default function ProductsIndex() {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const { config } = useExperience();
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const raw = searchParams.get("category");
-  const filter: "all" | ProductCategory = isProductFilter(raw) ? raw : "all";
-
-  const list = useMemo(() => {
-    const pool = visibleProducts();
-    if (filter === "all") return pool;
-    return pool.filter((product) => product.categories.includes(filter));
-  }, [filter]);
-
-  useEffect(() => {
-    track("products_page_viewed", { category: filter });
-    // Initial landing only — filter changes emit product_filter_selected.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const ctx = animateProductCards(root, config);
-    return () => ctx.revert();
-  }, [config]);
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root || filter === "all") return;
-    refreshProductCards(root, config);
-  }, [filter, config]);
-
-  function setFilter(next: "all" | ProductCategory) {
-    const params = new URLSearchParams(searchParams.toString());
-    if (next === "all") params.delete("category");
-    else params.set("category", next);
-    const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
-    track("product_filter_selected", { category: next });
-  }
-
   return (
-    <div ref={rootRef} className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24">
-      <ProductFilters value={filter} onChange={setFilter} />
+    <ProductsIndexMotion>
+      <ProductFilters />
 
-      {list.length ? (
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:gap-8">
-          {list.map((product, index) => (
-            <ProductCard
-              key={product.slug}
-              product={product}
-              priority={filter === "all" && index < 2}
-            />
-          ))}
-        </ul>
-      ) : (
-        <p className="mt-12 max-w-md text-sm text-ink-soft" role="status">
-          No tools in this category yet.
-        </p>
-      )}
-    </div>
+      {productShelfOrder.map((shelf) => {
+        const list = productsOnShelf(shelf);
+        if (!list.length) return null;
+        const featured = shelf === "featured";
+        return (
+          <section key={shelf} id={`shelf-${shelf}`} className="mt-16 scroll-mt-28">
+            <h2 className={`font-display leading-[1.08] text-navy ${featured ? "text-3xl sm:text-4xl" : "text-2xl"}`}>
+              {productShelfLabels[shelf]}
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft">{productShelfCopy[shelf]}</p>
+            <ul className={`mt-8 grid gap-6 lg:gap-8 ${featured ? "lg:grid-cols-3" : "sm:grid-cols-2"}`}>
+              {list.map((product, index) => (
+                <ProductCard key={product.slug} product={product} priority={featured && index < 3} />
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+    </ProductsIndexMotion>
   );
 }

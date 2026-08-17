@@ -49,6 +49,18 @@ test("checkout prices come from the catalog, not the browser", () => {
   assert.doesNotMatch(source, /price:\s*parsed/);
 });
 
+test("catalogue shelves cover all 13 products in the published order", () => {
+  const source = readFileSync(join(root, "products/index.ts"), "utf8");
+  const slugs = [...source.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(slugs.length, 13);
+  assert.match(source, /shelfBySlug/);
+  assert.match(source, /"jury-me": "featured"/);
+  assert.match(source, /"portfolio-roast": "featured"/);
+  assert.match(source, /"brief-me": "featured"/);
+  assert.match(source, /"design-roulette": "quick-tools"/);
+  assert.match(source, /"design-iq": "quick-tools"/);
+});
+
 test("qa-ready products are still coming-soon in the catalogue", () => {
   const source = readFileSync(join(root, "products/index.ts"), "utf8");
   for (const slug of [
@@ -63,6 +75,12 @@ test("qa-ready products are still coming-soon in the catalogue", () => {
     const block = source.slice(source.indexOf(`slug: "${slug}"`), source.indexOf(`slug: "${slug}"`) + 700);
     assert.match(block, /status: "coming-soon"/, slug);
   }
+});
+
+test("commerce mode stays whatsapp until the paid chain passes", () => {
+  const env = readFileSync(join(root, ".env.example"), "utf8");
+  assert.match(env, /NEXT_PUBLIC_COMMERCE_MODE=whatsapp/);
+  assert.match(env, /\/api\/webhooks\/razorpay/);
 });
 
 test("100 design prompts", () => {

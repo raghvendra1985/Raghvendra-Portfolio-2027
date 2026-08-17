@@ -7,7 +7,7 @@ export const site = {
   email: "hello@raghvendrasingh.com",
   linkedin: "https://www.linkedin.com/in/raghvendrasingh23/",
   whatsapp: "https://wa.me/919555909094",
-  location: "Faridabad, India · Remote worldwide",
+  location: "Delhi NCR, India · Remote worldwide",
   status: "Open to selected opportunities",
   statusDetail:
     "Available for remote product leadership, advisory, and selected collaborations.",

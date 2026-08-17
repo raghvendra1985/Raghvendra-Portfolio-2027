@@ -47,7 +47,7 @@ export const resume = {
         org: "Independent · EQTY · Growing With Kid · Bolo Buddy · GWK Ghostwriter",
         title: "Product Design Leader / Product Builder",
         dates: "2023 — Present",
-        meta: "Faridabad, India · Remote",
+        meta: "Delhi NCR, India · Remote",
         scope:
           "Product strategy, research, UX, AI interaction design, prototyping, product architecture, and hands-on building. Ventures are live and in motion — not claimed as proven commercial scale.",
         bullets: [

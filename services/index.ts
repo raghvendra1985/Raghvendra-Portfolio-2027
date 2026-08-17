@@ -18,15 +18,15 @@ export const services: Service[] = [
     index: "01",
     slug: "product-leadership",
     title: "Product Leadership",
-    summary: "Strategy, product direction, decision systems and cross-functional alignment.",
+    summary: "Strategy, product direction, and decision systems that help product, design and engineering make consistent calls.",
     description:
-      "Strategy, product direction, decision systems and cross-functional alignment.",
+      "Strategy, product direction, and decision systems that help product, design and engineering make consistent calls.",
     stack: ["Strategy", "Product direction", "Decision systems", "Cross-functional alignment"],
     problem:
       "The product has momentum, but strategy, UX, and delivery are not making the same decisions.",
     help: [
       "Product strategy and direction",
-      "Decision systems across design, product, and engineering",
+      "Decision systems that help product, design and engineering make consistent calls",
       "Prioritised roadmaps that a team can actually run",
       "Cross-functional alignment without extra process theatre",
     ],

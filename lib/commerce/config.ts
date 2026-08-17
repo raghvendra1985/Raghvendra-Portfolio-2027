@@ -75,12 +75,54 @@ export function hasSupabaseAuth() {
 export function isCommerceConfigured() {
   const mode = commerceMode();
   if (mode === "whatsapp") return false;
-  return hasRazorpayKeys() && hasSupabaseAdmin();
+  return hasRazorpayKeys() && hasSupabaseAdmin() && Boolean(razorpayWebhookSecret());
 }
 
 export function isClientCheckoutEnabled() {
   const mode = commerceMode();
   return (mode === "test" || mode === "live") && Boolean(razorpayKeyId());
+}
+
+/**
+ * Presence-only checklist. Never return secret values.
+ * Do not set commerceMode to live from code. Flip the env var only after
+ * Design Roulette and Design IQ complete the paid chain.
+ */
+export function commerceGoLiveChecklist() {
+  const mode = commerceMode();
+  const razorpay = {
+    keyId: Boolean(razorpayKeyId()),
+    keySecret: Boolean(razorpayKeySecret()),
+    webhookSecret: Boolean(razorpayWebhookSecret()),
+  };
+  const supabase = {
+    url: Boolean(supabaseUrl()),
+    anonKey: Boolean(supabaseAnonKey()),
+    serviceRole: Boolean(supabaseServiceRoleKey()),
+  };
+  const resend = {
+    apiKey: Boolean(resendApiKey()),
+    from: Boolean(emailFrom()),
+  };
+  const secretsReady =
+    razorpay.keyId &&
+    razorpay.keySecret &&
+    razorpay.webhookSecret &&
+    supabase.url &&
+    supabase.anonKey &&
+    supabase.serviceRole &&
+    resend.apiKey;
+  return {
+    mode,
+    webhookPath: "/api/webhooks/razorpay",
+    authCallbackPath: "/account/callback",
+    razorpay,
+    supabase,
+    resend,
+    secretsReady,
+    checkoutEnabled: isClientCheckoutEnabled() && isCommerceConfigured(),
+    liveModeSet: mode === "live",
+  };
 }
 
 export function storageBucket() {

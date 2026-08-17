@@ -46,6 +46,7 @@ export default async function AdminHomePage() {
         <Stat label="Catalog products" value={String(products.length)} />
       </dl>
       <nav className="mt-12 flex flex-wrap gap-6 font-mono-label text-[11px]">
+        <Link href="/admin/go-live">Go live</Link>
         <Link href="/admin/orders">Orders</Link>
         <Link href="/admin/customers">Customers</Link>
         <Link href="/admin/products">Products</Link>

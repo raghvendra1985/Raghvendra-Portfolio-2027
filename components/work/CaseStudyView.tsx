@@ -96,7 +96,7 @@ export default function CaseStudyView({
 
       <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-20">
         <article data-case-chapter className="max-w-3xl">
-          <p className="font-mono-label text-[11px] text-green">Challenge</p>
+          <p className="font-mono-label text-[11px] text-green">Company / product context</p>
           <p className="mt-4 text-lg leading-relaxed">{study.challenge}</p>
         </article>
       </section>
@@ -104,7 +104,7 @@ export default function CaseStudyView({
       {steps.length ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
           <p className="font-mono-label text-[11px] text-green" data-case-chapter>
-            Approach
+            What I did
           </p>
           <ol className="mt-8 space-y-8">
             {steps.map((step, index) => (
@@ -140,6 +140,10 @@ export default function CaseStudyView({
               </article>
             ))}
           </div>
+          <p className="mt-8 max-w-2xl text-sm leading-relaxed text-ink-soft">
+            Company-scale figures in this case study describe the product context. They are not
+            personal performance metrics.
+          </p>
         </section>
       ) : null}
 
