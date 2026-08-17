@@ -7,7 +7,13 @@ import { track } from "@/lib/analytics";
 import ProductStatusMark from "@/components/products/ProductStatusMark";
 import { formatCategories, formatInr, type Product } from "@/products";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  priority = false,
+}: {
+  product: Product;
+  priority?: boolean;
+}) {
   const ref = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
@@ -51,6 +57,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 alt={product.name}
                 fill
                 sizes="(min-width: 640px) 50vw, 100vw"
+                priority={priority}
                 unoptimized={product.cover.endsWith(".svg")}
                 className="object-cover object-top"
               />

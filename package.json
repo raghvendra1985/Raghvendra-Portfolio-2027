@@ -8,9 +8,13 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "check:assets": "node scripts/check-assets.mjs"
+    "check:assets": "node scripts/check-assets.mjs",
+    "og:products": "node scripts/render-product-og.mjs",
+    "test:commerce": "node --test scripts/commerce-test.mjs"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.3",
     "@vercel/analytics": "^2.0.1",
     "framer-motion": "^12.23.12",
     "gsap": "^3.13.0",
@@ -18,7 +22,9 @@
     "next": "^15.5.23",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "split-type": "^0.3.4"
+    "resend": "^6.20.0",
+    "split-type": "^0.3.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -28,6 +34,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "^15.5.23",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -62,8 +62,12 @@ export default function ProductsIndex() {
 
       {list.length ? (
         <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:gap-8">
-          {list.map((product) => (
-            <ProductCard key={product.slug} product={product} />
+          {list.map((product, index) => (
+            <ProductCard
+              key={product.slug}
+              product={product}
+              priority={filter === "all" && index < 2}
+            />
           ))}
         </ul>
       ) : (

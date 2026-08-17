@@ -170,7 +170,7 @@ export default function ContactForm() {
                   setIntent(item.id);
                   track("contact_intent_selected", { intent: item.id });
                 }}
-                className={`min-h-11 px-2 font-mono-label text-[11px] ${
+                className={`min-h-11 max-w-full px-2 text-left font-mono-label text-[11px] ${
                   pressed
                     ? "text-navy underline decoration-gold decoration-2 underline-offset-8"
                     : "text-ink-soft hover:text-navy"

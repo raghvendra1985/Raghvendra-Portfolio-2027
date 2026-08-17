@@ -11,7 +11,12 @@ export const site = {
   status: "Open to selected opportunities",
   statusDetail:
     "Available for remote product leadership, advisory, and selected collaborations.",
-  /** Set when a PDF is added at this public path. Resume CTAs request via contact until then. */
+  /**
+   * One-line flip when the PDF exists:
+   * 1. Save as public/raghvendra-singh-resume.pdf
+   * 2. Set resumeHref: "/raghvendra-singh-resume.pdf"
+   * Until then, Request resume → /contact?intent=hiring.
+   */
   resumeHref: null as string | null,
   experienceLine: "20 years in design · 14+ years in digital product and UX",
   positioning: "Product Design Leader · Systems Thinker · AI Product Builder",
@@ -41,8 +46,8 @@ export const navLinks = [
   { label: "About", href: "/about" },
   { label: "Studio", href: "/studio" },
   { label: "Knowledge", href: "/knowledge" },
-  { label: "Products", href: "/products" },
-  { label: "Contact", href: "/contact" },
+    { label: "Products", href: "/products" },
+    { label: "Contact", href: "/contact" },
 ];
 
 const primaryHrefs = ["/work", "/products", "/about", "/contact"] as const;
@@ -60,6 +65,7 @@ export const footerLinks = {
     { label: "Studio", href: "/studio" },
     { label: "Knowledge", href: "/knowledge" },
     { label: "Products", href: "/products" },
+    { label: "Library", href: "/account/library" },
     { label: "Contact", href: "/contact" },
   ],
   social: [

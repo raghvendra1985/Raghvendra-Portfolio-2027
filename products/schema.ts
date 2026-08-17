@@ -42,6 +42,14 @@ export function productMetadata(product: Product): Metadata {
   };
 }
 
+function offerUrl(product: Product) {
+  return product.checkoutUrl ?? `${site.url}/products/${product.slug}`;
+}
+
+function offerAvailability(product: Product) {
+  return product.status === "live" ? "https://schema.org/InStock" : "https://schema.org/PreOrder";
+}
+
 export function productsIndexJsonLd() {
   const items = visibleProducts();
   return {
@@ -68,10 +76,10 @@ export function productsIndexJsonLd() {
           url: `${site.url}/products/${product.slug}`,
           offers: {
             "@type": "Offer",
-            url: `${site.url}/products/${product.slug}`,
+            url: offerUrl(product),
             price: product.price,
             priceCurrency: product.currency,
-            availability: "https://schema.org/PreOrder",
+            availability: offerAvailability(product),
           },
         },
       })),
@@ -98,10 +106,10 @@ export function productJsonLd(product: Product) {
     category: formatCategories(product),
     offers: {
       "@type": "Offer",
-      url,
+      url: offerUrl(product),
       price: product.price,
       priceCurrency: product.currency,
-      availability: "https://schema.org/PreOrder",
+      availability: offerAvailability(product),
       priceSpecification: {
         "@type": "UnitPriceSpecification",
         price: product.price,

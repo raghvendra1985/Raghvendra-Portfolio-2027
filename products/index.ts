@@ -8,6 +8,8 @@ export type ProductCategory =
 
 export type Currency = "INR";
 
+export type DeliveryType = "download" | "app" | "hybrid";
+
 export type Product = {
   id: string;
   slug: string;
@@ -24,6 +26,13 @@ export type Product = {
   attribution: "By Raghvendra Singh";
   cover?: string;
   ogImage?: string;
+  /** Optional external payment-link override. Razorpay is preferred when commerce is configured. */
+  checkoutUrl?: string;
+  deliveryType: DeliveryType;
+  downloadAsset?: string;
+  appPath?: string;
+  version: string;
+  allowPreorder?: boolean;
   seoTitle?: string;
   seoDescription?: string;
 };
@@ -54,7 +63,7 @@ export const productFilterLabels: Record<"all" | ProductCategory, string> = {
 
 const attribution = "By Raghvendra Singh" as const;
 
-export const products: Product[] = [
+const catalog: Array<Omit<Product, "deliveryType" | "version" | "appPath" | "downloadAsset">> = [
   {
     id: "sp-design-dare",
     slug: "design-dare",
@@ -69,6 +78,7 @@ export const products: Product[] = [
     cta: "Take the dare",
     attribution,
     cover: "/assets/products/design-dare/cover.svg",
+    ogImage: "/assets/products/design-dare/og.png",
     seoDescription: "A practice tool that makes design students think, make, and defend a point of view.",
   },
   {
@@ -85,6 +95,7 @@ export const products: Product[] = [
     cta: "Spin a challenge",
     attribution,
     cover: "/assets/products/design-roulette/cover.svg",
+    ogImage: "/assets/products/design-roulette/og.png",
     seoDescription: "Spin a focused design challenge when you need a reason to start.",
   },
   {
@@ -101,6 +112,7 @@ export const products: Product[] = [
     cta: "Face the jury",
     attribution,
     cover: "/assets/products/jury-me/cover.svg",
+    ogImage: "/assets/products/jury-me/og.png",
     seoDescription: "Rehearse design jury questions before the panel is in the room.",
   },
   {
@@ -117,6 +129,7 @@ export const products: Product[] = [
     cta: "Get a brief",
     attribution,
     cover: "/assets/products/brief-me/cover.svg",
+    ogImage: "/assets/products/brief-me/og.png",
     seoDescription: "Generate a sharper project brief so portfolio work starts with a real problem.",
   },
   {
@@ -134,6 +147,7 @@ export const products: Product[] = [
     cta: "Take the test",
     attribution,
     cover: "/assets/products/design-iq/cover.svg",
+    ogImage: "/assets/products/design-iq/og.png",
     seoDescription: "A short test that names how your design brain works — then tells you what to practice next.",
   },
   {
@@ -150,6 +164,7 @@ export const products: Product[] = [
     cta: "Roast my portfolio",
     attribution,
     cover: "/assets/products/portfolio-roast/cover.svg",
+    ogImage: "/assets/products/portfolio-roast/og.png",
     seoDescription: "A critique tool that shows what is weakening a design student portfolio.",
   },
   {
@@ -166,6 +181,7 @@ export const products: Product[] = [
     cta: "Start the reps",
     attribution,
     cover: "/assets/products/idea-gym/cover.svg",
+    ogImage: "/assets/products/idea-gym/og.png",
     seoDescription: "Timed creative reps for design students who need range, not inspiration quotes.",
   },
   {
@@ -182,6 +198,7 @@ export const products: Product[] = [
     cta: "Open the case",
     attribution,
     cover: "/assets/products/design-detective/cover.svg",
+    ogImage: "/assets/products/design-detective/og.png",
     seoDescription: "Observation drills that train design students to notice what others miss.",
   },
   {
@@ -198,6 +215,7 @@ export const products: Product[] = [
     cta: "Draw the draw",
     attribution,
     cover: "/assets/products/sketch-roulette/cover.svg",
+    ogImage: "/assets/products/sketch-roulette/og.png",
     seoDescription: "Spin object, user, and constraint — then sketch. A drawing drill for design students.",
   },
   {
@@ -214,6 +232,7 @@ export const products: Product[] = [
     cta: "Sit the test",
     attribution,
     cover: "/assets/products/design-entrance-simulator/cover.svg",
+    ogImage: "/assets/products/design-entrance-simulator/og.png",
     seoDescription: "A timed design entrance practice test you can sit before the real one.",
   },
   {
@@ -230,6 +249,7 @@ export const products: Product[] = [
     cta: "Find a project",
     attribution,
     cover: "/assets/products/what-should-i-design/cover.svg",
+    ogImage: "/assets/products/what-should-i-design/og.png",
     seoDescription: "Find a portfolio-worthy design project instead of another generic case study.",
   },
   {
@@ -246,6 +266,7 @@ export const products: Product[] = [
     cta: "Draw a question",
     attribution,
     cover: "/assets/products/crit-card/cover.svg",
+    ogImage: "/assets/products/crit-card/og.png",
     seoDescription: "Draw a critique question when a design project gets stuck.",
   },
   {
@@ -262,9 +283,41 @@ export const products: Product[] = [
     cta: "Get the prompts",
     attribution,
     cover: "/assets/products/100-design-prompts/cover.svg",
+    ogImage: "/assets/products/100-design-prompts/og.png",
     seoDescription: "One hundred design prompts for students who need a reason to start.",
   },
 ];
+
+const deliveryBySlug: Record<string, DeliveryType> = {
+  "design-dare": "hybrid",
+  "design-roulette": "app",
+  "jury-me": "app",
+  "brief-me": "app",
+  "design-iq": "app",
+  "portfolio-roast": "app",
+  "idea-gym": "app",
+  "design-detective": "app",
+  "sketch-roulette": "app",
+  "design-entrance-simulator": "hybrid",
+  "what-should-i-design": "app",
+  "crit-card": "app",
+  "100-design-prompts": "hybrid",
+};
+
+export const products: Product[] = catalog.map((product) => {
+  const deliveryType = deliveryBySlug[product.slug];
+  if (!deliveryType) {
+    throw new Error(`Missing delivery type for ${product.slug}`);
+  }
+  return {
+    ...product,
+    deliveryType,
+    version: "1.0",
+    appPath: deliveryType === "download" ? undefined : `/tools/${product.slug}`,
+    downloadAsset:
+      deliveryType === "app" ? undefined : `product-deliverables/${product.slug}/v1/pack.pdf`,
+  };
+});
 
 export function formatInr(price: number) {
   return new Intl.NumberFormat("en-IN", {
@@ -288,6 +341,10 @@ export function liveProducts() {
 
 export function getProduct(slug: string) {
   return products.find((product) => product.slug === slug);
+}
+
+export function getProductById(id: string) {
+  return products.find((product) => product.id === id);
 }
 
 export function startingPrice() {

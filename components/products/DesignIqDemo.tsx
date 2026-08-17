@@ -11,7 +11,7 @@ import {
   type DesignIqTypeId,
 } from "@/products/design-iq";
 
-export default function DesignIqDemo() {
+export default function DesignIqDemo({ previewLimit }: { previewLimit?: number }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -45,6 +45,7 @@ export default function DesignIqDemo() {
     const next = [...answers, type];
     setAnswers(next);
     setStep((current) => current + 1);
+    if (previewLimit && next.length >= previewLimit) return;
     if (next.length === designIqQuestions.length) {
       const scored = scoreDesignIq(next);
       const params = new URLSearchParams(searchParams.toString());
@@ -75,6 +76,7 @@ export default function DesignIqDemo() {
   }
 
   const question = designIqQuestions[step];
+  const previewDone = Boolean(previewLimit && answers.length >= previewLimit && !result);
 
   return (
     <div className="border border-mist/15 bg-navy p-6 text-mist sm:p-8">
@@ -95,6 +97,14 @@ export default function DesignIqDemo() {
           >
             Begin →
           </button>
+        </div>
+      ) : previewDone ? (
+        <div>
+          <p className="font-mono-label text-[11px] text-gold">Preview</p>
+          <h3 className="mt-4 font-display text-2xl">The full diagnostic unlocks after purchase.</h3>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-mist/70">
+            Eight choices. A named way of seeing. One practice instruction.
+          </p>
         </div>
       ) : result ? (
         <div>

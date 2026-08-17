@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MagneticButton from "@/components/buttons/MagneticButton";
+import CheckoutPanel from "@/components/commerce/CheckoutPanel";
 import ProductStatusMark from "@/components/products/ProductStatusMark";
 import DesignIqDemo from "@/components/products/DesignIqDemo";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import { track } from "@/lib/analytics";
-import { buyWhatsApp, isPurchasable, notifyWhatsApp } from "@/products/commerce";
+import { isPurchasable, productCta } from "@/products/commerce";
 import { formatCategories, formatInr, getAdjacentProducts, type Product } from "@/products";
 import { getProductCopy } from "@/products/copy";
 
@@ -19,23 +20,58 @@ function ProductCta({
   product: Product;
   variant: "primary" | "secondary" | "gold";
 }) {
-  const live = isPurchasable(product);
-  const href = live ? buyWhatsApp(product) : notifyWhatsApp(product);
+  const cta = productCta(product);
+  const [open, setOpen] = useState(false);
+
+  if (cta.kind === "checkout") {
+    return (
+      <>
+        <MagneticButton
+          variant={variant}
+          cursor="Open"
+          onClick={() => {
+            track("buy_cta_clicked", {
+              from: "product_buy",
+              channel: "razorpay",
+              slug: product.slug,
+              productId: product.id,
+              price: product.price,
+            });
+            setOpen(true);
+          }}
+        >
+          {cta.label}
+        </MagneticButton>
+        <CheckoutPanel product={product} open={open} onClose={() => setOpen(false)} />
+      </>
+    );
+  }
+
   return (
     <MagneticButton
-      href={href}
+      href={cta.href ?? undefined}
       variant={variant}
       cursor="Open"
-      onClick={() =>
-        track(live ? "buy_cta_clicked" : "contact_cta_clicked", {
-          from: live ? "product_buy" : "product_notify",
+      onClick={() => {
+        if (cta.kind === "external-checkout") {
+          track("buy_cta_clicked", {
+            from: "product_buy",
+            channel: "checkout",
+            slug: product.slug,
+            price: product.price,
+          });
+          track("checkout_started", { slug: product.slug, price: product.price });
+          return;
+        }
+        track(cta.kind === "whatsapp-buy" ? "buy_cta_clicked" : "contact_cta_clicked", {
+          from: cta.kind === "whatsapp-buy" ? "product_buy" : "product_notify",
           channel: "whatsapp",
           slug: product.slug,
           price: product.price,
-        })
-      }
+        });
+      }}
     >
-      {live ? "Message to buy" : "Notify me"}
+      {cta.label}
     </MagneticButton>
   );
 }
@@ -46,7 +82,8 @@ export default function ProductView({ product }: { product: Product }) {
 
   useEffect(() => {
     track("product_page_viewed", { slug: product.slug, status: product.status });
-  }, [product.slug, product.status]);
+    track("product_view", { slug: product.slug, productId: product.id });
+  }, [product.slug, product.status, product.id]);
 
   return (
     <article>
@@ -86,7 +123,7 @@ export default function ProductView({ product }: { product: Product }) {
           <p className="font-mono-label text-[11px] text-mist/50">Preview</p>
           <div className="mt-6">
             {product.slug === "design-iq" ? (
-              <DesignIqDemo />
+              <DesignIqDemo previewLimit={2} />
             ) : (
               <ProductDemoSlot product={product} note={copy?.demoNote} />
             )}
