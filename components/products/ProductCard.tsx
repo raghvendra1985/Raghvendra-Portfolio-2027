@@ -2,7 +2,6 @@ import Image from "next/image";
 import ProductCardLink from "@/components/products/ProductCardLink";
 import ProductStatusMark from "@/components/products/ProductStatusMark";
 import { formatCategories, formatInr, type Product } from "@/products";
-import { site } from "@/lib/site";
 
 export default function ProductCard({
   product,
@@ -12,8 +11,7 @@ export default function ProductCard({
   priority?: boolean;
 }) {
   const href = `/products/${product.slug}`;
-  const url = `${site.url}${href}`;
-  const statusLabel = product.status === "live" ? "Live" : "Coming soon";
+  const hasCover = Boolean(product.cover);
 
   return (
     <li data-product-card>
@@ -37,9 +35,11 @@ export default function ProductCard({
           </div>
         )}
         <div className="relative px-5 py-4">
-          <h2 className="type-h3">{product.name}</h2>
-          <p className="mt-1 text-sm leading-relaxed text-mist/70">{product.hook}</p>
-          <div className="mt-3 flex items-end justify-between gap-4">
+          <h2 className={hasCover ? "sr-only" : "type-h3"}>{product.name}</h2>
+          {hasCover ? null : (
+            <p className="mt-1 text-sm leading-relaxed text-mist/70">{product.hook}</p>
+          )}
+          <div className={`flex items-end justify-between gap-4 ${hasCover ? "" : "mt-3"}`}>
             <div className="min-w-0">
               <ProductStatusMark status={product.status} inverted />
               <p className="mt-1 font-mono-label text-mist">{formatInr(product.price)}</p>
@@ -51,9 +51,6 @@ export default function ProductCard({
               View →
             </p>
           </div>
-          <p className="sr-only">
-            {statusLabel}. {url}
-          </p>
         </div>
       </ProductCardLink>
     </li>
