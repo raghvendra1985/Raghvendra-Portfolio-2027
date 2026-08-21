@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope, Space_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Manrope, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import ExperienceProvider from "@/components/providers/ExperienceProvider";
 import { site } from "@/lib/site";
 import { jsonLdScript, personJsonLd } from "@/lib/seo";
 
-const display = Fraunces({
+const display = localFont({
+  src: "../Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf",
   variable: "--font-display",
-  subsets: ["latin"],
   display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
-  adjustFontFallback: true,
+  weight: "200 800",
+  fallback: ["system-ui", "sans-serif"],
+  adjustFontFallback: "Arial",
 });
 
 const sans = Manrope({

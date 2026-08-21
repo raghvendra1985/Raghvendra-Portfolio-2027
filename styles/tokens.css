@@ -19,7 +19,13 @@
   --duration-xl: 1.6s;
 
   --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-physical: cubic-bezier(0.16, 1, 0.3, 1);
   --focus: var(--gold);
+
+  --paper: #f5f4f0;
+  --paper-edge: #d9d9d5;
+  --object-shadow: 0 4px 16px color-mix(in srgb, var(--navy) 10%, transparent);
+  --object-shadow-lift: 0 12px 28px color-mix(in srgb, var(--navy) 16%, transparent);
 
   --nav-height: 88px;
   --nav-height-compact: 64px;
@@ -38,7 +44,7 @@
   --text-h1: clamp(2.5rem, 2.1rem + 1.6vw, 3.5rem);
   --text-hero: clamp(2.75rem, 2.2rem + 2.2vw, 4rem);
 
-  --tracking-hero: -0.025em;
+  --tracking-hero: -0.035em;
   --tracking-h1: -0.025em;
   --tracking-h2: -0.02em;
   --tracking-h3: -0.01em;
@@ -63,6 +69,8 @@
   --color-line-strong: var(--line-strong);
   --color-surface: var(--surface);
   --color-surface-dim: var(--surface-dim);
+  --color-paper: var(--paper);
+  --color-paper-edge: var(--paper-edge);
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);

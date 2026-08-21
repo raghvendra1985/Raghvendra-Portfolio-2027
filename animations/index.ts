@@ -3,6 +3,7 @@ export {
   EASE,
   EASE_IN,
   EASE_IN_OUT,
+  EASE_PHYSICAL,
   registerMotion,
   prefersReducedMotion,
   isTouchDevice,
@@ -49,3 +50,4 @@ export {
 export { animateContactForm } from "./forms";
 export { animateNotFound } from "./notFound";
 export { animateProductCards, refreshProductCards } from "./products";
+export { animateLibraryEnter, animateLibraryFilter, animateLibraryShelf } from "./library";

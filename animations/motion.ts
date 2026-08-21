@@ -18,6 +18,7 @@ export const DURATION = {
 export const EASE = "power4.out";
 export const EASE_IN = "power4.in";
 export const EASE_IN_OUT = "power4.inOut";
+export const EASE_PHYSICAL = "cubic-bezier(0.16, 1, 0.3, 1)";
 
 export type DurationKey = keyof typeof DURATION;
 

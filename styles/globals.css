@@ -20,9 +20,8 @@ body {
 }
 
 .font-display {
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-family: var(--font-display), system-ui, sans-serif;
   font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 50, "WONK" 0;
   font-weight: var(--weight-regular);
   letter-spacing: var(--tracking-hero);
 }
@@ -37,23 +36,30 @@ body {
 }
 
 .type-hero {
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-family: var(--font-display), system-ui, sans-serif;
   font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 50, "WONK" 0;
   font-weight: var(--weight-regular);
   font-size: var(--text-hero);
-  line-height: 1.1;
+  line-height: 1.05;
   letter-spacing: var(--tracking-hero);
 }
 
 .type-h1 {
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-family: var(--font-display), system-ui, sans-serif;
   font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 50, "WONK" 0;
   font-weight: var(--weight-regular);
   font-size: var(--text-h1);
   line-height: 1.1;
   letter-spacing: var(--tracking-h1);
+}
+
+.type-statement {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-optical-sizing: auto;
+  font-weight: var(--weight-medium);
+  font-size: var(--text-h2);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-h2);
 }
 
 .type-h2 {
@@ -213,25 +219,60 @@ html.motion-ready [data-loader-root] {
 }
 
 .library-cover {
-  transform: translate3d(0, 0, 0) scale(1);
-  transition:
-    transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
-    opacity 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  transform: translate3d(0, 0, 0);
+  box-shadow: var(--object-shadow);
+  transition: box-shadow 0.38s var(--ease-physical);
 }
 
-[data-library-item] {
-  border-top-color: var(--line);
-  transition: border-color 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+[data-library-object] {
+  cursor: pointer;
 }
 
-[data-library-item]:hover,
-[data-library-item][data-in-view="true"] {
-  border-top-color: var(--gold);
+[data-library-object]:hover,
+[data-library-object][data-in-view="true"] {
+  z-index: 2;
 }
 
-[data-library-item]:hover .library-cover,
-[data-library-item][data-in-view="true"] .library-cover {
-  transform: translate3d(0, -8px, 0) scale(1.03);
+@media (hover: hover) and (pointer: fine) {
+  [data-library-object]:hover .library-cover,
+  [data-library-object][data-hovered="true"] .library-cover {
+    box-shadow: var(--object-shadow-lift);
+  }
+}
+
+.library-shelf {
+  perspective: 1200px;
+}
+
+.library-spine-label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.library-plank {
+  height: 12px;
+  background:
+    linear-gradient(to bottom, color-mix(in srgb, var(--paper-edge) 55%, var(--paper)), var(--paper-edge));
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--navy) 8%, transparent);
+}
+
+.library-reveal {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.library-reveal[data-open="true"] {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+[data-library-object][data-library-visible="false"] {
+  width: 0;
+  min-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .product-plate-grid {

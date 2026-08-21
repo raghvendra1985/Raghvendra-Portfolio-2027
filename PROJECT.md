@@ -87,7 +87,7 @@ Do not change visual branding, typography, spacing, or content unless the animat
 
 ### Typography
 
-- Display: Fraunces (Season Mix stand-in), fallback Georgia
+- Display: Bricolage Grotesque (local OFL variable), fallback system-ui
 - Body / UI: Manrope
 - Mono: Space Mono (code and product runtime only)
 

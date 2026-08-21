@@ -9,4 +9,4 @@ npm install
 npm run dev
 ```
 
-Fraunces is the editorial display face and Manrope is the UI/body face, both via `next/font`.
+Bricolage Grotesque is the editorial display face and Manrope is the UI/body face.
