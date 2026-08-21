@@ -72,13 +72,28 @@ export function libraryMetrics(item: StudioResource) {
 
 export type StudioCompanion = {
   kind: string;
+  name?: string;
   line: string;
+  image?: string;
+  imageAlt?: string;
+  images?: { src: string; alt: string }[];
 };
+
+export function companionPhotos(companion: StudioCompanion) {
+  if (companion.images?.length) return companion.images;
+  if (companion.image) {
+    return [{ src: companion.image, alt: companion.imageAlt ?? companion.kind }];
+  }
+  return [];
+}
+
+export type StudioObjectIllustration = "notebook" | "desk" | "bike" | "can";
 
 export type StudioObject = {
   name: string;
   use: string;
   note: string;
+  illustration?: StudioObjectIllustration;
   image?: string;
   imageAlt?: string;
 };
@@ -105,6 +120,7 @@ export type StudioPage = {
   };
   objects: StudioObject[];
   resources: StudioResource[];
+  rooms: { src: string; alt: string; title: string }[];
 };
 
 export const studioPage: StudioPage = {
@@ -128,8 +144,28 @@ export const studioPage: StudioPage = {
     dedication:
       "This household also includes my parents. They are not a gallery. They are why the house is a house.",
     companions: [
-      { kind: "Dog", line: "The one who decides when the day actually starts." },
-      { kind: "Cat", line: "Independent operations. Supervises the desk." },
+      {
+        kind: "Dog",
+        name: "Bingo",
+        line: "The one who decides when the day actually starts.",
+        image: "/assets/studio/pets/bingo.jpg",
+        imageAlt: "Bingo, a tricolour beagle puppy in mid-stride.",
+      },
+      {
+        kind: "Cat",
+        name: "Ocean",
+        line: "Independent operations. Supervises the desk.",
+        images: [
+          {
+            src: "/assets/studio/pets/ocean.jpg",
+            alt: "Ocean, a white long-haired cat on the tiled floor.",
+          },
+          {
+            src: "/assets/studio/pets/ocean-2.jpg",
+            alt: "Ocean on her back, being scratched under the chin.",
+          },
+        ],
+      },
       { kind: "Fish", line: "A quiet tank. Water quality is a product spec." },
       { kind: "Birds", line: "Sound in the apartment when the city is loud." },
     ],
@@ -138,7 +174,9 @@ export const studioPage: StudioPage = {
       "A few flowering pots that have to survive Faridabad summers",
       "Outside-strip plants that get the leftover attention after the ride",
     ],
-    // Add files under public/assets/studio/ then list { src, alt } here. No stock photos.
+    // Add files under public/assets/studio/ then list { src, alt } here.
+    // Dog, cat, garden, and ride photos join the HelixSpiral covers automatically.
+    // No stock photos.
     images: [],
   },
   motion: {
@@ -146,26 +184,42 @@ export const studioPage: StudioPage = {
     body: "I cycle because it clears the queue in my head before I design anything. Sport is the same idea at a different intensity: a body that is not only sitting in Figma. No Strava theatre here — just a bike, a route, and the habit of going out.",
     images: [],
   },
+  rooms: [
+    {
+      src: "/assets/studio/desktop.jpg",
+      alt: "Corner standing desk with dual screens, boom microphone, yellow open shelves, and a motorcycle helmet.",
+      title: "Desktop",
+    },
+    {
+      src: "/assets/studio/wall.jpg",
+      alt: "Pegboard and whiteboard on the studio wall, with a ukulele, tools, and handwritten goals.",
+      title: "Wall",
+    },
+  ],
   objects: [
     {
       name: "Notebook and pens",
       use: "Analog",
       note: "Decisions get written before they get slides. The sketchbook is the first system, not a prop.",
+      illustration: "notebook",
     },
     {
       name: "Desk machines",
       use: "Workspace",
       note: "One primary machine for making. Secondary screens only when the work actually needs them.",
+      illustration: "desk",
     },
     {
       name: "Bike",
       use: "Motion",
       note: "The commute that is not a commute. Kit stays simple so leaving the house is not a project.",
+      illustration: "bike",
     },
     {
       name: "Watering can",
       use: "Garden",
       note: "The most honest tool in the house. If it is dry, the system failed.",
+      illustration: "can",
     },
   ],
   resources: [
@@ -379,3 +433,40 @@ export const studioPage: StudioPage = {
     },
   ],
 };
+
+export type StudioCoverSlide = {
+  src: string;
+  alt: string;
+  title: string;
+};
+
+export function studioCoverSlides(): StudioCoverSlide[] {
+  const slides: StudioCoverSlide[] = [];
+  for (const companion of studioPage.habitat.companions) {
+    for (const photo of companionPhotos(companion)) {
+      slides.push({
+        src: photo.src,
+        alt: photo.alt,
+        title: companion.name ?? companion.kind,
+      });
+    }
+  }
+  for (const image of studioPage.habitat.images) {
+    slides.push({ src: image.src, alt: image.alt, title: "Garden" });
+  }
+  for (const image of studioPage.motion.images) {
+    slides.push({ src: image.src, alt: image.alt, title: "Ride" });
+  }
+  for (const room of studioPage.rooms) {
+    slides.push({ src: room.src, alt: room.alt, title: room.title });
+  }
+  for (const item of studioPage.resources) {
+    if (!item.image) continue;
+    slides.push({
+      src: item.image,
+      alt: item.imageAlt ?? item.title,
+      title: item.spineLabel || item.title,
+    });
+  }
+  return slides;
+}

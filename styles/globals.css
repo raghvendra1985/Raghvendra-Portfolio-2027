@@ -275,6 +275,452 @@ html.motion-ready [data-loader-root] {
   visibility: hidden;
 }
 
+.helix-spiral:active {
+  cursor: grabbing;
+}
+
+.studio-ticker {
+  background: var(--paper);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+.studio-card,
+.about-card {
+  box-shadow: var(--object-shadow);
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .studio-card:hover,
+  .studio-card:focus-within,
+  .about-card:hover,
+  .about-card:focus-within {
+    box-shadow: var(--object-shadow-lift);
+  }
+}
+
+.about-polaroid {
+  box-shadow: var(--object-shadow);
+  padding: 0.7rem 0.7rem 1.1rem;
+  will-change: transform;
+}
+
+.studio-object-art {
+  --soa-hot: #ff2d8a;
+  --soa-pink: #ff4ea8;
+  --soa-orange: #ff7a1a;
+  --soa-lemon: #ffe14a;
+  --soa-cyan: #3ec8ff;
+  --soa-lavender: #c9a8ff;
+  --soa-lime: #b4e843;
+  --soa-magenta: #e83e8c;
+  --soa-board: #4a1a6b;
+  --soa-shadow: 5px 5px 0 var(--navy);
+  position: relative;
+  width: 200px;
+  height: 160px;
+  margin-top: 1rem;
+  overflow: hidden;
+  background: var(--soa-hot);
+  box-shadow: var(--soa-shadow);
+  transform-origin: 50% 80%;
+  transition: transform 0.38s var(--ease-physical);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .studio-object-art:hover {
+    transform: rotate(-1.6deg);
+  }
+}
+
+.studio-object-art .soa-desk {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 38%;
+  background: var(--soa-orange);
+}
+
+.studio-object-art .soa-notepad {
+  position: absolute;
+  right: 14px;
+  bottom: 18px;
+  width: 72px;
+  height: 88px;
+  background: #fff;
+  box-shadow: var(--soa-shadow);
+  transform: rotate(6deg);
+}
+
+.studio-object-art .soa-sprinkle {
+  position: absolute;
+  inset: 10px 8px;
+  background-image:
+    repeating-linear-gradient(
+      115deg,
+      var(--soa-hot) 0 3px,
+      transparent 3px 10px
+    ),
+    repeating-linear-gradient(
+      -20deg,
+      var(--soa-cyan) 0 3px,
+      transparent 3px 12px
+    ),
+    repeating-linear-gradient(
+      70deg,
+      var(--soa-lemon) 0 2px,
+      transparent 2px 11px
+    );
+  opacity: 0.95;
+}
+
+.studio-object-art .soa-clip {
+  position: absolute;
+  width: 22px;
+  height: 34px;
+  border: 4px solid currentColor;
+  border-radius: 11px 11px 4px 4px;
+  background: transparent;
+  box-shadow: 4px 4px 0 var(--navy);
+}
+
+.studio-object-art .soa-clip-a {
+  color: var(--soa-lemon);
+  left: 86px;
+  bottom: 22px;
+  transform: rotate(-18deg);
+}
+
+.studio-object-art .soa-clip-b {
+  color: var(--soa-cyan);
+  left: 108px;
+  bottom: 16px;
+  transform: rotate(12deg);
+}
+
+.studio-object-art .soa-clip-c {
+  color: var(--soa-magenta);
+  left: 72px;
+  bottom: 10px;
+  width: 18px;
+  height: 28px;
+  transform: rotate(28deg);
+}
+
+.studio-object-art .soa-cup {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  width: 58px;
+  height: 62px;
+  border-radius: 6px 6px 10px 10px;
+  background:
+    radial-gradient(circle at 12px 16px, var(--soa-lime) 5px, transparent 6px),
+    radial-gradient(circle at 40px 28px, var(--soa-lime) 5px, transparent 6px),
+    radial-gradient(circle at 22px 44px, var(--soa-lime) 5px, transparent 6px),
+    #fff;
+  box-shadow: var(--soa-shadow);
+}
+
+.studio-object-art .soa-pen {
+  position: absolute;
+  width: 8px;
+  height: 54px;
+  border-radius: 3px 3px 1px 1px;
+  box-shadow: 3px 3px 0 var(--navy);
+}
+
+.studio-object-art .soa-pen-pink {
+  left: 14px;
+  top: -28px;
+  background: var(--soa-pink);
+  transform: rotate(-8deg);
+}
+
+.studio-object-art .soa-pen-cyan {
+  left: 28px;
+  top: -34px;
+  background: var(--soa-cyan);
+  transform: rotate(6deg);
+}
+
+.studio-object-art .soa-scissors {
+  position: absolute;
+  left: 40px;
+  top: -30px;
+  width: 7px;
+  height: 50px;
+  background: var(--soa-lemon);
+  border-radius: 2px;
+  box-shadow: 3px 3px 0 var(--navy);
+  transform: rotate(14deg);
+}
+
+.studio-object-art .soa-scissors::before,
+.studio-object-art .soa-scissors::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  width: 12px;
+  height: 12px;
+  border: 3px solid var(--soa-lemon);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 2px 2px 0 var(--navy);
+}
+
+.studio-object-art .soa-scissors::before {
+  left: -10px;
+}
+
+.studio-object-art .soa-scissors::after {
+  left: 4px;
+}
+
+.studio-object-art .soa-board {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 104px;
+  height: 92px;
+  background: var(--soa-board);
+  box-shadow: var(--soa-shadow);
+}
+
+.studio-object-art .soa-grid {
+  position: absolute;
+  inset: 8px 8px 28px;
+  background-image:
+    linear-gradient(to right, #ff8cc8 1px, transparent 1px),
+    linear-gradient(to bottom, #ffe14a 1px, transparent 1px),
+    linear-gradient(to right, #3ec8ff 0 25%, #b4e843 25% 50%, #ffe14a 50% 75%, #c9a8ff 75%);
+  background-size: 12px 12px, 12px 12px, 100% 8px;
+  background-position: 0 0, 0 0, 0 100%;
+  background-repeat: repeat, repeat, no-repeat;
+  opacity: 0.85;
+}
+
+.studio-object-art .soa-sticky {
+  position: absolute;
+  width: 38px;
+  height: 34px;
+  padding: 4px 3px 0;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--navy);
+  box-shadow: 3px 3px 0 var(--navy);
+}
+
+.studio-object-art .soa-sticky-y {
+  top: 28px;
+  left: 8px;
+  background: var(--soa-lemon);
+  transform: rotate(-8deg);
+}
+
+.studio-object-art .soa-sticky-p {
+  top: 36px;
+  left: 34px;
+  background: var(--soa-pink);
+  transform: rotate(7deg);
+}
+
+.studio-object-art .soa-sticky-c {
+  top: 52px;
+  left: 18px;
+  background: var(--soa-cyan);
+  transform: rotate(-3deg);
+}
+
+.studio-object-art .soa-calendar {
+  position: absolute;
+  right: 58px;
+  bottom: 14px;
+  width: 36px;
+  height: 40px;
+  background: var(--soa-lavender);
+  box-shadow: var(--soa-shadow);
+}
+
+.studio-object-art .soa-cal-head {
+  display: block;
+  height: 10px;
+  background: var(--soa-board);
+}
+
+.studio-object-art .soa-tumbler {
+  position: absolute;
+  right: 12px;
+  bottom: 14px;
+  width: 38px;
+  height: 58px;
+  border-radius: 8px 8px 10px 10px;
+  background: var(--soa-pink);
+  box-shadow: var(--soa-shadow);
+}
+
+.studio-object-art .soa-lid {
+  position: absolute;
+  top: -6px;
+  right: 4px;
+  left: 4px;
+  height: 10px;
+  background: var(--soa-lemon);
+  box-shadow: 3px 3px 0 var(--navy);
+}
+
+.studio-object-art .soa-handle {
+  position: absolute;
+  top: 14px;
+  right: -14px;
+  width: 16px;
+  height: 28px;
+  border: 5px solid var(--soa-lemon);
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 3px 3px 0 var(--navy);
+}
+
+.studio-object-art .soa-straw {
+  position: absolute;
+  top: -22px;
+  left: 16px;
+  width: 6px;
+  height: 26px;
+  background: var(--soa-magenta);
+  border-radius: 3px;
+  box-shadow: 2px 2px 0 var(--navy);
+}
+
+.studio-object-art .soa-ball {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  width: 88px;
+  height: 88px;
+  filter: drop-shadow(5px 5px 0 var(--navy));
+}
+
+.studio-object-art .soa-washi {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  box-shadow: var(--soa-shadow);
+}
+
+.studio-object-art .soa-washi::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  background: var(--soa-orange);
+}
+
+.studio-object-art .soa-washi-a {
+  right: 22px;
+  bottom: 22px;
+  background: repeating-linear-gradient(
+    -32deg,
+    var(--soa-cyan) 0 5px,
+    var(--soa-lemon) 5px 10px
+  );
+}
+
+.studio-object-art .soa-washi-b {
+  right: 48px;
+  bottom: 14px;
+  width: 30px;
+  height: 30px;
+  background: repeating-linear-gradient(
+    18deg,
+    var(--soa-pink) 0 4px,
+    #fff 4px 8px
+  );
+}
+
+.studio-object-art .soa-bowl {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  width: 44px;
+  height: 22px;
+  border-radius: 0 0 22px 22px;
+  background: var(--soa-orange);
+  box-shadow: var(--soa-shadow);
+}
+
+.studio-object-art .soa-gold {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  left: 6px;
+  height: 8px;
+  border-radius: 8px;
+  background: var(--soa-lemon);
+}
+
+.studio-object-art .soa-can {
+  position: absolute;
+  right: 28px;
+  bottom: 16px;
+  width: 54px;
+  height: 58px;
+  border-radius: 8px 8px 14px 14px;
+  background: var(--soa-pink);
+  box-shadow: var(--soa-shadow);
+}
+
+.studio-object-art .soa-spout {
+  position: absolute;
+  top: 10px;
+  left: -28px;
+  width: 32px;
+  height: 12px;
+  background: var(--soa-lemon);
+  border-radius: 8px 2px 2px 8px;
+  box-shadow: 3px 3px 0 var(--navy);
+}
+
+.studio-object-art .soa-spout::after {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: -4px;
+  width: 12px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--soa-cyan);
+  box-shadow: 2px 2px 0 var(--navy);
+}
+
+.studio-object-art .soa-can-handle {
+  position: absolute;
+  top: 10px;
+  right: -16px;
+  width: 18px;
+  height: 32px;
+  border: 5px solid var(--soa-cyan);
+  border-left: 0;
+  border-radius: 0 12px 12px 0;
+  box-shadow: 3px 3px 0 var(--navy);
+}
+
+.studio-object-art .soa-rose {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  width: 22px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--soa-lavender);
+  box-shadow: 2px 2px 0 var(--navy);
+}
+
 .product-plate-grid {
   background-image:
     linear-gradient(to right, currentColor 1px, transparent 1px),
@@ -333,6 +779,12 @@ html.motion-ready [data-loader-root] {
 
   [data-product-plate] {
     transform: none !important;
+    transition: none;
+  }
+
+  .studio-object-art,
+  .studio-object-art:hover {
+    transform: none;
     transition: none;
   }
 

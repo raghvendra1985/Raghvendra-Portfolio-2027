@@ -51,3 +51,5 @@ export { animateContactForm } from "./forms";
 export { animateNotFound } from "./notFound";
 export { animateProductCards, refreshProductCards } from "./products";
 export { animateLibraryEnter, animateLibraryFilter, animateLibraryShelf } from "./library";
+export { animateStudioTicker, animateStudioCard } from "./studio";
+export { animateAboutPolaroid, animateAboutStat } from "./about";
