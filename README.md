@@ -9,4 +9,4 @@ npm install
 npm run dev
 ```
 
-Geist is the active display font via `next/font`.
+Fraunces is the editorial display face and Manrope is the UI/body face, both via `next/font`.

@@ -74,7 +74,7 @@ export default function ImageReveal({
             aria-label={alt || "Image unavailable"}
           >
             {alt ? (
-              <p className="font-mono-label text-[11px] text-ink-soft">{alt}</p>
+              <p className="font-mono-label text-ink-soft">{alt}</p>
             ) : null}
           </div>
         )}

@@ -12,7 +12,6 @@ import ServiceViewTracker from "@/components/analytics/ServiceViewTracker";
 import { enterpriseLeadership, featuredWork } from "@/case-studies";
 import { services } from "@/services";
 import { knowledgeArticles } from "@/knowledge";
-import { site } from "@/lib/site";
 import Image from "next/image";
 
 export default function HomePage() {
@@ -22,20 +21,16 @@ export default function HomePage() {
 
       <SelectedWork studies={featuredWork} />
 
-      <EnterpriseLeadership studies={enterpriseLeadership} />
-
-      <HiringPath />
-
       <SectionReveal className="border-t border-line px-[var(--page-pad)] py-24">
         <div className="mx-auto grid max-w-[1440px] gap-12 lg:grid-cols-2">
           <div data-reveal-item>
-            <p className="font-mono-label text-[11px] text-ink-soft">02 / About</p>
-            <h2 className="mt-4 font-display text-3xl sm:text-5xl">
-              {site.experienceLine}.
+            <p className="font-mono-label text-ink-soft">02 / About</p>
+            <h2 className="mt-4 max-w-xl type-h1">
+              Twenty years of designing across products, organisations and classrooms.
             </h2>
           </div>
           <div data-reveal-item className="flex flex-col justify-end">
-            <p className="max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+            <p className="max-w-xl type-lead text-ink-soft">
               Product design leader working across enterprise systems, fintech, AI products,
               founder-led ventures, and design education. I move between strategy, systems,
               interaction design, team building, and shipping products.
@@ -57,10 +52,10 @@ export default function HomePage() {
       >
         <ServiceViewTracker />
         <div className="mx-auto max-w-[1440px]">
-          <p className="font-mono-label text-[11px] text-ink-soft" data-reveal-item>
+          <p className="font-mono-label text-ink-soft" data-reveal-item>
             03 / Practice
           </p>
-          <h2 className="mt-4 max-w-3xl font-display text-3xl sm:text-5xl" data-reveal-item>
+          <h2 className="mt-4 max-w-3xl type-h2" data-reveal-item>
             How I contribute.
           </h2>
           <div className="mt-12 grid gap-8 sm:grid-cols-2">
@@ -70,17 +65,17 @@ export default function HomePage() {
                 data-reveal-item
                 className="flex flex-col border-t-2 border-navy pt-5"
               >
-                <p className="font-mono-label text-[11px] text-green">{service.index}</p>
-                <h3 className="mt-3 font-display text-2xl">{service.title}</h3>
-                <p className="mt-3 text-base leading-relaxed text-navy">{service.problem}</p>
-                <p className="mt-5 font-mono-label text-[11px] text-ink-soft">What I help with</p>
-                <ul className="mt-2 space-y-1 text-sm leading-relaxed text-ink-soft">
+                <p className="font-mono-label text-green">{service.index}</p>
+                <h3 className="mt-3 type-h3">{service.title}</h3>
+                <p className="mt-3 type-body text-navy">{service.problem}</p>
+                <p className="mt-5 font-mono-label text-ink-soft">What I help with</p>
+                <ul className="mt-2 space-y-1 type-small text-ink-soft">
                   {service.help.slice(0, 4).map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <p className="mt-5 text-sm leading-relaxed text-ink-soft">{service.engagement}</p>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                <p className="mt-5 type-small text-ink-soft">{service.engagement}</p>
+                <p className="mt-2 type-small text-ink-soft">
                   {service.outputs.join(" · ")}
                 </p>
                 <div className="mt-6">
@@ -101,18 +96,22 @@ export default function HomePage() {
         </div>
       </SectionReveal>
 
+      <EnterpriseLeadership studies={enterpriseLeadership} />
+
+      <HiringPath />
+
       <SectionReveal className="border-t border-line px-[var(--page-pad)] py-24">
         <div className="mx-auto max-w-[1440px]">
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between" data-reveal-item>
             <div>
-              <p className="font-mono-label text-[11px] text-ink-soft">04 / Knowledge</p>
-              <h2 className="mt-4 font-display text-3xl sm:text-5xl">
+              <p className="font-mono-label text-ink-soft">04 / Knowledge</p>
+              <h2 className="mt-4 type-h2">
                 Ideas made useful.
               </h2>
             </div>
             <TrackedLink
               href="/knowledge"
-              className="font-mono-label text-[11px]"
+              className="font-mono-label"
               data-cursor="Open"
               event="knowledge_article_clicked"
               payload={{ slug: "index" }}
@@ -132,8 +131,8 @@ export default function HomePage() {
                 className="grid gap-4 border-t border-line py-6 sm:grid-cols-[1fr_140px] sm:items-center sm:gap-8"
               >
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                  <span className="font-display text-xl sm:text-2xl">{article.title}</span>
-                  <span className="font-mono-label shrink-0 text-[11px] text-ink-soft">
+                  <span className="type-h3">{article.title}</span>
+                  <span className="font-mono-label shrink-0 text-ink-soft">
                     {article.category}
                   </span>
                 </div>
@@ -164,11 +163,11 @@ export default function HomePage() {
       <SectionReveal className="border-t border-navy bg-navy px-[var(--page-pad)] py-24 text-mist">
         <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-8 sm:flex-row sm:items-end">
           <div data-reveal-item>
-            <p className="font-mono-label text-[11px] text-mist/50">06 / Contact</p>
-            <h2 className="mt-4 max-w-xl font-display text-3xl sm:text-5xl">
+            <p className="font-mono-label text-mist/50">05 / Contact</p>
+            <h2 className="mt-4 max-w-xl type-h1">
               Design strategy is infrastructure. Let&apos;s talk.
             </h2>
-            <p className="mt-4 max-w-lg text-base leading-relaxed text-mist/70">
+            <p className="mt-4 max-w-lg type-lead text-mist/70">
               Available for senior product design roles, design leadership, advisory, workshops,
               and selected product collaborations.
             </p>

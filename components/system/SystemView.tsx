@@ -31,21 +31,21 @@ export default function SystemView({ data }: { data: FounderOs }) {
         data-os-index
         className="sticky top-[4.5rem] z-20 border-b border-line bg-mist/90 px-[var(--page-pad)] py-3"
       >
-        <p className="mx-auto max-w-[1440px] font-mono-label text-[11px] text-ink-soft" aria-live="polite">
+        <p className="mx-auto max-w-[1440px] font-mono-label text-ink-soft" aria-live="polite">
           <span className="text-gold">{current.index}</span>
           <span> / {current.title}</span>
         </p>
       </div>
 
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-16 pt-16 sm:pt-24">
-        <p className="font-mono-label text-[11px] text-ink-soft" data-os-item>
+        <p className="font-mono-label text-ink-soft" data-os-item>
           {data.identity.name}
         </p>
-        <p className="mt-4 font-mono-label text-[11px] text-green" data-os-item>
+        <p className="mt-4 font-mono-label text-green" data-os-item>
           {data.identity.positioning}
         </p>
         <h1
-          className="mt-8 max-w-4xl font-display text-4xl leading-[1.05] text-navy sm:text-6xl"
+          className="mt-8 max-w-4xl type-h1 text-navy"
           data-os-item
         >
           {data.identity.deck}
@@ -69,11 +69,11 @@ export default function SystemView({ data }: { data: FounderOs }) {
                   href={`#${item.id}`}
                   className="grid gap-3 border-t border-line py-8 md:grid-cols-[80px_minmax(0,1fr)]"
                 >
-                  <p className="font-mono-label text-[11px] text-gold">
+                  <p className="font-mono-label text-gold">
                     {String(index + 1).padStart(2, "0")}
                   </p>
                   <div>
-                    <p className="font-display text-2xl sm:text-3xl">{item.label}</p>
+                    <p className="type-h3">{item.label}</p>
                     <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
                       {item.summary}
                     </p>
@@ -96,17 +96,17 @@ export default function SystemView({ data }: { data: FounderOs }) {
               <li key={product.name} data-os-item className="border-t border-line py-10">
                 {product.href ? (
                   <Link href={product.href} data-cursor="View" className="block">
-                    <p className="font-mono-label text-[11px] text-ink-soft">{product.kind}</p>
-                    <h3 className="mt-3 font-display text-2xl sm:text-4xl">{product.name}</h3>
+                    <p className="font-mono-label text-ink-soft">{product.kind}</p>
+                    <h3 className="mt-3 type-h3">{product.name}</h3>
                     <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
                       {product.summary}
                     </p>
-                    <p className="mt-6 font-mono-label text-[11px] text-green">Read case study →</p>
+                    <p className="mt-6 font-mono-label text-green">Read case study →</p>
                   </Link>
                 ) : (
                   <article>
-                    <p className="font-mono-label text-[11px] text-ink-soft">{product.kind}</p>
-                    <h3 className="mt-3 font-display text-2xl sm:text-4xl">{product.name}</h3>
+                    <p className="font-mono-label text-ink-soft">{product.kind}</p>
+                    <h3 className="mt-3 type-h3">{product.name}</h3>
                     <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
                       {product.summary}
                     </p>
@@ -130,11 +130,11 @@ export default function SystemView({ data }: { data: FounderOs }) {
                 data-os-item
                 className="grid gap-4 border-t border-line py-10 md:grid-cols-[80px_minmax(0,720px)]"
               >
-                <span className="font-mono-label text-[11px] text-gold">
+                <span className="font-mono-label text-gold">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="font-display text-2xl sm:text-3xl">{principle.title}</h3>
+                  <h3 className="type-h3">{principle.title}</h3>
                   <p className="mt-4 text-base leading-relaxed text-ink-soft">{principle.body}</p>
                 </div>
               </li>
@@ -174,8 +174,8 @@ export default function SystemView({ data }: { data: FounderOs }) {
         <OSModule id="teaching" index="08" title="Teaching" current={current.id === "teaching"}>
           {data.teaching.map((item) => (
             <article key={item.title} data-os-item className="border-t border-line py-10">
-              <p className="font-mono-label text-[11px] text-ink-soft">{item.context}</p>
-              <h3 className="mt-3 font-display text-2xl sm:text-3xl">{item.title}</h3>
+              <p className="font-mono-label text-ink-soft">{item.context}</p>
+              <h3 className="mt-3 type-h3">{item.title}</h3>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft">{item.body}</p>
             </article>
           ))}
@@ -194,9 +194,9 @@ export default function SystemView({ data }: { data: FounderOs }) {
               data-cursor="Open"
               className="block border-t border-line py-8"
             >
-              <h3 className="font-display text-2xl">{item.label}</h3>
+              <h3 className="type-h3">{item.label}</h3>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">{item.body}</p>
-              <p className="mt-4 font-mono-label text-[11px] text-green">Open →</p>
+              <p className="mt-4 font-mono-label text-green">Open →</p>
             </Link>
           ))}
         </OSModule>

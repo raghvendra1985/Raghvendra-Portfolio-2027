@@ -16,8 +16,8 @@ export default function HiringPath() {
         className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-8 border-t-2 border-navy pt-8 lg:flex-row lg:items-end"
       >
         <div className="max-w-2xl">
-          <p className="font-mono-label text-[11px] text-ink-soft">Hiring</p>
-          <h2 className="mt-3 font-display text-3xl sm:text-4xl">
+          <p className="font-mono-label text-ink-soft">Hiring</p>
+          <h2 className="mt-3 type-h2">
             Hiring for Product Design Leadership?
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">

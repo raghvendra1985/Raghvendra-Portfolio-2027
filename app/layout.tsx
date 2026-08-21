@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Inter, Space_Mono } from "next/font/google";
+import { Fraunces, Manrope, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import ExperienceProvider from "@/components/providers/ExperienceProvider";
 import { site } from "@/lib/site";
 import { jsonLdScript, personJsonLd } from "@/lib/seo";
 
-const geist = Geist({
+const display = Fraunces({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
+  axes: ["SOFT", "WONK", "opsz"],
   adjustFontFallback: true,
 });
 
-const inter = Inter({
+const sans = Manrope({
   variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
   adjustFontFallback: true,
 });
@@ -66,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${inter.variable} ${mono.variable} h-full antialiased`}
+      className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
     >
       <head>
         <script

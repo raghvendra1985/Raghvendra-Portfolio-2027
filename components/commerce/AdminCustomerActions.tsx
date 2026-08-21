@@ -23,13 +23,13 @@ export default function AdminCustomerActions({
   }
   return (
     <div className="mt-12 space-y-4">
-      <h2 className="font-display text-2xl">Actions</h2>
+      <h2 className="type-h3">Actions</h2>
       <div className="flex flex-wrap gap-3">
         {products.map((product) => (
           <button
             key={product.id}
             type="button"
-            className="min-h-11 border border-navy px-3 font-mono-label text-[11px]"
+            className="min-h-11 border border-navy px-3 font-mono-label"
             onClick={() => post("/api/admin/entitlements", { customerId, productId: product.id, action: "grant" })}
           >
             Grant {product.name}
@@ -43,7 +43,7 @@ export default function AdminCustomerActions({
             <button
               key={row.id}
               type="button"
-              className="min-h-11 px-3 font-mono-label text-[11px] text-ink-soft"
+              className="min-h-11 px-3 font-mono-label text-ink-soft"
               onClick={() => post("/api/admin/entitlements", { customerId, productId: row.product_id, action: "revoke" })}
             >
               Revoke {row.product_id}
@@ -52,7 +52,7 @@ export default function AdminCustomerActions({
       </div>
       <button
         type="button"
-        className="min-h-11 font-mono-label text-[11px]"
+        className="min-h-11 font-mono-label"
         onClick={() => {
           const productId = entitlements[0]?.product_id;
           if (productId) post("/api/admin/resend-access", { customerId, productId });

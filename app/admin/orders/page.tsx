@@ -20,10 +20,10 @@ export default async function AdminOrdersPage() {
   }
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24 pt-32">
-      <Link href="/admin" className="font-mono-label text-[11px] text-ink-soft">
+      <Link href="/admin" className="font-mono-label text-ink-soft">
         ← Admin
       </Link>
-      <h1 className="mt-6 font-display text-4xl">Orders</h1>
+      <h1 className="mt-6 type-h2">Orders</h1>
       <ul className="mt-10 divide-y divide-line border-y border-line">
         {rows.map((order) => (
           <li key={order.id} className="flex flex-wrap justify-between gap-4 py-4">

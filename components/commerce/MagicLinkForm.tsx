@@ -28,7 +28,7 @@ export default function MagicLinkForm({ next = "/account/library" }: { next?: st
 
   return (
     <form onSubmit={onSubmit} className="max-w-md">
-      <label htmlFor="login-email" className="font-mono-label text-[11px] text-ink-soft">
+      <label htmlFor="login-email" className="font-mono-label text-ink-soft">
         Email used at checkout
       </label>
       <input

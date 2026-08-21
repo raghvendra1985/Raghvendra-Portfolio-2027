@@ -56,7 +56,7 @@ PageHero line-mask reveal, contact form stagger, editorial 404, concierge trigge
 
 Status: complete.
 
-Mobile blur gating, ImageReveal fallbacks, font CLS alignment to Geist, a11y (aria-current, Concierge inert, form validation), Person JSON-LD + OG/Twitter completeness, error boundary, empty-filter copy, lint/typecheck/build gates. No deploy — launch review (Vercel, analytics, domain) is a separate decision.
+Mobile blur gating, ImageReveal fallbacks, font CLS alignment, a11y (aria-current, Concierge inert, form validation), Person JSON-LD + OG/Twitter completeness, error boundary, empty-filter copy, lint/typecheck/build gates. No deploy — launch review (Vercel, analytics, domain) is a separate decision.
 
 ## Tech stack
 
@@ -87,9 +87,9 @@ Do not change visual branding, typography, spacing, or content unless the animat
 
 ### Typography
 
-- Display: Neue Montreal, fallback Geist
-- Body: Inter
-- Mono: Space Mono
+- Display: Fraunces (Season Mix stand-in), fallback Georgia
+- Body / UI: Manrope
+- Mono: Space Mono (code and product runtime only)
 
 ## Motion rules
 

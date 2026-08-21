@@ -47,7 +47,7 @@ const ConciergeSearch = forwardRef<
           placeholder="Ask about work, AI, leadership, teaching…"
           autoComplete="off"
           enterKeyHint="search"
-          className="min-h-11 w-full bg-transparent font-display text-xl leading-snug text-navy outline-none placeholder:text-ink-soft/50 sm:text-3xl"
+          className="min-h-11 w-full bg-transparent type-h2 text-navy outline-none placeholder:text-ink-soft/50"
           aria-label="Ask the portfolio"
           aria-describedby={speechError ? "concierge-speech-status" : "concierge-listen-status"}
         />

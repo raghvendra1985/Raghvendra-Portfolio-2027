@@ -39,10 +39,10 @@ export default async function OrdersPage() {
             {orders.map((order) => (
               <li key={order.id} className="flex flex-wrap items-baseline justify-between gap-4 py-5">
                 <div>
-                  <p className="font-mono-label text-[11px] text-ink-soft">{order.id}</p>
+                  <p className="font-mono-label text-ink-soft">{order.id}</p>
                   <p className="mt-2 text-base capitalize">{order.status}</p>
                 </div>
-                <p className="font-mono-label text-[11px]">{formatInr(order.total)}</p>
+                <p className="font-mono-label">{formatInr(order.total)}</p>
               </li>
             ))}
           </ul>

@@ -36,14 +36,14 @@ export default function ConciergeResponse({
             </button>
           ) : null}
         </div>
-        <p className="mt-3 max-w-2xl font-display text-2xl leading-snug sm:text-3xl">
+        <p className="mt-3 max-w-2xl type-h3">
           {answer.answer}
         </p>
       </section>
 
       {answer.evidence.length ? (
         <section data-concierge-result>
-          <p className="font-mono-label text-[11px] text-ink-soft">Evidence</p>
+          <p className="font-mono-label text-ink-soft">Evidence</p>
           <div className="mt-2">
             {answer.evidence.map((item) => {
               const index = optionIndex++;
@@ -61,7 +61,7 @@ export default function ConciergeResponse({
 
       {answer.related.length ? (
         <section data-concierge-result>
-          <p className="font-mono-label text-[11px] text-ink-soft">Related</p>
+          <p className="font-mono-label text-ink-soft">Related</p>
           <div className="mt-2">
             {answer.related.map((item) => {
               const index = optionIndex++;
@@ -79,7 +79,7 @@ export default function ConciergeResponse({
 
       {answer.nextQuestions.length ? (
         <section data-concierge-result>
-          <p className="font-mono-label text-[11px] text-ink-soft">Next question</p>
+          <p className="font-mono-label text-ink-soft">Next question</p>
           <ul className="mt-4">
             {answer.nextQuestions.map((question) => {
               const index = optionIndex++;
@@ -89,7 +89,7 @@ export default function ConciergeResponse({
                     type="button"
                     data-concierge-option
                     onClick={() => onNextQuestion(question)}
-                    className={`w-full border-t border-line py-4 text-left font-display text-lg ${
+                    className={`w-full border-t border-line py-4 text-left type-h3 ${
                       activeIndex === index ? "text-navy" : "text-ink-soft hover:text-navy"
                     }`}
                   >

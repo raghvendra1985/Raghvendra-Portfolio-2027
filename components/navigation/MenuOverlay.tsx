@@ -80,14 +80,14 @@ export default function MenuOverlay({
                     className="group flex min-h-11 items-baseline gap-4 py-2"
                   >
                     <span
-                      className={`font-mono-label text-[11px] ${
+                      className={`font-mono-label ${
                         active ? "text-gold" : "text-mist/40 group-hover:text-gold"
                       }`}
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span
-                      className={`font-display text-3xl leading-[1.08] sm:text-5xl ${
+                      className={`type-h2 ${
                         active ? "text-green" : "text-mist group-hover:text-gold"
                       }`}
                     >
@@ -107,7 +107,7 @@ export default function MenuOverlay({
           <CharmPicker onHang={onClose} />
           <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="flex items-center gap-2 font-mono-label text-[11px] text-mist/70">
+              <p className="flex items-center gap-2 font-mono-label text-mist/70">
                 <span className="h-1.5 w-1.5 rounded-full bg-green" aria-hidden="true" />
                 {site.status}
               </p>
@@ -116,7 +116,7 @@ export default function MenuOverlay({
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-mist/80 hover:text-gold"
+                      className="inline-flex min-h-11 items-center font-mono-label text-mist/80 hover:text-gold"
                       {...(link.href.startsWith("http")
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}

@@ -13,8 +13,8 @@ export default function ProblemRoutes() {
     >
       <div className="mx-auto max-w-[1440px]">
         <div data-reveal-item>
-          <p className="font-mono-label text-[11px] text-ink-soft">For founders &amp; clients</p>
-          <h2 className="mt-4 max-w-3xl font-display text-3xl sm:text-5xl">
+          <p className="font-mono-label text-ink-soft">For founders &amp; clients</p>
+          <h2 className="mt-4 max-w-3xl type-h2">
             What are you trying to solve?
           </h2>
         </div>
@@ -29,8 +29,8 @@ export default function ProblemRoutes() {
                   onClick={() => track("problem_route_clicked", { route: route.id })}
                   className="flex min-h-14 flex-col items-start gap-2 border-b border-line py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
                 >
-                  <span className="min-w-0 font-display text-xl sm:text-2xl">{route.label}</span>
-                  <span className="shrink-0 font-mono-label text-[11px] text-green">
+                  <span className="min-w-0 type-h3">{route.label}</span>
+                  <span className="shrink-0 font-mono-label text-green">
                     {service?.title ?? "Discuss"} →
                   </span>
                 </Link>

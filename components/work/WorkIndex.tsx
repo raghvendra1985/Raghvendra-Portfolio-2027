@@ -40,13 +40,13 @@ function Card({ study }: { study: CaseStudy }) {
   const body = (
     <>
       {media}
-      <p className="mt-4 font-mono-label text-[11px] text-ink-soft">
+      <p className="mt-4 font-mono-label text-ink-soft">
         {study.index} / {laneLabels[study.lane]} / {study.category}
       </p>
-      <h2 className="mt-2 font-display text-2xl">{study.title}</h2>
+      <h2 className="mt-2 type-h3">{study.title}</h2>
       <p className="mt-2 text-sm text-ink-soft">{study.client}</p>
       <p className="mt-3 text-sm leading-relaxed text-ink-soft">{study.summary}</p>
-      <p className="mt-4 font-mono-label text-[11px] text-green">
+      <p className="mt-4 font-mono-label text-green">
         {study.tier === "flagship"
           ? "Read case study →"
           : study.href
@@ -190,7 +190,7 @@ export default function WorkIndex() {
             <section key={group.lane} aria-labelledby={`lane-${group.lane}`}>
               <h2
                 id={`lane-${group.lane}`}
-                className="font-mono-label text-[11px] text-ink-soft"
+                className="font-mono-label text-ink-soft"
               >
                 {laneLabels[group.lane]}
               </h2>

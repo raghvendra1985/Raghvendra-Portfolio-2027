@@ -126,7 +126,7 @@ export default function Navigation() {
         <div className="mx-auto flex max-w-[1440px] items-center justify-between px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3">
         <Link
           href="/"
-          className={`min-w-0 truncate font-display text-base sm:text-lg ${
+          className={`min-w-0 truncate type-lead ${
             open ? "text-mist" : "text-navy"
           }`}
           data-cursor="Open"
@@ -143,7 +143,7 @@ export default function Navigation() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`font-mono-label text-[11px] ${
+                className={`font-mono-label ${
                   open
                     ? active
                       ? "text-gold"

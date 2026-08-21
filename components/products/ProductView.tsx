@@ -21,28 +21,28 @@ export default function ProductView({ product }: { product: Product }) {
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-12 pt-32 sm:pt-40">
         <Link
           href="/products"
-          className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-ink-soft hover:text-navy"
+          className="inline-flex min-h-11 items-center font-mono-label text-ink-soft hover:text-navy"
         >
           ← All products
         </Link>
-        <p className="mt-8 font-mono-label text-[11px] text-ink-soft">
+        <p className="mt-8 font-mono-label text-ink-soft">
           {product.number} / Secret Products
         </p>
         <div className="mt-4">
           <ProductStatusMark status={product.status} />
         </div>
-        <h1 className="mt-6 max-w-4xl font-display text-[clamp(2rem,7vw,3.75rem)] leading-[1.12] text-navy lg:text-6xl lg:leading-[1.05]">
+        <h1 className="mt-6 max-w-4xl type-h1 text-navy">
           {product.hook}
         </h1>
-        <p className="mt-4 font-display text-2xl text-navy sm:text-3xl">{product.name}</p>
+        <p className="mt-4 type-h3 text-navy">{product.name}</p>
         {product.description ? (
           <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
             {product.description}
           </p>
         ) : null}
         <div className="mt-8 flex flex-wrap items-end gap-6">
-          <p className="font-mono-label text-[11px] text-navy">{formatInr(product.price)}</p>
-          <p className="font-mono-label text-[11px] text-ink-soft">{formatCategories(product)}</p>
+          <p className="font-mono-label text-navy">{formatInr(product.price)}</p>
+          <p className="font-mono-label text-ink-soft">{formatCategories(product)}</p>
         </div>
         <div className="mt-8 scroll-mt-28" id="buy">
           <ProductCta product={product} variant={isPurchasable(product) ? "primary" : "secondary"} />
@@ -51,10 +51,10 @@ export default function ProductView({ product }: { product: Product }) {
 
       <SectionReveal className="border-t border-line bg-navy px-[var(--page-pad)] py-16 text-mist sm:py-20">
         <div className="mx-auto max-w-[1440px]" data-reveal-item>
-          <p className="font-mono-label text-[11px] text-mist/50">Preview</p>
+          <p className="font-mono-label text-mist/50">Preview</p>
           <div className="mt-6">
             {product.slug === "design-iq" ? (
-              <Suspense fallback={<p className="font-mono-label text-[11px] text-mist/50">Loading preview</p>}>
+              <Suspense fallback={<p className="font-mono-label text-mist/50">Loading preview</p>}>
                 <DesignIqDemo previewLimit={2} />
               </Suspense>
             ) : (
@@ -69,15 +69,15 @@ export default function ProductView({ product }: { product: Product }) {
           <SectionReveal className="border-t border-line px-[var(--page-pad)] py-20">
             <div className="mx-auto grid max-w-[1440px] gap-10 lg:grid-cols-2">
               <div data-reveal-item>
-                <p className="font-mono-label text-[11px] text-ink-soft">Problem</p>
+                <p className="font-mono-label text-ink-soft">Problem</p>
                 <p className="mt-4 max-w-xl text-lg leading-relaxed text-navy">{copy.problem}</p>
               </div>
               <div data-reveal-item>
-                <p className="font-mono-label text-[11px] text-ink-soft">What this tool does</p>
+                <p className="font-mono-label text-ink-soft">What this tool does</p>
                 <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
                   {product.description ?? product.hook}
                 </p>
-                <p className="mt-6 font-mono-label text-[11px] text-ink-soft">Who it is for</p>
+                <p className="mt-6 font-mono-label text-ink-soft">Who it is for</p>
                 <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
                   {copy.whoFor ??
                     `Design students working on ${formatCategories(product).toLowerCase()}. Buy once. Use when you need it.`}
@@ -88,11 +88,11 @@ export default function ProductView({ product }: { product: Product }) {
 
           <SectionReveal className="border-t border-line px-[var(--page-pad)] py-20">
             <div className="mx-auto max-w-[1440px]" data-reveal-item>
-              <p className="font-mono-label text-[11px] text-ink-soft">How it works</p>
+              <p className="font-mono-label text-ink-soft">How it works</p>
               <ol className="mt-4 max-w-2xl space-y-4">
                 {copy.howItWorks.map((step, index) => (
                   <li key={step} className="flex gap-4 text-base leading-relaxed text-ink-soft">
-                    <span className="font-mono-label text-[11px] text-green">
+                    <span className="font-mono-label text-green">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span>{step}</span>
@@ -105,13 +105,13 @@ export default function ProductView({ product }: { product: Product }) {
           <SectionReveal className="border-t border-line px-[var(--page-pad)] py-20">
             <div className="mx-auto grid max-w-[1440px] gap-10 lg:grid-cols-2">
               <div data-reveal-item>
-                <p className="font-mono-label text-[11px] text-ink-soft">Example output</p>
+                <p className="font-mono-label text-ink-soft">Example output</p>
                 <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
                   {copy.exampleOutput}
                 </p>
               </div>
               <div data-reveal-item>
-                <p className="font-mono-label text-[11px] text-ink-soft">What you get</p>
+                <p className="font-mono-label text-ink-soft">What you get</p>
                 <ul className="mt-4 space-y-3">
                   {copy.whatYouGet.map((item) => (
                     <li key={item} className="max-w-xl text-base leading-relaxed text-ink-soft">
@@ -131,12 +131,12 @@ export default function ProductView({ product }: { product: Product }) {
           data-reveal-item
         >
           <div>
-            <p className="font-mono-label text-[11px] text-mist/50">One-time price</p>
-            <p className="mt-4 font-display text-4xl sm:text-5xl">{formatInr(product.price)}</p>
+            <p className="font-mono-label text-mist/50">One-time price</p>
+            <p className="mt-4 type-h2">{formatInr(product.price)}</p>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-mist/70">
               Buy once. Use when you need it. No subscription. No bundle.
             </p>
-            <p className="mt-6 font-mono-label text-[11px] text-mist/45">{product.attribution}</p>
+            <p className="mt-6 font-mono-label text-mist/45">{product.attribution}</p>
           </div>
           <ProductCta product={product} variant="gold" />
         </div>
@@ -156,8 +156,8 @@ export default function ProductView({ product }: { product: Product }) {
                 data-cursor="Open"
                 className="flex min-h-11 flex-1 flex-col justify-center border border-line px-5 py-4 hover:border-navy"
               >
-                <span className="font-mono-label text-[11px] text-ink-soft">← Previous</span>
-                <span className="mt-2 font-display text-xl">{prev.name}</span>
+                <span className="font-mono-label text-ink-soft">← Previous</span>
+                <span className="mt-2 type-h3">{prev.name}</span>
               </TrackedLink>
             ) : (
               <span className="hidden flex-1 sm:block" />
@@ -170,15 +170,15 @@ export default function ProductView({ product }: { product: Product }) {
                 data-cursor="Next"
                 className="flex min-h-11 flex-1 flex-col justify-center border border-line px-5 py-4 text-left hover:border-navy sm:text-right"
               >
-                <span className="font-mono-label text-[11px] text-ink-soft">Next →</span>
-                <span className="mt-2 font-display text-xl">{next.name}</span>
+                <span className="font-mono-label text-ink-soft">Next →</span>
+                <span className="mt-2 type-h3">{next.name}</span>
               </TrackedLink>
             ) : null}
           </div>
           <div className="mx-auto mt-6 max-w-[1440px]" data-reveal-item>
             <Link
               href="/products"
-              className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-ink-soft hover:text-navy"
+              className="inline-flex min-h-11 items-center font-mono-label text-ink-soft hover:text-navy"
             >
               ← All products
             </Link>
@@ -206,8 +206,8 @@ function ProductDemoSlot({ product, note }: { product: Product; note?: string })
       ) : (
         <div className="flex aspect-[16/10] items-end bg-navy p-8">
           <div>
-            <p className="font-mono-label text-[11px] text-gold">{product.number}</p>
-            <p className="mt-4 font-display text-3xl">{product.name}</p>
+            <p className="font-mono-label text-gold">{product.number}</p>
+            <p className="mt-4 type-h2">{product.name}</p>
           </div>
         </div>
       )}

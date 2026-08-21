@@ -30,13 +30,13 @@ export default function ContactPage() {
       <SectionReveal className="mx-auto grid max-w-[1440px] gap-16 px-[var(--page-pad)] pb-24 lg:grid-cols-[0.8fr_1.2fr]">
         <div data-reveal-item className="space-y-8">
           <div>
-            <p className="font-mono-label text-[11px] text-ink-soft">Email</p>
+            <p className="font-mono-label text-ink-soft">Email</p>
             <a href={`mailto:${site.email}`} className="mt-2 block text-lg">
               {site.email}
             </a>
           </div>
           <div>
-            <p className="font-mono-label text-[11px] text-ink-soft">WhatsApp</p>
+            <p className="font-mono-label text-ink-soft">WhatsApp</p>
             <a
               href={site.whatsapp}
               target="_blank"
@@ -47,17 +47,17 @@ export default function ContactPage() {
             </a>
           </div>
           <div>
-            <p className="font-mono-label text-[11px] text-ink-soft">Based in</p>
+            <p className="font-mono-label text-ink-soft">Based in</p>
             <p className="mt-2 text-lg">{site.location}</p>
           </div>
           <div>
-            <p className="font-mono-label text-[11px] text-ink-soft">Status</p>
+            <p className="font-mono-label text-ink-soft">Status</p>
             <p className="mt-2 text-lg">
               {site.status} — {site.statusDetail}
             </p>
           </div>
           <div>
-            <p className="font-mono-label text-[11px] text-ink-soft">Elsewhere</p>
+            <p className="font-mono-label text-ink-soft">Elsewhere</p>
             <a
               href={site.linkedin}
               target="_blank"
@@ -68,7 +68,7 @@ export default function ContactPage() {
             </a>
           </div>
           <div>
-            <p className="font-mono-label text-[11px] text-ink-soft">Resume</p>
+            <p className="font-mono-label text-ink-soft">Resume</p>
             <div className="mt-3">
               <ResumeCta size="sm" source="contact" />
             </div>

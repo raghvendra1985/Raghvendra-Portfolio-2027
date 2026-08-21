@@ -33,11 +33,11 @@ export default function EvidenceCard({
       }}
       className={`block border-t border-line py-5 ${active ? "bg-surface-dim" : ""}`}
     >
-      <p className="font-mono-label text-[11px] text-gold">
+      <p className="font-mono-label text-gold">
         {evidenceSourceLabel(item.source)}
       </p>
-      <p className="mt-2 font-display text-xl leading-snug sm:text-2xl">{item.title}</p>
-      <p className="mt-3 font-mono-label text-[11px] text-green">{item.label}</p>
+      <p className="mt-2 type-h3">{item.title}</p>
+      <p className="mt-3 font-mono-label text-green">{item.label}</p>
     </Link>
   );
 }

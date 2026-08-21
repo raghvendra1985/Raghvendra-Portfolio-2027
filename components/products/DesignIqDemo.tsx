@@ -82,8 +82,8 @@ export default function DesignIqDemo({ previewLimit }: { previewLimit?: number }
     <div className="border border-mist/15 bg-navy p-6 text-mist sm:p-8">
       {!started && !result ? (
         <div>
-          <p className="font-mono-label text-[11px] text-gold">005 · Preview</p>
-          <h3 className="mt-4 font-display text-2xl leading-[1.08] sm:text-3xl">
+          <p className="font-mono-label text-gold">005 · Preview</p>
+          <h3 className="mt-4 type-h3">
             Eight choices. One name for how you work.
           </h3>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-mist/70">
@@ -93,38 +93,38 @@ export default function DesignIqDemo({ previewLimit }: { previewLimit?: number }
             type="button"
             onClick={start}
             data-cursor="Open"
-            className="mt-8 inline-flex min-h-11 items-center font-mono-label text-[11px] text-gold"
+            className="mt-8 inline-flex min-h-11 items-center font-mono-label text-gold"
           >
             Begin →
           </button>
         </div>
       ) : previewDone ? (
         <div>
-          <p className="font-mono-label text-[11px] text-gold">Preview</p>
-          <h3 className="mt-4 font-display text-2xl">The full diagnostic unlocks after purchase.</h3>
+          <p className="font-mono-label text-gold">Preview</p>
+          <h3 className="mt-4 type-h3">The full diagnostic unlocks after purchase.</h3>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-mist/70">
             Eight choices. A named way of seeing. One practice instruction.
           </p>
         </div>
       ) : result ? (
         <div>
-          <p className="font-mono-label text-[11px] text-gold">Your design brain</p>
-          <h3 className="mt-4 font-display text-3xl leading-[1.08] sm:text-4xl">{result.name}</h3>
-          <p className="mt-3 font-mono-label text-[11px] text-mist/55">{result.kicker}</p>
+          <p className="font-mono-label text-gold">Your design brain</p>
+          <h3 className="mt-4 type-h2">{result.name}</h3>
+          <p className="mt-3 font-mono-label text-mist/55">{result.kicker}</p>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-mist/80">{result.body}</p>
           <p className="mt-6 max-w-xl text-sm leading-relaxed text-mist/70">{result.practice}</p>
           <div className="mt-8 flex flex-wrap gap-6">
             <button
               type="button"
               onClick={share}
-              className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-gold"
+              className="inline-flex min-h-11 items-center font-mono-label text-gold"
             >
               {copied ? "Link copied" : "Copy share link →"}
             </button>
             <button
               type="button"
               onClick={reset}
-              className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-mist/60 hover:text-mist"
+              className="inline-flex min-h-11 items-center font-mono-label text-mist/60 hover:text-mist"
             >
               Take it again
             </button>
@@ -132,10 +132,10 @@ export default function DesignIqDemo({ previewLimit }: { previewLimit?: number }
         </div>
       ) : question ? (
         <div>
-          <p className="font-mono-label text-[11px] text-mist/50">
+          <p className="font-mono-label text-mist/50">
             {String(step + 1).padStart(2, "0")} / {String(designIqQuestions.length).padStart(2, "0")}
           </p>
-          <h3 className="mt-4 font-display text-2xl leading-[1.08] sm:text-3xl">{question.prompt}</h3>
+          <h3 className="mt-4 type-h3">{question.prompt}</h3>
           <ul className="mt-8 space-y-2">
             {question.options.map((option) => (
               <li key={option.label}>

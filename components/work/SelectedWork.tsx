@@ -86,10 +86,10 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
       </p>
       <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="font-mono-label text-[11px] text-ink-soft">05 / Selected work</p>
+          <p className="font-mono-label text-ink-soft">01 / Selected work</p>
           <h2
             id="selected-work-heading"
-            className="mt-4 font-display text-[1.85rem] leading-[1.12] sm:text-5xl sm:leading-[1.05]"
+            className="mt-4 type-h2"
           >
             Current / founder work
           </h2>
@@ -147,10 +147,10 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                 <div className="lg:hidden">
                   <StudyCover study={study} className="mb-6 aspect-[4/5] min-h-[220px] w-full" />
                 </div>
-                <p className="font-mono-label text-[12px] text-ink-soft">
+                <p className="font-mono-label text-ink-soft">
                   {study.index} / {study.year}
                 </p>
-                <h3 className="mt-3 font-display text-2xl sm:text-3xl">{study.title}</h3>
+                <h3 className="mt-3 type-h3">{study.title}</h3>
                 <p className="mt-2 text-base text-navy">
                   {study.client}
                   {study.role ? (
@@ -160,7 +160,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                 <p className="mt-3 max-w-md text-base leading-relaxed text-ink-soft">
                   {study.summary}
                 </p>
-                <p className="mt-4 font-mono-label text-[12px] text-navy">View case study →</p>
+                <p className="mt-4 font-mono-label text-navy">View case study →</p>
               </Link>
             </li>
           ))}

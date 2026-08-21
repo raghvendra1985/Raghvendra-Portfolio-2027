@@ -33,21 +33,21 @@ export default function ProductCard({
         ) : (
           <div className="relative aspect-[4/3] bg-navy p-6" aria-hidden="true">
             <span className="product-plate-grid pointer-events-none absolute inset-0 text-mist" />
-            <p className="relative font-mono-label text-[11px] text-gold">{product.number}</p>
+            <p className="relative font-mono-label text-gold">{product.number}</p>
           </div>
         )}
         <div className="relative px-5 py-4">
-          <h2 className="font-display text-xl leading-[1.08]">{product.name}</h2>
+          <h2 className="type-h3">{product.name}</h2>
           <p className="mt-1 text-sm leading-relaxed text-mist/70">{product.hook}</p>
           <div className="mt-3 flex items-end justify-between gap-4">
             <div className="min-w-0">
               <ProductStatusMark status={product.status} inverted />
-              <p className="mt-1 font-mono-label text-[11px] text-mist">{formatInr(product.price)}</p>
-              <p className="mt-1 truncate font-mono-label text-[11px] text-mist/50">
+              <p className="mt-1 font-mono-label text-mist">{formatInr(product.price)}</p>
+              <p className="mt-1 truncate font-mono-label text-mist/50">
                 {formatCategories(product)}
               </p>
             </div>
-            <p className="shrink-0 font-mono-label text-[11px] text-gold group-hover:text-mist">
+            <p className="shrink-0 font-mono-label text-gold group-hover:text-mist">
               View →
             </p>
           </div>

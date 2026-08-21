@@ -30,7 +30,7 @@ export default function SuggestedQuestions({
                 type="button"
                 data-concierge-option
                 onClick={() => onSelect(item.label)}
-                className={`w-full border-t border-line py-4 text-left font-display text-lg leading-snug sm:text-xl ${
+                className={`w-full border-t border-line py-4 text-left type-h3 ${
                   highlighted || activeIndex === index
                     ? "text-navy"
                     : "text-ink-soft hover:text-navy"

@@ -15,10 +15,10 @@ export default async function AdminCustomersPage() {
   }
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24 pt-32">
-      <Link href="/admin" className="font-mono-label text-[11px] text-ink-soft">
+      <Link href="/admin" className="font-mono-label text-ink-soft">
         ← Admin
       </Link>
-      <h1 className="mt-6 font-display text-4xl">Customers</h1>
+      <h1 className="mt-6 type-h2">Customers</h1>
       <ul className="mt-10 divide-y divide-line border-y border-line">
         {(rows ?? []).map((customer) => (
           <li key={customer.id} className="py-4">

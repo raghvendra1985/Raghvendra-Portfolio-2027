@@ -8,7 +8,7 @@ export default function ProgressIndicator({
   label?: string;
 }) {
   return (
-    <p className="font-mono-label text-[11px] text-ink-soft" aria-live="polite">
+    <p className="font-mono-label text-ink-soft" aria-live="polite">
       {label ?? "Progress"} {String(current).padStart(2, "0")} / {String(total).padStart(2, "0")}
     </p>
   );

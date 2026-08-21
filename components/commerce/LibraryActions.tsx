@@ -29,8 +29,8 @@ export default function LibraryActions({
 
   return (
     <article className="border border-line px-5 py-6">
-      <p className="font-mono-label text-[11px] text-ink-soft">Purchased {date}</p>
-      <h2 className="mt-2 font-display text-2xl">{product.name}</h2>
+      <p className="font-mono-label text-ink-soft">Purchased {date}</p>
+      <h2 className="mt-2 type-h3">{product.name}</h2>
       <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-soft">{product.hook}</p>
       <div className="mt-6 flex flex-wrap gap-3">
         {product.deliveryType !== "download" ? (
@@ -55,7 +55,7 @@ export default function LibraryActions({
         <button
           type="button"
           onClick={resend}
-          className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-ink-soft hover:text-navy"
+          className="inline-flex min-h-11 items-center font-mono-label text-ink-soft hover:text-navy"
         >
           Resend access email
         </button>

@@ -21,7 +21,7 @@ export default async function AccountPage() {
         description={customer ? `Signed in as ${customer.email}.` : `Signed in as ${user?.email ?? ""}.`}
       />
       <div className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24">
-        <ul className="space-y-4 font-mono-label text-[11px]">
+        <ul className="space-y-4 font-mono-label">
           <li>
             <Link href="/account/library" className="inline-flex min-h-11 items-center hover:text-gold">
               My Library →

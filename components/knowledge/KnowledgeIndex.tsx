@@ -40,12 +40,12 @@ function ArticleRow({ article }: { article: KnowledgeArticle }) {
         sizes="(min-width: 768px) 280px, 100vw"
       />
       <div>
-        <p className="font-mono-label text-[11px] text-gold">
+        <p className="font-mono-label text-gold">
           {article.category} · {article.readMinutes} min
         </p>
-        <h3 className="mt-3 font-display text-2xl leading-[1.08] sm:text-3xl">{article.title}</h3>
+        <h3 className="mt-3 type-h3">{article.title}</h3>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink-soft">{article.deck}</p>
-        <p className="mt-5 font-mono-label text-[11px] text-green">Read note →</p>
+        <p className="mt-5 font-mono-label text-green">Read note →</p>
       </div>
     </Link>
   );
@@ -110,12 +110,12 @@ export default function KnowledgeIndex({
   return (
     <div ref={rootRef}>
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-16 pt-32 sm:pt-40">
-        <p data-hero-copy className="font-mono-label text-[11px] text-ink-soft">
+        <p data-hero-copy className="font-mono-label text-ink-soft">
           04 / Knowledge
         </p>
         <h1
           data-hero-headline
-          className="mt-6 max-w-5xl font-display text-[clamp(2.6rem,7vw,6.5rem)] leading-[0.94] text-navy"
+          className="mt-6 max-w-5xl type-h1 text-navy"
         >
           Ideas made useful.
         </h1>
@@ -133,15 +133,15 @@ export default function KnowledgeIndex({
           aria-labelledby="featured-note"
           className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20"
         >
-          <p className="font-mono-label text-[11px] text-gold" data-knowledge-item>
+          <p className="font-mono-label text-gold" data-knowledge-item>
             Featured
           </p>
           <div className="mt-6 grid items-end gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
             <div data-knowledge-item>
-              <p className="font-mono-label text-[11px] text-ink-soft">
+              <p className="font-mono-label text-ink-soft">
                 {featured.category} · {featured.readMinutes} min
               </p>
-              <h2 id="featured-note" className="mt-4 font-display text-3xl leading-[1.05] sm:text-5xl">
+              <h2 id="featured-note" className="mt-4 type-h2">
                 {featured.title}
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft">{featured.deck}</p>
@@ -204,7 +204,7 @@ export default function KnowledgeIndex({
           })}
         </div>
 
-        <h2 id="knowledge-notes" className="mt-12 font-mono-label text-[11px] text-ink-soft">
+        <h2 id="knowledge-notes" className="mt-12 font-mono-label text-ink-soft">
           {filter === "All" ? "All notes" : filter}
         </h2>
 
@@ -226,12 +226,12 @@ export default function KnowledgeIndex({
         className="border-t border-line bg-surface-dim px-[var(--page-pad)] py-24"
       >
         <div className="mx-auto max-w-[1440px]">
-          <p className="font-mono-label text-[11px] text-gold" data-knowledge-item>
+          <p className="font-mono-label text-gold" data-knowledge-item>
             Frameworks
           </p>
           <h2
             id="knowledge-frameworks"
-            className="mt-4 max-w-3xl font-display text-3xl leading-[1.05] sm:text-5xl"
+            className="mt-4 max-w-3xl type-h2"
             data-knowledge-item
           >
             Methods I actually use in the room.
@@ -247,26 +247,26 @@ export default function KnowledgeIndex({
                       data-cursor="Open"
                       className="grid gap-4 border-t border-line py-10 md:grid-cols-[80px_minmax(0,1fr)_200px]"
                     >
-                      <p className="font-mono-label text-[11px] text-gold">
+                      <p className="font-mono-label text-gold">
                         {String(index + 1).padStart(2, "0")}
                       </p>
                       <div>
-                        <h3 className="font-display text-2xl sm:text-3xl">{framework.title}</h3>
+                        <h3 className="type-h3">{framework.title}</h3>
                         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
                           {framework.deck}
                         </p>
                       </div>
-                      <p className="font-mono-label text-[11px] text-green md:self-end md:text-right">
+                      <p className="font-mono-label text-green md:self-end md:text-right">
                         Read in the note →
                       </p>
                     </Link>
                   ) : (
                     <div className="grid gap-4 border-t border-line py-10 md:grid-cols-[80px_minmax(0,1fr)]">
-                      <p className="font-mono-label text-[11px] text-gold">
+                      <p className="font-mono-label text-gold">
                         {String(index + 1).padStart(2, "0")}
                       </p>
                       <div>
-                        <h3 className="font-display text-2xl sm:text-3xl">{framework.title}</h3>
+                        <h3 className="type-h3">{framework.title}</h3>
                         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
                           {framework.deck}
                         </p>
@@ -284,12 +284,12 @@ export default function KnowledgeIndex({
         aria-labelledby="knowledge-os"
         className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-24"
       >
-        <p className="font-mono-label text-[11px] text-gold" data-knowledge-item>
+        <p className="font-mono-label text-gold" data-knowledge-item>
           Founder OS
         </p>
         <h2
           id="knowledge-os"
-          className="mt-4 max-w-3xl font-display text-3xl leading-[1.05] sm:text-5xl"
+          className="mt-4 max-w-3xl type-h2"
           data-knowledge-item
         >
           The notes sit inside the operating system.
@@ -303,10 +303,10 @@ export default function KnowledgeIndex({
                 className="grid gap-3 border-t border-line py-8 md:grid-cols-[minmax(0,1fr)_auto]"
               >
                 <div>
-                  <h3 className="font-display text-2xl">{link.label}</h3>
+                  <h3 className="type-h3">{link.label}</h3>
                   <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft">{link.note}</p>
                 </div>
-                <p className="font-mono-label text-[11px] text-green md:self-end">Open →</p>
+                <p className="font-mono-label text-green md:self-end">Open →</p>
               </Link>
             </li>
           ))}

@@ -56,27 +56,27 @@ export default function Hero() {
       <div className="relative mx-auto max-w-[1440px]">
         <p
           data-hero-copy
-          className="font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-tight text-navy"
+          className="type-lead text-navy"
         >
           Raghvendra Singh
         </p>
 
         <h1
           data-hero-headline
-          className="mt-6 max-w-4xl font-display text-[clamp(2.15rem,8vw,5.5rem)] leading-[1.08] text-navy sm:leading-[0.95]"
+          className="mt-6 max-w-4xl type-hero text-navy"
         >
-          I design products, systems,{" "}
+          I design products, systems and teams
           <br className="hidden sm:block" />
-          and teams that scale.
+          {" "}that turn complexity into clarity.
         </h1>
 
-        <p data-hero-copy className="mt-6 font-mono-label text-[11px] text-ink-soft">
+        <p data-hero-copy className="mt-6 font-mono-label text-ink-soft">
           Product Design Leader · Systems Thinker · AI Product Builder
         </p>
 
         <p
           data-hero-copy
-          className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg"
+          className="mt-5 max-w-xl type-lead text-ink-soft"
         >
           {site.experienceLine}. Product strategy, systems,
           AI products, design operations, and hands-on product building.

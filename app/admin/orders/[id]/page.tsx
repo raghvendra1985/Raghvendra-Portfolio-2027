@@ -18,10 +18,10 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
   const { data: emails } = await admin.from("email_events").select("*").eq("order_id", id);
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24 pt-32">
-      <Link href="/admin/orders" className="font-mono-label text-[11px] text-ink-soft">
+      <Link href="/admin/orders" className="font-mono-label text-ink-soft">
         ← Orders
       </Link>
-      <h1 className="mt-6 font-display text-4xl">Order</h1>
+      <h1 className="mt-6 type-h2">Order</h1>
       <dl className="mt-8 grid gap-4 text-sm">
         <Row label="Order ID" value={order.id} />
         <Row label="Status" value={order.status} />
@@ -31,7 +31,7 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
         <Row label="Razorpay payment" value={order.razorpay_payment_id ?? "—"} />
         <Row label="Paid at" value={order.paid_at ?? "—"} />
       </dl>
-      <h2 className="mt-12 font-display text-2xl">Items</h2>
+      <h2 className="mt-12 type-h3">Items</h2>
       <ul className="mt-4 space-y-2">
         {(items ?? []).map((item) => (
           <li key={item.id}>
@@ -39,7 +39,7 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
           </li>
         ))}
       </ul>
-      <h2 className="mt-12 font-display text-2xl">Payments</h2>
+      <h2 className="mt-12 type-h3">Payments</h2>
       <ul className="mt-4 space-y-2">
         {(payments ?? []).map((payment) => (
           <li key={payment.id}>
@@ -47,7 +47,7 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
           </li>
         ))}
       </ul>
-      <h2 className="mt-12 font-display text-2xl">Entitlements</h2>
+      <h2 className="mt-12 type-h3">Entitlements</h2>
       <ul className="mt-4 space-y-2">
         {(entitlements ?? []).map((row) => (
           <li key={row.id}>
@@ -55,7 +55,7 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
           </li>
         ))}
       </ul>
-      <h2 className="mt-12 font-display text-2xl">Email</h2>
+      <h2 className="mt-12 type-h3">Email</h2>
       <ul className="mt-4 space-y-2">
         {(emails ?? []).map((row) => (
           <li key={row.id}>
@@ -70,7 +70,7 @@ export default async function AdminOrderPage({ params }: { params: Promise<{ id:
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="grid gap-1 sm:grid-cols-[12rem_1fr]">
-      <dt className="font-mono-label text-[11px] text-ink-soft">{label}</dt>
+      <dt className="font-mono-label text-ink-soft">{label}</dt>
       <dd className="break-all">{value}</dd>
     </div>
   );

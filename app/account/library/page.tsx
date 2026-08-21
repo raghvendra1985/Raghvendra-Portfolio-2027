@@ -54,7 +54,7 @@ export default async function LibraryPage({
         ) : null}
         {items.length ? (
           <div className="grid gap-6">
-            <p className="font-mono-label text-[11px] text-ink-soft">YOUR PRODUCTS</p>
+            <p className="font-mono-label text-ink-soft">YOUR PRODUCTS</p>
             {items.map((item) => {
               const product = getProductById(item.productId);
               if (!product) return null;

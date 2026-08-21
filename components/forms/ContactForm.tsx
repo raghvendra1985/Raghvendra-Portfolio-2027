@@ -88,7 +88,7 @@ export default function ContactForm() {
     <form ref={rootRef} onSubmit={handleSubmit} className="space-y-5" noValidate>
       <div className="grid gap-4 sm:grid-cols-2">
         <div data-form-item>
-          <label htmlFor="name" className="font-mono-label text-[11px] text-ink-soft">
+          <label htmlFor="name" className="font-mono-label text-ink-soft">
             Name
           </label>
           <input
@@ -112,7 +112,7 @@ export default function ContactForm() {
           ) : null}
         </div>
         <div data-form-item>
-          <label htmlFor="email" className="font-mono-label text-[11px] text-ink-soft">
+          <label htmlFor="email" className="font-mono-label text-ink-soft">
             Email
           </label>
           <input
@@ -138,7 +138,7 @@ export default function ContactForm() {
         </div>
       </div>
       <div data-form-item>
-        <label htmlFor="company" className="font-mono-label text-[11px] text-ink-soft">
+        <label htmlFor="company" className="font-mono-label text-ink-soft">
           Company
         </label>
         <input
@@ -151,7 +151,7 @@ export default function ContactForm() {
         />
       </div>
       <div data-form-item>
-        <p id="intent-label" className="font-mono-label text-[11px] text-ink-soft">
+        <p id="intent-label" className="font-mono-label text-ink-soft">
           I’m reaching out about
         </p>
         <div
@@ -170,7 +170,7 @@ export default function ContactForm() {
                   setIntent(item.id);
                   track("contact_intent_selected", { intent: item.id });
                 }}
-                className={`min-h-11 max-w-full px-2 text-left font-mono-label text-[11px] ${
+                className={`min-h-11 max-w-full px-2 text-left font-mono-label ${
                   pressed
                     ? "text-navy underline decoration-gold decoration-2 underline-offset-8"
                     : "text-ink-soft hover:text-navy"
@@ -183,7 +183,7 @@ export default function ContactForm() {
         </div>
       </div>
       <div data-form-item>
-        <label htmlFor="message" className="font-mono-label text-[11px] text-ink-soft">
+        <label htmlFor="message" className="font-mono-label text-ink-soft">
           What would you like to discuss?
         </label>
         <textarea

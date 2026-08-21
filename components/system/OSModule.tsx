@@ -21,12 +21,12 @@ export default function OSModule({
       aria-current={current ? "true" : undefined}
       className="scroll-mt-28 border-t border-line py-20 sm:py-28"
     >
-      <p className="font-mono-label text-[11px] text-gold" data-os-item>
+      <p className="font-mono-label text-gold" data-os-item>
         {index}
       </p>
       <h2
         id={`os-${id}-heading`}
-        className="mt-4 max-w-3xl font-display text-3xl leading-[1.05] text-navy sm:text-5xl"
+        className="mt-4 max-w-3xl type-h2 text-navy"
         data-os-item
       >
         {title}

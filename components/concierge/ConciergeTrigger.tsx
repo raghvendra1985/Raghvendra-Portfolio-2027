@@ -86,7 +86,7 @@ export default function ConciergeTrigger({
       <TriggerButton
         variant="mobile-menu"
         source="mobile-menu"
-        className={`inline-flex min-h-11 items-center font-mono-label text-[11px] text-gold hover:text-mist ${className}`}
+        className={`inline-flex min-h-11 items-center font-mono-label text-gold hover:text-mist ${className}`}
       >
         Ask the portfolio →
       </TriggerButton>

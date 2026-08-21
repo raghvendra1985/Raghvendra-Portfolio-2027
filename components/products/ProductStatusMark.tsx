@@ -19,7 +19,7 @@ export default function ProductStatusMark({
   const live = status === "live";
   return (
     <p
-      className={`font-mono-label text-[11px] ${
+      className={`font-mono-label ${
         live
           ? inverted
             ? "text-gold"

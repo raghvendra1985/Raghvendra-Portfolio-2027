@@ -13,11 +13,11 @@ export default function KnowledgeLink({ item }: { item: KnowledgeLinkItem }) {
       data-cursor="Open"
       className="grid gap-3 border-t border-line py-8 md:grid-cols-[80px_1fr]"
     >
-      <p className="font-mono-label text-[11px] text-ink-soft">{article.index}</p>
+      <p className="font-mono-label text-ink-soft">{article.index}</p>
       <div>
-        <h3 className="font-display text-2xl">{article.title}</h3>
+        <h3 className="type-h3">{article.title}</h3>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">{item.note}</p>
-        <p className="mt-4 font-mono-label text-[11px] text-green">Read note →</p>
+        <p className="mt-4 font-mono-label text-green">Read note →</p>
       </div>
     </Link>
   );

@@ -310,7 +310,7 @@ export default function HangingCharm() {
           disabled={covered}
           aria-label="Previous charm"
           onClick={() => switchCharm(-1)}
-          className="flex h-7 w-7 items-center justify-center font-mono-label text-[11px] text-navy/50 hover:text-gold"
+          className="flex h-7 w-7 items-center justify-center font-mono-label text-navy/50 hover:text-gold"
         >
           ←
         </button>
@@ -320,7 +320,7 @@ export default function HangingCharm() {
           disabled={covered}
           aria-label="Next charm"
           onClick={() => switchCharm(1)}
-          className="flex h-7 w-7 items-center justify-center font-mono-label text-[11px] text-navy/50 hover:text-gold"
+          className="flex h-7 w-7 items-center justify-center font-mono-label text-navy/50 hover:text-gold"
         >
           →
         </button>

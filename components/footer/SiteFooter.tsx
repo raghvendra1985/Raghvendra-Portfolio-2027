@@ -23,7 +23,7 @@ export default function SiteFooter() {
       <div className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-20">
         <p
           data-footer-wordmark
-          className="font-display text-[clamp(3rem,12vw,9rem)] leading-[0.9] tracking-tight"
+          className="font-display text-[clamp(3rem,12vw,9rem)] leading-[0.9]"
         >
           Raghvendra
           <span className="text-gold">.</span>

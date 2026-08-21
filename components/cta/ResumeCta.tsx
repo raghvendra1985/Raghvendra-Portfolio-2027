@@ -54,7 +54,7 @@ export default function ResumeCta({
           data-cursor="View"
           className={
             className ??
-            "inline-flex min-h-11 items-center font-mono-label text-[11px] text-mist/80 hover:text-gold"
+            "inline-flex min-h-11 items-center font-mono-label text-mist/80 hover:text-gold"
           }
         >
           {label}
@@ -71,7 +71,7 @@ export default function ResumeCta({
         data-cursor="Open"
         className={
           className ??
-          "inline-flex min-h-11 items-center font-mono-label text-[11px] text-mist/80 hover:text-gold"
+          "inline-flex min-h-11 items-center font-mono-label text-mist/80 hover:text-gold"
         }
       >
         {label}

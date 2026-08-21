@@ -142,13 +142,13 @@ export default function CheckoutPanel({
         className="w-full max-w-md border border-navy bg-mist p-6 sm:p-8"
         aria-labelledby="checkout-title"
       >
-        <p className="font-mono-label text-[11px] text-ink-soft">Checkout</p>
-        <h2 id="checkout-title" className="mt-3 font-display text-3xl text-navy">
+        <p className="font-mono-label text-ink-soft">Checkout</p>
+        <h2 id="checkout-title" className="mt-3 type-h2 text-navy">
           {product.name}
         </h2>
-        <p className="mt-2 font-mono-label text-[11px] text-navy">{formatInr(product.price)} · one-time</p>
+        <p className="mt-2 font-mono-label text-navy">{formatInr(product.price)} · one-time</p>
         <div className="mt-6">
-          <label htmlFor="buy-name" className="font-mono-label text-[11px] text-ink-soft">
+          <label htmlFor="buy-name" className="font-mono-label text-ink-soft">
             Name
           </label>
           <input
@@ -160,7 +160,7 @@ export default function CheckoutPanel({
           />
         </div>
         <div className="mt-4">
-          <label htmlFor="buy-email" className="font-mono-label text-[11px] text-ink-soft">
+          <label htmlFor="buy-email" className="font-mono-label text-ink-soft">
             Email
           </label>
           <input
@@ -173,7 +173,7 @@ export default function CheckoutPanel({
           />
         </div>
         <div className="mt-4">
-          <label htmlFor="buy-phone" className="font-mono-label text-[11px] text-ink-soft">
+          <label htmlFor="buy-phone" className="font-mono-label text-ink-soft">
             Phone
           </label>
           <input
@@ -204,7 +204,7 @@ export default function CheckoutPanel({
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex min-h-11 items-center font-mono-label text-[11px] text-ink-soft hover:text-navy"
+            className="inline-flex min-h-11 items-center font-mono-label text-ink-soft hover:text-navy"
           >
             Cancel
           </button>

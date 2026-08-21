@@ -19,7 +19,7 @@ export default function ProductsIndex() {
         const featured = shelf === "featured";
         return (
           <section key={shelf} id={`shelf-${shelf}`} className="mt-16 scroll-mt-28">
-            <h2 className={`font-display leading-[1.08] text-navy ${featured ? "text-3xl sm:text-4xl" : "text-2xl"}`}>
+            <h2 className={`text-navy ${featured ? "type-h2" : "type-h3"}`}>
               {productShelfLabels[shelf]}
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft">{productShelfCopy[shelf]}</p>

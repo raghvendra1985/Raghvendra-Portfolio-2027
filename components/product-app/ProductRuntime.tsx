@@ -22,10 +22,10 @@ const field =
   "mt-2 min-h-12 w-full border border-navy/20 bg-mist px-4 py-3 text-base text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";
 
 const toolBtn =
-  "inline-flex min-h-11 items-center border border-navy px-4 font-mono-label text-[11px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";
+  "inline-flex min-h-11 items-center border border-navy px-4 font-mono-label focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";
 
 const toolLinkBtn =
-  "inline-flex min-h-11 items-center font-mono-label text-[11px] hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";
+  "inline-flex min-h-11 items-center font-mono-label hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";
 
 function formatClock(total: number) {
   const minutes = Math.floor(total / 60);
@@ -72,7 +72,7 @@ function DesignDareApp() {
     <div className="mt-10 grid gap-6 lg:grid-cols-2">
       <InputPanel title="Dare">
         <ProgressIndicator current={index + 1} total={dares.length} label="Card" />
-        <p className="mt-4 font-display text-3xl">{dare.title}</p>
+        <p className="mt-4 type-h2">{dare.title}</p>
         <p className="mt-3 text-sm text-ink-soft">{dare.constraint}</p>
         <p className="mt-4 text-base leading-relaxed">{dare.make}</p>
         <button type="button" className={`mt-6 ${toolLinkBtn}`} onClick={() => setIndex((value) => value + 1)}>
@@ -82,7 +82,7 @@ function DesignDareApp() {
       <OutputPanel title="Defence — five lines">
         {defenceLines.map((line) => (
           <label key={line} className="mt-4 block">
-            <span className="font-mono-label text-[11px] text-mist/50">{line}</span>
+            <span className="font-mono-label text-mist/50">{line}</span>
             <textarea
               className="mt-2 min-h-16 w-full border border-mist/20 bg-navy px-3 py-2 text-mist"
               value={defence[line]}
@@ -125,8 +125,8 @@ function SpinnerApp({
         </button>
       </InputPanel>
       <OutputPanel title="Your draw">
-        <p className="font-display text-2xl leading-snug">{line}</p>
-        <p className="mt-6 font-mono-label text-[11px] text-mist/50">Ten minutes. Pencil. Start.</p>
+        <p className="type-h3">{line}</p>
+        <p className="mt-6 font-mono-label text-mist/50">Ten minutes. Pencil. Start.</p>
       </OutputPanel>
     </div>
   );
@@ -141,8 +141,8 @@ function JuryApp() {
     <div className="mt-10 grid gap-6 lg:grid-cols-2">
       <InputPanel title="Rehearsal">
         <ProgressIndicator current={index + 1} total={juryQuestions.length} label="Question" />
-        <p className="mt-6 font-display text-3xl leading-snug">{question.prompt}</p>
-        <p className="mt-4 font-mono-label text-[11px] text-ink-soft" aria-live="polite">
+        <p className="mt-6 type-h2">{question.prompt}</p>
+        <p className="mt-4 font-mono-label text-ink-soft" aria-live="polite">
           {left === 0 ? "Time. Finish the sentence, then reveal." : `${formatClock(left ?? 90)} · answer out loud`}
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
@@ -279,9 +279,9 @@ function GymApp() {
       <OutputPanel title="Set">
         {active ? (
           <>
-            <p className="font-display text-2xl">{active.title}</p>
+            <p className="type-h3">{active.title}</p>
             <p className="mt-4 text-lg leading-relaxed">{active.brief}</p>
-            <p className="mt-6 font-mono-label text-[11px] text-gold" aria-live="polite">
+            <p className="mt-6 font-mono-label text-gold" aria-live="polite">
               {left === 0 ? "The set is over. Quantity is the score." : `${formatClock(left ?? 0)} · you cannot pause`}
             </p>
           </>
@@ -299,7 +299,7 @@ function DetectiveApp() {
   return (
     <div className="mt-10 grid gap-6 lg:grid-cols-2">
       <InputPanel title="Case file">
-        <p className="font-display text-3xl">{file.place}</p>
+        <p className="type-h2">{file.place}</p>
         <p className="mt-4 text-sm text-ink-soft">Artefact: {file.artefact}</p>
         <p className="mt-4 leading-relaxed">{file.friction}</p>
         <button
@@ -393,7 +393,7 @@ function CritApp() {
   return (
     <div className="mt-10">
       <OutputPanel title="One card">
-        <p className="font-display text-3xl leading-snug">{critCards[index]}</p>
+        <p className="type-h2">{critCards[index]}</p>
         <button
           type="button"
           className={`mt-8 ${toolLinkBtn} text-gold`}
@@ -422,7 +422,7 @@ function PromptsApp() {
       <ol className="mt-8 space-y-4">
         {list.map((item) => (
           <li key={item.n} className="border-b border-line pb-4">
-            <span className="font-mono-label text-[11px] text-green">{String(item.n).padStart(3, "0")}</span>
+            <span className="font-mono-label text-green">{String(item.n).padStart(3, "0")}</span>
             <p className="mt-2 text-base leading-relaxed">{item.prompt}</p>
           </li>
         ))}

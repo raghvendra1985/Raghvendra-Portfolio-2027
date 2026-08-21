@@ -88,7 +88,7 @@ export default function CharmPicker({
       {GROUPS.map((group) => (
         <div key={group.set}>
           <p
-            className={`font-mono-label text-[11px] uppercase tracking-[0.14em] ${
+            className={`font-mono-label uppercase tracking-[0.14em] ${
               onMist ? "text-ink-soft" : "text-mist/70"
             }`}
           >
@@ -207,7 +207,7 @@ export default function CharmPicker({
       <button
         type="button"
         onClick={toggleHidden}
-        className={`inline-flex min-h-11 items-center font-mono-label text-[11px] ${
+        className={`inline-flex min-h-11 items-center font-mono-label ${
           onMist ? "text-ink-soft hover:text-navy" : "text-mist/80 hover:text-gold"
         }`}
       >
@@ -215,7 +215,7 @@ export default function CharmPicker({
       </button>
       {credit ? (
         <p
-          className={`font-mono-label text-[11px] ${
+          className={`font-mono-label ${
             onMist ? "text-ink-soft/80" : "text-mist/50"
           }`}
         >

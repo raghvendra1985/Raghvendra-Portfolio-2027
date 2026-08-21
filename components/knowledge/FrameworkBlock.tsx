@@ -14,10 +14,10 @@ export default function FrameworkBlock({
       aria-labelledby={`framework-${framework.id}`}
       className={`scroll-mt-28 ${compact ? "" : "border-t border-line pt-12"}`}
     >
-      <p className="font-mono-label text-[11px] text-gold">Framework</p>
+      <p className="font-mono-label text-gold">Framework</p>
       <h2
         id={`framework-${framework.id}`}
-        className={`mt-3 font-display leading-[1.05] ${compact ? "text-2xl sm:text-3xl" : "text-3xl sm:text-4xl"}`}
+        className={`mt-3 ${compact ? "type-h3" : "type-h2"}`}
       >
         {framework.title}
       </h2>
@@ -29,9 +29,9 @@ export default function FrameworkBlock({
             data-framework-step
             className="grid gap-3 border-t border-line pt-5 md:grid-cols-[72px_minmax(0,1fr)]"
           >
-            <span className="font-mono-label text-[11px] text-gold">{step.index}</span>
+            <span className="font-mono-label text-gold">{step.index}</span>
             <div>
-              <h3 className="font-display text-xl sm:text-2xl">{step.title}</h3>
+              <h3 className="type-h3">{step.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-ink-soft sm:text-base">{step.body}</p>
             </div>
           </li>

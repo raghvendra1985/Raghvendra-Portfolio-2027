@@ -10,13 +10,13 @@ export default function ProductFilters() {
         {productShelfOrder.map((shelf, index) => (
           <span key={shelf} className="inline-flex shrink-0 items-center">
             {index > 0 ? (
-              <span className="px-1 font-mono-label text-[11px] text-ink-soft/40" aria-hidden="true">
+              <span className="px-1 font-mono-label text-ink-soft/40" aria-hidden="true">
                 ·
               </span>
             ) : null}
             <a
               href={`#shelf-${shelf}`}
-              className="inline-flex min-h-11 items-center px-2 font-mono-label text-[11px] text-ink-soft hover:text-navy"
+              className="inline-flex min-h-11 items-center px-2 font-mono-label text-ink-soft hover:text-navy"
             >
               {productShelfLabels[shelf]}
             </a>

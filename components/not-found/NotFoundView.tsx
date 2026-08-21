@@ -31,12 +31,12 @@ export default function NotFoundView() {
 
   return (
     <section ref={rootRef} className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-40">
-      <p data-hero-copy className="font-mono-label text-[11px] text-ink-soft">
+      <p data-hero-copy className="font-mono-label text-ink-soft">
         404
       </p>
       <h1
         data-hero-headline
-        className="mt-6 font-display text-5xl leading-[1.05] text-navy"
+        className="mt-6 type-h1 text-navy"
       >
         This page is not in the system.
       </h1>

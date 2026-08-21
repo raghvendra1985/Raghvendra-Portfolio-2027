@@ -65,15 +65,15 @@ export default function ArticleView({
   return (
     <article ref={rootRef}>
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-10 pt-32 sm:pt-40">
-        <Link href="/knowledge" className="font-mono-label text-[11px] text-ink-soft">
+        <Link href="/knowledge" className="font-mono-label text-ink-soft">
           ← Knowledge
         </Link>
-        <p data-hero-copy className="mt-8 font-mono-label text-[11px] text-gold">
+        <p data-hero-copy className="mt-8 font-mono-label text-gold">
           {article.category} · {article.readMinutes} min read
         </p>
         <h1
           data-hero-headline
-          className="mt-6 max-w-5xl font-display text-[clamp(2.2rem,5.5vw,4.8rem)] leading-[1.02]"
+          className="mt-6 max-w-5xl type-h1"
         >
           {article.title}
         </h1>
@@ -111,15 +111,15 @@ export default function ArticleView({
                 data-article-block
                 className="scroll-mt-28"
               >
-                <p className="font-mono-label text-[11px] text-green">{section.kicker}</p>
-                <h2 className="mt-3 font-display text-2xl sm:text-3xl">{section.title}</h2>
+                <p className="font-mono-label text-green">{section.kicker}</p>
+                <h2 className="mt-3 type-h3">{section.title}</h2>
                 {section.paragraphs.map((paragraph) => (
                   <p key={paragraph} className="mt-4 text-base leading-relaxed text-navy/85">
                     {paragraph}
                   </p>
                 ))}
                 {section.pullquote ? (
-                  <blockquote className="mt-8 border-l-2 border-gold pl-6 font-display text-2xl leading-snug sm:text-3xl">
+                  <blockquote className="mt-8 border-l-2 border-gold pl-6 type-h3">
                     {section.pullquote}
                   </blockquote>
                 ) : null}
@@ -170,13 +170,13 @@ export default function ArticleView({
             data-cursor="Open"
             className="block"
           >
-            <p className="font-mono-label text-[11px] text-ink-soft">Previous</p>
-            <p className="mt-3 max-w-md font-display text-2xl">{previous.title}</p>
+            <p className="font-mono-label text-ink-soft">Previous</p>
+            <p className="mt-3 max-w-md type-h3">{previous.title}</p>
           </Link>
           <div data-related-item className="sm:text-right">
             <Link href={`/knowledge/${next.slug}`} data-cursor="Open" className="block">
-              <p className="font-mono-label text-[11px] text-ink-soft">Next</p>
-              <p className="mt-3 max-w-md font-display text-2xl sm:ml-auto">{next.title}</p>
+              <p className="font-mono-label text-ink-soft">Next</p>
+              <p className="mt-3 max-w-md type-h3 sm:ml-auto">{next.title}</p>
             </Link>
             <div className="mt-6 sm:flex sm:justify-end">
               <MagneticButton href={`/knowledge/${next.slug}`} cursor="Next">

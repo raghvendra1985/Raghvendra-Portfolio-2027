@@ -39,14 +39,14 @@ export default function CaseStudyView({
   return (
     <div ref={rootRef}>
       <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-12 pt-32 sm:pt-40">
-        <Link href="/work" className="font-mono-label text-[11px] text-ink-soft">
+        <Link href="/work" className="font-mono-label text-ink-soft">
           ← All selected work
         </Link>
-        <p className="mt-8 font-mono-label text-[11px] text-gold">
+        <p className="mt-8 font-mono-label text-gold">
           {study.category}
         </p>
-        <p className="mt-3 font-mono-label text-[11px] text-ink-soft">{study.client}</p>
-        <h1 className="mt-6 max-w-4xl font-display text-4xl leading-[1.05] sm:text-6xl">
+        <p className="mt-3 font-mono-label text-ink-soft">{study.client}</p>
+        <h1 className="mt-6 max-w-4xl type-h1">
           {study.title}
         </h1>
         {liveLinks.length ? (
@@ -68,15 +68,15 @@ export default function CaseStudyView({
           className="mt-10 grid gap-6 border-t border-line pt-6 sm:grid-cols-3"
         >
           <div>
-            <dt className="font-mono-label text-[11px] text-ink-soft">Role</dt>
+            <dt className="font-mono-label text-ink-soft">Role</dt>
             <dd className="mt-2 text-sm">{study.role}</dd>
           </div>
           <div>
-            <dt className="font-mono-label text-[11px] text-ink-soft">Timeline</dt>
+            <dt className="font-mono-label text-ink-soft">Timeline</dt>
             <dd className="mt-2 text-sm">{study.timeline}</dd>
           </div>
           <div>
-            <dt className="font-mono-label text-[11px] text-ink-soft">Engagement</dt>
+            <dt className="font-mono-label text-ink-soft">Engagement</dt>
             <dd className="mt-2 text-sm">{study.engagement}</dd>
           </div>
         </dl>
@@ -96,14 +96,14 @@ export default function CaseStudyView({
 
       <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-20">
         <article data-case-chapter className="max-w-3xl">
-          <p className="font-mono-label text-[11px] text-green">Company / product context</p>
+          <p className="font-mono-label text-green">Company / product context</p>
           <p className="mt-4 text-lg leading-relaxed">{study.challenge}</p>
         </article>
       </section>
 
       {steps.length ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-          <p className="font-mono-label text-[11px] text-green" data-case-chapter>
+          <p className="font-mono-label text-green" data-case-chapter>
             What I did
           </p>
           <ol className="mt-8 space-y-8">
@@ -113,7 +113,7 @@ export default function CaseStudyView({
                 data-case-step
                 className="grid gap-4 border-t border-line pt-6 md:grid-cols-[80px_minmax(0,720px)]"
               >
-                <span className="font-mono-label text-[11px] text-gold">
+                <span className="font-mono-label text-gold">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <p className="text-base leading-relaxed sm:text-lg">{step}</p>
@@ -125,7 +125,7 @@ export default function CaseStudyView({
 
       {outcomes.length ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-          <p className="font-mono-label text-[11px] text-green" data-case-chapter>
+          <p className="font-mono-label text-green" data-case-chapter>
             Outcome
           </p>
           <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -135,7 +135,7 @@ export default function CaseStudyView({
                 data-case-chapter
                 className="border-t-2 border-navy pt-4"
               >
-                <h2 className="font-display text-xl">{outcome.title}</h2>
+                <h2 className="type-h3">{outcome.title}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-ink-soft">{outcome.body}</p>
               </article>
             ))}
@@ -149,7 +149,7 @@ export default function CaseStudyView({
 
       {gallery.length ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-          <p className="font-mono-label text-[11px] text-ink-soft" data-case-chapter>
+          <p className="font-mono-label text-ink-soft" data-case-chapter>
             Frames
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
@@ -180,8 +180,8 @@ export default function CaseStudyView({
       >
         <div className="mx-auto flex max-w-[1440px] flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="font-mono-label text-[11px] text-ink-soft">Have a similar challenge?</p>
-            <h2 className="mt-3 max-w-lg font-display text-3xl sm:text-4xl">
+            <p className="font-mono-label text-ink-soft">Have a similar challenge?</p>
+            <h2 className="mt-3 max-w-lg type-h2">
               Start a conversation.
             </h2>
           </div>
@@ -192,7 +192,7 @@ export default function CaseStudyView({
             </MagneticButton>
           </div>
         </div>
-        <p className="mx-auto mt-8 max-w-[1440px] font-mono-label text-[11px] text-ink-soft">
+        <p className="mx-auto mt-8 max-w-[1440px] font-mono-label text-ink-soft">
           Next — {next.client}: {next.title}
         </p>
       </section>

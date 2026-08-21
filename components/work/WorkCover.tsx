@@ -23,10 +23,10 @@ export default function WorkCover({
         className="cover-grid pointer-events-none absolute inset-0 opacity-20"
         aria-hidden="true"
       />
-      <p className="font-mono-label text-[11px] opacity-70">{study.index}</p>
+      <p className="font-mono-label opacity-70">{study.index}</p>
       <div>
-        <p className="font-display text-4xl leading-none sm:text-6xl">{study.client}</p>
-        <p className="mt-3 font-mono-label text-[11px] opacity-70">{study.industry}</p>
+        <p className="type-h2">{study.client}</p>
+        <p className="mt-3 font-mono-label opacity-70">{study.industry}</p>
       </div>
     </div>
   );

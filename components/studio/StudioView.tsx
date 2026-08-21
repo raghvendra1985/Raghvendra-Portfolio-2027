@@ -64,7 +64,7 @@ function ResourceMedia({
       }
       aria-hidden="true"
     >
-      <p className="font-mono-label text-[11px] text-mist">{item.shelf}</p>
+      <p className="font-mono-label text-mist">{item.shelf}</p>
     </div>
   );
 
@@ -146,8 +146,8 @@ function ResourceCard({
   const meta = `${item.shelf} · ${item.topic}${item.current ? " · Currently reading" : ""}`;
   const copy = (
     <div className={layout === "grid" ? "mt-4 min-w-0" : "min-w-0 flex-1"}>
-      <p className="font-mono-label text-[11px] text-gold">{meta}</p>
-      <h3 className="mt-3 font-display text-xl sm:text-2xl">{item.title}</h3>
+      <p className="font-mono-label text-gold">{meta}</p>
+      <h3 className="mt-3 type-h3">{item.title}</h3>
       <p className="mt-1 text-sm text-green">{item.creator}</p>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">{item.note}</p>
       <ResourceActions
@@ -259,7 +259,7 @@ export default function StudioView() {
       />
 
       <SectionReveal className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-        <p className="font-mono-label text-[11px] text-ink-soft" data-reveal-item>
+        <p className="font-mono-label text-ink-soft" data-reveal-item>
           A week
         </p>
         <p
@@ -275,14 +275,14 @@ export default function StudioView() {
         className="scroll-mt-28 border-t border-line px-[var(--page-pad)] py-24"
       >
         <div className="mx-auto max-w-[1440px]">
-          <h2 className="font-display text-3xl sm:text-4xl" data-reveal-item>
+          <h2 className="type-h2" data-reveal-item>
             Library
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink-soft" data-reveal-item>
             A working shelf — books, essays, podcasts, and a few objects that changed how I work
             or live. Replace as the shelf changes.
           </p>
-          <p className="mt-3 max-w-xl font-mono-label text-[11px] text-ink-soft" data-reveal-item>
+          <p className="mt-3 max-w-xl font-mono-label text-ink-soft" data-reveal-item>
             Book links to Amazon are affiliate links. I earn from qualifying purchases.
           </p>
 
@@ -367,7 +367,7 @@ export default function StudioView() {
         className="scroll-mt-28 border-t border-line bg-surface-dim px-[var(--page-pad)] py-24"
       >
         <div className="mx-auto max-w-[1440px]">
-          <h2 className="font-display text-3xl sm:text-4xl" data-reveal-item>
+          <h2 className="type-h2" data-reveal-item>
             {habitat.title}
           </h2>
           <p
@@ -386,14 +386,14 @@ export default function StudioView() {
           <ul className="mt-12 grid gap-8 sm:grid-cols-2">
             {habitat.companions.map((companion) => (
               <li key={companion.kind} data-reveal-item className="border-t-2 border-navy pt-4">
-                <p className="font-mono-label text-[11px] text-green">{companion.kind}</p>
+                <p className="font-mono-label text-green">{companion.kind}</p>
                 <p className="mt-3 text-sm leading-relaxed text-navy">{companion.line}</p>
               </li>
             ))}
           </ul>
 
           <div className="mt-12" data-reveal-item>
-            <p className="font-mono-label text-[11px] text-ink-soft">Garden</p>
+            <p className="font-mono-label text-ink-soft">Garden</p>
             <ul className="mt-4 max-w-xl space-y-2 text-sm leading-relaxed text-ink-soft">
               {habitat.plants.map((plant) => (
                 <li key={plant}>{plant}</li>
@@ -412,7 +412,7 @@ export default function StudioView() {
         id="motion"
         className="scroll-mt-28 mx-auto max-w-[1440px] px-[var(--page-pad)] py-24"
       >
-        <h2 className="font-display text-3xl sm:text-4xl" data-reveal-item>
+        <h2 className="type-h2" data-reveal-item>
           {motion.title}
         </h2>
         <p
@@ -432,7 +432,7 @@ export default function StudioView() {
         className="scroll-mt-28 border-t border-line px-[var(--page-pad)] py-24"
       >
         <div className="mx-auto max-w-[1440px]">
-          <h2 className="font-display text-3xl sm:text-4xl" data-reveal-item>
+          <h2 className="type-h2" data-reveal-item>
             Objects
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink-soft" data-reveal-item>
@@ -446,7 +446,7 @@ export default function StudioView() {
                 className="grid gap-4 border-t border-line py-8 md:grid-cols-[200px_1fr]"
               >
                 <div>
-                  <p className="font-mono-label text-[11px] text-ink-soft">{object.use}</p>
+                  <p className="font-mono-label text-ink-soft">{object.use}</p>
                   {object.image ? (
                     <ImageReveal
                       src={object.image}
@@ -458,7 +458,7 @@ export default function StudioView() {
                   ) : null}
                 </div>
                 <div>
-                  <h3 className="font-display text-2xl">{object.name}</h3>
+                  <h3 className="type-h3">{object.name}</h3>
                   <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
                     {object.note}
                   </p>
@@ -472,8 +472,8 @@ export default function StudioView() {
       <SectionReveal className="border-t border-line bg-surface-dim px-[var(--page-pad)] py-24">
         <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-8 sm:flex-row sm:items-end">
           <div data-reveal-item>
-            <p className="font-mono-label text-[11px] text-ink-soft">{teaching.title}</p>
-            <h2 className="mt-3 max-w-lg font-display text-2xl sm:text-3xl">{teaching.body}</h2>
+            <p className="font-mono-label text-ink-soft">{teaching.title}</p>
+            <h2 className="mt-3 max-w-lg type-h3">{teaching.body}</h2>
           </div>
           <div data-reveal-item>
             <Link
@@ -493,8 +493,8 @@ export default function StudioView() {
           className="flex flex-col items-start justify-between gap-8 border border-line p-6 sm:flex-row sm:items-end sm:p-10"
         >
           <div>
-            <p className="font-mono-label text-[11px] text-ink-soft">Work with Singh</p>
-            <h2 className="mt-3 max-w-lg font-display text-2xl sm:text-3xl">
+            <p className="font-mono-label text-ink-soft">Work with Singh</p>
+            <h2 className="mt-3 max-w-lg type-h3">
               The studio is personal. The work is still available.
             </h2>
           </div>

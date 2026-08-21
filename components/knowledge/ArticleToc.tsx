@@ -48,7 +48,7 @@ export default function ArticleToc({
         aria-label="On this page"
       >
         <details>
-          <summary className="cursor-pointer font-mono-label text-[11px] text-ink-soft">
+          <summary className="cursor-pointer font-mono-label text-ink-soft">
             <span className="text-gold">{current?.kicker}</span>
             <span> / {current?.title}</span>
           </summary>
@@ -62,7 +62,7 @@ export default function ArticleToc({
 
   return (
     <nav data-article-toc aria-label="On this page" className="sticky top-28">
-      <p className="font-mono-label text-[11px] text-ink-soft">Inside</p>
+      <p className="font-mono-label text-ink-soft">Inside</p>
       <div className="mt-4">
         <TocLinks sections={sections} activeId={activeId} />
       </div>

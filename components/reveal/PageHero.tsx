@@ -43,18 +43,18 @@ export default function PageHero({
       ref={rootRef}
       className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-16 pt-32 sm:pt-40"
     >
-      <p data-hero-copy className="font-mono-label text-[11px] text-ink-soft">
+      <p data-hero-copy className="font-mono-label text-ink-soft">
         {index} / {label}
       </p>
       <h1
         data-hero-headline
-        className="mt-6 max-w-4xl font-display text-[clamp(2rem,7vw,3.75rem)] leading-[1.12] text-navy lg:text-6xl lg:leading-[1.05]"
+        className="mt-6 max-w-4xl type-h1 text-navy"
       >
         {title}
       </h1>
       <p
         data-hero-copy
-        className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg"
+        className="mt-6 max-w-xl type-lead text-ink-soft"
       >
         {description}
       </p>

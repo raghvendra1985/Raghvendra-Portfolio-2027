@@ -39,8 +39,8 @@ export default function PurchaseSuccessView() {
 
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24 pt-32 sm:pt-40">
-      <p className="font-mono-label text-[11px] text-ink-soft">Purchase</p>
-      <h1 className="mt-6 max-w-3xl font-display text-[clamp(2rem,7vw,3.75rem)] leading-[1.12] text-navy">
+      <p className="font-mono-label text-ink-soft">Purchase</p>
+      <h1 className="mt-6 max-w-3xl type-h1 text-navy">
         {ready ? "Payment received." : "Payment is being confirmed."}
       </h1>
       <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">

@@ -18,8 +18,8 @@ export default function Error({
 
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-40">
-      <p className="font-mono-label text-[11px] text-ink-soft">Error</p>
-      <h1 className="mt-6 font-display text-5xl leading-[1.05] text-navy">
+      <p className="font-mono-label text-ink-soft">Error</p>
+      <h1 className="mt-6 type-h1 text-navy">
         Something went wrong.
       </h1>
       <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">

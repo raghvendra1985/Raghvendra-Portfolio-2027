@@ -19,7 +19,7 @@ export default function SaveState({
     }
   }, [storageKey, value]);
   if (!saved) return null;
-  return <p className="font-mono-label text-[11px] text-ink-soft">Saved on this device.</p>;
+  return <p className="font-mono-label text-ink-soft">Saved on this device.</p>;
 }
 
 export function readSavedState<T>(storageKey: string, fallback: T): T {

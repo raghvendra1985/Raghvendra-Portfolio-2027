@@ -49,7 +49,7 @@ export default function Loader() {
       <div className="flex flex-col items-center gap-6">
         <p
           data-loader-wordmark
-          className="font-display text-4xl tracking-tight sm:text-5xl"
+          className="type-h1"
         >
           Raghvendra Singh
         </p>
@@ -58,7 +58,7 @@ export default function Loader() {
           className="h-px w-40 origin-left bg-gold"
           aria-hidden="true"
         />
-        <span className="font-mono-label text-[11px] text-mist/50">
+        <span className="font-mono-label text-mist/50">
           Portfolio V8
         </span>
       </div>

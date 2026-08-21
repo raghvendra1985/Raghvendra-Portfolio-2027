@@ -40,7 +40,7 @@ export default function AboutPage() {
           />
         </div>
         <div data-reveal-item className="max-w-xl">
-          <p className="font-display text-2xl leading-snug text-navy sm:text-3xl">
+          <p className="type-h3 text-navy">
             Product Design Leader · Systems Thinker · AI Product Builder
           </p>
         </div>
@@ -49,23 +49,23 @@ export default function AboutPage() {
       <SectionReveal className="mx-auto grid max-w-[1440px] gap-8 px-[var(--page-pad)] pb-20 md:grid-cols-3">
         {aboutPage.stats.map((stat) => (
           <div key={stat.label} data-reveal-item className="border-t border-navy pt-4">
-            <p className="font-display text-4xl">{stat.value}</p>
-            <p className="mt-2 font-mono-label text-[11px] text-ink-soft">{stat.label}</p>
+            <p className="type-h2">{stat.value}</p>
+            <p className="mt-2 font-mono-label text-ink-soft">{stat.label}</p>
           </div>
         ))}
       </SectionReveal>
 
       <SectionReveal className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-        <h2 className="font-display text-3xl sm:text-4xl" data-reveal-item>
+        <h2 className="type-h2" data-reveal-item>
           How the work is organised.
         </h2>
         <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {aboutPage.chapters.map((chapter, index) => (
             <li key={chapter.title} data-reveal-item className="border-t border-navy pt-4">
-              <p className="font-mono-label text-[11px] text-green">
+              <p className="font-mono-label text-green">
                 {String(index + 1).padStart(2, "0")}
               </p>
-              <h3 className="mt-3 font-display text-xl">{chapter.title}</h3>
+              <h3 className="mt-3 type-h3">{chapter.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-ink-soft">{chapter.body}</p>
             </li>
           ))}
@@ -77,14 +77,14 @@ export default function AboutPage() {
         className="scroll-mt-28 border-t border-line bg-surface-dim px-[var(--page-pad)] py-24"
       >
         <div className="mx-auto max-w-[1440px]">
-          <h2 className="font-display text-3xl sm:text-4xl" data-reveal-item>
+          <h2 className="type-h2" data-reveal-item>
             What I believe
           </h2>
           <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {aboutPage.beliefs.map((belief) => (
               <article key={belief.index} data-reveal-item className="border-t-2 border-navy pt-4">
-                <p className="font-mono-label text-[11px] text-green">{belief.index}</p>
-                <h3 className="mt-3 font-display text-xl">{belief.title}</h3>
+                <p className="font-mono-label text-green">{belief.index}</p>
+                <h3 className="mt-3 type-h3">{belief.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink-soft">
                   {belief.description}
                 </p>
@@ -98,7 +98,7 @@ export default function AboutPage() {
         id="experience"
         className="scroll-mt-28 mx-auto max-w-[1440px] px-[var(--page-pad)] py-24"
       >
-        <h2 className="font-display text-3xl sm:text-4xl" data-reveal-item>
+        <h2 className="type-h2" data-reveal-item>
           Five chapters. One direction.
         </h2>
         <ol className="mt-12">
@@ -109,9 +109,9 @@ export default function AboutPage() {
               data-reveal-item
               className="scroll-mt-28 grid gap-4 border-t border-line py-8 md:grid-cols-[200px_1fr]"
             >
-              <p className="font-mono-label text-[11px] text-ink-soft">{era.range}</p>
+              <p className="font-mono-label text-ink-soft">{era.range}</p>
               <div>
-                <h3 className="font-display text-2xl">{era.role}</h3>
+                <h3 className="type-h3">{era.role}</h3>
                 <p className="mt-1 text-sm text-green">{era.org}</p>
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
                   {era.description}
@@ -127,18 +127,18 @@ export default function AboutPage() {
         className="scroll-mt-28 border-t border-line bg-surface-dim px-[var(--page-pad)] py-24"
       >
         <div className="mx-auto max-w-[1440px]">
-          <p className="font-mono-label text-[11px] text-ink-soft" data-reveal-item>
+          <p className="font-mono-label text-ink-soft" data-reveal-item>
             Also
           </p>
           <p
             data-reveal-item
-            className="mt-4 max-w-2xl font-display text-2xl leading-snug sm:text-3xl"
+            className="mt-4 max-w-2xl type-h3"
           >
             {aboutPage.glimpse.body}
           </p>
           <p
             data-reveal-item
-            className="mt-8 font-mono-label text-[11px] text-green"
+            className="mt-8 font-mono-label text-green"
           >
             {aboutPage.glimpse.beats.join(" · ")}
           </p>
@@ -156,8 +156,8 @@ export default function AboutPage() {
           className="flex flex-col items-start justify-between gap-8 border border-line p-6 sm:flex-row sm:items-end sm:p-10"
         >
           <div>
-            <p className="font-mono-label text-[11px] text-ink-soft">Hiring &amp; work</p>
-            <h2 className="mt-3 max-w-lg font-display text-2xl sm:text-3xl">
+            <p className="font-mono-label text-ink-soft">Hiring &amp; work</p>
+            <h2 className="mt-3 max-w-lg type-h3">
               Product design leadership, with evidence attached.
             </h2>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-ink-soft">

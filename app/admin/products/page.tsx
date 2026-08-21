@@ -9,10 +9,10 @@ export default function AdminProductsPage() {
   const matrix = productMatrix();
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24 pt-32">
-      <Link href="/admin" className="font-mono-label text-[11px] text-ink-soft">
+      <Link href="/admin" className="font-mono-label text-ink-soft">
         ← Admin
       </Link>
-      <h1 className="mt-6 font-display text-4xl">Products</h1>
+      <h1 className="mt-6 type-h2">Products</h1>
       <p className="mt-4 max-w-xl text-sm text-ink-soft">
         Catalogue status is what customers see. Release readiness is internal. Do not flip coming-soon to live until readiness is qa-ready or live, and never because content merely exists.
       </p>
@@ -22,7 +22,7 @@ export default function AdminProductsPage() {
           const blockers = liveSwitchBlockers(product.slug);
           return (
             <li key={product.id} className="grid gap-2 py-4 lg:grid-cols-[8rem_1fr_9rem_8rem_6rem]">
-              <span className="font-mono-label text-[11px]">{product.number}</span>
+              <span className="font-mono-label">{product.number}</span>
               <span>
                 {product.name} · {product.deliveryType}
                 {row?.releaseReadiness === "content-blocked" ? (

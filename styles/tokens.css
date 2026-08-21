@@ -25,6 +25,24 @@
   --nav-height-compact: 64px;
   --page-pad: clamp(1.5rem, 4.5vw, 4.5rem);
   --max-width: 1440px;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+
+  --text-caption: 0.8125rem;
+  --text-small: 0.875rem;
+  --text-body: clamp(1rem, 0.98rem + 0.08vw, 1.0625rem);
+  --text-lead: clamp(1.125rem, 1.08rem + 0.18vw, 1.25rem);
+  --text-h3: clamp(1.5rem, 1.35rem + 0.6vw, 2rem);
+  --text-h2: clamp(1.875rem, 1.65rem + 0.7vw, 2.5rem);
+  --text-h1: clamp(2.5rem, 2.1rem + 1.6vw, 3.5rem);
+  --text-hero: clamp(2.75rem, 2.2rem + 2.2vw, 4rem);
+
+  --tracking-hero: -0.025em;
+  --tracking-h1: -0.025em;
+  --tracking-h2: -0.02em;
+  --tracking-h3: -0.01em;
+  --tracking-label: 0.04em;
 }
 
 @media (max-width: 1023px) {

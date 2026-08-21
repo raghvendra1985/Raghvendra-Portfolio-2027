@@ -9,11 +9,11 @@ function Column({
 }) {
   return (
     <div data-os-item>
-      <p className="font-mono-label text-[11px] text-gold">{label}</p>
+      <p className="font-mono-label text-gold">{label}</p>
       <ul className="mt-6 space-y-8">
         {items.map((item) => (
           <li key={item.title} className="border-t border-line pt-4">
-            <h3 className="font-display text-xl">{item.title}</h3>
+            <h3 className="type-h3">{item.title}</h3>
             <p className="mt-3 text-sm leading-relaxed text-ink-soft">{item.body}</p>
           </li>
         ))}

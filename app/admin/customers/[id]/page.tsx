@@ -19,10 +19,10 @@ export default async function AdminCustomerPage({ params }: { params: Promise<{ 
   const first = orders?.[orders.length - 1]?.created_at;
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24 pt-32">
-      <Link href="/admin/customers" className="font-mono-label text-[11px] text-ink-soft">
+      <Link href="/admin/customers" className="font-mono-label text-ink-soft">
         ← Customers
       </Link>
-      <h1 className="mt-6 font-display text-4xl">{customer.name ?? customer.email}</h1>
+      <h1 className="mt-6 type-h2">{customer.name ?? customer.email}</h1>
       <dl className="mt-8 grid gap-3 text-sm">
         <p>Email: {customer.email}</p>
         <p>Phone: {customer.phone ?? "—"}</p>
@@ -31,7 +31,7 @@ export default async function AdminCustomerPage({ params }: { params: Promise<{ 
         <p>Lifetime: {formatInr(lifetime)}</p>
         <p>Consent: {(consents ?? []).map((row) => `${row.consent_type} ${row.status}`).join(" · ") || "—"}</p>
       </dl>
-      <h2 className="mt-12 font-display text-2xl">Products owned</h2>
+      <h2 className="mt-12 type-h3">Products owned</h2>
       <ul className="mt-4 space-y-2">
         {(entitlements ?? []).map((row) => (
           <li key={row.id}>
@@ -39,7 +39,7 @@ export default async function AdminCustomerPage({ params }: { params: Promise<{ 
           </li>
         ))}
       </ul>
-      <h2 className="mt-12 font-display text-2xl">Orders</h2>
+      <h2 className="mt-12 type-h3">Orders</h2>
       <ul className="mt-4 space-y-2">
         {(orders ?? []).map((order) => (
           <li key={order.id}>

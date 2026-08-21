@@ -238,7 +238,7 @@ export default function ConciergePanel() {
         <div className="flex items-start justify-between gap-6">
           <div>
             <p className="font-mono-label text-gold">Ask the portfolio</p>
-            <h2 id={titleId} className="mt-3 font-display text-3xl sm:text-4xl">
+            <h2 id={titleId} className="mt-3 type-h2">
               What would you like to know?
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-soft">
