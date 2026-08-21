@@ -219,13 +219,13 @@ html.motion-ready [data-loader-root] {
 }
 
 .library-cover {
-  transform: translate3d(0, 0, 0);
   box-shadow: var(--object-shadow);
-  transition: box-shadow 0.38s var(--ease-physical);
 }
 
 [data-library-object] {
   cursor: pointer;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 [data-library-object]:hover,

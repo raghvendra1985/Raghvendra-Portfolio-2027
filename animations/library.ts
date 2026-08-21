@@ -2,8 +2,7 @@
 
 import {
   DURATION,
-  EASE_PHYSICAL,
-  createScope,
+  EASE,
   gsap,
   showImmediately,
   type MotionConfig,
@@ -27,8 +26,8 @@ export function animateLibraryEnter(root: HTMLElement, config: MotionConfig) {
       y: 0,
       duration: DURATION.md,
       stagger: 0.02,
-      ease: EASE_PHYSICAL,
-      overwrite: "auto",
+      ease: EASE,
+      overwrite: true,
     },
   );
 }
@@ -95,7 +94,7 @@ export function animateLibraryFilter(
       gsap.fromTo(
         el,
         { x: dx },
-        { x: 0, duration: DURATION.md, ease: EASE_PHYSICAL, overwrite: "auto" },
+        { x: 0, duration: DURATION.md, ease: EASE, overwrite: "auto" },
       );
     });
 
@@ -108,8 +107,8 @@ export function animateLibraryFilter(
           y: 0,
           duration: DURATION.md,
           stagger: 0.02,
-          ease: EASE_PHYSICAL,
-          overwrite: "auto",
+          ease: EASE,
+          overwrite: true,
         },
       );
     }
@@ -121,7 +120,7 @@ export function animateLibraryFilter(
       autoAlpha: 0,
       duration: DURATION.md,
       stagger: 0.02,
-      ease: EASE_PHYSICAL,
+      ease: EASE,
       overwrite: "auto",
       onComplete: applyLayoutAndFlip,
       onInterrupt: applyLayoutAndFlip,
@@ -140,7 +139,6 @@ export function animateLibraryShelf(
     reducedMotion: boolean;
   },
 ) {
-  return createScope(root, () => {
     const items = Array.from(root.querySelectorAll<HTMLElement>("[data-library-object]")).filter(
       (item) => item.dataset.libraryVisible !== "false" && item.dataset.libraryExiting !== "true",
     );
@@ -174,17 +172,18 @@ export function animateLibraryShelf(
         rotate: isSelected ? 0 : isHovered ? -1 : restRotate,
         scale: isSelected ? 1.04 : isHovered ? 1.06 : 1,
         duration: isSelected ? 0.52 : 0.36,
-        ease: EASE_PHYSICAL,
+        ease: EASE,
         transformOrigin: "50% 100%",
-        overwrite: "auto",
+        overwrite: true,
+        force3D: true,
       });
 
       if (face) {
         gsap.to(face, {
           rotateY: isSelected ? -8 : 0,
           duration: isSelected ? 0.42 : 0.32,
-          ease: EASE_PHYSICAL,
-          overwrite: "auto",
+          ease: EASE,
+          overwrite: true,
         });
       }
 
@@ -194,8 +193,8 @@ export function animateLibraryShelf(
           y: isSelected ? 0 : 12,
           scale: isSelected ? 1 : 0.94,
           duration: 0.4,
-          ease: EASE_PHYSICAL,
-          overwrite: "auto",
+          ease: EASE,
+          overwrite: true,
         });
       }
 
@@ -205,10 +204,9 @@ export function animateLibraryShelf(
           y: isSelected ? 0 : 16,
           duration: 0.32,
           delay: isSelected ? 0.18 : 0,
-          ease: EASE_PHYSICAL,
-          overwrite: "auto",
+          ease: EASE,
+          overwrite: true,
         });
       }
     });
-  });
 }

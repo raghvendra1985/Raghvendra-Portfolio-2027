@@ -28,6 +28,7 @@ export default function LibraryShelf({ resources }: { resources: StudioResource[
   const [focusIndex, setFocusIndex] = useState(0);
   const shelfRef = useRef<HTMLDivElement>(null);
   const didEnter = useRef(false);
+  const shelfArmed = useRef(false);
   const { config } = useExperience();
   const { reducedMotion } = config;
 
@@ -40,7 +41,7 @@ export default function LibraryShelf({ resources }: { resources: StudioResource[
 
   useEffect(() => {
     const root = shelfRef.current;
-    if (!root) return;
+    if (!root || config.isMobile) return;
     if (!didEnter.current) {
       didEnter.current = true;
       animateLibraryEnter(root, {
@@ -55,13 +56,14 @@ export default function LibraryShelf({ resources }: { resources: StudioResource[
 
   useEffect(() => {
     const root = shelfRef.current;
-    if (!root) return;
-    const ctx = animateLibraryShelf(root, {
+    if (!root || config.isMobile) return;
+    if (hoveredKey || selectedKey) shelfArmed.current = true;
+    if (!shelfArmed.current) return;
+    animateLibraryShelf(root, {
       hoveredKey,
       selectedKey,
       reducedMotion,
     });
-    return () => ctx.revert();
   }, [hoveredKey, reducedMotion, selectedKey]);
 
   function selectItem(item: StudioResource) {

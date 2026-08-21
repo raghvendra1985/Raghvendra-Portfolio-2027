@@ -46,7 +46,11 @@ export default function LibraryObject({
         data-cursor="Open"
         onClick={onSelect}
         onMouseEnter={() => onHover(true)}
-        onMouseLeave={() => onHover(false)}
+        onMouseLeave={(event) => {
+          const next = event.relatedTarget;
+          if (next instanceof Element && next.closest("[data-library-object]")) return;
+          onHover(false);
+        }}
         onFocus={() => onHover(true)}
         onBlur={() => onHover(false)}
         className="library-cover relative overflow-hidden text-left"
