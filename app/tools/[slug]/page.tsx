@@ -23,12 +23,17 @@ export async function generateMetadata({
 
 export default async function ToolPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const { product, entitled } = await requireProductEntitlement(slug);
+  const { product, entitled, demo } = await requireProductEntitlement(slug);
   if (!product || product.deliveryType === "download") notFound();
   if (!entitled) redirect(`/products/${slug}?reason=no-access`);
   return (
     <>
-      <TrackOnMount event="product_opened" payload={{ slug: product.slug, productId: product.id }} />
+      {demo ? (
+        <p className="border-b border-gold bg-navy px-[var(--page-pad)] py-3 font-mono-label text-gold">
+          ADMIN DEMO — not a purchase. Access is granted because this email is an admin, not because of a query parameter.
+        </p>
+      ) : null}
+      <TrackOnMount event="product_opened" payload={{ slug: product.slug, productId: product.id, demo }} />
       <ProductRuntime product={product} />
     </>
   );

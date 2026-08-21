@@ -49,7 +49,7 @@ export function emailFrom() {
 }
 
 export function adminEmails() {
-  return (process.env.ADMIN_EMAILS ?? "")
+  return (process.env.ADMIN_EMAILS ?? process.env.NEXT_ADMIN_EMAILS ?? "")
     .split(",")
     .map((value) => value.trim().toLowerCase())
     .filter(Boolean);

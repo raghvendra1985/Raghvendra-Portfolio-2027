@@ -101,3 +101,42 @@ test("webhook signature", () => {
   assert.equal(verifyWebhook(body, signature, "whsec"), true);
   assert.equal(verifyWebhook(body, "nope", "whsec"), false);
 });
+
+test("prelaunch control room is admin-only and unlisted", () => {
+  const robots = readFileSync(join(root, "app/robots.ts"), "utf8");
+  const sitemap = readFileSync(join(root, "app/sitemap.ts"), "utf8");
+  const nav = readFileSync(join(root, "lib/site.ts"), "utf8");
+  assert.match(robots, /disallow: \["\/account", "\/admin"/);
+  assert.doesNotMatch(sitemap, /prelaunch/);
+  assert.doesNotMatch(nav, /prelaunch/);
+});
+
+test("admin demo access is server-side email, not a query parameter", () => {
+  const access = readFileSync(join(root, "lib/commerce/access.ts"), "utf8");
+  const tools = readFileSync(join(root, "app/tools/[slug]/page.tsx"), "utf8");
+  assert.match(access, /isAdminEmail\(user\.email\)/);
+  assert.doesNotMatch(tools, /searchParams/);
+  assert.match(tools, /ADMIN DEMO/);
+});
+
+test("simulation never calls razorpay or resend", () => {
+  const source = readFileSync(join(root, "lib/commerce/simulate.ts"), "utf8");
+  assert.match(source, /SIMULATION_PROVIDER = "simulation"/);
+  assert.match(source, /purchaseConfirmedMarkup/);
+  assert.doesNotMatch(source, /sendPurchaseEmail/);
+  assert.doesNotMatch(source, /sendMail/);
+  assert.doesNotMatch(source, /api\.razorpay\.com/);
+  const emailPreview = readFileSync(join(root, "app/admin/prelaunch/email-preview/page.tsx"), "utf8");
+  assert.match(emailPreview, /previewPurchaseEmail/);
+});
+
+test("prelaunch audits cover all 13 catalog slugs and do not claim AI", () => {
+  const catalog = readFileSync(join(root, "products/index.ts"), "utf8");
+  const audits = readFileSync(join(root, "prelaunch/audits.ts"), "utf8");
+  const catalogSlugs = [...catalog.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]).sort();
+  const auditSlugs = [...audits.matchAll(/^\s+"([a-z0-9-]+)": \{/gm)].map((match) => match[1]).sort();
+  assert.equal(catalogSlugs.length, 13);
+  assert.deepEqual(auditSlugs, catalogSlugs);
+  assert.match(audits, /ai: false/);
+  assert.doesNotMatch(audits, /engine: "AI-generated"/);
+});

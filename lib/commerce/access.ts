@@ -1,3 +1,4 @@
+import { isAdminEmail } from "@/lib/commerce/config";
 import { requireAdminClient } from "@/lib/supabase/admin";
 import { getAuthUser } from "@/lib/supabase/server";
 import { getProduct, type Product } from "@/products";
@@ -20,6 +21,7 @@ export async function getCustomerForUser() {
 
 /**
  * Access is decided by an active entitlement row, not by Razorpay payment state.
+ * Admin demo access is isAdminEmail on the session — never a ?demo= query parameter.
  */
 export async function hasEntitlement(product: Product, customerId: string | null) {
   if (!customerId) return false;
@@ -41,7 +43,11 @@ export async function hasEntitlement(product: Product, customerId: string | null
 export async function requireProductEntitlement(slug: string) {
   const product = getProduct(slug);
   const { user, customer } = await getCustomerForUser();
-  if (!product || !user) return { product, user, customer, entitled: false };
+  if (!product || !user) return { product, user, customer, entitled: false, demo: false };
   const entitled = await hasEntitlement(product, customer?.id ?? null);
-  return { product, user, customer, entitled };
+  if (entitled) return { product, user, customer, entitled: true, demo: false };
+  if (isAdminEmail(user.email)) {
+    return { product, user, customer, entitled: true, demo: true };
+  }
+  return { product, user, customer, entitled: false, demo: false };
 }
