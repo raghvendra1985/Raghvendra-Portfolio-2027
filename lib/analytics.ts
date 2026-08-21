@@ -19,6 +19,7 @@ export type AnalyticsEvent =
   | "payment_failed"
   | "purchase_completed"
   | "library_view"
+  | "library_item_selected"
   | "product_opened"
   | "product_downloaded"
   | "marketing_opt_in"
