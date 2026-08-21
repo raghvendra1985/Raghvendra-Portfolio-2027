@@ -1,47 +1,101 @@
-"use client";
-
 import Image from "next/image";
 import { TrackedLink } from "@/components/analytics/TrackedCta";
 import WorkCard from "@/components/work/WorkCard";
 import { knowledgeArticles } from "@/knowledge";
 
 export default function HomeNotes() {
+  const [featured, ...rest] = knowledgeArticles.slice(0, 3);
+
+  if (!featured) return null;
+
   return (
-    <div className="mt-10">
-      {knowledgeArticles.slice(0, 3).map((article) => (
-        <WorkCard key={article.slug}>
-          <TrackedLink
-            href={`/knowledge/${article.slug}`}
-            data-reveal-item
-            data-cursor="Open"
-            event="knowledge_article_clicked"
-            payload={{ slug: article.slug }}
-            className="grid gap-4 border-t border-line py-6 sm:grid-cols-[1fr_140px] sm:items-center sm:gap-8"
+    <div className="mt-10 grid gap-4 lg:grid-cols-12">
+      <WorkCard className="lg:col-span-7 bg-paper">
+        <TrackedLink
+          href={`/knowledge/${featured.slug}`}
+          data-reveal-item
+          data-cursor="Open"
+          event="knowledge_article_clicked"
+          payload={{ slug: featured.slug }}
+          className="group flex h-full flex-col bg-paper"
+        >
+          <div
+            data-work-cover
+            className="relative aspect-[16/10] overflow-hidden bg-mist"
           >
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-              <span className="type-h3">{article.title}</span>
-              <span className="font-mono-label shrink-0 text-ink-soft">{article.category}</span>
+            <Image
+              src={featured.cover}
+              alt={featured.coverAlt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 58vw"
+              unoptimized={featured.cover.endsWith(".svg")}
+              className={
+                featured.coverFit === "contain"
+                  ? "object-contain object-center p-8"
+                  : "object-cover object-center"
+              }
+            />
+          </div>
+          <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
+            <div>
+              <p className="font-mono-label text-gold">{featured.category}</p>
+              <h3 className="mt-3 type-h3">{featured.title}</h3>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
+                {featured.deck}
+              </p>
             </div>
-            <div
-              data-work-cover
-              className="relative h-20 w-36 overflow-hidden sm:h-[88px] sm:w-[140px] sm:justify-self-end"
-            >
-              <Image
-                src={article.cover}
-                alt={article.coverAlt}
-                fill
-                sizes="140px"
-                unoptimized={article.cover.endsWith(".svg")}
-                className={
-                  article.coverFit === "contain"
-                    ? "object-contain object-left sm:object-right"
-                    : "object-cover object-center"
-                }
-              />
-            </div>
-          </TrackedLink>
-        </WorkCard>
-      ))}
+            <p className="mt-6 font-mono-label text-green">
+              {featured.readMinutes} min read →
+            </p>
+          </div>
+        </TrackedLink>
+      </WorkCard>
+
+      <ul className="flex flex-col gap-4 lg:col-span-5">
+        {rest.map((article) => (
+          <li key={article.slug} className="min-h-[11rem] flex-1">
+            <WorkCard className="h-full bg-paper">
+              <TrackedLink
+                href={`/knowledge/${article.slug}`}
+                data-reveal-item
+                data-cursor="Open"
+                event="knowledge_article_clicked"
+                payload={{ slug: article.slug }}
+                className="flex h-full min-h-[11rem] overflow-hidden"
+              >
+                <div
+                  data-work-cover
+                  className="relative w-[7.5rem] shrink-0 overflow-hidden bg-mist sm:w-40"
+                >
+                  <Image
+                    src={article.cover}
+                    alt={article.coverAlt}
+                    fill
+                    sizes="160px"
+                    unoptimized={article.cover.endsWith(".svg")}
+                    className={
+                      article.coverFit === "contain"
+                        ? "object-contain object-center p-3"
+                        : "object-cover object-center"
+                    }
+                  />
+                </div>
+                <div className="flex min-w-0 flex-1 flex-col justify-between p-5 sm:p-6">
+                  <div>
+                    <p className="font-mono-label text-gold">{article.category}</p>
+                    <h3 className="mt-2 type-h3 text-[1.25rem] leading-snug sm:text-[1.5rem]">
+                      {article.title}
+                    </h3>
+                  </div>
+                  <p className="mt-4 font-mono-label text-ink-soft">
+                    {article.readMinutes} min →
+                  </p>
+                </div>
+              </TrackedLink>
+            </WorkCard>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

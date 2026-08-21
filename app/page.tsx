@@ -1,5 +1,6 @@
 import Hero from "@/components/hero/Hero";
 import SelectedWork from "@/components/work/SelectedWork";
+import AboutPolaroid from "@/components/about/AboutPolaroid";
 import EnterpriseLeadership from "@/components/home/EnterpriseLeadership";
 import HiringPath from "@/components/home/HiringPath";
 import ProblemRoutes from "@/components/home/ProblemRoutes";
@@ -22,21 +23,27 @@ export default function HomePage() {
       <SelectedWork studies={featuredWork} />
 
       <SectionReveal className="border-t border-line px-[var(--page-pad)] py-24">
-        <div className="mx-auto grid max-w-[1440px] gap-12 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-[1440px] items-center gap-12 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-16">
+          <div data-reveal-item className="mx-auto w-full max-w-[300px] lg:mx-0">
+            <AboutPolaroid
+              src="/assets/about/raghvendra-singh.png"
+              alt="Raghvendra Singh"
+              idle
+              sizes="300px"
+            />
+          </div>
           <div data-reveal-item>
             <p className="font-mono-label text-ink-soft">02 / About</p>
             <h2 className="mt-4 max-w-xl type-h1">
               Twenty years of designing across products, organisations and classrooms.
             </h2>
-          </div>
-          <div data-reveal-item className="flex flex-col justify-end">
-            <p className="max-w-xl type-lead text-ink-soft">
+            <p className="mt-6 max-w-xl type-lead text-ink-soft">
               Product design leader working across enterprise systems, fintech, AI products,
               founder-led ventures, and design education. I move between strategy, systems,
               interaction design, team building, and shipping products.
             </p>
             <div className="mt-8">
-            <MagneticButton href="/about" variant="secondary" cursor="Open" className="w-full justify-center sm:w-auto">
+              <MagneticButton href="/about" variant="secondary" cursor="Open" className="w-full justify-center sm:w-auto">
                 More about me
               </MagneticButton>
             </div>

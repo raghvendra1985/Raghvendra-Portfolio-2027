@@ -6,6 +6,22 @@ import WorkCard from "@/components/work/WorkCard";
 import { track } from "@/lib/analytics";
 import { problemRoutes, services } from "@/services";
 
+const mosaic = [
+  "md:col-span-2 md:row-span-2 min-h-[22rem]",
+  "min-h-[10.5rem]",
+  "min-h-[10.5rem]",
+  "min-h-[10.5rem]",
+  "md:col-span-2 min-h-[10.5rem]",
+];
+
+const surfaces = [
+  "bg-navy text-mist",
+  "bg-paper text-navy",
+  "bg-paper text-navy",
+  "bg-paper text-navy",
+  "bg-surface-dim text-navy",
+];
+
 export default function ProblemRoutes() {
   return (
     <SectionReveal
@@ -19,22 +35,34 @@ export default function ProblemRoutes() {
             What are you trying to solve?
           </h2>
         </div>
-        <ul className="mt-10 border-t border-line">
-          {problemRoutes.map((route) => {
+        <ul className="mt-10 grid gap-4 md:grid-cols-3">
+          {problemRoutes.map((route, index) => {
             const service = services.find((item) => item.slug === route.service);
+            const featured = index === 0;
             return (
-              <li key={route.id} data-reveal-item>
-                <WorkCard>
+              <li key={route.id} data-reveal-item className={mosaic[index]}>
+                <WorkCard className={`h-full ${surfaces[index]}`}>
                   <Link
                     href={route.href}
                     data-cursor="Open"
                     onClick={() => track("problem_route_clicked", { route: route.id })}
-                    className="flex min-h-14 flex-col items-start gap-2 border-b border-line py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                    className="group relative flex h-full min-h-[10.5rem] flex-col justify-between overflow-hidden p-6 sm:p-8"
                   >
-                    <span className="min-w-0 type-h3">{route.label}</span>
-                    <span className="shrink-0 font-mono-label text-green">
-                      {service?.title ?? "Discuss"} →
-                    </span>
+                    <span
+                      className="pointer-events-none absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gold motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-x-100"
+                      aria-hidden="true"
+                    />
+                    <span className="font-mono-label text-gold">{service?.index ?? "00"}</span>
+                    <div className="mt-8">
+                      <span className="block max-w-md type-h3">{route.label}</span>
+                      <span
+                        className={`mt-4 inline-flex font-mono-label ${
+                          featured ? "text-gold" : "text-green"
+                        }`}
+                      >
+                        {service?.title ?? "Discuss"} →
+                      </span>
+                    </div>
                   </Link>
                 </WorkCard>
               </li>
