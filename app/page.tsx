@@ -55,7 +55,7 @@ export default function HomePage() {
           <p className="font-mono-label text-ink-soft" data-reveal-item>
             03 / Practice
           </p>
-          <h2 className="mt-4 max-w-3xl type-h2" data-reveal-item>
+          <h2 id="practice-heading" className="mt-4 max-w-3xl type-h2" data-reveal-item>
             How I contribute.
           </h2>
           <PracticeLanes services={services} />

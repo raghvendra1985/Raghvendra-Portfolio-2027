@@ -1,129 +1,101 @@
 "use client";
 
-import { DURATION, EASE, createScope, gsap, type MotionConfig } from "./motion";
+import {
+  DURATION,
+  EASE,
+  createScope,
+  gsap,
+  ScrollTrigger,
+  motionBlur,
+  type MotionConfig,
+} from "./motion";
 
-export type InvertLaneOptions = {
-  /** Offset enter from the left/right. Hover-only when false. */
-  enter?: boolean;
+export type PracticeIndexOptions = {
+  onIndex?: (index: number) => void;
 };
 
 /**
- * Mondragon-style lanes: optional offset enter, navy fill scaleX on hover,
- * siblings dim. Transform/opacity only — text color stays CSS group-hover.
+ * Practice index: sticky panel crossfade, row-linked progress.
+ * Matches selected work — no invert fills, no offset pills.
  */
-export function animateInvertLanes(
+export function animatePracticeIndex(
   root: HTMLElement,
   config: MotionConfig,
-  options: InvertLaneOptions = {},
+  options: PracticeIndexOptions = {},
 ) {
-  const enter = options.enter ?? false;
-
   return createScope(root, () => {
-    const lanes = Array.from(root.querySelectorAll<HTMLElement>("[data-invert-lane]"));
-    if (!lanes.length) return;
+    const rows = Array.from(root.querySelectorAll<HTMLElement>("[data-practice-row]"));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>("[data-practice-panel]"));
+    const progress = root.querySelector<HTMLElement>("[data-practice-progress]");
 
-    lanes.forEach((lane) => {
-      const fill = lane.querySelector<HTMLElement>("[data-invert-fill]");
-      const side = lane.dataset.invertSide === "end" ? 1 : -1;
+    if (!rows.length) return;
 
-      if (fill) gsap.set(fill, { scaleX: 0, transformOrigin: "left center", force3D: true });
-
-      if (config.reducedMotion) {
-        gsap.set(lane, { autoAlpha: 1, x: 0, y: 0 });
-        return;
+    if (config.reducedMotion) {
+      gsap.set(panels, { autoAlpha: 0, y: 0, filter: "none" });
+      if (panels[0]) gsap.set(panels[0], { autoAlpha: 1 });
+    } else {
+      gsap.set(panels, {
+        autoAlpha: 0,
+        y: 12,
+        filter: motionBlur(8, config),
+      });
+      if (panels[0]) {
+        gsap.set(panels[0], { autoAlpha: 1, y: 0, filter: "blur(0px)" });
       }
+    }
 
-      if (enter && !config.isMobile) {
-        gsap.fromTo(
-          lane,
-          { autoAlpha: 0, x: 40 * side, y: 16 },
-          {
-            autoAlpha: 1,
-            x: 0,
-            y: 0,
-            duration: DURATION.lg,
-            ease: EASE,
-            force3D: true,
-            scrollTrigger: {
-              trigger: lane,
-              start: "top 88%",
-              once: true,
-            },
-          },
-        );
-      }
-
-      if (config.isMobile) return;
-
-      let armed = false;
-      const restFill = () => {
-        if (!fill) return;
-        gsap.to(fill, {
-          scaleX: 0,
-          duration: DURATION.md,
-          ease: EASE,
-          overwrite: true,
-          force3D: true,
-        });
-      };
-
-      const lift = () => {
-        armed = true;
-        gsap.killTweensOf([lane, fill, ...lanes].filter(Boolean));
-        gsap.to(lane, {
-          y: -6,
-          duration: DURATION.sm,
-          ease: EASE,
-          overwrite: true,
-          force3D: true,
-        });
-        if (fill) {
-          gsap.to(fill, {
-            scaleX: 1,
-            duration: DURATION.sm,
-            ease: EASE,
-            overwrite: true,
-            force3D: true,
-          });
-        }
-        lanes.forEach((other) => {
-          if (other === lane) return;
-          gsap.to(other, {
-            autoAlpha: 0.45,
-            duration: DURATION.sm,
-            ease: EASE,
-            overwrite: true,
-          });
-        });
-      };
-
-      const rest = () => {
-        if (!armed) return;
-        gsap.killTweensOf([lane, fill, ...lanes].filter(Boolean));
-        gsap.to(lane, {
-          y: 0,
-          duration: DURATION.md,
-          ease: EASE,
-          overwrite: true,
-          force3D: true,
-        });
-        restFill();
-        lanes.forEach((other) => {
-          gsap.to(other, {
-            autoAlpha: 1,
-            duration: DURATION.md,
-            ease: EASE,
-            overwrite: true,
-          });
-        });
-      };
-
-      lane.addEventListener("mouseenter", lift);
-      lane.addEventListener("mouseleave", rest);
-      lane.addEventListener("focusin", lift);
-      lane.addEventListener("focusout", (event) => {
-        if (!lane.contains(event.relatedTarget as Node | null)) rest();
+    rows.forEach((row, index) => {
+      ScrollTrigger.create({
+        trigger: row,
+        start: "top 55%",
+        end: "bottom 55%",
+        onEnter: () =>
+          setPracticeIndex(panels, progress, index, rows.length, options.onIndex, config),
+        onEnterBack: () =>
+          setPracticeIndex(panels, progress, index, rows.length, options.onIndex, config),
       });
     });
   });
+}
+
+export function crossfadePracticePanel(
+  panels: HTMLElement[],
+  index: number,
+  config: MotionConfig,
+) {
+  panels.forEach((panel, i) => {
+    const active = i === index;
+    if (config.reducedMotion) {
+      gsap.set(panel, { autoAlpha: active ? 1 : 0, y: 0, filter: "none" });
+      return;
+    }
+    gsap.to(panel, {
+      autoAlpha: active ? 1 : 0,
+      y: active ? 0 : 12,
+      filter: active ? "blur(0px)" : motionBlur(8, config),
+      duration: DURATION.md,
+      ease: EASE,
+      overwrite: "auto",
+      force3D: true,
+    });
+  });
+}
+
+function setPracticeIndex(
+  panels: HTMLElement[],
+  progress: HTMLElement | null,
+  index: number,
+  total: number,
+  onIndex: ((index: number) => void) | undefined,
+  config: MotionConfig,
+) {
+  crossfadePracticePanel(panels, index, config);
+  onIndex?.(index);
+  if (progress) {
+    gsap.to(progress, {
+      scaleX: (index + 1) / total,
+      duration: config.reducedMotion ? 0 : DURATION.md,
+      ease: EASE,
+    });
+  }
 }

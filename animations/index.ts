@@ -55,5 +55,5 @@ export { animateStudioTicker, animateStudioCard } from "./studio";
 export type { StudioCardOptions } from "./studio";
 export { animateAboutPolaroid, animateAboutStat } from "./about";
 export { animateWorkCard, animateWorkTicker } from "./work";
-export { animateInvertLanes } from "./practice";
-export type { InvertLaneOptions } from "./practice";
+export { animatePracticeIndex, crossfadePracticePanel } from "./practice";
+export type { PracticeIndexOptions } from "./practice";
