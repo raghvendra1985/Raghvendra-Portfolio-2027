@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import SectionReveal from "@/components/reveal/SectionReveal";
+import StudioHover from "@/components/studio/StudioHover";
 import { track } from "@/lib/analytics";
 import type { CaseStudy } from "@/case-studies";
 
@@ -45,6 +46,7 @@ export default function EnterpriseLeadership({ studies }: { studies: CaseStudy[]
         <ul className="mt-12 grid gap-px bg-mist/15 md:grid-cols-3">
           {studies.map((study) => (
             <li key={study.slug} data-reveal-item className="bg-navy">
+              <StudioHover>
               <Link
                 href={`/work/${study.slug}`}
                 data-cursor="View"
@@ -62,6 +64,7 @@ export default function EnterpriseLeadership({ studies }: { studies: CaseStudy[]
                 <p className="mt-4 flex-1 text-sm leading-relaxed text-mist/70">{impactLine(study)}</p>
                 <p className="mt-6 font-mono-label text-gold">Read case study →</p>
               </Link>
+              </StudioHover>
             </li>
           ))}
         </ul>
