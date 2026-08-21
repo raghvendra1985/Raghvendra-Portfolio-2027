@@ -3,6 +3,7 @@
 import {
   DURATION,
   EASE,
+  EASE_IN_OUT,
   createScope,
   gsap,
   ScrollTrigger,
@@ -136,33 +137,127 @@ export function animateSelectedWork(
   return createScope(root, () => {
     const rows = Array.from(root.querySelectorAll<HTMLElement>("[data-work-row]"));
     const visuals = Array.from(root.querySelectorAll<HTMLElement>("[data-work-visual]"));
+    const clipVisuals = Array.from(root.querySelectorAll<HTMLElement>("[data-work-clip-visual]"));
     const progress = root.querySelector<HTMLElement>("[data-work-progress]");
 
     if (!rows.length) return;
 
+    const groups = [visuals, clipVisuals].filter((group) => group.length);
+
     if (config.reducedMotion) {
-      gsap.set(visuals, { autoAlpha: 0, scale: 1, filter: "none" });
-      if (visuals[0]) gsap.set(visuals[0], { autoAlpha: 1 });
-    } else {
-      gsap.set(visuals, {
-        autoAlpha: 0,
-        scale: 1.04,
-        filter: motionBlur(8, config),
+      groups.forEach((group) => {
+        gsap.set(group, { autoAlpha: 0, scale: 1, filter: "none" });
+        if (group[0]) gsap.set(group[0], { autoAlpha: 1 });
       });
-      if (visuals[0]) {
-        gsap.set(visuals[0], { autoAlpha: 1, scale: 1, filter: "blur(0px)" });
-      }
+    } else {
+      groups.forEach((group) => {
+        gsap.set(group, {
+          autoAlpha: 0,
+          scale: 1.04,
+          filter: motionBlur(8, config),
+        });
+        if (group[0]) {
+          gsap.set(group[0], { autoAlpha: 1, scale: 1, filter: "blur(0px)" });
+        }
+      });
     }
+
+    setupWorkClip(root, config);
 
     rows.forEach((row, index) => {
       ScrollTrigger.create({
         trigger: row,
         start: "top 55%",
         end: "bottom 55%",
-        onEnter: () => setWorkIndex(visuals, progress, index, rows.length, options.onIndex, config),
-        onEnterBack: () => setWorkIndex(visuals, progress, index, rows.length, options.onIndex, config),
+        onEnter: () =>
+          setWorkIndex(groups, progress, index, rows.length, options.onIndex, config),
+        onEnterBack: () =>
+          setWorkIndex(groups, progress, index, rows.length, options.onIndex, config),
       });
     });
+  });
+}
+
+/**
+ * Fullscreen clip: cover starts as the stage, then insets into the sticky frame
+ * while sibling covers assemble. Structure from the clip-path reference; our covers,
+ * sharp corners, token durations. Desktop + motion-ok only.
+ */
+function setupWorkClip(root: HTMLElement, config: MotionConfig) {
+  const stage = root.querySelector<HTMLElement>("[data-work-clip-root]");
+  const clip = root.querySelector<HTMLElement>("[data-work-clip]");
+  const clipImage = root.querySelector<HTMLElement>("[data-work-clip-img]");
+  const target = root.querySelector<HTMLElement>("[data-work-clip-target]");
+  const slidesParent = root.querySelector<HTMLElement>("[data-work-slides]");
+  const slides = Array.from(root.querySelectorAll<HTMLElement>("[data-work-slide]")).filter(
+    (slide) => slide.dataset.workSlide !== "current",
+  );
+  const desktop = typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches;
+
+  if (!stage || !clip || !clipImage || !target) return;
+
+  if (config.reducedMotion || config.isMobile || !desktop) {
+    gsap.set(clip, { autoAlpha: 0, clipPath: "none" });
+    gsap.set(slides, { autoAlpha: 0 });
+    return;
+  }
+
+  const insetForTarget = () => {
+    const stageBox = stage.getBoundingClientRect();
+    const targetBox = target.getBoundingClientRect();
+    if (stageBox.width < 8 || stageBox.height < 8 || targetBox.width < 8) {
+      return "inset(0% 0% 0% 0%)";
+    }
+    const top = Math.max(0, ((targetBox.top - stageBox.top) / stageBox.height) * 100);
+    const left = Math.max(0, ((targetBox.left - stageBox.left) / stageBox.width) * 100);
+    const bottom = Math.max(0, ((stageBox.bottom - targetBox.bottom) / stageBox.height) * 100);
+    const right = Math.max(0, ((stageBox.right - targetBox.right) / stageBox.width) * 100);
+    return `inset(${top}% ${right}% ${bottom}% ${left}%)`;
+  };
+
+  gsap.set(clip, {
+    autoAlpha: 1,
+    clipPath: "inset(0% 0% 0% 0%)",
+    willChange: "clip-path",
+  });
+  gsap.set(clipImage, { scale: 1.12, transformOrigin: "50% 50%", force3D: true });
+  if (slidesParent) gsap.set(slidesParent, { perspective: 1000, transformStyle: "preserve-3d" });
+  gsap.set(slides, { autoAlpha: 0, z: 280, force3D: true });
+
+  ScrollTrigger.create({
+    trigger: stage,
+    start: "top 78%",
+    once: true,
+    onEnter: () => {
+      const endInset = insetForTarget();
+      gsap
+        .timeline({
+          defaults: { duration: DURATION.lg, ease: EASE_IN_OUT },
+          onComplete: () => {
+            gsap.set(clip, { willChange: "auto" });
+          },
+        })
+        .addLabel("start", 0)
+        .to(clip, { clipPath: endInset }, "start")
+        .to(clipImage, { scale: 0.85, force3D: true }, "start")
+        .to(
+          slides,
+          {
+            autoAlpha: 1,
+            z: 0,
+            duration: DURATION.xl,
+            stagger: { amount: 0.15, from: "center" },
+          },
+          "start",
+        )
+        .addLabel("land", "start+=0.85")
+        .to(clipImage, { scale: 1, duration: DURATION.md, ease: EASE }, "land")
+        .to([clip, slidesParent].filter(Boolean), {
+          autoAlpha: 0,
+          duration: DURATION.md,
+          ease: EASE,
+        }, "land");
+    },
   });
 }
 
@@ -194,14 +289,14 @@ export function crossfadeWorkVisual(
 }
 
 function setWorkIndex(
-  visuals: HTMLElement[],
+  groups: HTMLElement[][],
   progress: HTMLElement | null,
   index: number,
   total: number,
   onIndex: ((index: number) => void) | undefined,
   config: MotionConfig,
 ) {
-  crossfadeWorkVisual(visuals, index, config);
+  groups.forEach((visuals) => crossfadeWorkVisual(visuals, index, config));
   onIndex?.(index);
   if (progress) {
     gsap.to(progress, {

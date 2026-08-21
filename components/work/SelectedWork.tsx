@@ -60,7 +60,9 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
     const root = rootRef.current;
     if (!root) return;
     const visuals = Array.from(root.querySelectorAll<HTMLElement>("[data-work-visual]"));
+    const clipVisuals = Array.from(root.querySelectorAll<HTMLElement>("[data-work-clip-visual]"));
     crossfadeWorkVisual(visuals, active, config);
+    if (clipVisuals.length) crossfadeWorkVisual(clipVisuals, active, config);
   }, [active, config]);
 
   function onKeyDown(event: React.KeyboardEvent) {
@@ -107,10 +109,42 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
 
       <WorkTicker items={workAudiences.filter((audience) => audience !== "All")} />
 
-      <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="relative mt-12" data-work-clip-root>
+        <div
+          data-work-slides
+          className="pointer-events-none absolute inset-0 z-[4] hidden grid-cols-4 items-center gap-4 lg:grid"
+          aria-hidden="true"
+        >
+          {studies.map((study, index) => (
+            <div
+              key={`slide-${study.slug}`}
+              data-work-slide={index === 0 ? "current" : "true"}
+              className={`overflow-hidden ${index === 0 ? "invisible" : ""}`}
+            >
+              <StudyCover study={study} className="aspect-[4/5] w-full" />
+            </div>
+          ))}
+        </div>
+
+        <div
+          data-work-clip
+          className="pointer-events-none absolute inset-0 z-[5] hidden overflow-hidden lg:block"
+          aria-hidden="true"
+          style={{ clipPath: "inset(0% 0% 0% 0%)" }}
+        >
+          <div data-work-clip-img className="relative h-full w-full">
+            {studies.map((study, index) => (
+              <div key={`clip-${study.slug}`} data-work-clip-visual className="absolute inset-0">
+                <StudyCover study={study} priority={index === 0} className="h-full w-full" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+      <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="relative hidden min-h-[70vh] lg:block">
           <div className="sticky top-24 overflow-hidden">
-            <div className="relative aspect-[4/5]">
+            <div data-work-clip-target className="relative aspect-[4/5]">
               <div data-parallax="0.08" className="absolute inset-0">
                 {studies.map((study, index) => (
                   <div
@@ -175,6 +209,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
             </li>
           ))}
         </ul>
+      </div>
       </div>
     </section>
   );
