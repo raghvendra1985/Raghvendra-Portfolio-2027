@@ -178,6 +178,9 @@ export function animateSelectedWork(
   });
 }
 
+/** Survives Selected Work remounts so the overlay cannot cover the list again. */
+let selectedWorkClipPlayed = false;
+
 /**
  * Fullscreen clip: cover starts as the stage, then insets into the sticky frame
  * while sibling covers assemble. Structure from the clip-path reference; our covers,
@@ -202,6 +205,12 @@ function setupWorkClip(root: HTMLElement, config: MotionConfig) {
     return;
   }
 
+  if (selectedWorkClipPlayed) {
+    gsap.set(clip, { autoAlpha: 0, clipPath: "none" });
+    gsap.set(slides, { autoAlpha: 0 });
+    return;
+  }
+
   const insetForTarget = () => {
     const stageBox = stage.getBoundingClientRect();
     const targetBox = target.getBoundingClientRect();
@@ -216,7 +225,7 @@ function setupWorkClip(root: HTMLElement, config: MotionConfig) {
   };
 
   gsap.set(clip, {
-    autoAlpha: 1,
+    autoAlpha: 0,
     clipPath: "inset(0% 0% 0% 0%)",
     willChange: "clip-path",
   });
@@ -230,6 +239,16 @@ function setupWorkClip(root: HTMLElement, config: MotionConfig) {
     once: true,
     onEnter: () => {
       const endInset = insetForTarget();
+      const stageBox = stage.getBoundingClientRect();
+      const targetBox = target.getBoundingClientRect();
+      if (targetBox.top < 0 || stageBox.bottom < 80) {
+        selectedWorkClipPlayed = true;
+        gsap.set(clip, { autoAlpha: 0, clipPath: "none" });
+        gsap.set(slides, { autoAlpha: 0 });
+        return;
+      }
+      selectedWorkClipPlayed = true;
+      gsap.set(clip, { autoAlpha: 1, willChange: "clip-path" });
       gsap
         .timeline({
           defaults: { duration: DURATION.lg, ease: EASE_IN_OUT },

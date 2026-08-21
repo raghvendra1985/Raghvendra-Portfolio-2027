@@ -23,8 +23,8 @@ function Cover({ study, featured = false }: { study: CaseStudy; featured?: boole
   return (
     <div
       data-studio-cover
-      className={`relative overflow-hidden bg-navy-soft ${
-        featured ? "aspect-[16/10]" : "aspect-[16/11] h-full min-h-[8.5rem]"
+      className={`relative min-w-0 overflow-hidden bg-navy-soft ${
+        featured ? "aspect-[16/10]" : "h-full min-h-[8.5rem] w-full"
       }`}
     >
       <Image
@@ -33,7 +33,7 @@ function Cover({ study, featured = false }: { study: CaseStudy; featured?: boole
         fill
         sizes={featured ? "(max-width: 1024px) 100vw, 50vw" : "280px"}
         unoptimized={src.endsWith(".svg")}
-        className="object-contain object-center"
+        className={featured ? "object-contain object-center" : "object-cover object-center"}
       />
     </div>
   );
@@ -103,7 +103,7 @@ export default function EnterpriseLeadership({ studies }: { studies: CaseStudy[]
                     href={`/work/${study.slug}`}
                     data-cursor="View"
                     onClick={() => track("enterprise_case_clicked", { slug: study.slug })}
-                    className="grid h-full grid-cols-1 overflow-hidden border border-mist/15 bg-navy sm:grid-cols-[11rem_1fr]"
+                    className="grid h-full grid-cols-1 overflow-hidden border border-mist/15 bg-navy sm:grid-cols-[11rem_minmax(0,1fr)]"
                   >
                     <Cover study={study} />
                     <div className="flex flex-col justify-between p-6 sm:p-7">
