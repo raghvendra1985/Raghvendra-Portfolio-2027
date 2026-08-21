@@ -7,6 +7,7 @@ import { animateSection } from "@/animations/sections";
 import { DURATION, EASE, gsap } from "@/animations/motion";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import ImageReveal from "@/components/reveal/ImageReveal";
+import WorkCard from "@/components/work/WorkCard";
 import WorkCover from "@/components/work/WorkCover";
 import { track } from "@/lib/analytics";
 import {
@@ -27,14 +28,16 @@ function parseAudience(raw: string | null): WorkAudience {
 
 function Card({ study }: { study: CaseStudy }) {
   const media = (
-    <ImageReveal
-      className="relative aspect-[4/5]"
-      src={study.cover}
-      alt={`${study.client} cover`}
-      sizes="(min-width: 768px) 50vw, 100vw"
-    >
-      <WorkCover study={study} className="h-full min-h-[280px]" />
-    </ImageReveal>
+    <div data-work-cover className="overflow-hidden">
+      <ImageReveal
+        className="relative aspect-[4/5]"
+        src={study.cover}
+        alt={`${study.client} cover`}
+        sizes="(min-width: 768px) 50vw, 100vw"
+      >
+        <WorkCover study={study} className="h-full min-h-[280px]" />
+      </ImageReveal>
+    </div>
   );
 
   const body = (
@@ -58,32 +61,40 @@ function Card({ study }: { study: CaseStudy }) {
 
   if (study.tier === "flagship") {
     return (
-      <Link
-        href={`/work/${study.slug}`}
-        data-cursor="View"
-        className="group block"
-        onClick={() => track("project_clicked", { slug: study.slug, from: "work" })}
-      >
-        {body}
-      </Link>
+      <WorkCard>
+        <Link
+          href={`/work/${study.slug}`}
+          data-cursor="View"
+          className="group block"
+          onClick={() => track("project_clicked", { slug: study.slug, from: "work" })}
+        >
+          {body}
+        </Link>
+      </WorkCard>
     );
   }
 
   if (study.href) {
     return (
-      <a
-        href={study.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-cursor="Live"
-        className="group block"
-      >
-        {body}
-      </a>
+      <WorkCard>
+        <a
+          href={study.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-cursor="Live"
+          className="group block"
+        >
+          {body}
+        </a>
+      </WorkCard>
     );
   }
 
-  return <article className="block">{body}</article>;
+  return (
+    <WorkCard>
+      <article className="block">{body}</article>
+    </WorkCard>
+  );
 }
 
 function StudyGrid({ studies }: { studies: CaseStudy[] }) {
@@ -124,7 +135,7 @@ export default function WorkIndex() {
     const root = rootRef.current;
     if (!root) return;
     // Initial mount only — filter changes use a light opacity stagger below.
-    const ctx = animateSection(root, config);
+    const ctx = animateSection(root, config, { stagger: 0.045, translate: 24 });
     return () => ctx.revert();
   }, [config]);
 

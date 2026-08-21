@@ -43,18 +43,75 @@ export function animateStudioTicker(root: HTMLElement, config: MotionConfig) {
   });
 }
 
-export function animateStudioCard(root: HTMLElement, config: MotionConfig) {
+export type StudioCardOptions = {
+  /** Vertical lift on hover. Full-bleed media should pass false. */
+  lift?: boolean;
+};
+
+/**
+ * Studio hover: optional y lift + cover scale.
+ * Rest waits until the first hover so section reveals are not killed.
+ */
+export function animateStudioCard(
+  root: HTMLElement,
+  config: MotionConfig,
+  options: StudioCardOptions = {},
+) {
+  const liftEnabled = options.lift ?? true;
+
   return createScope(root, () => {
-    gsap.set(root, { y: 0, force3D: true });
+    const covers = Array.from(root.querySelectorAll<HTMLElement>("[data-studio-cover]")).map(
+      (el) => el.querySelector<HTMLElement>("[data-image-media]") ?? el,
+    );
     if (config.reducedMotion || config.isMobile) return;
 
+    let armed = false;
+    const targets = liftEnabled ? [root, ...covers] : covers;
+
     const lift = () => {
-      gsap.killTweensOf(root);
-      gsap.to(root, { y: -8, duration: DURATION.sm, ease: EASE, overwrite: true, force3D: true });
+      armed = true;
+      gsap.killTweensOf(targets);
+      if (liftEnabled) {
+        gsap.to(root, {
+          y: -8,
+          duration: DURATION.sm,
+          ease: EASE,
+          overwrite: true,
+          force3D: true,
+        });
+      }
+      covers.forEach((cover) => {
+        gsap.to(cover, {
+          scale: 1.06,
+          duration: DURATION.md,
+          ease: EASE,
+          overwrite: true,
+          force3D: true,
+        });
+      });
     };
+
     const rest = () => {
-      gsap.killTweensOf(root);
-      gsap.to(root, { y: 0, duration: DURATION.md, ease: EASE, overwrite: true, force3D: true });
+      if (!armed) return;
+      gsap.killTweensOf(targets);
+      if (liftEnabled) {
+        gsap.to(root, {
+          y: 0,
+          duration: DURATION.md,
+          ease: EASE,
+          overwrite: true,
+          force3D: true,
+        });
+      }
+      covers.forEach((cover) => {
+        gsap.to(cover, {
+          scale: 1,
+          duration: DURATION.md,
+          ease: EASE,
+          overwrite: true,
+          force3D: true,
+        });
+      });
     };
 
     root.addEventListener("mouseenter", lift);

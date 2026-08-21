@@ -140,8 +140,19 @@ export function animateSelectedWork(
 
     if (!rows.length) return;
 
-    gsap.set(visuals, { autoAlpha: 0 });
-    if (visuals[0]) gsap.set(visuals[0], { autoAlpha: 1 });
+    if (config.reducedMotion) {
+      gsap.set(visuals, { autoAlpha: 0, scale: 1, filter: "none" });
+      if (visuals[0]) gsap.set(visuals[0], { autoAlpha: 1 });
+    } else {
+      gsap.set(visuals, {
+        autoAlpha: 0,
+        scale: 1.04,
+        filter: motionBlur(8, config),
+      });
+      if (visuals[0]) {
+        gsap.set(visuals[0], { autoAlpha: 1, scale: 1, filter: "blur(0px)" });
+      }
+    }
 
     rows.forEach((row, index) => {
       ScrollTrigger.create({
@@ -163,7 +174,11 @@ export function crossfadeWorkVisual(
   visuals.forEach((visual, i) => {
     const active = i === index;
     if (config.reducedMotion) {
-      gsap.set(visual, { autoAlpha: active ? 1 : 0 });
+      gsap.set(visual, {
+        autoAlpha: active ? 1 : 0,
+        scale: 1,
+        filter: "none",
+      });
       return;
     }
     gsap.to(visual, {
@@ -173,6 +188,7 @@ export function crossfadeWorkVisual(
       duration: DURATION.md,
       ease: EASE,
       overwrite: "auto",
+      force3D: true,
     });
   });
 }

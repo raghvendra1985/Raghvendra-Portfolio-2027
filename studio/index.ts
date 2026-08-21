@@ -182,7 +182,36 @@ export const studioPage: StudioPage = {
   motion: {
     title: "Cadence, not trophies",
     body: "I cycle because it clears the queue in my head before I design anything. Sport is the same idea at a different intensity: a body that is not only sitting in Figma. No Strava theatre here — just a bike, a route, and the habit of going out.",
-    images: [],
+    images: [
+      {
+        src: "/assets/studio/rides/01.jpg",
+        alt: "After a ride, standing next to a Giant Talon mountain bike with helmet in hand.",
+      },
+      {
+        src: "/assets/studio/rides/02.jpg",
+        alt: "Strava map of a morning ride in Faridabad: 12.62 km in 48 minutes.",
+      },
+      {
+        src: "/assets/studio/rides/05.jpg",
+        alt: "Portrait in a blue cycling jersey after a ride.",
+      },
+      {
+        src: "/assets/studio/rides/04.jpg",
+        alt: "Ride of 25.35 km in 1 hour 13 minutes.",
+      },
+      {
+        src: "/assets/studio/rides/03.jpg",
+        alt: "Weekly cycling targets complete: 50.48 km.",
+      },
+      {
+        src: "/assets/studio/rides/06.jpg",
+        alt: "Weekly cycling start: 25.18 km in 1 hour 10 minutes.",
+      },
+      {
+        src: "/assets/studio/rides/07.jpg",
+        alt: "Weekly cycling complete: 32.71 km in 1 hour 38 minutes.",
+      },
+    ],
   },
   rooms: [
     {

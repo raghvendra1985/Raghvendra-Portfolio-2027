@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { ReactNode } from "react";
 import PageHero from "@/components/reveal/PageHero";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import ImageReveal from "@/components/reveal/ImageReveal";
@@ -10,8 +11,27 @@ import ObjectStillLife from "@/components/studio/ObjectStillLife";
 import HelixSpiral from "@/components/studio/HelixSpiral";
 import StudioTicker from "@/components/studio/StudioTicker";
 import StudioCard from "@/components/studio/StudioCard";
+import StudioHover from "@/components/studio/StudioHover";
 import StudioStage from "@/components/studio/StudioStage";
 import { companionPhotos, studioCoverSlides, studioPage, studioTopics } from "@/studio";
+
+const tileReveal = { stagger: 0.045, translate: 24 };
+
+function Cover({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`overflow-hidden ${className}`}>
+      <div data-studio-cover className="h-full w-full">
+        {children}
+      </div>
+    </div>
+  );
+}
 
 function OptionalPhotos({
   images,
@@ -24,14 +44,15 @@ function OptionalPhotos({
   return (
     <div className="mt-8 grid gap-4 sm:grid-cols-2">
       {images.map((image) => (
-        <ImageReveal
-          key={image.src}
-          src={image.src}
-          alt={image.alt}
-          className="aspect-[16/10] bg-surface-dim"
-          sizes={sizes}
-          parallax={0.04}
-        />
+        <Cover key={image.src}>
+          <ImageReveal
+            src={image.src}
+            alt={image.alt}
+            className="aspect-[16/10] bg-surface-dim"
+            sizes={sizes}
+            parallax={0.04}
+          />
+        </Cover>
       ))}
     </div>
   );
@@ -92,13 +113,17 @@ export default function StudioView() {
         <SectionReveal key={room.src} className="border-b border-line">
           <StudioStage label={room.title}>
             <div className="pt-14" data-reveal-item>
-              <ImageReveal
-                src={room.src}
-                alt={room.alt}
-                className="aspect-[4/3] w-full bg-navy md:aspect-[16/10]"
-                sizes="100vw"
-                parallax={0.03}
-              />
+              <StudioHover lift={false}>
+                <Cover>
+                  <ImageReveal
+                    src={room.src}
+                    alt={room.alt}
+                    className="aspect-[4/3] w-full bg-navy md:aspect-[16/10]"
+                    sizes="100vw"
+                    parallax={0.03}
+                  />
+                </Cover>
+              </StudioHover>
             </div>
           </StudioStage>
         </SectionReveal>
@@ -128,6 +153,7 @@ export default function StudioView() {
       <SectionReveal
         id="habitat"
         className="scroll-mt-28 border-t border-line bg-surface-dim px-[var(--page-pad)] py-24"
+        options={tileReveal}
       >
         <div className="mx-auto max-w-[1440px]">
           <h2 className="type-h2" data-reveal-item>
@@ -151,16 +177,17 @@ export default function StudioView() {
                         className={`mb-5 grid gap-2 ${photos.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}
                       >
                         {photos.map((photo) => (
-                          <ImageReveal
-                            key={photo.src}
-                            src={photo.src}
-                            alt={photo.alt}
-                            className={
-                              photos.length > 1 ? "aspect-square bg-mist" : "aspect-[16/10] bg-mist"
-                            }
-                            sizes="(min-width: 640px) 22vw, 45vw"
-                            parallax={0.03}
-                          />
+                          <Cover key={photo.src}>
+                            <ImageReveal
+                              src={photo.src}
+                              alt={photo.alt}
+                              className={
+                                photos.length > 1 ? "aspect-square bg-mist" : "aspect-[16/10] bg-mist"
+                              }
+                              sizes="(min-width: 640px) 22vw, 45vw"
+                              parallax={0.03}
+                            />
+                          </Cover>
                         ))}
                       </div>
                     ) : null}
@@ -193,23 +220,41 @@ export default function StudioView() {
       <SectionReveal
         id="motion"
         className="scroll-mt-28 border-t border-line px-[var(--page-pad)] py-24"
+        options={tileReveal}
       >
-        <div className="mx-auto grid max-w-[1440px] gap-8 lg:grid-cols-2 lg:items-end">
-          <div data-reveal-item>
+        <div className="mx-auto max-w-[1440px]">
+          <div data-reveal-item className="max-w-2xl">
             <h2 className="type-h2">{motion.title}</h2>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-soft">
+            <p className="mt-6 text-base leading-relaxed text-ink-soft">
               {motion.body}
             </p>
           </div>
-          <StudioCard data-reveal-item className="min-h-[220px]">
-            <OptionalPhotos images={motion.images} sizes="(min-width: 1024px) 40vw, 100vw" />
-          </StudioCard>
+          {motion.images.length ? (
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {motion.images.map((image) => (
+                <li key={image.src} data-reveal-item>
+                  <StudioHover>
+                    <Cover>
+                      <ImageReveal
+                        src={image.src}
+                        alt={image.alt}
+                        className="aspect-[3/4] bg-surface-dim"
+                        sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+                        parallax={0.03}
+                      />
+                    </Cover>
+                  </StudioHover>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
       </SectionReveal>
 
       <SectionReveal
         id="objects"
         className="scroll-mt-28 border-t border-line px-[var(--page-pad)] py-24"
+        options={tileReveal}
       >
         <div className="mx-auto max-w-[1440px]">
           <h2 className="type-h2" data-reveal-item>
@@ -220,26 +265,27 @@ export default function StudioView() {
           </p>
           <ul className="mt-12">
             {objects.map((object, index) => (
-              <li
-                key={object.name}
-                data-reveal-item
-                className="grid gap-6 border-t border-line py-10 md:grid-cols-[72px_200px_1fr]"
-              >
+              <li key={object.name} data-reveal-item className="border-t border-line">
+                <StudioHover className="grid gap-6 py-10 md:grid-cols-[72px_200px_1fr]">
                 <p className="font-mono-label text-gold">
                   {String(index + 1).padStart(2, "0")}
                 </p>
                 <div>
                   <p className="font-mono-label text-ink-soft">{object.use}</p>
                   {object.illustration ? (
-                    <ObjectStillLife kind={object.illustration} />
+                    <Cover className="mt-4">
+                      <ObjectStillLife kind={object.illustration} />
+                    </Cover>
                   ) : object.image ? (
-                    <ImageReveal
-                      src={object.image}
-                      alt={object.imageAlt ?? object.name}
-                      className="mt-4 aspect-[16/10] max-w-[200px] bg-surface-dim"
-                      sizes="200px"
-                      parallax={0}
-                    />
+                    <Cover className="mt-4">
+                      <ImageReveal
+                        src={object.image}
+                        alt={object.imageAlt ?? object.name}
+                        className="aspect-[16/10] max-w-[200px] bg-surface-dim"
+                        sizes="200px"
+                        parallax={0}
+                      />
+                    </Cover>
                   ) : null}
                 </div>
                 <div>
@@ -248,6 +294,7 @@ export default function StudioView() {
                     {object.note}
                   </p>
                 </div>
+                </StudioHover>
               </li>
             ))}
           </ul>

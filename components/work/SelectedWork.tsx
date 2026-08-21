@@ -6,8 +6,10 @@ import Link from "next/link";
 import { animateSelectedWork, crossfadeWorkVisual } from "@/animations/caseStudy";
 import { animateParallax } from "@/animations/parallax";
 import { useExperience } from "@/components/providers/ExperienceProvider";
+import WorkCard from "@/components/work/WorkCard";
+import WorkTicker from "@/components/work/WorkTicker";
 import { track } from "@/lib/analytics";
-import type { CaseStudy } from "@/case-studies";
+import { workAudiences, type CaseStudy } from "@/case-studies";
 
 function StudyCover({
   study,
@@ -103,6 +105,8 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
         </Link>
       </div>
 
+      <WorkTicker items={workAudiences.filter((audience) => audience !== "All")} />
+
       <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="relative hidden min-h-[70vh] lg:block">
           <div className="sticky top-24 overflow-hidden">
@@ -132,6 +136,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
         <ul className="flex flex-col">
           {studies.map((study, index) => (
             <li key={study.slug}>
+              <WorkCard>
               <Link
                 href={`/work/${study.slug}`}
                 data-work-row
@@ -145,7 +150,11 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                 onMouseEnter={() => setActive(index)}
               >
                 <div className="lg:hidden">
-                  <StudyCover study={study} className="mb-6 aspect-[4/5] min-h-[220px] w-full" />
+                  <div className="mb-6 overflow-hidden">
+                    <div data-work-cover>
+                      <StudyCover study={study} className="aspect-[4/5] min-h-[220px] w-full" />
+                    </div>
+                  </div>
                 </div>
                 <p className="font-mono-label text-ink-soft">
                   {study.index} / {study.year}
@@ -162,6 +171,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                 </p>
                 <p className="mt-4 font-mono-label text-navy">View case study →</p>
               </Link>
+              </WorkCard>
             </li>
           ))}
         </ul>
