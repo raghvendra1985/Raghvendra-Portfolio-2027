@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Manrope, Space_Mono } from "next/font/google";
+import { Manrope, Newsreader, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import ExperienceProvider from "@/components/providers/ExperienceProvider";
@@ -18,6 +18,14 @@ const display = localFont({
 
 const sans = Manrope({
   variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  adjustFontFallback: true,
+});
+
+const serif = Newsreader({
+  variable: "--font-serif",
   subsets: ["latin"],
   weight: ["400", "500"],
   display: "swap",
@@ -70,7 +78,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
+      className={`${display.variable} ${sans.variable} ${serif.variable} ${mono.variable} h-full antialiased`}
     >
       <head>
         <script

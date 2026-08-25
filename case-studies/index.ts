@@ -919,7 +919,7 @@ export const flagshipStudies = caseStudies.filter((study) => study.tier === "fla
 
 export const primaryStudies = caseStudies.filter((study) => study.lane === "primary");
 
-const featuredSlugs = ["eqty", "gwk-ghostwriter", "growing-with-kid", "bolo-buddy"] as const;
+const featuredSlugs = ["eqty", "gwk-ghostwriter", "nye"] as const;
 
 export const featuredWork = featuredSlugs.map((slug) => {
   const study = caseStudies.find((item) => item.slug === slug);

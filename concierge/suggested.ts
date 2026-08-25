@@ -8,28 +8,61 @@ export type SuggestedQuestion = {
   modeHint?: ConciergeMode;
 };
 
+export const openingQuestions: SuggestedQuestion[] = [
+  {
+    id: "product-leadership",
+    label: "Which projects show product leadership?",
+    query: "product leadership EQTY Rapipay Verizon Crowley design leadership",
+    preferIds: ["work:eqty", "work:nye", "work:verizon", "work:crowley", "experience:leadership-arc"],
+    modeHint: "hiring",
+  },
+  {
+    id: "ai-products-built",
+    label: "What is his experience with AI products?",
+    query: "AI products GWK Ghostwriter Bolo Buddy EQTY trust",
+    preferIds: [
+      "work:gwk-ghostwriter",
+      "work:bolo-buddy",
+      "work:eqty",
+      "knowledge:ai-products-earn-trust",
+      "framework:ai-trust-stack",
+    ],
+    modeHint: "hiring",
+  },
+  {
+    id: "enterprise-systems",
+    label: "Has he worked on complex enterprise systems?",
+    query: "enterprise systems Verizon Rapipay Crowley complex workflows",
+    preferIds: ["work:verizon", "work:nye", "work:crowley", "experience:leadership-arc"],
+    modeHint: "hiring",
+  },
+  {
+    id: "designops-approach",
+    label: "How does he approach DesignOps?",
+    query: "DesignOps operating model critique system design leadership",
+    preferIds: [
+      "services:systems-designops",
+      "knowledge:critique-system",
+      "knowledge:operating-model-invisible",
+    ],
+    modeHint: "project",
+  },
+  {
+    id: "advisory-availability",
+    label: "Is he available for advisory work?",
+    query: "available advisory leadership workshops selected opportunities",
+    preferIds: ["about:overview", "services:advisory-teaching", "services:product-leadership"],
+    modeHint: "hiring",
+  },
+];
+
 export const suggestedQuestions: SuggestedQuestion[] = [
+  ...openingQuestions,
   {
     id: "strongest-product",
     label: "Show me your strongest product work",
     query: "strongest product work flagship EQTY GWK Ghostwriter Growing With Kid Bolo Buddy",
     preferIds: ["work:eqty", "work:gwk-ghostwriter", "work:growing-with-kid", "work:bolo-buddy"],
-    modeHint: "hiring",
-  },
-  {
-    id: "ai-products-built",
-    label: "What AI products have you built?",
-    query: "AI products built GWK Ghostwriter Bolo Buddy EQTY Sagacito Ethiqly AI Trust Stack",
-    preferIds: [
-      "work:gwk-ghostwriter",
-      "work:bolo-buddy",
-      "work:eqty",
-      "work:sagacito",
-      "work:ethiqly",
-      "framework:ai-trust-stack",
-      "knowledge:ai-products-earn-trust",
-      "system:products",
-    ],
     modeHint: "hiring",
   },
   {

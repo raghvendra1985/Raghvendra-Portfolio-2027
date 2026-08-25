@@ -1,5 +1,4 @@
 export type Service = {
-  index: string;
   slug: string;
   title: string;
   summary: string;
@@ -10,20 +9,22 @@ export type Service = {
   engagement: string;
   outputs: string[];
   cta: string;
+  href: string;
+  related: { label: string; href: string };
   intent: "ai-product" | "designops" | "workshop" | "hiring";
 };
 
 export const services: Service[] = [
   {
-    index: "01",
     slug: "product-leadership",
-    title: "Product Leadership",
-    summary: "Strategy, product direction, and decision systems that help product, design and engineering make consistent calls.",
+    title: "Product direction",
+    summary:
+      "Strategy, product direction, and decision systems that help product, design and engineering make consistent calls.",
     description:
       "Strategy, product direction, and decision systems that help product, design and engineering make consistent calls.",
-    stack: ["Strategy", "Product direction", "Decision systems", "Cross-functional alignment"],
+    stack: ["Strategy", "Product direction", "Cross-functional alignment"],
     problem:
-      "The product has momentum, but strategy, UX, and delivery are not making the same decisions.",
+      "Your product has momentum, but priorities, experience, and delivery are not making the same decisions.",
     help: [
       "Product strategy and direction",
       "Decision systems that help product, design and engineering make consistent calls",
@@ -38,45 +39,47 @@ export const services: Service[] = [
       "Experience architecture",
     ],
     cta: "Discuss this problem",
+    href: "/contact?intent=ai-product",
+    related: { label: "EQTY", href: "/work/eqty" },
     intent: "ai-product",
   },
   {
-    index: "02",
     slug: "systems-designops",
-    title: "Systems & DesignOps",
-    summary: "Design systems, operating models, critique systems and team practices.",
+    title: "Complex systems",
+    summary: "Experience architecture, design systems, and operating models for products that have to scale.",
     description:
-      "Design systems, operating models, critique systems and team practices.",
-    stack: ["Design systems", "Operating models", "Critique systems", "Team practices"],
+      "Experience architecture, design systems, and operating models for products that have to scale.",
+    stack: ["Experience architecture", "Design systems", "Operating models"],
     problem:
-      "The team ships, but quality, critique, and the design system do not scale with the product.",
+      "Your workflows, platform, or service have become difficult to understand, operate, or scale.",
     help: [
       "Design system direction",
       "Operating models for design",
-      "Critique and review systems",
+      "Experience architecture for complex workflows",
       "Team practices that survive a hiring wave",
     ],
     engagement: "System work inside live product teams.",
     outputs: [
       "Design system direction",
       "Operating model",
-      "Critique system",
+      "Experience architecture",
       "Practice notes a team can keep",
     ],
     cta: "Discuss this problem",
+    href: "/contact?intent=designops",
+    related: { label: "Rapipay / Crowley", href: "/work/nye" },
     intent: "designops",
   },
   {
-    index: "03",
     slug: "ai-product-building",
-    title: "AI Product Building",
+    title: "AI product building",
     summary:
       "AI-native products, workflows, prototypes and trust-centered interaction models.",
     description:
       "AI-native products, workflows, prototypes and trust-centered interaction models.",
-    stack: ["AI-native products", "Workflows", "Prototypes", "Trust-centered interaction"],
+    stack: ["AI-native products", "Prototyping", "Trust and interaction"],
     problem:
-      "Your AI product has strong technology but unclear workflows, UX, trust, or product scope.",
+      "The technology is promising, but the product still needs clear workflows, scope, trust, and human control.",
     help: [
       "Product scope for AI features",
       "Workflows and human/AI handoffs",
@@ -92,17 +95,18 @@ export const services: Service[] = [
       "Experiment plan",
     ],
     cta: "Discuss this problem",
+    href: "/contact?intent=ai-product",
+    related: { label: "GWK Ghostwriter", href: "/work/gwk-ghostwriter" },
     intent: "ai-product",
   },
   {
-    index: "04",
     slug: "advisory-teaching",
-    title: "Advisory & Teaching",
-    summary: "Workshops, mentoring, curriculum and design leadership development.",
-    description: "Workshops, mentoring, curriculum and design leadership development.",
-    stack: ["Workshops", "Mentoring", "Curriculum", "Leadership development"],
+    title: "Design leadership",
+    summary: "Critique, decision systems, hiring support, and a shared product language.",
+    description: "Critique, decision systems, hiring support, and a shared product language.",
+    stack: ["Leadership", "DesignOps", "Workshops", "Mentoring"],
     problem:
-      "The team needs a shared language for product, critique, or AI — not another slide deck.",
+      "The team needs stronger critique, decision systems, hiring support, or a shared product language.",
     help: [
       "Workshops and team sessions",
       "Design leadership development",
@@ -116,7 +120,9 @@ export const services: Service[] = [
       "Practice exercises",
       "Follow-through notes",
     ],
-    cta: "Start a project",
+    cta: "Start a conversation",
+    href: "/contact?intent=workshop",
+    related: { label: "View experience", href: "/about#experience" },
     intent: "workshop",
   },
 ];

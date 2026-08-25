@@ -7,16 +7,16 @@ export const site = {
   email: "hello@raghvendrasingh.com",
   linkedin: "https://www.linkedin.com/in/raghvendrasingh23/",
   whatsapp: "https://wa.me/919555909094",
-  location: "Delhi NCR, India · Remote worldwide",
+  location: "Delhi NCR, India · Working remotely",
   status: "Open to selected opportunities",
   statusDetail:
-    "Available for remote product leadership, advisory, and selected collaborations.",
+    "Remote product leadership, advisory, and thoughtfully matched collaborations.",
   /**
    * Recruiter PDF. Generated from /resume via `npm run resume:pdf`.
    */
   resumeHref: "/raghvendra-singh-resume.pdf",
   experienceLine: "20 years in design · 14+ years in digital product and UX",
-  positioning: "Product Design Leader · Systems Thinker · AI Product Builder",
+  positioning: "Product design leader · Systems thinker · Hands-on builder",
   /** Amazon.in Associates tracking ID. Set NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG on Vercel. */
   amazonAssociatesTag: process.env.NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG ?? "",
   amazonStore: "https://www.amazon.in",
@@ -39,35 +39,36 @@ export function whatsappHref(text?: string) {
 
 export const navLinks = [
   { label: "Work", href: "/work" },
-  { label: "System", href: "/system" },
   { label: "About", href: "/about" },
+  { label: "Notes", href: "/knowledge" },
+  { label: "Products", href: "/products" },
+  { label: "Contact", href: "/contact" },
+  { label: "System", href: "/system" },
   { label: "Studio", href: "/studio" },
-  { label: "Knowledge", href: "/knowledge" },
-    { label: "Products", href: "/products" },
-    { label: "Contact", href: "/contact" },
 ];
 
-const primaryHrefs = ["/work", "/products", "/about", "/contact"] as const;
+const primaryHrefs = ["/work", "/about", "/knowledge", "/products"] as const;
+const menuHrefs = ["/contact", "/system", "/studio"] as const;
 
 export const primaryNavLinks = primaryHrefs.map(
   (href) => navLinks.find((link) => link.href === href)!,
 );
 
+export const menuNavLinks = menuHrefs.map(
+  (href) => navLinks.find((link) => link.href === href)!,
+);
+
 export const footerLinks = {
   sitemap: [
-    { label: "Home", href: "/" },
     { label: "Work", href: "/work" },
-    { label: "System", href: "/system" },
     { label: "About", href: "/about" },
-    { label: "Studio", href: "/studio" },
-    { label: "Knowledge", href: "/knowledge" },
+    { label: "Notes", href: "/knowledge" },
     { label: "Products", href: "/products" },
-    { label: "Library", href: "/account/library" },
     { label: "Contact", href: "/contact" },
   ],
   social: [
-    { label: "LinkedIn", href: site.linkedin },
     { label: "Email", href: `mailto:${site.email}` },
+    { label: "LinkedIn", href: site.linkedin },
     { label: "WhatsApp", href: site.whatsapp },
   ],
 };

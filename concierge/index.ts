@@ -12,6 +12,7 @@ export { buildConciergeIndex, getConciergeEntry } from "./sources";
 export { retrieve, tokenize, expandQuery } from "./retrieve";
 export { composeResponse, evidenceSourceLabel } from "./compose";
 export {
+  openingQuestions,
   suggestedQuestions,
   matchSuggestedQuestion,
   nextQuestionsFor,

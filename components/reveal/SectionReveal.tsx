@@ -10,11 +10,15 @@ export default function SectionReveal({
   className,
   options,
   id,
+  charmRest = false,
+  charmDense = false,
 }: {
   children: ReactNode;
   className?: string;
   options?: RevealOptions;
   id?: string;
+  charmRest?: boolean;
+  charmDense?: boolean;
 }) {
   const ref = useRef<HTMLElement>(null);
   const { config } = useExperience();
@@ -46,7 +50,14 @@ export default function SectionReveal({
   }, [config, fade, blur, translate, scale, duration, delay, stagger, ease, start]);
 
   return (
-    <section ref={ref} id={id} className={className} data-reveal>
+    <section
+      ref={ref}
+      id={id}
+      className={className}
+      data-reveal
+      data-charm-rest={charmRest ? "true" : undefined}
+      data-charm-dense={charmDense ? "true" : undefined}
+    >
       {children}
     </section>
   );

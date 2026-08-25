@@ -123,6 +123,7 @@ export function animateCaseStudy(root: HTMLElement, config: MotionConfig) {
 
 export type SelectedWorkOptions = {
   onIndex?: (index: number) => void;
+  isPaused?: () => boolean;
 };
 
 /**
@@ -169,10 +170,14 @@ export function animateSelectedWork(
         trigger: row,
         start: "top 55%",
         end: "bottom 55%",
-        onEnter: () =>
-          setWorkIndex(groups, progress, index, rows.length, options.onIndex, config),
-        onEnterBack: () =>
-          setWorkIndex(groups, progress, index, rows.length, options.onIndex, config),
+        onEnter: () => {
+          if (options.isPaused?.()) return;
+          setWorkIndex(groups, progress, index, rows.length, options.onIndex, config);
+        },
+        onEnterBack: () => {
+          if (options.isPaused?.()) return;
+          setWorkIndex(groups, progress, index, rows.length, options.onIndex, config);
+        },
       });
     });
   });

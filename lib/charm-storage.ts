@@ -99,13 +99,19 @@ export function subscribeCharmState(callback: (state: CharmState) => void) {
   };
 }
 
-/** Keep the hang point off the wordmark, Menu toggle, and reading column. */
+/** Keep the hang point inside the right-hand charm corridor on desktop. */
+export function corridorWidth(width = typeof window === "undefined" ? 1280 : window.innerWidth) {
+  return Math.min(160, Math.max(112, width * 0.08));
+}
+
 export function clampHangX(hangX: number, width = typeof window === "undefined" ? 1280 : window.innerWidth) {
-  const phone = width < 768;
-  const tablet = width >= 768 && width < 1024;
-  const minPx = phone ? width * 0.72 : tablet ? width * 0.78 : 200;
-  const maxPx = width - (phone ? 56 : tablet ? 64 : 80);
-  const px = clampUnit(hangX) * width;
-  const clamped = Math.min(Math.max(px, Math.min(minPx, maxPx - 8)), Math.max(maxPx, minPx + 8));
-  return clamped / width;
+  if (width < 1024) {
+    const minPx = width * 0.78;
+    const maxPx = width - 56;
+    const px = clampUnit(hangX) * width;
+    const clamped = Math.min(Math.max(px, Math.min(minPx, maxPx - 8)), Math.max(maxPx, minPx + 8));
+    return clamped / width;
+  }
+  const corridor = corridorWidth(width);
+  return (width - corridor / 2) / width;
 }

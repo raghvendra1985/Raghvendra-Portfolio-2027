@@ -25,15 +25,15 @@ export default function AmbientLayer() {
     >
       <div
         data-ambient-light
-        className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-gold opacity-[0.07] blur-3xl"
+        className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-gold opacity-[0.04] blur-3xl"
       />
       <div
         data-ambient-light
-        className="absolute -right-16 top-[40%] h-80 w-80 rounded-full bg-green opacity-[0.06] blur-3xl"
+        className="absolute -right-16 top-[40%] h-80 w-80 rounded-full bg-green opacity-[0.035] blur-3xl"
       />
       <div
         data-ambient-breath
-        className="absolute bottom-[-8rem] left-1/3 h-96 w-96 rounded-full bg-navy opacity-[0.04] blur-3xl"
+        className="absolute bottom-[-8rem] left-1/3 h-96 w-96 rounded-full bg-navy opacity-[0.025] blur-3xl"
       />
       <svg className="grain" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <filter id="rs-grain">

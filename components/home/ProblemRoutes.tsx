@@ -52,7 +52,9 @@ export default function ProblemRoutes() {
                       className="pointer-events-none absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gold motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-x-100"
                       aria-hidden="true"
                     />
-                    <span className="font-mono-label text-gold">{service?.index ?? "00"}</span>
+                    <span className="font-mono-label text-gold">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                     <div className="mt-8">
                       <span className="block max-w-md type-h3">{route.label}</span>
                       <span

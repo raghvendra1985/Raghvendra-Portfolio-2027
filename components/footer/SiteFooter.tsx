@@ -6,6 +6,7 @@ import { animateFooter } from "@/animations/footer";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { footerLinks, site } from "@/lib/site";
 import ResumeCta from "@/components/cta/ResumeCta";
+import { homeFooter } from "@/home/copy";
 
 export default function SiteFooter() {
   const rootRef = useRef<HTMLElement>(null);
@@ -29,11 +30,9 @@ export default function SiteFooter() {
           <span className="text-gold">.</span>
         </p>
 
-        <div className="mt-16 grid gap-10 border-t border-mist/15 pt-10 md:grid-cols-4">
+        <div className="mt-16 grid gap-10 border-t border-mist/15 pt-10 md:grid-cols-2 lg:grid-cols-4">
           <div data-footer-link>
-            <p className="max-w-xs text-base leading-relaxed text-mist/80">
-              {site.positioning}. {site.experienceLine}.
-            </p>
+            <p className="max-w-xs type-body text-mist/85">{homeFooter.blurb}</p>
           </div>
 
           <div>
@@ -41,7 +40,10 @@ export default function SiteFooter() {
             <ul className="mt-4 space-y-2">
               {footerLinks.sitemap.map((link) => (
                 <li key={link.href} data-footer-link>
-                  <Link href={link.href} className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold">
+                  <Link
+                    href={link.href}
+                    className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -52,19 +54,21 @@ export default function SiteFooter() {
           <div>
             <p className="font-mono-label text-mist/70">Connect</p>
             <ul className="mt-4 space-y-2">
-              {footerLinks.social.map((link) => (
-                <li key={link.label} data-footer-link>
-                  <a
-                    href={link.href}
-                    className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
-                    {...(link.href.startsWith("http")
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {footerLinks.social
+                .filter((link) => link.label !== "WhatsApp")
+                .map((link) => (
+                  <li key={link.label} data-footer-link>
+                    <a
+                      href={link.href}
+                      className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
+                      {...(link.href.startsWith("http")
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
               <li data-footer-link>
                 <ResumeCta
                   appearance="text"
@@ -72,6 +76,20 @@ export default function SiteFooter() {
                   className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
                 />
               </li>
+              {footerLinks.social
+                .filter((link) => link.label === "WhatsApp")
+                .map((link) => (
+                  <li key={link.label} data-footer-link>
+                    <a
+                      href={link.href}
+                      className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
             </ul>
           </div>
 
@@ -86,11 +104,9 @@ export default function SiteFooter() {
                 />
                 {site.status}
               </p>
-              <p className="mt-2 text-base text-mist/75">{site.statusDetail}</p>
+              <p className="mt-2 type-body text-mist/80">{site.statusDetail}</p>
             </div>
-            <p className="mt-8 font-mono-label text-mist/60">
-              {site.location}
-            </p>
+            <p className="mt-8 font-mono-label text-mist/60">{site.location}</p>
           </div>
         </div>
 

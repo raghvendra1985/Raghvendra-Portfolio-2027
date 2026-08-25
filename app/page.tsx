@@ -1,19 +1,20 @@
 import Hero from "@/components/hero/Hero";
 import SelectedWork from "@/components/work/SelectedWork";
 import AboutPolaroid from "@/components/about/AboutPolaroid";
+import ConnectiveThesis from "@/components/home/ConnectiveThesis";
+import CompactCharmPicker from "@/components/delight/CompactCharmPicker";
 import EnterpriseLeadership from "@/components/home/EnterpriseLeadership";
 import HiringPath from "@/components/home/HiringPath";
-import ProblemRoutes from "@/components/home/ProblemRoutes";
 import PracticeLanes from "@/components/home/PracticeLanes";
 import HomeNotes from "@/components/home/HomeNotes";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import { TrackedLink, TrackedMagneticButton } from "@/components/analytics/TrackedCta";
 import ProductShelf from "@/components/products/ProductShelf";
-import CharmGallery from "@/components/delight/CharmGallery";
 import ServiceViewTracker from "@/components/analytics/ServiceViewTracker";
 import { enterpriseLeadership, featuredWork } from "@/case-studies";
 import { services } from "@/services";
+import { homeAbout, homeContact, homeKnowledge, homePractice } from "@/home/copy";
 
 export default function HomePage() {
   return (
@@ -22,48 +23,59 @@ export default function HomePage() {
 
       <SelectedWork studies={featuredWork} />
 
-      <SectionReveal className="border-t border-line px-[var(--page-pad)] py-24">
-        <div className="mx-auto grid max-w-[1440px] items-center gap-12 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-16">
-          <div data-reveal-item className="mx-auto w-full max-w-[300px] lg:mx-0">
+      <ConnectiveThesis />
+
+      <CompactCharmPicker />
+
+      <SectionReveal
+        charmRest
+        className="border-t border-line px-[var(--page-pad)] py-24"
+      >
+        <div className="mx-auto grid max-w-[1440px] items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-20">
+          <div data-reveal-item className="mx-auto w-full max-w-[320px] lg:mx-0">
             <AboutPolaroid
               src="/assets/about/raghvendra-singh.png"
               alt="Raghvendra Singh"
               idle
-              sizes="300px"
+              sizes="320px"
             />
           </div>
           <div data-reveal-item>
-            <p className="font-mono-label text-ink-soft">02 / About</p>
-            <h2 className="mt-4 max-w-xl type-h1">
-              Twenty years of designing across products, organisations and classrooms.
+            <p className="font-mono-label text-ink-soft">{homeAbout.index}</p>
+            <h2 className="mt-4 max-w-xl font-serif text-[clamp(2rem,1.5rem+1.6vw,3.15rem)] font-normal leading-[1.15] tracking-[-0.02em]">
+              {homeAbout.title}
             </h2>
-            <p className="mt-6 max-w-xl type-lead text-ink-soft">
-              Product design leader working across enterprise systems, fintech, AI products,
-              founder-led ventures, and design education. I move between strategy, systems,
-              interaction design, team building, and shipping products.
-            </p>
+            <p className="mt-6 max-w-[65ch] type-lead text-ink">{homeAbout.body}</p>
             <div className="mt-8">
-              <MagneticButton href="/about" variant="secondary" cursor="Open" className="w-full justify-center sm:w-auto">
-                More about me
+              <MagneticButton
+                href={homeAbout.href}
+                variant="secondary"
+                cursor="Open"
+                className="w-full justify-center sm:w-auto"
+              >
+                {homeAbout.cta}
               </MagneticButton>
             </div>
           </div>
         </div>
       </SectionReveal>
 
-      <ProblemRoutes />
-
       <SectionReveal
         id="practice"
+        charmRest
+        charmDense
         className="scroll-mt-28 border-t border-line bg-surface-dim px-[var(--page-pad)] py-24"
       >
+        <span id="solve" className="sr-only">
+          Practice
+        </span>
         <ServiceViewTracker />
         <div className="mx-auto max-w-[1440px]">
           <p className="font-mono-label text-ink-soft" data-reveal-item>
-            03 / Practice
+            {homePractice.index}
           </p>
           <h2 id="practice-heading" className="mt-4 max-w-3xl type-h2" data-reveal-item>
-            How I contribute.
+            {homePractice.title}
           </h2>
           <PracticeLanes services={services} />
         </div>
@@ -73,14 +85,19 @@ export default function HomePage() {
 
       <HiringPath />
 
-      <SectionReveal className="border-t border-line px-[var(--page-pad)] py-24">
+      <SectionReveal
+        charmRest
+        charmDense
+        className="border-t border-line px-[var(--page-pad)] py-24"
+      >
         <div className="mx-auto max-w-[1440px]">
-          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between" data-reveal-item>
+          <div
+            className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between"
+            data-reveal-item
+          >
             <div>
-              <p className="font-mono-label text-ink-soft">04 / Knowledge</p>
-              <h2 className="mt-4 type-h2">
-                Ideas made useful.
-              </h2>
+              <p className="font-mono-label text-ink-soft">{homeKnowledge.index}</p>
+              <h2 className="mt-4 type-h2">{homeKnowledge.title}</h2>
             </div>
             <TrackedLink
               href="/knowledge"
@@ -89,7 +106,7 @@ export default function HomePage() {
               event="knowledge_article_clicked"
               payload={{ slug: "index" }}
             >
-              All notes →
+              {homeKnowledge.all} →
             </TrackedLink>
           </div>
           <HomeNotes />
@@ -98,28 +115,24 @@ export default function HomePage() {
 
       <ProductShelf />
 
-      <CharmGallery />
-
-      <SectionReveal className="border-t border-navy bg-navy px-[var(--page-pad)] py-24 text-mist">
+      <SectionReveal
+        charmRest
+        className="border-t border-navy bg-navy px-[var(--page-pad)] py-24 text-mist"
+      >
         <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-8 sm:flex-row sm:items-end">
           <div data-reveal-item>
-            <p className="font-mono-label text-mist/50">05 / Contact</p>
-            <h2 className="mt-4 max-w-xl type-h1">
-              Design strategy is infrastructure. Let&apos;s talk.
-            </h2>
-            <p className="mt-4 max-w-lg type-lead text-mist/70">
-              Available for senior product design roles, design leadership, advisory, workshops,
-              and selected product collaborations.
-            </p>
+            <p className="font-mono-label text-mist/70">{homeContact.index}</p>
+            <h2 className="mt-4 max-w-xl type-h1">{homeContact.title}</h2>
+            <p className="mt-4 max-w-[65ch] type-lead text-mist/85">{homeContact.body}</p>
           </div>
           <div data-reveal-item>
             <TrackedMagneticButton
-              href="/contact"
+              href={homeContact.href}
               variant="gold"
               event="contact_cta_clicked"
               payload={{ from: "home" }}
             >
-              Start a conversation
+              {homeContact.cta}
             </TrackedMagneticButton>
           </div>
         </div>

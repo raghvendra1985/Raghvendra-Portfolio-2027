@@ -51,6 +51,14 @@ export default function AboutView() {
             priority
             sizes="(max-width: 1024px) 80vw, 320px"
           />
+          <div className="mt-6 ml-auto w-[58%] max-w-[180px]">
+            <AboutPolaroid
+              src="/assets/studio/desktop.jpg"
+              alt="A desk in Raghvendra’s studio"
+              idle
+              sizes="180px"
+            />
+          </div>
         </div>
         <div data-reveal-item className="max-w-xl">
           <p className="type-h3 text-navy">

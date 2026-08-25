@@ -11,8 +11,9 @@ export const CHARM_SIZE = 64;
 export const CHARM_VISUAL = 84;
 export const REHANG_ZONE = 60;
 export const BEAD_STATIONS = [34, 24, 15] as const;
-export const DESKTOP_SCALE = 1.85;
-export const MOBILE_SCALE = 1.35;
+export const DESKTOP_SCALE = 1.4;
+export const DESKTOP_SCALE_DENSE = 1.05;
+export const MOBILE_SCALE = 1.1;
 export const PHONE_SCALE = 0.58;
 const STEP = 1 / 120;
 
@@ -54,7 +55,16 @@ export function animateCharm(handles: PendulumHandles, options: PendulumOptions)
     const width = window.innerWidth;
     if (width < 768) return PHONE_SCALE;
     if (width < 1024 || config.isMobile) return MOBILE_SCALE;
-    return DESKTOP_SCALE;
+    const dense = document.documentElement.dataset.charmDense === "true";
+    return dense ? DESKTOP_SCALE_DENSE : DESKTOP_SCALE;
+  };
+  const hangOriginY = () => {
+    const nav = document.querySelector<HTMLElement>("[data-nav]");
+    const compact = nav?.getAttribute("data-compact") === "true";
+    const styles = getComputedStyle(document.documentElement);
+    const raw = styles.getPropertyValue(compact ? "--nav-height-compact" : "--nav-height");
+    const parsed = Number.parseFloat(raw);
+    return Number.isFinite(parsed) ? parsed : compact ? 64 : 88;
   };
   const hangPx = () => (clampHangX(getHangX()) * window.innerWidth) / worldScale();
   const maxStretch = STRING_LENGTH * 1.4;
@@ -100,6 +110,12 @@ export function animateCharm(handles: PendulumHandles, options: PendulumOptions)
   let mouseVx = 0;
   let lastMouseT = 0;
   let acc = 0;
+  let lastLive = 0;
+  const IDLE_MS = 2800;
+
+  const markLive = () => {
+    lastLive = performance.now();
+  };
 
   const lastNode = () => nodes[NODE_COUNT - 1];
 
@@ -183,14 +199,15 @@ export function animateCharm(handles: PendulumHandles, options: PendulumOptions)
     const grabSize = Math.round(24 * m) * 2;
     const halfGrab = grabSize / 2;
 
-    world.setAttribute("transform", `scale(${m.toFixed(4)})`);
+    const originY = hangOriginY();
+    world.setAttribute("transform", `translate(0 ${originY.toFixed(1)}) scale(${m.toFixed(4)})`);
     visual.setAttribute(
       "transform",
       `translate(${tip.x.toFixed(2)} ${tip.y.toFixed(2)}) rotate(${deg.toFixed(2)})`,
     );
     charm.style.width = `${grabSize}px`;
     charm.style.height = `${grabSize}px`;
-    charm.style.transform = `translate(${(grabWorldX * m - halfGrab).toFixed(1)}px, ${(grabWorldY * m - halfGrab).toFixed(1)}px)`;
+    charm.style.transform = `translate(${(grabWorldX * m - halfGrab).toFixed(1)}px, ${(grabWorldY * m + originY - halfGrab).toFixed(1)}px)`;
     stringEl.setAttribute("d", ropePath());
 
     const beadEls = beads.children;
@@ -202,27 +219,28 @@ export function animateCharm(handles: PendulumHandles, options: PendulumOptions)
       );
     });
     if (caption) {
-      caption.style.transform = `translate(${grabWorldX * m}px, ${grabWorldY * m + halfGrab + 8}px) translate(-50%, 0)`;
+      caption.style.transform = `translate(${grabWorldX * m}px, ${grabWorldY * m + originY + halfGrab + 8}px) translate(-50%, 0)`;
     }
     if (switcher) {
-      switcher.style.transform = `translate(${grabWorldX * m}px, ${grabWorldY * m + halfGrab + 24}px) translate(-50%, 0)`;
+      switcher.style.display = "none";
     }
   };
 
   const integrate = () => {
     time += STEP;
-    const wind = 0.0035 * Math.sin(time * 0.55) + 0.002 * Math.sin(time * 1.3 + 0.8);
+    const live = performance.now() - lastLive < IDLE_MS;
+    const wind = live ? 0.0035 * Math.sin(time * 0.55) : 0;
     for (let i = 1; i < NODE_COUNT; i += 1) {
       const node = nodes[i];
-      const vx = (node.x - node.px) * 0.98;
-      const vy = (node.y - node.py) * 0.98;
+      const vx = (node.x - node.px) * (live ? 0.98 : 0.86);
+      const vy = (node.y - node.py) * (live ? 0.98 : 0.86);
       node.px = node.x;
       node.py = node.y;
       node.x += vx + wind * (i / (NODE_COUNT - 1));
       node.y += vy + 0.125;
     }
 
-    if (mouseSeen && !config.isMobile && !dragging) {
+    if (live && mouseSeen && !config.isMobile && !dragging) {
       const art = getArt();
       const tip = lastNode();
       const angle = Math.atan2(tip.x - nodes[NODE_COUNT - 2].x, tip.y - nodes[NODE_COUNT - 2].y);
@@ -271,6 +289,7 @@ export function animateCharm(handles: PendulumHandles, options: PendulumOptions)
     const tip = lastNode();
     tip.px -= px;
     tip.py -= py;
+    markLive();
   };
 
   const impulseFromTap = () => {
@@ -310,6 +329,7 @@ export function animateCharm(handles: PendulumHandles, options: PendulumOptions)
     event.preventDefault();
     charm.setPointerCapture(event.pointerId);
     dragging = true;
+    markLive();
     pinPointer();
     constrain();
     charm.style.cursor = "grabbing";
@@ -378,19 +398,10 @@ export function animateCharm(handles: PendulumHandles, options: PendulumOptions)
       return;
     }
 
-    const elapsed = performance.now() - downTime;
-    const travel = Math.hypot(worldPoint.x - downX, worldPoint.y - downY);
-    const click = elapsed < 280 && travel < 6;
-
-    if (click && onSwitch) {
-      onSwitch(event.shiftKey ? -1 : 1);
-      shove(8 * (event.shiftKey ? -1 : 1));
-      return;
-    }
-
     const impulseX = Math.max(-28, Math.min(28, velocityX / 90));
     const impulseY = Math.max(-18, Math.min(18, velocityY / 120));
     shove(impulseX, impulseY);
+    markLive();
     const flicked = Math.hypot(impulseX, impulseY) > 4;
     if (flicked) onFlick();
   };
@@ -408,21 +419,17 @@ export function animateCharm(handles: PendulumHandles, options: PendulumOptions)
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       onRitual();
-      return;
-    }
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      onSwitch?.(1);
-      return;
-    }
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      onSwitch?.(-1);
     }
   };
 
   const tick = () => {
     if (paused() || dragging || ritualLock) return;
+    if (performance.now() - lastLive > IDLE_MS && !dragging) {
+      nodes = seedNodes(hangPx());
+      constrain();
+      apply();
+      return;
+    }
     acc += Math.min(gsap.ticker.deltaRatio() / 60, 0.1);
     let stepped = false;
     let steps = 0;
@@ -444,7 +451,6 @@ export function animateCharm(handles: PendulumHandles, options: PendulumOptions)
   charm.addEventListener("keydown", onKey);
   window.addEventListener(CHARM_FLICK_EVENT, onFlickRequest);
   gsap.ticker.add(tick);
-  if (consumeCharmFlick()) impulse();
 
   return () => {
     savedRope = {

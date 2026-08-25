@@ -59,7 +59,7 @@ export default function ConciergeTrigger({
         variant="float"
         source="float"
         cursor
-        className={`fixed bottom-8 right-6 z-[55] hidden min-h-11 border border-navy/20 bg-mist/95 px-4 py-3 font-mono-label text-navy shadow-sm backdrop-blur lg:inline-flex ${className}`}
+        className={`fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-[55] hidden min-h-11 border border-navy/20 bg-mist/95 px-4 py-3 font-mono-label text-navy shadow-sm backdrop-blur lg:inline-flex ${className}`}
       >
         Ask the portfolio
         <span className="ml-3 text-ink-soft" aria-hidden="true">
@@ -74,9 +74,18 @@ export default function ConciergeTrigger({
       <TriggerButton
         variant="mobile-bar"
         source="mobile-bar"
-        className={`fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 z-[55] min-h-11 border border-navy/20 bg-mist/95 px-4 py-3 font-mono-label text-navy shadow-sm backdrop-blur lg:hidden ${className}`}
+        className={`fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-[55] inline-flex h-11 w-11 items-center justify-center border border-navy/20 bg-mist/95 font-mono-label text-navy shadow-sm backdrop-blur lg:hidden ${className}`}
       >
-        Ask
+        <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+          <path
+            d="M5 12h.01M12 7a4 4 0 0 1 4 4c0 1.5-.8 2.3-2.2 3.2-.9.6-1.8 1.3-1.8 2.3v.01M12 19h.01"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </TriggerButton>
     );
   }

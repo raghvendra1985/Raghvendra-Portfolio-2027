@@ -10,7 +10,7 @@ export default function HomeNotes() {
 
   return (
     <div className="mt-10 grid gap-4 lg:grid-cols-12">
-      <WorkCard className="lg:col-span-7 bg-paper">
+      <WorkCard className="bg-paper lg:col-span-7">
         <TrackedLink
           href={`/knowledge/${featured.slug}`}
           data-reveal-item
@@ -19,10 +19,7 @@ export default function HomeNotes() {
           payload={{ slug: featured.slug }}
           className="group flex h-full flex-col bg-paper"
         >
-          <div
-            data-work-cover
-            className="relative aspect-[16/10] overflow-hidden bg-mist"
-          >
+          <div data-work-cover className="relative aspect-[16/10] overflow-hidden bg-mist">
             <Image
               src={featured.cover}
               alt={featured.coverAlt}
@@ -39,12 +36,12 @@ export default function HomeNotes() {
           <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
             <div>
               <p className="font-mono-label text-gold">{featured.category}</p>
-              <h3 className="mt-3 type-h3">{featured.title}</h3>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
-                {featured.deck}
-              </p>
+              <h3 className="mt-3 font-serif text-[1.65rem] font-normal leading-snug tracking-[-0.02em] sm:text-[1.85rem]">
+                {featured.title}
+              </h3>
+              <p className="mt-4 max-w-[65ch] type-body text-ink">{featured.deck}</p>
             </div>
-            <p className="mt-6 font-mono-label text-green">
+            <p className="mt-6 font-mono-label text-navy">
               {featured.readMinutes} min read →
             </p>
           </div>
@@ -83,12 +80,13 @@ export default function HomeNotes() {
                 <div className="flex min-w-0 flex-1 flex-col justify-between p-5 sm:p-6">
                   <div>
                     <p className="font-mono-label text-gold">{article.category}</p>
-                    <h3 className="mt-2 type-h3 text-[1.25rem] leading-snug sm:text-[1.5rem]">
+                    <h3 className="mt-2 font-serif text-[1.2rem] font-normal leading-snug tracking-[-0.015em] sm:text-[1.35rem]">
                       {article.title}
                     </h3>
+                    <p className="mt-3 line-clamp-2 type-body text-ink">{article.deck}</p>
                   </div>
-                  <p className="mt-4 font-mono-label text-ink-soft">
-                    {article.readMinutes} min →
+                  <p className="mt-4 font-mono-label text-navy">
+                    {article.readMinutes} min read →
                   </p>
                 </div>
               </TrackedLink>

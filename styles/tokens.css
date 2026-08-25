@@ -6,7 +6,7 @@
 
   --navy-soft: color-mix(in srgb, var(--navy) 72%, var(--mist));
   --ink: var(--navy);
-  --ink-soft: color-mix(in srgb, var(--navy) 58%, var(--mist));
+  --ink-soft: color-mix(in srgb, var(--navy) 72%, var(--mist));
   --line: color-mix(in srgb, var(--navy) 12%, transparent);
   --line-strong: color-mix(in srgb, var(--navy) 28%, transparent);
   --surface: var(--mist);
@@ -30,6 +30,7 @@
   --nav-height: 88px;
   --nav-height-compact: 64px;
   --page-pad: clamp(1.5rem, 4.5vw, 4.5rem);
+  --charm-corridor: clamp(112px, 8vw, 160px);
   --max-width: 1440px;
 
   --weight-regular: 400;
@@ -37,8 +38,8 @@
 
   --text-caption: 0.8125rem;
   --text-small: 0.875rem;
-  --text-body: clamp(1rem, 0.98rem + 0.08vw, 1.0625rem);
-  --text-lead: clamp(1.125rem, 1.08rem + 0.18vw, 1.25rem);
+  --text-body: clamp(1.125rem, 1.08rem + 0.25vw, 1.375rem);
+  --text-lead: clamp(1.1875rem, 1.12rem + 0.22vw, 1.375rem);
   --text-h3: clamp(1.5rem, 1.35rem + 0.6vw, 2rem);
   --text-h2: clamp(1.875rem, 1.65rem + 0.7vw, 2.5rem);
   --text-h1: clamp(2.5rem, 2.1rem + 1.6vw, 3.5rem);
@@ -53,7 +54,7 @@
 
 @media (max-width: 1023px) {
   :root {
-    --ink-soft: color-mix(in srgb, var(--navy) 70%, var(--mist));
+    --ink-soft: color-mix(in srgb, var(--navy) 78%, var(--mist));
   }
 }
 
@@ -73,5 +74,6 @@
   --color-paper-edge: var(--paper-edge);
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
 }

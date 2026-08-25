@@ -12,7 +12,7 @@ import { useExperience } from "@/components/providers/ExperienceProvider";
 import ConciergeTrigger from "@/components/concierge/ConciergeTrigger";
 import CharmPicker from "@/components/delight/CharmPicker";
 import ResumeCta from "@/components/cta/ResumeCta";
-import { footerLinks, navLinks, site } from "@/lib/site";
+import { footerLinks, menuNavLinks, site } from "@/lib/site";
 
 export default function MenuOverlay({
   open,
@@ -65,9 +65,9 @@ export default function MenuOverlay({
         <h2 id="site-menu-title" className="sr-only">
           Site menu
         </h2>
-        <nav aria-label="All pages" className="mx-auto w-full max-w-[1440px] flex-1">
+        <nav aria-label="More pages" className="mx-auto w-full max-w-[1440px] flex-1">
           <ul className="grid gap-2 sm:grid-cols-2 sm:gap-x-16 sm:gap-y-3">
-            {navLinks.map((link, index) => {
+            {menuNavLinks.map((link, index) => {
               const active =
                 pathname === link.href || pathname.startsWith(`${link.href}/`);
               return (

@@ -7,16 +7,18 @@ import { animateSelectedWork, crossfadeWorkVisual } from "@/animations/caseStudy
 import { animateParallax } from "@/animations/parallax";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import WorkCard from "@/components/work/WorkCard";
-import WorkTicker from "@/components/work/WorkTicker";
 import { track } from "@/lib/analytics";
-import { workAudiences, type CaseStudy } from "@/case-studies";
+import type { CaseStudy } from "@/case-studies";
+import { homeWork, homeWorkCards } from "@/home/copy";
 
 function StudyCover({
   study,
+  title,
   priority = false,
   className = "",
 }: {
   study: CaseStudy;
+  title: string;
   priority?: boolean;
   className?: string;
 }) {
@@ -29,7 +31,7 @@ function StudyCover({
     <div className={`relative overflow-hidden bg-navy ${className}`} data-shared-image>
       <Image
         src={src}
-        alt={`${study.client} — ${study.title}`}
+        alt={`${study.client} — ${title}`}
         fill
         priority={priority}
         sizes="(max-width: 1024px) 100vw, 55vw"
@@ -42,13 +44,20 @@ function StudyCover({
 
 export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
   const rootRef = useRef<HTMLElement>(null);
+  const pausedRef = useRef(false);
   const { config } = useExperience();
   const [active, setActive] = useState(0);
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    const ctx = animateSelectedWork(root, config, { onIndex: setActive });
+    const ctx = animateSelectedWork(root, config, {
+      onIndex: (index) => {
+        if (pausedRef.current) return;
+        setActive(index);
+      },
+      isPaused: () => pausedRef.current,
+    });
     const parallax = animateParallax(root, config);
     return () => {
       ctx.revert();
@@ -76,10 +85,15 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
     }
   }
 
+  const total = String(studies.length).padStart(2, "0");
+
   return (
     <section
       ref={rootRef}
-      className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-16 sm:py-20"
+      id="work"
+      data-charm-dense="true"
+      data-charm-rest="true"
+      className="scroll-mt-28 mx-auto max-w-[1440px] px-[var(--page-pad)] py-16 sm:py-20"
       aria-labelledby="selected-work-heading"
       aria-describedby="selected-work-keys"
       tabIndex={0}
@@ -90,12 +104,9 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
       </p>
       <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="font-mono-label text-ink-soft">01 / Selected work</p>
-          <h2
-            id="selected-work-heading"
-            className="mt-4 type-h2"
-          >
-            Current / founder work
+          <p className="font-mono-label text-ink-soft">{homeWork.index}</p>
+          <h2 id="selected-work-heading" className="mt-4 type-h2">
+            {homeWork.title}
           </h2>
         </div>
         <Link
@@ -103,11 +114,9 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
           className="inline-flex min-h-11 shrink-0 items-center font-mono-label text-navy"
           data-cursor="View"
         >
-          All work →
+          {homeWork.all} →
         </Link>
       </div>
-
-      <WorkTicker items={workAudiences.filter((audience) => audience !== "All")} />
 
       <div className="relative mt-12" data-work-clip-root>
         <div
@@ -115,15 +124,22 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
           className="pointer-events-none absolute inset-0 z-[4] hidden grid-cols-4 items-center gap-4 lg:grid"
           aria-hidden="true"
         >
-          {studies.map((study, index) => (
-            <div
-              key={`slide-${study.slug}`}
-              data-work-slide={index === 0 ? "current" : "true"}
-              className={`overflow-hidden ${index === 0 ? "invisible" : ""}`}
-            >
-              <StudyCover study={study} className="aspect-[4/5] w-full" />
-            </div>
-          ))}
+          {studies.map((study, index) => {
+            const copy = homeWorkCards[study.slug];
+            return (
+              <div
+                key={`slide-${study.slug}`}
+                data-work-slide={index === 0 ? "current" : "true"}
+                className={`overflow-hidden ${index === 0 ? "invisible" : ""}`}
+              >
+                <StudyCover
+                  study={study}
+                  title={copy?.title ?? study.title}
+                  className="aspect-[4/5] w-full"
+                />
+              </div>
+            );
+          })}
         </div>
 
         <div
@@ -133,83 +149,124 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
           style={{ clipPath: "inset(0% 0% 0% 0%)" }}
         >
           <div data-work-clip-img className="relative h-full w-full">
-            {studies.map((study, index) => (
-              <div key={`clip-${study.slug}`} data-work-clip-visual className="absolute inset-0">
-                <StudyCover study={study} priority={index === 0} className="h-full w-full" />
-              </div>
-            ))}
-          </div>
-        </div>
-
-      <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="relative hidden min-h-[70vh] lg:block">
-          <div className="sticky top-24 overflow-hidden">
-            <div data-work-clip-target className="relative aspect-[4/5]">
-              <div data-parallax="0.08" className="absolute inset-0">
-                {studies.map((study, index) => (
-                  <div
-                    key={study.slug}
-                    data-work-visual
-                    className="absolute inset-0"
-                    aria-hidden={index !== active}
-                  >
-                    <StudyCover study={study} priority={index === 0} className="h-full w-full" />
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="mt-4 h-px bg-line">
-              <div data-work-progress className="h-px origin-left scale-x-0 bg-gold" />
-            </div>
-            <p className="sr-only" aria-live="polite">
-              {studies[active]?.client}: {studies[active]?.title}
-            </p>
-          </div>
-        </div>
-
-        <ul className="flex flex-col">
-          {studies.map((study, index) => (
-            <li key={study.slug}>
-              <WorkCard>
-              <Link
-                href={`/work/${study.slug}`}
-                data-work-row
-                data-cursor="View"
-                onClick={() => track("project_clicked", { slug: study.slug, from: "home" })}
-                className={`block border-t border-line py-8 ${
-                  index === active ? "opacity-100" : "opacity-80 hover:opacity-100 lg:opacity-55 lg:hover:opacity-100"
-                }`}
-                aria-current={index === active ? "true" : undefined}
-                onFocus={() => setActive(index)}
-                onMouseEnter={() => setActive(index)}
-              >
-                <div className="lg:hidden">
-                  <div className="mb-6 overflow-hidden">
-                    <div data-work-cover>
-                      <StudyCover study={study} className="aspect-[4/5] min-h-[220px] w-full" />
-                    </div>
-                  </div>
+            {studies.map((study, index) => {
+              const copy = homeWorkCards[study.slug];
+              return (
+                <div key={`clip-${study.slug}`} data-work-clip-visual className="absolute inset-0">
+                  <StudyCover
+                    study={study}
+                    title={copy?.title ?? study.title}
+                    priority={index === 0}
+                    className="h-full w-full"
+                  />
                 </div>
-                <p className="font-mono-label text-ink-soft">
-                  {study.index} / {study.year}
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="relative hidden min-h-[70vh] lg:block">
+            <div className="sticky top-24 overflow-hidden">
+              <div data-work-clip-target className="relative aspect-[4/5]">
+                <div data-parallax="0.08" className="absolute inset-0">
+                  {studies.map((study, index) => {
+                    const copy = homeWorkCards[study.slug];
+                    return (
+                      <div
+                        key={study.slug}
+                        data-work-visual
+                        className="absolute inset-0"
+                        aria-hidden={index !== active}
+                      >
+                        <StudyCover
+                          study={study}
+                          title={copy?.title ?? study.title}
+                          priority={index === 0}
+                          className="h-full w-full"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-4">
+                <p className="font-mono-label text-ink-soft" aria-live="polite">
+                  {String(active + 1).padStart(2, "0")} / {total}
                 </p>
-                <h3 className="mt-3 type-h3">{study.title}</h3>
-                <p className="mt-2 text-base text-navy">
-                  {study.client}
-                  {study.role ? (
-                    <span className="text-ink-soft"> · {study.role}</span>
-                  ) : null}
-                </p>
-                <p className="mt-3 max-w-md text-base leading-relaxed text-ink-soft">
-                  {study.summary}
-                </p>
-                <p className="mt-4 font-mono-label text-navy">View case study →</p>
-              </Link>
-              </WorkCard>
-            </li>
-          ))}
-        </ul>
-      </div>
+                <div className="h-px flex-1 bg-line">
+                  <div data-work-progress className="h-px origin-left scale-x-0 bg-gold" />
+                </div>
+              </div>
+              <p className="sr-only" aria-live="polite">
+                {homeWorkCards[studies[active]?.slug ?? ""]?.client}:{" "}
+                {homeWorkCards[studies[active]?.slug ?? ""]?.title}
+              </p>
+            </div>
+          </div>
+
+          <ul
+            className="flex flex-col"
+            data-work-list
+            onPointerEnter={() => {
+              pausedRef.current = true;
+            }}
+            onPointerLeave={() => {
+              pausedRef.current = false;
+            }}
+          >
+            {studies.map((study, index) => {
+              const copy = homeWorkCards[study.slug];
+              if (!copy) return null;
+              return (
+                <li key={study.slug}>
+                  <WorkCard>
+                    <Link
+                      href={`/work/${study.slug}`}
+                      data-work-row
+                      data-cursor="View"
+                      onClick={() => track("project_clicked", { slug: study.slug, from: "home" })}
+                      className={`block border-t border-line py-8 ${
+                        index === active
+                          ? "opacity-100"
+                          : "opacity-80 lg:opacity-60 lg:hover:opacity-100"
+                      }`}
+                      aria-current={index === active ? "true" : undefined}
+                      onFocus={() => setActive(index)}
+                      onMouseEnter={() => setActive(index)}
+                    >
+                      <div className="lg:hidden">
+                        <div className="mb-6 overflow-hidden">
+                          <div data-work-cover>
+                            <StudyCover
+                              study={study}
+                              title={copy.title}
+                              className="aspect-[4/5] min-h-[220px] w-full"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-baseline justify-between gap-4">
+                        <p className="font-mono-label text-ink-soft">{copy.client}</p>
+                        <p className="font-mono-label text-ink-soft lg:hidden">
+                          {String(index + 1).padStart(2, "0")} / {total}
+                        </p>
+                      </div>
+                      <h3 className="mt-3 type-h3">{copy.title}</h3>
+                      <p className="mt-2 font-mono-label text-ink-soft">
+                        {copy.role} · {copy.year}
+                      </p>
+                      <p className="mt-3 font-mono-label text-navy">{copy.tags.join(" · ")}</p>
+                      <p className="mt-4 max-w-[65ch] type-body text-ink">{copy.problem}</p>
+                      <p className="mt-3 max-w-[65ch] type-body text-ink">{copy.result}</p>
+                      <p className="mt-5 font-mono-label text-navy">View case study →</p>
+                    </Link>
+                  </WorkCard>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );

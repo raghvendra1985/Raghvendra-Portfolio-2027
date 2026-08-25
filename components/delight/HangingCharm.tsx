@@ -17,7 +17,6 @@ import {
   DARUMA_LABELS,
   getCharm,
   getCharmArt,
-  nextCharmId,
   nextDaruma,
   nextDrishti,
   nextEmoji,
@@ -65,6 +64,8 @@ export default function HangingCharm() {
   const { open: conciergeOpen } = useConcierge();
   const menuOpen = useMenuOpen();
   const { state, ready, update } = useCharmState();
+  const pathname = usePathname();
+  const [desktop, setDesktop] = useState(false);
   const worldRef = useRef<SVGGElement>(null);
   const stringRef = useRef<SVGPathElement>(null);
   const beadsGroupRef = useRef<SVGGElement>(null);
@@ -73,7 +74,6 @@ export default function HangingCharm() {
   const charmRef = useRef<HTMLButtonElement>(null);
   const captionRef = useRef<HTMLSpanElement>(null);
   const captionTextRef = useRef<HTMLSpanElement>(null);
-  const switcherRef = useRef<HTMLDivElement>(null);
   const hangXRef = useRef(state.hangX);
   const idRef = useRef(state.id);
   const emojiRef = useRef(state.emoji);
@@ -86,19 +86,20 @@ export default function HangingCharm() {
   darumaRef.current = state.daruma;
   drishtiRef.current = state.drishti;
 
-  const pathname = usePathname();
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const updateDesktop = () => setDesktop(media.matches);
+    updateDesktop();
+    media.addEventListener("change", updateDesktop);
+    return () => media.removeEventListener("change", updateDesktop);
+  }, []);
+
   const covered = !pageReady || conciergeOpen || menuOpen;
-  const hidden = !ready || state.hidden;
+  const hidden = !ready || state.hidden || !desktop;
   const coveredRef = useRef(covered);
-  const pathReady = useRef(false);
   coveredRef.current = covered;
   const art = getCharmArt(state.id);
-
-  function switchCharm(step: number) {
-    const id = nextCharmId(idRef.current, step);
-    update({ id, hidden: false });
-    track("charm_switched", { id, from: idRef.current });
-  }
+  const charmName = getCharm(state.id).name;
 
   function playRitual() {
     const id = idRef.current;
@@ -131,12 +132,25 @@ export default function HangingCharm() {
   }, [config.reducedMotion, update]);
 
   useEffect(() => {
-    if (!pathReady.current) {
-      pathReady.current = true;
-      return;
-    }
-    if (hidden || coveredRef.current) return;
-    requestCharmFlick();
+    const desktop = window.matchMedia("(min-width: 1024px)").matches;
+    document.documentElement.dataset.charm = !hidden && desktop && !covered ? "hanging" : "away";
+    return () => {
+      document.documentElement.dataset.charm = "away";
+    };
+  }, [hidden, covered]);
+
+  useEffect(() => {
+    const dense = Array.from(document.querySelectorAll<HTMLElement>("[data-charm-dense='true']"));
+    if (!dense.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const overlapping = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio > 0.28);
+        document.documentElement.dataset.charmDense = overlapping ? "true" : "false";
+      },
+      { threshold: [0.2, 0.35, 0.5], rootMargin: "-12% 0px -35% 0px" },
+    );
+    dense.forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
   }, [pathname, hidden]);
 
   useEffect(() => {
@@ -155,7 +169,6 @@ export default function HangingCharm() {
         string: stringEl,
         beads,
         caption: captionRef.current ?? undefined,
-        switcher: switcherRef.current ?? undefined,
       },
       {
         config,
@@ -172,7 +185,6 @@ export default function HangingCharm() {
         onFlick: () => {
           track("charm_flicked", { id: idRef.current });
         },
-        onSwitch: (step) => switchCharm(step),
         onRitual: () => playRitual(),
       },
     );
@@ -289,7 +301,7 @@ export default function HangingCharm() {
         type="button"
         tabIndex={covered ? -1 : 0}
         disabled={covered}
-        aria-label="Grab the charm, drag it, flick it, or slide it along the top edge"
+        aria-label={`${charmName} charm. Grab, drag, or flick it. Double-click for a ritual.`}
         className="pointer-events-auto absolute left-0 top-0 cursor-grab touch-none select-none rounded-full bg-transparent p-0 active:cursor-grabbing"
         style={{
           height: CHARM_SIZE,
@@ -303,28 +315,6 @@ export default function HangingCharm() {
       >
         <span ref={captionTextRef} className="opacity-0" />
       </span>
-      <div ref={switcherRef} className="pointer-events-auto absolute left-0 top-0 flex gap-1">
-        <button
-          type="button"
-          tabIndex={covered ? -1 : 0}
-          disabled={covered}
-          aria-label="Previous charm"
-          onClick={() => switchCharm(-1)}
-          className="flex h-7 w-7 items-center justify-center font-mono-label text-navy/50 hover:text-gold"
-        >
-          ←
-        </button>
-        <button
-          type="button"
-          tabIndex={covered ? -1 : 0}
-          disabled={covered}
-          aria-label="Next charm"
-          onClick={() => switchCharm(1)}
-          className="flex h-7 w-7 items-center justify-center font-mono-label text-navy/50 hover:text-gold"
-        >
-          →
-        </button>
-      </div>
     </div>
   );
 }

@@ -239,7 +239,7 @@ export default function ConciergePanel() {
           <div>
             <p className="font-mono-label text-gold">Ask the portfolio</p>
             <h2 id={titleId} className="mt-3 type-h2">
-              What would you like to know?
+              Ask about Raghvendra’s work
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-soft">
               Ask out loud or type — I’ll point you to published work.

@@ -298,7 +298,7 @@ function buildServiceEntries(): ConciergeEntry[] {
     topics: uniq(["services", "engagement", ...service.stack, service.title]),
     summary: service.summary,
     content: `${service.description}. ${service.stack.join(". ")}`,
-    url: `/#services`,
+    url: `/#practice`,
   }));
 }
 
@@ -307,7 +307,7 @@ function buildProductEntries(): ConciergeEntry[] {
     id: "products:shelf",
     source: "products",
     type: "product-shelf",
-    title: "Secret Products",
+    title: "Studio tools",
     slug: "products",
     topics: [
       "secret products",

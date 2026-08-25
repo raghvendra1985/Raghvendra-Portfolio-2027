@@ -1,6 +1,6 @@
 "use client";
 
-import { suggestedQuestions, matchSuggestedQuestion } from "@/concierge";
+import { openingQuestions, matchSuggestedQuestion } from "@/concierge";
 
 export default function SuggestedQuestions({
   onSelect,
@@ -18,7 +18,7 @@ export default function SuggestedQuestions({
     <div data-concierge-item>
       <p className="mt-8 font-mono-label text-ink-soft">Suggested</p>
       <ul className="mt-4" role="listbox" aria-label="Suggested questions">
-        {suggestedQuestions.map((item, index) => {
+        {openingQuestions.map((item, index) => {
           const highlighted =
             matchedId === item.id ||
             (needle.length > 1 &&

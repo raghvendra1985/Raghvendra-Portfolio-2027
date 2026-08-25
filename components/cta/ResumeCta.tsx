@@ -29,8 +29,8 @@ export default function ResumeCta({
 }) {
   const downloading = Boolean(site.resumeHref);
   const href = site.resumeHref ?? "/contact?intent=hiring";
-  const label = downloading ? "Download Resume" : "Request resume";
-  const accessible = downloading ? "Download Resume, PDF, 2 pages" : "Request resume";
+  const label = downloading ? "Download résumé" : "Request résumé";
+  const accessible = downloading ? "Download résumé, PDF, 2 pages" : "Request résumé";
 
   const onTrack = () => {
     if (downloading) {

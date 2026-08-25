@@ -9,7 +9,6 @@ import { menuOriginFromToggle, type MenuOrigin } from "@/animations/menu";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { getLenis } from "@/hooks/useLenis";
 import { primaryNavLinks, site } from "@/lib/site";
-import ConciergeTrigger from "@/components/concierge/ConciergeTrigger";
 import { useConcierge } from "@/components/concierge/ConciergeProvider";
 import MenuToggle from "@/components/navigation/MenuToggle";
 import MenuOverlay from "@/components/navigation/MenuOverlay";
@@ -161,14 +160,13 @@ export default function Navigation() {
 
         <div className="flex items-center gap-3">
           <p
-            className={`hidden items-center gap-2 font-mono-label text-[10px] lg:flex ${
+            className={`hidden max-w-[11rem] items-center gap-2 font-mono-label text-[10px] leading-tight lg:flex ${
               open ? "text-mist/70" : "text-ink-soft"
             }`}
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-green" aria-hidden="true" />
-            {site.status}
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-green" aria-hidden="true" />
+            <span className="uppercase tracking-[0.08em]">{site.status}</span>
           </p>
-          <ConciergeTrigger variant="nav" inverted={open} />
           <MenuToggle ref={toggleRef} open={open} inverted={open} onClick={toggleMenu} />
         </div>
         </div>
