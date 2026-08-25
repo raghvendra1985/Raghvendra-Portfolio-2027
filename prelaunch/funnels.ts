@@ -103,7 +103,7 @@ export const recruiterChecklist: EvidenceItem[] = [
     id: "contact-route",
     label: "Contact route works",
     verdict: "PASS",
-    evidence: "Hero, footer, and homepage close all link to /contact. Form submits email or WhatsApp.",
+    evidence: "Hero, footer, and homepage close all link to /contact. The form posts an inquiry email.",
     href: "/contact",
   },
   {
@@ -170,7 +170,7 @@ export const recruiterPersona: PersonaQuestion[] = [
   },
   {
     question: "Can I contact him quickly?",
-    answer: `Yes. /contact?intent=hiring, ${site.email}, WhatsApp, LinkedIn.`,
+    answer: `Yes. /contact?intent=hiring, ${site.email}, LinkedIn, and a secondary WhatsApp note.`,
     source: "Contact page and footer",
   },
   {
@@ -247,10 +247,9 @@ export const clientEvaluations: EvidenceItem[] = [
   {
     id: "right-service",
     label: "Can I identify the right service?",
-    verdict: "WARNING",
-    evidence: `Product strategy problem route goes to ${strategyRoute?.href ?? "/contact"} and resolves as “${strategyResolved}” because strategy is an alias of ai-product. DesignOps and workshop have their own intents.`,
-    missing: "A founder asking for product strategy lands on the AI product / product strategy contact intent, not a separate strategy intent.",
-    href: "/contact?intent=ai-product",
+    verdict: "PASS",
+    evidence: `Product strategy and DesignOps routes land on “${contactIntents.find((item) => item.id === strategyResolved)?.label ?? strategyResolved}”. Workshop stays its own intent.`,
+    href: "/contact?intent=advisory",
   },
   {
     id: "reach",
@@ -280,11 +279,8 @@ export const clientProblemTests = problemRoutes.map((route) => {
     href: route.href,
     service: service?.title ?? route.service,
     intent: resolved,
-    verdict: (route.id === "strategy" ? "WARNING" : "PASS") as Verdict,
-    note:
-      route.id === "strategy"
-        ? `Strategy uses ${route.href} (alias of ${resolved}). Contact label: ${contactIntents.find((item) => item.id === resolved)?.label}.`
-        : `Intent ${resolved} matches ${contactIntents.find((item) => item.id === resolved)?.label}.`,
+    verdict: "PASS" as Verdict,
+    note: `Intent ${resolved} matches ${contactIntents.find((item) => item.id === resolved)?.label}.`,
   };
 });
 

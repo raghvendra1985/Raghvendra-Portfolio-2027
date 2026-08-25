@@ -30,6 +30,7 @@ export default function MagneticButton({
   onClick,
   className: extraClassName = "",
   ariaLabel,
+  disabled = false,
 }: {
   href?: string;
   children: ReactNode;
@@ -41,6 +42,7 @@ export default function MagneticButton({
   onClick?: () => void;
   className?: string;
   ariaLabel?: string;
+  disabled?: boolean;
 }) {
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
   const { config } = useExperience();
@@ -52,7 +54,7 @@ export default function MagneticButton({
     return () => ctx.revert();
   }, [config]);
 
-  const className = `relative isolate inline-flex items-center gap-3 overflow-hidden font-mono-label focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${sizes[size]} ${variants[variant]} ${extraClassName}`;
+  const className = `relative isolate inline-flex items-center gap-3 overflow-hidden font-mono-label focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${sizes[size]} ${variants[variant]} ${disabled ? "pointer-events-none opacity-50" : ""} ${extraClassName}`;
 
   const inner = (
     <>
@@ -115,6 +117,7 @@ export default function MagneticButton({
       type={type ?? "button"}
       className={className}
       data-cursor={cursor}
+      disabled={disabled}
       onClick={onClick}
       {...(ariaLabel ? { "aria-label": ariaLabel } : {})}
     >

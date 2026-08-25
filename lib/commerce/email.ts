@@ -1,4 +1,10 @@
-import { emailFrom, publicSiteUrl, resendApiKey } from "@/lib/commerce/config";
+import {
+  emailFrom,
+  isAuthenticatedFromAddress,
+  publicSiteUrl,
+  resendApiKey,
+} from "@/lib/commerce/config";
+import { sendContactMail } from "@/lib/contact-mail";
 import { firstNameFrom } from "@/lib/commerce/normalize";
 import { formatInr } from "@/products";
 
@@ -14,6 +20,7 @@ type Mail = {
   to: string;
   subject: string;
   html: string;
+  replyTo?: string;
 };
 
 async function sendMail(mail: Mail) {
@@ -24,6 +31,11 @@ async function sendMail(mail: Mail) {
     }
     return { id: null as string | null, skipped: true };
   }
+  const from = emailFrom();
+  if (!isAuthenticatedFromAddress(from)) {
+    console.error("[mail] from mailbox is not the approved sender");
+    throw new Error("send-failed");
+  }
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -31,15 +43,22 @@ async function sendMail(mail: Mail) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: emailFrom(),
+      from,
       to: [mail.to],
       subject: mail.subject,
       html: mail.html,
+      ...(mail.replyTo ? { reply_to: mail.replyTo } : {}),
     }),
   });
-  const payload = (await response.json()) as { id?: string; message?: string };
+  let payload: { id?: string; name?: string } = {};
+  try {
+    payload = (await response.json()) as { id?: string; name?: string };
+  } catch {
+    payload = {};
+  }
   if (!response.ok) {
-    throw new Error(payload.message ?? "Resend failed");
+    console.error("[mail] provider rejected", response.status, payload.name ?? "unknown");
+    throw new Error("send-failed");
   }
   return { id: payload.id ?? null, skipped: false };
 }
@@ -54,7 +73,7 @@ function layout(title: string, body: string) {
           <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="background:#EBEDE3;max-width:560px;">
             <tr><td style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:0.16em;color:#0B1849;padding-bottom:16px;">RAGHVENDRA SINGH</td></tr>
             <tr><td style="height:4px;background:#E4B028;"></td></tr>
-            <tr><td style="padding-top:28px;font-size:28px;line-height:1.2;">${title}</td></tr>
+            <tr><td style="padding-top:28px;font-size:28px;line-height:1.2;">${escapeHtml(title)}</td></tr>
             <tr><td style="padding-top:20px;font-size:16px;line-height:1.6;color:#3a4a6a;">${body}</td></tr>
           </table>
         </td>
@@ -152,6 +171,48 @@ export async function sendAccessEmail(input: {
     html: layout(
       `${input.productName} access`,
       `<p>Hi ${first},</p><p>Here is your access again.</p>${button(input.accessHref, action)}${button(library, "My Library")}<p>Raghvendra Singh</p>`,
+    ),
+  });
+}
+
+function oneLine(value: string) {
+  return value.replace(/[\r\n]+/g, " ").trim();
+}
+
+export async function sendContactInquiry(input: {
+  to: string;
+  name: string;
+  email: string;
+  organisation: string;
+  intentId: string;
+  intentLabel: string;
+  timeline: string;
+  source: string;
+  message: string;
+}) {
+  const rows = [
+    ["Name", input.name],
+    ["Work email", input.email],
+    ["Organisation", input.organisation || "—"],
+    ["Intent", `${input.intentLabel} (${input.intentId})`],
+    ["Source", input.source || "—"],
+    ["Timeline", input.timeline || "—"],
+  ]
+    .map(
+      ([label, value]) =>
+        `<p style="margin:0 0 8px;"><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:0.12em;">${escapeHtml(label)}</span><br>${escapeHtml(value)}</p>`,
+    )
+    .join("");
+  const subject = oneLine(
+    `${input.intentLabel} — ${input.organisation || input.name}`,
+  ).slice(0, 180);
+  return sendContactMail({
+    to: input.to,
+    replyTo: oneLine(input.email),
+    subject,
+    html: layout(
+      input.intentLabel,
+      `${rows}<p style="margin:24px 0 0;white-space:pre-wrap;">${escapeHtml(input.message)}</p>`,
     ),
   });
 }

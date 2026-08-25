@@ -44,8 +44,70 @@ export function resendApiKey() {
   return process.env.RESEND_API_KEY ?? "";
 }
 
+const AUTHENTICATED_FROM =
+  "Raghvendra Singh Portfolio <portfolio@raghvendrasingh.com>";
+const APPROVED_FROM_MAILBOX = "portfolio@raghvendrasingh.com";
+const SMTP_AUTH_MAILBOX = "hello@raghvendrasingh.com";
+const CONTACT_INBOX = "hello@raghvendrasingh.com";
+
+function unwrapEnv(value: string | undefined) {
+  const trimmed = value?.trim() ?? "";
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1).trim();
+  }
+  return trimmed;
+}
+
+/** Parse a From/To header to a single mailbox. Rejects lists, nested angles, and header injection. */
+function parsedMailbox(value: string): string | null {
+  const trimmed = value.trim();
+  if (!trimmed || /[\r\n,]/.test(trimmed)) return null;
+  const angled = trimmed.match(/^[^<>]*<([^<>]+)>\s*$/);
+  const mailbox = (angled ? angled[1] : trimmed).trim().toLowerCase();
+  if (!/^[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(mailbox)) return null;
+  return mailbox;
+}
+
+/** Authenticated sender identity. Never the visitor. Contact sends via Workspace SMTP. */
 export function emailFrom() {
-  return process.env.EMAIL_FROM ?? "Raghvendra Singh <hello@raghvendrasingh.com>";
+  return unwrapEnv(process.env.EMAIL_FROM) || AUTHENTICATED_FROM;
+}
+
+/** Inbox that receives contact inquiries. Distinct from the From identity. */
+export function emailTo() {
+  return unwrapEnv(process.env.EMAIL_TO) || CONTACT_INBOX;
+}
+
+export function isAuthenticatedFromAddress(from = emailFrom()) {
+  return parsedMailbox(from) === APPROVED_FROM_MAILBOX;
+}
+
+export function isApprovedContactInbox(to = emailTo()) {
+  return parsedMailbox(to) === CONTACT_INBOX;
+}
+
+export function smtpHost() {
+  return unwrapEnv(process.env.SMTP_HOST) || "smtp.gmail.com";
+}
+
+export function smtpPort() {
+  const parsed = Number(unwrapEnv(process.env.SMTP_PORT) || "465");
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 465;
+}
+
+export function smtpUser() {
+  return unwrapEnv(process.env.SMTP_USER) || SMTP_AUTH_MAILBOX;
+}
+
+export function smtpPass() {
+  return unwrapEnv(process.env.SMTP_PASS).replace(/\s+/g, "");
+}
+
+export function smtpConfigured() {
+  return Boolean(smtpPass() && parsedMailbox(smtpUser()) === SMTP_AUTH_MAILBOX);
 }
 
 export function adminEmails() {
@@ -102,7 +164,7 @@ export function commerceGoLiveChecklist() {
   };
   const resend = {
     apiKey: Boolean(resendApiKey()),
-    from: Boolean(emailFrom()),
+    from: isAuthenticatedFromAddress(),
   };
   const secretsReady =
     razorpay.keyId &&
