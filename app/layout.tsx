@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import ExperienceProvider from "@/components/providers/ExperienceProvider";
 import { site } from "@/lib/site";
-import { jsonLdScript, personJsonLd } from "@/lib/seo";
+import { jsonLdScript, pageMetadataExtras, personJsonLd } from "@/lib/seo";
 
 const display = localFont({
   src: "../Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf",
@@ -47,20 +47,12 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.description,
-  alternates: { canonical: "/" },
-  openGraph: {
+  ...pageMetadataExtras({
     title: site.title,
     description: site.description,
-    url: site.url,
-    siteName: site.name,
-    locale: "en_IN",
-    type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: site.title,
-    description: site.description,
-  },
+    path: "/",
+    image: "/assets/about/raghvendra-singh.png",
+  }),
   icons: {
     icon: "/favicon.svg",
   },

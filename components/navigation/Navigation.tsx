@@ -9,6 +9,7 @@ import { menuOriginFromToggle, type MenuOrigin } from "@/animations/menu";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { getLenis } from "@/hooks/useLenis";
 import { primaryNavLinks, site } from "@/lib/site";
+import { TrackedLink } from "@/components/analytics/TrackedCta";
 import { useConcierge } from "@/components/concierge/ConciergeProvider";
 import MenuToggle from "@/components/navigation/MenuToggle";
 import MenuOverlay from "@/components/navigation/MenuOverlay";
@@ -138,10 +139,12 @@ export default function Navigation() {
             const active =
               pathname === link.href || pathname.startsWith(`${link.href}/`);
             return (
-              <Link
+              <TrackedLink
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
+                event="nav_clicked"
+                payload={{ surface: "primary_nav", dest: link.href }}
                 className={`font-mono-label ${
                   open
                     ? active
@@ -153,7 +156,7 @@ export default function Navigation() {
                 }`}
               >
                 {link.label}
-              </Link>
+              </TrackedLink>
             );
           })}
         </nav>

@@ -22,7 +22,7 @@ export default function ProductShelf() {
       <div className="mx-auto max-w-[1440px]">
         <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
           <div data-reveal-item>
-            <p className="font-mono-label text-ink-soft">{homeTools.eyebrow}</p>
+            <p className="font-mono-label text-navy/80">{homeTools.eyebrow}</p>
             <h2 className="mt-4 max-w-xl type-h2">{homeTools.title}</h2>
             <p className="mt-4 max-w-[65ch] type-body text-ink">{homeTools.body}</p>
           </div>
@@ -30,7 +30,7 @@ export default function ProductShelf() {
             <Link
               href="/products"
               data-cursor="Open"
-              onClick={() => track("product_card_clicked", { slug: "shelf" })}
+              onClick={() => track("product_card_clicked", { slug: "shelf", surface: "home_tools" })}
               className="inline-flex min-h-11 items-center font-mono-label text-navy"
             >
               {homeTools.explore} →

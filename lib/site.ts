@@ -43,9 +43,11 @@ export const navLinks = [
   { label: "Notes", href: "/knowledge" },
   { label: "Products", href: "/products" },
   { label: "Contact", href: "/contact" },
-  { label: "System", href: "/system" },
-  { label: "Studio", href: "/studio" },
-];
+  { label: "System", href: "/system", hint: "How I think, decide, and operate" },
+  { label: "Studio", href: "/studio", hint: "The room around the work" },
+] as const;
+
+export type NavLink = (typeof navLinks)[number];
 
 const primaryHrefs = ["/work", "/about", "/knowledge", "/products"] as const;
 const menuHrefs = ["/contact", "/system", "/studio"] as const;

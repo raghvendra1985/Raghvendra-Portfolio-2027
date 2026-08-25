@@ -37,6 +37,7 @@ function TriggerButton({
       onClick={() => openConcierge(source)}
       className={className}
       aria-label="Ask the portfolio"
+      data-concierge-trigger="true"
       data-cursor={cursor ? "Ask" : undefined}
     >
       {children}

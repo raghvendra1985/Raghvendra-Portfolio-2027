@@ -20,6 +20,7 @@ import { useMotionConfig } from "@/hooks/useMotionConfig";
 import { hasVisited, markVisited } from "@/animations/loader";
 import { setLenis, getLenis } from "@/hooks/useLenis";
 import { captureUtmFromLocation } from "@/lib/utm";
+import { hashScrollOffsetPx } from "@/lib/hash-scroll";
 import Loader from "@/components/loader/Loader";
 import Cursor from "@/components/cursor/Cursor";
 import AmbientLayer from "@/components/ambient/AmbientLayer";
@@ -106,10 +107,10 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
       getLenis()?.resize();
       ScrollTrigger.refresh();
       const hash = window.location.hash;
-      if (hash) getLenis()?.scrollTo(hash, { offset: -88 });
+      if (hash) getLenis()?.scrollTo(hash, { offset: -hashScrollOffsetPx() });
     });
     return () => cancelAnimationFrame(id);
-  }, [pathname]);
+  }, [pathname, pageReady]);
 
   const markPageReady = useCallback(() => {
     document.documentElement.classList.remove("is-loading");

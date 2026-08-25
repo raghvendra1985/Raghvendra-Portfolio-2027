@@ -46,7 +46,8 @@ export type AnalyticsEvent =
   | "contact_form_submitted"
   | "knowledge_article_clicked"
   | "hiring_path_clicked"
-  | "problem_route_clicked";
+  | "problem_route_clicked"
+  | "nav_clicked";
 
 /**
  * Site-wide analytics hook. Sinks to Vercel Analytics and logs in development.

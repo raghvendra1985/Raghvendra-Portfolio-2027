@@ -36,7 +36,7 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <p className="font-mono-label text-mist/70">Explore</p>
+            <p className="font-mono-label text-mist/85">Explore</p>
             <ul className="mt-4 space-y-2">
               {footerLinks.sitemap.map((link) => (
                 <li key={link.href} data-footer-link>
@@ -52,7 +52,7 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <p className="font-mono-label text-mist/70">Connect</p>
+            <p className="font-mono-label text-mist/85">Connect</p>
             <ul className="mt-4 space-y-2">
               {footerLinks.social
                 .filter((link) => link.label !== "WhatsApp")
@@ -95,7 +95,7 @@ export default function SiteFooter() {
 
           <div data-footer-status className="flex flex-col justify-between">
             <div>
-              <p className="font-mono-label text-mist/70">Status</p>
+              <p className="font-mono-label text-mist/85">Status</p>
               <p className="mt-4 flex items-center gap-2 text-base">
                 <span
                   data-status-dot

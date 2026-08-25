@@ -31,12 +31,26 @@ function getFocusable(root: HTMLElement) {
   ).filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
 }
 
+function visibleAskTrigger() {
+  const nodes = document.querySelectorAll<HTMLElement>("[data-concierge-trigger]");
+  for (const el of nodes) {
+    if (el.closest("[inert]")) continue;
+    const cs = getComputedStyle(el);
+    if (cs.display === "none" || cs.visibility === "hidden") continue;
+    const rect = el.getBoundingClientRect();
+    if (rect.width < 1 || rect.height < 1) continue;
+    return el;
+  }
+  return null;
+}
+
 export default function ConciergePanel() {
   const { open, closeConcierge } = useConcierge();
   const { config } = useExperience();
   const pathname = usePathname();
   const titleId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const restoreFocusRef = useRef<HTMLElement | null>(null);
 
@@ -45,13 +59,18 @@ export default function ConciergePanel() {
   const [answer, setAnswer] = useState<ConciergeAnswer | null>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [fromVoice, setFromVoice] = useState(false);
+  const [emptyHint, setEmptyHint] = useState("");
 
   const { speak, cancel: cancelSpeech, speaking, supported: ttsSupported } = useSpeechSynthesis();
 
   const runQuery = useCallback(
     (value: string, voice = false) => {
       const trimmed = value.trim();
-      if (!trimmed) return;
+      if (!trimmed) {
+        setEmptyHint("Type a question or pick a suggestion.");
+        return;
+      }
+      setEmptyHint("");
       cancelSpeech();
       setQuery(trimmed);
       setFromVoice(voice);
@@ -92,11 +111,12 @@ export default function ConciergePanel() {
 
   useEffect(() => {
     if (!open) return;
-    restoreFocusRef.current = document.activeElement as HTMLElement | null;
+    restoreFocusRef.current = visibleAskTrigger() ?? (document.activeElement as HTMLElement | null);
     setQuery("");
     setAnswer(null);
     setActiveIndex(-1);
     setFromVoice(false);
+    setEmptyHint("");
     cancelSpeech();
     stopListening();
     const id = requestAnimationFrame(() => inputRef.current?.focus());
@@ -210,9 +230,35 @@ export default function ConciergePanel() {
         el.removeAttribute("inert");
         el.removeAttribute("aria-hidden");
       });
-      restoreFocusRef.current?.focus?.();
+      const target = visibleAskTrigger() ?? restoreFocusRef.current;
+      target?.focus?.();
     };
   }, [open, closeConcierge]);
+
+  useEffect(() => {
+    if (!open) return;
+    const panel = panelRef.current;
+    const viewport = window.visualViewport;
+    if (!panel) return;
+
+    const update = () => {
+      const keyboard = viewport
+        ? Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop)
+        : 0;
+      panel.style.setProperty("--concierge-keyboard", `${keyboard}px`);
+    };
+
+    update();
+    viewport?.addEventListener("resize", update);
+    viewport?.addEventListener("scroll", update);
+    window.addEventListener("resize", update);
+    return () => {
+      viewport?.removeEventListener("resize", update);
+      viewport?.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      panel.style.removeProperty("--concierge-keyboard");
+    };
+  }, [open]);
 
   if (!open) return null;
 
@@ -229,53 +275,65 @@ export default function ConciergePanel() {
       />
 
       <div
+        ref={panelRef}
         data-concierge-panel
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="absolute inset-x-0 bottom-0 top-[10vh] overflow-y-auto border-t border-line bg-mist px-[var(--page-pad)] pb-16 pt-8 sm:inset-x-8 sm:bottom-8 sm:top-[12vh] sm:border sm:border-line md:inset-x-auto md:left-1/2 md:w-full md:max-w-3xl md:-translate-x-1/2"
+        className="absolute inset-x-0 bottom-[var(--concierge-keyboard,0px)] top-[10vh] overflow-y-auto border-t border-line bg-mist px-[var(--page-pad)] pb-16 pt-0 sm:inset-x-8 sm:bottom-[max(2rem,var(--concierge-keyboard,0px))] sm:top-[12vh] sm:border sm:border-line md:inset-x-auto md:left-1/2 md:w-full md:max-w-3xl md:-translate-x-1/2"
       >
-        <div className="flex items-start justify-between gap-6">
-          <div>
-            <p className="font-mono-label text-gold">Ask the portfolio</p>
-            <h2 id={titleId} className="mt-3 type-h2">
-              Ask about Raghvendra’s work
-            </h2>
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-soft">
-              Ask out loud or type — I’ll point you to published work.
-            </p>
+        <div className="sticky top-0 z-10 bg-mist pb-4 pt-8">
+          <div className="flex items-start justify-between gap-6">
+            <div>
+              <p className="font-mono-label text-gold">Ask the portfolio</p>
+              <h2 id={titleId} className="mt-3 type-h2">
+                Ask about Raghvendra’s work
+              </h2>
+              <p className="mt-3 max-w-xl text-base leading-relaxed text-navy/80">
+                Ask out loud or type — I’ll point you to published work.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={closeConcierge}
+              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center font-mono-label text-navy hover:text-green"
+            >
+              Close
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={closeConcierge}
-            className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center font-mono-label text-ink-soft hover:text-navy"
-          >
-            Close
-          </button>
-        </div>
 
-        <div className="mt-8">
-          <ConciergeSearch
-            ref={inputRef}
-            value={displayQuery}
-            onChange={(value) => {
-              setQuery(value);
-              setFromVoice(false);
-              if (!value.trim()) setAnswer(null);
-            }}
-            onSubmit={() => runQuery(query)}
-            listening={listening}
-            speechSupported={speechSupported}
-            speechError={speechError}
-            onToggleListen={() => {
-              if (listening) {
-                stopListening();
-                return;
-              }
-              trackConcierge("concierge_voice_start");
-              startListening();
-            }}
-          />
+          <div className="mt-8">
+            <ConciergeSearch
+              ref={inputRef}
+              value={displayQuery}
+              onChange={(value) => {
+                setQuery(value);
+                setFromVoice(false);
+                setEmptyHint("");
+                if (!value.trim()) setAnswer(null);
+              }}
+              onSubmit={() => runQuery(query)}
+              listening={listening}
+              speechSupported={speechSupported}
+              speechError={speechError}
+              onToggleListen={() => {
+                if (listening) {
+                  stopListening();
+                  return;
+                }
+                trackConcierge("concierge_voice_start");
+                startListening();
+              }}
+            />
+            <p className="sr-only" aria-live="polite">
+              {emptyHint}
+            </p>
+            {emptyHint ? (
+              <p className="mt-3 font-mono-label text-navy" role="status">
+                {emptyHint}
+              </p>
+            ) : null}
+          </div>
         </div>
 
         <details className="mt-6" data-concierge-item>

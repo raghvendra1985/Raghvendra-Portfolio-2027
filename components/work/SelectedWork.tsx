@@ -7,6 +7,7 @@ import { animateSelectedWork, crossfadeWorkVisual } from "@/animations/caseStudy
 import { animateParallax } from "@/animations/parallax";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import WorkCard from "@/components/work/WorkCard";
+import { TrackedLink } from "@/components/analytics/TrackedCta";
 import { track } from "@/lib/analytics";
 import type { CaseStudy } from "@/case-studies";
 import { homeWork, homeWorkCards } from "@/home/copy";
@@ -93,7 +94,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
       id="work"
       data-charm-dense="true"
       data-charm-rest="true"
-      className="scroll-mt-28 mx-auto max-w-[1440px] px-[var(--page-pad)] py-16 sm:py-20"
+      className="scroll-mt-[var(--hash-offset)] mx-auto max-w-[1440px] px-[var(--page-pad)] py-16 sm:py-20"
       aria-labelledby="selected-work-heading"
       aria-describedby="selected-work-keys"
       tabIndex={0}
@@ -104,18 +105,20 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
       </p>
       <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="font-mono-label text-ink-soft">{homeWork.index}</p>
+          <p className="font-mono-label text-navy/80">{homeWork.index}</p>
           <h2 id="selected-work-heading" className="mt-4 type-h2">
             {homeWork.title}
           </h2>
         </div>
-        <Link
+        <TrackedLink
           href="/work"
           className="inline-flex min-h-11 shrink-0 items-center font-mono-label text-navy"
           data-cursor="View"
+          event="project_clicked"
+          payload={{ from: "home_all" }}
         >
           {homeWork.all} →
-        </Link>
+        </TrackedLink>
       </div>
 
       <div className="relative mt-12" data-work-clip-root>

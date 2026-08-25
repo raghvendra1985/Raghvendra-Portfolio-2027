@@ -6,7 +6,7 @@
 
   --navy-soft: color-mix(in srgb, var(--navy) 72%, var(--mist));
   --ink: var(--navy);
-  --ink-soft: color-mix(in srgb, var(--navy) 72%, var(--mist));
+  --ink-soft: color-mix(in srgb, var(--navy) 78%, var(--mist));
   --line: color-mix(in srgb, var(--navy) 12%, transparent);
   --line-strong: color-mix(in srgb, var(--navy) 28%, transparent);
   --surface: var(--mist);
@@ -29,6 +29,7 @@
 
   --nav-height: 88px;
   --nav-height-compact: 64px;
+  --hash-offset: calc(var(--nav-height) + 12px);
   --page-pad: clamp(1.5rem, 4.5vw, 4.5rem);
   --charm-corridor: clamp(112px, 8vw, 160px);
   --max-width: 1440px;
@@ -54,7 +55,7 @@
 
 @media (max-width: 1023px) {
   :root {
-    --ink-soft: color-mix(in srgb, var(--navy) 78%, var(--mist));
+    --ink-soft: color-mix(in srgb, var(--navy) 82%, var(--mist));
   }
 }
 

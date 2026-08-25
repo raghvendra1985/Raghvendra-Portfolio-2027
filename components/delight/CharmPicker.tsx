@@ -208,7 +208,7 @@ export default function CharmPicker({
         type="button"
         onClick={toggleHidden}
         className={`inline-flex min-h-11 items-center font-mono-label ${
-          onMist ? "text-ink-soft hover:text-navy" : "text-mist/80 hover:text-gold"
+          onMist ? "text-navy hover:text-green" : "text-mist hover:text-gold"
         }`}
       >
         {state.hidden ? "Hang it" : "Put it away"}

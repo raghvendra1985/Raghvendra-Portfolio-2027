@@ -80,7 +80,7 @@ function directAnswer(
     case "ai-products-built":
       return `Published AI product work includes ${named}. Trust and judgment boundaries live in the AI Trust Stack.`;
     case "fintech":
-      return `Fintech evidence spans EQTY, NYE Money at Rapipay, and related financial product work.`;
+      return `Fintech evidence spans the EQTY design partnership and UX leadership for NYE Money at Rapipay.`;
     case "design-systems":
       return `Design systems are treated as operating infrastructure — DesignOps, critique standards, and visible decision paths.`;
     case "leadership":
@@ -103,10 +103,12 @@ function directAnswer(
       return `Open to selected product leadership, advisory, and collaborations. Contact is the next step if the work looks like a fit.`;
     case "parenting-gwk":
       return `Growing With Kid is the parenting community product — one clear job for parents, shipped as a live founder product.`;
+    case "eqty":
+      return `EQTY is a founding design partnership: a shared operating model so trust, ledger operations, and workflow could extend as one system instead of three separate products.`;
     case "ghostwriter":
-      return `GWK Ghostwriter is the AI writing product in the same family as Growing With Kid. The case study holds the published evidence.`;
+      return `GWK Ghostwriter is a shipped research-to-post writing studio with long-term memory, voice rules, and source material — not a prompt box. The case study holds the published evidence.`;
     case "nye-money":
-      return `NYE Money at Rapipay is the published fintech product work alongside EQTY.`;
+      return `Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.`;
     case "resume":
       return `The published career path is on About — 20 years in design · 14+ years in digital product and UX. Read the experience timeline, or request a resume from Contact.`;
     default:

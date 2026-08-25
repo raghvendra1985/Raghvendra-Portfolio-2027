@@ -127,14 +127,14 @@ export default function AboutView() {
 
       <SectionReveal
         id="experience"
-        className="scroll-mt-28 mx-auto max-w-[1440px] px-[var(--page-pad)] py-24"
+        className="scroll-mt-[var(--hash-offset)] mx-auto max-w-[1440px] px-[var(--page-pad)] py-24"
       >
         <h2 className="type-h2" data-reveal-item>
           Five chapters. One direction.
         </h2>
         <ol className="mt-12 space-y-4">
           {aboutPage.timeline.map((era, index) => (
-            <li key={era.id} id={era.id} data-reveal-item className="scroll-mt-28">
+            <li key={era.id} id={era.id} data-reveal-item className="scroll-mt-[var(--hash-offset)]">
               <AboutCard>
                 <div className="grid gap-4 md:grid-cols-[48px_160px_1fr]">
                   <p className="font-mono-label text-gold">

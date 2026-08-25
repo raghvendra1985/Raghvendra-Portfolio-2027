@@ -8,7 +8,7 @@ export default function ConnectiveThesis() {
       className="border-t border-line px-[var(--page-pad)] py-24"
     >
       <div className="mx-auto max-w-[1440px]">
-        <p className="font-mono-label text-ink-soft" data-reveal-item>
+        <p className="font-mono-label text-navy/80" data-reveal-item>
           {homeThesis.eyebrow}
         </p>
         <h2

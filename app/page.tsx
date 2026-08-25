@@ -8,7 +8,6 @@ import HiringPath from "@/components/home/HiringPath";
 import PracticeLanes from "@/components/home/PracticeLanes";
 import HomeNotes from "@/components/home/HomeNotes";
 import SectionReveal from "@/components/reveal/SectionReveal";
-import MagneticButton from "@/components/buttons/MagneticButton";
 import { TrackedLink, TrackedMagneticButton } from "@/components/analytics/TrackedCta";
 import ProductShelf from "@/components/products/ProductShelf";
 import ServiceViewTracker from "@/components/analytics/ServiceViewTracker";
@@ -41,20 +40,22 @@ export default function HomePage() {
             />
           </div>
           <div data-reveal-item>
-            <p className="font-mono-label text-ink-soft">{homeAbout.index}</p>
+            <p className="font-mono-label text-navy/80">{homeAbout.index}</p>
             <h2 className="mt-4 max-w-xl font-serif text-[clamp(2rem,1.5rem+1.6vw,3.15rem)] font-normal leading-[1.15] tracking-[-0.02em]">
               {homeAbout.title}
             </h2>
             <p className="mt-6 max-w-[65ch] type-lead text-ink">{homeAbout.body}</p>
             <div className="mt-8">
-              <MagneticButton
+              <TrackedMagneticButton
                 href={homeAbout.href}
                 variant="secondary"
                 cursor="Open"
                 className="w-full justify-center sm:w-auto"
+                event="nav_clicked"
+                payload={{ surface: "home_about", dest: "/about" }}
               >
                 {homeAbout.cta}
-              </MagneticButton>
+              </TrackedMagneticButton>
             </div>
           </div>
         </div>
@@ -64,14 +65,14 @@ export default function HomePage() {
         id="practice"
         charmRest
         charmDense
-        className="scroll-mt-28 border-t border-line bg-surface-dim px-[var(--page-pad)] py-24"
+        className="scroll-mt-[var(--hash-offset)] border-t border-line bg-surface-dim px-[var(--page-pad)] py-24"
       >
         <span id="solve" className="sr-only">
           Practice
         </span>
         <ServiceViewTracker />
         <div className="mx-auto max-w-[1440px]">
-          <p className="font-mono-label text-ink-soft" data-reveal-item>
+          <p className="font-mono-label text-navy/80" data-reveal-item>
             {homePractice.index}
           </p>
           <h2 id="practice-heading" className="mt-4 max-w-3xl type-h2" data-reveal-item>
@@ -96,7 +97,7 @@ export default function HomePage() {
             data-reveal-item
           >
             <div>
-              <p className="font-mono-label text-ink-soft">{homeKnowledge.index}</p>
+              <p className="font-mono-label text-navy/80">{homeKnowledge.index}</p>
               <h2 className="mt-4 type-h2">{homeKnowledge.title}</h2>
             </div>
             <TrackedLink
@@ -104,7 +105,7 @@ export default function HomePage() {
               className="font-mono-label"
               data-cursor="Open"
               event="knowledge_article_clicked"
-              payload={{ slug: "index" }}
+              payload={{ slug: "index", surface: "home_knowledge" }}
             >
               {homeKnowledge.all} →
             </TrackedLink>
@@ -121,7 +122,7 @@ export default function HomePage() {
       >
         <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-8 sm:flex-row sm:items-end">
           <div data-reveal-item>
-            <p className="font-mono-label text-mist/70">{homeContact.index}</p>
+            <p className="font-mono-label text-mist/85">{homeContact.index}</p>
             <h2 className="mt-4 max-w-xl type-h1">{homeContact.title}</h2>
             <p className="mt-4 max-w-[65ch] type-lead text-mist/85">{homeContact.body}</p>
           </div>

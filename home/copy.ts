@@ -66,7 +66,7 @@ export const homeWorkCards: Record<string, HomeWorkCard> = {
     problem:
       "Trust, ledger operations, and workflow were being designed as separate layers instead of one operating system.",
     result:
-      "Created a shared product framework connecting trust, ledger operations, workflows, and platform extensibility.",
+      "Designed a shared operating model so trust, ledger operations, and workflow could extend as one system instead of three separate products.",
   },
   "gwk-ghostwriter": {
     client: "GWK Ghostwriter",
@@ -83,11 +83,11 @@ export const homeWorkCards: Record<string, HomeWorkCard> = {
     title: "Leading the experience of a financial super app at organisational scale",
     role: "Senior Manager UX",
     year: "2022",
-    tags: ["Product leadership", "Fintech", "Mobile"],
+    tags: ["Enterprise leadership", "Fintech", "Mobile"],
     problem:
       "Payments, banking, and investments were splitting into disconnected features instead of one everyday money product.",
     result:
-      "Unified wallet, UPI, partner banking, and investments into a single consumer system adopted across the product organisation.",
+      "Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.",
   },
 };
 

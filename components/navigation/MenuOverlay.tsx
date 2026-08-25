@@ -86,12 +86,19 @@ export default function MenuOverlay({
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span
-                      className={`type-h2 ${
-                        active ? "text-green" : "text-mist group-hover:text-gold"
-                      }`}
-                    >
-                      {link.label}
+                    <span className="min-w-0">
+                      <span
+                        className={`block type-h2 ${
+                          active ? "text-green" : "text-mist group-hover:text-gold"
+                        }`}
+                      >
+                        {link.label}
+                      </span>
+                      {"hint" in link && link.hint ? (
+                        <span className="mt-2 block max-w-md text-base leading-snug text-mist/85">
+                          {link.hint}
+                        </span>
+                      ) : null}
                     </span>
                   </Link>
                 </li>
@@ -107,7 +114,7 @@ export default function MenuOverlay({
           <CharmPicker onHang={onClose} />
           <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="flex items-center gap-2 font-mono-label text-mist/70">
+              <p className="flex items-center gap-2 font-mono-label text-mist/85">
                 <span className="h-1.5 w-1.5 rounded-full bg-green" aria-hidden="true" />
                 {site.status}
               </p>

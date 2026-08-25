@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { animateHero } from "@/animations/hero";
 import { animateParallax } from "@/animations/parallax";
 import { useExperience } from "@/components/providers/ExperienceProvider";
-import MagneticButton from "@/components/buttons/MagneticButton";
+import { TrackedMagneticButton } from "@/components/analytics/TrackedCta";
 import { homeHero } from "@/home/copy";
 
 export default function Hero() {
@@ -54,7 +54,7 @@ export default function Hero() {
           {homeHero.headline}
         </h1>
 
-        <p data-hero-copy className="mt-6 font-mono-label text-ink-soft">
+        <p data-hero-copy className="mt-6 font-mono-label text-navy">
           {homeHero.kicker}
         </p>
 
@@ -67,19 +67,27 @@ export default function Hero() {
 
         <div data-cta-row className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <div data-hero-cta className="w-full sm:w-auto">
-            <MagneticButton href={homeHero.primary.href} cursor="View" className="w-full justify-center sm:w-auto">
+            <TrackedMagneticButton
+              href={homeHero.primary.href}
+              cursor="View"
+              className="w-full justify-center sm:w-auto"
+              event="project_clicked"
+              payload={{ from: "home_hero", slug: "selected" }}
+            >
               {homeHero.primary.label}
-            </MagneticButton>
+            </TrackedMagneticButton>
           </div>
           <div data-hero-cta className="w-full sm:w-auto">
-            <MagneticButton
+            <TrackedMagneticButton
               href={homeHero.secondary.href}
               variant="secondary"
               cursor="Open"
               className="w-full justify-center sm:w-auto"
+              event="hiring_path_clicked"
+              payload={{ surface: "home_hero", dest: "experience" }}
             >
               {homeHero.secondary.label}
-            </MagneticButton>
+            </TrackedMagneticButton>
           </div>
         </div>
       </div>

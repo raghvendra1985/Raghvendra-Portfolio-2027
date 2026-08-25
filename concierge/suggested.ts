@@ -226,6 +226,13 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     modeHint: "hiring",
   },
   {
+    id: "eqty",
+    label: "Show EQTY",
+    query: "EQTY fintech operating model founding design partner",
+    preferIds: ["work:eqty", "system:products", "system:focus"],
+    modeHint: "hiring",
+  },
+  {
     id: "ghostwriter",
     label: "What is GWK Ghostwriter?",
     query: "ghostwriter GWK Ghostwriter AI writing product",
@@ -234,7 +241,7 @@ export const suggestedQuestions: SuggestedQuestion[] = [
   },
   {
     id: "nye-money",
-    label: "Show NYE Money / Rapipay",
+    label: "Show Rapipay / NYE Money",
     query: "NYE money Rapipay fintech payments",
     preferIds: ["work:nye", "work:eqty", "experience:leadership-arc"],
     modeHint: "hiring",
@@ -274,6 +281,12 @@ export function matchSuggestedQuestion(query: string) {
     !normalized.includes("design system")
   ) {
     return suggestedQuestions.find((item) => item.id === "ai-products-built");
+  }
+  if (normalized.includes("eqty")) {
+    return suggestedQuestions.find((item) => item.id === "eqty");
+  }
+  if (normalized.includes("nye") || normalized.includes("rapipay") || normalized.includes("money app")) {
+    return suggestedQuestions.find((item) => item.id === "nye-money");
   }
   if (normalized.includes("fintech") || normalized.includes("financial")) {
     return suggestedQuestions.find((item) => item.id === "fintech");
@@ -339,9 +352,6 @@ export function matchSuggestedQuestion(query: string) {
     !normalized.includes("ghost")
   ) {
     return suggestedQuestions.find((item) => item.id === "parenting-gwk");
-  }
-  if (normalized.includes("nye") || normalized.includes("rapipay") || normalized.includes("money app")) {
-    return suggestedQuestions.find((item) => item.id === "nye-money");
   }
   if (
     normalized.includes("where should i start") ||

@@ -111,7 +111,7 @@ export const caseStudies: CaseStudy[] = [
     tone: "navy",
     tier: "flagship",
     lane: "primary",
-    role: "Founding design partner",
+    role: "Founding Design Partner",
     timeline: "Ongoing",
     engagement: "Product strategy and experience architecture",
     cover: "/assets/work/eqty/cover.svg",
@@ -121,45 +121,45 @@ export const caseStudies: CaseStudy[] = [
       "/assets/work/eqty/gallery-03.svg",
     ],
     challenge:
-      "Financial products fail when trust, workflow, and business architecture are designed as separate layers. EQTY needed a modular operating system that could hold high-trust financial experiences without burying operators in complexity.",
+      "Trust, ledger operations, and workflow were being designed as separate layers instead of one operating system. EQTY needed a shared model that could hold high-trust financial work without burying operators in complexity — and without splitting into three products.",
     approachSteps: [
       "Joined as founding design partner — shaping product strategy and experience architecture together, not handing over screens after the system was already decided.",
-      "Mapped the operating system as modules: how money, people, and decisions move, and where trust has to be visible in the interface.",
+      "Mapped the operating system as one set of modules: how money, people, and decisions move, and where trust has to be visible in the interface.",
       "Designed workflows for operators who need clarity under load — fewer dead ends, clearer states, and language that matches how finance teams actually work.",
       "Kept the visual system quiet so the architecture could carry the product: hierarchy, restraint, and a structure that can grow without a redesign every quarter.",
     ],
     outcomes: [
       {
-        title: "Strategy in the product",
-        body: "Experience architecture is part of the operating system, not a coat of paint applied after the modules were locked.",
+        title: "One operating model",
+        body: "Designed a shared operating model so trust, ledger operations, and workflow could extend as one system instead of three separate products.",
       },
       {
-        title: "Trust as a design problem",
-        body: "High-trust financial work is treated as workflow and language, not as a marketing claim.",
+        title: "Partnership inside the decisions",
+        body: "Experience architecture was decided with the product, not applied after the modules were locked.",
       },
       {
         title: "A system that can extend",
-        body: "A modular structure so new financial surfaces can join the OS without fracturing the operator experience.",
+        body: "New financial surfaces can join the OS without fracturing the operator experience.",
       },
     ],
   },
   {
     index: "02",
     slug: "nye",
-    client: "NYE",
+    client: "Rapipay",
     title: "A financial super app — payments, banking, and investments in one system",
     summary:
-      "Product design leadership for NYE Money at Rapipay — prepaid wallet & RuPay card, UPI, NCMC, Jana accounts, digital gold, and mutual funds.",
+      "Senior Manager UX for NYE Money at Rapipay — leading the consumer experience at organisational scale across wallet, UPI, partner banking, and investments.",
     year: "2022",
     category: "SaaS Products",
     industry: "Fintech · Payments",
-    tags: ["Product", "Fintech", "Mobile"],
+    tags: ["Enterprise", "Fintech", "Mobile"],
     tone: "navy",
     tier: "flagship",
     lane: "enterprise",
     role: "Senior Manager UX",
-    timeline: "Rapipay Fintech tenure",
-    engagement: "Product design leadership",
+    timeline: "2022",
+    engagement: "UX leadership at organisational scale",
     href: "https://nye.money/",
     links: [
       { label: "Visit live site", href: "https://nye.money/" },
@@ -184,9 +184,10 @@ export const caseStudies: CaseStudy[] = [
       "/assets/work/nye/gallery-08.jpg",
     ],
     challenge:
-      "NYE needed one consumer surface that could hold prepaid wallet and RuPay Platinum card, UPI payments, NCMC transit, partner bank accounts, digital gold, and mutual funds — without reading like a pile of disconnected fintech features.",
+      "At Rapipay, payments, banking, and investments were splitting into disconnected features. NYE Money needed one everyday consumer system — and a shared experience language the product organisation could adopt, not a pile of fintech modules.",
     approachSteps: [
-      "Framed the product as a financial operating layer for everyday money: spend, move, save, and invest — with security and compliance visible in the experience, not only in the fine print.",
+      "Led UX at organisational scale: set the experience language for wallet, UPI, partner banking, and investments, and worked it through the product organisation rather than a single squad.",
+      "Framed NYE as a financial operating layer for everyday money: spend, move, save, and invest — with security and compliance visible in the experience, not only in the fine print.",
       "Designed payment journeys around Scan & Pay, UPI transfer, Autopay, and payment requests, with prepaid and NCMC states held in the same mental model.",
       "Structured banking onboarding for Jana Savings and Current accounts as progress-led journeys, so unfinished account opening stayed recoverable instead of abandoned.",
       "Brought investments into the same app grammar — digital gold vault and mutual fund baskets — so growth products did not feel like a second brand bolted on.",
@@ -194,16 +195,16 @@ export const caseStudies: CaseStudy[] = [
     ],
     outcomes: [
       {
+        title: "Leadership at organisational scale",
+        body: "Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.",
+      },
+      {
         title: "A live financial super app",
         body: "NYE ships on the web and on iOS and Android as Rapipay’s consumer finance product — wallet, card, UPI, banking, and investments in one place.",
       },
       {
-        title: "Payments that hold transit",
-        body: "Prepaid and NCMC sit beside UPI actions, so metro and bus top-ups are part of the money system rather than a side utility.",
-      },
-      {
-        title: "Banking and invest in the same OS",
-        body: "Partner account opening, digital gold, and mutual funds share the product’s structure instead of splintering into separate apps.",
+        title: "One grammar for money",
+        body: "Prepaid, NCMC, partner account opening, digital gold, and mutual funds share the product’s structure instead of splintering into separate apps.",
       },
     ],
   },
@@ -285,7 +286,7 @@ export const caseStudies: CaseStudy[] = [
       "/assets/work/gwk-ghostwriter/gallery-05.png",
     ],
     challenge:
-      "Generic LinkedIn tools write like everyone else. This studio had to remember voice rules, source material, and what actually worked — not another prompt box.",
+      "Generic writing tools produce generic content because they have no memory of voice, sources, or what actually worked. This studio had to remember the rules — not another prompt box.",
     approachSteps: [
       "Built a full product surface first: dashboard, post editor with live LinkedIn preview, ideas, calendar, knowledge base, memory, analytics, and voice profile.",
       "Made memory the core — preferences, style, feedback, and topics persist across sessions, so the next draft already knows the rules.",
@@ -294,8 +295,8 @@ export const caseStudies: CaseStudy[] = [
     ],
     outcomes: [
       {
-        title: "A studio you can open",
-        body: "The product is live in the portfolio — dashboard through analytics — not a deck of screens.",
+        title: "A workflow you can run",
+        body: "Shipped a research-to-post workflow with long-term memory, voice rules, and source material a founder can actually run.",
       },
       {
         title: "Voice as a system",

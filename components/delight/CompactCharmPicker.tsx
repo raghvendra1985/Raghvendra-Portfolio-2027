@@ -5,9 +5,31 @@ import CharmMark from "@/components/delight/CharmMark";
 import CharmPicker from "@/components/delight/CharmPicker";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import { useCharmState } from "@/components/delight/useCharmState";
-import { CHARMS, getCharm, getCharmArt } from "@/lib/charms";
+import { getCharm, getCharmArt, type CharmId } from "@/lib/charms";
 import { track } from "@/lib/analytics";
 import { compactCharmPrinciples, homeCharms } from "@/home/copy";
+
+function CharmThumb({ id, size }: { id: CharmId; size: number }) {
+  const art = getCharmArt(id);
+  const [frameW, frameH] = art.frame;
+  if (art.src) {
+    return (
+      <img
+        src={art.src}
+        alt=""
+        width={frameW}
+        height={frameH}
+        className="max-h-full max-w-full object-contain"
+        style={{ width: size, height: size }}
+      />
+    );
+  }
+  return (
+    <span className="block shrink-0" style={{ width: size, height: size }}>
+      <CharmMark id={id} className="h-full w-full" />
+    </span>
+  );
+}
 
 export default function CompactCharmPicker() {
   const { state, ready, update } = useCharmState();
@@ -15,9 +37,21 @@ export default function CompactCharmPicker() {
   const liveId = useId();
   const selected = getCharm(state.id);
 
-  if (!ready) return null;
+  if (!ready) {
+    return (
+      <SectionReveal charmRest className="border-t border-line px-[var(--page-pad)] py-20">
+        <div className="mx-auto max-w-[1440px]" aria-busy="true">
+          <div className="max-w-2xl">
+            <p className="font-mono-label text-navy/80">{homeCharms.eyebrow}</p>
+            <h2 className="mt-4 type-h2">{homeCharms.title}</h2>
+          </div>
+          <div className="mt-10 grid min-h-[13rem] gap-3 sm:grid-cols-2 lg:grid-cols-4" />
+        </div>
+      </SectionReveal>
+    );
+  }
 
-  function hang(id: (typeof CHARMS)[number]["id"]) {
+  function hang(id: CharmId) {
     update({ id, hidden: false });
     track("charm_hung", { id });
   }
@@ -36,7 +70,7 @@ export default function CompactCharmPicker() {
     <SectionReveal charmRest className="border-t border-line px-[var(--page-pad)] py-20">
       <div className="mx-auto max-w-[1440px]">
         <div data-reveal-item className="max-w-2xl">
-          <p className="font-mono-label text-ink-soft">{homeCharms.eyebrow}</p>
+          <p className="font-mono-label text-navy/80">{homeCharms.eyebrow}</p>
           <h2 className="mt-4 type-h2">{homeCharms.title}</h2>
         </div>
 
@@ -54,22 +88,20 @@ export default function CompactCharmPicker() {
           {!state.hidden ? (
             <div className="mt-8 flex items-center gap-4 border border-line bg-paper px-4 py-3">
               <div className="flex h-12 w-12 items-center justify-center">
-                {getCharmArt(state.id).src ? (
-                  <img src={getCharmArt(state.id).src} alt="" className="max-h-10 max-w-10" />
-                ) : (
-                  <CharmMark
-                    id={state.id}
-                    emoji={state.emoji}
-                    daruma={state.daruma}
-                    drishti={state.drishti}
-                    className="h-10 w-10"
-                  />
-                )}
+                <CharmThumb id={state.id} size={40} />
               </div>
-              <div className="min-w-0">
-                <p className="font-mono-label text-ink-soft">Accompanying charm</p>
+              <div className="min-w-0 flex-1">
+                <p className="font-mono-label text-navy/80">Accompanying charm</p>
                 <p className="type-body text-navy">{selected.name}</p>
               </div>
+              <button
+                type="button"
+                onClick={toggleHidden}
+                aria-label={`${homeCharms.hide}: ${selected.name}`}
+                className="inline-flex min-h-11 shrink-0 items-center font-mono-label text-navy"
+              >
+                {homeCharms.hide}
+              </button>
             </div>
           ) : null}
         </div>
@@ -90,15 +122,11 @@ export default function CompactCharmPicker() {
                   }`}
                 >
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center">
-                    {getCharmArt(item.id).src ? (
-                      <img src={getCharmArt(item.id).src} alt="" className="max-h-8 max-w-8" />
-                    ) : (
-                      <CharmMark id={item.id} className="h-8 w-8" />
-                    )}
+                    <CharmThumb id={item.id} size={32} />
                   </span>
                   <span>
                     <span className="block font-mono-label text-navy">{charm.name}</span>
-                    <span className="mt-1 block type-body text-ink-soft">{item.principle}</span>
+                    <span className="mt-1 block type-body text-navy/80">{item.principle}</span>
                   </span>
                 </button>
               </li>
@@ -118,7 +146,7 @@ export default function CompactCharmPicker() {
           <button
             type="button"
             onClick={toggleHidden}
-            className="inline-flex min-h-11 items-center font-mono-label text-ink-soft hover:text-navy"
+            className="inline-flex min-h-11 items-center font-mono-label text-navy hover:text-green"
           >
             {state.hidden ? homeCharms.restore : homeCharms.hide}
           </button>

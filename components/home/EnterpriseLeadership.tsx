@@ -34,7 +34,7 @@ export default function EnterpriseLeadership({ studies }: { studies: CaseStudy[]
     <SectionReveal
       id="enterprise"
       charmRest
-      className="scroll-mt-28 border-t border-navy bg-navy px-[var(--page-pad)] py-24 text-mist"
+      className="scroll-mt-[var(--hash-offset)] border-t border-navy bg-navy px-[var(--page-pad)] py-24 text-mist"
     >
       <div className="mx-auto max-w-[1440px]">
         <div
@@ -42,7 +42,7 @@ export default function EnterpriseLeadership({ studies }: { studies: CaseStudy[]
           data-reveal-item
         >
           <div>
-            <p className="font-mono-label text-mist/70">{homeEnterprise.eyebrow}</p>
+            <p className="font-mono-label text-mist/85">{homeEnterprise.eyebrow}</p>
             <h2 className="mt-4 max-w-3xl type-h2">{homeEnterprise.title}</h2>
             <p className="mt-4 max-w-[65ch] type-body text-mist/85">{homeEnterprise.body}</p>
           </div>
