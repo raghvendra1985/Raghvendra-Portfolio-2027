@@ -98,7 +98,7 @@ function directAnswer(
     case "start-here":
       return `Start with ${named}. Then ask about AI, fintech, or leadership if you want a narrower path.`;
     case "about-who":
-      return `Raghvendra is a product design leader working across systems, fintech, AI products, and founder-led ventures. About and the career timeline hold the published evidence.`;
+      return `Raghvendra is a product design leader whose work moved from visual craft and industrial constraints through digital products and organisational decisions, into founder work and teaching. About holds the five chapters.`;
     case "availability":
       return `Open to selected product leadership, advisory, and collaborations. Contact is the next step if the work looks like a fit.`;
     case "parenting-gwk":
@@ -110,7 +110,7 @@ function directAnswer(
     case "nye-money":
       return `Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.`;
     case "resume":
-      return `The published career path is on About — 20 years in design · 14+ years in digital product and UX. Read the experience timeline, or request a resume from Contact.`;
+      return `The published career path is on About — twenty years across visual, industrial, product, and organisational design, with 14+ years leading digital products and UX systems. Read the five chapters, or request a résumé from Contact.`;
     default:
       break;
   }

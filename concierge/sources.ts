@@ -211,6 +211,10 @@ function buildSystemEntries(): ConciergeEntry[] {
 }
 
 function buildAboutEntries(): ConciergeEntry[] {
+  const statsLine = aboutPage.stats
+    .map((stat) => `${stat.value} ${stat.unit} — ${stat.label}`)
+    .join(". ");
+
   const overview: ConciergeEntry = {
     id: "about:overview",
     source: "about",
@@ -221,12 +225,14 @@ function buildAboutEntries(): ConciergeEntry[] {
       "about",
       "product design leader",
       "systems thinker",
-      "AI product builder",
+      "hands-on builder",
+      "career narrative",
+      "five chapters",
       "IIAD",
       "hire",
     ],
     summary: aboutPage.description,
-    content: `${aboutPage.heroTitle}. ${aboutPage.heroDescription}`,
+    content: `${aboutPage.heroTitle} ${aboutPage.heroDescription} ${aboutPage.identity} ${aboutPage.location} ${statsLine}`,
     url: "/about",
   };
 
@@ -250,6 +256,52 @@ function buildAboutEntries(): ConciergeEntry[] {
     url: "/contact",
   };
 
+  const lead: ConciergeEntry = {
+    id: "about:lead",
+    source: "about",
+    type: "leadership",
+    title: aboutPage.leadDeck,
+    slug: "lead",
+    topics: [
+      "how I lead",
+      "leadership",
+      "critique",
+      "direction without distance",
+      "teams",
+    ],
+    summary: aboutPage.leadDeck,
+    content: `${aboutPage.leadTitle}. ${aboutPage.leadDeck} ${aboutPage.leadBody} ${aboutPage.leadBehaviors
+      .map((behavior) => `${behavior.title}: ${behavior.body}`)
+      .join(" ")}`,
+    url: "/about#lead",
+  };
+
+  const modes: ConciergeEntry = {
+    id: "about:practice",
+    source: "about",
+    type: "practice",
+    title: "How I work today",
+    slug: "practice",
+    topics: ["lead", "design systems", "build", "teach", "practice", "how I work"],
+    summary: aboutPage.modesIntro,
+    content: `${aboutPage.modesIntro} ${aboutPage.modes
+      .map((mode) => `${mode.title}: ${mode.body}`)
+      .join(" ")}`,
+    url: "/about",
+  };
+
+  const teaching: ConciergeEntry = {
+    id: "about:teaching",
+    source: "about",
+    type: "teaching",
+    title: aboutPage.teachingTitle,
+    slug: "teaching",
+    topics: ["teaching", "IIAD", "workshops", "mentoring", "500 designers", "critique"],
+    summary: aboutPage.teachingTitle,
+    content: aboutPage.teachingBody,
+    url: "/about#teaching",
+  };
+
   const beliefs: ConciergeEntry[] = aboutPage.beliefs.map((belief) => ({
     id: `about:belief:${belief.index}`,
     source: "about" as const,
@@ -258,11 +310,11 @@ function buildAboutEntries(): ConciergeEntry[] {
     slug: `belief-${belief.index}`,
     topics: uniq(["beliefs", "about", "philosophy", belief.title]),
     summary: belief.description,
-    content: belief.description,
+    content: `${belief.description} Evidence: ${belief.evidence.label}.`,
     url: "/about#beliefs",
   }));
 
-  return [overview, contact, ...beliefs];
+  return [overview, contact, lead, modes, teaching, ...beliefs];
 }
 
 function buildExperienceEntries(): ConciergeEntry[] {
@@ -275,6 +327,7 @@ function buildExperienceEntries(): ConciergeEntry[] {
     topics: uniq([
       "experience",
       "career",
+      "chapters",
       "leadership",
       era.role,
       era.org,
@@ -282,8 +335,8 @@ function buildExperienceEntries(): ConciergeEntry[] {
       era.id === "leadership-arc" ? "fintech" : "",
       era.id === "ux-lead-arc" || era.id === "product-industrial" ? "enterprise systems" : "",
     ]),
-    summary: era.description,
-    content: `${era.range}. ${era.role}. ${era.org}. ${era.description}`,
+    summary: era.learned,
+    content: `${era.range}. ${era.role}. ${era.org}. ${era.context} ${era.owned} ${era.learned}`,
     url: `/about#${era.id}`,
   }));
 }

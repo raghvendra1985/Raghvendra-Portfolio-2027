@@ -208,7 +208,7 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     id: "about-who",
     label: "Who is Raghvendra?",
     query: "who are you about product design leader systems AI",
-    preferIds: ["about:overview", "experience:leadership-arc", "system:identity", "about:contact"],
+    preferIds: ["about:overview", "experience:founder", "experience:leadership-arc", "about:lead", "about:contact"],
     modeHint: "hiring",
   },
   {

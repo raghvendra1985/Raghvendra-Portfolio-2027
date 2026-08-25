@@ -122,7 +122,9 @@ const QUERY_ALIASES: [string, string][] = [
   ["available", "contact hire open opportunities"],
   ["availability", "contact hire"],
   ["hire me", "why hire leadership about"],
-  ["who are you", "about raghvendra product design leader"],
+  ["who are you", "about raghvendra product design leader five chapters"],
+  ["how do you lead", "direction without distance critique leadership about"],
+  ["how i lead", "direction without distance critique leadership"],
   ["start", "flagship eqty ghostwriter bolo buddy"],
 ];
 
