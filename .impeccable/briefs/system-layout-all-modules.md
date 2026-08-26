@@ -9,6 +9,8 @@
 - Shape sample (Dashboard / Focus / Method / Decision Log): [system-layout-reference.html](./system-layout-reference.html) — retokened to mist/navy/green/gold and Bricolage + Manrope for parking in-repo; shapes match the capacity brief sample.
 - Live surface: `components/system/*`, data in `founder-os/index.ts`
 
+**Type check when scheduling:** Retokening is not purely mechanical. Bricolage has more display personality than the original Space Grotesk stand-in — re-check tile / card / method / ledger weight with real type before locking shapes, especially how much presence the Decision Log timeline needs relative to the other families.
+
 ## Why all modules
 
 Diagnosis: every content type uses the same stacked unit → monotony.  
