@@ -175,7 +175,6 @@ export const studioPage: StudioPage = {
       "Outside-strip plants that get the leftover attention after the ride",
     ],
     // Add files under public/assets/studio/ then list { src, alt } here.
-    // Dog, cat, garden, and ride photos join the HelixSpiral covers automatically.
     // No stock photos.
     images: [],
   },
@@ -462,40 +461,3 @@ export const studioPage: StudioPage = {
     },
   ],
 };
-
-export type StudioCoverSlide = {
-  src: string;
-  alt: string;
-  title: string;
-};
-
-export function studioCoverSlides(): StudioCoverSlide[] {
-  const slides: StudioCoverSlide[] = [];
-  for (const companion of studioPage.habitat.companions) {
-    for (const photo of companionPhotos(companion)) {
-      slides.push({
-        src: photo.src,
-        alt: photo.alt,
-        title: companion.name ?? companion.kind,
-      });
-    }
-  }
-  for (const image of studioPage.habitat.images) {
-    slides.push({ src: image.src, alt: image.alt, title: "Garden" });
-  }
-  for (const image of studioPage.motion.images) {
-    slides.push({ src: image.src, alt: image.alt, title: "Ride" });
-  }
-  for (const room of studioPage.rooms) {
-    slides.push({ src: room.src, alt: room.alt, title: room.title });
-  }
-  for (const item of studioPage.resources) {
-    if (!item.image) continue;
-    slides.push({
-      src: item.image,
-      alt: item.imageAlt ?? item.title,
-      title: item.spineLabel || item.title,
-    });
-  }
-  return slides;
-}

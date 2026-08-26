@@ -2,47 +2,6 @@
 
 import { DURATION, EASE, createScope, gsap, type MotionConfig } from "./motion";
 
-export function animateStudioTicker(root: HTMLElement, config: MotionConfig) {
-  const track = root.querySelector<HTMLElement>("[data-studio-ticker-track]");
-  if (!track) return createScope(root, () => {});
-
-  return createScope(root, () => {
-    gsap.set(track, { x: 0 });
-    if (config.reducedMotion) return;
-
-    const tween = gsap.to(track, {
-      x: "-50%",
-      duration: 32,
-      ease: "none",
-      repeat: -1,
-    });
-
-    let hovered = false;
-    let focused = false;
-    const sync = () => {
-      if (hovered || focused) tween.pause();
-      else tween.play();
-    };
-
-    root.addEventListener("mouseenter", () => {
-      hovered = true;
-      sync();
-    });
-    root.addEventListener("mouseleave", () => {
-      hovered = false;
-      sync();
-    });
-    root.addEventListener("focusin", () => {
-      focused = true;
-      sync();
-    });
-    root.addEventListener("focusout", () => {
-      focused = false;
-      sync();
-    });
-  });
-}
-
 export type StudioCardOptions = {
   /** Vertical lift on hover. Full-bleed media should pass false. */
   lift?: boolean;

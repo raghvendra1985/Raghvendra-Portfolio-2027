@@ -38,7 +38,7 @@ The layout reference was built from live content, so it never named these prior 
 - **StudioTicker** — topic/kind marquee. Ambient chrome that reads as dashboard noise against the “one shape per section” direction.
 - **Contact CTA card** — services brochure move; teaching bridge to Notes is the only exit.
 
-Components remain in the repo unused for now; delete in a later cleanup if Studio stays this shape.
+Removed from the repo: `HelixSpiral.tsx`, `StudioTicker.tsx`, and `animateStudioTicker`. Hover lift stays in `animateStudioCard` (used by StudioHover / AboutCard).
 
 ## Hero copy / a11y note
 
