@@ -5,7 +5,7 @@ import { pageMetadataExtras } from "@/lib/seo";
 
 const title = "System";
 const description =
-  "How Raghvendra Singh thinks, builds, decides, learns, and operates — a founder operating system.";
+  "How Raghvendra Singh thinks, decides, builds, learns, and operates — methodology connecting practice to published Work evidence.";
 
 export const metadata: Metadata = {
   title,

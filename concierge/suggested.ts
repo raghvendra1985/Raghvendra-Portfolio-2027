@@ -12,18 +12,21 @@ export const openingQuestions: SuggestedQuestion[] = [
   {
     id: "product-leadership",
     label: "Which projects show product leadership?",
-    query: "product leadership EQTY Rapipay Verizon Crowley design leadership",
-    preferIds: ["work:eqty", "work:nye", "work:verizon", "work:crowley", "experience:leadership-arc"],
+    query:
+      "product direction product leadership EQTY Sagacito contribution group featured evidence",
+    preferIds: ["work:eqty", "work:sagacito", "work:nye", "work:verizon", "experience:leadership-arc"],
     modeHint: "hiring",
   },
   {
     id: "ai-products-built",
     label: "What is his experience with AI products?",
-    query: "AI products GWK Ghostwriter Bolo Buddy EQTY trust",
+    query:
+      "AI and founder products GWK Ghostwriter Bolo Buddy Growing With Kid Urban Prakriti contribution",
     preferIds: [
       "work:gwk-ghostwriter",
       "work:bolo-buddy",
-      "work:eqty",
+      "work:growing-with-kid",
+      "work:urban-prakriti",
       "knowledge:ai-products-earn-trust",
       "framework:ai-trust-stack",
     ],
@@ -32,8 +35,16 @@ export const openingQuestions: SuggestedQuestion[] = [
   {
     id: "enterprise-systems",
     label: "Has he worked on complex enterprise systems?",
-    query: "enterprise systems Verizon Rapipay Crowley complex workflows",
-    preferIds: ["work:verizon", "work:nye", "work:crowley", "experience:leadership-arc"],
+    query:
+      "complex systems enterprise leadership Verizon Crowley Shuttl Hempel Rapipay contribution group",
+    preferIds: [
+      "work:verizon",
+      "work:nye",
+      "work:crowley",
+      "work:shuttl",
+      "work:hempel",
+      "experience:leadership-arc",
+    ],
     modeHint: "hiring",
   },
   {
@@ -110,15 +121,31 @@ export const suggestedQuestions: SuggestedQuestion[] = [
   {
     id: "founder-products",
     label: "Show founder-led products",
-    query: "founder products GWK Ghostwriter Growing With Kid Bolo Buddy 2886 Founder OS",
+    query:
+      "founder products as practice GWK Ghostwriter Growing With Kid Bolo Buddy System methodology contribution",
     preferIds: [
       "work:gwk-ghostwriter",
       "work:growing-with-kid",
       "work:bolo-buddy",
       "work:2886",
       "system:products",
+      "system:practice",
       "system:focus",
-      "knowledge:building-growing-with-kid",
+    ],
+    modeHint: "hiring",
+  },
+  {
+    id: "system-methodology",
+    label: "How does his System / operating practice work?",
+    query:
+      "System methodology how I think decide operate product direction complex systems AI and founder products enterprise leadership",
+    preferIds: [
+      "system:identity",
+      "system:practice",
+      "system:principles",
+      "system:decisions",
+      "system:products",
+      "system:focus",
     ],
     modeHint: "hiring",
   },
@@ -307,6 +334,20 @@ export function matchSuggestedQuestion(query: string) {
     normalized.includes("design iq")
   ) {
     return suggestedQuestions.find((item) => item.id === "student-tools");
+  }
+  if (
+    normalized.includes("founder os") ||
+    normalized.includes("operating system") ||
+    normalized.includes("methodology") ||
+    normalized.includes("how do you think") ||
+    normalized.includes("how does his system") ||
+    (normalized.includes("system") &&
+      (normalized.includes("practice") ||
+        normalized.includes("operate") ||
+        normalized.includes("decide") ||
+        normalized.includes("method")))
+  ) {
+    return suggestedQuestions.find((item) => item.id === "system-methodology");
   }
   if (normalized.includes("founder")) {
     return suggestedQuestions.find((item) => item.id === "founder-products");

@@ -11,10 +11,12 @@ import type { CaseStudy } from "@/case-studies";
 
 export default function CaseStudyView({
   study,
-  next,
+  related,
+  different,
 }: {
   study: CaseStudy;
-  next: CaseStudy;
+  related?: CaseStudy;
+  different?: CaseStudy;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const { config } = useExperience();
@@ -185,16 +187,58 @@ export default function CaseStudyView({
               Start a conversation.
             </h2>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <MagneticButton href="/contact">Start a conversation</MagneticButton>
-            <MagneticButton href={`/work/${next.slug}`} variant="secondary" cursor="Next">
-              Next case study
-            </MagneticButton>
-          </div>
+          <MagneticButton href="/contact">Start a conversation</MagneticButton>
         </div>
-        <p className="mx-auto mt-8 max-w-[1440px] font-mono-label text-ink-soft">
-          Next — {next.client}: {next.title}
-        </p>
+
+        <nav
+          className="mx-auto mt-16 max-w-[1440px]"
+          aria-label="Continue through selected work"
+        >
+          <p className="font-mono-label text-ink-soft">Continue</p>
+          <ul className="mt-6 grid gap-8 md:grid-cols-3">
+            {related ? (
+              <li>
+                <p className="font-mono-label text-ink-soft">Related project</p>
+                <Link
+                  href={`/work/${related.slug}`}
+                  data-cursor="View"
+                  className="mt-3 block group"
+                >
+                  <span className="font-mono-label text-ink-soft">{related.client}</span>
+                  <span className="mt-2 block type-h3 text-navy group-hover:text-green">
+                    {related.title}
+                  </span>
+                </Link>
+              </li>
+            ) : null}
+            {different ? (
+              <li>
+                <p className="font-mono-label text-ink-soft">
+                  Different kind of work
+                </p>
+                <Link
+                  href={`/work/${different.slug}`}
+                  data-cursor="View"
+                  className="mt-3 block group"
+                >
+                  <span className="font-mono-label text-ink-soft">{different.client}</span>
+                  <span className="mt-2 block type-h3 text-navy group-hover:text-green">
+                    {different.title}
+                  </span>
+                </Link>
+              </li>
+            ) : null}
+            <li>
+              <p className="font-mono-label text-ink-soft">Back to all work</p>
+              <Link href="/work" data-cursor="Open" className="mt-3 block group">
+                <span className="mt-2 block type-h3 text-navy group-hover:text-green">
+                  Selected work
+                </span>
+                <span className="mt-2 block font-mono-label text-green">View all →</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </section>
     </div>
   );

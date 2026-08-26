@@ -38,6 +38,7 @@ export type AnalyticsEvent =
   | "resume_download"
   | "resume_requested"
   | "project_clicked"
+  | "work_toc_clicked"
   | "enterprise_case_clicked"
   | "service_clicked"
   | "service_view"

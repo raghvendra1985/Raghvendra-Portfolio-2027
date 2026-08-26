@@ -41,7 +41,7 @@ export default function ContactPage() {
 
         <div data-reveal-item className="space-y-10">
           <div>
-            <p className="font-mono-label text-ink-soft">{contactPage.nextEyebrow}</p>
+            <p className="font-section-label text-navy">{contactPage.nextEyebrow}</p>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-soft">
               {contactPage.nextBody}
             </p>

@@ -126,6 +126,16 @@ const QUERY_ALIASES: [string, string][] = [
   ["how do you lead", "direction without distance critique leadership about"],
   ["how i lead", "direction without distance critique leadership"],
   ["start", "flagship eqty ghostwriter bolo buddy"],
+  ["product direction", "product-direction eqty sagacito viralops"],
+  ["complex systems", "complex-systems shuttl hempel obzrv verizon"],
+  ["enterprise leadership", "enterprise-leadership nye rapipay verizon crowley"],
+  ["ai and founder", "ai-founder gwk ghostwriter bolo buddy growing with kid urban prakriti"],
+  ["founder products", "ai-founder bolo buddy growing with kid urban prakriti products as practice"],
+  ["founder os", "system methodology practice method to evidence"],
+  ["operating system", "system methodology practice how I decide"],
+  ["methodology", "system practice method to evidence contribution group"],
+  ["how I operate", "system methodology decisions principles practice"],
+  ["how I decide", "system decision log principles practice"],
 ];
 
 export function expandQuery(query: string): string {

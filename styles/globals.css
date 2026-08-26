@@ -39,6 +39,16 @@ body {
   text-transform: uppercase;
 }
 
+/* In-card section heading. Not a page hero, not a field label. */
+.font-section-label {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-size: var(--text-small);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-label);
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
 .type-hero {
   font-family: var(--font-display), system-ui, sans-serif;
   font-optical-sizing: auto;

@@ -8,7 +8,7 @@ export default function FocusCard({ item }: { item: FocusItem }) {
       <h3 className="mt-3 type-h3">{item.name}</h3>
       <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">{item.status}</p>
       {item.href ? (
-        <p className="mt-6 font-mono-label text-green">Read case study →</p>
+        <p className="mt-6 font-mono-label text-green">Open published evidence →</p>
       ) : null}
     </>
   );

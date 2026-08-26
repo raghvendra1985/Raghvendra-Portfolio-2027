@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CaseStudyView from "@/components/work/CaseStudyView";
-import { flagshipStudies, getCaseStudy, getNextCaseStudy } from "@/case-studies";
+import { flagshipStudies, getCaseStudy, getCaseStudyContinuation } from "@/case-studies";
 import { pageMetadataExtras } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -50,7 +50,7 @@ export default async function CaseStudyPage({
   const { slug } = await params;
   const study = getCaseStudy(slug);
   if (!study) notFound();
-  const next = getNextCaseStudy(slug);
+  const { related, different } = getCaseStudyContinuation(slug);
 
-  return <CaseStudyView study={study} next={next} />;
+  return <CaseStudyView study={study} related={related} different={different} />;
 }

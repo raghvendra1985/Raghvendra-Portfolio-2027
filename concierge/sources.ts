@@ -1,5 +1,5 @@
 import { aboutPage } from "@/about";
-import { caseStudies } from "@/case-studies";
+import { caseStudies, contributionGroupLabels } from "@/case-studies";
 import { founderOs, osModules } from "@/founder-os";
 import {
   getFrameworkArticle,
@@ -17,9 +17,11 @@ function uniq(topics: string[]) {
 
 function buildWorkEntries(): ConciergeEntry[] {
   return caseStudies.map((study) => {
+    const groupLabel = contributionGroupLabels[study.contributionGroup];
     const narrative = [
       study.role,
       study.engagement,
+      study.contribution,
       study.challenge,
       ...(study.approachSteps ?? []),
       ...(study.outcomes?.flatMap((o) => [o.title, o.body]) ?? []),
@@ -39,15 +41,26 @@ function buildWorkEntries(): ConciergeEntry[] {
       title: `${study.client} — ${study.title}`,
       slug: study.slug,
       topics: uniq([
+        study.contributionGroup,
+        groupLabel,
+        study.evidence,
         study.category,
         study.industry,
         study.lane,
         study.tier,
+        study.featuredDesignation ?? "",
         ...study.tags,
         study.client,
       ]),
-      summary: study.summary,
-      content: narrative || study.summary,
+      summary: study.contribution || study.summary,
+      content: [
+        `Contribution group: ${groupLabel}.`,
+        `Evidence: ${study.evidence}.`,
+        study.featuredDesignation ? `Featured as ${study.featuredDesignation}.` : "",
+        narrative || study.summary,
+      ]
+        .filter(Boolean)
+        .join(" "),
       url,
     };
   });
@@ -109,41 +122,81 @@ function buildFrameworkEntries(): ConciergeEntry[] {
 }
 
 function buildSystemEntries(): ConciergeEntry[] {
+  const contributionGroups = [
+    "product direction",
+    "complex systems",
+    "AI and founder products",
+    "enterprise leadership",
+  ];
+
   const identity: ConciergeEntry = {
     id: "system:identity",
     source: "system",
     type: "operating-system",
-    title: "Founder OS",
+    title: "System — methodology",
     slug: "system",
-    topics: ["founder os", "operating system", "practice", "leadership"],
-    summary: founderOs.identity.deck,
-    content: `${founderOs.identity.name}. ${founderOs.identity.positioning}. ${founderOs.identity.deck}`,
+    topics: uniq([
+      "founder os",
+      "operating system",
+      "methodology",
+      "practice",
+      "how I think",
+      "how I decide",
+      "how I operate",
+      ...contributionGroups,
+    ]),
+    summary:
+      "System explains the repeatable practice — how to think, decide, build, learn, and operate. About is career story; Work is published evidence.",
+    content: [
+      founderOs.identity.name,
+      founderOs.identity.positioning,
+      founderOs.identity.deck,
+      "Methodology, not a second portfolio. Contribution groups match Work: Product direction, Complex systems, AI and founder products, Enterprise leadership.",
+      founderOs.practiceMap
+        .map(
+          (row) =>
+            `${row.group}: ${row.method} Evidence: ${row.examples.map((e) => e.label).join(", ")}.`,
+        )
+        .join(" "),
+    ].join(" "),
     url: "/system",
   };
 
   const modules: ConciergeEntry[] = osModules.map((module) => {
     let summary = "";
     let content = "";
-    const topics: string[] = [module.title, "founder os", "system"];
+    const topics: string[] = [module.title, "founder os", "system", "methodology"];
 
     switch (module.id) {
       case "dashboard":
-        summary = "Six ways into the operating system.";
+        summary = "Ways into the operating system — a table of contents for the practice.";
         content = founderOs.dashboard.map((d) => `${d.label}. ${d.summary}`).join(" ");
         break;
       case "focus":
-        summary = "Current workstreams that set the week.";
+        summary = "Current workstreams that set the week — framed as operating questions.";
         content = founderOs.focus
           .map((f) => `${f.name}. ${f.role}. ${f.status}`)
           .join(" ");
-        topics.push("EQTY", "GWK Ghostwriter", "Growing With Kid", "Bolo Buddy", "teaching", "product leadership");
+        topics.push("EQTY", "Growing With Kid", "Bolo Buddy", "teaching");
+        break;
+      case "practice":
+        summary =
+          "Method to evidence — Product direction, Complex systems, AI and founder products, Enterprise leadership.";
+        content = founderOs.practiceMap
+          .map(
+            (row) =>
+              `${row.group}. ${row.method} Examples: ${row.examples.map((e) => e.label).join(", ")}.`,
+          )
+          .join(" ");
+        topics.push(...contributionGroups, "contribution group", "evidence");
         break;
       case "products":
-        summary = "Founder products and the fintech OS partnership.";
+        summary =
+          "Products as practice — small founder products that test the OS under real constraints.";
         content = founderOs.products
-          .map((p) => `${p.name}. ${p.kind}. ${p.summary}`)
+          .map((p) => `${p.name}. Tests: ${p.tests}. ${p.summary}`)
           .join(" ");
-        topics.push("products", "fintech", "founder", "AI");
+        topics.push("products as practice", "founder", "AI", "constraint");
         break;
       case "principles":
         summary = "Operating principles the practice holds.";
@@ -165,12 +218,12 @@ function buildSystemEntries(): ConciergeEntry[] {
         topics.push("experiments", "AI", "product");
         break;
       case "knowledge":
-        summary = "Field notes linked from the operating system.";
-        content = founderOs.knowledge.map((k) => k.note).join(" ");
-        topics.push("writing", "knowledge");
+        summary = "Writing and field notes — routes to Notes, does not browse articles on System.";
+        content = `${founderOs.writing.intro} ${founderOs.writing.cta} ${founderOs.writing.href}`;
+        topics.push("writing", "field notes", "Notes");
         break;
       case "teaching":
-        summary = "Curriculum, workshops, and mentoring.";
+        summary = "Curriculum, workshops, and mentoring as feedback on the OS.";
         content = founderOs.teaching
           .map((t) => `${t.title}. ${t.context}. ${t.body}`)
           .join(" ");
@@ -188,9 +241,9 @@ function buildSystemEntries(): ConciergeEntry[] {
         topics.push("roadmap");
         break;
       case "archive":
-        summary = "Enterprise systems and client work that still inform the OS.";
+        summary = "Enterprise systems and earlier work that still inform the OS.";
         content = founderOs.archive.map((a) => `${a.label}. ${a.body}`).join(" ");
-        topics.push("enterprise", "advisory", "archive");
+        topics.push("enterprise", "archive", ...contributionGroups);
         break;
     }
 

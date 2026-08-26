@@ -25,7 +25,7 @@ function evidenceLabel(entry: RankedEntry): string {
     case "knowledge":
       return `Read the note →`;
     case "system":
-      return entry.slug === "system" ? "Explore Founder OS →" : `Explore ${entry.title} →`;
+      return entry.slug === "system" ? "Explore System →" : `Explore ${entry.title} →`;
     case "about":
       return entry.slug === "contact" ? "Open contact →" : "About Raghvendra →";
     case "experience":
@@ -84,9 +84,9 @@ function directAnswer(
     case "design-systems":
       return `Design systems are treated as operating infrastructure — DesignOps, critique standards, and visible decision paths.`;
     case "leadership":
-      return `Leadership evidence covers Design Lead work, enterprise architecture, critique systems, and Founder OS decision practice.`;
+      return `Leadership evidence covers Design Lead work, enterprise architecture, critique systems, and System decision practice.`;
     case "founder-products":
-      return `Founder-led products include GWK Ghostwriter, Growing With Kid, Bolo Buddy, and 2886 — held inside Founder OS.`;
+      return `Founder products are held as practice on System — small products that test the operating system under real constraints — with published evidence on Work.`;
     case "ai-in-design":
       return `AI is used as product craft: trust surfaces, human judgment boundaries, and AI Blueprint engagements — not as theatre.`;
     case "teach":
@@ -94,7 +94,9 @@ function directAnswer(
     case "frameworks":
       return `Published frameworks include Decision Stack, Critique System, AI Trust Stack, Product Operating Model, Visible Learning Loop, and Product Filter.`;
     case "why-hire":
-      return `Hire for product leadership, systems thinking, and AI product craft — evidenced in flagship work, career eras, and Founder OS.`;
+      return `Hire for product leadership evidenced in Work, career eras on About, and the methodology on System — how decisions, experiments, and contribution groups connect.`;
+    case "system-methodology":
+      return `System is the methodology page — how to think, decide, build, learn, and operate. Work proves contribution across Product direction, Complex systems, AI and founder products, and Enterprise leadership.`;
     case "start-here":
       return `Start with ${named}. Then ask about AI, fintech, or leadership if you want a narrower path.`;
     case "about-who":
@@ -117,7 +119,7 @@ function directAnswer(
 
   const q = query.toLowerCase();
   if (q.includes("ai")) {
-    return `AI product experience shows up in ${named} — with methods in Knowledge and Founder OS.`;
+    return `AI product experience shows up in ${named} — with methods on System and field notes on Notes.`;
   }
   if (q.includes("fintech") || q.includes("finance")) {
     return `Fintech experience is documented in ${named}.`;
@@ -221,7 +223,7 @@ export function evidenceSourceLabel(source: ConciergeSource) {
     case "framework":
       return "Framework";
     case "system":
-      return "Founder OS";
+      return "System";
     case "about":
       return "About";
     case "experience":

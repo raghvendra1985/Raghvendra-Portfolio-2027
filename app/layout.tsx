@@ -19,7 +19,7 @@ const display = localFont({
 const sans = Manrope({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   display: "swap",
   adjustFontFallback: true,
 });

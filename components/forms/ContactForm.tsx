@@ -152,11 +152,11 @@ export default function ContactForm() {
   return (
     <form ref={rootRef} onSubmit={handleSubmit} className="relative space-y-5" noValidate>
       <div data-form-item>
-        <p id="intent-label" className="font-mono-label text-ink-soft">
+        <h2 id="intent-label" className="font-section-label text-navy">
           {contactPage.intentPrompt}
-        </p>
+        </h2>
         <div
-          className="-mx-1 mt-2 flex flex-col items-start sm:flex-wrap sm:flex-row"
+          className="-mx-1 mt-4 flex flex-col items-start sm:flex-wrap sm:flex-row"
           role="radiogroup"
           aria-labelledby="intent-label"
           aria-required="true"

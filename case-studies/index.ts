@@ -9,6 +9,16 @@ export type WorkTier = "flagship" | "lightweight";
 
 export type WorkLane = "primary" | "enterprise" | "founder" | "archive";
 
+/** Primary contribution grouping for Work Index V2. Featured studies keep a group for continuation. */
+export type ContributionGroup =
+  | "product-direction"
+  | "complex-systems"
+  | "ai-founder"
+  | "enterprise-leadership"
+  | "archive";
+
+export type WorkEvidence = "CASE STUDY" | "LIVE PRODUCT" | "SELECTED WORK" | "ARCHIVE";
+
 export type CaseStudy = {
   index: string;
   slug: string;
@@ -22,6 +32,14 @@ export type CaseStudy = {
   tone: "navy" | "green" | "gold" | "mist";
   tier: WorkTier;
   lane: WorkLane;
+  contributionGroup: ContributionGroup;
+  /** Outcome-oriented one-liner for index cards. */
+  contribution: string;
+  evidence: WorkEvidence;
+  /** Featured band designation (Product direction / AI product building / Enterprise leadership). */
+  featuredDesignation?: string;
+  /** Quieter supporting card on the work index (Growing With Kid, Bolo Buddy). */
+  indexCompact?: boolean;
   featured?: boolean;
   role?: string;
   timeline?: string;
@@ -34,6 +52,159 @@ export type CaseStudy = {
   links?: { label: string; href: string }[];
   cover?: string;
   gallery?: string[];
+};
+
+export const contributionGroups: Exclude<ContributionGroup, "archive">[] = [
+  "product-direction",
+  "complex-systems",
+  "ai-founder",
+  "enterprise-leadership",
+];
+
+export const contributionGroupLabels: Record<ContributionGroup, string> = {
+  "product-direction": "Product direction",
+  "complex-systems": "Complex systems",
+  "ai-founder": "AI and founder products",
+  "enterprise-leadership": "Enterprise leadership",
+  archive: "Archive",
+};
+
+type WorkIndexMeta = {
+  contributionGroup: ContributionGroup;
+  contribution: string;
+  evidence: WorkEvidence;
+  featuredDesignation?: string;
+  indexCompact?: boolean;
+};
+
+/** Index-only fields. Featured three are omitted from remaining-work sections via `featuredWork`. */
+const workIndexBySlug: Record<string, WorkIndexMeta> = {
+  eqty: {
+    contributionGroup: "product-direction",
+    contribution:
+      "Designed a shared operating model so trust, ledger operations, and workflow could extend as one system instead of three separate products.",
+    evidence: "CASE STUDY",
+    featuredDesignation: "Product direction",
+  },
+  "gwk-ghostwriter": {
+    contributionGroup: "ai-founder",
+    contribution:
+      "Shipped a research-to-post workflow with long-term memory, voice rules, and source material a founder can actually run.",
+    evidence: "CASE STUDY",
+    featuredDesignation: "AI product building",
+  },
+  nye: {
+    contributionGroup: "enterprise-leadership",
+    contribution:
+      "Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.",
+    evidence: "CASE STUDY",
+    featuredDesignation: "Enterprise leadership",
+  },
+  sagacito: {
+    contributionGroup: "product-direction",
+    contribution:
+      "Designed Ymax, Pgov, and RevX as one pre-sales-to-revenue pipeline adopted by major Indian media houses.",
+    evidence: "CASE STUDY",
+  },
+  viralops: {
+    contributionGroup: "product-direction",
+    contribution:
+      "Delivered a full dual-product website redesign through an extended client review cycle without stalling the design work.",
+    evidence: "CASE STUDY",
+  },
+  "pacific-design-house": {
+    contributionGroup: "product-direction",
+    contribution:
+      "Framed ethical manufacturing capacity and buyer credentials as part of the design offer, not a footnote.",
+    evidence: "CASE STUDY",
+  },
+  "2886": {
+    contributionGroup: "product-direction",
+    contribution:
+      "Gave an artisan fashion brand a quiet web system that holds craft technique and modern cut in one register.",
+    evidence: "CASE STUDY",
+  },
+  shuttl: {
+    contributionGroup: "complex-systems",
+    contribution:
+      "Built an end-to-end design system across rider, driver, and corporate surfaces — including data-over-sound check-in for congested corridors.",
+    evidence: "CASE STUDY",
+  },
+  hempel: {
+    contributionGroup: "complex-systems",
+    contribution:
+      "Turned a three-month procurement workshop into an ROI-ranked roadmap that informed MyHempel’s core features.",
+    evidence: "CASE STUDY",
+  },
+  obzrv: {
+    contributionGroup: "complex-systems",
+    contribution:
+      "Shipped a real-time F&B analytics MVP for Gulf operators in under three months, proving the data model before scale.",
+    evidence: "CASE STUDY",
+  },
+  "growing-with-kid": {
+    contributionGroup: "ai-founder",
+    contribution:
+      "Built a parenting community around one clear job — fewer features, sharper decisions, trust that compounds.",
+    evidence: "CASE STUDY",
+    indexCompact: true,
+  },
+  "bolo-buddy": {
+    contributionGroup: "ai-founder",
+    contribution:
+      "Shipped an audio-first, culturally rooted storytelling product for Indian families across Hindi, English, Hinglish, and Tamil.",
+    evidence: "CASE STUDY",
+    indexCompact: true,
+  },
+  "urban-prakriti": {
+    contributionGroup: "ai-founder",
+    contribution:
+      "Positioned and launched a transparent plant-based D2C brand for city residents instead of competing on commodity price.",
+    evidence: "CASE STUDY",
+  },
+  ethiqly: {
+    contributionGroup: "archive",
+    contribution:
+      "Prototyped rubric-based AI writing support for literature classrooms with Classroom and Schoology hooks.",
+    evidence: "ARCHIVE",
+  },
+  verizon: {
+    contributionGroup: "enterprise-leadership",
+    contribution:
+      "Created a deployment and campaign model that bypasses site Wi-Fi and centralizes playback across retail, transit, and campus screens.",
+    evidence: "CASE STUDY",
+  },
+  crowley: {
+    contributionGroup: "enterprise-leadership",
+    contribution:
+      "Replaced a dense legacy freight form with a guided quote flow aligned to rate-engine and customs constraints.",
+    evidence: "CASE STUDY",
+  },
+  tannins: {
+    contributionGroup: "archive",
+    contribution: "Web presence spanning B2B tannin solutions and consumer wine.",
+    evidence: "ARCHIVE",
+  },
+  omf: {
+    contributionGroup: "archive",
+    contribution: "Sleep-retail site redesign prepared as a client pitch.",
+    evidence: "ARCHIVE",
+  },
+  udbodhan: {
+    contributionGroup: "archive",
+    contribution: "Web work for India’s oldest continuously published Bengali magazine.",
+    evidence: "ARCHIVE",
+  },
+  strike: {
+    contributionGroup: "archive",
+    contribution: "Freelance MVP for subscription stock-market analytics.",
+    evidence: "ARCHIVE",
+  },
+  "smart-currency-exchange": {
+    contributionGroup: "archive",
+    contribution: "Freelance MVP for live currency conversion and selection.",
+    evidence: "ARCHIVE",
+  },
 };
 
 export const workCategories: Array<"All" | WorkCategory> = [
@@ -96,7 +267,10 @@ export const laneLabels: Record<WorkLane, string> = {
   archive: "Archive",
 };
 
-export const caseStudies: CaseStudy[] = [
+const caseStudyRecords: Omit<
+  CaseStudy,
+  "contributionGroup" | "contribution" | "evidence" | "featuredDesignation" | "indexCompact"
+>[] = [
   {
     index: "01",
     slug: "eqty",
@@ -916,6 +1090,12 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
+export const caseStudies: CaseStudy[] = caseStudyRecords.map((study) => {
+  const meta = workIndexBySlug[study.slug];
+  if (!meta) throw new Error(`Missing work index meta: ${study.slug}`);
+  return { ...study, ...meta };
+});
+
 export const flagshipStudies = caseStudies.filter((study) => study.tier === "flagship");
 
 export const primaryStudies = caseStudies.filter((study) => study.lane === "primary");
@@ -927,6 +1107,33 @@ export const featuredWork = featuredSlugs.map((slug) => {
   if (!study) throw new Error(`Missing featured study: ${slug}`);
   return study;
 });
+
+const featuredSlugSet = new Set<string>(featuredSlugs);
+
+export function isFeaturedStudy(slug: string) {
+  return featuredSlugSet.has(slug);
+}
+
+/** Recruiter-weight order within each remaining-work group. */
+const remainingOrderByGroup: Record<Exclude<ContributionGroup, "archive">, string[]> = {
+  "product-direction": ["sagacito", "viralops", "pacific-design-house", "2886"],
+  "complex-systems": ["shuttl", "hempel", "obzrv"],
+  "ai-founder": ["urban-prakriti", "growing-with-kid", "bolo-buddy"],
+  "enterprise-leadership": ["verizon", "crowley"],
+};
+
+/** Remaining work on the index — excludes featured three; archive is separate. */
+export function getRemainingWorkByGroup(group: Exclude<ContributionGroup, "archive">) {
+  const order = remainingOrderByGroup[group];
+  const rank = new Map(order.map((slug, index) => [slug, index]));
+  return caseStudies
+    .filter((study) => study.contributionGroup === group && !featuredSlugSet.has(study.slug))
+    .sort((a, b) => (rank.get(a.slug) ?? 99) - (rank.get(b.slug) ?? 99));
+}
+
+export function getArchiveWork() {
+  return caseStudies.filter((study) => study.contributionGroup === "archive");
+}
 
 /** Published enterprise studies for homepage credibility. Porsche is not in the case-study set. */
 const enterpriseLeadershipSlugs = ["verizon", "nye", "crowley"] as const;
@@ -947,4 +1154,48 @@ export function getNextCaseStudy(slug: string) {
   const index = sequence.findIndex((study) => study.slug === slug);
   if (index < 0) return sequence[0];
   return sequence[(index + 1) % sequence.length];
+}
+
+function pickRelatedStudy(study: CaseStudy): CaseStudy | undefined {
+  const sameGroup = flagshipStudies.filter(
+    (item) => item.contributionGroup === study.contributionGroup && item.slug !== study.slug,
+  );
+  const order =
+    study.contributionGroup === "archive"
+      ? []
+      : remainingOrderByGroup[study.contributionGroup as Exclude<ContributionGroup, "archive">];
+  const rank = new Map(order.map((slug, index) => [slug, index]));
+  const sorted = [...sameGroup].sort(
+    (a, b) => (rank.get(a.slug) ?? 50) - (rank.get(b.slug) ?? 50),
+  );
+  // Prefer contribution peers outside Featured so enterprise/AI narratives stay true.
+  const nonFeaturedSame = sorted.filter((item) => !featuredSlugSet.has(item.slug));
+  if (nonFeaturedSame.length) return nonFeaturedSame[0];
+  if (sorted.length) return sorted[0];
+  if (featuredSlugSet.has(study.slug)) {
+    return featuredWork.find((item) => item.slug !== study.slug);
+  }
+  return undefined;
+}
+
+function pickDifferentStudy(study: CaseStudy, related?: CaseStudy): CaseStudy | undefined {
+  const avoid = new Set([study.slug, related?.slug].filter(Boolean) as string[]);
+  const differentGroup = flagshipStudies.find(
+    (item) => item.contributionGroup !== study.contributionGroup && !avoid.has(item.slug),
+  );
+  if (differentGroup) return differentGroup;
+  return flagshipStudies.find((item) => !avoid.has(item.slug));
+}
+
+export type CaseStudyContinuation = {
+  related?: CaseStudy;
+  different?: CaseStudy;
+};
+
+export function getCaseStudyContinuation(slug: string): CaseStudyContinuation {
+  const study = getCaseStudy(slug);
+  if (!study) return {};
+  const related = pickRelatedStudy(study);
+  const different = pickDifferentStudy(study, related);
+  return { related, different };
 }

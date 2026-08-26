@@ -7,9 +7,16 @@ export type FocusItem = {
 
 export type ProductItem = {
   name: string;
-  kind: string;
+  /** Operating question or constraint the product puts on the practice. */
+  tests: string;
   summary: string;
   href?: string;
+};
+
+export type PracticeMapItem = {
+  group: string;
+  method: string;
+  examples: { label: string; href: string }[];
 };
 
 export type DecisionEntry = {
@@ -47,9 +54,10 @@ export type ArchiveItem = {
   href: string;
 };
 
-export type KnowledgeLinkItem = {
-  slug: string;
-  note: string;
+export type WritingHub = {
+  intro: string;
+  href: string;
+  cta: string;
 };
 
 export type DashboardItem = {
@@ -63,10 +71,11 @@ export type FounderOs = {
   dashboard: DashboardItem[];
   focus: FocusItem[];
   products: ProductItem[];
+  practiceMap: PracticeMapItem[];
   principles: { title: string; body: string }[];
   decisions: DecisionEntry[];
   experiments: ExperimentItem[];
-  knowledge: KnowledgeLinkItem[];
+  writing: WritingHub;
   teaching: TeachingItem[];
   roadmap: { now: RoadmapItem[]; next: RoadmapItem[]; later: RoadmapItem[] };
   archive: ArchiveItem[];
@@ -75,101 +84,147 @@ export type FounderOs = {
 export const founderOs: FounderOs = {
   identity: {
     name: "Raghvendra Singh",
-    positioning: "Product Design Leader | Systems Thinker | AI Product Builder",
+    positioning:
+      "An operating system for turning ambiguity into decisions, experiments, and published evidence.",
     deck: "This is how I think, build, decide, learn, and operate.",
   },
   dashboard: [
     {
       id: "focus",
       label: "Current Focus",
-      summary: "EQTY, Growing With Kid, Bolo Buddy, and teaching — the workstreams that set the week.",
+      summary: "The workstreams that set the week — and the published cases behind them.",
+    },
+    {
+      id: "practice",
+      label: "Method to evidence",
+      summary:
+        "Four contribution groups from Work — each with a working method and one or two published examples.",
     },
     {
       id: "products",
-      label: "Active Products",
-      summary: "Founder products and the fintech OS partnership, held as one practice.",
+      label: "Products as practice",
+      summary:
+        "Small products are where the operating system meets real constraints—users, scope, trust, and shipping.",
+    },
+    {
+      id: "decisions",
+      label: "Decision Log",
+      summary: "Trade-offs that stayed — context, cut, outcome, lesson.",
     },
     {
       id: "experiments",
-      label: "Current Experiments",
-      summary: "Hypotheses in motion — audio-first stories, constraint as editor, modular finance.",
-    },
-    {
-      id: "teaching",
-      label: "Teaching",
-      summary: "Curriculum, workshops, and mentoring as a way to test what actually works.",
-    },
-    {
-      id: "archive",
-      label: "Advisory",
-      summary: "Enterprise systems and client work that still inform how the OS runs.",
+      label: "Experiments",
+      summary: "Hypotheses in motion: audio-first stories, constraint as editor, modular finance.",
     },
     {
       id: "knowledge",
-      label: "Writing",
-      summary: "Notes on decisions, trust, operating models, and building with less.",
+      label: "Writing and field notes",
+      summary: "Notes on decisions, trust, and operating models — browse on Notes, not here.",
+    },
+    {
+      id: "archive",
+      label: "Archive",
+      summary: "Enterprise systems and earlier work that still inform how the OS runs.",
     },
   ],
   focus: [
     {
       name: "EQTY",
       role: "Founding design partner",
-      status: "Shaping a modular fintech operating system — trust, workflow, architecture.",
+      status: "This week’s question: can trust, ledger, and workflow extend as one system — not three products?",
       href: "/work/eqty",
     },
     {
       name: "Growing With Kid",
       role: "Founder / product builder",
-      status: "A parenting community that says one thing well — and GWK Ghostwriter, a live AI writing studio.",
+      status: "This week’s question: what stays if the product must say one job well?",
       href: "/work/growing-with-kid",
     },
     {
       name: "Bolo Buddy",
       role: "Cofounder",
-      status: "Audio-first, screen-free stories in languages that feel like home.",
+      status: "This week’s question: will families trust a bedtime product that is audio-first and culturally specific?",
       href: "/work/bolo-buddy",
     },
     {
       name: "Teaching",
       role: "Associate Professor, IIAD",
-      status: "Design education as a capability — decisions, not decoration.",
+      status: "This week’s check: can students narrate the trade-off without a principal in the room?",
     },
   ],
   products: [
     {
       name: "GWK Ghostwriter",
-      kind: "AI product",
+      tests: "Can a founder run research-to-post with memory and voice rules — without a content team?",
       summary:
-        "A personal LinkedIn studio: memory, source material, idea scoring, and a research-to-post workflow. Open the product from Work.",
+        "Shipped workflow becomes the test: long-term memory, source material, and a voice that holds under deadline.",
       href: "/work/gwk-ghostwriter",
     },
     {
       name: "Growing With Kid",
-      kind: "Community product",
+      tests: "What survives when constraint edits the product — one audience, one promise?",
       summary:
-        "Newsletter, guides, and community for Indian parents. Constraint is the editor: one audience, one promise.",
+        "Newsletter and community before a feature catalogue. The OS learns to cut theatre and keep the job.",
       href: "/work/growing-with-kid",
     },
     {
       name: "Bolo Buddy",
-      kind: "AI product",
+      tests: "Will trust hold when the interface disappears at bedtime?",
       summary:
-        "Culturally rooted bedtime stories — Hindi, English, Hinglish, Tamil — built for children, not scaled down from adults.",
+        "Audio-first, screen-free stories in languages that feel like home. Distribution is harder; the practice is clearer.",
       href: "/work/bolo-buddy",
     },
     {
       name: "EQTY",
-      kind: "Fintech OS",
+      tests: "Can experience architecture live inside the operating system — not after the marketing site?",
       summary:
-        "Founding design partnership. Experience architecture sits inside the operating system, not after it.",
+        "Modules, states, and operator language before a campaign surface. The partnership tests whether quiet hierarchy scales.",
       href: "/work/eqty",
     },
     {
       name: "Urban Prakriti",
-      kind: "Founder experiment",
+      tests: "Can a small brand stay honest when scale pressure asks for louder claims?",
       summary:
-        "A health brand built as a founder — positioning, identity, and D2C for city residents. Still running, still teaching how a venture stays honest.",
+        "Positioning and D2C for city residents. Still running — still teaching how a venture refuses commodity noise.",
       href: "/work/urban-prakriti",
+    },
+  ],
+  practiceMap: [
+    {
+      group: "Product direction",
+      method:
+        "Share one operating model across surfaces so new work joins the system instead of restarting the product.",
+      examples: [
+        { label: "EQTY", href: "/work/eqty" },
+        { label: "Sagacito", href: "/work/sagacito" },
+      ],
+    },
+    {
+      group: "Complex systems",
+      method:
+        "Treat platforms as shared infrastructure — patterns, states, and handoffs that survive team turnover.",
+      examples: [
+        { label: "Shuttl", href: "/work/shuttl" },
+        { label: "Hempel", href: "/work/hempel" },
+      ],
+    },
+    {
+      group: "AI and founder products",
+      method:
+        "Ship the smallest useful version under real users; let constraint and trust edit the feature list.",
+      examples: [
+        { label: "GWK Ghostwriter", href: "/work/gwk-ghostwriter" },
+        { label: "Bolo Buddy", href: "/work/bolo-buddy" },
+      ],
+    },
+    {
+      group: "Enterprise leadership",
+      method:
+        "Align product, design, and operations on one decision path when the organisation is the constraint.",
+      examples: [
+        { label: "Rapipay", href: "/work/nye" },
+        { label: "Verizon", href: "/work/verizon" },
+      ],
     },
   ],
   principles: [
@@ -179,11 +234,11 @@ export const founderOs: FounderOs = {
     },
     {
       title: "Make thinking visible",
-      body: "Products fail when the operating model stays invisible. Write the decision, the trade-off, and the lesson where the team can see them.",
+      body: "Write the decision, the trade-off, and the lesson where the team can see them — or politics fills the gap.",
     },
     {
       title: "Build systems, not dependencies",
-      body: "If the work cannot run without you in the room, it is not a system. It is a bottleneck. The deliverable is the system that generates the artefacts.",
+      body: "If the work cannot run without you in the room, it is not a system. The deliverable is what generates the artefacts.",
     },
     {
       title: "Ship useful versions early",
@@ -191,7 +246,7 @@ export const founderOs: FounderOs = {
     },
     {
       title: "Teach what works",
-      body: "Teaching is not a second identity. It is how the practice is tested — students and teams as the fastest feedback loop.",
+      body: "Students and teams are the fastest feedback loop. Teaching checks whether the bar travels without you.",
     },
   ],
   decisions: [
@@ -279,50 +334,30 @@ export const founderOs: FounderOs = {
       status: "Learning",
       testing: "IIAD modules as sprints with a production bar and visible decision rights.",
       learning:
-        "The classroom is a feedback loop for the practice. Teaching is a capability of the OS, not a separate identity.",
+        "The classroom is a feedback loop for the practice. Teaching is how the operating model is checked.",
     },
   ],
-  knowledge: [
-    {
-      slug: "stop-designing-screens",
-      note: "The review that starts with the decision, not the layout.",
-    },
-    {
-      slug: "critique-system",
-      note: "A team needs a critique system, not more meetings.",
-    },
-    {
-      slug: "ai-products-earn-trust",
-      note: "Trust is a product surface — source, uncertainty, undo.",
-    },
-    {
-      slug: "operating-model-invisible",
-      note: "Make the path of decisions visible or politics fills the gap.",
-    },
-    {
-      slug: "teaching-design-through-decisions",
-      note: "The critique is the curriculum.",
-    },
-    {
-      slug: "building-growing-with-kid",
-      note: "Constraint as editor. Founder work is still product work.",
-    },
-  ],
+  writing: {
+    intro:
+      "Field notes on decisions, trust, critique, and building with less. System points to Notes — it does not browse the articles here.",
+    href: "/knowledge",
+    cta: "Open Notes →",
+  },
   teaching: [
     {
       title: "Curriculum as a sprint",
       context: "IIAD · industrial design and AI in practice",
-      body: "Each module is a sprint. Deliverables are held to a production bar. Students learn to narrate trade-offs: what they cut, what they kept, and what evidence moved the call.",
+      body: "Each module is a sprint with a production bar. Deliverables must answer: what was cut, what was kept, and what evidence moved the call.",
     },
     {
       title: "Workshops as research",
       context: "Teams and classrooms",
-      body: "Workshops are not performances. They map friction, rank it, and leave a system behind — the same motion as enterprise advisory, used on a syllabus.",
+      body: "Map friction, rank it, leave a system behind — the same motion as enterprise advisory, used on a syllabus.",
     },
     {
       title: "Mentoring as operating model",
       context: "Juniors and founders",
-      body: "If someone cannot apply the bar without you in the room, the OS has a dependency. Mentoring is how that dependency is designed out.",
+      body: "If someone cannot apply the bar without you in the room, the OS still has a dependency. Mentoring designs that dependency out.",
     },
   ],
   roadmap: {
@@ -346,8 +381,8 @@ export const founderOs: FounderOs = {
         body: "Keep this log public and current so the operating model does not go invisible again.",
       },
       {
-        title: "Knowledge as a hub",
-        body: "Expand the notes when a principle has been tested — not as a content calendar.",
+        title: "Writing and field notes",
+        body: "Expand Notes when a principle has been tested — not as a content calendar.",
       },
     ],
     later: [
@@ -364,7 +399,7 @@ export const founderOs: FounderOs = {
   archive: [
     {
       label: "Enterprise experience",
-      body: "Verizon, Crowley, Sagacito, Shuttl, Hempel — systems that had to last. Still on /work.",
+      body: "Verizon, Crowley, Sagacito, Shuttl, Hempel — systems that had to last. Still on Work.",
       href: "/work",
     },
     {
@@ -374,7 +409,7 @@ export const founderOs: FounderOs = {
     },
     {
       label: "Earlier web and MVPs",
-      body: "Archive cards on /work — Tannins, OMF, Udbodhan, Strike, and the rest. Career depth, not the current headline.",
+      body: "Archive on Work — Tannins, OMF, Udbodhan, Strike, and the rest. Career depth, not the current headline.",
       href: "/work",
     },
     {
@@ -388,12 +423,13 @@ export const founderOs: FounderOs = {
 export const osModules = [
   { id: "dashboard", index: "01", title: "Dashboard" },
   { id: "focus", index: "02", title: "Current Focus" },
-  { id: "products", index: "03", title: "Products" },
-  { id: "principles", index: "04", title: "Operating Principles" },
-  { id: "decisions", index: "05", title: "Decision Log" },
-  { id: "experiments", index: "06", title: "Experiments" },
-  { id: "knowledge", index: "07", title: "Knowledge" },
-  { id: "teaching", index: "08", title: "Teaching" },
-  { id: "roadmap", index: "09", title: "Roadmap" },
-  { id: "archive", index: "10", title: "Archive" },
+  { id: "practice", index: "03", title: "Method to evidence" },
+  { id: "products", index: "04", title: "Products as practice" },
+  { id: "principles", index: "05", title: "Operating Principles" },
+  { id: "decisions", index: "06", title: "Decision Log" },
+  { id: "experiments", index: "07", title: "Experiments" },
+  { id: "knowledge", index: "08", title: "Writing and field notes" },
+  { id: "teaching", index: "09", title: "Teaching" },
+  { id: "roadmap", index: "10", title: "Roadmap" },
+  { id: "archive", index: "11", title: "Archive" },
 ] as const;

@@ -9,7 +9,6 @@ import FocusCard from "@/components/system/FocusCard";
 import ExperimentCard from "@/components/system/ExperimentCard";
 import DecisionLog from "@/components/system/DecisionLog";
 import Roadmap from "@/components/system/Roadmap";
-import KnowledgeLink from "@/components/system/KnowledgeLink";
 import { osModules, type FounderOs } from "@/founder-os";
 
 export default function SystemView({ data }: { data: FounderOs }) {
@@ -44,10 +43,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
         <p className="mt-4 font-mono-label text-green" data-os-item>
           {data.identity.positioning}
         </p>
-        <h1
-          className="mt-8 max-w-4xl type-h1 text-navy"
-          data-os-item
-        >
+        <h1 className="mt-8 max-w-4xl type-h1 text-navy" data-os-item>
           {data.identity.deck}
         </h1>
       </header>
@@ -60,7 +56,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           current={current.id === "dashboard"}
         >
           <p className="max-w-xl text-base leading-relaxed text-ink-soft" data-os-item>
-            Six ways into the operating system. Not widgets — a table of contents.
+            Ways into the operating system. Not widgets — a table of contents for how the practice runs.
           </p>
           <ol className="mt-10">
             {data.dashboard.map((item, index) => (
@@ -90,22 +86,69 @@ export default function SystemView({ data }: { data: FounderOs }) {
           ))}
         </OSModule>
 
-        <OSModule id="products" index="03" title="Products" current={current.id === "products"}>
+        <OSModule
+          id="practice"
+          index="03"
+          title="Method to evidence"
+          current={current.id === "practice"}
+        >
+          <p className="max-w-xl text-base leading-relaxed text-ink-soft" data-os-item>
+            The same contribution groups as Work. Method first — then one or two published examples.
+          </p>
+          <ul className="mt-10">
+            {data.practiceMap.map((row) => (
+              <li
+                key={row.group}
+                data-os-item
+                className="grid gap-4 border-t border-line py-10 md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)]"
+              >
+                <h3 className="type-h3 text-navy">{row.group}</h3>
+                <div>
+                  <p className="max-w-2xl text-base leading-relaxed text-ink-soft">{row.method}</p>
+                  <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+                    {row.examples.map((example) => (
+                      <li key={example.href}>
+                        <Link
+                          href={example.href}
+                          data-cursor="View"
+                          className="font-mono-label text-green underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                        >
+                          {example.label} →
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </OSModule>
+
+        <OSModule
+          id="products"
+          index="04"
+          title="Products as practice"
+          current={current.id === "products"}
+        >
+          <p className="mb-8 max-w-xl text-base leading-relaxed text-ink-soft" data-os-item>
+            Small products are where the operating system meets real constraints—users, scope, trust, and
+            shipping.
+          </p>
           <ul>
             {data.products.map((product) => (
               <li key={product.name} data-os-item className="border-t border-line py-10">
                 {product.href ? (
                   <Link href={product.href} data-cursor="View" className="block">
-                    <p className="font-mono-label text-ink-soft">{product.kind}</p>
+                    <p className="font-mono-label text-ink-soft">{product.tests}</p>
                     <h3 className="mt-3 type-h3">{product.name}</h3>
                     <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
                       {product.summary}
                     </p>
-                    <p className="mt-6 font-mono-label text-green">Read case study →</p>
+                    <p className="mt-6 font-mono-label text-green">Open published evidence →</p>
                   </Link>
                 ) : (
                   <article>
-                    <p className="font-mono-label text-ink-soft">{product.kind}</p>
+                    <p className="font-mono-label text-ink-soft">{product.tests}</p>
                     <h3 className="mt-3 type-h3">{product.name}</h3>
                     <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
                       {product.summary}
@@ -119,7 +162,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
 
         <OSModule
           id="principles"
-          index="04"
+          index="05"
           title="Operating Principles"
           current={current.id === "principles"}
         >
@@ -144,7 +187,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
 
         <OSModule
           id="decisions"
-          index="05"
+          index="06"
           title="Decision Log"
           current={current.id === "decisions"}
         >
@@ -156,7 +199,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
 
         <OSModule
           id="experiments"
-          index="06"
+          index="07"
           title="Experiments"
           current={current.id === "experiments"}
         >
@@ -165,13 +208,25 @@ export default function SystemView({ data }: { data: FounderOs }) {
           ))}
         </OSModule>
 
-        <OSModule id="knowledge" index="07" title="Knowledge" current={current.id === "knowledge"}>
-          {data.knowledge.map((item) => (
-            <KnowledgeLink key={item.slug} item={item} />
-          ))}
+        <OSModule
+          id="knowledge"
+          index="08"
+          title="Writing and field notes"
+          current={current.id === "knowledge"}
+        >
+          <div data-os-item className="border-t border-line py-10">
+            <p className="max-w-xl text-base leading-relaxed text-ink-soft">{data.writing.intro}</p>
+            <Link
+              href={data.writing.href}
+              data-cursor="Open"
+              className="mt-8 inline-block font-mono-label text-green underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
+              {data.writing.cta}
+            </Link>
+          </div>
         </OSModule>
 
-        <OSModule id="teaching" index="08" title="Teaching" current={current.id === "teaching"}>
+        <OSModule id="teaching" index="09" title="Teaching" current={current.id === "teaching"}>
           {data.teaching.map((item) => (
             <article key={item.title} data-os-item className="border-t border-line py-10">
               <p className="font-mono-label text-ink-soft">{item.context}</p>
@@ -181,11 +236,11 @@ export default function SystemView({ data }: { data: FounderOs }) {
           ))}
         </OSModule>
 
-        <OSModule id="roadmap" index="09" title="Roadmap" current={current.id === "roadmap"}>
+        <OSModule id="roadmap" index="10" title="Roadmap" current={current.id === "roadmap"}>
           <Roadmap roadmap={data.roadmap} />
         </OSModule>
 
-        <OSModule id="archive" index="10" title="Archive" current={current.id === "archive"}>
+        <OSModule id="archive" index="11" title="Archive" current={current.id === "archive"}>
           {data.archive.map((item) => (
             <Link
               key={item.label}
