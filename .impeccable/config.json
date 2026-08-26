@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          ".impeccable/briefs/system-layout-reference.html"
+        ],
+        "createdAt": "2026-08-26T14:46:22.453Z",
+        "reason": "Parked System layout reference fixture; not production UI; sizes approximate brand type for shape documentation only"
+      },
+      {
+        "rule": "overused-font",
+        "value": "*",
+        "files": [
+          ".impeccable/briefs/system-layout-reference.html"
+        ],
+        "createdAt": "2026-08-26T14:46:22.502Z",
+        "reason": "Parked reference fixture; brand fonts preferred in body; file is documentation not shipped UI"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/briefs/system-layout-reference.html"
+        ],
+        "createdAt": "2026-08-26T14:46:22.547Z",
+        "reason": "Parked reference fixture documenting layout shapes for future System reopen"
+      }
+    ]
+  }
+}

@@ -42,9 +42,9 @@ Recruiters and founders scan under time pressure on web (desktop and stacked mob
 - Do not invent testimonials, metrics, or unpublished case results.
 - Do not reopen frozen surfaces except for sustained production failure.
 
-**Frozen reference material (do not edit unless sustained production failure is confirmed):** Homepage (legacy “Knowledge” label on the home chapter may remain), About, Contact, Work Index V2 (`/work`), featured case-study interiors, System (`/system` — structure, methodology copy, contribution map, Ask System sources), Notes (`/knowledge` — Notes naming, format shelves, featured curation, article rails, Ask Notes labels; URLs stay `/knowledge`), shared navigation, footer, Ask UI chrome, charm system, and visual tokens (`styles/tokens.css` identity).
+**Frozen reference material (do not edit unless sustained production failure is confirmed):** Homepage (legacy “Knowledge” label on the home chapter may remain), About, Contact, Work Index V2 (`/work`), featured case-study interiors, System (`/system` — structure, methodology copy, contribution map, Ask System sources; layout monotony fix deferred until an all-modules layout reopen), Notes (`/knowledge` — Notes naming, format shelves, featured curation, article rails, Ask Notes labels; URLs stay `/knowledge`), shared navigation, footer, Ask UI chrome, charm system, and visual tokens (`styles/tokens.css` identity).
 
-**Next open surface:** Studio — reveal the life and environment around the work without becoming another About page or portfolio index.
+**Next open surface:** Studio (`/studio`) — reveal the life and environment around the work (room, companions, library, cadence, objects) without becoming another About page or portfolio index. Do not reopen System for a partial layout pass; when System layout returns, ship all eleven modules in one pass (see `.impeccable/briefs/system-layout-all-modules.md`).
 
 ## Brand Commitments
 

@@ -84,7 +84,7 @@ components:
 
 An authored Swiss-editorial portfolio that behaves like a modern digital product. Large display type, quiet surfaces, and a narrow colour set (navy, mist, green, gold) carry leadership credibility without SaaS chrome. Cultural rootedness lives in the charm corridor and working symbols; motion is physical and shared through `animations/` — never page-local theatre.
 
-The system rejects cream-as-personality, purple-glow kits, dashboard shells, and generic “premium” restyles. Frozen surfaces (Homepage, About, Contact, Work Index, System, Notes, featured case-study interiors, nav, footer, Ask, charms, tokens) are the identity source of truth. Open surfaces (next: Studio) refine hierarchy and finish inside that identity.
+The system rejects cream-as-personality, purple-glow kits, dashboard shells, and generic “premium” restyles. Frozen surfaces (Homepage, About, Contact, Work Index, System, Notes, featured case-study interiors, nav, footer, Ask, charms, tokens) are the identity source of truth. Open surface now: Studio — life and environment around the work, not a second About or Work index. A future System layout reopen (all eleven modules, presentation-only) is parked in `.impeccable/briefs/system-layout-all-modules.md`; do not ship a four-module partial.
 
 **Key Characteristics:**
 

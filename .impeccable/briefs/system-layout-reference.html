@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>System — layout reference (parked)</title>
+<!--
+  REFERENCE ONLY — not production.
+  Shape sample for a future all-modules System layout reopen.
+  See system-layout-all-modules.md. Copy intent matches live System; presentation only.
+-->
+<style>
+  :root{
+    --mist:#EBEDE3;
+    --mist-raised:#E2E4D8;
+    --paper:#F4F5EE;
+    --navy:#0B1849;
+    --ink-soft:#3D4A6B;
+    --gold:#E4B028;
+    --gold-soft:#F3E4A8;
+    --green:#124D1C;
+    --green-soft:#D8E4D4;
+    --line:#C8CBBA;
+    --line-strong:#B4B8A6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--mist);font-family:Manrope,system-ui,sans-serif;color:var(--navy)}
+  .mono{font-family:Manrope,system-ui,sans-serif;letter-spacing:0.06em;text-transform:uppercase;font-size:11px;font-weight:600}
+  h1,h2,h3{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:600;color:var(--navy);margin:0}
+  .note{max-width:900px;margin:0 auto;padding:28px 32px 0;font-size:13px;color:var(--ink-soft);line-height:1.6}
+  .note b{color:var(--navy)}
+  .page{display:grid;grid-template-columns:1fr 220px;max-width:1400px;margin:0 auto;padding:0 32px}
+  @media (max-width:960px){.page{grid-template-columns:1fr}}
+  .rail{position:sticky;top:0;align-self:start;padding-top:220px;display:flex;flex-direction:column;gap:2px}
+  @media (max-width:960px){.rail{display:none}}
+  .rail a{font-family:Manrope,system-ui,sans-serif;font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;padding:10px 0 10px 20px;border-left:2px solid var(--line)}
+  .rail a.active{color:var(--gold);border-color:var(--gold);font-weight:600}
+  .rail a:hover{color:var(--navy)}
+  .main{min-width:0;padding-bottom:80px}
+  .hero{padding:64px 0 40px}
+  .hero .who{color:var(--ink-soft);margin-bottom:10px}
+  .hero .thesis{font-size:14px;color:var(--ink-soft);max-width:520px;margin-bottom:22px;line-height:1.55}
+  .hero h1{font-size:44px;line-height:1.12;max-width:720px}
+  .hero-rule{height:1px;background:var(--line-strong);margin-top:36px}
+  section{padding:56px 0}
+  section + section{border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-head .idx{color:var(--gold)}
+  .sec-head h2{font-size:26px}
+  .sec-desc{font-size:14px;color:var(--ink-soft);max-width:560px;margin:10px 0 32px;line-height:1.6}
+  .tile-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media (max-width:640px){.tile-grid{grid-template-columns:1fr}}
+  .tile{background:var(--paper);padding:24px 26px}
+  .tile:hover{background:var(--mist-raised)}
+  .tile .idx{color:var(--gold);display:block;margin-bottom:10px}
+  .tile h3{font-size:18px;margin-bottom:8px}
+  .tile p{font-size:13px;color:var(--ink-soft);line-height:1.55;margin:0}
+  .focus-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media (max-width:640px){.focus-grid{grid-template-columns:1fr}}
+  .focus-card{border:1px solid var(--line-strong);background:var(--paper);border-radius:0;padding:22px 24px;display:flex;flex-direction:column;min-height:168px}
+  .focus-card .role{color:var(--ink-soft);margin-bottom:8px}
+  .focus-card h3{font-size:19px;margin-bottom:10px}
+  .focus-card .q{font-size:13px;color:var(--ink-soft);line-height:1.55;margin:0 0 auto}
+  .focus-card a{font-size:11px;letter-spacing:0.04em;text-transform:uppercase;font-weight:600;color:var(--green);text-decoration:none;margin-top:16px;display:inline-flex;align-items:center;gap:5px}
+  .focus-card a:hover{text-decoration:underline}
+  .method-row{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:22px 0;border-top:1px solid var(--line)}
+  .method-row:last-child{border-bottom:1px solid var(--line)}
+  @media (max-width:640px){.method-row{grid-template-columns:1fr;gap:8px}}
+  .method-row h3{font-size:18px;line-height:1.2}
+  .method-row p{font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0 0 10px;max-width:460px}
+  .method-row .links a{font-size:11px;letter-spacing:0.04em;text-transform:uppercase;font-weight:600;color:var(--green);text-decoration:none;margin-right:18px}
+  .method-row .links a:hover{text-decoration:underline}
+  .ledger{position:relative;padding-left:28px}
+  .ledger::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line-strong)}
+  .entry{position:relative;padding:0 0 34px}
+  .entry:last-child{padding-bottom:0}
+  .entry::before{content:"";position:absolute;left:-28px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--gold-soft);border:1.5px solid var(--gold)}
+  .entry .meta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+  .entry .tag{color:var(--gold)}
+  .entry a.read{font-size:11px;letter-spacing:0.04em;text-transform:uppercase;font-weight:600;color:var(--green);text-decoration:none}
+  .entry a.read:hover{text-decoration:underline}
+  .entry h3{font-size:20px;line-height:1.3;max-width:640px}
+  .callout{background:var(--green-soft);border:1px solid var(--line-strong);padding:26px 28px;margin-top:8px;font-size:13px;color:var(--navy);line-height:1.6}
+  .callout b{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="note"><b>Reference only — not production.</b> Shape sample for Dashboard, Focus, Method, and Decision Log. A future reopen must cover all eleven System modules in one ship. See system-layout-all-modules.md.</div>
+<div class="page">
+  <nav class="rail" aria-label="Chapter sample">
+    <a href="#dashboard" class="active">01 · Dashboard</a>
+    <a href="#focus">02 · Current focus</a>
+    <a href="#method">03 · Method to evidence</a>
+    <a href="#log">06 · Decision log</a>
+  </nav>
+  <main class="main">
+    <div class="hero">
+      <p class="who mono">Raghvendra Singh</p>
+      <p class="thesis">An operating system for turning ambiguity into decisions, experiments, and published evidence.</p>
+      <h1>This is how I think, build, decide, learn, and operate.</h1>
+      <div class="hero-rule"></div>
+    </div>
+    <section id="dashboard">
+      <div class="sec-head"><span class="idx mono">01</span><h2>Dashboard</h2></div>
+      <p class="sec-desc">Ways into the operating system. Not widgets — a table of contents for how the practice runs.</p>
+      <div class="tile-grid">
+        <div class="tile"><span class="idx mono">01</span><h3>Current Focus</h3><p>The workstreams that set the week — and the published cases behind them.</p></div>
+        <div class="tile"><span class="idx mono">02</span><h3>Method to evidence</h3><p>Four contribution groups from Work — each with a working method and one or two published examples.</p></div>
+        <div class="tile"><span class="idx mono">03</span><h3>Products as practice</h3><p>Small products are where the operating system meets real constraints — users, scope, trust, and shipping.</p></div>
+        <div class="tile"><span class="idx mono">06</span><h3>Decision Log</h3><p>Trade-offs that stayed — context, cut, outcome, lesson.</p></div>
+      </div>
+    </section>
+    <section id="focus">
+      <div class="sec-head"><span class="idx mono">02</span><h2>Current Focus</h2></div>
+      <div class="focus-grid">
+        <div class="focus-card">
+          <span class="role mono">Founding design partner</span>
+          <h3>EQTY</h3>
+          <p class="q">This week's question: can trust, ledger, and workflow extend as one system — not three products?</p>
+          <a href="#">Open published evidence →</a>
+        </div>
+        <div class="focus-card">
+          <span class="role mono">Founder / product builder</span>
+          <h3>Growing With Kid</h3>
+          <p class="q">This week's question: what stays if the product must say one job well?</p>
+          <a href="#">Open published evidence →</a>
+        </div>
+        <div class="focus-card">
+          <span class="role mono">Cofounder</span>
+          <h3>Bolo Buddy</h3>
+          <p class="q">This week's question: will families trust a bedtime product that is audio-first and culturally specific?</p>
+          <a href="#">Open published evidence →</a>
+        </div>
+        <div class="focus-card">
+          <span class="role mono">Associate Professor, IIAD</span>
+          <h3>Teaching</h3>
+          <p class="q">This week's check: can students narrate the trade-off without a principal in the room?</p>
+        </div>
+      </div>
+    </section>
+    <section id="method">
+      <div class="sec-head"><span class="idx mono">03</span><h2>Method to evidence</h2></div>
+      <p class="sec-desc">The same contribution groups as Work. Method first — then one or two published examples.</p>
+      <div class="method-row">
+        <h3>Product<br>direction</h3>
+        <div>
+          <p>Share one operating model across surfaces so new work joins the system instead of restarting the product.</p>
+          <div class="links"><a href="#">EQTY →</a><a href="#">SAGACITO →</a></div>
+        </div>
+      </div>
+      <div class="method-row">
+        <h3>Complex<br>systems</h3>
+        <div>
+          <p>Treat platforms as shared infrastructure — patterns, states, and handoffs that survive team turnover.</p>
+          <div class="links"><a href="#">SHUTTL →</a><a href="#">HEMPEL →</a></div>
+        </div>
+      </div>
+      <div class="method-row">
+        <h3>AI and founder<br>products</h3>
+        <div>
+          <p>Ship the smallest useful version under real users; let constraint and trust edit the feature list.</p>
+          <div class="links"><a href="#">GWK Ghostwriter →</a><a href="#">Bolo Buddy →</a></div>
+        </div>
+      </div>
+      <div class="method-row">
+        <h3>Enterprise<br>leadership</h3>
+        <div>
+          <p>Align product, design, and operations on one decision path when the organisation is the constraint.</p>
+          <div class="links"><a href="#">Rapipay →</a><a href="#">Verizon →</a></div>
+        </div>
+      </div>
+    </section>
+    <section id="log">
+      <div class="sec-head"><span class="idx mono">06</span><h2>Decision Log</h2></div>
+      <p class="sec-desc">Process and trade-offs. No invented results — only what the work taught.</p>
+      <div class="ledger">
+        <div class="entry">
+          <div class="meta"><span class="tag mono">01 / Bolo Buddy</span><a class="read" href="#">Read entry →</a></div>
+          <h3>Build bedtime stories as audio-first and screen-free, not as another kids' app.</h3>
+        </div>
+        <div class="entry">
+          <div class="meta"><span class="tag mono">02 / Growing With Kid</span><a class="read" href="#">Read entry →</a></div>
+          <h3>Let constraint edit the product — one job, not a catalogue of parenting features.</h3>
+        </div>
+        <div class="entry">
+          <div class="meta"><span class="tag mono">03 / EQTY</span><a class="read" href="#">Read entry →</a></div>
+          <h3>Join as founding design partner and treat experience architecture as part of the operating system.</h3>
+        </div>
+      </div>
+      <div class="callout">
+        <b>Why this shape</b>
+        A decision log is a timeline of causally linked choices, not a stack of interchangeable cards — the connecting line and date-ordered dots say that structurally, instead of relying on the reader to infer it from repeated eyebrow text.
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
