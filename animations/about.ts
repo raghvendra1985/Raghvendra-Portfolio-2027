@@ -48,13 +48,18 @@ export function animateAboutStat(root: HTMLElement, config: MotionConfig, value:
   const { amount, suffix } = parseStat(value);
 
   return createScope(root, () => {
-    if (config.reducedMotion) {
-      root.textContent = value;
+    // Keep the real published value in the accessibility tree at all times.
+    // Visual count-up runs only on an aria-hidden sibling when present.
+    const visual = root.querySelector<HTMLElement>("[data-about-stat-visual]");
+    const target = visual ?? root;
+
+    if (config.reducedMotion || !visual) {
+      target.textContent = value;
       return;
     }
 
     const display = { n: 0 };
-    root.textContent = `0${suffix}`;
+    target.textContent = `0${suffix}`;
 
     ScrollTrigger.create({
       trigger: root,
@@ -66,7 +71,10 @@ export function animateAboutStat(root: HTMLElement, config: MotionConfig, value:
           duration: DURATION.lg,
           ease: EASE,
           onUpdate: () => {
-            root.textContent = `${Math.round(display.n)}${suffix}`;
+            target.textContent = `${Math.round(display.n)}${suffix}`;
+          },
+          onComplete: () => {
+            target.textContent = value;
           },
         });
       },

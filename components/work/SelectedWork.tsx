@@ -16,11 +16,14 @@ function StudyCover({
   study,
   title,
   priority = false,
+  decorative = false,
   className = "",
 }: {
   study: CaseStudy;
   title: string;
   priority?: boolean;
+  /** Empty alt when the image is a decorative clone under an aria-hidden layer. */
+  decorative?: boolean;
   className?: string;
 }) {
   const src = study.cover;
@@ -32,7 +35,7 @@ function StudyCover({
     <div className={`relative overflow-hidden bg-navy ${className}`} data-shared-image>
       <Image
         src={src}
-        alt={`${study.client} — ${title}`}
+        alt={decorative ? "" : `${study.client} — ${title}`}
         fill
         priority={priority}
         sizes="(max-width: 1024px) 100vw, 55vw"
@@ -138,6 +141,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                 <StudyCover
                   study={study}
                   title={copy?.title ?? study.title}
+                  decorative
                   className="aspect-[4/5] w-full"
                 />
               </div>
@@ -160,6 +164,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                     study={study}
                     title={copy?.title ?? study.title}
                     priority={index === 0}
+                    decorative
                     className="h-full w-full"
                   />
                 </div>
@@ -186,6 +191,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                           study={study}
                           title={copy?.title ?? study.title}
                           priority={index === 0}
+                          decorative={index !== active}
                           className="h-full w-full"
                         />
                       </div>

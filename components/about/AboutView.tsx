@@ -25,7 +25,10 @@ function AboutStatValue({ value }: { value: string }) {
 
   return (
     <p ref={ref} className="type-h2">
-      {value}
+      <span className="sr-only">{value}</span>
+      <span data-about-stat-visual aria-hidden="true">
+        {value}
+      </span>
     </p>
   );
 }
