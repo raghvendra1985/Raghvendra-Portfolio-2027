@@ -44,6 +44,7 @@ export function articleJsonLd(article: KnowledgeArticle) {
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     articleSection: article.category,
     timeRequired: `PT${article.readMinutes}M`,
+    ...(article.publishedAt ? { datePublished: article.publishedAt } : {}),
     author: {
       "@type": "Person",
       name: site.name,
@@ -61,9 +62,9 @@ export function knowledgeIndexJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Knowledge",
+    name: "Notes",
     description:
-      "Field notes on product leadership, systems, AI, teaching, and founder practice.",
+      "Field notes on designing products, systems and teams—drawn from work, tested in practice.",
     url: `${site.url}/knowledge`,
     isPartOf: { "@type": "WebSite", name: site.name, url: site.url },
   };

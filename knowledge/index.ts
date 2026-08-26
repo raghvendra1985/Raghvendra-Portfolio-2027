@@ -15,6 +15,20 @@ export type KnowledgeCategory =
   | "Learning"
   | "Founder";
 
+/** Editorial format for the Notes index. Not every shelf must appear. */
+export type NoteFormat = "field-note" | "framework" | "essay";
+
+export const noteFormatLabels: Record<NoteFormat, string> = {
+  "field-note": "Field notes",
+  framework: "Frameworks in use",
+  essay: "Essays",
+};
+
+export type NoteEvidenceLink = {
+  href: string;
+  label: string;
+};
+
 export type KnowledgeSection = {
   id: string;
   kicker: string;
@@ -35,9 +49,14 @@ export type KnowledgeArticle = {
   slug: string;
   title: string;
   deck: string;
+  /** Topic label shown in metadata (not used as a filter). */
   category: KnowledgeCategory;
+  format: NoteFormat;
   readMinutes: number;
-  featured?: boolean;
+  /** 1 = primary featured, 2 = secondary. Omit if not featured. */
+  featuredRank?: 1 | 2;
+  /** ISO date only when the real publication date is known. Never invent. */
+  publishedAt?: string;
   cover: string;
   coverAlt: string;
   coverFit: "contain" | "cover";
@@ -45,6 +64,10 @@ export type KnowledgeArticle = {
   takeaway: string;
   relatedSlugs: string[];
   sections: KnowledgeSection[];
+  /** Optional System method link when genuinely supported. */
+  systemLink?: NoteEvidenceLink;
+  /** Optional Work evidence link when genuinely supported. */
+  workLink?: NoteEvidenceLink;
 };
 
 export const knowledgeCategories: Array<"All" | KnowledgeCategory> = [
@@ -57,6 +80,19 @@ export const knowledgeCategories: Array<"All" | KnowledgeCategory> = [
   "Founder",
 ];
 
+export function formatNoteMeta(article: KnowledgeArticle) {
+  const parts = [article.category, `${article.readMinutes} min`];
+  if (article.publishedAt) {
+    const formatted = new Intl.DateTimeFormat("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }).format(new Date(article.publishedAt));
+    parts.push(formatted);
+  }
+  return parts.join(" · ");
+}
+
 export const knowledgeArticles: KnowledgeArticle[] = [
   {
     index: "01",
@@ -64,8 +100,9 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     title: "Stop designing screens. Start designing decisions.",
     deck: "Most design problems are not screen problems. They are decision problems wearing a visual disguise.",
     category: "Product",
+    format: "framework",
     readMinutes: 8,
-    featured: true,
+    featuredRank: 1,
     cover: "/assets/knowledge/stop-designing-screens/cover.svg",
     coverAlt: "Editorial diagram of a decision stack: decision, information, confidence, action, outcome.",
     coverFit: "contain",
@@ -73,6 +110,10 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     takeaway:
       "Pick one important screen. Write the decision. List the doubts. Remove anything that does not help.",
     relatedSlugs: ["operating-model-invisible", "critique-system"],
+    systemLink: {
+      href: "/system#practice",
+      label: "Method to evidence",
+    },
     sections: [
       {
         id: "s1",
@@ -129,6 +170,7 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     title: "A design team does not need more meetings. It needs a critique system.",
     deck: "More review time does not create better work. Clear standards, visible decisions, and useful feedback do.",
     category: "Leadership",
+    format: "framework",
     readMinutes: 9,
     cover: "/assets/knowledge/critique-system/cover.svg",
     coverAlt: "Editorial diagram of a critique system: bar, log, owner, risk.",
@@ -137,6 +179,10 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     takeaway:
       "Write the quality bar so a junior can apply it. If they cannot, you do not have a system.",
     relatedSlugs: ["teaching-design-through-decisions", "stop-designing-screens"],
+    systemLink: {
+      href: "/system#teaching",
+      label: "Teaching",
+    },
     sections: [
       {
         id: "s1",
@@ -178,6 +224,7 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     title: "AI products do not earn trust by sounding intelligent.",
     deck: "They earn trust by being useful, understandable, correct enough, and easy to control.",
     category: "AI",
+    format: "framework",
     readMinutes: 10,
     cover: "/assets/knowledge/ai-products-earn-trust/cover.svg",
     coverAlt: "Editorial diagram of an AI trust stack: useful, understandable, correct, controllable.",
@@ -186,6 +233,10 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     takeaway:
       "Map where the model may act alone, where it must ask, and where a human signs. That map is the product.",
     relatedSlugs: ["stop-designing-screens", "building-growing-with-kid"],
+    workLink: {
+      href: "/work/gwk-ghostwriter",
+      label: "GWK Ghostwriter",
+    },
     sections: [
       {
         id: "s1",
@@ -227,6 +278,7 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     title: "Products fail when the operating model stays invisible.",
     deck: "Teams do not need perfect process. They need a shared view of how decisions get made.",
     category: "Systems",
+    format: "framework",
     readMinutes: 8,
     cover: "/assets/knowledge/operating-model-invisible/cover.svg",
     coverAlt: "Editorial diagram of a visible operating model: rights, intake, queue, evidence.",
@@ -235,6 +287,10 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     takeaway:
       "Write the decision rights. Publish the intake. Show the queue. Politics has less room when the path is visible.",
     relatedSlugs: ["critique-system", "stop-designing-screens"],
+    systemLink: {
+      href: "/system#principles",
+      label: "Operating Principles",
+    },
     sections: [
       {
         id: "s1",
@@ -268,6 +324,7 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     title: "Teaching design through decisions, not decoration.",
     deck: "Students improve faster when they can explain why they made a choice, not just show what they made.",
     category: "Learning",
+    format: "field-note",
     readMinutes: 7,
     cover: "/assets/knowledge/teaching-design-through-decisions/cover.svg",
     coverAlt: "Editorial diagram of a visible learning loop: sprint, make, narrate, critique.",
@@ -276,6 +333,10 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     takeaway:
       "Run the module as a sprint. Hold a production bar. Make the trade-off the thing students must say out loud.",
     relatedSlugs: ["critique-system", "building-growing-with-kid"],
+    systemLink: {
+      href: "/system#teaching",
+      label: "Teaching",
+    },
     sections: [
       {
         id: "s1",
@@ -308,7 +369,9 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     title: "Building Growing With Kid with less money than most teams spend on tools.",
     deck: "Constraints did not make the work easier. They forced the product to become clearer.",
     category: "Founder",
+    format: "essay",
     readMinutes: 11,
+    featuredRank: 2,
     cover: "/assets/knowledge/building-growing-with-kid/cover.svg",
     coverAlt: "Editorial diagram of a three-question product filter: who, decide, trust.",
     coverFit: "contain",
@@ -316,6 +379,10 @@ export const knowledgeArticles: KnowledgeArticle[] = [
     takeaway:
       "Who is this for. What must they decide. What would make them stop trusting you. Ship the smallest thing that answers those three.",
     relatedSlugs: ["stop-designing-screens", "ai-products-earn-trust"],
+    workLink: {
+      href: "/work/growing-with-kid",
+      label: "Growing With Kid",
+    },
     sections: [
       {
         id: "s1",
@@ -345,16 +412,17 @@ export const knowledgeArticles: KnowledgeArticle[] = [
   },
 ];
 
-export const founderOsLinks = [
+/** Continue-with links from Notes into System (not a second article shelf). */
+export const notesSystemLinks = [
   {
     href: "/system",
-    label: "Founder OS",
-    note: "How I think, build, decide, learn, and operate.",
+    label: "System",
+    note: "How the practice turns ambiguity into decisions, experiments, and published evidence.",
   },
   {
-    href: "/system#principles",
-    label: "Operating Principles",
-    note: "The bar the practice holds when the review is over.",
+    href: "/system#practice",
+    label: "Method to evidence",
+    note: "The path from question to published work.",
   },
   {
     href: "/system#decisions",
@@ -362,14 +430,39 @@ export const founderOsLinks = [
     note: "Process and trade-offs. No invented results.",
   },
   {
-    href: "/system#teaching",
-    label: "Teaching",
-    note: "Curriculum as a sprint. The critique is the curriculum.",
+    href: "/system#products",
+    label: "Products as practice",
+    note: "Where the operating system meets real constraints.",
   },
 ] as const;
 
-export const featuredArticle =
-  knowledgeArticles.find((article) => article.featured) ?? knowledgeArticles[0];
+/** @deprecated Prefer notesSystemLinks — kept for any lingering imports. */
+export const founderOsLinks = notesSystemLinks;
+
+export const featuredPrimaryArticle =
+  knowledgeArticles.find((article) => article.featuredRank === 1) ?? knowledgeArticles[0];
+
+export const featuredSecondaryArticle = knowledgeArticles.find(
+  (article) => article.featuredRank === 2,
+);
+
+/** @deprecated Prefer featuredPrimaryArticle. */
+export const featuredArticle = featuredPrimaryArticle;
+
+export const noteFormatOrder: NoteFormat[] = ["framework", "field-note", "essay"];
+
+export function getArticlesByFormat(format: NoteFormat) {
+  return knowledgeArticles.filter((article) => article.format === format);
+}
+
+export function getShelfArticles(format: NoteFormat) {
+  const featuredSlugs = new Set(
+    [featuredPrimaryArticle, featuredSecondaryArticle]
+      .filter(Boolean)
+      .map((article) => article!.slug),
+  );
+  return getArticlesByFormat(format).filter((article) => !featuredSlugs.has(article.slug));
+}
 
 export function getFrameworkArticle(id: FrameworkId) {
   return knowledgeArticles.find((article) => article.framework === id);

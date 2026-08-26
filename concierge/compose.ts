@@ -219,9 +219,9 @@ export function evidenceSourceLabel(source: ConciergeSource) {
     case "work":
       return "Work";
     case "knowledge":
-      return "Knowledge";
+      return "Notes";
     case "framework":
-      return "Framework";
+      return "Notes";
     case "system":
       return "System";
     case "about":

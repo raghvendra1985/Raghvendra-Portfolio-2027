@@ -12,7 +12,7 @@ import FrameworkBlock from "@/components/knowledge/FrameworkBlock";
 import HonestNote from "@/components/knowledge/HonestNote";
 import Takeaway from "@/components/knowledge/Takeaway";
 import RelatedReading from "@/components/knowledge/RelatedReading";
-import type { KnowledgeArticle, KnowledgeFramework } from "@/knowledge";
+import { formatNoteMeta, type KnowledgeArticle, type KnowledgeFramework } from "@/knowledge";
 
 export default function ArticleView({
   article,
@@ -66,20 +66,31 @@ export default function ArticleView({
     <article ref={rootRef}>
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-10 pt-32 sm:pt-40">
         <Link href="/knowledge" className="font-mono-label text-ink-soft">
-          ← Knowledge
+          ← Notes
         </Link>
         <p data-hero-copy className="mt-8 font-mono-label text-gold">
-          {article.category} · {article.readMinutes} min read
+          {formatNoteMeta(article)}
         </p>
-        <h1
-          data-hero-headline
-          className="mt-6 max-w-5xl type-h1"
-        >
+        <h1 data-hero-headline className="mt-6 max-w-5xl type-h1">
           {article.title}
         </h1>
         <p data-hero-copy className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
           {article.deck}
         </p>
+        {article.systemLink || article.workLink ? (
+          <p data-hero-copy className="mt-6 flex flex-wrap gap-x-6 gap-y-2 font-mono-label text-ink-soft">
+            {article.systemLink ? (
+              <Link href={article.systemLink.href} className="text-green hover:text-navy">
+                System · {article.systemLink.label} →
+              </Link>
+            ) : null}
+            {article.workLink ? (
+              <Link href={article.workLink.href} className="text-green hover:text-navy">
+                Work · {article.workLink.label} →
+              </Link>
+            ) : null}
+          </p>
+        ) : null}
       </header>
 
       <div className="mx-auto max-w-[1440px] px-[var(--page-pad)]">
@@ -114,7 +125,7 @@ export default function ArticleView({
                 <p className="font-mono-label text-green">{section.kicker}</p>
                 <h2 className="mt-3 type-h3">{section.title}</h2>
                 {section.paragraphs.map((paragraph) => (
-                  <p key={paragraph} className="mt-4 text-base leading-relaxed text-navy/85">
+                  <p key={paragraph} className="mt-4 max-w-[65ch] text-base leading-relaxed text-ink">
                     {paragraph}
                   </p>
                 ))}

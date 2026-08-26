@@ -20,7 +20,7 @@ function TocLinks({
                 currentItem ? "text-navy" : "text-ink-soft hover:text-navy"
               }`}
             >
-              <span className="font-mono-label text-[10px] text-gold">{section.kicker}</span>
+              <span className="font-mono-label text-xs text-gold">{section.kicker}</span>
               <span className="mt-1 block">{section.title}</span>
             </a>
           </li>

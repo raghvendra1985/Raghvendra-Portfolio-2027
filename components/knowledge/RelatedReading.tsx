@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { KnowledgeArticle } from "@/knowledge";
+import { formatNoteMeta, type KnowledgeArticle } from "@/knowledge";
 
 export default function RelatedReading({ articles }: { articles: KnowledgeArticle[] }) {
   if (!articles.length) return null;
@@ -13,9 +13,9 @@ export default function RelatedReading({ articles }: { articles: KnowledgeArticl
             <Link
               href={`/knowledge/${article.slug}`}
               data-cursor="Open"
-              className="grid gap-3 border-t border-line py-8 md:grid-cols-[120px_minmax(0,1fr)]"
+              className="grid gap-3 border-t border-line py-8 md:grid-cols-[minmax(0,160px)_minmax(0,1fr)]"
             >
-              <p className="font-mono-label text-gold">{article.category}</p>
+              <p className="font-mono-label text-gold">{formatNoteMeta(article)}</p>
               <div>
                 <p className="type-h3">{article.title}</p>
                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft">{article.deck}</p>

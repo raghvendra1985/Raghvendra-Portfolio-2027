@@ -88,7 +88,8 @@ function buildKnowledgeEntries(): ConciergeEntry[] {
       topics: uniq([
         article.category,
         article.framework ?? "",
-        "knowledge",
+        article.format,
+        "Notes",
         "field notes",
       ]),
       summary: article.deck,
@@ -110,6 +111,7 @@ function buildFrameworkEntries(): ConciergeEntry[] {
       slug: framework.id,
       topics: uniq([
         "framework",
+        "Notes",
         framework.title,
         article?.category ?? "",
         "method",
