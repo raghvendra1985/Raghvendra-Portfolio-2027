@@ -29,6 +29,33 @@
         ],
         "createdAt": "2026-08-26T14:46:22.547Z",
         "reason": "Parked reference fixture documenting layout shapes for future System reopen"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          ".impeccable/briefs/studio-layout-reference.html"
+        ],
+        "createdAt": "2026-08-26T14:59:12.452Z",
+        "reason": "Parked Studio layout reference fixture; not production UI"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/briefs/studio-layout-reference.html"
+        ],
+        "createdAt": "2026-08-26T14:59:12.510Z",
+        "reason": "Parked Studio layout reference fixture; not production UI"
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          ".impeccable/briefs/studio-layout-reference.html"
+        ],
+        "createdAt": "2026-08-26T15:04:07.707Z",
+        "reason": "Parked Studio layout fixture; not production UI"
       }
     ]
   }

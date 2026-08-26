@@ -134,7 +134,7 @@ export const studioPage: StudioPage = {
     "Faridabad mornings start outside when they can — water the balcony, a short ride, then a reading block before the first call. The rest of the week is remote product work; the garden and the animals are the operating system that is not on a laptop.",
   teaching: {
     title: "The classroom is a lab",
-    body: "Teaching design and AI is not a side lecture. It is another place to test methods, frameworks, and judgment — the same questions as a critique, with different stakes. The notes live on Knowledge.",
+    body: "Teaching design and AI is not a side lecture. It is another place to test methods, frameworks, and judgment — the same questions as a critique, with different stakes. The writing continues on Notes.",
     href: "/knowledge",
     cta: "Read the notes →",
   },

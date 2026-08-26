@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio — layout reference (parked)</title>
+<!--
+  Parked critique deliverable for /studio layout.
+  Production implementation: components/studio/StudioView.tsx + LibraryLane.tsx
+  Brand tokens in production; this fixture is not shipped.
+-->
+<style>
+  :root{
+    --bg:#EBEDE3;
+    --ink:#0B1849;
+    --ink-sec:#2A3860;
+    --gold:#E4B028;
+    --border:#D9D9D5;
+  }
+  body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--ink);padding:32px;line-height:1.5}
+  h1{font-size:2rem;margin:0 0 12px}
+  p{font-size:1rem;max-width:40rem}
+  code{font-size:0.9em}
+  table{border-collapse:collapse;width:100%;max-width:720px;margin-top:28px}
+  th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}
+  th{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--gold)}
+  td{font-size:1rem}
+  .note{margin-top:28px;color:var(--ink-sec);font-size:0.875rem}
+</style>
+</head>
+<body>
+  <h1>Studio layout reference</h1>
+  <p>Shapes only. Live copy/photos in <code>studio/index.ts</code>; React in <code>StudioView</code> / <code>LibraryLane</code>.</p>
+  <table>
+    <tr><th>Section</th><th>Shape</th></tr>
+    <tr><td>Hero</td><td>Asymmetric text + desk photo; description + ritual combined</td></tr>
+    <tr><td>Dedication</td><td>Centered pull-quote from habitat.dedication</td></tr>
+    <tr><td>Rooms</td><td>Offset 7fr/5fr pair; shared caption</td></tr>
+    <tr><td>Library</td><td>Horizontal scroll shelf; note on hover/focus</td></tr>
+    <tr><td>Habitat</td><td>Photo leads (Bingo, Ocean) + text column (Fish, Birds, Garden)</td></tr>
+    <tr><td>Cadence</td><td>CSS scatter of lived ride photos; italic caption</td></tr>
+    <tr><td>Objects</td><td>Plain numbered list (no still-life cards)</td></tr>
+    <tr><td>Teaching</td><td>Quiet centered bridge → Notes (/knowledge)</td></tr>
+  </table>
+  <p class="note">Intentional drops vs prior Studio: HelixSpiral (same assets now have section jobs), StudioTicker (ambient chrome), boxed library filter shelf, uniform habitat cards, Contact CTA card. Not silent omissions from the critique HTML.</p>
+</body>
+</html>
