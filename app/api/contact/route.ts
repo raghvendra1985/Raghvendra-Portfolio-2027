@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { emailTo, isApprovedContactInbox } from "@/lib/commerce/config";
+import { emailTo, isApprovedContactInbox, logContactMailConfigInvalid } from "@/lib/commerce/config";
 import { sendContactInquiry } from "@/lib/commerce/email";
 import { clientIp, contactRequestAllowed } from "@/lib/contact-rate-limit";
 import {
@@ -49,6 +49,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please wait a moment and try again." }, { status: 429 });
   }
   if (rate === "unavailable") {
+    console.error("contact_mail_rate_store_unavailable");
     return NextResponse.json({ error: GENERIC_FAIL }, { status: 503 });
   }
 
@@ -57,6 +58,7 @@ export async function POST(request: Request) {
   }
 
   if (!isApprovedContactInbox()) {
+    logContactMailConfigInvalid();
     return NextResponse.json({ error: GENERIC_FAIL }, { status: 503 });
   }
 

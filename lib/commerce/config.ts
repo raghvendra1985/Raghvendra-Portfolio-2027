@@ -47,7 +47,7 @@ export function resendApiKey() {
 const AUTHENTICATED_FROM =
   "Raghvendra Singh Portfolio <portfolio@raghvendrasingh.com>";
 const APPROVED_FROM_MAILBOX = "portfolio@raghvendrasingh.com";
-const SMTP_AUTH_MAILBOX = "hello@raghvendrasingh.com";
+const SMTP_AUTH_MAILBOX = "hello@growingwithkid.com";
 const CONTACT_INBOX = "hello@raghvendrasingh.com";
 
 function unwrapEnv(value: string | undefined) {
@@ -103,11 +103,77 @@ export function smtpUser() {
 }
 
 export function smtpPass() {
-  return unwrapEnv(process.env.SMTP_PASS).replace(/\s+/g, "");
+  return (
+    process.env.SMTP_PASS?.trim()
+      .replace(/^["']|["']$/g, "")
+      .replace(/\s+/g, "") ?? ""
+  );
+}
+
+export type ContactMailConfigDiagnosis = {
+  missingVariables: string[];
+  invalidVariables: string[];
+  fromMailboxAllowed: boolean;
+  smtpPortValid: boolean;
+  smtpPassPresent: boolean;
+  smtpPassLengthValid: undefined;
+};
+
+/** Names only. Never include env values, credentials, or mailboxes. */
+export function inspectContactMailConfig(): ContactMailConfigDiagnosis {
+  const missingVariables: string[] = [];
+  const invalidVariables: string[] = [];
+
+  const host = unwrapEnv(process.env.SMTP_HOST);
+  if (!host) missingVariables.push("SMTP_HOST");
+
+  const portRaw = unwrapEnv(process.env.SMTP_PORT);
+  if (!portRaw) missingVariables.push("SMTP_PORT");
+  const portNum = Number(portRaw || "465");
+  const smtpPortValid = Number.isFinite(portNum) && portNum > 0;
+  if (portRaw && !smtpPortValid) invalidVariables.push("SMTP_PORT");
+
+  const user = unwrapEnv(process.env.SMTP_USER);
+  if (!user) missingVariables.push("SMTP_USER");
+  else if (parsedMailbox(user) !== SMTP_AUTH_MAILBOX) invalidVariables.push("SMTP_USER");
+
+  const pass = smtpPass();
+  const smtpPassPresent = Boolean(pass);
+  if (!smtpPassPresent) missingVariables.push("SMTP_PASS");
+
+  const fromRaw = unwrapEnv(process.env.EMAIL_FROM);
+  if (!fromRaw) missingVariables.push("EMAIL_FROM");
+  const fromMailboxAllowed = isAuthenticatedFromAddress(emailFrom());
+  if (fromRaw && !fromMailboxAllowed) invalidVariables.push("EMAIL_FROM");
+
+  const toRaw = unwrapEnv(process.env.EMAIL_TO);
+  if (!toRaw) missingVariables.push("EMAIL_TO");
+  else if (!isApprovedContactInbox(toRaw)) invalidVariables.push("EMAIL_TO");
+
+  return {
+    missingVariables,
+    invalidVariables,
+    fromMailboxAllowed,
+    smtpPortValid,
+    smtpPassPresent,
+    smtpPassLengthValid: undefined,
+  };
+}
+
+export function logContactMailConfigInvalid() {
+  const diagnosis = inspectContactMailConfig();
+  console.error("contact_mail_config_invalid", diagnosis);
+  return diagnosis;
 }
 
 export function smtpConfigured() {
-  return Boolean(smtpPass() && parsedMailbox(smtpUser()) === SMTP_AUTH_MAILBOX);
+  const diagnosis = inspectContactMailConfig();
+  return (
+    diagnosis.missingVariables.length === 0 &&
+    diagnosis.invalidVariables.length === 0 &&
+    diagnosis.fromMailboxAllowed &&
+    diagnosis.smtpPortValid
+  );
 }
 
 export function adminEmails() {

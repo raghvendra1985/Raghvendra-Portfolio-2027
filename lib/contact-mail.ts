@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import {
   emailFrom,
   isAuthenticatedFromAddress,
+  logContactMailConfigInvalid,
   smtpConfigured,
   smtpHost,
   smtpPass,
@@ -19,9 +20,7 @@ type Mail = {
 /** Workspace SMTP AUTH for Contact only. Commerce mail stays on Resend. */
 export async function sendContactMail(mail: Mail) {
   if (!smtpConfigured()) {
-    if (process.env.NODE_ENV === "development") {
-      console.info("[email skipped]", mail.subject, mail.to);
-    }
+    logContactMailConfigInvalid();
     return { id: null as string | null, skipped: true };
   }
 
