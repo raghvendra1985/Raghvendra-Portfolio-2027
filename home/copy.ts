@@ -150,7 +150,7 @@ export const homeTools = {
   title: "Small tools for designers learning to think beyond the screen.",
   body:
     "Practical exercises for briefs, critique, judgment, and portfolio development. Buy once. Use when needed.",
-  slugs: ["design-dare", "design-iq", "portfolio-roast"] as const,
+  slugs: ["design-roulette", "design-iq", "design-dare"] as const,
   explore: "Explore all tools",
 } as const;
 

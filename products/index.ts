@@ -424,9 +424,11 @@ export function getAdjacentProducts(slug: string) {
   };
 }
 
+export const productsVisitorTitle = "Studio tools";
+
 export const secretProductsIntro = {
   index: "/",
-  label: "Secret Products",
+  label: productsVisitorTitle,
   title: "Tools for people learning to design.",
   description: "Small, focused tools for design students. Buy once. Use when you need them.",
 };

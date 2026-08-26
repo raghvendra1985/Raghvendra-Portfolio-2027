@@ -33,7 +33,7 @@ function evidenceLabel(entry: RankedEntry): string {
     case "services":
       return `See ${entry.title} →`;
     case "products":
-      return entry.slug === "products" ? "Open Secret Products →" : `Open ${entry.title} →`;
+      return entry.slug === "products" ? "Open Studio tools →" : `Open ${entry.title} →`;
     default:
       return "Open →";
   }
@@ -231,7 +231,7 @@ export function evidenceSourceLabel(source: ConciergeSource) {
     case "services":
       return "Services";
     case "products":
-      return "Secret Products";
+      return "Studio tools";
     default:
       return source;
   }

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import { track } from "@/lib/analytics";
+import ProductStatusMark from "@/components/products/ProductStatusMark";
 import { formatInr, getProduct, startingPrice, visibleProducts } from "@/products";
 import { homeTools } from "@/home/copy";
 
@@ -49,9 +50,10 @@ export default function ProductShelf() {
                 className="flex min-h-14 items-baseline justify-between gap-4 border-t border-line py-5"
               >
                 <span className="type-h3">{product.name}</span>
-                <span className="shrink-0 font-mono-label text-ink-soft">
-                  {formatInr(product.price)}
-                </span>
+                <div className="flex shrink-0 items-baseline gap-3">
+                  <ProductStatusMark status={product.status} />
+                  <span className="font-mono-label text-ink-soft">{formatInr(product.price)}</span>
+                </div>
               </Link>
             </li>
           ))}

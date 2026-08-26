@@ -8,7 +8,7 @@ import DesignIqDemo from "@/components/products/DesignIqDemo";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import { TrackedLink } from "@/components/analytics/TrackedCta";
 import { isPurchasable } from "@/products/commerce";
-import { formatCategories, formatInr, getAdjacentProducts, type Product } from "@/products";
+import { formatCategories, formatInr, getAdjacentProducts, productsVisitorTitle, type Product } from "@/products";
 import { getProductCopy } from "@/products/copy";
 
 export default function ProductView({ product }: { product: Product }) {
@@ -26,7 +26,7 @@ export default function ProductView({ product }: { product: Product }) {
           ← All products
         </Link>
         <p className="mt-8 font-mono-label text-ink-soft">
-          {product.number} / Secret Products
+          {product.number} / {productsVisitorTitle}
         </p>
         <div className="mt-4">
           <ProductStatusMark status={product.status} />

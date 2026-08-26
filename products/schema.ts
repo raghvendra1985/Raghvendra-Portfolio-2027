@@ -4,11 +4,12 @@ import { pageMetadataExtras } from "@/lib/seo";
 import {
   formatCategories,
   formatInr,
+  productsVisitorTitle,
   visibleProducts,
   type Product,
 } from "./index";
 
-export const productsIndexTitle = "Secret Products";
+export const productsIndexTitle = productsVisitorTitle;
 export const productsIndexDescription =
   "Small, focused tools for design students. Practice, briefs, jury prep, and portfolio work. Buy once. Use when you need them.";
 
