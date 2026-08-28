@@ -84,23 +84,28 @@ export default function CaseStudyView({
         </dl>
       </section>
 
-      <div data-case-hero data-shared-image-target className="relative h-[420px] sm:h-[520px]">
-        <ImageReveal
-          className="h-full w-full"
-          src={study.cover}
-          alt={`${study.client} — ${study.title}`}
-          priority
-          sizes="100vw"
-        >
-          <WorkCover study={study} className="h-full min-h-[420px] sm:min-h-[520px]" />
-        </ImageReveal>
-      </div>
-
-      <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-20">
-        <article data-case-chapter className="max-w-3xl">
-          <p className="font-mono-label text-green">Company / product context</p>
-          <p className="mt-4 text-lg leading-relaxed">{study.challenge}</p>
-        </article>
+      <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
+          <div
+            data-case-hero
+            data-shared-image-target
+            className="relative aspect-[16/10] min-h-[240px] lg:min-h-[420px]"
+          >
+            <ImageReveal
+              className="h-full w-full"
+              src={study.cover}
+              alt={`${study.client} — ${study.title}`}
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+            >
+              <WorkCover study={study} className="h-full min-h-[240px] lg:min-h-[420px]" />
+            </ImageReveal>
+          </div>
+          <article data-case-chapter>
+            <p className="font-mono-label text-green">Company / product context</p>
+            <p className="mt-4 text-lg leading-relaxed">{study.challenge}</p>
+          </article>
+        </div>
       </section>
 
       {steps.length ? (

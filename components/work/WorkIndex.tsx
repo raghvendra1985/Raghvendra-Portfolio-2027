@@ -34,32 +34,15 @@ function CardBody({
   compact?: boolean;
 }) {
   const coverAspect = featured
-    ? "aspect-[16/10] min-h-[240px] sm:min-h-[320px]"
+    ? "aspect-[16/10] min-h-[220px] lg:min-h-[280px]"
     : compact
       ? "aspect-[4/3] min-h-[160px]"
-      : "aspect-[4/5] min-h-[220px]";
+      : "aspect-[3/2] min-h-[200px]";
   const cta = evidenceCta(study);
 
-  return (
+  const copy = (
     <>
-      {study.cover ? (
-        <div data-work-cover className="overflow-hidden">
-          <ImageReveal
-            className={`relative ${coverAspect}`}
-            src={study.cover}
-            alt={`${study.client} cover`}
-            sizes={featured ? "(min-width: 768px) 100vw, 100vw" : "(min-width: 768px) 50vw, 100vw"}
-          >
-            <WorkCover study={study} className="h-full" />
-          </ImageReveal>
-        </div>
-      ) : null}
-
-      <div
-        className={`flex flex-wrap items-center gap-x-3 gap-y-1 font-mono-label text-ink-soft ${
-          study.cover ? "mt-4" : ""
-        }`}
-      >
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono-label text-ink-soft">
         {featured ? <span className="text-gold">Featured</span> : null}
         {featured && study.featuredDesignation ? (
           <span>{study.featuredDesignation}</span>
@@ -74,11 +57,7 @@ function CardBody({
         {study.title}
       </h3>
 
-      <dl
-        className={`mt-4 grid gap-3 font-mono-label text-ink-soft ${
-          compact ? "grid-cols-2" : "grid-cols-2"
-        }`}
-      >
+      <dl className="mt-4 grid grid-cols-2 gap-3 font-mono-label text-ink-soft">
         {study.role ? (
           <div>
             <dt className="text-ink-soft/70">Role</dt>
@@ -93,15 +72,44 @@ function CardBody({
 
       <p
         className={`mt-4 leading-relaxed text-ink-soft ${
-          compact ? "text-sm line-clamp-2" : featured ? "max-w-3xl text-base" : "text-sm"
+          compact ? "text-sm line-clamp-2" : featured ? "text-base" : "text-sm"
         }`}
       >
         {study.contribution}
       </p>
 
       {cta ? (
-        <p className={`mt-4 font-mono-label ${featured ? "text-sm" : ""} text-green`}>{cta}</p>
+        <p className="mt-4 inline-flex min-h-11 items-center font-mono-label text-green">{cta}</p>
       ) : null}
+    </>
+  );
+
+  const cover = study.cover ? (
+    <div data-work-cover className="overflow-hidden">
+      <ImageReveal
+        className={`relative ${coverAspect}`}
+        src={study.cover}
+        alt={`${study.client} cover`}
+        sizes={featured ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 768px) 50vw, 100vw"}
+      >
+        <WorkCover study={study} className="h-full" />
+      </ImageReveal>
+    </div>
+  ) : null;
+
+  if (featured) {
+    return (
+      <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-16">
+        {cover}
+        <div>{copy}</div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {cover}
+      <div className={cover ? "mt-4" : ""}>{copy}</div>
     </>
   );
 }
@@ -293,7 +301,7 @@ export default function WorkIndex() {
         <h2 id="featured-evidence-heading" className="font-section-label text-navy">
           Featured evidence
         </h2>
-        <ul className="mt-8 space-y-16">
+        <ul className="mt-8 space-y-16 lg:space-y-24">
           {featuredWork.map((study) => (
             <li key={study.slug} data-reveal-item>
               <StudyLink study={study} featured />
