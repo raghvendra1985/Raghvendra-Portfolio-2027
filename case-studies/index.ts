@@ -52,6 +52,13 @@ export type CaseStudy = {
   links?: { label: string; href: string }[];
   cover?: string;
   gallery?: string[];
+  /** Documentation sheets in a local carousel (Crowley design system). */
+  designSystem?: {
+    src: string;
+    caption: string;
+    width: number;
+    height: number;
+  }[];
 };
 
 export const contributionGroups: Exclude<ContributionGroup, "archive">[] = [
@@ -747,6 +754,44 @@ const caseStudyRecords: Omit<
       "/assets/work/crowley/gallery-02.webp",
       "/assets/work/crowley/gallery-03.webp",
       "/assets/work/crowley/gallery-04.webp",
+    ],
+    designSystem: [
+      {
+        src: "/assets/work/crowley/design-system-cover.png",
+        caption: "Design system",
+        width: 1400,
+        height: 900,
+      },
+      {
+        src: "/assets/work/crowley/colors-documentation.png",
+        caption: "Colors",
+        width: 1400,
+        height: 1090,
+      },
+      {
+        src: "/assets/work/crowley/grid-system-documentation.png",
+        caption: "Grid system",
+        width: 1400,
+        height: 900,
+      },
+      {
+        src: "/assets/work/crowley/iconography-docs.png",
+        caption: "Iconography",
+        width: 1400,
+        height: 900,
+      },
+      {
+        src: "/assets/work/crowley/components-documentation.png",
+        caption: "Components",
+        width: 1400,
+        height: 900,
+      },
+      {
+        src: "/assets/work/crowley/symbols-documentation.png",
+        caption: "Symbols",
+        width: 1400,
+        height: 1356,
+      },
     ],
     challenge:
       "International shippers faced fragmented communication across trucking companies, ports, and customs brokers, unclear total shipping costs due to hidden fees, and compliance risk from disconnected customs processes — with no unified way to get a clear, upfront freight quote across ocean, rail, and land networks.",

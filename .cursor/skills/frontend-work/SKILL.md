@@ -39,7 +39,7 @@ Keep featured slugs and group hash ids for TOC / concierge.
 
 **Opening:** Layout 219. Desktop is media | copy (cover + challenge). Mobile stacks. Keep back link, title, live links, and Role / Timeline / Engagement above that split.
 
-Keep what is not Relume: numbered `approachSteps` rail, outcome grid, frames grid, Related / Different / Back.
+Keep what is not Relume: numbered `approachSteps` rail, outcome grid (title is the one-line proof), billboard Frames (one still + one caption from the matching approach step), Crowley design-system carousel (local rebuild; square chrome), Related / Different / Back.
 
 Do not tab chapters. Do not pin-stack steps.
 

@@ -87,7 +87,11 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
       autoRaf: true,
       allowNestedScroll: true,
       prevent: (node) =>
-        Boolean(node.closest("input, textarea, select, [contenteditable='true']")),
+        Boolean(
+          node.closest(
+            "input, textarea, select, [contenteditable='true'], [data-lenis-prevent]",
+          ),
+        ),
     });
     setLenis(lenis);
     lenis.on("scroll", ScrollTrigger.update);

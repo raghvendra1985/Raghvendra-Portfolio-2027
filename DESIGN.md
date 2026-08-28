@@ -183,3 +183,10 @@ Depth is mostly tonal (mist → surface-dim → navy) and hairline rules (`--lin
 - Duplicate projects across Featured and contribution groups.
 - Hide critical facts behind hover.
 - Replace authored personality with generic premium SaaS styling, cream body, or purple glow.
+
+## 7. Decisions Log
+
+| Date | Decision | Rationale |
+|------|----------|-----------|
+| 2026-08-28 | Parallel HQ is a reference for composure, not a restyle. See `.impeccable/briefs/parallel-layout-review.md`. | Agency conversion IA (pills, Book a call, testimonials, capability menus) fights the hiring-brief job and the freeze. |
+| 2026-08-28 | Case-study Frames: billboard still + one caption; outcome title is the one-line proof. Homepage and Work index unchanged. | Single-surface Parallel composition loan. Captions reuse published approach steps — no new claims. |

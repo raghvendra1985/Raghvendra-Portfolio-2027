@@ -21,10 +21,11 @@ export function animateCaseStudy(root: HTMLElement, config: MotionConfig) {
     const chapters = root.querySelectorAll("[data-case-chapter]");
     const steps = root.querySelectorAll("[data-case-step]");
     const gallery = root.querySelectorAll("[data-case-gallery]");
+    const system = root.querySelector("[data-case-system]");
     const next = root.querySelector("[data-case-next]");
 
     if (config.reducedMotion) {
-      showImmediately([hero, chapters, steps, gallery, next]);
+      showImmediately([hero, chapters, steps, gallery, system, next]);
       return;
     }
 
@@ -81,19 +82,37 @@ export function animateCaseStudy(root: HTMLElement, config: MotionConfig) {
       );
     }
 
-    if (gallery.length) {
+    gallery.forEach((frame) => {
       gsap.fromTo(
-        gallery,
+        frame,
         { autoAlpha: 0, y: 16, filter: motionBlur(8, config) },
         {
           autoAlpha: 1,
           y: 0,
           filter: "blur(0px)",
           duration: DURATION.lg,
-          stagger: 0.1,
           ease: EASE,
           scrollTrigger: {
-            trigger: gallery[0],
+            trigger: frame,
+            start: "top 85%",
+            once: true,
+          },
+        },
+      );
+    });
+
+    if (system) {
+      gsap.fromTo(
+        system,
+        { autoAlpha: 0, y: 20, filter: motionBlur(8, config) },
+        {
+          autoAlpha: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: DURATION.lg,
+          ease: EASE,
+          scrollTrigger: {
+            trigger: system,
             start: "top 85%",
             once: true,
           },

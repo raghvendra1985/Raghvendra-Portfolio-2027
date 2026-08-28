@@ -6,8 +6,38 @@ import { animateCaseStudy } from "@/animations/caseStudy";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import ImageReveal from "@/components/reveal/ImageReveal";
 import WorkCover from "@/components/work/WorkCover";
+import CaseStudyCarousel from "@/components/work/CaseStudyCarousel";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import type { CaseStudy } from "@/case-studies";
+
+function frameCaption(study: CaseStudy, index: number) {
+  const step = study.approachSteps?.[index];
+  if (!step) return undefined;
+  return step.match(/^[^.!?]+[.!?]?/)?.[0]?.trim();
+}
+
+function frameSurface(src: string) {
+  const crowley = src.includes("/work/crowley/");
+  const portraitPhoto = src.endsWith(".jpg");
+  const diagram = src.endsWith(".svg");
+  const aspect = src.includes("/work/crowley/gallery-02")
+    ? "aspect-[40/21]"
+    : crowley
+      ? "aspect-[3/2]"
+      : portraitPhoto
+        ? "aspect-[3/4]"
+        : src.endsWith(".png") || src.endsWith(".webp")
+          ? "aspect-[16/10]"
+          : "aspect-[3/2]";
+
+  return {
+    className: portraitPhoto
+      ? `relative mx-auto ${aspect} w-full max-w-xl bg-surface-dim`
+      : `relative ${aspect} w-full bg-surface-dim`,
+    objectFit: (crowley || diagram || portraitPhoto ? "contain" : "cover") as "contain" | "cover",
+    parallax: crowley || diagram ? 0 : 0.06,
+  };
+}
 
 export default function CaseStudyView({
   study,
@@ -31,6 +61,7 @@ export default function CaseStudyView({
   const steps = study.approachSteps ?? [];
   const outcomes = study.outcomes ?? [];
   const gallery = study.gallery ?? [];
+  const designSystem = study.designSystem ?? [];
   const liveLinks =
     study.links?.length
       ? study.links
@@ -144,10 +175,12 @@ export default function CaseStudyView({
               <article
                 key={outcome.title}
                 data-case-chapter
-                className="border-t-2 border-navy pt-4"
+                className="border-t-2 border-navy pt-5"
               >
-                <h2 className="type-h3">{outcome.title}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{outcome.body}</p>
+                <h2 className="max-w-[22ch] type-h3 text-navy">{outcome.title}</h2>
+                <p className="mt-3 max-w-[36rem] text-sm leading-snug text-ink-soft">
+                  {outcome.body}
+                </p>
               </article>
             ))}
           </div>
@@ -160,32 +193,51 @@ export default function CaseStudyView({
 
       {gallery.length ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-          <p className="font-mono-label text-ink-soft" data-case-chapter>
+          <p className="font-mono-label text-green" data-case-chapter>
             Frames
           </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {gallery.map((src, index) => (
-              <div key={src} data-case-gallery>
-                <ImageReveal
-                  className={`relative ${
-                    src.includes("/work/crowley/gallery-02")
-                      ? "aspect-[40/21] bg-surface-dim"
-                      : src.includes("/work/crowley/")
-                        ? "aspect-[3/2] bg-surface-dim"
-                        : src.endsWith(".jpg")
-                          ? "aspect-[3/4]"
-                          : src.endsWith(".png") || src.endsWith(".webp")
-                            ? "aspect-[16/10]"
-                            : "aspect-[3/2]"
-                  }`}
-                  src={src}
-                  alt={`${study.client} — frame ${index + 1}`}
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  objectFit={src.includes("/work/crowley/") ? "contain" : "cover"}
-                  parallax={src.includes("/work/crowley/") ? 0 : 0.06}
-                />
-              </div>
-            ))}
+          <ul className="mt-10 space-y-16 sm:space-y-20">
+            {gallery.map((src, index) => {
+              const surface = frameSurface(src);
+              const caption = frameCaption(study, index);
+              return (
+                <li key={src} data-case-gallery>
+                  <figure>
+                    <ImageReveal
+                      className={surface.className}
+                      src={src}
+                      alt={`${study.client} — frame ${index + 1}`}
+                      sizes={
+                        src.endsWith(".jpg")
+                          ? "(min-width: 640px) 36rem, 100vw"
+                          : "100vw"
+                      }
+                      objectFit={surface.objectFit}
+                      parallax={surface.parallax}
+                    />
+                    {caption ? (
+                      <figcaption className="mt-4 max-w-3xl text-lg leading-snug text-navy">
+                        {caption}
+                      </figcaption>
+                    ) : null}
+                  </figure>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ) : null}
+
+      {designSystem.length ? (
+        <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
+          <p className="font-mono-label text-green" data-case-chapter>
+            Design system
+          </p>
+          <div className="mt-10" data-case-system>
+            <CaseStudyCarousel
+              label={`${study.client} design system`}
+              slides={designSystem}
+            />
           </div>
         </section>
       ) : null}
