@@ -4,13 +4,14 @@ import { useEffect, useRef } from "react";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import ResumeCta from "@/components/cta/ResumeCta";
 import AboutCard from "@/components/about/AboutCard";
+import AboutEvidenceLink from "@/components/about/AboutEvidenceLink";
 import AboutPolaroid from "@/components/about/AboutPolaroid";
-import { TrackedLink, TrackedMagneticButton } from "@/components/analytics/TrackedCta";
+import AboutTimeline from "@/components/about/AboutTimeline";
+import { TrackedMagneticButton } from "@/components/analytics/TrackedCta";
 import { animateAboutStat } from "@/animations/about";
 import { animateHero } from "@/animations/hero";
 import { useExperience } from "@/components/providers/ExperienceProvider";
-import { aboutPage, type EvidenceLink } from "@/about";
-import type { AnalyticsEvent } from "@/lib/analytics";
+import { aboutPage } from "@/about";
 
 function AboutStatValue({ value }: { value: string }) {
   const ref = useRef<HTMLParagraphElement>(null);
@@ -30,40 +31,6 @@ function AboutStatValue({ value }: { value: string }) {
         {value}
       </span>
     </p>
-  );
-}
-
-function evidenceTracking(href: string): {
-  event: AnalyticsEvent;
-  payload: Record<string, string>;
-} {
-  if (href.startsWith("/work/")) {
-    return {
-      event: "project_clicked",
-      payload: { from: "about", slug: href.replace("/work/", "") },
-    };
-  }
-  if (href.startsWith("/knowledge/")) {
-    return {
-      event: "knowledge_article_clicked",
-      payload: { slug: href.replace("/knowledge/", ""), surface: "about" },
-    };
-  }
-  return { event: "nav_clicked", payload: { from: "about", dest: href } };
-}
-
-function EvidenceLinkText({ evidence }: { evidence: EvidenceLink }) {
-  const tracking = evidenceTracking(evidence.href);
-  return (
-    <TrackedLink
-      href={evidence.href}
-      className="mt-4 inline-flex font-mono-label text-green"
-      data-cursor="Open"
-      event={tracking.event}
-      payload={tracking.payload}
-    >
-      {evidence.label} →
-    </TrackedLink>
   );
 }
 
@@ -159,42 +126,7 @@ export default function AboutView() {
         ))}
       </SectionReveal>
 
-      <SectionReveal
-        id="experience"
-        className="scroll-mt-[var(--hash-offset)] mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24"
-      >
-        <h2 className="type-h2" data-reveal-item>
-          Five chapters. One direction.
-        </h2>
-        <ol className="mt-12 space-y-4">
-          {aboutPage.timeline.map((era, index) => (
-            <li key={era.id} id={era.id} data-reveal-item className="scroll-mt-[var(--hash-offset)]">
-              <AboutCard>
-                <div className="grid gap-4 md:grid-cols-[48px_160px_1fr]">
-                  <p className="font-mono-label text-gold">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p className="font-mono-label text-ink-soft">{era.range}</p>
-                  <div>
-                    <h3 className="type-h3">{era.role}</h3>
-                    <p className="mt-1 text-sm text-green">{era.org}</p>
-                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-soft">
-                      {era.context}
-                    </p>
-                    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">
-                      {era.owned}
-                    </p>
-                    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-navy">
-                      {era.learned}
-                    </p>
-                    {era.evidence ? <EvidenceLinkText evidence={era.evidence} /> : null}
-                  </div>
-                </div>
-              </AboutCard>
-            </li>
-          ))}
-        </ol>
-      </SectionReveal>
+      <AboutTimeline />
 
       <SectionReveal
         id="lead"
@@ -219,7 +151,7 @@ export default function AboutView() {
             ))}
           </ul>
           <div className="mt-8" data-reveal-item>
-            <EvidenceLinkText evidence={aboutPage.leadCritique} />
+            <AboutEvidenceLink evidence={aboutPage.leadCritique} />
           </div>
         </div>
       </SectionReveal>
@@ -263,7 +195,7 @@ export default function AboutView() {
                   <p className="mt-3 text-sm leading-relaxed text-ink-soft">
                     {belief.description}
                   </p>
-                  <EvidenceLinkText evidence={belief.evidence} />
+                  <AboutEvidenceLink evidence={belief.evidence} />
                 </AboutCard>
               </div>
             ))}
@@ -277,7 +209,7 @@ export default function AboutView() {
                   <p className="mt-2 text-sm leading-relaxed text-ink-soft">
                     {belief.description}
                   </p>
-                  <EvidenceLinkText evidence={belief.evidence} />
+                  <AboutEvidenceLink evidence={belief.evidence} />
                 </AboutCard>
               </div>
             ))}
@@ -299,7 +231,7 @@ export default function AboutView() {
           {aboutPage.teachingBody}
         </p>
         <div className="mt-6" data-reveal-item>
-          <EvidenceLinkText evidence={aboutPage.teachingEvidence} />
+          <AboutEvidenceLink evidence={aboutPage.teachingEvidence} />
         </div>
       </SectionReveal>
 
