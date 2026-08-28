@@ -65,42 +65,34 @@ function AboutHero() {
   return (
     <header
       ref={rootRef}
-      className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-16 pt-32 sm:pt-40"
+      className="mx-auto grid max-w-[1440px] items-end gap-10 px-[var(--page-pad)] pb-16 pt-32 sm:pt-40 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.15fr)] lg:gap-16"
     >
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)] lg:items-end lg:gap-16">
-        <div>
-          <p data-hero-copy className="font-mono-label text-ink-soft">
-            02 / {aboutPage.heroEyebrow}
-          </p>
-          <h1 data-hero-headline className="mt-6 max-w-4xl type-h1 text-navy">
-            {aboutPage.heroTitle}
-          </h1>
-          <p data-hero-copy className="mt-6 max-w-xl type-lead text-ink-soft">
-            {aboutPage.heroDescription}
-          </p>
-        </div>
-        <div data-hero-copy className="max-w-[320px]">
+      <div>
+        <p data-hero-copy className="font-mono-label text-gold">
+          {aboutPage.heroEyebrow}
+        </p>
+        <h1 data-hero-headline className="mt-3.5 max-w-[22rem] type-h1 text-navy lg:max-w-[26rem]">
+          {aboutPage.heroTitle}
+        </h1>
+      </div>
+      <div data-hero-copy className="relative min-h-0 pb-4 lg:min-h-[28rem] lg:pb-8">
+        <div className="relative z-[1] w-full max-w-[28rem] lg:mt-10 lg:w-[68%] lg:max-w-none">
           <AboutPolaroid
             src="/assets/about/raghvendra-singh.png"
             alt="Raghvendra Singh"
             hello
             idle
             priority
-            sizes="(max-width: 1024px) 80vw, 320px"
+            sizes="(max-width: 1024px) 90vw, 38vw"
           />
-          <div className="mt-6 ml-auto w-[72%] max-w-[228px]">
-            <AboutPolaroid
-              src="/assets/studio/desktop.jpg"
-              alt={aboutPage.workspaceCaption}
-              idle
-              sizes="228px"
-            />
-            <p className="mt-3 text-xs leading-relaxed text-ink-soft">
-              {aboutPage.workspaceCaption}
-            </p>
-          </div>
-          <p className="mt-6 type-h3 text-navy">{aboutPage.identity}</p>
-          <p className="mt-2 text-sm leading-relaxed text-ink-soft">{aboutPage.location}</p>
+        </div>
+        <div className="relative z-[2] mt-[-8%] ml-auto w-[62%] max-w-[240px] lg:absolute lg:top-[22%] lg:right-0 lg:mt-0 lg:w-[44%] lg:max-w-none">
+          <AboutPolaroid
+            src="/assets/studio/desktop.jpg"
+            alt={aboutPage.workspaceCaption}
+            rotate={2.8}
+            sizes="(max-width: 1024px) 50vw, 20vw"
+          />
         </div>
       </div>
     </header>
