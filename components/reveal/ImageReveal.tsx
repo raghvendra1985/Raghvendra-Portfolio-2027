@@ -15,6 +15,7 @@ export default function ImageReveal({
   className,
   parallax = 0.12,
   objectFit = "cover",
+  objectPosition,
 }: {
   children?: ReactNode;
   src?: string;
@@ -24,6 +25,7 @@ export default function ImageReveal({
   className?: string;
   parallax?: number;
   objectFit?: "cover" | "contain";
+  objectPosition?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { config, pageReady } = useExperience();
@@ -64,6 +66,7 @@ export default function ImageReveal({
                 ? "object-contain object-center"
                 : "object-cover object-center"
             }
+            style={objectPosition ? { objectPosition } : undefined}
           />
         ) : children ? (
           children

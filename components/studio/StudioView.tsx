@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
+import Image from "next/image";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import ImageReveal from "@/components/reveal/ImageReveal";
 import LibraryLane from "@/components/studio/LibraryLane";
@@ -12,21 +13,13 @@ import { companionPhotos, studioPage } from "@/studio";
 
 const tileReveal = { stagger: 0.045, translate: 24 };
 
-/** Prefer lived ride photos over Strava screenshots for the scatter. */
-const CADENCE_SCATTER = [
-  "/assets/studio/rides/01.jpg",
-  "/assets/studio/rides/05.jpg",
-  "/assets/studio/rides/03.jpg",
-  "/assets/studio/rides/04.jpg",
-  "/assets/studio/rides/07.jpg",
-] as const;
-
-const scatterClass = [
-  "col-span-3 row-span-3",
-  "col-span-3 row-span-2",
-  "col-span-2 row-span-2",
-  "col-span-2 row-span-2",
-  "col-span-2 row-span-2",
+/** Relume Gallery 21 off-grid: native photo aspects, staggered columns. No object-cover crop. */
+const CADENCE_GALLERY = [
+  { id: "ride-01", src: "/assets/studio/rides/01.jpg", width: 768, height: 1024 },
+  { id: "ride-05", src: "/assets/studio/rides/05.jpg", width: 776, height: 1024 },
+  { id: "ride-03", src: "/assets/studio/rides/03.jpg", width: 573, height: 1024 },
+  { id: "ride-04", src: "/assets/studio/rides/04.jpg", width: 590, height: 1024 },
+  { id: "ride-07", src: "/assets/studio/rides/07.jpg", width: 567, height: 1024 },
 ] as const;
 
 function Cover({
@@ -41,6 +34,35 @@ function Cover({
       <div data-studio-cover className="h-full w-full">
         {children}
       </div>
+    </div>
+  );
+}
+
+function CadenceGallery({
+  images,
+}: {
+  images: Array<{
+    id: string;
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  }>;
+}) {
+  return (
+    <div className="grid grid-cols-2 items-start gap-4 md:grid-cols-3 md:gap-6">
+      {images.map((image, index) => (
+        <figure key={image.id} className={index % 2 === 1 ? "md:mt-12" : undefined}>
+          <Image
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            className="h-auto w-full bg-surface-dim"
+            sizes="(min-width: 768px) 30vw, 50vw"
+          />
+        </figure>
+      ))}
     </div>
   );
 }
@@ -94,19 +116,34 @@ function StudioHero() {
         </p>
       </div>
       {desk ? (
-        <div data-hero-copy>
-          <StudioHover lift={false}>
+        <div data-hero-copy className="relative">
+          <StudioHover lift={false} className="relative z-[1] w-full lg:mt-14 lg:w-[62%]">
             <Cover>
               <ImageReveal
                 src={desk.src}
                 alt={desk.alt}
                 className="aspect-[4/5] w-full bg-surface-dim"
-                sizes="(min-width: 1024px) 40vw, 100vw"
+                sizes="(min-width: 1024px) 28vw, 100vw"
                 parallax={0.03}
                 priority
               />
             </Cover>
           </StudioHover>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-0 right-0 z-[2] hidden w-[48%] lg:block"
+          >
+            <Cover>
+              <ImageReveal
+                src={desk.src}
+                alt=""
+                className="aspect-[4/5] w-full bg-surface-dim"
+                sizes="(min-width: 1024px) 18vw"
+                parallax={0.02}
+                objectPosition="36% 52%"
+              />
+            </Cover>
+          </div>
         </div>
       ) : null}
     </header>
@@ -122,9 +159,10 @@ export default function StudioView() {
     (companion) => companionPhotos(companion).length === 0,
   );
   const gardenLine = habitat.plants.join(". ");
-  const cadenceImages = CADENCE_SCATTER.map((src) =>
-    motion.images.find((image) => image.src === src),
-  ).filter((image): image is (typeof motion.images)[number] => Boolean(image));
+  const cadenceImages = CADENCE_GALLERY.flatMap((tile) => {
+    const image = motion.images.find((entry) => entry.src === tile.src);
+    return image ? [{ ...tile, alt: image.alt }] : [];
+  });
 
   return (
     <>
@@ -284,30 +322,8 @@ export default function StudioView() {
           </div>
 
           {cadenceImages.length ? (
-            <div
-              data-reveal-item
-              className="grid auto-rows-[90px] grid-cols-2 gap-3.5 sm:grid-cols-6"
-            >
-              {cadenceImages.map((image, index) => (
-                <div
-                  key={image.src}
-                  className={`overflow-hidden bg-surface-dim ${scatterClass[index] ?? "col-span-2 row-span-2"} ${
-                    index === 0
-                      ? "max-sm:col-span-2 max-sm:row-span-2"
-                      : "max-sm:col-span-1 max-sm:row-span-1"
-                  }`}
-                >
-                  <Cover className="h-full">
-                    <ImageReveal
-                      src={image.src}
-                      alt={image.alt}
-                      className="h-full min-h-[120px] w-full"
-                      sizes="(min-width: 640px) 30vw, 50vw"
-                      parallax={0.02}
-                    />
-                  </Cover>
-                </div>
-              ))}
+            <div data-reveal-item>
+              <CadenceGallery images={cadenceImages} />
             </div>
           ) : null}
 
