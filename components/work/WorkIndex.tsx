@@ -33,11 +33,14 @@ function CardBody({
   featured?: boolean;
   compact?: boolean;
 }) {
-  const coverAspect = featured
-    ? "aspect-[16/10] min-h-[220px] lg:min-h-[280px]"
-    : compact
-      ? "aspect-[4/3] min-h-[160px]"
-      : "aspect-[3/2] min-h-[200px]";
+  const coverAspect =
+    study.slug === "crowley"
+      ? "aspect-[4/5] min-h-[200px]"
+      : featured
+        ? "aspect-[16/10] min-h-[220px] lg:min-h-[280px]"
+        : compact
+          ? "aspect-[4/3] min-h-[160px]"
+          : "aspect-[3/2] min-h-[200px]";
   const cta = evidenceCta(study);
 
   const copy = (
@@ -87,10 +90,13 @@ function CardBody({
   const cover = study.cover ? (
     <div data-work-cover className="overflow-hidden">
       <ImageReveal
-        className={`relative ${coverAspect}`}
+        key={study.cover}
+        className={`relative ${coverAspect}${study.slug === "crowley" ? " bg-surface-dim" : ""}`}
         src={study.cover}
         alt={`${study.client} cover`}
         sizes={featured ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 768px) 50vw, 100vw"}
+        objectFit={study.slug === "crowley" ? "contain" : "cover"}
+        parallax={study.slug === "crowley" ? 0 : 0.12}
       >
         <WorkCover study={study} className="h-full" />
       </ImageReveal>

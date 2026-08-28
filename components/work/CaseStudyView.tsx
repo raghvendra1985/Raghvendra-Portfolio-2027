@@ -89,14 +89,18 @@ export default function CaseStudyView({
           <div
             data-case-hero
             data-shared-image-target
-            className="relative aspect-[16/10] min-h-[240px] lg:min-h-[420px]"
+            className={`relative min-h-[240px] lg:min-h-[420px] ${
+              study.slug === "crowley" ? "aspect-[4/5]" : "aspect-[16/10]"
+            }`}
           >
             <ImageReveal
-              className="h-full w-full"
+              className={`h-full w-full ${study.slug === "crowley" ? "bg-surface-dim" : ""}`}
               src={study.cover}
               alt={`${study.client} — ${study.title}`}
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
+              objectFit={study.slug === "crowley" ? "contain" : "cover"}
+              parallax={study.slug === "crowley" ? 0 : 0.12}
             >
               <WorkCover study={study} className="h-full min-h-[240px] lg:min-h-[420px]" />
             </ImageReveal>
@@ -164,16 +168,21 @@ export default function CaseStudyView({
               <div key={src} data-case-gallery>
                 <ImageReveal
                   className={`relative ${
-                    src.endsWith(".jpg")
-                      ? "aspect-[3/4]"
-                      : src.endsWith(".png") || src.endsWith(".webp")
-                        ? "aspect-[16/10]"
-                        : "aspect-[3/2]"
+                    src.includes("/work/crowley/gallery-02")
+                      ? "aspect-[40/21] bg-surface-dim"
+                      : src.includes("/work/crowley/")
+                        ? "aspect-[3/2] bg-surface-dim"
+                        : src.endsWith(".jpg")
+                          ? "aspect-[3/4]"
+                          : src.endsWith(".png") || src.endsWith(".webp")
+                            ? "aspect-[16/10]"
+                            : "aspect-[3/2]"
                   }`}
                   src={src}
-                  alt={`${study.client} diagram ${index + 1}`}
+                  alt={`${study.client} — frame ${index + 1}`}
                   sizes="(min-width: 768px) 33vw, 100vw"
-                  parallax={0.06}
+                  objectFit={src.includes("/work/crowley/") ? "contain" : "cover"}
+                  parallax={src.includes("/work/crowley/") ? 0 : 0.06}
                 />
               </div>
             ))}

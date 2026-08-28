@@ -733,11 +733,20 @@ const caseStudyRecords: Omit<
     role: "Staff Design Consultant",
     timeline: "1 year",
     engagement: "Advisory",
-    cover: "/assets/work/crowley/cover.svg",
+    href: "https://www.crowley.com/logistics/route/",
+    links: [
+      { label: "Visit live site", href: "https://www.crowley.com/logistics/route/" },
+      {
+        label: "Sign in to C Sight",
+        href: "https://csight.crowley.com/crowley/s/find-a-route",
+      },
+    ],
+    cover: "/assets/work/crowley/cover.webp",
     gallery: [
-      "/assets/work/crowley/gallery-01.svg",
-      "/assets/work/crowley/gallery-02.svg",
-      "/assets/work/crowley/gallery-03.svg",
+      "/assets/work/crowley/gallery-01.webp",
+      "/assets/work/crowley/gallery-02.webp",
+      "/assets/work/crowley/gallery-03.webp",
+      "/assets/work/crowley/gallery-04.webp",
     ],
     challenge:
       "International shippers faced fragmented communication across trucking companies, ports, and customs brokers, unclear total shipping costs due to hidden fees, and compliance risk from disconnected customs processes — with no unified way to get a clear, upfront freight quote across ocean, rail, and land networks.",
