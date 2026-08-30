@@ -123,6 +123,7 @@ export default function MenuOverlay({
                   <li key={link.label}>
                     <a
                       href={link.href}
+                      aria-label={"ariaLabel" in link ? link.ariaLabel : undefined}
                       className="inline-flex min-h-11 items-center font-mono-label text-mist/80 hover:text-gold"
                       {...(link.href.startsWith("http")
                         ? { target: "_blank", rel: "noopener noreferrer" }

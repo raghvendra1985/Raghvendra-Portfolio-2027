@@ -39,18 +39,28 @@ export function whatsappHref(text?: string) {
 
 export const navLinks = [
   { label: "Work", href: "/work" },
+  { label: "Approach", href: "/#approach" },
   { label: "About", href: "/about" },
   { label: "Notes", href: "/knowledge" },
   { label: "Products", href: "/products" },
-  { label: "Contact", href: "/contact" },
+  { label: "Start a conversation", href: "/contact" },
   { label: "System", href: "/system", hint: "How I think, decide, and operate" },
   { label: "Studio", href: "/studio", hint: "The room around the work" },
 ] as const;
 
 export type NavLink = (typeof navLinks)[number];
 
-const primaryHrefs = ["/work", "/about", "/knowledge", "/products"] as const;
-const menuHrefs = ["/contact", "/system", "/studio"] as const;
+const primaryHrefs = ["/work", "/#approach", "/about"] as const;
+const menuHrefs = [
+  "/work",
+  "/#approach",
+  "/about",
+  "/knowledge",
+  "/products",
+  "/system",
+  "/studio",
+  "/contact",
+] as const;
 
 export const primaryNavLinks = primaryHrefs.map(
   (href) => navLinks.find((link) => link.href === href)!,
@@ -63,14 +73,31 @@ export const menuNavLinks = menuHrefs.map(
 export const footerLinks = {
   sitemap: [
     { label: "Work", href: "/work" },
+    { label: "Approach", href: "/#approach" },
     { label: "About", href: "/about" },
-    { label: "Notes", href: "/knowledge" },
+    { label: "Writing", href: "/knowledge" },
+  ],
+  more: [
     { label: "Products", href: "/products" },
+    { label: "System", href: "/system" },
+    { label: "Studio", href: "/studio" },
     { label: "Contact", href: "/contact" },
   ],
   social: [
-    { label: "Email", href: `mailto:${site.email}` },
-    { label: "LinkedIn", href: site.linkedin },
-    { label: "WhatsApp", href: site.whatsapp },
+    {
+      label: "Email",
+      href: `mailto:${site.email}`,
+      ariaLabel: `Email ${site.name} at ${site.email}`,
+    },
+    {
+      label: "LinkedIn",
+      href: site.linkedin,
+      ariaLabel: `${site.name} on LinkedIn (opens in a new tab)`,
+    },
+    {
+      label: "WhatsApp",
+      href: site.whatsapp,
+      ariaLabel: `Message ${site.name} on WhatsApp (opens in a new tab)`,
+    },
   ],
 };
