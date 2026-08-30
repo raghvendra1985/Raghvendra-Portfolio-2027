@@ -25,7 +25,7 @@ function ProjectFigure({
         {src ? (
           <Image
             src={src}
-            alt={`${project.study.client} — ${project.title}`}
+            alt={project.title}
             fill
             priority={priority}
             loading={priority ? undefined : "lazy"}

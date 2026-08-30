@@ -198,6 +198,10 @@ html.motion-ready .site-content {
   html[data-charm="hanging"] .site-content {
     padding-right: var(--charm-corridor);
   }
+
+  html[data-charm="hanging"] [data-nav] [data-nav-bar] {
+    padding-right: calc(var(--page-pad) + var(--charm-corridor));
+  }
 }
 
 html.motion-ready [data-loader-root] {

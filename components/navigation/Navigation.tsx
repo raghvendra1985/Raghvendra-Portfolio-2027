@@ -144,13 +144,16 @@ export default function Navigation() {
         data-nav
         data-compact="false"
         data-menu-open={open ? "true" : "false"}
-        className={`group fixed inset-x-0 top-0 z-50 border-b ${
+        className={`group fixed inset-x-0 top-0 z-[90] border-b ${
           open
             ? "border-transparent bg-navy"
             : "border-transparent bg-transparent data-[compact=true]:border-line data-[compact=true]:bg-mist/70"
         }`}
       >
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3">
+        <div
+          data-nav-bar
+          className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3"
+        >
           <Link
             href="/"
             aria-label={`${site.name}, home`}
@@ -160,7 +163,10 @@ export default function Navigation() {
             Raghvendra
           </Link>
 
-          <nav aria-label="Primary" className="hidden items-center gap-5 xl:gap-7 lg:flex">
+          <nav
+            aria-label="Primary"
+            className="hidden min-[960px]:flex min-[960px]:flex-wrap min-[960px]:items-center min-[960px]:justify-end min-[960px]:gap-x-4 min-[960px]:gap-y-1 xl:gap-x-7"
+          >
             {primaryNavLinks.map((link) => {
               const active = isNavActive(pathname, link.href, hash);
               return (
@@ -193,7 +199,7 @@ export default function Navigation() {
             </TrackedLink>
           </nav>
 
-          <div className="flex items-center gap-3 lg:hidden">
+          <div className="flex items-center gap-3 min-[960px]:hidden">
             <MenuToggle ref={toggleRef} open={open} inverted={open} onClick={toggleMenu} />
           </div>
         </div>
