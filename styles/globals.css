@@ -184,6 +184,27 @@ html.is-loading [data-nav] {
   -webkit-backdrop-filter: none !important;
 }
 
+/* GSAP clip-path / autoAlpha must not leave overlay links invisible on the
+   hamburger breakpoint (touch and tablet, including widths above 768px). */
+@media (max-width: 959px) {
+  #site-menu[aria-hidden="false"] [data-menu-panel] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+
+  #site-menu[aria-hidden="false"] [data-menu-item] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  #site-menu[aria-hidden="false"] [data-menu-item] a {
+    display: flex !important;
+  }
+}
+
 html.is-loading .site-content {
   opacity: 0;
   animation: rs-loader-failsafe 0.25s ease 2.4s forwards;

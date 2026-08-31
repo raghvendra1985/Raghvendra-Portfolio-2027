@@ -60,7 +60,9 @@ export default function MenuOverlay({
     >
       <div
         data-menu-panel
-        className="absolute inset-0 flex flex-col overflow-y-auto bg-navy px-[var(--page-pad)] pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-24 text-mist opacity-0 sm:pt-28"
+        className={`absolute inset-0 flex flex-col overflow-y-auto bg-navy px-[var(--page-pad)] pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-24 text-mist sm:pt-28 ${
+          open ? "opacity-100" : "opacity-0"
+        }`}
       >
         <h2 id="site-menu-title" className="sr-only">
           Site menu
@@ -76,7 +78,6 @@ export default function MenuOverlay({
                     href={link.href}
                     aria-current={active ? "page" : undefined}
                     onClick={onClose}
-                    data-cursor="Open"
                     className="group flex min-h-11 items-baseline gap-3 py-1.5 sm:gap-4 sm:py-2"
                   >
                     <span
