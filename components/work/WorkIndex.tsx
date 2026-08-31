@@ -262,7 +262,7 @@ function GroupNav({
             <a
               href={`#group-${group.id}`}
               onClick={() => onTocClick(group.id)}
-              className="font-mono-label text-navy underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              className="inline-flex min-h-11 items-center font-mono-label text-navy underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
             >
               {group.label}
             </a>
@@ -272,7 +272,7 @@ function GroupNav({
           <a
             href="#archive"
             onClick={() => onTocClick("archive")}
-            className="font-mono-label text-ink-soft underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            className="inline-flex min-h-11 items-center font-mono-label text-ink-soft underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
           >
             Archive
           </a>

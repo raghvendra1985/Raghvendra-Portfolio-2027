@@ -22,7 +22,7 @@ export default function HowILead() {
               <h3 className="font-serif text-[1.5rem] leading-tight text-navy sm:text-[1.75rem] sm:leading-none">
                 {stage.title}
               </h3>
-              <p className="col-span-2 max-w-[58ch] type-body text-ink-soft sm:col-start-2 lg:col-span-1 lg:col-start-auto lg:justify-self-end">
+              <p className="col-span-2 max-w-[58ch] type-body text-ink-soft sm:col-span-1 sm:col-start-2 lg:col-start-auto lg:justify-self-end">
                 {stage.body}
               </p>
             </li>

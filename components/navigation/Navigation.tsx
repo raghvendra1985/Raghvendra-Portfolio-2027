@@ -157,7 +157,7 @@ export default function Navigation() {
           <Link
             href="/"
             aria-label={`${site.name}, home`}
-            className={`min-w-0 truncate type-lead ${open ? "text-mist" : "text-navy"}`}
+            className={`shrink-0 type-lead ${open ? "text-mist" : "text-navy"}`}
             data-cursor="Open"
           >
             Raghvendra

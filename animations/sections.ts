@@ -52,6 +52,12 @@ export function animateSection(
         once: true,
       },
     });
+
+    const failsafe = window.setTimeout(() => {
+      showImmediately(nodes);
+    }, 1400);
+
+    return () => window.clearTimeout(failsafe);
   });
 }
 
