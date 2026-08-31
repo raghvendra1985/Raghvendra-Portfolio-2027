@@ -24,7 +24,7 @@ export default function SiteFooter() {
       <div className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-16 sm:py-20">
         <p
           data-footer-wordmark
-          className="font-display text-[clamp(3rem,12vw,9rem)] leading-[0.9]"
+          className="break-words font-display text-[clamp(2.35rem,14vw,9rem)] leading-[0.9]"
         >
           Raghvendra
           <span className="text-gold">.</span>
@@ -34,10 +34,10 @@ export default function SiteFooter() {
           <div data-footer-link>
             <p className="max-w-xs type-body text-mist/85">{leadershipFooter.blurb}</p>
             <p className="mt-6 type-body text-mist/80">{site.location}</p>
-            <p className="mt-3 flex items-center gap-2 text-base">
+            <p data-footer-status className="mt-3 flex items-start gap-2 text-base">
               <span
                 data-status-dot
-                className="h-2 w-2 rounded-full bg-green"
+                className="mt-2 h-2 w-2 shrink-0 rounded-full bg-green"
                 aria-hidden="true"
               />
               <span>
@@ -53,7 +53,7 @@ export default function SiteFooter() {
                 <li key={link.href} data-footer-link>
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
+                    className="inline-flex min-h-11 items-center text-base text-mist hover:text-gold"
                   >
                     {link.label}
                   </Link>
@@ -72,7 +72,7 @@ export default function SiteFooter() {
                     <a
                       href={link.href}
                       aria-label={link.ariaLabel}
-                      className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
+                    className="inline-flex min-h-11 items-center text-base text-mist hover:text-gold"
                       {...(link.href.startsWith("http")
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
@@ -85,7 +85,7 @@ export default function SiteFooter() {
                 <ResumeCta
                   appearance="text"
                   source="footer"
-                  className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
+                  className="inline-flex min-h-11 items-center text-base text-mist hover:text-gold"
                 />
               </li>
             </ul>
@@ -98,7 +98,7 @@ export default function SiteFooter() {
                 <li key={link.href} data-footer-link>
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-11 items-center text-base text-mist/90 hover:text-gold"
+                    className="inline-flex min-h-11 items-center text-base text-mist hover:text-gold"
                   >
                     {link.label}
                   </Link>

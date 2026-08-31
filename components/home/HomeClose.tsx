@@ -7,7 +7,7 @@ export default function HomeClose() {
   return (
     <SectionReveal
       id={leadershipClose.id}
-      className="scroll-mt-[var(--hash-offset)] border-t border-navy bg-navy px-[var(--page-pad)] py-20 text-mist sm:py-24"
+      className="scroll-mt-[var(--hash-offset)] border-t border-navy bg-navy px-[var(--page-pad)] py-14 text-mist sm:py-20 lg:py-24"
     >
       <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
         <div data-reveal-item className="max-w-3xl">

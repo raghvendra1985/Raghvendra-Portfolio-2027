@@ -21,7 +21,7 @@ function ProjectFigure({
 
   return (
     <figure className={className}>
-      <div className="relative aspect-[16/10] overflow-hidden border border-line bg-navy">
+      <div className="relative aspect-[4/3] overflow-hidden border border-line bg-navy sm:aspect-[16/10]">
         {src ? (
           <Image
             src={src}
@@ -93,11 +93,11 @@ export default function LeadershipWork() {
   return (
     <SectionReveal
       id="work"
-      className="scroll-mt-[var(--hash-offset)] border-t border-line px-[var(--page-pad)] py-20 sm:py-24"
+      className="scroll-mt-[var(--hash-offset)] border-t border-line px-[var(--page-pad)] py-14 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-[1440px]">
         <div
-          className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
+          className="flex w-full flex-col gap-4 md:flex-row md:items-end md:justify-between"
           data-reveal-item
         >
           <div className="max-w-3xl">
@@ -109,7 +109,7 @@ export default function LeadershipWork() {
             href={leadershipWork.all.href}
             variant="secondary"
             cursor="Open"
-            className="w-full justify-center sm:w-auto"
+            className="w-full justify-center md:w-auto"
             event="nav_clicked"
             payload={{ surface: "home_work", dest: "/work" }}
           >
@@ -117,7 +117,7 @@ export default function LeadershipWork() {
           </TrackedMagneticButton>
         </div>
 
-        <div className="mt-16 space-y-16 lg:space-y-24">
+        <div className="mt-10 space-y-12 sm:mt-16 lg:space-y-24">
           {projects.map((project, index) => {
             const isWide = project.layout === "wide";
             const isCopyLed = project.layout === "copy-led";
@@ -129,10 +129,10 @@ export default function LeadershipWork() {
                 data-reveal-item
                 className={
                   isWide
-                    ? "grid gap-8 border border-line bg-paper p-5 sm:p-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-12 lg:p-10"
+                    ? "grid gap-6 border border-line bg-paper p-4 sm:p-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-12 lg:p-10"
                     : isCopyLed
-                      ? "grid items-center gap-8 rounded-none bg-surface-dim p-5 sm:p-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14 lg:p-10"
-                      : "grid items-center gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-14"
+                      ? "grid items-center gap-6 rounded-none bg-surface-dim p-4 sm:p-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14 lg:p-10"
+                      : "grid items-center gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-14"
                 }
               >
                 <ProjectFigure

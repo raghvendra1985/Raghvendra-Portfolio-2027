@@ -3,7 +3,7 @@ import { leadershipPrinciples } from "@/home/leadership-home";
 
 export default function IntelligentPrinciples() {
   return (
-    <SectionReveal className="border-t border-line px-[var(--page-pad)] py-20 sm:py-24">
+    <SectionReveal className="border-t border-line px-[var(--page-pad)] py-14 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-[1440px]">
         <p className="font-mono-label text-navy/80" data-reveal-item>
           {leadershipPrinciples.eyebrow}

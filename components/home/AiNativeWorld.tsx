@@ -5,13 +5,13 @@ export default function AiNativeWorld() {
   return (
     <SectionReveal
       id={leadershipAi.id}
-      className="scroll-mt-[var(--hash-offset)] border-t border-line bg-navy px-[var(--page-pad)] py-20 text-mist sm:py-24"
+      className="scroll-mt-[var(--hash-offset)] border-t border-line bg-navy px-[var(--page-pad)] py-14 text-mist sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-[1440px]">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
           <div data-reveal-item>
             <p className="font-mono-label text-mist/70">{leadershipAi.eyebrow}</p>
-            <h2 className="mt-4 max-w-xl type-h1">{leadershipAi.title}</h2>
+            <h2 className="mt-4 max-w-xl type-h1 text-[clamp(1.75rem,6vw,3.5rem)]">{leadershipAi.title}</h2>
             <p className="mt-6 max-w-[42ch] type-lead text-mist/85">{leadershipAi.intro}</p>
           </div>
           <ol className="space-y-0 border-t border-mist/15" data-reveal-item>

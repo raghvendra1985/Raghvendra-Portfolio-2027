@@ -31,7 +31,7 @@ export function animateFooter(
     const links = root.querySelectorAll("[data-footer-link]");
     const status = root.querySelector("[data-footer-status]");
 
-    if (config.reducedMotion) {
+    if (config.reducedMotion || config.isMobile) {
       showImmediately([wordmark, links, status]);
       return;
     }
@@ -40,10 +40,14 @@ export function animateFooter(
       defaults: { ease: EASE },
       scrollTrigger: {
         trigger: root,
-        start: "top 88%",
+        start: "top 92%",
         once: true,
       },
     });
+
+    const failsafe = window.setTimeout(() => {
+      showImmediately([wordmark, links, status]);
+    }, 1400);
 
     if (wordmark) {
       tl.fromTo(
@@ -81,5 +85,7 @@ export function animateFooter(
         0.4,
       );
     }
+
+    return () => window.clearTimeout(failsafe);
   });
 }

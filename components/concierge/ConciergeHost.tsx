@@ -24,12 +24,16 @@ export default function ConciergeHost() {
       if (cancelled) return;
       const work = document.getElementById("work");
       const hero = document.querySelector<HTMLElement>("[data-hero-headline]");
-      if (!work || !hero) {
+      if (!work) {
         frame = window.requestAnimationFrame(attach);
         return;
       }
 
       const update = () => {
+        if (!hero) {
+          setRevealed(true);
+          return;
+        }
         setRevealed(hero.getBoundingClientRect().bottom < 72);
       };
 
@@ -37,7 +41,7 @@ export default function ConciergeHost() {
       window.addEventListener("scroll", update, { passive: true });
       const observer = new IntersectionObserver(update, { threshold: [0, 0.1, 0.4] });
       observer.observe(work);
-      observer.observe(hero);
+      if (hero) observer.observe(hero);
       cleanup = () => {
         window.removeEventListener("scroll", update);
         observer.disconnect();

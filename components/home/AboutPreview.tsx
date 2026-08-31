@@ -5,9 +5,9 @@ import { leadershipAbout } from "@/home/leadership-home";
 
 export default function AboutPreview() {
   return (
-    <SectionReveal className="border-t border-line px-[var(--page-pad)] py-20 sm:py-24">
-      <div className="mx-auto grid max-w-[1440px] items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-20">
-        <div data-reveal-item className="mx-auto w-full max-w-[320px] lg:mx-0">
+    <SectionReveal className="border-t border-line px-[var(--page-pad)] py-14 sm:py-20 lg:py-24">
+      <div className="mx-auto grid max-w-[1440px] items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-20">
+        <div data-reveal-item className="mx-auto w-full max-w-[min(320px,100%)] lg:mx-0">
           <AboutPolaroid
             src={leadershipAbout.image.src}
             alt={leadershipAbout.image.alt}

@@ -56,17 +56,17 @@ export default function MenuOverlay({
       aria-labelledby="site-menu-title"
       aria-hidden={!open}
       inert={!open}
-      className={`fixed inset-0 z-[45] ${open ? "pointer-events-auto" : "pointer-events-none"}`}
+      className={`fixed inset-0 z-[80] ${open ? "pointer-events-auto" : "pointer-events-none"}`}
     >
       <div
         data-menu-panel
-        className="absolute inset-0 flex flex-col overflow-y-auto bg-navy px-[var(--page-pad)] pb-10 pt-28 text-mist opacity-0"
+        className="absolute inset-0 flex flex-col overflow-y-auto bg-navy px-[var(--page-pad)] pb-10 pt-24 text-mist opacity-0 sm:pt-28"
       >
         <h2 id="site-menu-title" className="sr-only">
           Site menu
         </h2>
         <nav aria-label="More pages" className="mx-auto w-full max-w-[1440px] flex-1">
-          <ul className="grid gap-2 sm:grid-cols-2 sm:gap-x-16 sm:gap-y-3">
+          <ul className="grid gap-1 sm:grid-cols-2 sm:gap-x-12 sm:gap-y-2">
             {menuNavLinks.map((link, index) => {
               const active =
                 pathname === link.href || pathname.startsWith(`${link.href}/`);
@@ -77,7 +77,7 @@ export default function MenuOverlay({
                     aria-current={active ? "page" : undefined}
                     onClick={onClose}
                     data-cursor="Open"
-                    className="group flex min-h-11 items-baseline gap-4 py-2"
+                    className="group flex min-h-11 items-baseline gap-3 py-1.5 sm:gap-4 sm:py-2"
                   >
                     <span
                       className={`font-mono-label ${
@@ -88,14 +88,14 @@ export default function MenuOverlay({
                     </span>
                     <span className="min-w-0">
                       <span
-                        className={`block type-h2 ${
+                        className={`block font-sans text-[clamp(1.35rem,5vw,2.5rem)] font-medium leading-tight tracking-[-0.02em] ${
                           active ? "text-green" : "text-mist group-hover:text-gold"
                         }`}
                       >
                         {link.label}
                       </span>
                       {"hint" in link && link.hint ? (
-                        <span className="mt-2 block max-w-md text-base leading-snug text-mist/85">
+                        <span className="mt-1 hidden max-w-md text-sm leading-snug text-mist/85 sm:mt-2 sm:block sm:text-base">
                           {link.hint}
                         </span>
                       ) : null}
@@ -109,9 +109,22 @@ export default function MenuOverlay({
 
         <div
           data-menu-item
-          className="mx-auto mt-10 flex w-full max-w-[1440px] flex-col gap-8 border-t border-mist/15 pt-8"
+          className="mx-auto mt-8 flex w-full max-w-[1440px] flex-col gap-6 border-t border-mist/15 pt-6 sm:mt-10 sm:gap-8 sm:pt-8"
         >
-          <CharmPicker onHang={onClose} />
+          <details className="group">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between font-mono-label text-mist/80 hover:text-gold [&::-webkit-details-marker]:hidden">
+              Charms
+              <span aria-hidden="true" className="text-mist/50 group-open:hidden">
+                +
+              </span>
+              <span aria-hidden="true" className="hidden text-mist/50 group-open:inline">
+                −
+              </span>
+            </summary>
+            <div className="mt-4">
+              <CharmPicker compact onHang={onClose} />
+            </div>
+          </details>
           <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="flex items-center gap-2 font-mono-label text-mist/85">

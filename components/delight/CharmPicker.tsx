@@ -31,10 +31,12 @@ export default function CharmPicker({
   onHang,
   tone = "navy",
   credit = true,
+  compact = false,
 }: {
   onHang?: () => void;
   tone?: "navy" | "mist";
   credit?: boolean;
+  compact?: boolean;
 }) {
   const { state, ready, update } = useCharmState();
   const [pickingEmoji, setPickingEmoji] = useState(false);
@@ -84,7 +86,7 @@ export default function CharmPicker({
   }
 
   return (
-    <div className="charm-gallery flex flex-col gap-8">
+    <div className={`charm-gallery flex flex-col ${compact ? "gap-5" : "gap-8"}`}>
       {GROUPS.map((group) => (
         <div key={group.set}>
           <p
@@ -94,7 +96,13 @@ export default function CharmPicker({
           >
             {group.label}
           </p>
-          <ul className="mt-4 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+          <ul
+            className={
+              compact
+                ? "mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3"
+                : "mt-4 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+            }
+          >
             {CHARMS.filter((charm) => charm.set === group.set).map((charm) => {
               const selected = !state.hidden && state.id === charm.id;
               const isEmoji = charm.id === "emoji";
@@ -108,8 +116,16 @@ export default function CharmPicker({
                     aria-pressed={selected}
                     onClick={() => hang(charm.id)}
                   />
-                  <div className="pointer-events-none relative flex flex-1 flex-col items-center px-[18px] pb-2 pt-2.5">
-                    <div className="mb-1.5 flex h-[148px] items-center justify-center">
+                  <div
+                    className={`pointer-events-none relative flex flex-1 flex-col items-center ${
+                      compact ? "px-2 pb-2 pt-2" : "px-[18px] pb-2 pt-2.5"
+                    }`}
+                  >
+                    <div
+                      className={`mb-1.5 flex items-center justify-center ${
+                        compact ? "h-[72px]" : "h-[148px]"
+                      }`}
+                    >
                       <div className="charm-plate">
                         {getCharmArt(charm.id).src ? (
                           <img src={getCharmArt(charm.id).src} alt="" />
@@ -125,12 +141,18 @@ export default function CharmPicker({
                       </div>
                     </div>
                     <p className="charm-name">{charm.name}</p>
-                    <p className="origin mt-1.5 mb-3">{charm.origin}</p>
-                    <p className="description mb-4">{charm.story}</p>
+                    {compact ? null : (
+                      <>
+                        <p className="origin mt-1.5 mb-3">{charm.origin}</p>
+                        <p className="description mb-4">{charm.story}</p>
+                      </>
+                    )}
                   </div>
                   <button
                     type="button"
-                    className="ritual-btn relative z-[2] mx-auto mb-5"
+                    className={`ritual-btn relative z-[2] mx-auto ${
+                      compact ? "mb-3 hidden sm:inline-flex" : "mb-5"
+                    }`}
                     data-ritual={charm.slug}
                     data-kind={ritualKind(charm.id)}
                     aria-expanded={isEmoji ? pickingEmoji : undefined}
