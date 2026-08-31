@@ -60,7 +60,7 @@ export default function MenuOverlay({
     >
       <div
         data-menu-panel
-        className="absolute inset-0 flex flex-col overflow-y-auto bg-navy px-[var(--page-pad)] pb-10 pt-24 text-mist opacity-0 sm:pt-28"
+        className="absolute inset-0 flex flex-col overflow-y-auto bg-navy px-[var(--page-pad)] pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-24 text-mist opacity-0 sm:pt-28"
       >
         <h2 id="site-menu-title" className="sr-only">
           Site menu
