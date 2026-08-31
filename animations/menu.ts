@@ -98,17 +98,6 @@ export function animateMenuClose(
     ease: EASE,
   });
 
-  if (config.isMobile) {
-    gsap.to(panel, {
-      autoAlpha: 0,
-      y: 12,
-      duration: DURATION.sm,
-      ease: EASE,
-      onComplete,
-    });
-    return;
-  }
-
   gsap.to(panel, {
     clipPath: `circle(0% at ${origin.x} ${origin.y})`,
     duration: DURATION.md,
