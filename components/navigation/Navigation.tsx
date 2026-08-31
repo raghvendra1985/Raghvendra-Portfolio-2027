@@ -10,12 +10,20 @@ import { useExperience } from "@/components/providers/ExperienceProvider";
 import { getLenis } from "@/hooks/useLenis";
 import { primaryNavLinks, site } from "@/lib/site";
 import { TrackedLink } from "@/components/analytics/TrackedCta";
+import ResumeCta from "@/components/cta/ResumeCta";
 import { useConcierge } from "@/components/concierge/ConciergeProvider";
 import MenuToggle from "@/components/navigation/MenuToggle";
 import MenuOverlay from "@/components/navigation/MenuOverlay";
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function isNavActive(pathname: string, href: string, hash: string) {
+  if (href === "/#approach") {
+    return pathname === "/" && hash === "#approach";
+  }
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export default function Navigation() {
   const rootRef = useRef<HTMLElement>(null);
@@ -25,8 +33,16 @@ export default function Navigation() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [origin, setOrigin] = useState<MenuOrigin>({ x: "100%", y: "0%" });
+  const [hash, setHash] = useState("");
 
   const wasOpen = useRef(false);
+
+  useEffect(() => {
+    const sync = () => setHash(window.location.hash);
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, [pathname]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -109,6 +125,17 @@ export default function Navigation() {
     setOpen((value) => !value);
   }
 
+  const linkClass = (active: boolean) =>
+    `inline-flex min-h-11 items-center font-mono-label ${
+      open
+        ? active
+          ? "text-gold"
+          : "text-mist/70 hover:text-mist"
+        : active
+          ? "text-green"
+          : "text-ink-soft hover:text-navy"
+    }`;
+
   return (
     <>
       <MenuOverlay open={open} origin={origin} onClose={() => setOpen(false)} />
@@ -117,61 +144,64 @@ export default function Navigation() {
         data-nav
         data-compact="false"
         data-menu-open={open ? "true" : "false"}
-        className={`group fixed inset-x-0 top-0 z-50 border-b ${
+        className={`group fixed inset-x-0 top-0 z-[90] border-b ${
           open
             ? "border-transparent bg-navy"
             : "border-transparent bg-transparent data-[compact=true]:border-line data-[compact=true]:bg-mist/70"
         }`}
       >
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3">
-        <Link
-          href="/"
-          className={`min-w-0 truncate type-lead ${
-            open ? "text-mist" : "text-navy"
-          }`}
-          data-cursor="Open"
+        <div
+          data-nav-bar
+          className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3"
         >
-          Raghvendra Singh
-        </Link>
-
-        <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex xl:gap-8">
-          {primaryNavLinks.map((link) => {
-            const active =
-              pathname === link.href || pathname.startsWith(`${link.href}/`);
-            return (
-              <TrackedLink
-                key={link.href}
-                href={link.href}
-                aria-current={active ? "page" : undefined}
-                event="nav_clicked"
-                payload={{ surface: "primary_nav", dest: link.href }}
-                className={`font-mono-label ${
-                  open
-                    ? active
-                      ? "text-gold"
-                      : "text-mist/70 hover:text-mist"
-                    : active
-                      ? "text-green"
-                      : "text-ink-soft hover:text-navy"
-                }`}
-              >
-                {link.label}
-              </TrackedLink>
-            );
-          })}
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <p
-            className={`hidden max-w-[11rem] items-center gap-2 font-mono-label text-[10px] leading-tight lg:flex ${
-              open ? "text-mist/70" : "text-ink-soft"
-            }`}
+          <Link
+            href="/"
+            aria-label={`${site.name}, home`}
+            className={`shrink-0 type-lead ${open ? "text-mist" : "text-navy"}`}
+            data-cursor="Open"
           >
-            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-green" aria-hidden="true" />
-            <span className="uppercase tracking-[0.08em]">{site.status}</span>
-          </p>
-          <MenuToggle ref={toggleRef} open={open} inverted={open} onClick={toggleMenu} />
-        </div>
+            Raghvendra
+          </Link>
+
+          <nav
+            aria-label="Primary"
+            className="hidden min-[960px]:flex min-[960px]:flex-wrap min-[960px]:items-center min-[960px]:justify-end min-[960px]:gap-x-4 min-[960px]:gap-y-1 xl:gap-x-7"
+          >
+            {primaryNavLinks.map((link) => {
+              const active = isNavActive(pathname, link.href, hash);
+              return (
+                <TrackedLink
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                  event="nav_clicked"
+                  payload={{ surface: "primary_nav", dest: link.href }}
+                  className={linkClass(active)}
+                >
+                  {link.label}
+                </TrackedLink>
+              );
+            })}
+            <ResumeCta
+              appearance="text"
+              source="primary_nav"
+              label="Résumé"
+              className={linkClass(false)}
+            />
+            <TrackedLink
+              href="/contact"
+              aria-current={pathname === "/contact" ? "page" : undefined}
+              event="nav_clicked"
+              payload={{ surface: "primary_nav", dest: "/contact" }}
+              className={linkClass(pathname === "/contact")}
+            >
+              Start a conversation
+            </TrackedLink>
+          </nav>
+
+          <div className="flex items-center gap-3 min-[960px]:hidden">
+            <MenuToggle ref={toggleRef} open={open} inverted={open} onClick={toggleMenu} />
+          </div>
         </div>
       </header>
     </>

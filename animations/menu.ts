@@ -30,31 +30,27 @@ export function animateMenuOpen(
   const { panel, items } = panelAndItems(root);
   if (!panel) return;
 
-  if (config.reducedMotion) {
-    gsap.set(panel, { autoAlpha: 1, clipPath: "none", y: 0 });
+  const hamburgerNav =
+    typeof window !== "undefined" && window.matchMedia("(max-width: 959px)").matches;
+
+  if (config.reducedMotion || config.isMobile || hamburgerNav) {
+    gsap.killTweensOf([panel, items]);
+    gsap.set(panel, { autoAlpha: 1, clipPath: "none", y: 0, clearProps: "clipPath" });
     showImmediately(items);
     return;
   }
 
   gsap.killTweensOf([panel, items]);
 
-  if (config.isMobile) {
-    gsap.fromTo(
-      panel,
-      { autoAlpha: 0, y: 16, clipPath: "none" },
-      { autoAlpha: 1, y: 0, duration: DURATION.md, ease: EASE },
-    );
-  } else {
-    gsap.fromTo(
-      panel,
-      { autoAlpha: 1, clipPath: `circle(0% at ${origin.x} ${origin.y})` },
-      {
-        clipPath: `circle(160% at ${origin.x} ${origin.y})`,
-        duration: DURATION.lg,
-        ease: EASE,
-      },
-    );
-  }
+  gsap.fromTo(
+    panel,
+    { autoAlpha: 1, clipPath: `circle(0% at ${origin.x} ${origin.y})` },
+    {
+      clipPath: `circle(160% at ${origin.x} ${origin.y})`,
+      duration: DURATION.lg,
+      ease: EASE,
+    },
+  );
 
   gsap.fromTo(
     items,
@@ -65,7 +61,7 @@ export function animateMenuOpen(
       duration: DURATION.md,
       stagger: 0.04,
       ease: EASE,
-      delay: config.isMobile ? 0.04 : 0.08,
+      delay: 0.08,
     },
   );
 }
@@ -82,8 +78,12 @@ export function animateMenuClose(
     return;
   }
 
-  if (config.reducedMotion) {
-    gsap.set(panel, { autoAlpha: 0, clipPath: "none", y: 0 });
+  const hamburgerNav =
+    typeof window !== "undefined" && window.matchMedia("(max-width: 959px)").matches;
+
+  if (config.reducedMotion || config.isMobile || hamburgerNav) {
+    gsap.killTweensOf([panel, items]);
+    gsap.set(panel, { autoAlpha: 0, clipPath: "none", y: 0, clearProps: "clipPath" });
     gsap.set(items, { autoAlpha: 0, y: 0 });
     onComplete?.();
     return;
@@ -97,17 +97,6 @@ export function animateMenuClose(
     stagger: 0.015,
     ease: EASE,
   });
-
-  if (config.isMobile) {
-    gsap.to(panel, {
-      autoAlpha: 0,
-      y: 12,
-      duration: DURATION.sm,
-      ease: EASE,
-      onComplete,
-    });
-    return;
-  }
 
   gsap.to(panel, {
     clipPath: `circle(0% at ${origin.x} ${origin.y})`,

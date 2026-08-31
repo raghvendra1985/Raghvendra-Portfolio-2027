@@ -184,6 +184,27 @@ html.is-loading [data-nav] {
   -webkit-backdrop-filter: none !important;
 }
 
+/* GSAP clip-path / autoAlpha must not leave overlay links invisible on the
+   hamburger breakpoint (touch and tablet, including widths above 768px). */
+@media (max-width: 959px) {
+  #site-menu[aria-hidden="false"] [data-menu-panel] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+
+  #site-menu[aria-hidden="false"] [data-menu-item] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  #site-menu[aria-hidden="false"] [data-menu-item] a {
+    display: flex !important;
+  }
+}
+
 html.is-loading .site-content {
   opacity: 0;
   animation: rs-loader-failsafe 0.25s ease 2.4s forwards;
@@ -197,6 +218,10 @@ html.motion-ready .site-content {
 @media (min-width: 1024px) {
   html[data-charm="hanging"] .site-content {
     padding-right: var(--charm-corridor);
+  }
+
+  html[data-charm="hanging"] [data-nav] [data-nav-bar] {
+    padding-right: calc(var(--page-pad) + var(--charm-corridor));
   }
 }
 
@@ -809,7 +834,7 @@ html.motion-ready [data-loader-root] {
   }
 
   .grain,
-  [data-cursor],
+  [data-cursor-root],
   [data-ambient] {
     display: none !important;
   }
@@ -1153,7 +1178,7 @@ html.motion-ready [data-loader-root] {
 }
 
 @media (pointer: coarse) {
-  [data-cursor] {
+  [data-cursor-root] {
     display: none !important;
   }
 

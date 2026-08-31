@@ -7,6 +7,7 @@ import { site } from "@/lib/site";
 export type ResumeDownloadSource =
   | "home_hero"
   | "home_recruiter"
+  | "primary_nav"
   | "about"
   | "contact"
   | "mobile_nav"
@@ -19,6 +20,7 @@ export default function ResumeCta({
   source,
   onNavigate,
   className,
+  label: labelOverride,
 }: {
   variant?: "primary" | "secondary" | "gold";
   size?: "sm" | "md";
@@ -26,10 +28,12 @@ export default function ResumeCta({
   source: ResumeDownloadSource;
   onNavigate?: () => void;
   className?: string;
+  label?: string;
 }) {
   const downloading = Boolean(site.resumeHref);
   const href = site.resumeHref ?? "/contact?intent=hiring";
-  const label = downloading ? "Download résumé" : "Request résumé";
+  const label =
+    labelOverride ?? (downloading ? "Download résumé" : "Request résumé");
   const accessible = downloading ? "Download résumé, PDF, 2 pages" : "Request résumé";
 
   const onTrack = () => {

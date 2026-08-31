@@ -24,7 +24,7 @@ const MenuToggle = forwardRef<
           : "border-navy/20 text-navy hover:border-navy"
       }`}
     >
-      <span className="hidden font-mono-label lg:inline">{open ? "Close" : "Menu"}</span>
+      <span className="font-mono-label">{open ? "Close" : "Menu"}</span>
       <span className="relative block h-3 w-4" aria-hidden="true">
         <span
           className={`absolute left-0 h-px w-4 bg-current transition-transform duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] motion-reduce:transition-none ${

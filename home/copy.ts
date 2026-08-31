@@ -164,5 +164,6 @@ export const homeContact = {
 } as const;
 
 export const homeFooter = {
-  blurb: "Making complex ideas useful across products, systems, and teams.",
+  blurb:
+    "Designing intelligent products, and the systems and alignment that make them successful.",
 } as const;
