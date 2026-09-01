@@ -1,0 +1,35 @@
+# Homepage hero — Grok image + video prompts
+# Drop outputs into public/assets/system-objects/home-hero.png (+ .webm / .mp4)
+
+## Image (Grok Imagine, 1:1, 2048px)
+
+Use case: stylized-concept
+Asset type: modular system-object illustration for a product-design leader homepage hero on raghvendrasingh.com
+
+Primary request: Create an original isometric visual metaphor for “intelligent products held together by systems and alignment.” Communicate that two product surfaces only become useful when a single decision node joins them. The focal action is “assemble”: separate modules come into register around one consequential orange cube.
+
+Scene/backdrop: isolated object with generous negative space on a flat cool mist ground #EBEDE3. No environment, no floor grid, no drop shadow beyond a minimal contact shade.
+
+Subject construction: one dominant assembly, 30-degree isometric. Two bone-white stacked module pairs (larger base with a small graphite port, smaller cube on top), a thin graphite bridge between them, and a single signal-orange cube #ED642F sitting on the bridge as the only saturated element. Three to four parts total. 45–55% canvas occupation. Same family as a quiet architectural hardware model, not a city of objects.
+
+Style/medium: precise editorial isometric illustration; architectural linework; warm tactile materiality; bone-white outer shells #FFFAF0; graphite interiors #292C29; fine dark ink outlines #171916; subtly softened edges; restrained uniform screen-print grain; no glossy plastic.
+
+Composition/framing: centered three-quarter isometric object, strong silhouette, no cropping of the primary structure, readable at 160px and at 800px. Square 1:1, 2048px.
+
+Color palette only: mist #EBEDE3, paper #F4EEDF (optional inner plane), bone #FFFAF0, ink #171916, graphite #292C29, signal orange #ED642F. Orange only on the one decision cube. No other accent.
+
+Constraints: original composition; no text; no letters; no logos; no watermark; no people; no UI chrome; no cables; no extra satellites.
+
+Avoid: photorealism, glassmorphism, neon, metallic chrome, clay render, cartoon, cyberpunk, cinematic camera, random gradients, stock 3D icons.
+
+## Video (upload chosen still, image-to-video)
+
+Animate the supplied isometric system-object without redesigning it. Preserve exact geometry, palette, framing, line weight, texture, and resting composition.
+
+Motion meaning: ASSEMBLE. The two bone module stacks start slightly apart and 8px lower, then rise into place; the graphite bridge slides in from the left; the orange cube scales once to 1.12× as it seats on the bridge, then returns to 1.0×. Structural travel 6–10px. Stagger 60–90ms. Duration 6–8 seconds. Restrained enter easing, no bounce.
+
+The first frame and the final frame must be visually identical to the supplied still (rest pose) so the clip can play once and freeze.
+
+Constraints: no camera move; no orbit; no object spin; no elastic bounce; no glow; no particles; no morphing; no perpetual loop; no text; no new colors.
+
+Output: 1:1, 8 seconds, 24fps, no audio. Export home-hero.webm and home-hero.mp4 beside home-hero.png.
