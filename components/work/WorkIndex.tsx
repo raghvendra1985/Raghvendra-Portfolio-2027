@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { animateSection } from "@/animations/sections";
 import { useExperience } from "@/components/providers/ExperienceProvider";
@@ -17,6 +18,13 @@ import {
   type CaseStudy,
   type ContributionGroup,
 } from "@/case-studies";
+
+const groupObjectSrc: Record<Exclude<ContributionGroup, "archive">, string> = {
+  "product-direction": "/assets/work/groups/product-direction.png",
+  "complex-systems": "/assets/work/groups/complex-systems.png",
+  "ai-founder": "/assets/work/groups/ai-founder.png",
+  "enterprise-leadership": "/assets/work/groups/enterprise-leadership.png",
+};
 
 function evidenceCta(study: CaseStudy) {
   if (study.tier === "flagship") return "Read case study →";
@@ -331,9 +339,20 @@ export default function WorkIndex() {
               aria-labelledby={`heading-${id}`}
               data-reveal-item
             >
-              <h2 id={`heading-${id}`} className="font-section-label text-navy">
-                {label}
-              </h2>
+              <div className="flex items-center gap-5">
+                <Image
+                  src={groupObjectSrc[id]}
+                  alt=""
+                  width={640}
+                  height={640}
+                  sizes="160px"
+                  className="size-[7.5rem] shrink-0 sm:size-40"
+                  aria-hidden="true"
+                />
+                <h2 id={`heading-${id}`} className="font-section-label text-navy">
+                  {label}
+                </h2>
+              </div>
 
               {full.length ? (
                 <ul className="mt-8 grid gap-10 md:grid-cols-2">

@@ -1,0 +1,14 @@
+Use case: stylized-concept
+Asset type: editorial website illustration for “[ARTICLE OR SECTION]”
+
+Primary request: Create an abstract editorial metaphor for “[IDEA]” using one clear visual relationship: “[RELATIONSHIP OR CHANGE]”.
+
+Style/medium: modern geometric editorial illustration made from large circles, rectangles, arcs, grids, cropped planes, and fine structural lines. Layered translucency suggests product and organisational layers. Warm print-like texture with subtle uniform grain. Precise but human, optimistic without becoming playful.
+
+Composition/framing: wide website composition with strong negative space and one dominant metaphor. Allow selected forms to crop beyond the frame. Maintain a clear text-safe area when requested: “[TEXT-SAFE AREA OR NONE]”.
+
+Color palette: warm paper #F4EEDF and bone #FFFAF0; near-black #171916; signal orange #ED642F as the primary emphasis. Select only one or two supporting colors from coral #EE776B, gold #EFB43E, petrol #103F4D, blue #4059DB, or mist #C7D5CF.
+
+Constraints: one metaphor; large readable shapes; accessible contrast; no embedded text; no logos; no watermark; no realistic people; no gratuitous 3D.
+
+Avoid: glassmorphism, random gradients, childish flat-vector style, corporate stock illustration, excessive characters, decorative patterns unrelated to the idea, photorealism, neon colors.

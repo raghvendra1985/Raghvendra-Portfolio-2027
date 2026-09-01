@@ -1,0 +1,14 @@
+Use case: logo-brand
+Asset type: website icon for “[SECTION OR ACTION]”
+
+Primary request: Design one original fine-line symbol communicating “[MEANING]”. Reduce the concept to no more than three visual elements.
+
+Style/medium: crisp vector-like monoline icon on a 24 × 24 grid; 1px-equivalent stroke; no solid fills; square terminals for structural geometry; controlled round joins and curves for human gestures; precise, quiet, intelligent.
+
+Composition: optically centered with a two-unit clear zone; strong silhouette and balanced negative space; legible at 20–24px.
+
+Color palette: near-black #171916 linework on transparent or warm-paper background. One optional small signal-orange #ED642F node marking the decision, connection, or point of control.
+
+Constraints: consistent stroke weight; no perspective; no container; no shadow; no text; no decorative detail; must also work in monochrome.
+
+Avoid: thick strokes, filled glyphs, emoji, clip art, rounded app-button containers, glassmorphism, glow, gradients, generic icon-pack appearance.

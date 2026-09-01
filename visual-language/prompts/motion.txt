@@ -1,0 +1,5 @@
+Animate the supplied icon or system object without redesigning it. Preserve the exact geometry, palette, framing, line weight, texture, and resting composition.
+
+Motion meaning: “[ASSEMBLE / CONNECT / REVEAL / ALIGN / RESOLVE]”. Animate only the relationship that explains this meaning. Structural layers may translate by 6–10px; connected components may stagger by 60–90ms; the active orange node may scale once to a maximum of 1.15×. Use restrained ease-out timing over 560–800ms, then return cleanly to the original resting state.
+
+Constraints: no camera movement; no object rotation unless structurally necessary; no elastic bounce; no continuous glow; no particles; no morphing that damages recognition; no perpetual decorative loop. The first and final frames must be visually identical for seamless implementation. Provide a reduced-motion version with no animation.
