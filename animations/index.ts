@@ -41,6 +41,7 @@ export { animateMenuOpen, animateMenuClose, menuOriginFromToggle } from "./menu"
 export type { MenuOrigin } from "./menu";
 export { animateSystem } from "./system";
 export type { SystemOptions } from "./system";
+export { animateSystemObject } from "./systemObject";
 export {
   animateConciergePanel,
   animateConciergeResults,

@@ -10,6 +10,7 @@ import ExperimentCard from "@/components/system/ExperimentCard";
 import DecisionLog from "@/components/system/DecisionLog";
 import Roadmap from "@/components/system/Roadmap";
 import { osModules, type FounderOs } from "@/founder-os";
+import { systemMarks } from "@/visual-language/marks";
 
 export default function SystemView({ data }: { data: FounderOs }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -54,6 +55,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="01"
           title="Dashboard"
           current={current.id === "dashboard"}
+          mark={systemMarks.dashboard}
         >
           <p className="max-w-xl text-base leading-relaxed text-ink-soft" data-os-item>
             Ways into the operating system. Not widgets — a table of contents for how the practice runs.
@@ -91,6 +93,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="03"
           title="Method to evidence"
           current={current.id === "practice"}
+          mark={systemMarks.practice}
         >
           <p className="max-w-xl text-base leading-relaxed text-ink-soft" data-os-item>
             The same contribution groups as Work. Method first — then one or two published examples.
@@ -190,6 +193,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="06"
           title="Decision Log"
           current={current.id === "decisions"}
+          mark={systemMarks.decisions}
         >
           <p className="mb-8 max-w-xl text-base leading-relaxed text-ink-soft" data-os-item>
             Process and trade-offs. No invented results — only what the work taught.
@@ -202,6 +206,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="07"
           title="Experiments"
           current={current.id === "experiments"}
+          mark={systemMarks.experiments}
         >
           {data.experiments.map((item) => (
             <ExperimentCard key={item.id} item={item} />

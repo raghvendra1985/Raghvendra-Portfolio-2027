@@ -7,7 +7,9 @@ import { animateKnowledgeIndex } from "@/animations/knowledge";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import ImageReveal from "@/components/reveal/ImageReveal";
 import MagneticButton from "@/components/buttons/MagneticButton";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import { track } from "@/lib/analytics";
+import { noteFormatMarks } from "@/visual-language/marks";
 import {
   formatNoteMeta,
   noteFormatLabels,
@@ -62,7 +64,13 @@ function FormatShelf({
 
   return (
     <section aria-labelledby={headingId} className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-      <h2 id={headingId} className="font-mono-label text-ink-soft" data-knowledge-item>
+      <h2 id={headingId} className="flex items-center gap-4 font-mono-label text-ink-soft" data-knowledge-item>
+        <SystemObjectMark
+          src={noteFormatMarks[format].src}
+          motion={noteFormatMarks[format].motion}
+          surface={noteFormatMarks[format].surface}
+          size="sm"
+        />
         {noteFormatLabels[format]}
       </h2>
       <div className="mt-2">

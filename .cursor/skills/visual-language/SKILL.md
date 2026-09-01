@@ -25,7 +25,9 @@ Do not invent a second illustration style. Do not mix all secondary narrative co
 | Pixel-mark | `pixel-mark.txt` | Compact 3×3 or 4×4 section markers. |
 | Motion | `motion.txt` | Animate a supplied still without redesigning it. |
 
-Work currently ships only system-objects, as chapter marks beside contribution-group headings. Do not generate the other families unless asked. Do not add page-local motion on `/work` beyond `animateSection` / `animateWorkCard`. Honor `prefers-reduced-motion`.
+Work currently ships quieter system-objects as chapter marks beside contribution-group headings. Homepage, System, Notes, and Studio also use the same family. Motion lives in `animations/systemObject.ts` — one-shot 700ms translate/scale, replay on hover, still under `prefers-reduced-motion`. Marks sit on mist `#EBEDE3` or paper `#F5F4F0` so the field matches the section behind them.
+
+Do not generate crowded satellite farms. Prefer three to four parts and 45–55% canvas occupation.
 
 ## Illustration palette
 
@@ -39,16 +41,16 @@ Optional secondary (pick at most one, or two for editorial only): coral `#EE776B
 
 ## Work group objects
 
-Four filled subjects. Paper background. One orange node. 1:1 raster.
+Four filled subjects. Mist `#EBEDE3` background. One orange node. 1:1 raster. Quiet geometry.
 
 | Group id | File | Metaphor |
 |---|---|---|
-| `product-direction` | `product-direction.png` | Competing planes collapse toward one orange decision node. |
-| `complex-systems` | `complex-systems.png` | Independent modules organise around one shared orange core. |
-| `ai-founder` | `ai-founder.png` | A compact built module tests and connects to a larger stacked practice. |
-| `enterprise-leadership` | `enterprise-leadership.png` | Separate platforms bridge to one accountable orange governance layer. |
+| `product-direction` | `product-direction.png` | Two planes meet at one orange decision node. |
+| `complex-systems` | `complex-systems.png` | Two modules on a rail around one orange core. |
+| `ai-founder` | `ai-founder.png` | A compact orange module connecting to a short stack. |
+| `enterprise-leadership` | `enterprise-leadership.png` | Two platforms bridged by one orange governance node. |
 
-On `/work`, place the object (~120–160px square, no card chrome) beside the group `font-section-label`. Keep hash ids. Do not replace case-study covers, Featured rows, Archive, or GroupNav.
+On `/work`, place the object (~80–96px square, no card chrome) beside the group `font-section-label`. Keep hash ids. Do not replace case-study covers, Featured rows, Archive, or GroupNav.
 
 ## Do not
 

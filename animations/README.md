@@ -20,6 +20,7 @@ All tweens use `transform`, `opacity`, or `filter`. Durations and easing come fr
 | Knowledge | `knowledge.ts` | Index row stagger. Article block reveals. |
 | Case study / selected work | `caseStudy.ts` | Sticky visual, crossfade, keyboard index, chapter reveals. |
 | Founder OS | `system.ts` | Sticky chapter index, module reveals. Reduced motion skips pin. |
+| System-objects | `systemObject.ts` | One-shot 700ms translate/scale on marks. Replay on hover. Reduced motion is still. |
 | Navigation | `navigation.ts` | Transparent → blur → compact → hide on down → reveal on up. |
 | Concierge | `concierge.ts` | Panel, results, mode, Ask trigger enter/hover. |
 | Forms | `forms.ts` | Contact field stagger. |

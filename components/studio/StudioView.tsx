@@ -7,9 +7,11 @@ import SectionReveal from "@/components/reveal/SectionReveal";
 import ImageReveal from "@/components/reveal/ImageReveal";
 import LibraryLane from "@/components/studio/LibraryLane";
 import StudioHover from "@/components/studio/StudioHover";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import { animateHero } from "@/animations/hero";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { companionPhotos, studioPage } from "@/studio";
+import { studioMark } from "@/visual-language/marks";
 
 const tileReveal = { stagger: 0.045, translate: 24 };
 
@@ -98,9 +100,17 @@ function StudioHero() {
       className="mx-auto grid max-w-[1440px] items-end gap-10 px-[var(--page-pad)] pb-14 pt-32 sm:pt-40 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12"
     >
       <div>
-        <p data-hero-copy className="font-mono-label text-gold">
-          Studio
-        </p>
+        <div data-hero-copy className="flex items-center gap-4">
+          <SystemObjectMark
+            src={studioMark.src}
+            motion={studioMark.motion}
+            surface={studioMark.surface}
+            size="sm"
+          />
+          <p className="font-mono-label text-gold">
+            Studio
+          </p>
+        </div>
         <h1 data-hero-headline className="mt-3.5 max-w-[32rem] type-h1 text-navy">
           {studioPage.heroTitle}
         </h1>
