@@ -8,19 +8,20 @@ All tweens use `transform`, `opacity`, or `filter`. Durations and easing come fr
 
 | Module | Entry | Notes |
 | --- | --- | --- |
-| Tokens + GSAP | `motion.ts` | `DURATION`, `EASE`, `getMotionConfig()`, `createScope()` |
-| Hero | `hero.ts` | SplitType line masks. `drift: false` for secondary PageHero. |
-| Sections | `sections.ts` | Fade, mask, blur, translate, scale. Image: blur → scale → sharp. |
-| Parallax / ambient / progress | `parallax.ts` | Mobile uses `parallaxScale` 0.35. Reduced motion is 0. |
+| Tokens + GSAP | `motion.ts` | Spec durations/easings, `getMotionConfig()`, `createScope()` |
+| Hero | `hero.ts` | Copy → CTA +100ms → system-object last. `drift: false` for secondary PageHero. |
+| Sections | `sections.ts` | 20px / 700ms enter. Image: blur → scale → sharp. |
+| Parallax / ambient / progress | `parallax.ts` | Atmosphere 8–16px / ~14s. Pause when the tab is hidden. |
 | Cursor | `cursor.ts` | Labels: View, Open, Next, Play, Live, Ask. Off on touch and reduced motion. |
-| Buttons | `buttons.ts` | Magnetic pull, arrow `x`, fill via `scaleX`, hover scale. |
+| Buttons | `buttons.ts` | 1px hover lift, press `.985`, arrow 4px, gold fill. Segmented thumb. |
 | Page transition | `pageTransition.ts` | Overlay fade/scale/blur. Shared image morph uses `x/y/scale`. |
 | Footer | `footer.ts` | Wordmark from below, link stagger, status opacity pulse. |
 | Loader | `loader.ts` | 900ms. First visit only. Phases: wordmark → nav → hero → ready. |
 | Knowledge | `knowledge.ts` | Index row stagger. Article block reveals. |
 | Case study / selected work | `caseStudy.ts` | Sticky visual, crossfade, keyboard index, chapter reveals. |
 | Founder OS | `system.ts` | Sticky chapter index, module reveals. Reduced motion skips pin. |
-| System-objects | `systemObject.ts` | Scroll-scrubbed parallel motion by meaning (assemble/connect/reveal/align/resolve). Hover settle 700ms. Reduced motion is still. |
+| System-objects | `systemObject.ts` | Scroll-scrub + hover/focus/tap. Max 10px, signal scale ≤1.15. No loop. |
+| Product stories | `productStory.ts` | Screening, Drafting, Briefing on product marketing previews. |
 | Navigation | `navigation.ts` | Transparent → blur → compact → hide on down → reveal on up. |
 | Concierge | `concierge.ts` | Panel, results, mode, Ask trigger enter/hover. |
 | Forms | `forms.ts` | Contact field stagger. |

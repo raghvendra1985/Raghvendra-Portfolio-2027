@@ -1,6 +1,6 @@
 "use client";
 
-import { EASE, createScope, gsap, type MotionConfig } from "./motion";
+import { DURATION, EASE_ENTER, createScope, gsap, type MotionConfig } from "./motion";
 
 function fromVars(meaning: string): gsap.TweenVars {
   switch (meaning) {
@@ -13,17 +13,15 @@ function fromVars(meaning: string): gsap.TweenVars {
     case "align":
       return { x: 8, y: 0 };
     case "resolve":
-      return { y: 6, scale: 1.1 };
+      return { y: 6, scale: 1.12 };
     default:
       return { y: 8 };
   }
 }
 
 /**
- * Scroll-linked motion for system-object marks.
- * Each meaning travels a different axis in parallel with vertical scroll
- * (6–10px / ≤1.10 scale), then rests. Hover replays a 700ms settle.
- * Reduced motion is still.
+ * System-object motion by meaning. Max travel 10px, signal scale ≤1.15.
+ * Plays on scroll reveal, hover, focus, or tap. Does not loop.
  */
 export function animateSystemObject(root: HTMLElement, config: MotionConfig) {
   return createScope(root, () => {
@@ -35,7 +33,14 @@ export function animateSystemObject(root: HTMLElement, config: MotionConfig) {
       return;
     }
 
-    const scrub = gsap.fromTo(root, from, {
+    const travel = config.isMobile ? 2 / 3 : 1;
+    const scaledFrom: gsap.TweenVars = {
+      ...from,
+      ...(typeof from.x === "number" ? { x: from.x * travel } : {}),
+      ...(typeof from.y === "number" ? { y: from.y * travel } : {}),
+    };
+
+    const scrub = gsap.fromTo(root, scaledFrom, {
       x: 0,
       y: 0,
       scale: 1,
@@ -51,24 +56,27 @@ export function animateSystemObject(root: HTMLElement, config: MotionConfig) {
     const play = () => {
       gsap.fromTo(
         root,
-        from,
+        scaledFrom,
         {
           x: 0,
           y: 0,
           scale: 1,
-          duration: 0.7,
-          ease: EASE,
+          duration: DURATION.reveal,
+          ease: EASE_ENTER,
           overwrite: "auto",
         },
       );
     };
 
-    const onEnter = () => play();
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (canHover) root.addEventListener("pointerenter", onEnter);
+    if (canHover) root.addEventListener("pointerenter", play);
+    root.addEventListener("focusin", play);
+    root.addEventListener("pointerdown", play);
 
     return () => {
-      if (canHover) root.removeEventListener("pointerenter", onEnter);
+      if (canHover) root.removeEventListener("pointerenter", play);
+      root.removeEventListener("focusin", play);
+      root.removeEventListener("pointerdown", play);
       scrub.kill();
     };
   });

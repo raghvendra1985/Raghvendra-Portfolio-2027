@@ -5,6 +5,9 @@ import ProductCta from "@/components/products/ProductCta";
 import ProductStatusMark from "@/components/products/ProductStatusMark";
 import ProductViewTracker from "@/components/products/ProductViewTracker";
 import DesignIqDemo from "@/components/products/DesignIqDemo";
+import ScreeningPreview from "@/components/products/stories/ScreeningPreview";
+import DraftingPreview from "@/components/products/stories/DraftingPreview";
+import BriefingPreview from "@/components/products/stories/BriefingPreview";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import { TrackedLink } from "@/components/analytics/TrackedCta";
 import { isPurchasable } from "@/products/commerce";
@@ -200,6 +203,29 @@ export default function ProductView({ product }: { product: Product }) {
 }
 
 function ProductDemoSlot({ product, note }: { product: Product; note?: string }) {
+  const story =
+    product.slug === "jury-me" ? (
+      <ScreeningPreview variant="jury" />
+    ) : product.slug === "portfolio-roast" ? (
+      <ScreeningPreview variant="roast" />
+    ) : product.slug === "brief-me" ? (
+      <div className="space-y-10">
+        <DraftingPreview />
+        <BriefingPreview />
+      </div>
+    ) : null;
+
+  if (story) {
+    return (
+      <figure>
+        {story}
+        {note ? (
+          <figcaption className="mt-4 max-w-xl text-sm leading-relaxed text-mist/60">{note}</figcaption>
+        ) : null}
+      </figure>
+    );
+  }
+
   return (
     <figure>
       {product.cover ? (

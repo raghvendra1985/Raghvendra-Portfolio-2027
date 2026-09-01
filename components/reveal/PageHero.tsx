@@ -47,11 +47,13 @@ export default function PageHero({
       ref={rootRef}
       className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-16 pt-32 sm:pt-40"
     >
-      <div data-hero-copy className="flex items-center gap-4">
+      <div className="flex items-center gap-4">
         {mark ? (
-          <SystemObjectMark src={mark.src} motion={mark.motion} surface={mark.surface} />
+          <span data-hero-visual>
+            <SystemObjectMark src={mark.src} motion={mark.motion} surface={mark.surface} />
+          </span>
         ) : null}
-        <p className="font-mono-label text-ink-soft">
+        <p data-hero-copy className="font-mono-label text-ink-soft">
           {index} / {label}
         </p>
       </div>

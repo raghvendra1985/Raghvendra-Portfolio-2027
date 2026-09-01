@@ -1,6 +1,6 @@
 "use client";
 
-import { DURATION, createScope, gsap, type MotionConfig } from "./motion";
+import { DURATION, EASE_DRIFT, createScope, gsap, type MotionConfig } from "./motion";
 
 export type ParallaxOptions = {
   /** Base travel in px at speed 1. */
@@ -52,29 +52,42 @@ export function animateAmbient(root: HTMLElement, config: MotionConfig) {
     if (config.reducedMotion || config.isMobile) return;
     const lights = root.querySelectorAll("[data-ambient-light]");
     const breath = root.querySelectorAll("[data-ambient-breath]");
+    const tweens: gsap.core.Tween[] = [];
 
     lights.forEach((light, i) => {
-      gsap.to(light, {
-        y: (i % 2 === 0 ? 18 : -14) * config.parallaxScale,
-        x: (i % 2 === 0 ? -12 : 16) * config.parallaxScale,
-        opacity: 0.18,
-        duration: DURATION.xl + i * 0.4,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut",
-      });
+      tweens.push(
+        gsap.to(light, {
+          y: (i % 2 === 0 ? 12 : -8) * config.parallaxScale,
+          x: (i % 2 === 0 ? -10 : 12) * config.parallaxScale,
+          opacity: 0.18,
+          duration: DURATION.atmosphere + i * 0.8,
+          yoyo: true,
+          repeat: -1,
+          ease: EASE_DRIFT,
+        }),
+      );
     });
 
     breath.forEach((node) => {
-      gsap.to(node, {
-        scale: 1.03,
-        opacity: 0.7,
-        duration: DURATION.xl,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut",
-      });
+      tweens.push(
+        gsap.to(node, {
+          scale: 1.03,
+          opacity: 0.7,
+          duration: DURATION.atmosphere,
+          yoyo: true,
+          repeat: -1,
+          ease: EASE_DRIFT,
+        }),
+      );
     });
+
+    const sync = () => {
+      if (document.hidden) tweens.forEach((tween) => tween.pause());
+      else tweens.forEach((tween) => tween.play());
+    };
+    document.addEventListener("visibilitychange", sync);
+
+    return () => document.removeEventListener("visibilitychange", sync);
   });
 }
 

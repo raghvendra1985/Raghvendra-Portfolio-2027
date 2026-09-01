@@ -12,6 +12,7 @@ import {
 } from "@/studio";
 import LibraryMobileStack from "./LibraryMobileStack";
 import LibraryObject from "./LibraryObject";
+import SegmentedToolbar from "@/components/ui/SegmentedToolbar";
 
 function orderResources(resources: StudioResource[]) {
   const books = resources.filter((item) => item.shelf === "Book");
@@ -102,30 +103,32 @@ export default function LibraryShelf({ resources }: { resources: StudioResource[
 
   return (
     <>
-      <div className="mt-10 flex flex-wrap gap-2" role="toolbar" aria-label="Filter library by topic">
-        {studioTopics.map((topic) => {
-          const pressed = filter === topic;
-          return (
-            <button
-              key={topic}
-              type="button"
-              aria-pressed={pressed}
-              onClick={() => {
-                setFilter(topic);
-                setSelectedKey(null);
-                setHoveredKey(null);
-                setFocusIndex(0);
-              }}
-              className={`min-h-11 border px-4 py-2 font-mono-label ${
-                pressed
-                  ? "border-navy bg-navy text-mist"
-                  : "border-line text-ink-soft hover:border-navy hover:text-navy"
-              }`}
-            >
-              {topic}
-            </button>
-          );
-        })}
+      <div className="mt-10">
+        <SegmentedToolbar label="Filter library by topic">
+          {studioTopics.map((topic) => {
+            const pressed = filter === topic;
+            return (
+              <button
+                key={topic}
+                type="button"
+                aria-pressed={pressed}
+                onClick={() => {
+                  setFilter(topic);
+                  setSelectedKey(null);
+                  setHoveredKey(null);
+                  setFocusIndex(0);
+                }}
+                className={`relative z-10 min-h-11 border px-4 py-2 font-mono-label ${
+                  pressed
+                    ? "border-navy bg-transparent text-mist"
+                    : "border-line text-ink-soft hover:border-navy hover:text-navy"
+                }`}
+              >
+                {topic}
+              </button>
+            );
+          })}
+        </SegmentedToolbar>
       </div>
 
       <div className="mt-10 lg:hidden">

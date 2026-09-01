@@ -4,6 +4,12 @@ export {
   EASE_IN,
   EASE_IN_OUT,
   EASE_PHYSICAL,
+  EASE_STANDARD,
+  EASE_ENTER,
+  EASE_EXIT,
+  EASE_MOVE,
+  EASE_REVEAL,
+  EASE_DRIFT,
   registerMotion,
   prefersReducedMotion,
   isTouchDevice,
@@ -24,7 +30,7 @@ export { animateSection, animateImageReveal } from "./sections";
 export { animateParallax, animateAmbient, animateProgress } from "./parallax";
 export { animateCursor } from "./cursor";
 export type { CursorLabel, CursorOptions } from "./cursor";
-export { animateMagneticButton } from "./buttons";
+export { animateMagneticButton, animateSegmentedIndicator } from "./buttons";
 export { playPageExit, playPageEnter, morphSharedImage } from "./pageTransition";
 export { animateFooter } from "./footer";
 export { animateLoader, hasVisited, markVisited, LOADER_DURATION_MS } from "./loader";
@@ -56,3 +62,4 @@ export { animateStudioCard } from "./studio";
 export type { StudioCardOptions } from "./studio";
 export { animateAboutPolaroid, animateAboutStat } from "./about";
 export { animateWorkCard, animateWorkTicker } from "./work";
+export { animateScreening, animateDrafting, animateBriefing } from "./productStory";

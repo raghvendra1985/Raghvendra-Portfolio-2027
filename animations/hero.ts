@@ -3,7 +3,9 @@
 import SplitType from "split-type";
 import {
   DURATION,
-  EASE,
+  EASE_DRIFT,
+  EASE_ENTER,
+  EASE_REVEAL,
   createScope,
   gsap,
   motionBlur,
@@ -25,16 +27,15 @@ export type HeroOptions = {
 const defaults: Required<HeroOptions> = {
   delay: 0,
   lineStagger: 0.08,
-  copyDuration: DURATION.md,
+  copyDuration: 0.76,
   ctaStagger: 0.08,
-  mouseStrength: 18,
+  mouseStrength: 14,
   drift: true,
 };
 
 /**
- * Hero reveal: SplitType line masks, paragraph fade, CTA stagger,
- * then a low-amplitude mouse drift on background planes.
- * Waits for document.fonts.ready so line breaks match live type.
+ * Hero sequence: copy rises, CTA follows 100ms later, system-object last,
+ * then low-amplitude atmosphere drift. Reduced motion shows the final state.
  */
 export async function animateHero(
   root: HTMLElement,
@@ -54,13 +55,15 @@ export async function animateHero(
     const headline = root.querySelector<HTMLElement>("[data-hero-headline]");
     const copy = root.querySelectorAll("[data-hero-copy]");
     const ctas = root.querySelectorAll("[data-hero-cta]");
+    const visual = root.querySelectorAll("[data-hero-visual]");
     const drift = root.querySelectorAll("[data-hero-drift]");
 
     if (config.reducedMotion || prefersReducedMotion()) {
-      gsap.set([headline, copy, ctas, drift], {
+      gsap.set([headline, copy, ctas, visual, drift], {
         autoAlpha: 1,
         y: 0,
         yPercent: 0,
+        scale: 1,
         filter: "none",
       });
       return;
@@ -81,17 +84,13 @@ export async function animateHero(
       if (split?.lines?.length) {
         gsap.set(split.lines, { yPercent: 0, y: 0, autoAlpha: 1 });
       }
-      if (copy.length) {
-        gsap.set(copy, { autoAlpha: 1, y: 0, filter: "none" });
-      }
-      if (ctas.length) {
-        gsap.set(ctas, { autoAlpha: 1, y: 0, scale: 1 });
-      }
+      if (copy.length) gsap.set(copy, { autoAlpha: 1, y: 0, filter: "none" });
+      if (ctas.length) gsap.set(ctas, { autoAlpha: 1, y: 0, scale: 1 });
+      if (visual.length) gsap.set(visual, { autoAlpha: 1, y: 0, scale: 1 });
     };
 
-    const failsafe = window.setTimeout(revealNow, 1400);
-
-    const tl = gsap.timeline({ delay: opts.delay, defaults: { ease: EASE } });
+    const failsafe = window.setTimeout(revealNow, 1600);
+    const tl = gsap.timeline({ delay: opts.delay, defaults: { ease: EASE_ENTER } });
 
     if (split?.lines?.length) {
       tl.fromTo(
@@ -99,7 +98,7 @@ export async function animateHero(
         { yPercent: 110, autoAlpha: 1 },
         {
           yPercent: 0,
-          duration: DURATION.lg,
+          duration: DURATION.reveal,
           stagger: opts.lineStagger,
           force3D: true,
         },
@@ -118,27 +117,42 @@ export async function animateHero(
           duration: opts.copyDuration,
           stagger: 0.06,
         },
-        0.28,
+        0.12,
       );
     }
 
     if (ctas.length) {
       tl.fromTo(
         ctas,
-        { autoAlpha: 0, y: 12, scale: 0.98 },
+        { autoAlpha: 0, y: 12, scale: 0.985 },
         {
           autoAlpha: 1,
           y: 0,
           scale: 1,
-          duration: DURATION.md,
+          duration: DURATION.panel,
           stagger: opts.ctaStagger,
         },
-        0.42,
+        0.22,
+      );
+    }
+
+    if (visual.length) {
+      tl.fromTo(
+        visual,
+        { autoAlpha: 0, y: 24, scale: 0.985 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: EASE_REVEAL,
+        },
+        0.36,
       );
     }
 
     if (opts.drift && !config.isMobile && drift.length) {
-      const strength = opts.mouseStrength * config.parallaxScale;
+      const strength = Math.min(16, opts.mouseStrength * config.parallaxScale);
       const onMove = (event: MouseEvent) => {
         const rect = root.getBoundingClientRect();
         const nx = (event.clientX - rect.left) / rect.width - 0.5;
@@ -146,8 +160,8 @@ export async function animateHero(
         gsap.to(drift, {
           x: nx * strength,
           y: ny * strength,
-          duration: DURATION.lg,
-          ease: EASE,
+          duration: DURATION.atmosphere,
+          ease: EASE_DRIFT,
           overwrite: "auto",
         });
       };

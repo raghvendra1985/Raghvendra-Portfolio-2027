@@ -25,7 +25,7 @@ Do not invent a second illustration style. Do not mix all secondary narrative co
 | Pixel-mark | `pixel-mark.txt` | Compact 3×3 or 4×4 section markers. |
 | Motion | `motion.txt` | Animate a supplied still without redesigning it. |
 
-Work, Home, System, Notes, About, Products, Contact, and Studio all use this family. Motion lives in `animations/systemObject.ts` — vertical-scroll scrub, a different axis per meaning (assemble / connect / reveal / align / resolve), hover settle, still under `prefers-reduced-motion`. Marks sit on mist `#EBEDE3`, paper `#F5F4F0`, or navy `#0B1849`.
+Work, Home, System, Notes, About, Products, Contact, and Studio all use this family. Motion lives in `animations/systemObject.ts` — assemble / connect / reveal / align / resolve on reveal, hover, focus, or tap. Max travel 10px, signal-node scale ≤1.15. No continuous loop. Reduced motion is the resting PNG. Marks sit on mist `#EBEDE3`, paper `#F5F4F0`, or navy `#0B1849`.
 
 The design-ops catalog at `/icon-library/system-object-library.html` (also `npm run library` on port 4173) includes a motion studio that runs all five meanings in parallel on one vertical scroll, plus per-mark scrub as the catalog grid passes.
 

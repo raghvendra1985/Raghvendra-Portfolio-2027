@@ -70,14 +70,16 @@ export default function ArticleView({
         <Link href="/knowledge" className="font-mono-label text-ink-soft">
           ← Notes
         </Link>
-        <div data-hero-copy className="mt-8 flex items-center gap-4">
-          <SystemObjectMark
-            src={noteFormatMarks[article.format].src}
-            motion={noteFormatMarks[article.format].motion}
-            surface={noteFormatMarks[article.format].surface}
-            size="sm"
-          />
-          <p className="font-mono-label text-gold">
+        <div className="mt-8 flex items-center gap-4">
+          <span data-hero-visual>
+            <SystemObjectMark
+              src={noteFormatMarks[article.format].src}
+              motion={noteFormatMarks[article.format].motion}
+              surface={noteFormatMarks[article.format].surface}
+              size="sm"
+            />
+          </span>
+          <p data-hero-copy className="font-mono-label text-gold">
             {formatNoteMeta(article)}
           </p>
         </div>

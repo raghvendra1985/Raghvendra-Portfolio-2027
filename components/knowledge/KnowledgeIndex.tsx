@@ -126,13 +126,15 @@ export default function KnowledgeIndex({
   return (
     <div ref={rootRef}>
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-16 pt-32 sm:pt-40">
-        <div data-hero-copy className="flex items-center gap-4">
-          <SystemObjectMark
-            src={pageMarks.notes.src}
-            motion={pageMarks.notes.motion}
-            surface={pageMarks.notes.surface}
-          />
-          <p className="font-mono-label text-ink-soft">
+        <div className="flex items-center gap-4">
+          <span data-hero-visual>
+            <SystemObjectMark
+              src={pageMarks.notes.src}
+              motion={pageMarks.notes.motion}
+              surface={pageMarks.notes.surface}
+            />
+          </span>
+          <p data-hero-copy className="font-mono-label text-ink-soft">
             04 / Notes
           </p>
         </div>

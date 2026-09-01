@@ -100,14 +100,16 @@ function StudioHero() {
       className="mx-auto grid max-w-[1440px] items-end gap-10 px-[var(--page-pad)] pb-14 pt-32 sm:pt-40 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12"
     >
       <div>
-        <div data-hero-copy className="flex items-center gap-4">
-          <SystemObjectMark
-            src={studioMark.src}
-            motion={studioMark.motion}
-            surface={studioMark.surface}
-            size="sm"
-          />
-          <p className="font-mono-label text-gold">
+        <div className="flex items-center gap-4">
+          <span data-hero-visual>
+            <SystemObjectMark
+              src={studioMark.src}
+              motion={studioMark.motion}
+              surface={studioMark.surface}
+              size="sm"
+            />
+          </span>
+          <p data-hero-copy className="font-mono-label text-gold">
             Studio
           </p>
         </div>
