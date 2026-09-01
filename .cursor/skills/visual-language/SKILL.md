@@ -25,9 +25,13 @@ Do not invent a second illustration style. Do not mix all secondary narrative co
 | Pixel-mark | `pixel-mark.txt` | Compact 3×3 or 4×4 section markers. |
 | Motion | `motion.txt` | Animate a supplied still without redesigning it. |
 
-Work currently ships quieter system-objects as chapter marks beside contribution-group headings. Homepage, System, Notes, and Studio also use the same family. Motion lives in `animations/systemObject.ts` — one-shot 700ms translate/scale, replay on hover, still under `prefers-reduced-motion`. Marks sit on mist `#EBEDE3` or paper `#F5F4F0` so the field matches the section behind them.
+Work, Home, System, Notes, About, Products, Contact, and Studio all use this family. Motion lives in `animations/systemObject.ts` — vertical-scroll scrub, a different axis per meaning (assemble / connect / reveal / align / resolve), hover settle, still under `prefers-reduced-motion`. Marks sit on mist `#EBEDE3`, paper `#F5F4F0`, or navy `#0B1849`.
+
+The design-ops catalog at `/icon-library/system-object-library.html` (also `npm run library` on port 4173) includes a motion studio that runs all five meanings in parallel on one vertical scroll, plus per-mark scrub as the catalog grid passes.
 
 Do not generate crowded satellite farms. Prefer three to four parts and 45–55% canvas occupation.
+
+Place marks beside page heroes and section labels only. Do not wire them into case-study interiors, Featured rows, Archive lists, or admin/account/purchase chrome.
 
 ## Illustration palette
 
@@ -56,5 +60,5 @@ On `/work`, place the object (~80–96px square, no card chrome) beside the grou
 
 - Restyle UI tokens or `DESIGN.md` to match this palette
 - Put the gallery in site nav
-- Wire generated objects into Homepage, System, About, or case-study interiors unless asked
+- Wire generated objects into case-study interiors unless asked
 - Use generic stock 3D, glassmorphism, neon, chrome, photorealism, or cyberpunk

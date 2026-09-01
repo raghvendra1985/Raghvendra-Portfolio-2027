@@ -10,6 +10,8 @@ import { TrackedLink } from "@/components/analytics/TrackedCta";
 import { isPurchasable } from "@/products/commerce";
 import { formatCategories, formatInr, getAdjacentProducts, productsVisitorTitle, type Product } from "@/products";
 import { getProductCopy } from "@/products/copy";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
+import { pageMarks } from "@/visual-language/marks";
 
 export default function ProductView({ product }: { product: Product }) {
   const copy = getProductCopy(product.slug);
@@ -25,9 +27,17 @@ export default function ProductView({ product }: { product: Product }) {
         >
           ← All products
         </Link>
-        <p className="mt-8 font-mono-label text-ink-soft">
-          {product.number} / {productsVisitorTitle}
-        </p>
+        <div className="mt-8 flex items-center gap-4">
+          <SystemObjectMark
+            src={pageMarks.products.src}
+            motion={pageMarks.products.motion}
+            surface={pageMarks.products.surface}
+            size="sm"
+          />
+          <p className="font-mono-label text-ink-soft">
+            {product.number} / {productsVisitorTitle}
+          </p>
+        </div>
         <div className="mt-4">
           <ProductStatusMark status={product.status} />
         </div>

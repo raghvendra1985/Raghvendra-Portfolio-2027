@@ -9,7 +9,7 @@ import ImageReveal from "@/components/reveal/ImageReveal";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import { track } from "@/lib/analytics";
-import { noteFormatMarks } from "@/visual-language/marks";
+import { noteFormatMarks, pageMarks } from "@/visual-language/marks";
 import {
   formatNoteMeta,
   noteFormatLabels,
@@ -126,9 +126,16 @@ export default function KnowledgeIndex({
   return (
     <div ref={rootRef}>
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-16 pt-32 sm:pt-40">
-        <p data-hero-copy className="font-mono-label text-ink-soft">
-          04 / Notes
-        </p>
+        <div data-hero-copy className="flex items-center gap-4">
+          <SystemObjectMark
+            src={pageMarks.notes.src}
+            motion={pageMarks.notes.motion}
+            surface={pageMarks.notes.surface}
+          />
+          <p className="font-mono-label text-ink-soft">
+            04 / Notes
+          </p>
+        </div>
         <h1 data-hero-headline className="mt-6 max-w-5xl type-h1 text-navy">
           Notes
         </h1>

@@ -1,4 +1,4 @@
-export type SystemObjectSurface = "mist" | "paper";
+export type SystemObjectSurface = "mist" | "paper" | "navy";
 export type MotionMeaning = "assemble" | "connect" | "reveal" | "align" | "resolve";
 
 export type SystemObjectMark = {
@@ -33,7 +33,55 @@ export const workGroupMarks: Record<
   },
 };
 
+export const pageMarks = {
+  home: {
+    src: "/assets/system-objects/home-hero.png",
+    surface: "mist",
+    motion: "assemble",
+  },
+  system: {
+    src: "/assets/system-objects/page-system.png",
+    surface: "mist",
+    motion: "reveal",
+  },
+  work: {
+    src: "/assets/system-objects/home-work.png",
+    surface: "mist",
+    motion: "align",
+  },
+  about: {
+    src: "/assets/system-objects/page-about.png",
+    surface: "mist",
+    motion: "reveal",
+  },
+  notes: {
+    src: "/assets/system-objects/page-notes.png",
+    surface: "mist",
+    motion: "reveal",
+  },
+  products: {
+    src: "/assets/system-objects/page-products.png",
+    surface: "mist",
+    motion: "assemble",
+  },
+  contact: {
+    src: "/assets/system-objects/page-contact.png",
+    surface: "mist",
+    motion: "connect",
+  },
+  studio: {
+    src: "/assets/system-objects/studio.png",
+    surface: "mist",
+    motion: "assemble",
+  },
+} as const satisfies Record<string, SystemObjectMark>;
+
 export const homeMarks = {
+  hero: {
+    src: "/assets/system-objects/home-hero.png",
+    surface: "mist",
+    motion: "assemble",
+  },
   impact: {
     src: "/assets/system-objects/home-impact.png",
     surface: "paper",
@@ -43,6 +91,11 @@ export const homeMarks = {
     src: "/assets/system-objects/home-work.png",
     surface: "mist",
     motion: "align",
+  },
+  approach: {
+    src: "/assets/system-objects/home-approach.png",
+    surface: "navy",
+    motion: "assemble",
   },
   principles: {
     src: "/assets/system-objects/home-principles.png",
@@ -54,6 +107,16 @@ export const homeMarks = {
     surface: "paper",
     motion: "resolve",
   },
+  about: {
+    src: "/assets/system-objects/home-about.png",
+    surface: "mist",
+    motion: "reveal",
+  },
+  close: {
+    src: "/assets/system-objects/home-close.png",
+    surface: "navy",
+    motion: "connect",
+  },
 } as const satisfies Record<string, SystemObjectMark>;
 
 export const systemMarks = {
@@ -62,10 +125,25 @@ export const systemMarks = {
     surface: "mist",
     motion: "reveal",
   },
+  focus: {
+    src: "/assets/system-objects/system-focus.png",
+    surface: "mist",
+    motion: "align",
+  },
   practice: {
     src: "/assets/system-objects/system-practice.png",
     surface: "mist",
     motion: "connect",
+  },
+  products: {
+    src: "/assets/system-objects/system-products.png",
+    surface: "mist",
+    motion: "assemble",
+  },
+  principles: {
+    src: "/assets/system-objects/system-principles.png",
+    surface: "mist",
+    motion: "align",
   },
   decisions: {
     src: "/assets/system-objects/system-decisions.png",
@@ -76,6 +154,26 @@ export const systemMarks = {
     src: "/assets/system-objects/system-experiments.png",
     surface: "mist",
     motion: "assemble",
+  },
+  knowledge: {
+    src: "/assets/system-objects/system-knowledge.png",
+    surface: "mist",
+    motion: "reveal",
+  },
+  teaching: {
+    src: "/assets/system-objects/system-teaching.png",
+    surface: "mist",
+    motion: "align",
+  },
+  roadmap: {
+    src: "/assets/system-objects/system-roadmap.png",
+    surface: "mist",
+    motion: "connect",
+  },
+  archive: {
+    src: "/assets/system-objects/system-archive.png",
+    surface: "mist",
+    motion: "resolve",
   },
 } as const satisfies Record<string, SystemObjectMark>;
 
@@ -97,8 +195,4 @@ export const noteFormatMarks = {
   },
 } as const satisfies Record<string, SystemObjectMark>;
 
-export const studioMark: SystemObjectMark = {
-  src: "/assets/system-objects/studio.png",
-  surface: "mist",
-  motion: "assemble",
-};
+export const studioMark = pageMarks.studio;

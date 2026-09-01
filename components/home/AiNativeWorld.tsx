@@ -1,5 +1,7 @@
 import SectionReveal from "@/components/reveal/SectionReveal";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import { leadershipAi } from "@/home/leadership-home";
+import { homeMarks } from "@/visual-language/marks";
 
 export default function AiNativeWorld() {
   return (
@@ -10,7 +12,14 @@ export default function AiNativeWorld() {
       <div className="mx-auto max-w-[1440px]">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
           <div data-reveal-item>
-            <p className="font-mono-label text-mist/70">{leadershipAi.eyebrow}</p>
+            <div className="flex items-center gap-4">
+              <SystemObjectMark
+                src={homeMarks.approach.src}
+                motion={homeMarks.approach.motion}
+                surface={homeMarks.approach.surface}
+              />
+              <p className="font-mono-label text-mist/70">{leadershipAi.eyebrow}</p>
+            </div>
             <h2 className="mt-4 max-w-xl type-h1 text-[clamp(1.75rem,6vw,3.5rem)]">{leadershipAi.title}</h2>
             <p className="mt-6 max-w-[42ch] type-lead text-mist/85">{leadershipAi.intro}</p>
           </div>

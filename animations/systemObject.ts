@@ -1,52 +1,67 @@
 "use client";
 
-import { DURATION, EASE, createScope, gsap, type MotionConfig } from "./motion";
+import { EASE, createScope, gsap, type MotionConfig } from "./motion";
+
+function fromVars(meaning: string): gsap.TweenVars {
+  switch (meaning) {
+    case "assemble":
+      return { y: 10, scale: 1.06 };
+    case "connect":
+      return { x: -8, y: 4 };
+    case "reveal":
+      return { y: 8, scale: 0.96 };
+    case "align":
+      return { x: 8, y: 0 };
+    case "resolve":
+      return { y: 6, scale: 1.1 };
+    default:
+      return { y: 8 };
+  }
+}
 
 /**
- * One-shot motion for system-object marks.
- * Translate 6–10px, orange-scale analogue via 1.08 max, 560–800ms ease-out,
- * then rest. First and final frames match. No loop.
+ * Scroll-linked motion for system-object marks.
+ * Each meaning travels a different axis in parallel with vertical scroll
+ * (6–10px / ≤1.10 scale), then rests. Hover replays a 700ms settle.
+ * Reduced motion is still.
  */
 export function animateSystemObject(root: HTMLElement, config: MotionConfig) {
   return createScope(root, () => {
+    const meaning = root.dataset.motionMeaning ?? "reveal";
+    const from = fromVars(meaning);
+
+    if (config.reducedMotion) {
+      gsap.set(root, { x: 0, y: 0, scale: 1 });
+      return;
+    }
+
+    const scrub = gsap.fromTo(root, from, {
+      x: 0,
+      y: 0,
+      scale: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: root,
+        start: "top 92%",
+        end: "top 58%",
+        scrub: 0.45,
+      },
+    });
+
     const play = () => {
-      if (config.reducedMotion) return;
-      const meaning = root.dataset.motionMeaning ?? "reveal";
-      const y = meaning === "assemble" ? 10 : meaning === "connect" ? 8 : 6;
       gsap.fromTo(
         root,
-        { y, scale: 1.08 },
+        from,
         {
+          x: 0,
           y: 0,
           scale: 1,
           duration: 0.7,
           ease: EASE,
-          overwrite: true,
+          overwrite: "auto",
         },
       );
     };
-
-    if (config.reducedMotion) {
-      gsap.set(root, { y: 0, scale: 1 });
-      return;
-    }
-
-    const trigger = gsap.fromTo(
-      root,
-      { y: 8, scale: 1.04 },
-      {
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        delay: DURATION.xs,
-        ease: EASE,
-        scrollTrigger: {
-          trigger: root,
-          start: "top 90%",
-          once: true,
-        },
-      },
-    );
 
     const onEnter = () => play();
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -54,7 +69,7 @@ export function animateSystemObject(root: HTMLElement, config: MotionConfig) {
 
     return () => {
       if (canHover) root.removeEventListener("pointerenter", onEnter);
-      trigger.kill();
+      scrub.kill();
     };
   });
 }

@@ -13,8 +13,10 @@
         --ink: #171916;
         --graphite: #292c29;
         --orange: #ed642f;
+        --navy: #0b1849;
       }
       * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
       body {
         margin: 0;
         background: var(--mist);
@@ -22,19 +24,10 @@
         font-family: Georgia, "Times New Roman", serif;
         line-height: 1.5;
       }
-      main {
-        max-width: 72rem;
-        margin: 0 auto;
-        padding: 4rem 1.5rem 7rem;
-      }
-      a {
-        color: var(--ink);
-      }
+      main { max-width: 72rem; margin: 0 auto; padding: 4rem 1.5rem 7rem; }
+      a { color: var(--ink); }
       a:hover { color: var(--orange); }
-      p.kicker,
-      .chip,
-      figcaption,
-      .meta {
+      p.kicker, .chip, figcaption, .meta, .lane p, .axis, .progress, .studio-note {
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
         font-size: 0.75rem;
         letter-spacing: 0.1em;
@@ -48,96 +41,111 @@
         line-height: 1.1;
         margin: 0.75rem 0 1rem;
       }
-      p.lede {
-        max-width: 40rem;
-        color: var(--graphite);
-        margin: 0 0 1.5rem;
-      }
-      .note {
-        max-width: 42rem;
-        padding: 0.9rem 1rem;
-        border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
-        font-size: 0.95rem;
-        color: var(--graphite);
-      }
-      .palette {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin: 2rem 0 3rem;
-      }
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.4rem 0.65rem;
-        background: var(--bone);
-        color: var(--ink);
-      }
-      .swatch {
-        width: 0.75rem;
-        height: 0.75rem;
-        border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
-      }
-      article {
-        display: grid;
-        gap: 1.5rem;
-        padding: 3rem 0;
-        border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
-      }
-      @media (min-width: 800px) {
-        article {
-          grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-          align-items: start;
-          gap: 2.5rem;
-        }
-      }
       h2 {
         font-size: 1.75rem;
         font-weight: 400;
         letter-spacing: -0.02em;
         margin: 0.35rem 0 0.75rem;
       }
-      .frames {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-end;
-        gap: 1.25rem;
-      }
-      figure {
-        margin: 0;
-        background: var(--mist);
-      }
-      figure img {
-        display: block;
-        background: var(--mist);
-      }
-      figure.full img { width: min(100%, 22rem); height: auto; }
-      figure.thumb img { width: 96px; height: 96px; object-fit: contain; }
-      .also {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-        gap: 1.5rem;
-        padding-top: 3rem;
-        border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
-      }
-      .also figure { text-align: center; }
-      .also img { width: 96px; height: 96px; margin: 0 auto; }
-      figcaption {
-        margin-top: 0.5rem;
+      p.lede { max-width: 42rem; color: var(--graphite); margin: 0 0 1.5rem; }
+      .note {
+        max-width: 46rem;
+        padding: 0.9rem 1rem;
+        border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+        font-size: 0.95rem;
         color: var(--graphite);
       }
-      p.slots { margin: 0 0 1rem; color: var(--graphite); font-size: 0.95rem; }
-      pre {
-        margin: 0;
-        padding: 1rem;
-        background: var(--bone);
-        color: var(--ink);
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.72rem;
-        line-height: 1.45;
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
+      .palette { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 2rem 0 3rem; }
+      .chip {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        padding: 0.4rem 0.65rem; background: var(--bone); color: var(--ink);
+      }
+      .swatch { width: 0.75rem; height: 0.75rem; border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent); }
+      .studio-track {
+        height: 280vh;
+        margin: 0 -1.5rem 4rem;
+        padding: 0 1.5rem;
+      }
+      .studio-sticky {
+        position: sticky;
+        top: 10vh;
+        padding: 1.25rem 0 1.5rem;
+        background: var(--mist);
+      }
+      .studio-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+      }
+      .progress { color: var(--orange); margin: 0; }
+      .rail {
+        height: 1px;
+        background: color-mix(in srgb, var(--ink) 14%, transparent);
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+      .rail span {
+        position: absolute;
+        top: -1px;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: var(--orange);
+      }
+      .lanes {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 1rem;
+        align-items: end;
+      }
+      @media (max-width: 800px) {
+        .lanes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .studio-track { height: 220vh; }
+        .studio-head { flex-direction: column; }
+      }
+      .lane { text-align: center; min-height: 11rem; }
+      .lane .stage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 8.5rem;
+      }
+      .lane img {
+        display: block;
+        width: 96px;
+        height: 96px;
+        transform-origin: center center;
+        will-change: transform;
+      }
+      .lane.navy .stage { background: var(--navy); }
+      .lane p { margin: 0.55rem 0 0; color: var(--ink); }
+      .axis { margin: 0.2rem 0 0; color: var(--graphite); }
+      .studio-note { color: var(--graphite); margin: 1rem 0 0; }
+      .catalog {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+        gap: 1.25rem 1rem;
+        padding: 2.5rem 0;
+        border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+      }
+      .catalog h2 { grid-column: 1 / -1; margin-top: 1.5rem; }
+      .catalog h2:first-child { margin-top: 0; }
+      figure { margin: 0; text-align: center; }
+      figure img {
+        display: block;
+        width: 96px;
+        height: 96px;
+        margin: 0 auto;
+        transform-origin: center center;
+        will-change: transform;
+      }
+      figure.navy { background: var(--navy); padding: 0.5rem; }
+      figcaption { margin-top: 0.5rem; color: var(--graphite); }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .lane img, figure img { transform: none !important; }
       }
     </style>
   </head>
@@ -146,129 +154,217 @@
       <p class="kicker"><a href="/icon-library/index.html">Icon library</a> · System-objects</p>
       <h1>System-object library</h1>
       <p class="lede">
-        Quiet isometric marks for Work, Home, System, Notes, and Studio. Three to four parts,
-        one orange node, field color matched to the section behind them. Motion is a 700ms
-        align on enter and hover — still when reduced motion is requested.
+        Quiet isometric marks for every public surface. Three to four parts, one orange node,
+        field matched to mist, paper, or navy. Scroll the studio to run assemble, connect,
+        reveal, align, and resolve in parallel.
       </p>
       <p class="note">
-        Internal catalog. Not in site navigation. Not indexed. Site chrome stays navy / mist /
-        gold / green — signal orange lives only inside these objects. Mist marks sit on #EBEDE3;
-        paper-section marks sit on #F5F4F0.
+        Internal catalog. Not in nav. Not indexed. Site chrome stays navy / mist / gold / green.
+        Marks on the live site scrub with vertical scroll; reduced motion is still.
       </p>
       <div class="palette" aria-label="Illustration palette">
         <span class="chip"><span class="swatch" style="background:#EBEDE3"></span> Mist #EBEDE3</span>
         <span class="chip"><span class="swatch" style="background:#F5F4F0"></span> Paper #F5F4F0</span>
+        <span class="chip"><span class="swatch" style="background:#0B1849"></span> Navy #0B1849</span>
         <span class="chip"><span class="swatch" style="background:#FFFAF0"></span> Bone #FFFAF0</span>
-        <span class="chip"><span class="swatch" style="background:#171916"></span> Ink #171916</span>
-        <span class="chip"><span class="swatch" style="background:#292C29"></span> Graphite #292C29</span>
         <span class="chip"><span class="swatch" style="background:#ED642F"></span> Signal orange #ED642F</span>
       </div>
 
-      <article id="product-direction">
-        <div>
-          <p class="meta">Work group · product-direction</p>
-          <h2>Product direction</h2>
-          <p class="slots">
-            Subject: Product direction. Core idea: many competing options collapsing into one
-            chosen path. Action: alignment of competing planes toward a single orange decision node.
-          </p>
-          <pre>Create an original isometric system-object illustration for “Product direction”. Show several competing interface planes and stacked tiles collapsing and aligning toward one shared active decision node. Use a consistent 30-degree isometric view, a centered assembly, bone-white hardware, graphite interiors, fine dark outlines, subtle paper grain, and one signal-orange decision node. The architecture should feel understandable rather than futuristic: precise, modular, tactile, and human. Warm paper background (#F4EEDF) with generous negative space. Occupies about 65–75% of the canvas. No text, logos, code, glassmorphism, glossy plastic, cyberpunk styling, clutter, or decorative components without meaning.</pre>
+      <h2 id="motion-studio">Motion studio</h2>
+      <p class="lede">
+        Five meanings, one vertical scroll. Lanes travel different axes in parallel, staggered
+        so the wave reads as transition rather than a single jump. First and last frames match.
+        No camera, bounce, glow, or loop.
+      </p>
+      <div class="studio-track" data-motion-studio>
+        <div class="studio-sticky">
+          <div class="studio-head">
+            <p class="kicker">Parallel scroll</p>
+            <p class="progress" data-progress>00 — rest</p>
+          </div>
+          <div class="rail" aria-hidden="true"><span data-rail></span></div>
+          <div class="lanes">
+            <div class="lane">
+              <div class="stage">
+                <img data-lane="assemble" data-stagger="0" src="/assets/system-objects/home-hero.png" alt="" width="96" height="96" />
+              </div>
+              <p>Assemble</p>
+              <p class="axis">Y + scale</p>
+            </div>
+            <div class="lane">
+              <div class="stage">
+                <img data-lane="connect" data-stagger="0.12" src="/assets/work/groups/complex-systems.png" alt="" width="96" height="96" />
+              </div>
+              <p>Connect</p>
+              <p class="axis">X − Y</p>
+            </div>
+            <div class="lane">
+              <div class="stage">
+                <img data-lane="reveal" data-stagger="0.24" src="/assets/system-objects/page-system.png" alt="" width="96" height="96" />
+              </div>
+              <p>Reveal</p>
+              <p class="axis">Y − scale</p>
+            </div>
+            <div class="lane">
+              <div class="stage">
+                <img data-lane="align" data-stagger="0.36" src="/assets/work/groups/product-direction.png" alt="" width="96" height="96" />
+              </div>
+              <p>Align</p>
+              <p class="axis">X +</p>
+            </div>
+            <div class="lane">
+              <div class="stage">
+                <img data-lane="resolve" data-stagger="0.48" src="/assets/system-objects/system-decisions.png" alt="" width="96" height="96" />
+              </div>
+              <p>Resolve</p>
+              <p class="axis">Scale + Y</p>
+            </div>
+          </div>
+          <p class="studio-note">Rest → peak → rest. Stagger keeps the five motions visible at once.</p>
         </div>
-        <div class="frames">
-          <figure class="full">
-            <img src="/assets/work/groups/product-direction.png" alt="Isometric system-object for Product direction" width="640" height="640" />
-            <figcaption>Full still</figcaption>
-          </figure>
-          <figure class="thumb">
-            <img src="/assets/work/groups/product-direction.png" alt="" width="160" height="160" />
-            <figcaption>96px</figcaption>
-          </figure>
-        </div>
-      </article>
+      </div>
 
-      <article id="complex-systems">
-        <div>
-          <p class="meta">Work group · complex-systems</p>
-          <h2>Complex systems</h2>
-          <p class="slots">
-            Subject: Complex systems. Core idea: several independent modules and layered platforms
-            organising around one shared active core. Action: independent modules organising around
-            one shared active core.
-          </p>
-          <pre>Create an original isometric system-object illustration for “Complex systems”. Show several independent modules and layered platforms organising around one shared active core. Use a consistent 30-degree isometric view, a centered assembly, bone-white hardware, graphite interiors, fine dark outlines, subtle paper grain, and one signal-orange central node. The architecture should feel understandable rather than futuristic: precise, modular, tactile, and human. Warm paper background with generous negative space. No text, logos, code, glassmorphism, glossy plastic, cyberpunk styling, clutter, or decorative components without meaning.</pre>
-        </div>
-        <div class="frames">
-          <figure class="full">
-            <img src="/assets/work/groups/complex-systems.png" alt="Isometric system-object for Complex systems" width="640" height="640" />
-            <figcaption>Full still</figcaption>
-          </figure>
-          <figure class="thumb">
-            <img src="/assets/work/groups/complex-systems.png" alt="" width="160" height="160" />
-            <figcaption>96px</figcaption>
-          </figure>
-        </div>
-      </article>
+      <div class="catalog">
+        <h2>Pages</h2>
+        <figure data-motion="assemble"><img src="/assets/system-objects/home-hero.png" alt="" /><figcaption>Home</figcaption></figure>
+        <figure data-motion="align"><img src="/assets/system-objects/home-work.png" alt="" /><figcaption>Work</figcaption></figure>
+        <figure data-motion="reveal"><img src="/assets/system-objects/page-about.png" alt="" /><figcaption>About</figcaption></figure>
+        <figure data-motion="reveal"><img src="/assets/system-objects/page-notes.png" alt="" /><figcaption>Notes</figcaption></figure>
+        <figure data-motion="assemble"><img src="/assets/system-objects/page-products.png" alt="" /><figcaption>Products</figcaption></figure>
+        <figure data-motion="connect"><img src="/assets/system-objects/page-contact.png" alt="" /><figcaption>Contact</figcaption></figure>
+        <figure data-motion="assemble"><img src="/assets/system-objects/studio.png" alt="" /><figcaption>Studio</figcaption></figure>
+        <figure data-motion="reveal"><img src="/assets/system-objects/page-system.png" alt="" /><figcaption>System</figcaption></figure>
 
-      <article id="ai-founder">
-        <div>
-          <p class="meta">Work group · ai-founder</p>
-          <h2>AI and founder products</h2>
-          <p class="slots">
-            Subject: AI and founder products. Core idea: a small built object testing a larger
-            operating system. Action: a compact module connecting to a larger stacked practice.
-          </p>
-          <pre>Create an original isometric system-object illustration for “AI and founder products”. Show a compact built module testing and connecting into a larger stacked practice of platforms and rails. Use a consistent 30-degree isometric view, a centered assembly, bone-white hardware, graphite interiors, fine dark outlines, subtle paper grain, and one signal-orange compact module as the active built object. The architecture should feel understandable rather than futuristic: precise, modular, tactile, and human. Warm paper background (#F4EEDF) with generous negative space. Occupies about 65–75% of the canvas. No text, logos, code, glassmorphism, glossy plastic, cyberpunk styling, clutter, or decorative components without meaning.</pre>
-        </div>
-        <div class="frames">
-          <figure class="full">
-            <img src="/assets/work/groups/ai-founder.png" alt="Isometric system-object for AI and founder products" width="640" height="640" />
-            <figcaption>Full still</figcaption>
-          </figure>
-          <figure class="thumb">
-            <img src="/assets/work/groups/ai-founder.png" alt="" width="160" height="160" />
-            <figcaption>96px</figcaption>
-          </figure>
-        </div>
-      </article>
+        <h2>Work groups</h2>
+        <figure data-motion="align"><img src="/assets/work/groups/product-direction.png" alt="" /><figcaption>Product direction</figcaption></figure>
+        <figure data-motion="connect"><img src="/assets/work/groups/complex-systems.png" alt="" /><figcaption>Complex systems</figcaption></figure>
+        <figure data-motion="assemble"><img src="/assets/work/groups/ai-founder.png" alt="" /><figcaption>AI and founder</figcaption></figure>
+        <figure data-motion="connect"><img src="/assets/work/groups/enterprise-leadership.png" alt="" /><figcaption>Enterprise</figcaption></figure>
 
-      <article id="enterprise-leadership">
-        <div>
-          <p class="meta">Work group · enterprise-leadership</p>
-          <h2>Enterprise leadership</h2>
-          <p class="slots">
-            Subject: Enterprise leadership. Core idea: distributed teams coordinating through one
-            accountable layer. Action: separate platforms bridging to a shared orange governance node.
-          </p>
-          <pre>Create an original isometric system-object illustration for “Enterprise leadership”. Show separate platforms and team modules bridging to one shared accountable governance layer. Use a consistent 30-degree isometric view, a centered assembly, bone-white hardware, graphite interiors, fine dark outlines, subtle paper grain, and one signal-orange governance node. The architecture should feel understandable rather than futuristic: precise, modular, tactile, and human. Warm paper background (#F4EEDF) with generous negative space. Occupies about 65–75% of the canvas. No text, logos, code, glassmorphism, glossy plastic, cyberpunk styling, clutter, or decorative components without meaning.</pre>
-        </div>
-        <div class="frames">
-          <figure class="full">
-            <img src="/assets/work/groups/enterprise-leadership.png" alt="Isometric system-object for Enterprise leadership" width="640" height="640" />
-            <figcaption>Full still</figcaption>
-          </figure>
-          <figure class="thumb">
-            <img src="/assets/work/groups/enterprise-leadership.png" alt="" width="160" height="160" />
-            <figcaption>96px</figcaption>
-          </figure>
-        </div>
-      </article>
+        <h2>Home</h2>
+        <figure data-motion="assemble"><img src="/assets/system-objects/home-hero.png" alt="" /><figcaption>Hero</figcaption></figure>
+        <figure data-motion="reveal"><img src="/assets/system-objects/home-impact.png" alt="" /><figcaption>Impact</figcaption></figure>
+        <figure data-motion="align"><img src="/assets/system-objects/home-work.png" alt="" /><figcaption>Selected work</figcaption></figure>
+        <figure class="navy" data-motion="assemble"><img src="/assets/system-objects/home-approach.png" alt="" /><figcaption>Approach</figcaption></figure>
+        <figure data-motion="align"><img src="/assets/system-objects/home-principles.png" alt="" /><figcaption>Principles</figcaption></figure>
+        <figure data-motion="resolve"><img src="/assets/system-objects/home-lead.png" alt="" /><figcaption>How I lead</figcaption></figure>
+        <figure data-motion="reveal"><img src="/assets/system-objects/home-about.png" alt="" /><figcaption>About preview</figcaption></figure>
+        <figure class="navy" data-motion="connect"><img src="/assets/system-objects/home-close.png" alt="" /><figcaption>Close</figcaption></figure>
 
-      <h2 style="margin-top:3rem">Also on the site</h2>
-      <p class="slots">Home, System, Notes, and Studio. Same language, quieter geometry, field matched to the page.</p>
-      <div class="also">
-        <figure><img src="/assets/system-objects/home-impact.png" alt="" width="96" height="96" /><figcaption>Impact</figcaption></figure>
-        <figure><img src="/assets/system-objects/home-work.png" alt="" width="96" height="96" /><figcaption>Work</figcaption></figure>
-        <figure><img src="/assets/system-objects/home-principles.png" alt="" width="96" height="96" /><figcaption>Principles</figcaption></figure>
-        <figure><img src="/assets/system-objects/home-lead.png" alt="" width="96" height="96" /><figcaption>How I lead</figcaption></figure>
-        <figure><img src="/assets/system-objects/system-dashboard.png" alt="" width="96" height="96" /><figcaption>Dashboard</figcaption></figure>
-        <figure><img src="/assets/system-objects/system-practice.png" alt="" width="96" height="96" /><figcaption>Practice</figcaption></figure>
-        <figure><img src="/assets/system-objects/system-decisions.png" alt="" width="96" height="96" /><figcaption>Decisions</figcaption></figure>
-        <figure><img src="/assets/system-objects/system-experiments.png" alt="" width="96" height="96" /><figcaption>Experiments</figcaption></figure>
-        <figure><img src="/assets/system-objects/notes-field-note.png" alt="" width="96" height="96" /><figcaption>Field notes</figcaption></figure>
-        <figure><img src="/assets/system-objects/notes-framework.png" alt="" width="96" height="96" /><figcaption>Frameworks</figcaption></figure>
-        <figure><img src="/assets/system-objects/notes-essay.png" alt="" width="96" height="96" /><figcaption>Essays</figcaption></figure>
-        <figure><img src="/assets/system-objects/studio.png" alt="" width="96" height="96" /><figcaption>Studio</figcaption></figure>
+        <h2>System</h2>
+        <figure data-motion="reveal"><img src="/assets/system-objects/page-system.png" alt="" /><figcaption>Page</figcaption></figure>
+        <figure data-motion="reveal"><img src="/assets/system-objects/system-dashboard.png" alt="" /><figcaption>Dashboard</figcaption></figure>
+        <figure data-motion="align"><img src="/assets/system-objects/system-focus.png" alt="" /><figcaption>Focus</figcaption></figure>
+        <figure data-motion="connect"><img src="/assets/system-objects/system-practice.png" alt="" /><figcaption>Practice</figcaption></figure>
+        <figure data-motion="assemble"><img src="/assets/system-objects/system-products.png" alt="" /><figcaption>Products</figcaption></figure>
+        <figure data-motion="align"><img src="/assets/system-objects/system-principles.png" alt="" /><figcaption>Principles</figcaption></figure>
+        <figure data-motion="resolve"><img src="/assets/system-objects/system-decisions.png" alt="" /><figcaption>Decisions</figcaption></figure>
+        <figure data-motion="assemble"><img src="/assets/system-objects/system-experiments.png" alt="" /><figcaption>Experiments</figcaption></figure>
+        <figure data-motion="reveal"><img src="/assets/system-objects/system-knowledge.png" alt="" /><figcaption>Writing</figcaption></figure>
+        <figure data-motion="align"><img src="/assets/system-objects/system-teaching.png" alt="" /><figcaption>Teaching</figcaption></figure>
+        <figure data-motion="connect"><img src="/assets/system-objects/system-roadmap.png" alt="" /><figcaption>Roadmap</figcaption></figure>
+        <figure data-motion="resolve"><img src="/assets/system-objects/system-archive.png" alt="" /><figcaption>Archive</figcaption></figure>
+
+        <h2>Notes shelves</h2>
+        <figure data-motion="reveal"><img src="/assets/system-objects/notes-field-note.png" alt="" /><figcaption>Field notes</figcaption></figure>
+        <figure data-motion="align"><img src="/assets/system-objects/notes-framework.png" alt="" /><figcaption>Frameworks</figcaption></figure>
+        <figure data-motion="reveal"><img src="/assets/system-objects/notes-essay.png" alt="" /><figcaption>Essays</figcaption></figure>
       </div>
     </main>
+    <script>
+      (function () {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduce) return;
+
+        function clamp(n) {
+          return Math.min(1, Math.max(0, n));
+        }
+
+        function wave(t) {
+          return Math.sin(clamp(t) * Math.PI);
+        }
+
+        function apply(el, kind, p) {
+          let x = 0;
+          let y = 0;
+          let s = 1;
+          if (kind === "assemble") {
+            y = p * 18;
+            s = 1 + p * 0.1;
+          } else if (kind === "connect") {
+            x = p * -16;
+            y = p * 8;
+          } else if (kind === "reveal") {
+            y = p * 16;
+            s = 1 - p * 0.06;
+          } else if (kind === "align") {
+            x = p * 16;
+          } else if (kind === "resolve") {
+            s = 1 + p * 0.12;
+            y = p * 10;
+          }
+          el.style.transform = "translate(" + x + "px," + y + "px) scale(" + s + ")";
+        }
+
+        const track = document.querySelector("[data-motion-studio]");
+        const nodes = track ? Array.from(track.querySelectorAll("[data-lane]")) : [];
+        const progress = document.querySelector("[data-progress]");
+        const rail = document.querySelector("[data-rail]");
+        const catalog = Array.from(document.querySelectorAll(".catalog figure[data-motion] img"));
+
+        function studioProgress() {
+          if (!track) return 0;
+          const rect = track.getBoundingClientRect();
+          const span = Math.max(1, rect.height - window.innerHeight * 0.35);
+          return clamp((window.innerHeight * 0.18 - rect.top) / span);
+        }
+
+        function phaseLabel(t) {
+          if (t < 0.08) return "rest";
+          if (t < 0.5) return "transition";
+          if (t < 0.92) return "resolve";
+          return "rest";
+        }
+
+        function frame() {
+          const t = studioProgress();
+          nodes.forEach(function (el) {
+            const kind = el.getAttribute("data-lane");
+            const stagger = parseFloat(el.getAttribute("data-stagger") || "0");
+            const local = clamp((t - stagger * 0.35) / (1 - 0.35 * 0.48));
+            apply(el, kind, wave(local));
+          });
+          if (progress) {
+            const pct = String(Math.round(t * 100)).padStart(2, "0");
+            progress.textContent = pct + " — " + phaseLabel(t);
+          }
+          if (rail) rail.style.width = t * 100 + "%";
+
+          catalog.forEach(function (el) {
+            const figure = el.closest("figure");
+            const kind = figure.getAttribute("data-motion");
+            const rect = figure.getBoundingClientRect();
+            const start = window.innerHeight * 0.92;
+            const end = window.innerHeight * 0.42;
+            const p = wave((start - rect.top) / Math.max(1, start - end));
+            apply(el, kind, p);
+          });
+        }
+
+        let ticking = false;
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(function () {
+            frame();
+            ticking = false;
+          });
+        }
+
+        frame();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+      })();
+    </script>
   </body>
 </html>

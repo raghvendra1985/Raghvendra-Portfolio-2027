@@ -13,6 +13,8 @@ import HonestNote from "@/components/knowledge/HonestNote";
 import Takeaway from "@/components/knowledge/Takeaway";
 import RelatedReading from "@/components/knowledge/RelatedReading";
 import { formatNoteMeta, type KnowledgeArticle, type KnowledgeFramework } from "@/knowledge";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
+import { noteFormatMarks } from "@/visual-language/marks";
 
 export default function ArticleView({
   article,
@@ -68,9 +70,17 @@ export default function ArticleView({
         <Link href="/knowledge" className="font-mono-label text-ink-soft">
           ← Notes
         </Link>
-        <p data-hero-copy className="mt-8 font-mono-label text-gold">
-          {formatNoteMeta(article)}
-        </p>
+        <div data-hero-copy className="mt-8 flex items-center gap-4">
+          <SystemObjectMark
+            src={noteFormatMarks[article.format].src}
+            motion={noteFormatMarks[article.format].motion}
+            surface={noteFormatMarks[article.format].surface}
+            size="sm"
+          />
+          <p className="font-mono-label text-gold">
+            {formatNoteMeta(article)}
+          </p>
+        </div>
         <h1 data-hero-headline className="mt-6 max-w-5xl type-h1">
           {article.title}
         </h1>

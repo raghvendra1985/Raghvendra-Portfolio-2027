@@ -28,7 +28,8 @@ export default function SystemObjectMark({
   }, [config, src]);
 
   const box = size === "sm" ? "size-16 sm:size-20" : "size-20 sm:size-24";
-  const ground = surface === "paper" ? "bg-paper" : "bg-mist";
+  const ground =
+    surface === "paper" ? "bg-paper" : surface === "navy" ? "bg-navy" : "bg-mist";
 
   return (
     <span
