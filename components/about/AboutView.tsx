@@ -117,7 +117,7 @@ export default function AboutView() {
 
       <SectionReveal className="mx-auto grid max-w-[1440px] gap-4 px-[var(--page-pad)] pb-20 md:grid-cols-3 md:gap-6">
         {aboutPage.stats.map((stat) => (
-          <div key={stat.unit} data-reveal-item>
+          <div key={`${stat.value}-${stat.unit}`} data-reveal-item>
             <AboutCard>
               <div className="flex items-baseline gap-2">
                 <AboutStatValue value={stat.value} />
