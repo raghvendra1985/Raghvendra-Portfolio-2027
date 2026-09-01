@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { site } from "@/lib/site";
 import { contactPage } from "@/contact";
 import { pageMetadataExtras } from "@/lib/seo";
+import { pageMarks } from "@/visual-language/marks";
 
 export const metadata: Metadata = {
   title: contactPage.title,
@@ -26,6 +27,7 @@ export default function ContactPage() {
         label="Contact"
         title={contactPage.heroTitle}
         description={contactPage.heroDescription}
+        mark={pageMarks.contact}
       />
 
       <SectionReveal

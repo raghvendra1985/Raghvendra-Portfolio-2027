@@ -9,6 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check:assets": "node scripts/check-assets.mjs",
+    "library": "npx --yes serve public -l 4173 -n --no-port-switching",
     "og:products": "node scripts/render-product-og.mjs",
     "resume:pdf": "tsx scripts/render-resume.tsx",
     "test:commerce": "node --test scripts/commerce-test.mjs"

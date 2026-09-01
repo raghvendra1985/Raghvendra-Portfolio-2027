@@ -12,20 +12,40 @@
   --surface: var(--mist);
   --surface-dim: color-mix(in srgb, var(--navy) 4%, var(--mist));
 
-  --duration-xs: 0.15s;
-  --duration-sm: 0.3s;
-  --duration-md: 0.6s;
-  --duration-lg: 1s;
-  --duration-xl: 1.6s;
+  --motion-instant: 100ms;
+  --motion-fast: 180ms;
+  --motion-ui: 240ms;
+  --motion-panel: 420ms;
+  --motion-reveal: 700ms;
+  --motion-story: 1100ms;
+  --motion-atmosphere: 14000ms;
 
-  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
-  --ease-physical: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-xs: var(--motion-instant);
+  --duration-sm: var(--motion-fast);
+  --duration-md: var(--motion-panel);
+  --duration-lg: var(--motion-reveal);
+  --duration-xl: var(--motion-story);
+
+  --ease-standard: cubic-bezier(0.4, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-exit: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --ease-move: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-reveal: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-drift: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-out: var(--ease-reveal);
+  --ease-physical: var(--ease-reveal);
+
   --focus: var(--gold);
 
   --paper: #f5f4f0;
   --paper-edge: #d9d9d5;
   --object-shadow: 0 4px 16px color-mix(in srgb, var(--navy) 10%, transparent);
   --object-shadow-lift: 0 12px 28px color-mix(in srgb, var(--navy) 16%, transparent);
+  --shadow-low: 0 4px 10px color-mix(in srgb, var(--navy) 12%, transparent);
+  --shadow-low-compact: 0 4px 4px color-mix(in srgb, var(--navy) 16%, transparent);
+  --shadow-mid:
+    4px 6px 8px -2px color-mix(in srgb, var(--navy) 22%, transparent),
+    -4px -1px 8px -2px color-mix(in srgb, var(--navy) 16%, transparent);
 
   --nav-height: 88px;
   --nav-height-compact: 64px;

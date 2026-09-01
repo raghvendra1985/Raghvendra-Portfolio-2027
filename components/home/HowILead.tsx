@@ -1,14 +1,23 @@
 import SectionReveal from "@/components/reveal/SectionReveal";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import { leadershipLead } from "@/home/leadership-home";
+import { homeMarks } from "@/visual-language/marks";
 
 export default function HowILead() {
   return (
     <SectionReveal className="border-t border-line bg-paper px-[var(--page-pad)] py-14 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-[1440px]">
-        <div className="max-w-3xl" data-reveal-item>
-          <p className="font-mono-label text-navy/80">{leadershipLead.eyebrow}</p>
-          <h2 className="mt-4 type-h2">{leadershipLead.title}</h2>
-          <p className="mt-6 max-w-[62ch] type-lead text-ink">{leadershipLead.intro}</p>
+        <div className="flex items-start gap-4" data-reveal-item>
+          <SystemObjectMark
+            src={homeMarks.lead.src}
+            motion={homeMarks.lead.motion}
+            surface={homeMarks.lead.surface}
+          />
+          <div className="max-w-3xl">
+            <p className="font-mono-label text-navy/80">{leadershipLead.eyebrow}</p>
+            <h2 className="mt-4 type-h2">{leadershipLead.title}</h2>
+            <p className="mt-6 max-w-[62ch] type-lead text-ink">{leadershipLead.intro}</p>
+          </div>
         </div>
         <ol className="mt-10 space-y-0 border-t border-line sm:mt-14" data-reveal-item>
           {leadershipLead.stages.map((stage, index) => (

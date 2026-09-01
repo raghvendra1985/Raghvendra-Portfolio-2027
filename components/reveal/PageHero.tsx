@@ -3,17 +3,21 @@
 import { useEffect, useRef } from "react";
 import { animateHero } from "@/animations/hero";
 import { useExperience } from "@/components/providers/ExperienceProvider";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
+import type { SystemObjectMark as MarkSpec } from "@/visual-language/marks";
 
 export default function PageHero({
   index,
   label,
   title,
   description,
+  mark,
 }: {
   index: string;
   label: string;
   title: string;
   description: string;
+  mark?: MarkSpec;
 }) {
   const rootRef = useRef<HTMLElement>(null);
   const { config, pageReady } = useExperience();
@@ -43,9 +47,16 @@ export default function PageHero({
       ref={rootRef}
       className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-16 pt-32 sm:pt-40"
     >
-      <p data-hero-copy className="font-mono-label text-ink-soft">
-        {index} / {label}
-      </p>
+      <div className="flex items-center gap-4">
+        {mark ? (
+          <span data-hero-visual>
+            <SystemObjectMark src={mark.src} motion={mark.motion} surface={mark.surface} />
+          </span>
+        ) : null}
+        <p data-hero-copy className="font-mono-label text-ink-soft">
+          {index} / {label}
+        </p>
+      </div>
       <h1
         data-hero-headline
         className="mt-6 max-w-4xl type-h1 text-navy"

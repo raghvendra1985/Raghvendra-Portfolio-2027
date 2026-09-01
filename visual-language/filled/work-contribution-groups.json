@@ -1,0 +1,59 @@
+{
+  "family": "system-object",
+  "template": "visual-language/prompts/system-object.txt",
+  "invariants": {
+    "viewpoint": "30-degree isometric",
+    "assembly": "one dominant modular assembly",
+    "background": "#F4EEDF",
+    "canvasOccupation": "65–75%",
+    "orangeRule": "one focal signal-orange element only",
+    "noText": true,
+    "readableAt": "160px"
+  },
+  "groups": [
+    {
+      "id": "product-direction",
+      "label": "Product direction",
+      "file": "public/assets/work/groups/product-direction.png",
+      "slots": {
+        "SUBJECT": "Product direction",
+        "CORE IDEA": "many competing options collapsing into one chosen path",
+        "ACTION OR TRANSFORMATION": "alignment of competing planes toward a single orange decision node"
+      },
+      "prompt": "Create an original isometric system-object illustration for “Product direction”. Show several competing interface planes and stacked tiles collapsing and aligning toward one shared active decision node. Use a consistent 30-degree isometric view, a centered assembly, bone-white hardware, graphite interiors, fine dark outlines, subtle paper grain, and one signal-orange decision node. The architecture should feel understandable rather than futuristic: precise, modular, tactile, and human. Warm paper background (#F4EEDF) with generous negative space. Occupies about 65–75% of the canvas. No text, logos, code, glassmorphism, glossy plastic, cyberpunk styling, clutter, or decorative components without meaning."
+    },
+    {
+      "id": "complex-systems",
+      "label": "Complex systems",
+      "file": "public/assets/work/groups/complex-systems.png",
+      "slots": {
+        "SUBJECT": "Complex systems",
+        "CORE IDEA": "several independent modules and layered platforms organising around one shared active core",
+        "ACTION OR TRANSFORMATION": "independent modules organising around one shared active core"
+      },
+      "prompt": "Create an original isometric system-object illustration for “Complex systems”. Show several independent modules and layered platforms organising around one shared active core. Use a consistent 30-degree isometric view, a centered assembly, bone-white hardware, graphite interiors, fine dark outlines, subtle paper grain, and one signal-orange central node. The architecture should feel understandable rather than futuristic: precise, modular, tactile, and human. Warm paper background with generous negative space. No text, logos, code, glassmorphism, glossy plastic, cyberpunk styling, clutter, or decorative components without meaning."
+    },
+    {
+      "id": "ai-founder",
+      "label": "AI and founder products",
+      "file": "public/assets/work/groups/ai-founder.png",
+      "slots": {
+        "SUBJECT": "AI and founder products",
+        "CORE IDEA": "a small built object testing a larger operating system",
+        "ACTION OR TRANSFORMATION": "a compact module connecting to a larger stacked practice"
+      },
+      "prompt": "Create an original isometric system-object illustration for “AI and founder products”. Show a compact built module testing and connecting into a larger stacked practice of platforms and rails. Use a consistent 30-degree isometric view, a centered assembly, bone-white hardware, graphite interiors, fine dark outlines, subtle paper grain, and one signal-orange compact module as the active built object. The architecture should feel understandable rather than futuristic: precise, modular, tactile, and human. Warm paper background (#F4EEDF) with generous negative space. Occupies about 65–75% of the canvas. No text, logos, code, glassmorphism, glossy plastic, cyberpunk styling, clutter, or decorative components without meaning."
+    },
+    {
+      "id": "enterprise-leadership",
+      "label": "Enterprise leadership",
+      "file": "public/assets/work/groups/enterprise-leadership.png",
+      "slots": {
+        "SUBJECT": "Enterprise leadership",
+        "CORE IDEA": "distributed teams coordinating through one accountable layer",
+        "ACTION OR TRANSFORMATION": "separate platforms bridging to a shared orange governance node"
+      },
+      "prompt": "Create an original isometric system-object illustration for “Enterprise leadership”. Show separate platforms and team modules bridging to one shared accountable governance layer. Use a consistent 30-degree isometric view, a centered assembly, bone-white hardware, graphite interiors, fine dark outlines, subtle paper grain, and one signal-orange governance node. The architecture should feel understandable rather than futuristic: precise, modular, tactile, and human. Warm paper background (#F4EEDF) with generous negative space. Occupies about 65–75% of the canvas. No text, logos, code, glassmorphism, glossy plastic, cyberpunk styling, clutter, or decorative components without meaning."
+    }
+  ]
+}

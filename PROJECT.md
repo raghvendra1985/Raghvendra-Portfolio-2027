@@ -101,15 +101,19 @@ Target 60 FPS.
 
 ### Tokens
 
+Motion organises complexity and returns the interface to calm. No bounce, elastic, or spring overshoot.
+
 | Name | Seconds |
 | --- | --- |
-| XS | 0.15 |
-| Small | 0.30 |
-| Medium | 0.60 |
-| Large | 1.00 |
-| Extra | 1.60 |
+| Instant | 0.10 |
+| Fast | 0.18 |
+| UI | 0.24 |
+| Panel | 0.42 |
+| Reveal | 0.70 |
+| Story | 1.10 |
+| Atmosphere | 14 |
 
-Ease: `power4.out`
+Primary ease: `cubic-bezier(0.165, 0.84, 0.44, 1)` (`EASE_ENTER`). UI feedback uses `EASE_STANDARD`. Hover travel stays under 4px.
 
 ## Accessibility
 
@@ -150,6 +154,9 @@ services/
 | `animations/concierge.ts` | Panel, results, mode, Ask trigger enter |
 | `animations/forms.ts` | Contact form field stagger |
 | `animations/notFound.ts` | Editorial 404 line reveal + CTA |
+| `animations/systemObject.ts` | Assemble / connect / reveal / align / resolve |
+| `animations/productStory.ts` | Screening, Drafting, Briefing product previews |
+| `animations/work.ts` | Card hover + linear ticker |
 
 Every animation is configurable. Complex timelines are commented.
 

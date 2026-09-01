@@ -5,9 +5,11 @@ import Link from "next/link";
 import { animateSection } from "@/animations/sections";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import ImageReveal from "@/components/reveal/ImageReveal";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import WorkCard from "@/components/work/WorkCard";
 import WorkCover from "@/components/work/WorkCover";
 import { track } from "@/lib/analytics";
+import { workGroupMarks } from "@/visual-language/marks";
 import {
   contributionGroupLabels,
   contributionGroups,
@@ -331,9 +333,16 @@ export default function WorkIndex() {
               aria-labelledby={`heading-${id}`}
               data-reveal-item
             >
-              <h2 id={`heading-${id}`} className="font-section-label text-navy">
-                {label}
-              </h2>
+              <div className="flex items-center gap-4">
+                <SystemObjectMark
+                  src={workGroupMarks[id].src}
+                  motion={workGroupMarks[id].motion}
+                  surface={workGroupMarks[id].surface}
+                />
+                <h2 id={`heading-${id}`} className="font-section-label text-navy">
+                  {label}
+                </h2>
+              </div>
 
               {full.length ? (
                 <ul className="mt-8 grid gap-10 md:grid-cols-2">

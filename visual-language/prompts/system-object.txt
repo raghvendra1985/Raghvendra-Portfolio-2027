@@ -1,0 +1,22 @@
+Use case: stylized-concept
+Asset type: modular system-object illustration for raghvendrasingh.com
+
+Primary request: Create an original isometric visual metaphor for “[SUBJECT]”. Communicate “[CORE IDEA]” through a single modular assembly. The focal action is “[ACTION OR TRANSFORMATION]”.
+
+Scene/backdrop: isolated object with generous negative space; use either a warm paper background (#F4EEDF) or a near-black background (#171916), chosen for clear contrast.
+
+Subject construction: build the object from stacked platforms, cubes, tiles, nodes, bridges, rails, rings, interface planes, or exploded layers. Every component must explain part of the concept. Use a consistent 30-degree isometric viewpoint and one dominant assembly rather than a collection of unrelated objects.
+
+Style/medium: precise editorial isometric illustration combining architectural linework with warm tactile materiality. Bone-white outer shells, graphite structural interiors, fine dark outlines, subtly softened edges, restrained screen-print grain, and carefully controlled depth. Sophisticated product-design portfolio aesthetic: systematic, intelligent, crafted, and human.
+
+Composition/framing: centered three-quarter isometric object occupying about 65–75% of the canvas. Strong silhouette, balanced negative space, no cropping of the primary structure. Clear hierarchy visible at thumbnail size.
+
+Color palette: paper #F4EEDF, bone #FFFAF0, ink #171916, graphite #292C29, signal orange #ED642F. Use signal orange only for the active layer, decision point, or consequential node. Optionally choose one secondary narrative color: coral #EE776B, gold #EFB43E, petrol #103F4D, or blue #4059DB. Never use all secondary colors together.
+
+Materials/textures: matte painted hardware, lightly speckled paper grain, subtle graphite interiors, crisp edges, minimal soft contact shadow. Texture must be delicate and uniform, never dirty or photorealistic.
+
+Concept rules: geometry explains the system; the orange component identifies what is active or changing; connections show relationships; exploded layers are used only when they clarify architecture or process.
+
+Constraints: original composition; consistent isometric geometry; one clear metaphor; one focal orange element; no text; no letters; no logos; no watermark; no unnecessary cables; no decorative components without meaning; readable at 160px; suitable for a premium product-design portfolio.
+
+Avoid: generic stock 3D icons, glossy plastic, glassmorphism, neon glow, metallic chrome, photorealism, clay render, cartoon style, excessive bevels, dramatic cinematic lighting, clutter, cyberpunk imagery, floating UI labels, random code text, brand imitation.

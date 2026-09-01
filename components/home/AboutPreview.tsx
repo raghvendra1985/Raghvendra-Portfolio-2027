@@ -1,7 +1,9 @@
 import AboutPolaroid from "@/components/about/AboutPolaroid";
 import { TrackedMagneticButton } from "@/components/analytics/TrackedCta";
 import SectionReveal from "@/components/reveal/SectionReveal";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import { leadershipAbout } from "@/home/leadership-home";
+import { homeMarks } from "@/visual-language/marks";
 
 export default function AboutPreview() {
   return (
@@ -16,7 +18,14 @@ export default function AboutPreview() {
           />
         </div>
         <div data-reveal-item>
-          <p className="font-mono-label text-navy/80">{leadershipAbout.eyebrow}</p>
+          <div className="flex items-center gap-4">
+            <SystemObjectMark
+              src={homeMarks.about.src}
+              motion={homeMarks.about.motion}
+              surface={homeMarks.about.surface}
+            />
+            <p className="font-mono-label text-navy/80">{leadershipAbout.eyebrow}</p>
+          </div>
           <h2 className="mt-4 max-w-xl font-serif text-[clamp(2rem,1.5rem+1.6vw,3.15rem)] font-normal leading-[1.15] tracking-[-0.02em]">
             {leadershipAbout.title}
           </h2>

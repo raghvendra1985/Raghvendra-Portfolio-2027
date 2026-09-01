@@ -4,6 +4,7 @@ import ProductsIndex from "@/components/products/ProductsIndex";
 import { jsonLdScript } from "@/lib/seo";
 import { secretProductsIntro } from "@/products";
 import { productsIndexJsonLd, productsIndexMetadata } from "@/products/schema";
+import { pageMarks } from "@/visual-language/marks";
 
 export const metadata: Metadata = productsIndexMetadata();
 
@@ -19,6 +20,7 @@ export default function ProductsPage() {
         label={secretProductsIntro.label}
         title={secretProductsIntro.title}
         description={secretProductsIntro.description}
+        mark={pageMarks.products}
       />
       <ProductsIndex />
     </>

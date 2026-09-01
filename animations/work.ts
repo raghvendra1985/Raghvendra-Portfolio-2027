@@ -1,9 +1,16 @@
 "use client";
 
-import { DURATION, EASE, createScope, gsap, type MotionConfig } from "./motion";
+import {
+  DURATION,
+  EASE_ENTER,
+  EASE_STANDARD,
+  createScope,
+  gsap,
+  type MotionConfig,
+} from "./motion";
 
 /**
- * Work card hover: cover scale + slight lift.
+ * Work card hover: cover scale + lift under 4px.
  * Rest pose waits until the first hover so enter/reveal tweens are not killed.
  */
 export function animateWorkCard(root: HTMLElement, config: MotionConfig) {
@@ -22,17 +29,17 @@ export function animateWorkCard(root: HTMLElement, config: MotionConfig) {
       armed = true;
       gsap.killTweensOf(targets);
       gsap.to(root, {
-        y: -8,
-        duration: DURATION.sm,
-        ease: EASE,
+        y: -3,
+        duration: DURATION.panel,
+        ease: EASE_ENTER,
         overwrite: true,
         force3D: true,
       });
       if (cover) {
         gsap.to(cover, {
-          scale: 1.06,
-          duration: DURATION.md,
-          ease: EASE,
+          scale: 1.04,
+          duration: DURATION.panel,
+          ease: EASE_ENTER,
           overwrite: true,
           force3D: true,
         });
@@ -44,16 +51,16 @@ export function animateWorkCard(root: HTMLElement, config: MotionConfig) {
       gsap.killTweensOf(targets);
       gsap.to(root, {
         y: 0,
-        duration: DURATION.md,
-        ease: EASE,
+        duration: DURATION.panel,
+        ease: EASE_STANDARD,
         overwrite: true,
         force3D: true,
       });
       if (cover) {
         gsap.to(cover, {
           scale: 1,
-          duration: DURATION.md,
-          ease: EASE,
+          duration: DURATION.panel,
+          ease: EASE_STANDARD,
           overwrite: true,
           force3D: true,
         });
@@ -67,6 +74,7 @@ export function animateWorkCard(root: HTMLElement, config: MotionConfig) {
   });
 }
 
+/** Constant linear marquee at 30–45px/s. Pauses on hover/focus and when offscreen. */
 export function animateWorkTicker(root: HTMLElement, config: MotionConfig) {
   const track = root.querySelector<HTMLElement>("[data-work-ticker-track]");
   if (!track) return createScope(root, () => {});
@@ -75,19 +83,36 @@ export function animateWorkTicker(root: HTMLElement, config: MotionConfig) {
     gsap.set(track, { x: 0 });
     if (config.reducedMotion) return;
 
+    const PX_PER_SEC = 38;
     const tween = gsap.to(track, {
       x: "-50%",
-      duration: 32,
+      duration: 48,
       ease: "none",
       repeat: -1,
     });
 
+    const syncDuration = () => {
+      const half = track.scrollWidth / 2;
+      if (half > 0) tween.duration(half / PX_PER_SEC);
+    };
+    syncDuration();
+
     let hovered = false;
     let focused = false;
+    let onscreen = true;
     const sync = () => {
-      if (hovered || focused) tween.pause();
+      if (hovered || focused || !onscreen || document.hidden) tween.pause();
       else tween.play();
     };
+
+    const io = new IntersectionObserver((entries) => {
+      onscreen = entries.some((entry) => entry.isIntersecting);
+      sync();
+    });
+    io.observe(root);
+
+    const onVis = () => sync();
+    document.addEventListener("visibilitychange", onVis);
 
     root.addEventListener("mouseenter", () => {
       hovered = true;
@@ -105,5 +130,14 @@ export function animateWorkTicker(root: HTMLElement, config: MotionConfig) {
       focused = false;
       sync();
     });
+
+    const ro = new ResizeObserver(syncDuration);
+    ro.observe(track);
+
+    return () => {
+      io.disconnect();
+      ro.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
+    };
   });
 }

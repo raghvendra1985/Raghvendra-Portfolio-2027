@@ -1,0 +1,10 @@
+Use case: logo-brand
+Asset type: compact section marker for “[SECTION]”
+
+Primary request: Create a distinctive abstract mark expressing “[ATTRIBUTE]” from three to six equal square modules on a strict 3 × 3 or 4 × 4 grid.
+
+Style/medium: severe black geometric pixel construction, simple figure-ground relationship, memorable at 16px, balanced negative space, no rounded corners.
+
+Color palette: solid near-black #171916 on warm paper #F4EEDF. Optional reversed version.
+
+Constraints: one-color first; no letters; no recognisable app logo; no gradients; no shadows; no extra grid lines in the final mark.

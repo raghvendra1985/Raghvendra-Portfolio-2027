@@ -32,8 +32,8 @@ export function animateStudioCard(
       gsap.killTweensOf(targets);
       if (liftEnabled) {
         gsap.to(root, {
-          y: -8,
-          duration: DURATION.sm,
+          y: -3,
+          duration: DURATION.panel,
           ease: EASE,
           overwrite: true,
           force3D: true,
@@ -41,8 +41,8 @@ export function animateStudioCard(
       }
       covers.forEach((cover) => {
         gsap.to(cover, {
-          scale: 1.06,
-          duration: DURATION.md,
+          scale: 1.04,
+          duration: DURATION.panel,
           ease: EASE,
           overwrite: true,
           force3D: true,
@@ -56,7 +56,7 @@ export function animateStudioCard(
       if (liftEnabled) {
         gsap.to(root, {
           y: 0,
-          duration: DURATION.md,
+          duration: DURATION.panel,
           ease: EASE,
           overwrite: true,
           force3D: true,
@@ -65,7 +65,7 @@ export function animateStudioCard(
       covers.forEach((cover) => {
         gsap.to(cover, {
           scale: 1,
-          duration: DURATION.md,
+          duration: DURATION.panel,
           ease: EASE,
           overwrite: true,
           force3D: true,

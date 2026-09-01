@@ -9,7 +9,9 @@ import FocusCard from "@/components/system/FocusCard";
 import ExperimentCard from "@/components/system/ExperimentCard";
 import DecisionLog from "@/components/system/DecisionLog";
 import Roadmap from "@/components/system/Roadmap";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import { osModules, type FounderOs } from "@/founder-os";
+import { pageMarks, systemMarks } from "@/visual-language/marks";
 
 export default function SystemView({ data }: { data: FounderOs }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -37,9 +39,16 @@ export default function SystemView({ data }: { data: FounderOs }) {
       </div>
 
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-16 pt-16 sm:pt-24">
-        <p className="font-mono-label text-ink-soft" data-os-item>
-          {data.identity.name}
-        </p>
+        <div className="flex items-center gap-4" data-os-item>
+          <SystemObjectMark
+            src={pageMarks.system.src}
+            motion={pageMarks.system.motion}
+            surface={pageMarks.system.surface}
+          />
+          <p className="font-mono-label text-ink-soft">
+            {data.identity.name}
+          </p>
+        </div>
         <p className="mt-4 font-mono-label text-green" data-os-item>
           {data.identity.positioning}
         </p>
@@ -54,6 +63,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="01"
           title="Dashboard"
           current={current.id === "dashboard"}
+          mark={systemMarks.dashboard}
         >
           <p className="max-w-xl text-base leading-relaxed text-ink-soft" data-os-item>
             Ways into the operating system. Not widgets — a table of contents for how the practice runs.
@@ -80,7 +90,13 @@ export default function SystemView({ data }: { data: FounderOs }) {
           </ol>
         </OSModule>
 
-        <OSModule id="focus" index="02" title="Current Focus" current={current.id === "focus"}>
+        <OSModule
+          id="focus"
+          index="02"
+          title="Current Focus"
+          current={current.id === "focus"}
+          mark={systemMarks.focus}
+        >
           {data.focus.map((item) => (
             <FocusCard key={item.name} item={item} />
           ))}
@@ -91,6 +107,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="03"
           title="Method to evidence"
           current={current.id === "practice"}
+          mark={systemMarks.practice}
         >
           <p className="max-w-xl text-base leading-relaxed text-ink-soft" data-os-item>
             The same contribution groups as Work. Method first — then one or two published examples.
@@ -129,6 +146,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="04"
           title="Products as practice"
           current={current.id === "products"}
+          mark={systemMarks.products}
         >
           <p className="mb-8 max-w-xl text-base leading-relaxed text-ink-soft" data-os-item>
             Small products are where the operating system meets real constraints—users, scope, trust, and
@@ -165,6 +183,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="05"
           title="Operating Principles"
           current={current.id === "principles"}
+          mark={systemMarks.principles}
         >
           <ol>
             {data.principles.map((principle, index) => (
@@ -190,6 +209,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="06"
           title="Decision Log"
           current={current.id === "decisions"}
+          mark={systemMarks.decisions}
         >
           <p className="mb-8 max-w-xl text-base leading-relaxed text-ink-soft" data-os-item>
             Process and trade-offs. No invented results — only what the work taught.
@@ -202,6 +222,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="07"
           title="Experiments"
           current={current.id === "experiments"}
+          mark={systemMarks.experiments}
         >
           {data.experiments.map((item) => (
             <ExperimentCard key={item.id} item={item} />
@@ -213,6 +234,7 @@ export default function SystemView({ data }: { data: FounderOs }) {
           index="08"
           title="Writing and field notes"
           current={current.id === "knowledge"}
+          mark={systemMarks.knowledge}
         >
           <div data-os-item className="border-t border-line py-10">
             <p className="max-w-xl text-base leading-relaxed text-ink-soft">{data.writing.intro}</p>
@@ -226,7 +248,13 @@ export default function SystemView({ data }: { data: FounderOs }) {
           </div>
         </OSModule>
 
-        <OSModule id="teaching" index="09" title="Teaching" current={current.id === "teaching"}>
+        <OSModule
+          id="teaching"
+          index="09"
+          title="Teaching"
+          current={current.id === "teaching"}
+          mark={systemMarks.teaching}
+        >
           {data.teaching.map((item) => (
             <article key={item.title} data-os-item className="border-t border-line py-10">
               <p className="font-mono-label text-ink-soft">{item.context}</p>
@@ -236,11 +264,23 @@ export default function SystemView({ data }: { data: FounderOs }) {
           ))}
         </OSModule>
 
-        <OSModule id="roadmap" index="10" title="Roadmap" current={current.id === "roadmap"}>
+        <OSModule
+          id="roadmap"
+          index="10"
+          title="Roadmap"
+          current={current.id === "roadmap"}
+          mark={systemMarks.roadmap}
+        >
           <Roadmap roadmap={data.roadmap} />
         </OSModule>
 
-        <OSModule id="archive" index="11" title="Archive" current={current.id === "archive"}>
+        <OSModule
+          id="archive"
+          index="11"
+          title="Archive"
+          current={current.id === "archive"}
+          mark={systemMarks.archive}
+        >
           {data.archive.map((item) => (
             <Link
               key={item.label}

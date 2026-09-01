@@ -11,7 +11,9 @@ import { TrackedMagneticButton } from "@/components/analytics/TrackedCta";
 import { animateAboutStat } from "@/animations/about";
 import { animateHero } from "@/animations/hero";
 import { useExperience } from "@/components/providers/ExperienceProvider";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import { aboutPage } from "@/about";
+import { pageMarks } from "@/visual-language/marks";
 
 function AboutStatValue({ value }: { value: string }) {
   const ref = useRef<HTMLParagraphElement>(null);
@@ -68,9 +70,18 @@ function AboutHero() {
       className="mx-auto grid max-w-[1440px] items-end gap-10 px-[var(--page-pad)] pb-16 pt-32 sm:pt-40 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.15fr)] lg:gap-16"
     >
       <div>
-        <p data-hero-copy className="font-mono-label text-gold">
-          {aboutPage.heroEyebrow}
-        </p>
+        <div className="flex items-center gap-4">
+          <span data-hero-visual>
+            <SystemObjectMark
+              src={pageMarks.about.src}
+              motion={pageMarks.about.motion}
+              surface={pageMarks.about.surface}
+            />
+          </span>
+          <p data-hero-copy className="font-mono-label text-gold">
+            {aboutPage.heroEyebrow}
+          </p>
+        </div>
         <h1 data-hero-headline className="mt-3.5 max-w-[22rem] type-h1 text-navy lg:max-w-[26rem]">
           {aboutPage.heroTitle}
         </h1>

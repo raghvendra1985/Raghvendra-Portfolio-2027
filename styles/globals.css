@@ -777,8 +777,8 @@ html.motion-ready [data-loader-root] {
 [data-product-plate] {
   border-top: 2px solid transparent;
   transition:
-    transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
-    border-color 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    transform var(--motion-panel) var(--ease-enter),
+    border-color var(--motion-ui) var(--ease-standard);
 }
 
 [data-product-plate]:hover,
@@ -788,7 +788,7 @@ html.motion-ready [data-loader-root] {
 
 @media (hover: hover) and (pointer: fine) {
   [data-product-plate]:hover {
-    transform: translate3d(0, -6px, 0);
+    transform: translate3d(0, -3px, 0);
   }
 }
 
@@ -806,6 +806,7 @@ html.motion-ready [data-loader-root] {
   [data-hero-line],
   [data-hero-copy],
   [data-hero-cta],
+  [data-hero-visual],
   [data-reveal],
   [data-image-reveal] {
     opacity: 1 !important;

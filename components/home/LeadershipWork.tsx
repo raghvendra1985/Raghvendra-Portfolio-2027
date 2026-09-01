@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { TrackedLink, TrackedMagneticButton } from "@/components/analytics/TrackedCta";
 import SectionReveal from "@/components/reveal/SectionReveal";
+import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import {
   getLeadershipProjects,
   leadershipWork,
   type LeadershipProject,
 } from "@/home/leadership-home";
+import { homeMarks } from "@/visual-language/marks";
 
 function ProjectFigure({
   project,
@@ -100,10 +102,17 @@ export default function LeadershipWork() {
           className="flex w-full flex-col gap-4 md:flex-row md:items-end md:justify-between"
           data-reveal-item
         >
-          <div className="max-w-3xl">
-            <p className="font-mono-label text-navy/80">{leadershipWork.eyebrow}</p>
-            <h2 className="mt-4 type-h2">{leadershipWork.title}</h2>
-            <p className="mt-4 max-w-[62ch] type-body text-ink-soft">{leadershipWork.intro}</p>
+          <div className="flex max-w-3xl items-start gap-4">
+            <SystemObjectMark
+              src={homeMarks.work.src}
+              motion={homeMarks.work.motion}
+              surface={homeMarks.work.surface}
+            />
+            <div>
+              <p className="font-mono-label text-navy/80">{leadershipWork.eyebrow}</p>
+              <h2 className="mt-4 type-h2">{leadershipWork.title}</h2>
+              <p className="mt-4 max-w-[62ch] type-body text-ink-soft">{leadershipWork.intro}</p>
+            </div>
           </div>
           <TrackedMagneticButton
             href={leadershipWork.all.href}
