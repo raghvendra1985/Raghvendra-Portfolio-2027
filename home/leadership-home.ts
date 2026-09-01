@@ -3,13 +3,17 @@ import { site } from "@/lib/site";
 
 export const leadershipHero = {
   name: "Raghvendra",
-  headline:
-    "Designing intelligent products. Building the systems and alignment that make them successful.",
-  supporting:
-    "I’m a product design leader working across strategy, AI-native experiences and organisational scale. I turn ambiguous opportunities into useful, trustworthy products—and help multidisciplinary teams deliver them.",
+  headline: "Intelligent products. Systems and alignment that make them hold.",
   roleLine: "Product Design · AI Experience · Strategy · Leadership",
   primary: { label: "View selected work", href: "#work" },
   secondary: { label: "Start a conversation", href: "/contact" },
+} as const;
+
+/** Homepage hero plate — replace still/video after Grok generation. */
+export const homeHeroMedia = {
+  still: "/assets/system-objects/home-hero.png",
+  webm: "/assets/system-objects/home-hero.webm",
+  mp4: "/assets/system-objects/home-hero.mp4",
 } as const;
 
 export const leadershipImpact = {

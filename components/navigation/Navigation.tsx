@@ -64,11 +64,12 @@ export default function Navigation() {
     if (open) {
       document.body.style.overflow = "hidden";
       lenis?.stop();
-      gsap.set(rootRef.current, {
-        yPercent: 0,
-        backdropFilter: "none",
-        webkitBackdropFilter: "none",
-      });
+      const nav = rootRef.current;
+      if (nav) {
+        gsap.set(nav, { yPercent: 0 });
+        nav.style.backdropFilter = "none";
+        nav.style.setProperty("-webkit-backdrop-filter", "none");
+      }
     } else {
       document.body.style.overflow = "";
       lenis?.start();
@@ -85,6 +86,7 @@ export default function Navigation() {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
+        toggleRef.current?.focus();
         setOpen(false);
         return;
       }
@@ -120,9 +122,18 @@ export default function Navigation() {
     toggleRef.current?.focus();
   }, [open]);
 
+  function closeMenu() {
+    toggleRef.current?.focus();
+    setOpen(false);
+  }
+
   function toggleMenu() {
-    if (!open) setOrigin(menuOriginFromToggle(toggleRef.current));
-    setOpen((value) => !value);
+    if (open) {
+      closeMenu();
+      return;
+    }
+    setOrigin(menuOriginFromToggle(toggleRef.current));
+    setOpen(true);
   }
 
   const linkClass = (active: boolean) =>
@@ -138,7 +149,7 @@ export default function Navigation() {
 
   return (
     <>
-      <MenuOverlay open={open} origin={origin} onClose={() => setOpen(false)} />
+      <MenuOverlay open={open} origin={origin} onClose={closeMenu} />
       <header
         ref={rootRef}
         data-nav

@@ -2,12 +2,14 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { gsap } from "@/animations/motion";
 import {
   morphSharedImage,
   playPageEnter,
   playPageExit,
 } from "@/animations/pageTransition";
 import { useExperience } from "@/components/providers/ExperienceProvider";
+import { scrollToHash } from "@/hooks/useLenis";
 
 export default function PageTransition() {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -41,7 +43,26 @@ export default function PageTransition() {
       if (target.target === "_blank" || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
         return;
       }
-      if (href === pathname) return;
+
+      const path = href.split(/[?#]/, 1)[0] || "/";
+      const hashIndex = href.indexOf("#");
+      const hash = hashIndex >= 0 ? href.slice(hashIndex).split("?")[0] : "";
+
+      // Same-route hash (e.g. Home → /#approach) must not play a page exit:
+      // pathname does not change, so playPageEnter never runs and the overlay
+      // stays covering the page.
+      if (path === pathname) {
+        gsap.set(overlay, { autoAlpha: 0 });
+        if (!hash) return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (window.location.hash !== hash) {
+          window.history.pushState(null, "", `${path}${hash}`);
+          window.dispatchEvent(new HashChangeEvent("hashchange"));
+        }
+        scrollToHash(hash);
+        return;
+      }
 
       event.preventDefault();
       event.stopPropagation();
