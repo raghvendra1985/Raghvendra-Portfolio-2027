@@ -1,124 +1,63 @@
-export type WorkCategory =
-  | "Enterprise Systems"
-  | "SaaS Products"
-  | "Founder & Ventures"
-  | "Web Design"
-  | "Freelance MVPs";
+export type {
+  WorkCategory,
+  WorkTier,
+  WorkLane,
+  ContributionGroup,
+  WorkEvidence,
+  NarrativeDepth,
+  CaseStudyOutcome,
+  EvidencedOutcome,
+  CaseStudyMandate,
+  CaseStudyDecision,
+  CaseStudyFrame,
+  CaseStudyAtAGlance,
+  CaseStudyVerification,
+  CaseStudy,
+  DeepCaseStudy,
+  SupportingCaseStudy,
+  CompactCaseStudy,
+  LightweightCaseStudy,
+  FlagshipCaseStudy,
+} from "./types";
 
-export type WorkTier = "flagship" | "lightweight";
+export {
+  isDeepCaseStudy,
+  isSupportingCaseStudy,
+  isCompactCaseStudy,
+  isFlagshipCaseStudy,
+} from "./types";
 
-export type WorkLane = "primary" | "enterprise" | "founder" | "archive";
+import type {
+  ContributionGroup,
+  WorkEvidence,
+  WorkCategory,
+  WorkLane,
+  CaseStudy,
+  DeepCaseStudy,
+  SupportingCaseStudy,
+  CompactCaseStudy,
+  LightweightCaseStudy,
+} from "./types";
 
-/** Primary contribution grouping for Work Index V2. Featured studies keep a group for continuation. */
-export type ContributionGroup =
-  | "product-direction"
-  | "complex-systems"
-  | "ai-founder"
-  | "enterprise-leadership"
-  | "archive";
+type IndexMetaKeys =
+  | "contributionGroup"
+  | "contribution"
+  | "evidence"
+  | "featuredDesignation"
+  | "indexCompact";
 
-export type WorkEvidence = "CASE STUDY" | "LIVE PRODUCT" | "SELECTED WORK" | "ARCHIVE";
-
-export type NarrativeDepth = "deep" | "supporting" | "compact";
-
-export type CaseStudyOutcome = {
-  title: string;
-  body: string;
-  level?: "business" | "operational" | "organisational";
-  confidence?: "company-metric" | "directional" | "estimate" | "observed";
-};
-
-export type CaseStudyMandate = {
-  owned: string;
-  others: string;
-  decisionMaker: string;
-  team: string;
-  authority: string;
-  deliveryConstraints: string;
-};
-
-export type CaseStudyDecision = {
-  situation: string;
-  options: { name: string; rejectedBecause?: string }[];
-  evidence: string;
-  tradeoff: string;
-  choice: string;
-  result: string;
-};
-
-export type CaseStudyFrame = {
-  src: string;
-  caption: string;
-};
-
-export type CaseStudy = {
-  index: string;
-  slug: string;
-  client: string;
-  title: string;
-  summary: string;
-  year: string;
-  category: WorkCategory;
-  industry: string;
-  tags: string[];
-  tone: "navy" | "green" | "gold" | "mist";
-  tier: WorkTier;
-  lane: WorkLane;
-  contributionGroup: ContributionGroup;
-  /** Outcome-oriented one-liner for index cards. */
-  contribution: string;
-  evidence: WorkEvidence;
-  /** Featured band designation (Product direction / AI product building / Enterprise leadership). */
-  featuredDesignation?: string;
-  /** Quieter supporting card on the work index (Growing With Kid, Bolo Buddy). */
-  indexCompact?: boolean;
-  featured?: boolean;
-  role?: string;
-  timeline?: string;
-  engagement?: string;
-  /** Opening situation. Prefer over challenge for new copy. */
-  situation?: string;
-  /** Legacy opening copy — used when situation is absent. */
-  challenge?: string;
-  people?: string;
-  apparentProblem?: string;
-  underlyingProblem?: string;
-  mandate?: CaseStudyMandate;
-  constraints?: string[];
-  decision?: CaseStudyDecision;
-  /** Compact template: three short decisions. */
-  decisions?: string[];
-  audience?: string;
-  designObjective?: string;
-  systemChangeSteps?: string[];
-  /** Legacy step rail — fallback when systemChangeSteps is absent. */
-  approachSteps?: string[];
-  iteration?: { title: string; body: string }[];
-  wouldChangeNow?: string;
-  narrativeDepth?: NarrativeDepth;
-  outcomes?: CaseStudyOutcome[];
-  href?: string;
-  /** Extra live destinations (site, App Store, Play Store, etc.). Falls back to `href`. */
-  links?: { label: string; href: string }[];
-  cover?: string;
-  /** Legacy gallery paths — prefer frames with captions. */
-  gallery?: string[];
-  /** Evidence frames with independent captions. */
-  frames?: CaseStudyFrame[];
-  /** Documentation sheets in a local carousel (Crowley design system). */
-  designSystem?: {
-    src: string;
-    caption: string;
-    width: number;
-    height: number;
-  }[];
-};
+type CaseStudyRecord =
+  | Omit<DeepCaseStudy, IndexMetaKeys>
+  | Omit<SupportingCaseStudy, IndexMetaKeys>
+  | Omit<CompactCaseStudy, IndexMetaKeys>
+  | Omit<LightweightCaseStudy, IndexMetaKeys>;
 
 export const contributionGroups: Exclude<ContributionGroup, "archive">[] = [
   "product-direction",
   "complex-systems",
   "ai-founder",
   "enterprise-leadership",
+  "brand-and-web",
 ];
 
 export const contributionGroupLabels: Record<ContributionGroup, string> = {
@@ -126,6 +65,7 @@ export const contributionGroupLabels: Record<ContributionGroup, string> = {
   "complex-systems": "Complex systems",
   "ai-founder": "AI and founder products",
   "enterprise-leadership": "Enterprise leadership",
+  "brand-and-web": "Brand and web work",
   archive: "Archive",
 };
 
@@ -157,7 +97,7 @@ const workIndexBySlug: Record<string, WorkIndexMeta> = {
     contribution:
       "Aligned wallet, UPI, banking, and investment teams around one consumer grammar so NYE stopped shipping as four products in one app.",
     evidence: "CASE STUDY",
-    featuredDesignation: "Enterprise leadership",
+    featuredDesignation: "Leadership and organisational influence",
   },
   sagacito: {
     contributionGroup: "product-direction",
@@ -166,19 +106,19 @@ const workIndexBySlug: Record<string, WorkIndexMeta> = {
     evidence: "CASE STUDY",
   },
   viralops: {
-    contributionGroup: "product-direction",
+    contributionGroup: "brand-and-web",
     contribution:
       "Protected dual-product scope and documented design decisions through an incomplete engagement without letting ambiguity erase the work.",
     evidence: "CASE STUDY",
   },
   "pacific-design-house": {
-    contributionGroup: "product-direction",
+    contributionGroup: "brand-and-web",
     contribution:
       "Made manufacturing capacity and ethical credentials scannable for international buyers, not buried under lookbook chrome.",
     evidence: "CASE STUDY",
   },
   "2886": {
-    contributionGroup: "product-direction",
+    contributionGroup: "brand-and-web",
     contribution:
       "Structured an artisan fashion site so craft technique and modern cut share one commercial journey.",
     evidence: "CASE STUDY",
@@ -327,10 +267,7 @@ export const laneLabels: Record<WorkLane, string> = {
   archive: "Archive",
 };
 
-const caseStudyRecords: Omit<
-  CaseStudy,
-  "contributionGroup" | "contribution" | "evidence" | "featuredDesignation" | "indexCompact"
->[] = [
+const caseStudyRecords: CaseStudyRecord[] = [
   {
     index: "01",
     slug: "eqty",
@@ -622,6 +559,21 @@ const caseStudyRecords: Omit<
     ],
     wouldChangeNow:
       "I would publish a living pattern inventory with owners per squad earlier, and track adoption with concrete examples of retired duplicate flows — so leadership evidence is organisational as well as product-live.",
+    atAGlance: {
+      user: "Everyday money consumers across wallet, UPI, banking, and investments",
+      problem: "Four product grammars inside one app — duplicated onboarding and trust patterns",
+      mandate: "UX leadership for a shared consumer experience language across squads",
+      decision: "Shared grammar with progress-led onboarding over product-line silos or one rigid template",
+      result: "Live super app on web and stores; directional reduction in duplicated design across teams",
+    },
+    verification: {
+      status: "needs-confirmation",
+      notes: [
+        "Confirm exact team composition and headcount during the Rapipay engagement.",
+        "Confirm which compliance-vs-usability conflict was the decisive example.",
+        "Confirm directional adoption claims with any non-confidential organisational evidence.",
+      ],
+    },
   },
   {
     index: "03",
@@ -844,6 +796,20 @@ const caseStudyRecords: Omit<
     ],
     wouldChangeNow:
       "I would instrument before/after draft acceptance rates against a fixed voice rubric earlier, and define explicit forget rules so memory does not quietly become a junk drawer of every past preference.",
+    atAGlance: {
+      user: "Founder-operator publishing LinkedIn for Growing With Kid",
+      problem: "Generic AI forgot voice, sources, and what worked — drafts drifted every session",
+      mandate: "Full product ownership of memory model, voice rules, and research-to-post workflow",
+      decision: "Memory-backed studio with human approval over prompt chat or autonomous posting",
+      result: "Runnable research-to-post prototype with persistent voice and source handling",
+    },
+    verification: {
+      status: "needs-confirmation",
+      notes: [
+        "Confirm early usage or quality evidence beyond founder-operated observation.",
+        "Confirm which voice-drift examples are publishable.",
+      ],
+    },
   },
   {
     index: "05",
@@ -880,7 +846,6 @@ const caseStudyRecords: Omit<
       "Audio-first and screen-free by design — text or narrated audio, mood-based categories — after parents rejected screen-dependent Western bedtime apps.",
       "Language selection across Hindi, English, Hinglish, and Tamil with cultural grounding in mythology and contemporary life; human voice narration (including family-recorded voice) over generic TTS as the trust cue.",
       "Child-safety and parent controls as product constraints: Bolo Buddy deliberately refuses to become open-ended chat, infinite video, or unsupervised generative play.",
-      // CONFIRM: specific parent/child test protocols and ₹299 validation results
     ],
     frames: [
       {
@@ -913,6 +878,13 @@ const caseStudyRecords: Omit<
         confidence: "directional",
       },
     ],
+    verification: {
+      status: "needs-confirmation",
+      notes: [
+        "Confirm specific parent/child test protocols before claiming research depth.",
+        "Confirm ₹299 subscription assumption vs any validation results.",
+      ],
+    },
   },
   {
     index: "06",
@@ -1290,7 +1262,6 @@ const caseStudyRecords: Omit<
         },
         {
           name: "Three-step progressive disclosure (route → cargo → contact)",
-          // CONFIRM: any A/B or usability session counts that preferred this path
         },
       ],
       evidence:
@@ -1368,6 +1339,21 @@ const caseStudyRecords: Omit<
     ],
     wouldChangeNow:
       "I would document the fragmented before-state as an explicit operator journey map earlier in the engagement, and I would instrument step abandonment by field type so product could see which customs or dimension prompts still create friction in production.",
+    atAGlance: {
+      user: "International shippers and Crowley quote operators",
+      problem: "A ~20-field spreadsheet-style quote split across trucking, ports, and brokers",
+      mandate: "Experience architecture for the wizard and design-system direction with product partners",
+      decision: "Three-step progressive disclosure over a reskin or spreadsheet-adjacent layout",
+      result: "Guided route → cargo → contact flow that still satisfies rate-engine and customs constraints",
+    },
+    verification: {
+      status: "needs-confirmation",
+      notes: [
+        "Confirm any usability or A/B evidence that preferred progressive disclosure.",
+        "Confirm exact ownership wording for design-system adoption vs sole authorship.",
+        "Confirm production validation or instrumentation evidence if publishable.",
+      ],
+    },
   },
   {
     index: "11",
@@ -1801,7 +1787,6 @@ const caseStudyRecords: Omit<
       "Cut scope to real-time ingestion, competitive pricing tracking, and one dashboard — not a full analytics platform.",
       "Design filters by business type so the same MVP speaks to restaurants and distributors without separate products.",
       "Treat “validated demand” as: stakeholders could run the core flow on working UI within the timeline — directional proof, not a published conversion study.",
-      // CONFIRM: who tested and what changed after first sessions
     ],
     frames: [
       {
@@ -1831,6 +1816,12 @@ const caseStudyRecords: Omit<
         confidence: "directional",
       },
     ],
+    verification: {
+      status: "needs-confirmation",
+      notes: [
+        "Confirm who tested the MVP and what changed after first sessions.",
+      ],
+    },
   },
   {
     index: "16",
@@ -1935,7 +1926,7 @@ export const flagshipStudies = caseStudies.filter((study) => study.tier === "fla
 
 export const primaryStudies = caseStudies.filter((study) => study.lane === "primary");
 
-const featuredSlugs = ["crowley", "gwk-ghostwriter", "nye"] as const;
+const featuredSlugs = ["nye", "crowley", "gwk-ghostwriter"] as const;
 
 export const featuredWork = featuredSlugs.map((slug) => {
   const study = caseStudies.find((item) => item.slug === slug);
@@ -1951,10 +1942,11 @@ export function isFeaturedStudy(slug: string) {
 
 /** Recruiter-weight order within each remaining-work group. */
 const remainingOrderByGroup: Record<Exclude<ContributionGroup, "archive">, string[]> = {
-  "product-direction": ["eqty", "sagacito", "viralops", "pacific-design-house", "2886"],
+  "product-direction": ["eqty", "sagacito"],
   "complex-systems": ["shuttl", "hempel", "obzrv"],
   "ai-founder": ["urban-prakriti", "growing-with-kid", "bolo-buddy"],
   "enterprise-leadership": ["verizon"],
+  "brand-and-web": ["viralops", "pacific-design-house", "2886"],
 };
 
 /** Remaining work on the index — excludes featured three; archive is separate. */

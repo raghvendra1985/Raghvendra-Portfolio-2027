@@ -1,5 +1,11 @@
 import { aboutPage } from "@/about";
-import { caseStudies, contributionGroupLabels } from "@/case-studies";
+import {
+  caseStudies,
+  contributionGroupLabels,
+  isCompactCaseStudy,
+  isDeepCaseStudy,
+  isSupportingCaseStudy,
+} from "@/case-studies";
 import { founderOs, osModules } from "@/founder-os";
 import {
   getFrameworkArticle,
@@ -15,51 +21,91 @@ function uniq(topics: string[]) {
   return [...new Set(topics.map((t) => t.trim()).filter(Boolean))];
 }
 
-function buildWorkEntries(): ConciergeEntry[] {
-  return caseStudies.map((study) => {
-    const groupLabel = contributionGroupLabels[study.contributionGroup];
-    const narrative = [
-      study.role,
-      study.engagement,
-      study.contribution,
-      study.situation ?? study.challenge,
+function narrativeForStudy(study: (typeof caseStudies)[number]): string {
+  const parts: string[] = [
+    study.role ?? "",
+    study.engagement ?? "",
+    study.contribution,
+    study.challenge ?? "",
+  ];
+
+  if (isDeepCaseStudy(study)) {
+    parts.push(
+      study.situation,
       study.people,
       study.apparentProblem,
       study.underlyingProblem,
+      [
+        study.mandate.owned,
+        study.mandate.others,
+        study.mandate.decisionMaker,
+        study.mandate.team,
+        study.mandate.authority,
+        study.mandate.deliveryConstraints,
+      ].join(" "),
+      ...study.constraints,
+      [
+        study.decision.situation,
+        ...study.decision.options.map((o) => `${o.name} ${o.rejectedBecause ?? ""}`),
+        study.decision.evidence,
+        study.decision.tradeoff,
+        study.decision.choice,
+        study.decision.result,
+      ].join(" "),
+      ...study.systemChangeSteps,
+      ...study.iteration.flatMap((i) => [i.title, i.body]),
+      study.wouldChangeNow,
+      ...study.outcomes.flatMap((o) => [o.title, o.body]),
+      ...study.frames.map((f) => f.caption),
+      study.atAGlance.user,
+      study.atAGlance.problem,
+      study.atAGlance.mandate,
+      study.atAGlance.decision,
+      study.atAGlance.result,
+    );
+  } else if (isSupportingCaseStudy(study)) {
+    parts.push(
+      study.situation,
+      [
+        study.mandate.owned,
+        study.mandate.others,
+        study.mandate.decisionMaker,
+        study.mandate.team,
+        study.mandate.authority,
+        study.mandate.deliveryConstraints,
+      ].join(" "),
+      [
+        study.decision.situation,
+        ...study.decision.options.map((o) => `${o.name} ${o.rejectedBecause ?? ""}`),
+        study.decision.evidence,
+        study.decision.tradeoff,
+        study.decision.choice,
+        study.decision.result,
+      ].join(" "),
+      ...study.systemChangeSteps,
+      study.wouldChangeNow,
+      ...study.outcomes.flatMap((o) => [o.title, o.body]),
+      ...study.frames.map((f) => f.caption),
+    );
+  } else if (isCompactCaseStudy(study)) {
+    parts.push(
+      study.situation,
       study.audience,
       study.designObjective,
-      study.mandate
-        ? [
-            study.mandate.owned,
-            study.mandate.others,
-            study.mandate.decisionMaker,
-            study.mandate.team,
-            study.mandate.authority,
-            study.mandate.deliveryConstraints,
-          ].join(" ")
-        : "",
-      ...(study.constraints ?? []),
-      study.decision
-        ? [
-            study.decision.situation,
-            ...study.decision.options.map(
-              (o) => `${o.name} ${o.rejectedBecause ?? ""}`,
-            ),
-            study.decision.evidence,
-            study.decision.tradeoff,
-            study.decision.choice,
-            study.decision.result,
-          ].join(" ")
-        : "",
-      ...(study.decisions ?? []),
-      ...(study.systemChangeSteps ?? study.approachSteps ?? []),
-      ...(study.iteration?.flatMap((i) => [i.title, i.body]) ?? []),
-      study.wouldChangeNow,
-      ...(study.outcomes?.flatMap((o) => [o.title, o.body]) ?? []),
-      ...(study.frames?.map((f) => f.caption) ?? []),
-    ]
-      .filter(Boolean)
-      .join(" ");
+      ...study.decisions,
+      ...study.outcomes.flatMap((o) => [o.title, o.body]),
+      ...study.frames.map((f) => f.caption),
+    );
+  }
+
+  // Never index study.verification — internal confirmation notes only
+  return parts.filter(Boolean).join(" ");
+}
+
+function buildWorkEntries(): ConciergeEntry[] {
+  return caseStudies.map((study) => {
+    const groupLabel = contributionGroupLabels[study.contributionGroup];
+    const narrative = narrativeForStudy(study);
 
     const url =
       study.tier === "flagship"
@@ -163,6 +209,7 @@ function buildSystemEntries(): ConciergeEntry[] {
     "complex systems",
     "AI and founder products",
     "enterprise leadership",
+    "brand and web work",
   ];
 
   const identity: ConciergeEntry = {
@@ -187,7 +234,7 @@ function buildSystemEntries(): ConciergeEntry[] {
       founderOs.identity.name,
       founderOs.identity.positioning,
       founderOs.identity.deck,
-      "Methodology, not a second portfolio. Contribution groups match Work: Product direction, Complex systems, AI and founder products, Enterprise leadership.",
+      "Methodology, not a second portfolio. Contribution groups match Work: Product direction, Complex systems, AI and founder products, Enterprise leadership, and Brand and web work.",
       founderOs.practiceMap
         .map(
           (row) =>
