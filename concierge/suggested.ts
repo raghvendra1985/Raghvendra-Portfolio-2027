@@ -14,7 +14,7 @@ export const openingQuestions: SuggestedQuestion[] = [
     label: "Which projects show product leadership?",
     query:
       "product direction product leadership EQTY Sagacito contribution group featured evidence",
-    preferIds: ["work:eqty", "work:sagacito", "work:nye", "work:verizon", "experience:leadership-arc"],
+    preferIds: ["work:crowley", "work:eqty", "work:sagacito", "work:nye", "experience:leadership-arc"],
     modeHint: "hiring",
   },
   {
@@ -38,11 +38,11 @@ export const openingQuestions: SuggestedQuestion[] = [
     query:
       "complex systems enterprise leadership Verizon Crowley Shuttl Hempel Rapipay contribution group",
     preferIds: [
-      "work:verizon",
-      "work:nye",
       "work:crowley",
+      "work:nye",
       "work:shuttl",
       "work:hempel",
+      "work:verizon",
       "experience:leadership-arc",
     ],
     modeHint: "hiring",
@@ -73,7 +73,7 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     id: "strongest-product",
     label: "Show me your strongest product work",
     query: "strongest product work flagship EQTY GWK Ghostwriter Growing With Kid Bolo Buddy",
-    preferIds: ["work:eqty", "work:gwk-ghostwriter", "work:growing-with-kid", "work:bolo-buddy"],
+    preferIds: ["work:crowley", "work:gwk-ghostwriter", "work:nye", "work:eqty"],
     modeHint: "hiring",
   },
   {

@@ -37,11 +37,21 @@ Keep featured slugs and group hash ids for TOC / concierge.
 
 ## Case-study layout
 
-**Opening:** Layout 219. Desktop is media | copy (cover + challenge). Mobile stacks. Keep back link, title, live links, and Role / Timeline / Engagement above that split.
+**Opening:** Layout 219. Desktop is media | copy (cover + **Situation** / compact **Context**). Mobile stacks. Keep back link, title, live links, and Role / Timeline / Engagement above that split.
 
-Keep what is not Relume: numbered `approachSteps` rail, outcome grid (title is the one-line proof), billboard Frames (one still + one caption from the matching approach step), Crowley design-system carousel (local rebuild; square chrome), Related / Different / Back.
+**Depth templates** (`narrativeDepth` on `CaseStudy`):
 
-Do not tab chapters. Do not pin-stack steps.
+| Depth | Slugs (typical) | Body |
+|---|---|---|
+| `deep` | Crowley, Rapipay, GWK Ghostwriter | People → apparent/underlying problem → mandate → constraints → critical decision → system change → iteration → outcomes → frames → would change now |
+| `supporting` | Shuttl, Sagacito, Hempel, EQTY | Mandate → one decision → system change → outcomes → frames → would change now |
+| `compact` | Verizon, Obzrv, Growing With Kid, Bolo Buddy, Viralops, PDH, 2886, … | Audience → design objective → three decisions → frames → outcomes |
+
+Keep: numbered system-change rail (`systemChangeSteps`), outcome grid with optional `level` / `confidence`, Frames with **independent** `frames[].caption` (never copy first sentence of steps), Crowley design-system carousel, Related / Different / Back.
+
+Footnote only when an outcome has `confidence: "company-metric"`: “Scale figures describe the operating context. Personal contributions are stated separately.”
+
+Do not tab chapters. Do not pin-stack steps. Do not hardcode a global disclaimer on every page.
 
 ## Visual rules
 

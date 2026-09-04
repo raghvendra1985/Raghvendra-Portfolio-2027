@@ -22,9 +22,41 @@ function buildWorkEntries(): ConciergeEntry[] {
       study.role,
       study.engagement,
       study.contribution,
-      study.challenge,
-      ...(study.approachSteps ?? []),
+      study.situation ?? study.challenge,
+      study.people,
+      study.apparentProblem,
+      study.underlyingProblem,
+      study.audience,
+      study.designObjective,
+      study.mandate
+        ? [
+            study.mandate.owned,
+            study.mandate.others,
+            study.mandate.decisionMaker,
+            study.mandate.team,
+            study.mandate.authority,
+            study.mandate.deliveryConstraints,
+          ].join(" ")
+        : "",
+      ...(study.constraints ?? []),
+      study.decision
+        ? [
+            study.decision.situation,
+            ...study.decision.options.map(
+              (o) => `${o.name} ${o.rejectedBecause ?? ""}`,
+            ),
+            study.decision.evidence,
+            study.decision.tradeoff,
+            study.decision.choice,
+            study.decision.result,
+          ].join(" ")
+        : "",
+      ...(study.decisions ?? []),
+      ...(study.systemChangeSteps ?? study.approachSteps ?? []),
+      ...(study.iteration?.flatMap((i) => [i.title, i.body]) ?? []),
+      study.wouldChangeNow,
       ...(study.outcomes?.flatMap((o) => [o.title, o.body]) ?? []),
+      ...(study.frames?.map((f) => f.caption) ?? []),
     ]
       .filter(Boolean)
       .join(" ");
@@ -48,6 +80,7 @@ function buildWorkEntries(): ConciergeEntry[] {
         study.industry,
         study.lane,
         study.tier,
+        study.narrativeDepth ?? "",
         study.featuredDesignation ?? "",
         ...study.tags,
         study.client,
@@ -57,6 +90,7 @@ function buildWorkEntries(): ConciergeEntry[] {
         `Contribution group: ${groupLabel}.`,
         `Evidence: ${study.evidence}.`,
         study.featuredDesignation ? `Featured as ${study.featuredDesignation}.` : "",
+        study.narrativeDepth ? `Narrative depth: ${study.narrativeDepth}.` : "",
         narrative || study.summary,
       ]
         .filter(Boolean)
