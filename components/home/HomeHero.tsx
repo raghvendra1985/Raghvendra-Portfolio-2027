@@ -5,7 +5,6 @@ import { animateHero } from "@/animations/hero";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { TrackedMagneticButton } from "@/components/analytics/TrackedCta";
 import HeroParticles from "@/components/home/HeroParticles";
-import HomeHeroVisual from "@/components/home/HomeHeroVisual";
 import { leadershipHero } from "@/home/leadership-home";
 
 export default function HomeHero() {
@@ -72,8 +71,8 @@ export default function HomeHero() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto grid max-w-[1440px] items-end gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
-        <div className="min-w-0">
+      <div className="relative z-10 mx-auto max-w-[1440px]">
+        <div className="min-w-0 max-w-[42rem]">
           <p data-hero-copy className="font-mono-label text-navy/80">
             {leadershipHero.roleLine}
           </p>
@@ -109,7 +108,6 @@ export default function HomeHero() {
             </div>
           </div>
         </div>
-        <HomeHeroVisual />
       </div>
     </section>
   );
