@@ -8,7 +8,6 @@ const NAVY = 0x0b1849;
 const GREEN = 0x124d1c;
 const GOLD = 0xe4b028;
 const MIST = 0xebede3;
-const CLEAR = 0x0a1238;
 
 export type ParticlesSwarmOptions = {
   count?: number;
@@ -18,7 +17,7 @@ export type ParticlesSwarmOptions = {
 };
 
 /**
- * Instanced particle swarm for the homepage hero visual plate.
+ * Instanced particle swarm for the homepage hero section background.
  * Quiet bloom, navy→green→gold progression, pause/dispose safe.
  */
 export class ParticlesSwarm {
@@ -71,18 +70,18 @@ export class ParticlesSwarm {
     const { width, height } = this.measure();
 
     this.scene = new THREE.Scene();
-    this.scene.fog = new THREE.FogExp2(CLEAR, 0.008);
-    this.scene.background = new THREE.Color(CLEAR);
+    this.scene.fog = new THREE.FogExp2(MIST, 0.006);
+    this.scene.background = null;
 
     this.camera = new THREE.PerspectiveCamera(55, width / Math.max(height, 1), 0.1, 2000);
     this.camera.position.set(0, 0, 110);
 
     this.renderer = new THREE.WebGLRenderer({
       antialias: this.sphereSegments >= 12,
-      alpha: false,
+      alpha: true,
       powerPreference: "high-performance",
     });
-    this.renderer.setClearColor(CLEAR, 1);
+    this.renderer.setClearColor(MIST, 0);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, this.dprCap));
     this.renderer.setSize(width, height, false);
     this.renderer.domElement.style.width = "100%";
@@ -93,7 +92,7 @@ export class ParticlesSwarm {
 
     this.composer = new EffectComposer(this.renderer);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
-    this.bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), 0.55, 0.28, 0.78);
+    this.bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), 0.42, 0.22, 0.82);
     this.composer.addPass(this.bloomPass);
 
     this.geometry = new THREE.SphereGeometry(0.28, this.sphereSegments, this.sphereSegments);
@@ -120,8 +119,8 @@ export class ParticlesSwarm {
           fresnel = clamp(1.0 - fresnel, 0.0, 1.0);
           fresnel = pow(fresnel, 2.2);
           vec3 mist = vec3(0.92, 0.93, 0.89);
-          vec3 col = mix(vColor * 0.55, vColor, fresnel) + mist * 0.04;
-          gl_FragColor = vec4(col, 0.18 + fresnel * 0.42);
+          vec3 col = mix(vColor * 0.45, vColor, fresnel) + mist * 0.03;
+          gl_FragColor = vec4(col, 0.12 + fresnel * 0.36);
         }
       `,
       transparent: true,

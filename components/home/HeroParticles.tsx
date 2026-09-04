@@ -10,8 +10,8 @@ type Props = {
 };
 
 /**
- * Mounts ParticlesSwarm into a full-bleed container.
- * Dynamic-imports three + swarm so the hero still SSR-renders a still plate.
+ * Mounts ParticlesSwarm as a full-bleed absolute layer.
+ * Dynamic-imports three + swarm so the hero still SSR-renders without WebGL.
  */
 export default function HeroParticles({ isMobile, onReady, onFail }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);

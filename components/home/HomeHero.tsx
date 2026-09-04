@@ -1,15 +1,25 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { animateHero } from "@/animations/hero";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { TrackedMagneticButton } from "@/components/analytics/TrackedCta";
+import HeroParticles from "@/components/home/HeroParticles";
 import HomeHeroVisual from "@/components/home/HomeHeroVisual";
 import { leadershipHero } from "@/home/leadership-home";
 
 export default function HomeHero() {
   const rootRef = useRef<HTMLElement>(null);
   const { config, pageReady } = useExperience();
+  const allowMotion = pageReady && !config.reducedMotion;
+  const [swarmLive, setSwarmLive] = useState(false);
+  const [swarmFailed, setSwarmFailed] = useState(false);
+
+  const onReady = useCallback(() => setSwarmLive(true), []);
+  const onFail = useCallback(() => {
+    setSwarmFailed(true);
+    setSwarmLive(false);
+  }, []);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -34,9 +44,35 @@ export default function HomeHero() {
   return (
     <section
       ref={rootRef}
-      className="relative isolate px-[var(--page-pad)] pb-10 pt-[calc(var(--nav-height)+0.75rem)] sm:pb-16 sm:pt-32 lg:pb-28 lg:pt-36"
+      className="relative isolate overflow-hidden px-[var(--page-pad)] pb-10 pt-[calc(var(--nav-height)+0.75rem)] sm:pb-16 sm:pt-32 lg:pb-28 lg:pt-36"
     >
-      <div className="mx-auto grid max-w-[1440px] items-end gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
+      {/* Full-section live background */}
+      {allowMotion && !swarmFailed ? (
+        <div
+          className={`pointer-events-none absolute inset-0 -z-10 transition-opacity duration-700 ${
+            swarmLive ? "opacity-100" : "opacity-0"
+          }`}
+          aria-hidden
+        >
+          <HeroParticles
+            isMobile={config.isMobile}
+            onReady={onReady}
+            onFail={onFail}
+          />
+        </div>
+      ) : null}
+
+      {/* Mist wash so navy type stays readable over the swarm */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(105deg, color-mix(in srgb, var(--mist) 92%, transparent) 0%, color-mix(in srgb, var(--mist) 70%, transparent) 45%, color-mix(in srgb, var(--mist) 35%, transparent) 100%)",
+        }}
+        aria-hidden
+      />
+
+      <div className="relative z-10 mx-auto grid max-w-[1440px] items-end gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
         <div className="min-w-0">
           <p data-hero-copy className="font-mono-label text-navy/80">
             {leadershipHero.roleLine}
