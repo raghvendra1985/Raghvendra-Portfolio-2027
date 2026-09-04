@@ -69,7 +69,7 @@ export default function HomeHero() {
                 variant="secondary"
                 cursor="Open"
                 className="w-full justify-center sm:w-auto"
-                event="contact_start"
+                event="contact_cta_click"
                 payload={{ source: "home_hero", channel: "cta" }}
               >
                 {leadershipHero.secondary.label}

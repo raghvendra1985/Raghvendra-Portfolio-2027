@@ -1,7 +1,7 @@
 "use client";
 
 import MagneticButton from "@/components/buttons/MagneticButton";
-import { track } from "@/lib/analytics";
+import { trackFunnel } from "@/lib/analytics";
 import { site } from "@/lib/site";
 
 export type ResumeDownloadSource =
@@ -38,9 +38,9 @@ export default function ResumeCta({
 
   const onTrack = () => {
     if (downloading) {
-      track("resume_download", { source });
+      trackFunnel("resume_download", { source });
     } else {
-      track("resume_requested", { source });
+      trackFunnel("contact_cta_click", { source, channel: "resume_request" });
     }
     onNavigate?.();
   };

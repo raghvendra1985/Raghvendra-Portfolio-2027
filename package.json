@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run resume:pdf && next build",
+    "build": "npm run validate:case-studies && npm run resume:pdf && next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "validate:case-studies": "tsx scripts/validate-case-studies.ts",
     "check:assets": "node scripts/check-assets.mjs",
     "library": "npx --yes serve public -l 4173 -n --no-port-switching",
     "og:products": "node scripts/render-product-og.mjs",

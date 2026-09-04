@@ -8,8 +8,15 @@ import ImageReveal from "@/components/reveal/ImageReveal";
 import WorkCover from "@/components/work/WorkCover";
 import CaseStudyCarousel from "@/components/work/CaseStudyCarousel";
 import MagneticButton from "@/components/buttons/MagneticButton";
-import type { CaseStudy, CaseStudyFrame, CaseStudyOutcome } from "@/case-studies";
-import { track } from "@/lib/analytics";
+import type {
+  CaseStudy,
+  CaseStudyAtAGlance,
+  CaseStudyFrame,
+  CaseStudyOutcome,
+  DeepCaseStudy,
+} from "@/case-studies";
+import { isDeepCaseStudy } from "@/case-studies";
+import { track, trackFunnel } from "@/lib/analytics";
 import { useCaseStudyScrollDepth } from "@/hooks/useCaseStudyScrollDepth";
 
 function frameSurface(src: string) {
@@ -38,7 +45,7 @@ function frameSurface(src: string) {
 }
 
 function resolveFrames(study: CaseStudy): CaseStudyFrame[] {
-  if (study.frames?.length) return study.frames;
+  if ("frames" in study && study.frames?.length) return study.frames;
   return (study.gallery ?? []).map((src) => ({ src, caption: "" }));
 }
 
@@ -90,8 +97,8 @@ function NumberedRail({ steps }: { steps: string[] }) {
 }
 
 function MandateBlock({ study }: { study: CaseStudy }) {
+  if (!("mandate" in study) || !study.mandate) return null;
   const m = study.mandate;
-  if (!m) return null;
   const rows: { label: string; value: string }[] = [
     { label: "I owned", value: m.owned },
     { label: "Others owned", value: m.others },
@@ -115,9 +122,34 @@ function MandateBlock({ study }: { study: CaseStudy }) {
   );
 }
 
+function AtAGlanceBlock({ glance }: { glance: CaseStudyAtAGlance }) {
+  const rows = [
+    { label: "User", value: glance.user },
+    { label: "Problem", value: glance.problem },
+    { label: "My mandate", value: glance.mandate },
+    { label: "Hard decision", value: glance.decision },
+    { label: "Result", value: glance.result },
+  ];
+  return (
+    <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
+      <ChapterLabel>At a glance</ChapterLabel>
+      <dl className="mt-8 grid gap-6 border-t border-line pt-6 sm:grid-cols-2 lg:grid-cols-5">
+        {rows.map((row) => (
+          <div key={row.label} data-case-chapter>
+            <dt className="font-mono-label text-ink-soft">{row.label}</dt>
+            <dd className="mt-2 text-sm leading-relaxed text-navy sm:text-base">
+              {row.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
 function DecisionBlock({ study }: { study: CaseStudy }) {
+  if (!("decision" in study) || !study.decision) return null;
   const d = study.decision;
-  if (!d) return null;
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
       <ChapterLabel>Critical decision</ChapterLabel>
@@ -237,11 +269,12 @@ function FramesBlock({ study }: { study: CaseStudy }) {
   );
 }
 
-function DeepBody({ study }: { study: CaseStudy }) {
-  const steps = study.systemChangeSteps ?? study.approachSteps ?? [];
-  const outcomes = study.outcomes ?? [];
+function DeepBody({ study }: { study: DeepCaseStudy }) {
+  const steps = study.systemChangeSteps;
+  const outcomes = study.outcomes;
   return (
     <>
+      <AtAGlanceBlock glance={study.atAGlance} />
       {study.people ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
           <ChapterLabel>People affected</ChapterLabel>
@@ -323,8 +356,9 @@ function DeepBody({ study }: { study: CaseStudy }) {
 }
 
 function SupportingBody({ study }: { study: CaseStudy }) {
-  const steps = study.systemChangeSteps ?? study.approachSteps ?? [];
-  const outcomes = study.outcomes ?? [];
+  if (!("systemChangeSteps" in study) || !study.systemChangeSteps) return null;
+  const steps = study.systemChangeSteps;
+  const outcomes = "outcomes" in study && study.outcomes ? study.outcomes : [];
   return (
     <>
       <MandateBlock study={study} />
@@ -337,7 +371,7 @@ function SupportingBody({ study }: { study: CaseStudy }) {
       ) : null}
       <OutcomesBlock outcomes={outcomes} />
       <FramesBlock study={study} />
-      {study.wouldChangeNow ? (
+      {"wouldChangeNow" in study && study.wouldChangeNow ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
           <ChapterLabel>What I would change now</ChapterLabel>
           <Prose className="mt-4 max-w-3xl" chapter>
@@ -350,11 +384,11 @@ function SupportingBody({ study }: { study: CaseStudy }) {
 }
 
 function CompactBody({ study }: { study: CaseStudy }) {
-  const outcomes = study.outcomes ?? [];
-  const decisions = study.decisions ?? [];
+  const outcomes = "outcomes" in study && study.outcomes ? study.outcomes : [];
+  const decisions = "decisions" in study && study.decisions ? study.decisions : [];
   return (
     <>
-      {study.audience ? (
+      {"audience" in study && study.audience ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
           <ChapterLabel>Audience</ChapterLabel>
           <Prose className="mt-4 max-w-3xl" chapter>
@@ -363,7 +397,7 @@ function CompactBody({ study }: { study: CaseStudy }) {
         </section>
       ) : null}
 
-      {study.designObjective ? (
+      {"designObjective" in study && study.designObjective ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
           <ChapterLabel>Design objective</ChapterLabel>
           <Prose className="mt-4 max-w-3xl" chapter>
@@ -400,6 +434,10 @@ export default function CaseStudyView({
   useCaseStudyScrollDepth(study.slug);
 
   useEffect(() => {
+    trackFunnel("case_study_view", { slug: study.slug, source: "case_study_page" });
+  }, [study.slug]);
+
+  useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
     const ctx = animateCaseStudy(root, config);
@@ -408,7 +446,8 @@ export default function CaseStudyView({
 
   const designSystem = study.designSystem ?? [];
   const depth = study.narrativeDepth ?? "supporting";
-  const situation = study.situation ?? study.challenge ?? "";
+  const situation =
+    ("situation" in study && study.situation) || study.challenge || "";
   const liveLinks =
     study.links?.length
       ? study.links
@@ -433,14 +472,20 @@ export default function CaseStudyView({
                 href={link.href}
                 variant="secondary"
                 cursor="Live"
-                onClick={() =>
+                onClick={() => {
+                  let host = "";
+                  try {
+                    host = new URL(link.href).hostname;
+                  } catch {
+                    host = "invalid";
+                  }
                   track("external_project_click", {
                     slug: study.slug,
-                    href: link.href,
+                    host,
                     source: "case_live_link",
                     label: link.label,
-                  })
-                }
+                  });
+                }}
               >
                 {link.label}
               </MagneticButton>
@@ -496,7 +541,7 @@ export default function CaseStudyView({
         </div>
       </section>
 
-      {depth === "deep" ? <DeepBody study={study} /> : null}
+      {depth === "deep" && isDeepCaseStudy(study) ? <DeepBody study={study} /> : null}
       {depth === "supporting" ? <SupportingBody study={study} /> : null}
       {depth === "compact" ? <CompactBody study={study} /> : null}
 

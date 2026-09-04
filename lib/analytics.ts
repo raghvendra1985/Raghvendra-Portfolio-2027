@@ -3,17 +3,29 @@ import { getStoredUtm } from "./utm";
 
 type Payload = Record<string, string | number | boolean | undefined | null>;
 
-/** Canonical Phase 1 funnel + existing product/commerce events. */
-export type AnalyticsEvent =
+/** Phase 1 hiring funnel — always use `trackFunnel` so `source` is required. */
+export type FunnelEvent =
   | "hero_work_click"
   | "work_filter_use"
   | "case_study_open"
+  | "case_study_view"
   | "case_study_depth_50"
   | "case_study_complete"
   | "resume_download"
+  | "contact_cta_click"
+  | "contact_form_start"
+  | "contact_submit"
+  | "contact_submit_failed";
+
+export type FunnelPayload = Payload & {
+  source: string;
+};
+
+/** Canonical Phase 1 funnel + existing product/commerce events. */
+export type AnalyticsEvent =
+  | FunnelEvent
   | "resume_requested"
   | "contact_start"
-  | "contact_submit"
   | "contact_form_failed"
   | "contact_cta_clicked"
   | "contact_intent_selected"
@@ -63,53 +75,120 @@ export type AnalyticsEvent =
   | "enterprise_case_clicked"
   /** @deprecated Prefer concierge_question */
   | "concierge_query"
-  /** @deprecated Prefer contact_start */
+  /** @deprecated Prefer contact_form_start */
   | "contact_form_started"
   /** @deprecated Prefer contact_submit */
   | "contact_form_submitted";
 
-const EVENT_ALIASES: Partial<Record<AnalyticsEvent, AnalyticsEvent>> = {
-  project_clicked: "case_study_open",
+/**
+ * Dual-write map for one release: emit the requested legacy name AND the
+ * canonical Phase 1 name. Never rewrite away the legacy event alone.
+ * `project_clicked` is NOT mapped to case_study_open — callers must choose.
+ */
+const LEGACY_DUAL_WRITE: Partial<Record<AnalyticsEvent, FunnelEvent | AnalyticsEvent>> = {
   work_toc_clicked: "work_filter_use",
   enterprise_case_clicked: "case_study_open",
   concierge_query: "concierge_question",
-  contact_form_started: "contact_start",
+  contact_form_started: "contact_form_start",
   contact_form_submitted: "contact_submit",
-  contact_cta_clicked: "contact_start",
+  contact_cta_clicked: "contact_cta_click",
+  contact_form_failed: "contact_submit_failed",
 };
+
+const ENTRY_KEY = "analytics_entry_path";
+const PREV_KEY = "analytics_previous_path";
+const CURR_KEY = "analytics_current_path";
+
+function currentPathname(): string {
+  if (typeof window === "undefined") return "";
+  return `${window.location.pathname}${window.location.hash || ""}`;
+}
+
+/** Keep SPA path history in sessionStorage. Call from a layout effect. */
+export function noteAnalyticsPath(pathname: string) {
+  if (typeof window === "undefined") return;
+  try {
+    const path = pathname || currentPathname();
+    if (!sessionStorage.getItem(ENTRY_KEY)) {
+      sessionStorage.setItem(ENTRY_KEY, path);
+    }
+    const current = sessionStorage.getItem(CURR_KEY);
+    if (current && current !== path) {
+      sessionStorage.setItem(PREV_KEY, current);
+    }
+    sessionStorage.setItem(CURR_KEY, path);
+  } catch {
+    /* private mode */
+  }
+}
+
+function referrerDomainOnly(): string {
+  if (typeof document === "undefined" || !document.referrer) return "";
+  try {
+    const url = new URL(document.referrer);
+    if (url.origin === window.location.origin) return "";
+    return url.hostname;
+  } catch {
+    return "";
+  }
+}
 
 function pageContext(): Record<string, string> {
   if (typeof window === "undefined") return {};
-  const path = `${window.location.pathname}${window.location.hash || ""}`;
-  let referrer = "";
+  const path = currentPathname();
+  let entry_path = path;
+  let previous_path = "";
   try {
-    if (document.referrer) {
-      const url = new URL(document.referrer);
-      referrer = `${url.host}${url.pathname}`;
+    entry_path = sessionStorage.getItem(ENTRY_KEY) || path;
+    previous_path = sessionStorage.getItem(PREV_KEY) || "";
+    if (!sessionStorage.getItem(ENTRY_KEY)) {
+      noteAnalyticsPath(path);
+      entry_path = path;
     }
   } catch {
-    referrer = "";
+    /* private mode */
   }
-  return { path, referrer };
+  return {
+    path,
+    entry_path,
+    previous_path,
+    referrer_domain: referrerDomainOnly(),
+  };
 }
 
-/**
- * Site-wide analytics hook. Sinks to Vercel Analytics and logs in development.
- * Always attaches stored UTMs, current path, and referrer. Does not send PII.
- * Deprecated event names are remapped to canonical funnel events.
- */
-export function track(event: AnalyticsEvent, payload: Payload = {}) {
-  const canonical = EVENT_ALIASES[event] ?? event;
+function emitRaw(event: string, payload: Payload) {
   const merged = { ...pageContext(), ...getStoredUtm(), ...payload };
-  if (canonical !== event) {
-    merged.legacy_event = event;
-  }
   const properties: Record<string, string | number | boolean | null> = {};
   for (const [key, value] of Object.entries(merged)) {
     if (value !== undefined) properties[key] = value;
   }
-  vercelTrack(canonical, properties);
+  vercelTrack(event, properties);
   if (process.env.NODE_ENV === "development") {
-    console.debug(`[analytics] ${canonical}`, merged);
+    console.debug(`[analytics] ${event}`, merged);
+  }
+}
+
+/**
+ * Required-source funnel tracker for Phase 1 metrics.
+ */
+export function trackFunnel(event: FunnelEvent, payload: FunnelPayload) {
+  if (!payload.source) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn(`[analytics] trackFunnel(${event}) missing source — dropped`);
+    }
+    return;
+  }
+  emitRaw(event, payload);
+}
+
+/**
+ * Site-wide analytics hook. Dual-writes legacy names for one release.
+ * Always attaches UTMs + SPA path context. Does not send external URL paths.
+ */
+export function track(event: AnalyticsEvent, payload: Payload = {}) {
+  const dual = LEGACY_DUAL_WRITE[event];
+  emitRaw(event, payload);
+  if (dual && dual !== event) {
+    emitRaw(dual, { ...payload, legacy_event: event });
   }
 }

@@ -80,7 +80,7 @@ function directAnswer(
     case "ai-products-built":
       return `Published AI product work includes ${named}. Trust and judgment boundaries live in the AI Trust Stack.`;
     case "fintech":
-      return `Fintech evidence spans the EQTY design partnership and UX leadership for NYE Money at Rapipay.`;
+      return `Fintech evidence starts with UX leadership for NYE Money at Rapipay, with EQTY as supporting founding design partnership.`;
     case "design-systems":
       return `Design systems are treated as operating infrastructure — DesignOps, critique standards, and visible decision paths.`;
     case "leadership":
@@ -94,11 +94,11 @@ function directAnswer(
     case "frameworks":
       return `Published frameworks include Decision Stack, Critique System, AI Trust Stack, Product Operating Model, Visible Learning Loop, and Product Filter.`;
     case "why-hire":
-      return `Hire for product leadership evidenced in Work, career eras on About, and the methodology on System — how decisions, experiments, and contribution groups connect.`;
+      return `Hire for product leadership evidenced in the featured trio — Rapipay, Crowley, and Ghostwriter — plus career eras on About and the methodology on System.`;
     case "system-methodology":
-      return `System is the methodology page — how to think, decide, build, learn, and operate. Work proves contribution across Product direction, Complex systems, AI and founder products, and Enterprise leadership.`;
+      return `System is the methodology page — how to think, decide, build, learn, and operate. Work proves contribution across Product direction, Complex systems, AI and founder products, Enterprise leadership, and Brand and web work.`;
     case "start-here":
-      return `Start with ${named}. Then ask about AI, fintech, or leadership if you want a narrower path.`;
+      return `Start with ${named} — Rapipay, Crowley, and Ghostwriter. Then ask about AI, fintech, or leadership if you want a narrower path.`;
     case "about-who":
       return `Raghvendra is a product design leader whose work moved from visual craft and industrial constraints through digital products and organisational decisions, into founder work and teaching. About holds the five chapters.`;
     case "availability":

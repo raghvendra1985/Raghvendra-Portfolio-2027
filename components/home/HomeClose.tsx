@@ -28,7 +28,7 @@ export default function HomeClose() {
             href={leadershipClose.primary.href}
             variant="gold"
             className="w-full justify-center sm:w-auto"
-            event="contact_start"
+            event="contact_cta_click"
             payload={{ source: "home_close", channel: "cta" }}
           >
             {leadershipClose.primary.label}

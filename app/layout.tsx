@@ -4,6 +4,7 @@ import { Manrope, Newsreader, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import ExperienceProvider from "@/components/providers/ExperienceProvider";
+import AnalyticsPathTracker from "@/components/analytics/AnalyticsPathTracker";
 import { site } from "@/lib/site";
 import { jsonLdScript, pageMetadataExtras, personJsonLd } from "@/lib/seo";
 
@@ -82,7 +83,10 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <ExperienceProvider>{children}</ExperienceProvider>
+        <ExperienceProvider>
+          <AnalyticsPathTracker />
+          {children}
+        </ExperienceProvider>
         <Analytics />
       </body>
     </html>

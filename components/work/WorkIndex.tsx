@@ -170,13 +170,19 @@ function StudyLink({
           rel="noopener noreferrer"
           data-cursor="Live"
           className="group block"
-          onClick={() =>
+          onClick={() => {
+            let host = "";
+            try {
+              host = study.href ? new URL(study.href).hostname : "";
+            } catch {
+              host = "invalid";
+            }
             track("external_project_click", {
               ...payload,
               source: featured ? "work_featured" : "work_group",
-              href: study.href,
-            })
-          }
+              host,
+            });
+          }}
         >
           {body}
         </a>
@@ -235,15 +241,21 @@ function ArchiveRow({ study }: { study: CaseStudy }) {
           rel="noopener noreferrer"
           className={`${className} text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold`}
           data-cursor="Live"
-          onClick={() =>
+          onClick={() => {
+            let host = "";
+            try {
+              host = study.href ? new URL(study.href).hostname : "";
+            } catch {
+              host = "invalid";
+            }
             track("external_project_click", {
               slug: study.slug,
               from: "work-archive",
               group: "archive",
               source: "work_archive",
-              href: study.href,
-            })
-          }
+              host,
+            });
+          }}
         >
           {inner}
         </a>

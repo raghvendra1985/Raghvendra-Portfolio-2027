@@ -202,7 +202,7 @@ export default function Navigation() {
             <TrackedLink
               href="/contact"
               aria-current={pathname === "/contact" ? "page" : undefined}
-              event="contact_start"
+              event="contact_cta_click"
               payload={{ source: "primary_nav", channel: "cta", dest: "/contact" }}
               className={linkClass(pathname === "/contact")}
             >

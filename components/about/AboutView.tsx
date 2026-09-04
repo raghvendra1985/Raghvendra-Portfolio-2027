@@ -297,7 +297,7 @@ export default function AboutView() {
               href={aboutPage.hiringPrimary.href}
               variant="primary"
               className="w-full justify-center sm:w-auto"
-              event="contact_start"
+              event="contact_cta_click"
               payload={{ source: "about", channel: "cta" }}
             >
               {aboutPage.hiringPrimary.label}
