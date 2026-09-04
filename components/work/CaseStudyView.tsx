@@ -9,6 +9,8 @@ import WorkCover from "@/components/work/WorkCover";
 import CaseStudyCarousel from "@/components/work/CaseStudyCarousel";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import type { CaseStudy } from "@/case-studies";
+import { track, trackFunnel } from "@/lib/analytics";
+import { useCaseStudyScrollDepth } from "@/hooks/useCaseStudyScrollDepth";
 
 function frameCaption(study: CaseStudy, index: number) {
   const step = study.approachSteps?.[index];
@@ -51,6 +53,12 @@ export default function CaseStudyView({
   const rootRef = useRef<HTMLDivElement>(null);
   const { config } = useExperience();
 
+  useCaseStudyScrollDepth(study.slug);
+
+  useEffect(() => {
+    trackFunnel("case_study_view", { slug: study.slug, source: "case_study_page" });
+  }, [study.slug]);
+
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -90,6 +98,20 @@ export default function CaseStudyView({
                 href={link.href}
                 variant="secondary"
                 cursor="Live"
+                onClick={() => {
+                  let host = "";
+                  try {
+                    host = new URL(link.href).hostname;
+                  } catch {
+                    host = "invalid";
+                  }
+                  track("external_project_click", {
+                    slug: study.slug,
+                    host,
+                    source: "case_live_link",
+                    label: link.label,
+                  });
+                }}
               >
                 {link.label}
               </MagneticButton>

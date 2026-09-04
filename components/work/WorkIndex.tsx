@@ -8,7 +8,7 @@ import ImageReveal from "@/components/reveal/ImageReveal";
 import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import WorkCard from "@/components/work/WorkCard";
 import WorkCover from "@/components/work/WorkCover";
-import { track } from "@/lib/analytics";
+import { track, trackFunnel } from "@/lib/analytics";
 import { workGroupMarks } from "@/visual-language/marks";
 import {
   contributionGroupLabels,
@@ -151,7 +151,9 @@ function StudyLink({
           href={`/work/${study.slug}`}
           data-cursor="View"
           className="group block"
-          onClick={() => track("project_clicked", payload)}
+          onClick={() =>
+            trackFunnel("case_study_open", { ...payload, source: featured ? "work_featured" : "work_group" })
+          }
         >
           {body}
         </Link>
@@ -168,7 +170,19 @@ function StudyLink({
           rel="noopener noreferrer"
           data-cursor="Live"
           className="group block"
-          onClick={() => track("project_clicked", { ...payload, live: true })}
+          onClick={() => {
+            let host = "";
+            try {
+              host = study.href ? new URL(study.href).hostname : "";
+            } catch {
+              host = "invalid";
+            }
+            track("external_project_click", {
+              ...payload,
+              source: featured ? "work_featured" : "work_group",
+              host,
+            });
+          }}
         >
           {body}
         </a>
@@ -204,7 +218,12 @@ function ArchiveRow({ study }: { study: CaseStudy }) {
           className={`${className} hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold`}
           data-cursor="View"
           onClick={() =>
-            track("project_clicked", { slug: study.slug, from: "work-archive", group: "archive" })
+            trackFunnel("case_study_open", {
+              slug: study.slug,
+              from: "work-archive",
+              group: "archive",
+              source: "work_archive",
+            })
           }
         >
           {inner}
@@ -222,14 +241,21 @@ function ArchiveRow({ study }: { study: CaseStudy }) {
           rel="noopener noreferrer"
           className={`${className} text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold`}
           data-cursor="Live"
-          onClick={() =>
-            track("project_clicked", {
+          onClick={() => {
+            let host = "";
+            try {
+              host = study.href ? new URL(study.href).hostname : "";
+            } catch {
+              host = "invalid";
+            }
+            track("external_project_click", {
               slug: study.slug,
               from: "work-archive",
               group: "archive",
-              live: true,
-            })
-          }
+              source: "work_archive",
+              host,
+            });
+          }}
         >
           {inner}
         </a>
@@ -252,7 +278,7 @@ function GroupNav({
   if (!groups.length) return null;
 
   function onTocClick(target: string) {
-    track("work_toc_clicked", { target });
+    trackFunnel("work_filter_use", { target, source: "work_toc" });
   }
 
   return (
