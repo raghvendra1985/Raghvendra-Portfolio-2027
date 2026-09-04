@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { trackFunnel } from "@/lib/analytics";
+import { caseStudyScrollProgress, trackFunnel } from "@/lib/analytics";
 
 /**
  * Case-study reading depth:
@@ -17,16 +17,6 @@ export function useCaseStudyScrollDepth(slug: string) {
     fired50.current = false;
     firedComplete.current = false;
 
-    function scrollableDistance() {
-      return document.documentElement.scrollHeight - window.innerHeight;
-    }
-
-    function progress() {
-      const scrollable = scrollableDistance();
-      if (scrollable <= 0) return 0;
-      return window.scrollY / scrollable;
-    }
-
     function markComplete(via: "continue" | "scroll_90") {
       if (firedComplete.current) return;
       firedComplete.current = true;
@@ -34,10 +24,11 @@ export function useCaseStudyScrollDepth(slug: string) {
     }
 
     function onScroll() {
-      const scrollable = scrollableDistance();
+      const doc = document.documentElement;
+      const scrollable = doc.scrollHeight - window.innerHeight;
       if (scrollable <= 0) return;
 
-      const p = progress();
+      const p = caseStudyScrollProgress(doc.scrollHeight, window.innerHeight, window.scrollY);
       if (!fired50.current && p >= 0.5) {
         fired50.current = true;
         trackFunnel("case_study_depth_50", { slug, source: "case_study" });

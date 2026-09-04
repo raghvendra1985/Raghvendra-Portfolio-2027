@@ -12,7 +12,8 @@
     "library": "npx --yes serve public -l 4173 -n --no-port-switching",
     "og:products": "node scripts/render-product-og.mjs",
     "resume:pdf": "tsx scripts/render-resume.tsx",
-    "test:commerce": "node --test scripts/commerce-test.mjs"
+    "test:commerce": "node --test scripts/commerce-test.mjs",
+    "test:phase1": "tsx scripts/test-phase1-analytics.ts"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.6.1",

@@ -1,24 +1,32 @@
 import { track as vercelTrack } from "@vercel/analytics";
 import { getStoredUtm } from "./utm";
+import {
+  isFunnelEvent,
+  planFunnelEmissions,
+  planTrackEmissions,
+  type FunnelEventName,
+} from "./analytics-core";
+
+export {
+  caseStudyScrollProgress,
+  CANONICAL_TO_LEGACY,
+  FUNNEL_EVENTS,
+  FUNNEL_EVENT_SET,
+  isFunnelEvent,
+  LEGACY_TO_CANONICAL,
+  planFunnelEmissions,
+  planTrackEmissions,
+  sanitizeAnalyticsPayload,
+  SENSITIVE_ANALYTICS_KEYS,
+} from "./analytics-core";
 
 type Payload = Record<string, string | number | boolean | undefined | null>;
 
 /**
- * Phase 1 hiring funnel — prefer `trackFunnel` so `source` is required.
+ * Phase 1 hiring funnel — always use `trackFunnel` so `source` is required.
  * Expected contact sequence: contact_cta_click → contact_start → contact_submit
  */
-export type FunnelEvent =
-  | "hero_work_click"
-  | "work_filter_use"
-  | "case_study_open"
-  | "case_study_view"
-  | "case_study_depth_50"
-  | "case_study_complete"
-  | "resume_download"
-  | "contact_cta_click"
-  | "contact_start"
-  | "contact_submit"
-  | "contact_submit_failed";
+export type FunnelEvent = FunnelEventName;
 
 export type FunnelPayload = Payload & {
   source: string;
@@ -31,14 +39,12 @@ export type AnalyticsEvent =
   | "contact_form_failed"
   | "contact_cta_clicked"
   | "contact_intent_selected"
-  | "concierge_question"
   | "concierge_open"
   | "concierge_result_click"
   | "concierge_no_result"
   | "concierge_voice_start"
   | "concierge_voice_result"
   | "concierge_speak"
-  | "external_project_click"
   | "products_page_viewed"
   | "product_filter_selected"
   | "product_card_viewed"
@@ -82,30 +88,7 @@ export type AnalyticsEvent =
   /** @deprecated Prefer contact_submit */
   | "contact_form_submitted";
 
-/**
- * Dual-write: legacy name → canonical Phase 1 name.
- * `project_clicked` is NOT mapped to case_study_open — callers must choose.
- */
-const LEGACY_TO_CANONICAL: Partial<Record<AnalyticsEvent, FunnelEvent | AnalyticsEvent>> = {
-  work_toc_clicked: "work_filter_use",
-  enterprise_case_clicked: "case_study_open",
-  concierge_query: "concierge_question",
-  contact_form_started: "contact_start",
-  contact_form_submitted: "contact_submit",
-  contact_cta_clicked: "contact_cta_click",
-  contact_form_failed: "contact_submit_failed",
-};
-
-/**
- * Dual-write: canonical funnel → legacy name (temporary, one release).
- */
-const CANONICAL_TO_LEGACY: Partial<Record<FunnelEvent, AnalyticsEvent>> = {
-  work_filter_use: "work_toc_clicked",
-  contact_cta_click: "contact_cta_clicked",
-  contact_start: "contact_form_started",
-  contact_submit: "contact_form_submitted",
-  contact_submit_failed: "contact_form_failed",
-};
+export type NonFunnelEvent = Exclude<AnalyticsEvent, FunnelEvent>;
 
 const ENTRY_KEY = "analytics_entry_path";
 const PREV_KEY = "analytics_previous_path";
@@ -185,31 +168,31 @@ function emitRaw(event: string, payload: Payload) {
  * Dual-writes the legacy pair when one exists for this release.
  */
 export function trackFunnel(event: FunnelEvent, payload: FunnelPayload) {
-  if (!payload.source) {
+  const planned = planFunnelEmissions(event, payload);
+  if (!planned.length) {
     if (process.env.NODE_ENV === "development") {
       console.warn(`[analytics] trackFunnel(${event}) missing source — dropped`);
     }
     return;
   }
-  emitRaw(event, payload);
-  const legacy = CANONICAL_TO_LEGACY[event];
-  if (legacy && legacy !== event) {
-    emitRaw(legacy, { ...payload, dual_of: event });
+  for (const row of planned) {
+    emitRaw(row.event, row.payload);
   }
 }
 
 /**
- * Site-wide analytics hook. Dual-writes legacy ↔ canonical for one release.
- * Always attaches UTMs + SPA path context. Does not send external URL paths.
+ * Non-funnel analytics. Funnel events must use `trackFunnel`.
+ * Dual-writes legacy → canonical only when the canonical pair has `source`.
  */
-export function track(event: AnalyticsEvent, payload: Payload = {}) {
-  emitRaw(event, payload);
-  const canonical = LEGACY_TO_CANONICAL[event];
-  if (canonical && canonical !== event) {
-    emitRaw(canonical, { ...payload, legacy_event: event });
+export function track(event: NonFunnelEvent, payload: Payload = {}) {
+  if (isFunnelEvent(event)) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn(`[analytics] track(${event}) is a funnel event — use trackFunnel`);
+    }
+    return;
   }
-  const legacy = CANONICAL_TO_LEGACY[event as FunnelEvent];
-  if (legacy && legacy !== event) {
-    emitRaw(legacy, { ...payload, dual_of: event });
+  const planned = planTrackEmissions(event, payload);
+  for (const row of planned) {
+    emitRaw(row.event, row.payload);
   }
 }

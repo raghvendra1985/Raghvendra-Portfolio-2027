@@ -8,7 +8,7 @@ import ImageReveal from "@/components/reveal/ImageReveal";
 import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import WorkCard from "@/components/work/WorkCard";
 import WorkCover from "@/components/work/WorkCover";
-import { track, trackFunnel } from "@/lib/analytics";
+import { trackFunnel } from "@/lib/analytics";
 import { workGroupMarks } from "@/visual-language/marks";
 import {
   contributionGroupLabels,
@@ -177,7 +177,7 @@ function StudyLink({
             } catch {
               host = "invalid";
             }
-            track("external_project_click", {
+            trackFunnel("external_project_click", {
               ...payload,
               source: featured ? "work_featured" : "work_group",
               host,
@@ -248,7 +248,7 @@ function ArchiveRow({ study }: { study: CaseStudy }) {
             } catch {
               host = "invalid";
             }
-            track("external_project_click", {
+            trackFunnel("external_project_click", {
               slug: study.slug,
               from: "work-archive",
               group: "archive",

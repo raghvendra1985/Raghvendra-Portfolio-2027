@@ -9,7 +9,7 @@ import WorkCover from "@/components/work/WorkCover";
 import CaseStudyCarousel from "@/components/work/CaseStudyCarousel";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import type { CaseStudy } from "@/case-studies";
-import { track, trackFunnel } from "@/lib/analytics";
+import { trackFunnel } from "@/lib/analytics";
 import { useCaseStudyScrollDepth } from "@/hooks/useCaseStudyScrollDepth";
 
 function frameCaption(study: CaseStudy, index: number) {
@@ -105,7 +105,7 @@ export default function CaseStudyView({
                   } catch {
                     host = "invalid";
                   }
-                  track("external_project_click", {
+                  trackFunnel("external_project_click", {
                     slug: study.slug,
                     host,
                     source: "case_live_link",
