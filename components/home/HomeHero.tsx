@@ -57,8 +57,8 @@ export default function HomeHero() {
                 href={leadershipHero.primary.href}
                 cursor="View"
                 className="w-full justify-center sm:w-auto"
-                event="project_clicked"
-                payload={{ from: "home_hero", slug: "selected" }}
+                event="hero_work_click"
+                payload={{ source: "home_hero", dest: leadershipHero.primary.href }}
               >
                 {leadershipHero.primary.label}
               </TrackedMagneticButton>
@@ -69,8 +69,8 @@ export default function HomeHero() {
                 variant="secondary"
                 cursor="Open"
                 className="w-full justify-center sm:w-auto"
-                event="contact_cta_clicked"
-                payload={{ from: "home_hero" }}
+                event="contact_start"
+                payload={{ source: "home_hero", channel: "cta" }}
               >
                 {leadershipHero.secondary.label}
               </TrackedMagneticButton>

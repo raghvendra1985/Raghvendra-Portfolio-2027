@@ -80,8 +80,8 @@ function ProjectCopy({ project }: { project: LeadershipProject }) {
         href={project.href}
         className="mt-8 inline-flex min-h-11 items-center font-mono-label text-navy hover:text-green"
         data-cursor="Open"
-        event="project_clicked"
-        payload={{ from: "home_leadership_work", slug: project.slug }}
+        event="case_study_open"
+        payload={{ source: "home_leadership_work", slug: project.slug }}
       >
         Read case study →
       </TrackedLink>

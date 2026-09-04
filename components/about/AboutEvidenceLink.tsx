@@ -10,8 +10,8 @@ function evidenceTracking(href: string): {
 } {
   if (href.startsWith("/work/")) {
     return {
-      event: "project_clicked",
-      payload: { from: "about", slug: href.replace("/work/", "") },
+      event: "case_study_open",
+      payload: { source: "about", slug: href.replace("/work/", "") },
     };
   }
   if (href.startsWith("/knowledge/")) {

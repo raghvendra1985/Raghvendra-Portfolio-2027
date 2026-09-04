@@ -9,6 +9,8 @@ import WorkCover from "@/components/work/WorkCover";
 import CaseStudyCarousel from "@/components/work/CaseStudyCarousel";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import type { CaseStudy, CaseStudyFrame, CaseStudyOutcome } from "@/case-studies";
+import { track } from "@/lib/analytics";
+import { useCaseStudyScrollDepth } from "@/hooks/useCaseStudyScrollDepth";
 
 function frameSurface(src: string) {
   const crowley = src.includes("/work/crowley/");
@@ -395,6 +397,8 @@ export default function CaseStudyView({
   const rootRef = useRef<HTMLDivElement>(null);
   const { config } = useExperience();
 
+  useCaseStudyScrollDepth(study.slug);
+
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -429,6 +433,14 @@ export default function CaseStudyView({
                 href={link.href}
                 variant="secondary"
                 cursor="Live"
+                onClick={() =>
+                  track("external_project_click", {
+                    slug: study.slug,
+                    href: link.href,
+                    source: "case_live_link",
+                    label: link.label,
+                  })
+                }
               >
                 {link.label}
               </MagneticButton>

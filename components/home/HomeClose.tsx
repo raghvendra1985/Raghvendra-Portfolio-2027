@@ -28,8 +28,8 @@ export default function HomeClose() {
             href={leadershipClose.primary.href}
             variant="gold"
             className="w-full justify-center sm:w-auto"
-            event="contact_cta_clicked"
-            payload={{ from: "home" }}
+            event="contact_start"
+            payload={{ source: "home_close", channel: "cta" }}
           >
             {leadershipClose.primary.label}
           </TrackedMagneticButton>

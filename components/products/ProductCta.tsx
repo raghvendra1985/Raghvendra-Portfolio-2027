@@ -57,7 +57,7 @@ export default function ProductCta({
           track("checkout_started", { slug: product.slug, price: product.price });
           return;
         }
-        track(cta.kind === "whatsapp-buy" ? "buy_cta_clicked" : "contact_cta_clicked", {
+        track(cta.kind === "whatsapp-buy" ? "buy_cta_clicked" : "contact_start", {
           from: cta.kind === "whatsapp-buy" ? "product_buy" : "product_notify",
           channel: "whatsapp",
           slug: product.slug,

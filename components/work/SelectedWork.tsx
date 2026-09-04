@@ -117,8 +117,8 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
           href="/work"
           className="inline-flex min-h-11 shrink-0 items-center font-mono-label text-navy"
           data-cursor="View"
-          event="project_clicked"
-          payload={{ from: "home_all" }}
+          event="hero_work_click"
+          payload={{ source: "home_selected_work_all", dest: "/work" }}
         >
           {homeWork.all} →
         </TrackedLink>
@@ -234,7 +234,9 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                       href={`/work/${study.slug}`}
                       data-work-row
                       data-cursor="View"
-                      onClick={() => track("project_clicked", { slug: study.slug, from: "home" })}
+                      onClick={() =>
+                        track("case_study_open", { slug: study.slug, source: "home_selected_work" })
+                      }
                       className={`block border-t border-line py-8 ${
                         index === active
                           ? "opacity-100"
