@@ -28,6 +28,7 @@ import Navigation from "@/components/navigation/Navigation";
 import SiteFooter from "@/components/footer/SiteFooter";
 import { ConciergeProvider } from "@/components/concierge/ConciergeProvider";
 import ConciergeHost from "@/components/concierge/ConciergeHost";
+import NowPlayingFloat from "@/components/music/NowPlayingFloat";
 import HangingCharm from "@/components/delight/HangingCharm";
 
 type ExperienceValue = {
@@ -131,6 +132,7 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
         <Navigation />
         <HangingCharm />
         <ConciergeHost />
+        <NowPlayingFloat />
         <div className="site-content flex min-h-full flex-1 flex-col pb-20 lg:pb-0">
           <main id="main" className="flex-1">
             {children}

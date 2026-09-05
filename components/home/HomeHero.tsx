@@ -1,19 +1,24 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { animateHero } from "@/animations/hero";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { TrackedMagneticButton } from "@/components/analytics/TrackedCta";
-import HomeHeroVisual from "@/components/home/HomeHeroVisual";
-import { leadershipHero, leadershipImpact } from "@/home/leadership-home";
-
-/** Hybrid: D split layout + A short headline/proof + C evidence strip (terms only). */
-const hybridHeadline = "Intelligent products that hold.";
-const hybridProof = "20 years · 500+ designers taught";
+import HeroParticles from "@/components/home/HeroParticles";
+import { leadershipHero } from "@/home/leadership-home";
 
 export default function HomeHero() {
   const rootRef = useRef<HTMLElement>(null);
   const { config, pageReady } = useExperience();
+  const allowMotion = pageReady && !config.reducedMotion;
+  const [swarmLive, setSwarmLive] = useState(false);
+  const [swarmFailed, setSwarmFailed] = useState(false);
+
+  const onReady = useCallback(() => setSwarmLive(true), []);
+  const onFail = useCallback(() => {
+    setSwarmFailed(true);
+    setSwarmLive(false);
+  }, []);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -36,21 +41,47 @@ export default function HomeHero() {
   }, [config, pageReady]);
 
   return (
-    <section ref={rootRef} className="relative isolate pb-10 sm:pb-16 lg:pb-28">
-      <div className="mx-auto grid max-w-[1440px] lg:grid-cols-2 lg:items-stretch">
-        <div className="flex flex-col justify-end px-[var(--page-pad)] pb-10 pt-[calc(var(--nav-height)+0.75rem)] sm:pt-32 lg:pb-16 lg:pr-10 lg:pt-36">
+    <section
+      ref={rootRef}
+      className="relative isolate overflow-hidden px-[var(--page-pad)] pb-10 pt-[calc(var(--nav-height)+0.75rem)] sm:pb-16 sm:pt-32 lg:pb-28 lg:pt-36"
+    >
+      {/* Full-section live background */}
+      {allowMotion && !swarmFailed ? (
+        <div
+          className={`pointer-events-none absolute inset-0 -z-10 transition-opacity duration-700 ${
+            swarmLive ? "opacity-100" : "opacity-0"
+          }`}
+          aria-hidden
+        >
+          <HeroParticles
+            isMobile={config.isMobile}
+            onReady={onReady}
+            onFail={onFail}
+          />
+        </div>
+      ) : null}
+
+      {/* Mist wash so navy type stays readable over the swarm */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(105deg, color-mix(in srgb, var(--mist) 92%, transparent) 0%, color-mix(in srgb, var(--mist) 70%, transparent) 45%, color-mix(in srgb, var(--mist) 35%, transparent) 100%)",
+        }}
+        aria-hidden
+      />
+
+      <div className="relative z-10 mx-auto max-w-[1440px]">
+        <div className="min-w-0 max-w-[42rem]">
           <p data-hero-copy className="font-mono-label text-navy/80">
             {leadershipHero.roleLine}
           </p>
           <h1
             data-hero-headline
-            className="mt-4 max-w-[14em] type-hero text-navy sm:mt-5 lg:mt-6"
+            className="mt-4 max-w-[16em] font-display text-[clamp(1.85rem,1.35rem+2.8vw,3.75rem)] font-normal leading-[1.08] tracking-[-0.03em] text-navy sm:mt-5 lg:mt-6"
           >
-            {hybridHeadline}
+            {leadershipHero.headline}
           </h1>
-          <p data-hero-copy className="mt-4 font-mono-label text-gold">
-            {hybridProof}
-          </p>
           <div className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
             <div data-hero-cta className="w-full sm:w-auto">
               <TrackedMagneticButton
@@ -75,29 +106,6 @@ export default function HomeHero() {
                 {leadershipHero.secondary.label}
               </TrackedMagneticButton>
             </div>
-          </div>
-
-          <div data-hero-copy className="mt-12 border border-line bg-paper">
-            <ul className="grid sm:grid-cols-2">
-              {leadershipImpact.items.map((item, index) => (
-                <li
-                  key={item.term}
-                  className={`px-4 py-4 font-serif text-base text-navy sm:py-5 sm:text-lg ${
-                    index > 0 ? "border-t border-line" : ""
-                  } ${index % 2 === 1 ? "sm:border-t-0 sm:border-l sm:border-line" : ""} ${
-                    index >= 2 ? "sm:border-t sm:border-line" : ""
-                  }`}
-                >
-                  {item.term}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="relative border-t border-line bg-paper px-[var(--page-pad)] py-10 lg:border-l lg:border-t-0 lg:py-16 lg:pl-10 lg:-mr-[var(--page-pad)] lg:pr-[var(--page-pad)]">
-          <div className="mx-auto flex w-full max-w-[26rem] items-center justify-center lg:max-w-none lg:scale-110 lg:origin-center [&_[data-hero-visual]]:bg-transparent">
-            <HomeHeroVisual />
           </div>
         </div>
       </div>

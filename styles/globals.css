@@ -1192,3 +1192,41 @@ html.motion-ready [data-loader-root] {
     transform: none;
   }
 }
+
+
+/* now-playing float */
+@keyframes now-playing-bar {
+  0%,
+  100% {
+    height: 0.2rem;
+  }
+  50% {
+    height: 1.35rem;
+  }
+}
+
+@keyframes now-playing-orb-a {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  40% {
+    transform: translate(28px, 36px);
+  }
+  70% {
+    transform: translate(54px, 8px);
+  }
+}
+
+@keyframes now-playing-orb-b {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  35% {
+    transform: translate(-36px, -24px);
+  }
+  65% {
+    transform: translate(-12px, -48px);
+  }
+}
