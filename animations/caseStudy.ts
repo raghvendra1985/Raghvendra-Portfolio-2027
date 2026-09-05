@@ -30,17 +30,33 @@ export function animateCaseStudy(root: HTMLElement, config: MotionConfig) {
     }
 
     if (hero) {
+      // Fade/blur the hero frame; scale only inner media so the grid cell
+      // width never grows past the Situation column during entrance.
+      const heroMedia =
+        hero.querySelector("[data-image-media]") ??
+        hero.querySelector("[data-image-reveal]") ??
+        hero;
       gsap.fromTo(
         hero,
-        { autoAlpha: 0, scale: 1.06, filter: motionBlur(18, config) },
+        { autoAlpha: 0, filter: motionBlur(18, config) },
         {
           autoAlpha: 1,
-          scale: 1,
           filter: "blur(0px)",
           duration: DURATION.xl,
           ease: EASE,
         },
       );
+      if (heroMedia !== hero) {
+        gsap.fromTo(
+          heroMedia,
+          { scale: 1.06 },
+          {
+            scale: 1,
+            duration: DURATION.xl,
+            ease: EASE,
+          },
+        );
+      }
     }
 
     chapters.forEach((chapter) => {

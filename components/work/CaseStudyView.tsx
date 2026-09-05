@@ -631,12 +631,17 @@ export default function CaseStudyView({
       </section>
 
       <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
+        <div
+          className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16"
+          data-case-hero-grid
+        >
           <div
             data-case-hero
             data-shared-image-target
-            className={`relative min-h-[240px] lg:min-h-[420px] ${
-              study.slug === "crowley" ? "aspect-[4/5]" : "aspect-[16/10]"
+            className={`relative min-w-0 w-full overflow-hidden ${
+              study.slug === "crowley"
+                ? "aspect-[4/5] min-h-[240px]"
+                : "aspect-[16/10]"
             }`}
           >
             <ImageReveal
@@ -646,12 +651,16 @@ export default function CaseStudyView({
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
               objectFit={study.slug === "crowley" ? "contain" : "cover"}
-              parallax={study.slug === "crowley" ? 0 : 0.12}
+              parallax={study.slug === "crowley" ? 0 : 0.08}
             >
-              <WorkCover study={study} className="h-full min-h-[240px] lg:min-h-[420px]" />
+              <WorkCover study={study} className="h-full w-full" />
             </ImageReveal>
           </div>
-          <article data-case-chapter>
+          <article
+            data-case-chapter
+            data-case-situation
+            className="relative z-[1] min-w-0"
+          >
             <p className="font-mono-label text-green">
               {depth === "compact" ? "Context" : "Situation"}
             </p>
