@@ -46,6 +46,7 @@ export const navLinks = [
   { label: "Start a conversation", href: "/contact" },
   { label: "System", href: "/system", hint: "How I think, decide, and operate" },
   { label: "Studio", href: "/studio", hint: "The room around the work" },
+  { label: "Teaching", href: "/teaching", hint: "Workshops and student reflections" },
 ] as const;
 
 export type NavLink = (typeof navLinks)[number];
@@ -59,6 +60,7 @@ const menuHrefs = [
   "/products",
   "/system",
   "/studio",
+  "/teaching",
   "/contact",
 ] as const;
 
@@ -81,6 +83,7 @@ export const footerLinks = {
     { label: "Products", href: "/products" },
     { label: "System", href: "/system" },
     { label: "Studio", href: "/studio" },
+    { label: "Teaching", href: "/teaching" },
     { label: "Contact", href: "/contact" },
   ],
   social: [

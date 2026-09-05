@@ -5,7 +5,7 @@ colors:
   navy: "#0B1849"
   green: "#124D1C"
   gold: "#E4B028"
-  mist: "#EBEDE3"
+  mist: "#FFFFFF"
   paper: "#F5F4F0"
   paper-edge: "#D9D9D5"
   ink: "#0B1849"

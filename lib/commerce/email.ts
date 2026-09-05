@@ -66,11 +66,11 @@ async function sendMail(mail: Mail) {
 function layout(title: string, body: string) {
   return `<!doctype html>
 <html>
-  <body style="margin:0;background:#EBEDE3;color:#0B1849;font-family:Georgia,serif;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#EBEDE3;padding:32px 16px;">
+  <body style="margin:0;background:#ffffff;color:#0B1849;font-family:Georgia,serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;padding:32px 16px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="background:#EBEDE3;max-width:560px;">
+          <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;max-width:560px;">
             <tr><td style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:0.16em;color:#0B1849;padding-bottom:16px;">RAGHVENDRA SINGH</td></tr>
             <tr><td style="height:4px;background:#E4B028;"></td></tr>
             <tr><td style="padding-top:28px;font-size:28px;line-height:1.2;">${escapeHtml(title)}</td></tr>
@@ -84,7 +84,7 @@ function layout(title: string, body: string) {
 }
 
 function button(href: string, label: string) {
-  return `<p style="margin:28px 0 0;"><a href="${href}" style="display:inline-block;background:#0B1849;color:#EBEDE3;text-decoration:none;padding:14px 20px;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:0.08em;">${label}</a></p>`;
+  return `<p style="margin:28px 0 0;"><a href="${href}" style="display:inline-block;background:#0B1849;color:#ffffff;text-decoration:none;padding:14px 20px;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:0.08em;">${label}</a></p>`;
 }
 
 export function purchaseConfirmedMarkup(input: {

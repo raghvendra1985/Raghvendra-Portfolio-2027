@@ -3,7 +3,10 @@ import { getStoredUtm } from "./utm";
 
 type Payload = Record<string, string | number | boolean | undefined | null>;
 
-/** Phase 1 hiring funnel — always use `trackFunnel` so `source` is required. */
+/**
+ * Phase 1 hiring funnel — always use `trackFunnel` so `source` is required.
+ * Expected contact sequence: contact_cta_click → contact_start → contact_submit
+ */
 export type FunnelEvent =
   | "hero_work_click"
   | "work_filter_use"
@@ -13,7 +16,7 @@ export type FunnelEvent =
   | "case_study_complete"
   | "resume_download"
   | "contact_cta_click"
-  | "contact_form_start"
+  | "contact_start"
   | "contact_submit"
   | "contact_submit_failed";
 
@@ -25,7 +28,6 @@ export type FunnelPayload = Payload & {
 export type AnalyticsEvent =
   | FunnelEvent
   | "resume_requested"
-  | "contact_start"
   | "contact_form_failed"
   | "contact_cta_clicked"
   | "contact_intent_selected"
@@ -75,24 +77,35 @@ export type AnalyticsEvent =
   | "enterprise_case_clicked"
   /** @deprecated Prefer concierge_question */
   | "concierge_query"
-  /** @deprecated Prefer contact_form_start */
+  /** @deprecated Prefer contact_start (form interaction) */
   | "contact_form_started"
   /** @deprecated Prefer contact_submit */
   | "contact_form_submitted";
 
 /**
- * Dual-write map for one release: emit the requested legacy name AND the
- * canonical Phase 1 name. Never rewrite away the legacy event alone.
+ * Dual-write: legacy name → canonical Phase 1 name.
  * `project_clicked` is NOT mapped to case_study_open — callers must choose.
  */
-const LEGACY_DUAL_WRITE: Partial<Record<AnalyticsEvent, FunnelEvent | AnalyticsEvent>> = {
+const LEGACY_TO_CANONICAL: Partial<Record<AnalyticsEvent, FunnelEvent | AnalyticsEvent>> = {
   work_toc_clicked: "work_filter_use",
   enterprise_case_clicked: "case_study_open",
   concierge_query: "concierge_question",
-  contact_form_started: "contact_form_start",
+  contact_form_started: "contact_start",
   contact_form_submitted: "contact_submit",
   contact_cta_clicked: "contact_cta_click",
   contact_form_failed: "contact_submit_failed",
+};
+
+/**
+ * Dual-write: canonical funnel → legacy name (temporary, one release).
+ * Keeps old dashboards receiving data while new names are primary.
+ */
+const CANONICAL_TO_LEGACY: Partial<Record<FunnelEvent, AnalyticsEvent>> = {
+  work_filter_use: "work_toc_clicked",
+  contact_cta_click: "contact_cta_clicked",
+  contact_start: "contact_form_started",
+  contact_submit: "contact_form_submitted",
+  contact_submit_failed: "contact_form_failed",
 };
 
 const ENTRY_KEY = "analytics_entry_path";
@@ -170,6 +183,7 @@ function emitRaw(event: string, payload: Payload) {
 
 /**
  * Required-source funnel tracker for Phase 1 metrics.
+ * Dual-writes the legacy pair when one exists for this release.
  */
 export function trackFunnel(event: FunnelEvent, payload: FunnelPayload) {
   if (!payload.source) {
@@ -179,16 +193,20 @@ export function trackFunnel(event: FunnelEvent, payload: FunnelPayload) {
     return;
   }
   emitRaw(event, payload);
+  const legacy = CANONICAL_TO_LEGACY[event];
+  if (legacy && legacy !== event) {
+    emitRaw(legacy, { ...payload, dual_of: event });
+  }
 }
 
 /**
- * Site-wide analytics hook. Dual-writes legacy names for one release.
+ * Site-wide analytics hook. Dual-writes legacy ↔ canonical for one release.
  * Always attaches UTMs + SPA path context. Does not send external URL paths.
  */
 export function track(event: AnalyticsEvent, payload: Payload = {}) {
-  const dual = LEGACY_DUAL_WRITE[event];
   emitRaw(event, payload);
-  if (dual && dual !== event) {
-    emitRaw(dual, { ...payload, legacy_event: event });
+  const canonical = LEGACY_TO_CANONICAL[event];
+  if (canonical && canonical !== event) {
+    emitRaw(canonical, { ...payload, legacy_event: event });
   }
 }

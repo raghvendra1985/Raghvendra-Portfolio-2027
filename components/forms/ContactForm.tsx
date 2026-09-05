@@ -57,7 +57,7 @@ export default function ContactForm() {
   function markStarted() {
     if (startedRef.current) return;
     startedRef.current = true;
-    trackFunnel("contact_form_start", { intent: intent ?? "none", source: "contact_form" });
+    trackFunnel("contact_start", { intent: intent ?? "none", source: "contact_form" });
   }
 
   function validate() {
