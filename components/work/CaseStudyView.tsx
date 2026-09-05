@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { animateCaseStudy } from "@/animations/caseStudy";
 import { useExperience } from "@/components/providers/ExperienceProvider";
@@ -13,6 +14,10 @@ import CaseStudyFrameInterlude, {
   CaseStudyMediaGrid,
 } from "@/components/work/CaseStudyFrameInterlude";
 import CaseStudyEditorialLayout from "@/components/work/CaseStudyEditorialLayout";
+import CaseStudyWireframesGrid, {
+  isMotionGifFrame,
+  isWireframeFrame,
+} from "@/components/work/CaseStudyWireframesGrid";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import type {
   CaseStudy,
@@ -301,7 +306,7 @@ function FramesBlock({
                   parallax={surface.parallax}
                 />
                 {frame.caption ? (
-                  <figcaption className="mt-4 max-w-3xl text-lg leading-snug text-navy">
+                  <figcaption className="mt-4 max-w-3xl type-lead text-navy">
                     {frame.caption}
                   </figcaption>
                 ) : null}
@@ -329,6 +334,11 @@ function StudyFrames({ study }: { study: CaseStudy }) {
     );
   }
   if (product.length) {
+    const motion = process.filter(isMotionGifFrame);
+    const wireframes = process.filter(isWireframeFrame);
+    const rest = process.filter(
+      (frame) => !isMotionGifFrame(frame) && !isWireframeFrame(frame),
+    );
     return (
       <>
         <CaseStudyProductStack
@@ -336,7 +346,43 @@ function StudyFrames({ study }: { study: CaseStudy }) {
           client={study.client}
           label="Product"
         />
-        <FramesBlock study={study} frames={process} label="Process" />
+        {motion.length ? (
+          <section
+            className="mx-auto max-w-[1440px] min-w-0 px-[var(--page-pad)] pb-20"
+            aria-label={`${study.client} motion`}
+          >
+            <ChapterLabel>Motion</ChapterLabel>
+            <ul className="mt-8 flex flex-wrap items-end justify-start gap-8 sm:gap-10">
+              {motion.map((frame, index) => (
+                <li key={frame.src} data-case-gallery className="w-[7.5rem] sm:w-36">
+                  <figure>
+                    <div className="relative aspect-square w-full overflow-hidden bg-surface-dim">
+                      <Image
+                        src={frame.src}
+                        alt={
+                          frame.caption
+                            ? `${study.client} — ${frame.caption}`
+                            : `${study.client} — motion ${index + 1}`
+                        }
+                        fill
+                        unoptimized
+                        sizes="9rem"
+                        className="object-contain object-center"
+                      />
+                    </div>
+                    {frame.caption ? (
+                      <figcaption className="mt-3 type-small text-ink-soft">
+                        {frame.caption}
+                      </figcaption>
+                    ) : null}
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+        <CaseStudyWireframesGrid frames={wireframes} client={study.client} />
+        <FramesBlock study={study} frames={rest} label="Process" />
       </>
     );
   }

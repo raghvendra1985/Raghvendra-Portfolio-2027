@@ -410,8 +410,8 @@ const caseStudyRecords: CaseStudyRecord[] = [
       },
     ],
     cover: "/assets/work/nye/cover.png",
-    productStackCount: 17,
-    mediaLayout: "editorial-alternate",
+    productStackCount: 8,
+    mediaLayout: "default",
     showreelFeaturedCount: 3,
     gallery: [
       "/assets/work/nye/gallery-01.jpg",

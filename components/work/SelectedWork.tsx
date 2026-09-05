@@ -175,23 +175,26 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
 
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="relative hidden min-h-[70vh] lg:block">
-            <div className="sticky top-24 overflow-hidden">
-              <div data-work-clip-target className="relative aspect-[4/5]">
+            <div className="sticky top-[calc(var(--nav-height)+0.75rem)] overflow-hidden">
+              <div data-work-clip-target className="relative aspect-[4/5] overflow-hidden">
                 <div data-parallax="0.08" className="absolute inset-0">
                   {studies.map((study, index) => {
                     const copy = homeWorkCards[study.slug];
+                    const behind = index !== active;
                     return (
                       <div
                         key={study.slug}
                         data-work-visual
-                        className="absolute inset-0"
-                        aria-hidden={index !== active}
+                        className={`absolute inset-0 origin-center transition-transform duration-500 ease-out ${
+                          behind ? "scale-[0.96] translate-y-3" : "scale-100 translate-y-0"
+                        }`}
+                        aria-hidden={behind}
                       >
                         <StudyCover
                           study={study}
                           title={copy?.title ?? study.title}
                           priority={index === 0}
-                          decorative={index !== active}
+                          decorative={behind}
                           className="h-full w-full"
                         />
                       </div>
@@ -200,8 +203,12 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                 </div>
               </div>
               <div className="mt-4 flex items-center justify-between gap-4">
-                <p className="font-mono-label text-ink-soft" aria-live="polite">
-                  {String(active + 1).padStart(2, "0")} / {total}
+                <p
+                  className="font-display text-[length:var(--text-h3)] font-medium leading-none tracking-[var(--tracking-h3)] text-navy"
+                  aria-live="polite"
+                >
+                  {String(active + 1).padStart(2, "0")}
+                  <span className="font-mono-label ml-2 text-ink-soft">/ {total}</span>
                 </p>
                 <div className="h-px flex-1 bg-line">
                   <div data-work-progress className="h-px origin-left scale-x-0 bg-gold" />
@@ -215,7 +222,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
           </div>
 
           <ul
-            className="flex flex-col"
+            className="flex min-w-0 flex-col"
             data-work-list
             onPointerEnter={() => {
               pausedRef.current = true;
@@ -228,7 +235,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
               const copy = homeWorkCards[study.slug];
               if (!copy) return null;
               return (
-                <li key={study.slug}>
+                <li key={study.slug} className="min-w-0">
                   <WorkCard>
                     <Link
                       href={`/work/${study.slug}`}
@@ -237,31 +244,32 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                       onClick={() =>
                         track("case_study_open", { slug: study.slug, source: "home_selected_work" })
                       }
-                      className={`block border-t border-line py-8 ${
+                      className={`block border-t border-line py-8 transition-opacity duration-300 lg:min-h-[min(36vh,18rem)] lg:py-10 ${
                         index === active
                           ? "opacity-100"
-                          : "opacity-80 lg:opacity-60 lg:hover:opacity-100"
+                          : "opacity-80 lg:opacity-45 lg:hover:opacity-100"
                       }`}
                       aria-current={index === active ? "true" : undefined}
                       onFocus={() => setActive(index)}
                       onMouseEnter={() => setActive(index)}
                     >
                       <div className="lg:hidden">
-                        <div className="mb-6 overflow-hidden">
+                        <div className="mb-5 overflow-hidden bg-surface-dim">
                           <div data-work-cover>
                             <StudyCover
                               study={study}
                               title={copy.title}
-                              className="aspect-[4/5] min-h-[220px] w-full"
+                              className="aspect-[4/5] min-h-[220px] w-full md:min-h-[280px]"
                             />
                           </div>
                         </div>
-                      </div>
-                      <div className="flex items-baseline justify-between gap-4">
-                        <p className="font-mono-label text-ink-soft">{copy.client}</p>
-                        <p className="font-mono-label text-ink-soft lg:hidden">
-                          {String(index + 1).padStart(2, "0")} / {total}
+                        <p className="font-display text-[length:var(--text-h3)] font-medium leading-none tracking-[var(--tracking-h3)] text-navy">
+                          {String(index + 1).padStart(2, "0")}
+                          <span className="font-mono-label ml-2 text-ink-soft">/ {total}</span>
                         </p>
+                      </div>
+                      <div className="mt-4 flex items-baseline justify-between gap-4 lg:mt-0">
+                        <p className="font-mono-label text-ink-soft">{copy.client}</p>
                       </div>
                       <h3 className="mt-3 type-h3">{copy.title}</h3>
                       <p className="mt-2 font-mono-label text-ink-soft">
@@ -270,7 +278,9 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                       <p className="mt-3 font-mono-label text-navy">{copy.tags.join(" · ")}</p>
                       <p className="mt-4 max-w-[65ch] type-body text-ink">{copy.problem}</p>
                       <p className="mt-3 max-w-[65ch] type-body text-ink">{copy.result}</p>
-                      <p className="mt-5 font-mono-label text-navy">View case study →</p>
+                      <p className="mt-5 inline-flex min-h-11 items-center font-mono-label text-navy">
+                        View case study →
+                      </p>
                     </Link>
                   </WorkCard>
                 </li>
