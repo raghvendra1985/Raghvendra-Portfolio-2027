@@ -17,11 +17,9 @@ import {
   type MotionConfig,
 } from "@/animations/motion";
 import { useMotionConfig } from "@/hooks/useMotionConfig";
-import { hasVisited, markVisited } from "@/animations/loader";
 import { setLenis, getLenis } from "@/hooks/useLenis";
 import { captureUtmFromLocation } from "@/lib/utm";
 import { hashScrollOffsetPx } from "@/lib/hash-scroll";
-import Loader from "@/components/loader/Loader";
 import Cursor from "@/components/cursor/Cursor";
 import AmbientLayer from "@/components/ambient/AmbientLayer";
 import ProgressBar from "@/components/progress/ProgressBar";
@@ -53,20 +51,13 @@ export function useExperience() {
 export default function ExperienceProvider({ children }: { children: ReactNode }) {
   const config = useMotionConfig();
   const pathname = usePathname();
-  const [pageReady, setPageReady] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
+  const [pageReady, setPageReady] = useState(true);
 
   useEffect(() => {
     registerMotion();
-    const first = !hasVisited();
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (first && !reduced) {
-      document.documentElement.classList.add("is-loading");
-      setShowLoader(true);
-    } else {
-      document.documentElement.classList.add("motion-ready");
-      setPageReady(true);
-    }
+    document.documentElement.classList.remove("is-loading");
+    document.documentElement.classList.add("motion-ready");
+    setPageReady(true);
   }, []);
 
   useEffect(() => {
@@ -74,7 +65,6 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
       document.documentElement.classList.remove("is-loading");
       document.documentElement.classList.add("motion-ready");
       setPageReady(true);
-      setShowLoader(false);
       return;
     }
 
@@ -124,18 +114,8 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
   }, []);
 
   const finishLoader = useCallback(() => {
-    setShowLoader(false);
+    /* Loader removed — kept for API compatibility with markPageReady callers. */
   }, []);
-
-  useEffect(() => {
-    if (pageReady) return;
-    const id = window.setTimeout(() => {
-      markVisited();
-      markPageReady();
-      finishLoader();
-    }, 2000);
-    return () => window.clearTimeout(id);
-  }, [pageReady, markPageReady, finishLoader]);
 
   const value = useMemo(
     () => ({ config, pageReady, markPageReady, finishLoader }),
@@ -145,7 +125,6 @@ export default function ExperienceProvider({ children }: { children: ReactNode }
   return (
     <ExperienceContext.Provider value={value}>
       <ConciergeProvider>
-        {showLoader ? <Loader /> : null}
         <Cursor />
         <AmbientLayer />
         <ProgressBar />

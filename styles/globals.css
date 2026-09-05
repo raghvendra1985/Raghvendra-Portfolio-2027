@@ -170,11 +170,11 @@ textarea:focus-visible,
 }
 
 html.is-loading body {
-  overflow: hidden;
+  /* First-visit loader removed — keep rule inert if class is ever set. */
 }
 
 html.is-loading [data-nav] {
-  opacity: 0;
+  opacity: 1;
 }
 
 [data-nav][data-menu-open="true"] {
@@ -206,8 +206,7 @@ html.is-loading [data-nav] {
 }
 
 html.is-loading .site-content {
-  opacity: 0;
-  animation: rs-loader-failsafe 0.25s ease 2.4s forwards;
+  opacity: 1;
 }
 
 html.motion-ready .site-content {

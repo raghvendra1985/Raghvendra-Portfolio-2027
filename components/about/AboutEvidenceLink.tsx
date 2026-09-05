@@ -1,17 +1,24 @@
 "use client";
 
-import type { AnalyticsEvent } from "@/lib/analytics";
+import {
+  type FunnelEvent,
+  type FunnelPayload,
+  type NonFunnelEvent,
+} from "@/lib/analytics";
 import { TrackedLink } from "@/components/analytics/TrackedCta";
 import type { EvidenceLink } from "@/about";
 
-function evidenceTracking(href: string): {
-  event: AnalyticsEvent;
-  payload: Record<string, string>;
-} {
+type Payload = Record<string, string | number | boolean | undefined | null>;
+
+function evidenceTracking(
+  href: string,
+):
+  | { event: FunnelEvent; payload: FunnelPayload }
+  | { event: NonFunnelEvent; payload?: Payload } {
   if (href.startsWith("/work/")) {
     return {
-      event: "project_clicked",
-      payload: { from: "about", slug: href.replace("/work/", "") },
+      event: "case_study_open",
+      payload: { source: "about", slug: href.replace("/work/", "") },
     };
   }
   if (href.startsWith("/knowledge/")) {
@@ -30,8 +37,7 @@ export default function AboutEvidenceLink({ evidence }: { evidence: EvidenceLink
       href={evidence.href}
       className="mt-4 inline-flex min-h-11 items-center font-mono-label text-green"
       data-cursor="Open"
-      event={tracking.event}
-      payload={tracking.payload}
+      {...tracking}
     >
       {evidence.label} →
     </TrackedLink>
