@@ -410,7 +410,7 @@ const caseStudyRecords: CaseStudyRecord[] = [
       },
     ],
     cover: "/assets/work/nye/cover.png",
-    productStackCount: 10,
+    productStackCount: 17,
     mediaLayout: "editorial-alternate",
     showreelFeaturedCount: 3,
     gallery: [
@@ -424,6 +424,13 @@ const caseStudyRecords: CaseStudyRecord[] = [
       "/assets/work/nye/gallery-08.jpg",
       "/assets/work/nye/motion/loading-y-outline.gif",
       "/assets/work/nye/motion/success-tick.gif",
+      "/assets/work/nye/motion/wireframes/medium-fidelity.gif",
+      "/assets/work/nye/motion/wireframes/concept-01.gif",
+      "/assets/work/nye/motion/wireframes/concept-02.gif",
+      "/assets/work/nye/motion/wireframes/concept-03.gif",
+      "/assets/work/nye/motion/wireframes/concept-04.gif",
+      "/assets/work/nye/motion/wireframes/concept-06.gif",
+      "/assets/work/nye/motion/wireframes/concept-08.gif",
       "/assets/work/nye/process-discovery.jpg",
       "/assets/work/nye/process-weekly-planning.jpg",
       "/assets/work/nye/process-ux-thematic-01.jpg",
@@ -664,6 +671,41 @@ const caseStudyRecords: CaseStudyRecord[] = [
         kind: "gif",
         caption:
           "Success confirmation: shared completion cue across money journeys.",
+      },
+      {
+        src: "/assets/work/nye/motion/wireframes/medium-fidelity.gif",
+        kind: "gif",
+        caption: "Medium-fidelity website mockup — early web structure for NYE.",
+      },
+      {
+        src: "/assets/work/nye/motion/wireframes/concept-01.gif",
+        kind: "gif",
+        caption: "Website concept 01 — exploratory layout motion.",
+      },
+      {
+        src: "/assets/work/nye/motion/wireframes/concept-02.gif",
+        kind: "gif",
+        caption: "Website concept 02 — exploratory layout motion.",
+      },
+      {
+        src: "/assets/work/nye/motion/wireframes/concept-03.gif",
+        kind: "gif",
+        caption: "Website concept 03 — exploratory layout motion.",
+      },
+      {
+        src: "/assets/work/nye/motion/wireframes/concept-04.gif",
+        kind: "gif",
+        caption: "Website concept 04 — exploratory layout motion.",
+      },
+      {
+        src: "/assets/work/nye/motion/wireframes/concept-06.gif",
+        kind: "gif",
+        caption: "Website concept 06 — exploratory layout motion.",
+      },
+      {
+        src: "/assets/work/nye/motion/wireframes/concept-08.gif",
+        kind: "gif",
+        caption: "Website concept 08 — exploratory layout motion.",
       },
       {
         src: "/assets/work/nye/process-discovery.jpg",
