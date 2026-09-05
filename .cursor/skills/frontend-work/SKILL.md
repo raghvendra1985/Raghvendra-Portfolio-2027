@@ -27,8 +27,8 @@ Do not invent photos or tag chips. Do not change homepage `SelectedWork`, Produc
 
 Keep the existing IA. Do not flatten featured + groups + archive into one grid.
 
-1. **Featured evidence** (EQTY, GWK Ghostwriter, NYE): Portfolio 23. Full-width editorial row — cover beside copy on desktop, stacked on mobile. `type-h2`, 16/10 covers, Featured + designation + evidence.
-2. **Contribution groups:** Portfolio 1. Two columns from `md`. Same fields: evidence, client, title, role/year, contribution, green text CTA. Compact cards are a quieter scale of the same card.
+1. **Featured evidence** (Rapipay, Crowley, GWK Ghostwriter): Portfolio 23. Full-width editorial row — cover beside copy on desktop, stacked on mobile. `type-h2`, 16/10 covers, Featured + designation + evidence.
+2. **Contribution groups:** Portfolio 1. Two columns from `md`. Same fields: evidence, client, title, role/year, contribution, green text CTA. Compact cards are a quieter scale of the same card. Groups include Product direction, Complex systems, AI and founder products, Enterprise leadership, and Brand and web work.
 3. **Archive:** list rows, not cards.
 
 **Flat Index Rule:** no Relume shadows, borders, or card chrome. Hover stays `animateWorkCard`.
@@ -37,11 +37,23 @@ Keep featured slugs and group hash ids for TOC / concierge.
 
 ## Case-study layout
 
-**Opening:** Layout 219. Desktop is media | copy (cover + challenge). Mobile stacks. Keep back link, title, live links, and Role / Timeline / Engagement above that split.
+**Opening:** Layout 219. Desktop is media | copy (cover + **Situation** / compact **Context**). Mobile stacks. Keep back link, title, live links, and Role / Timeline / Engagement above that split.
 
-Keep what is not Relume: numbered `approachSteps` rail, outcome grid (title is the one-line proof), billboard Frames (one still + one caption from the matching approach step), Crowley design-system carousel (local rebuild; square chrome), Related / Different / Back.
+**Depth templates** (`narrativeDepth` on `CaseStudy`):
 
-Do not tab chapters. Do not pin-stack steps.
+| Depth | Slugs (typical) | Body |
+|---|---|---|
+| `deep` | Crowley, Rapipay, GWK Ghostwriter | At a glance → People → apparent/underlying problem → mandate → constraints → critical decision → system change → iteration → outcomes → frames → would change now |
+| `supporting` | Shuttl, Sagacito, Hempel, EQTY | Mandate → one decision → system change → outcomes → frames → would change now |
+| `compact` | Verizon, Obzrv, Growing With Kid, Bolo Buddy, Viralops, PDH, 2886, … | Audience → design objective → three decisions → frames → outcomes |
+
+`CaseStudy` is a discriminated union (`DeepCaseStudy` | `SupportingCaseStudy` | `CompactCaseStudy` | lightweight). Required fields differ by depth. Internal `verification` notes must never render or enter concierge retrieval.
+
+Keep: numbered system-change rail (`systemChangeSteps`), outcome grid with optional `level` / `confidence`, Frames with **independent** `frames[].caption` (never copy first sentence of steps), Crowley design-system carousel, Related / Different / Back.
+
+Footnote only when an outcome has `confidence: "company-metric"`: “Scale figures describe the operating context. Personal contributions are stated separately.”
+
+Do not tab chapters. Do not pin-stack steps. Do not hardcode a global disclaimer on every page.
 
 ## Visual rules
 
