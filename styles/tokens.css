@@ -77,6 +77,15 @@
 @media (max-width: 1023px) {
   :root {
     --ink-soft: color-mix(in srgb, var(--navy) 82%, var(--mist));
+    /* +2px readability bump for mobile / tablet; desktop clamps unchanged */
+    --text-caption: 0.9375rem;
+    --text-small: 1rem;
+    --text-body: clamp(1.25rem, 1.2rem + 0.25vw, 1.5rem);
+    --text-lead: clamp(1.3125rem, 1.24rem + 0.22vw, 1.5rem);
+    --text-h3: clamp(1.625rem, 1.475rem + 0.6vw, 2.125rem);
+    --text-h2: clamp(2rem, 1.775rem + 0.7vw, 2.625rem);
+    --text-h1: clamp(2.625rem, 2.225rem + 1.6vw, 3.625rem);
+    --text-hero: clamp(2.875rem, 2.325rem + 2.2vw, 4.125rem);
   }
 }
 

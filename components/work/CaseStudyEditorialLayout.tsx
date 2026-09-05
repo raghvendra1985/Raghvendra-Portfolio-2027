@@ -3,14 +3,14 @@
 import Image from "next/image";
 import ImageReveal from "@/components/reveal/ImageReveal";
 import { CaseStudyMediaGrid } from "@/components/work/CaseStudyFrameInterlude";
+import CaseStudyWireframesGrid, {
+  isMotionGifFrame,
+  isWireframeFrame,
+} from "@/components/work/CaseStudyWireframesGrid";
 import type { CaseStudyFrame } from "@/case-studies";
 
 function isGifFrame(frame: CaseStudyFrame) {
   return frame.src.endsWith(".gif") || frame.kind === "gif";
-}
-
-function isWireframeFrame(frame: CaseStudyFrame) {
-  return frame.src.includes("/wireframes/");
 }
 
 /**
@@ -30,9 +30,7 @@ export default function CaseStudyEditorialLayout({
   const phones = product.filter(
     (frame) => !isGifFrame(frame) && !isWireframeFrame(frame),
   );
-  const motion = product.filter(
-    (frame) => isGifFrame(frame) && !isWireframeFrame(frame),
-  );
+  const motion = product.filter(isMotionGifFrame);
   const wireframes = product.filter(isWireframeFrame);
 
   return (
@@ -69,9 +67,7 @@ export default function CaseStudyEditorialLayout({
                         {String(index + 1).padStart(2, "0")}
                       </p>
                       {frame.caption ? (
-                        <p className="mt-3 text-lg leading-snug text-navy sm:text-xl">
-                          {frame.caption}
-                        </p>
+                        <p className="mt-3 type-lead text-navy">{frame.caption}</p>
                       ) : null}
                     </figcaption>
                   </figure>
@@ -110,7 +106,7 @@ export default function CaseStudyEditorialLayout({
                     />
                   </div>
                   {frame.caption ? (
-                    <figcaption className="mt-3 text-sm leading-snug text-ink-soft">
+                    <figcaption className="mt-3 type-small text-ink-soft">
                       {frame.caption}
                     </figcaption>
                   ) : null}
@@ -121,44 +117,7 @@ export default function CaseStudyEditorialLayout({
         </section>
       ) : null}
 
-      {wireframes.length ? (
-        <section
-          className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20"
-          data-case-editorial="wireframes"
-          aria-label={`${client} wireframes`}
-        >
-          <p className="font-mono-label text-green" data-case-chapter>
-            Wireframes
-          </p>
-          <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {wireframes.map((frame, index) => (
-              <li key={frame.src} data-case-gallery>
-                <figure>
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-surface-dim">
-                    <Image
-                      src={frame.src}
-                      alt={
-                        frame.caption
-                          ? `${client} — ${frame.caption}`
-                          : `${client} — wireframe ${index + 1}`
-                      }
-                      fill
-                      unoptimized
-                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-                      className="object-contain object-center"
-                    />
-                  </div>
-                  {frame.caption ? (
-                    <figcaption className="mt-3 text-sm leading-snug text-navy">
-                      {frame.caption}
-                    </figcaption>
-                  ) : null}
-                </figure>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
+      <CaseStudyWireframesGrid frames={wireframes} client={client} />
 
       <CaseStudyMediaGrid
         frames={process}
