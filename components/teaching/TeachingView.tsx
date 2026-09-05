@@ -70,10 +70,21 @@ function TeachingHero() {
           <p className="font-mono-label text-ink-soft">
             {teachingPage.heroVenuesLabel}
           </p>
-          <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 lg:flex-col lg:gap-y-2.5">
+          <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1 lg:gap-5">
             {teachingPage.heroVenues.map((venue) => (
-              <li key={venue} className="font-mono-label text-navy">
-                {venue}
+              <li key={venue.name} className="flex min-h-11 items-center gap-3.5">
+                {venue.logo ? (
+                  <span className="relative flex h-11 w-28 shrink-0 items-center justify-center overflow-hidden border border-line bg-paper px-2">
+                    <Image
+                      src={venue.logo.src}
+                      alt=""
+                      width={venue.logo.width}
+                      height={venue.logo.height}
+                      className="max-h-8 w-auto max-w-full object-contain"
+                    />
+                  </span>
+                ) : null}
+                <span className="font-mono-label text-navy">{venue.name}</span>
               </li>
             ))}
           </ul>

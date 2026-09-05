@@ -20,6 +20,17 @@ export type TeachingHeroSlide = {
   height: number;
 };
 
+export type TeachingVenue = {
+  name: string;
+  /** Optional institution mark under public/assets/testimonials/logos. */
+  logo?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
+};
+
 export type TeachingPage = {
   title: string;
   description: string;
@@ -27,7 +38,7 @@ export type TeachingPage = {
   heroTitle: string;
   heroDescription: string;
   heroVenuesLabel: string;
-  heroVenues: string[];
+  heroVenues: TeachingVenue[];
   heroGalleryLabel: string;
   heroGallery: TeachingHeroSlide[];
   sectionEyebrow: string;
@@ -47,14 +58,78 @@ export const teachingPage: TeachingPage = {
     "I facilitate UX and concept-development sessions in design classrooms — helping students question the problem, build shared language, and apply judgment under real constraints. Recruiters evaluating teaching or workshop facilitation can see the rooms, the venues, and what students took away.",
   heroVenuesLabel: "Recent rooms",
   heroVenues: [
-    "NIFT Delhi",
-    "DTU",
-    "NID Kurukshetra",
-    "IIAD",
-    "WUD",
-    "Ambedkar University",
-    "Chitkara University",
-    "GenAI · Bangalore",
+    {
+      name: "NIFT Delhi",
+      logo: {
+        src: "/assets/testimonials/logos/nift.png",
+        alt: "NIFT logo",
+        width: 512,
+        height: 512,
+      },
+    },
+    {
+      name: "DTU",
+      logo: {
+        src: "/assets/testimonials/logos/dtu.png",
+        alt: "Department of Design, DTU logo",
+        width: 200,
+        height: 200,
+      },
+    },
+    {
+      name: "NID Kurukshetra",
+      logo: {
+        src: "/assets/testimonials/logos/nid-kurukshetra.png",
+        alt: "National Institute of Design logo",
+        width: 200,
+        height: 200,
+      },
+    },
+    {
+      name: "IIAD",
+      logo: {
+        src: "/assets/testimonials/logos/iiad.png",
+        alt: "IIAD logo",
+        width: 1280,
+        height: 720,
+      },
+    },
+    {
+      name: "WUD",
+      logo: {
+        src: "/assets/testimonials/logos/wud.png",
+        alt: "World University of Design logo",
+        width: 508,
+        height: 211,
+      },
+    },
+    {
+      name: "Ambedkar University",
+      logo: {
+        src: "/assets/testimonials/logos/ambedkar.png",
+        alt: "Ambedkar University Delhi logo",
+        width: 236,
+        height: 238,
+      },
+    },
+    {
+      name: "Chitkara University",
+      logo: {
+        src: "/assets/testimonials/logos/chitkara.png",
+        alt: "Chitkara University logo",
+        width: 235,
+        height: 78,
+      },
+    },
+    {
+      name: "Outskill · GenAI",
+      logo: {
+        src: "/assets/testimonials/logos/outskill-genai.png",
+        alt: "Outskill GenAI logo",
+        width: 640,
+        height: 143,
+      },
+    },
   ],
   heroGalleryLabel: "Workshop scenes",
   heroGallery: [
@@ -101,7 +176,7 @@ export const teachingPage: TeachingPage = {
     {
       src: "/assets/testimonials/workshop-scenes/genai-bangalore-01.jpg",
       alt: "GenAI workshop in Bangalore",
-      venue: "GenAI · Bangalore",
+      venue: "Outskill · GenAI",
       caption: "GenAI workshop — exploring new tools",
       width: 1920,
       height: 1440,
@@ -189,7 +264,7 @@ export const teachingPage: TeachingPage = {
     {
       src: "/assets/testimonials/workshop-scenes/genai-bangalore-02.jpg",
       alt: "GenAI workshop discussion in Bangalore",
-      venue: "GenAI · Bangalore",
+      venue: "Outskill · GenAI",
       caption: "Discussion during GenAI session",
       width: 1920,
       height: 1440,
