@@ -129,10 +129,19 @@ type CaseStudyShared = {
   /** Curated product/motion videos — rendered as a muted showreel strip. */
   showreel?: CaseStudyShowreel[];
   /**
-   * When set, the first N frames render as a sticky product stack;
-   * remaining frames use the standard vertical Frames block (e.g. process photos).
+   * When set, the first N frames are treated as product (vs process).
+   * Used by sticky stack OR narrative-interludes layouts.
    */
   productStackCount?: number;
+  /**
+   * How product/process media is placed relative to narrative.
+   * - default: Frames block (or sticky stack when productStackCount is set)
+   * - narrative-interludes: product pairs after Decision / System change
+   * - editorial-alternate: story first, then L/R product pairs + motion strip + process grid
+   */
+  mediaLayout?: "default" | "narrative-interludes" | "editorial-alternate";
+  /** Cap showreel videos shown (e.g. 3 featured). */
+  showreelFeaturedCount?: number;
   verification?: CaseStudyVerification;
 };
 

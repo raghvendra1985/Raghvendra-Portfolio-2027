@@ -57,6 +57,7 @@ export default function CaseStudyShowreel({
       ref={rootRef}
       className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20"
       aria-label={label}
+      data-case-showreel
     >
       <p className="font-mono-label text-green" data-case-chapter>
         {label}

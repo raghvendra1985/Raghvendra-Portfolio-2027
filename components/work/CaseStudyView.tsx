@@ -9,6 +9,10 @@ import WorkCover from "@/components/work/WorkCover";
 import CaseStudyCarousel from "@/components/work/CaseStudyCarousel";
 import CaseStudyProductStack from "@/components/work/CaseStudyProductStack";
 import CaseStudyShowreel from "@/components/work/CaseStudyShowreel";
+import CaseStudyFrameInterlude, {
+  CaseStudyMediaGrid,
+} from "@/components/work/CaseStudyFrameInterlude";
+import CaseStudyEditorialLayout from "@/components/work/CaseStudyEditorialLayout";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import type {
   CaseStudy,
@@ -67,6 +71,17 @@ function splitProductAndProcess(study: CaseStudy): {
   return {
     product: frames.slice(0, stackCount),
     process: frames.slice(stackCount),
+  };
+}
+
+/** Option A: product pairs beside narrative beats; remainder + process after outcomes. */
+function splitNarrativeInterludes(study: CaseStudy) {
+  const { product, process } = splitProductAndProcess(study);
+  return {
+    afterDecision: product.slice(0, 2),
+    afterSystemChange: product.slice(2, 4),
+    productRemainder: product.slice(4),
+    process,
   };
 }
 
@@ -300,7 +315,19 @@ function FramesBlock({
 }
 
 function StudyFrames({ study }: { study: CaseStudy }) {
+  if (study.mediaLayout === "narrative-interludes") {
+    return null;
+  }
   const { product, process } = splitProductAndProcess(study);
+  if (study.mediaLayout === "editorial-alternate" && product.length) {
+    return (
+      <CaseStudyEditorialLayout
+        product={product}
+        process={process}
+        client={study.client}
+      />
+    );
+  }
   if (product.length) {
     return (
       <>
@@ -319,6 +346,11 @@ function StudyFrames({ study }: { study: CaseStudy }) {
 function DeepBody({ study }: { study: DeepCaseStudy }) {
   const steps = study.systemChangeSteps;
   const outcomes = study.outcomes;
+  const interludes =
+    study.mediaLayout === "narrative-interludes"
+      ? splitNarrativeInterludes(study)
+      : null;
+
   return (
     <>
       <AtAGlanceBlock glance={study.atAGlance} />
@@ -366,11 +398,27 @@ function DeepBody({ study }: { study: DeepCaseStudy }) {
 
       <DecisionBlock study={study} />
 
+      {interludes ? (
+        <CaseStudyFrameInterlude
+          frames={interludes.afterDecision}
+          client={study.client}
+          slot="after-decision"
+        />
+      ) : null}
+
       {steps.length ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
           <ChapterLabel>How the system changed</ChapterLabel>
           <NumberedRail steps={steps} />
         </section>
+      ) : null}
+
+      {interludes ? (
+        <CaseStudyFrameInterlude
+          frames={interludes.afterSystemChange}
+          client={study.client}
+          slot="after-system-change"
+        />
       ) : null}
 
       {study.iteration?.length ? (
@@ -388,7 +436,25 @@ function DeepBody({ study }: { study: DeepCaseStudy }) {
       ) : null}
 
       <OutcomesBlock outcomes={outcomes} />
-      <StudyFrames study={study} />
+
+      {interludes ? (
+        <>
+          <CaseStudyMediaGrid
+            frames={interludes.productRemainder}
+            client={study.client}
+            label="Product"
+            slot="product-remainder"
+          />
+          <CaseStudyMediaGrid
+            frames={interludes.process}
+            client={study.client}
+            label="Process"
+            slot="process"
+          />
+        </>
+      ) : (
+        <StudyFrames study={study} />
+      )}
 
       {study.wouldChangeNow ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
@@ -480,6 +546,14 @@ export default function CaseStudyView({
 
   useCaseStudyScrollDepth(study.slug);
 
+  const designSystem = study.designSystem ?? [];
+  const showreelAll = study.showreel ?? [];
+  const showreel =
+    study.showreelFeaturedCount && study.showreelFeaturedCount > 0
+      ? showreelAll.slice(0, study.showreelFeaturedCount)
+      : showreelAll;
+  const depth = study.narrativeDepth ?? "supporting";
+
   useEffect(() => {
     trackFunnel("case_study_view", { slug: study.slug, source: "case_study_page" });
   }, [study.slug]);
@@ -491,9 +565,6 @@ export default function CaseStudyView({
     return () => ctx.revert();
   }, [config, study.slug]);
 
-  const designSystem = study.designSystem ?? [];
-  const showreel = study.showreel ?? [];
-  const depth = study.narrativeDepth ?? "supporting";
   const situation =
     ("situation" in study && study.situation) || study.challenge || "";
   const liveLinks =
