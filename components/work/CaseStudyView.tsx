@@ -7,6 +7,12 @@ import { useExperience } from "@/components/providers/ExperienceProvider";
 import ImageReveal from "@/components/reveal/ImageReveal";
 import WorkCover from "@/components/work/WorkCover";
 import CaseStudyCarousel from "@/components/work/CaseStudyCarousel";
+import CaseStudyProductStack from "@/components/work/CaseStudyProductStack";
+import CaseStudyShowreel from "@/components/work/CaseStudyShowreel";
+import CaseStudyFrameInterlude, {
+  CaseStudyMediaGrid,
+} from "@/components/work/CaseStudyFrameInterlude";
+import CaseStudyEditorialLayout from "@/components/work/CaseStudyEditorialLayout";
 import MagneticButton from "@/components/buttons/MagneticButton";
 import type {
   CaseStudy,
@@ -21,25 +27,29 @@ import { useCaseStudyScrollDepth } from "@/hooks/useCaseStudyScrollDepth";
 
 function frameSurface(src: string) {
   const crowley = src.includes("/work/crowley/");
-  const portraitPhoto = src.endsWith(".jpg");
+  const processPhoto = src.includes("/process-");
+  const portraitPhoto = src.endsWith(".jpg") && !processPhoto;
+  const gif = src.endsWith(".gif");
   const diagram = src.endsWith(".svg");
   const aspect = src.includes("/work/crowley/gallery-02")
     ? "aspect-[40/21]"
     : crowley
       ? "aspect-[3/2]"
-      : portraitPhoto
-        ? "aspect-[3/4]"
-        : src.endsWith(".png") || src.endsWith(".webp")
-          ? "aspect-[16/10]"
-          : "aspect-[3/2]";
+      : processPhoto
+        ? "aspect-[16/10]"
+        : portraitPhoto || gif
+          ? "aspect-[3/4]"
+          : src.endsWith(".png") || src.endsWith(".webp")
+            ? "aspect-[16/10]"
+            : "aspect-[3/2]";
 
   return {
-    className: portraitPhoto
+    className: portraitPhoto || gif
       ? `relative mx-auto ${aspect} w-full max-w-xl bg-surface-dim`
       : `relative ${aspect} w-full bg-surface-dim`,
-    objectFit: (crowley || diagram || portraitPhoto ? "contain" : "cover") as
-      | "contain"
-      | "cover",
+    objectFit: (crowley || diagram || portraitPhoto || gif || processPhoto
+      ? "contain"
+      : "cover") as "contain" | "cover",
     parallax: crowley || diagram ? 0 : 0.06,
   };
 }
@@ -47,6 +57,32 @@ function frameSurface(src: string) {
 function resolveFrames(study: CaseStudy): CaseStudyFrame[] {
   if ("frames" in study && study.frames?.length) return study.frames;
   return (study.gallery ?? []).map((src) => ({ src, caption: "" }));
+}
+
+function splitProductAndProcess(study: CaseStudy): {
+  product: CaseStudyFrame[];
+  process: CaseStudyFrame[];
+} {
+  const frames = resolveFrames(study);
+  const stackCount = study.productStackCount;
+  if (!stackCount || stackCount <= 0) {
+    return { product: [], process: frames };
+  }
+  return {
+    product: frames.slice(0, stackCount),
+    process: frames.slice(stackCount),
+  };
+}
+
+/** Option A: product pairs beside narrative beats; remainder + process after outcomes. */
+function splitNarrativeInterludes(study: CaseStudy) {
+  const { product, process } = splitProductAndProcess(study);
+  return {
+    afterDecision: product.slice(0, 2),
+    afterSystemChange: product.slice(2, 4),
+    productRemainder: product.slice(4),
+    process,
+  };
 }
 
 function ChapterLabel({ children }: { children: React.ReactNode }) {
@@ -231,15 +267,24 @@ function OutcomesBlock({ outcomes }: { outcomes: CaseStudyOutcome[] }) {
   );
 }
 
-function FramesBlock({ study }: { study: CaseStudy }) {
-  const frames = resolveFrames(study);
+function FramesBlock({
+  study,
+  frames: framesProp,
+  label = "Frames",
+}: {
+  study: CaseStudy;
+  frames?: CaseStudyFrame[];
+  label?: string;
+}) {
+  const frames = framesProp ?? resolveFrames(study);
   if (!frames.length) return null;
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-      <ChapterLabel>Frames</ChapterLabel>
+      <ChapterLabel>{label}</ChapterLabel>
       <ul className="mt-10 space-y-16 sm:space-y-20">
         {frames.map((frame, index) => {
           const surface = frameSurface(frame.src);
+          const isGif = frame.src.endsWith(".gif") || frame.kind === "gif";
           return (
             <li key={frame.src} data-case-gallery>
               <figure>
@@ -248,7 +293,7 @@ function FramesBlock({ study }: { study: CaseStudy }) {
                   src={frame.src}
                   alt={`${study.client} — frame ${index + 1}`}
                   sizes={
-                    frame.src.endsWith(".jpg")
+                    frame.src.endsWith(".jpg") || isGif
                       ? "(min-width: 640px) 36rem, 100vw"
                       : "100vw"
                   }
@@ -269,9 +314,43 @@ function FramesBlock({ study }: { study: CaseStudy }) {
   );
 }
 
+function StudyFrames({ study }: { study: CaseStudy }) {
+  if (study.mediaLayout === "narrative-interludes") {
+    return null;
+  }
+  const { product, process } = splitProductAndProcess(study);
+  if (study.mediaLayout === "editorial-alternate" && product.length) {
+    return (
+      <CaseStudyEditorialLayout
+        product={product}
+        process={process}
+        client={study.client}
+      />
+    );
+  }
+  if (product.length) {
+    return (
+      <>
+        <CaseStudyProductStack
+          frames={product}
+          client={study.client}
+          label="Product"
+        />
+        <FramesBlock study={study} frames={process} label="Process" />
+      </>
+    );
+  }
+  return <FramesBlock study={study} />;
+}
+
 function DeepBody({ study }: { study: DeepCaseStudy }) {
   const steps = study.systemChangeSteps;
   const outcomes = study.outcomes;
+  const interludes =
+    study.mediaLayout === "narrative-interludes"
+      ? splitNarrativeInterludes(study)
+      : null;
+
   return (
     <>
       <AtAGlanceBlock glance={study.atAGlance} />
@@ -319,11 +398,27 @@ function DeepBody({ study }: { study: DeepCaseStudy }) {
 
       <DecisionBlock study={study} />
 
+      {interludes ? (
+        <CaseStudyFrameInterlude
+          frames={interludes.afterDecision}
+          client={study.client}
+          slot="after-decision"
+        />
+      ) : null}
+
       {steps.length ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
           <ChapterLabel>How the system changed</ChapterLabel>
           <NumberedRail steps={steps} />
         </section>
+      ) : null}
+
+      {interludes ? (
+        <CaseStudyFrameInterlude
+          frames={interludes.afterSystemChange}
+          client={study.client}
+          slot="after-system-change"
+        />
       ) : null}
 
       {study.iteration?.length ? (
@@ -341,7 +436,25 @@ function DeepBody({ study }: { study: DeepCaseStudy }) {
       ) : null}
 
       <OutcomesBlock outcomes={outcomes} />
-      <FramesBlock study={study} />
+
+      {interludes ? (
+        <>
+          <CaseStudyMediaGrid
+            frames={interludes.productRemainder}
+            client={study.client}
+            label="Product"
+            slot="product-remainder"
+          />
+          <CaseStudyMediaGrid
+            frames={interludes.process}
+            client={study.client}
+            label="Process"
+            slot="process"
+          />
+        </>
+      ) : (
+        <StudyFrames study={study} />
+      )}
 
       {study.wouldChangeNow ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
@@ -370,7 +483,7 @@ function SupportingBody({ study }: { study: CaseStudy }) {
         </section>
       ) : null}
       <OutcomesBlock outcomes={outcomes} />
-      <FramesBlock study={study} />
+      <StudyFrames study={study} />
       {"wouldChangeNow" in study && study.wouldChangeNow ? (
         <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
           <ChapterLabel>What I would change now</ChapterLabel>
@@ -413,7 +526,7 @@ function CompactBody({ study }: { study: CaseStudy }) {
         </section>
       ) : null}
 
-      <FramesBlock study={study} />
+      <StudyFrames study={study} />
       <OutcomesBlock outcomes={outcomes} />
     </>
   );
@@ -433,6 +546,14 @@ export default function CaseStudyView({
 
   useCaseStudyScrollDepth(study.slug);
 
+  const designSystem = study.designSystem ?? [];
+  const showreelAll = study.showreel ?? [];
+  const showreel =
+    study.showreelFeaturedCount && study.showreelFeaturedCount > 0
+      ? showreelAll.slice(0, study.showreelFeaturedCount)
+      : showreelAll;
+  const depth = study.narrativeDepth ?? "supporting";
+
   useEffect(() => {
     trackFunnel("case_study_view", { slug: study.slug, source: "case_study_page" });
   }, [study.slug]);
@@ -444,8 +565,6 @@ export default function CaseStudyView({
     return () => ctx.revert();
   }, [config, study.slug]);
 
-  const designSystem = study.designSystem ?? [];
-  const depth = study.narrativeDepth ?? "supporting";
   const situation =
     ("situation" in study && study.situation) || study.challenge || "";
   const liveLinks =
@@ -555,6 +674,10 @@ export default function CaseStudyView({
             />
           </div>
         </section>
+      ) : null}
+
+      {showreel.length ? (
+        <CaseStudyShowreel items={showreel} label="Showreel" />
       ) : null}
 
       <section
