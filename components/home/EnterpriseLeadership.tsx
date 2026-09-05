@@ -50,7 +50,9 @@ export default function EnterpriseLeadership({ studies }: { studies: CaseStudy[]
             href="/work"
             className="hidden min-h-11 shrink-0 items-center font-mono-label text-gold sm:inline-flex"
             data-cursor="View"
-            onClick={() => track("enterprise_case_clicked", { slug: "work-index" })}
+            onClick={() =>
+              track("hero_work_click", { source: "home_enterprise", dest: "/work" })
+            }
           >
             View all work →
           </Link>
@@ -66,7 +68,12 @@ export default function EnterpriseLeadership({ studies }: { studies: CaseStudy[]
                   <Link
                     href={`/work/${study.slug}`}
                     data-cursor="View"
-                    onClick={() => track("enterprise_case_clicked", { slug: study.slug })}
+                    onClick={() =>
+                      track("case_study_open", {
+                        slug: study.slug,
+                        source: "home_enterprise",
+                      })
+                    }
                     className="flex h-full flex-col border border-mist/25 bg-navy"
                   >
                     <Cover study={study} />

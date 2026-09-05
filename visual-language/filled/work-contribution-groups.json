@@ -54,6 +54,17 @@
         "ACTION OR TRANSFORMATION": "separate platforms bridging to a shared orange governance node"
       },
       "prompt": "Create an original isometric system-object illustration for “Enterprise leadership”. Show separate platforms and team modules bridging to one shared accountable governance layer. Use a consistent 30-degree isometric view, a centered assembly, bone-white hardware, graphite interiors, fine dark outlines, subtle paper grain, and one signal-orange governance node. The architecture should feel understandable rather than futuristic: precise, modular, tactile, and human. Warm paper background (#F4EEDF) with generous negative space. Occupies about 65–75% of the canvas. No text, logos, code, glassmorphism, glossy plastic, cyberpunk styling, clutter, or decorative components without meaning."
+    },
+    {
+      "id": "brand-and-web",
+      "label": "Brand and web work",
+      "file": "public/assets/work/groups/brand-and-web.png",
+      "slots": {
+        "SUBJECT": "Brand and web work",
+        "CORE IDEA": "craft and commercial story sharing one scannable surface",
+        "ACTION OR TRANSFORMATION": "layered panels resolving into one readable public face"
+      },
+      "prompt": "Create an original isometric system-object illustration for “Brand and web work”. Show layered brand and layout panels resolving into one readable public face. Use a consistent 30-degree isometric view, a centered assembly, bone-white hardware, graphite interiors, fine dark outlines, subtle paper grain, and one signal-orange focal panel. The architecture should feel understandable rather than futuristic: precise, modular, tactile, and human. Warm paper background (#F4EEDF) with generous negative space. Occupies about 65–75% of the canvas. No text, logos, code, glassmorphism, glossy plastic, cyberpunk styling, clutter, or decorative components without meaning."
     }
   ]
 }

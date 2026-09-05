@@ -258,8 +258,8 @@ export const aboutPage: AboutPage = {
   teachingBody:
     "When an idea has to survive a classroom, it cannot depend on authority or jargon. Teaching more than 500 designers strengthened how I explain decisions, structure critique, and create shared language inside teams. Critique and shared language are leadership, not a side hustle.",
   teachingEvidence: {
-    label: "Teaching design through decisions",
-    href: "/knowledge/teaching-design-through-decisions",
+    label: "What students say",
+    href: "/teaching",
   },
   glimpse: {
     body: "I design systems for products. At home I keep living ones: animals, a balcony garden, a bike, and a shelf that changes what I notice.",

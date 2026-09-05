@@ -57,27 +57,6 @@ export type HomeWorkCard = {
 };
 
 export const homeWorkCards: Record<string, HomeWorkCard> = {
-  eqty: {
-    client: "EQTY",
-    title: "Designing the operating model for a modular fintech platform",
-    role: "Founding Design Partner",
-    year: "2026",
-    tags: ["Product strategy", "Architecture", "UX systems"],
-    problem:
-      "Trust, ledger operations, and workflow were being designed as separate layers instead of one operating system.",
-    result:
-      "Designed a shared operating model so trust, ledger operations, and workflow could extend as one system instead of three separate products.",
-  },
-  "gwk-ghostwriter": {
-    client: "GWK Ghostwriter",
-    title: "Building an AI writing studio that remembers voice, not just prompts",
-    role: "Founder / product builder",
-    year: "2026",
-    tags: ["AI products", "Prototyping", "Trust and interaction"],
-    problem: "Generic writing tools produce generic content because they have no memory of voice, sources, or what actually worked.",
-    result:
-      "Shipped a research-to-post workflow with long-term memory, voice rules, and source material a founder can actually run.",
-  },
   nye: {
     client: "Rapipay",
     title: "Leading the experience of a financial super app at organisational scale",
@@ -88,6 +67,27 @@ export const homeWorkCards: Record<string, HomeWorkCard> = {
       "Payments, banking, and investments were splitting into disconnected features instead of one everyday money product.",
     result:
       "Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.",
+  },
+  crowley: {
+    client: "Crowley Maritime",
+    title: "Unifying freight quoting across a fragmented supply chain",
+    role: "Staff Design Consultant",
+    year: "2021",
+    tags: ["Complex systems", "Enterprise", "Design systems"],
+    problem:
+      "A dense ~20-field quote form split shippers across trucking, ports, and brokers.",
+    result:
+      "Replaced the legacy form with a guided origin-to-cargo-to-contact flow while keeping rate-engine and customs constraints intact.",
+  },
+  "gwk-ghostwriter": {
+    client: "GWK Ghostwriter",
+    title: "Building an AI writing studio that remembers voice, not just prompts",
+    role: "Founder / product builder",
+    year: "2026",
+    tags: ["AI products", "Prototyping", "Trust and interaction"],
+    problem: "Generic writing tools produce generic content because they have no memory of voice, sources, or what actually worked.",
+    result:
+      "Shipped a research-to-post workflow with long-term memory, voice rules, and source material a founder can actually run.",
   },
 };
 

@@ -45,7 +45,7 @@ export const leadershipImpact = {
 export type LeadershipWorkLayout = "image-led" | "copy-led" | "wide";
 
 export type LeadershipWorkEntry = {
-  slug: "bolo-buddy" | "nye" | "crowley";
+  slug: "nye" | "crowley" | "gwk-ghostwriter";
   kind: string;
   title: string;
   capabilities: readonly string[];
@@ -54,32 +54,33 @@ export type LeadershipWorkEntry = {
   layout: LeadershipWorkLayout;
 };
 
+/** Same featured trio as `/work`: Rapipay → Crowley → Ghostwriter. */
 export const leadershipWorkMeta: readonly LeadershipWorkEntry[] = [
   {
-    slug: "bolo-buddy",
-    kind: "Zero-to-one",
-    title: "Bolo Buddy — voice-first AI storytelling for children",
-    capabilities: ["AI experience", "Product direction", "Founder execution"],
-    outcome:
-      "Bolo Buddy remains operational and building a community of Indian parents seeking culturally rooted, screen-free content.",
-    layout: "image-led",
-  },
-  {
     slug: "nye",
-    kind: "Complex system",
+    kind: "Enterprise leadership",
     title: "Rapipay — financial access designed around trust",
     capabilities: ["UX leadership", "Fintech", "Organisational alignment"],
     outcome:
       "Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.",
-    layout: "copy-led",
+    layout: "image-led",
   },
   {
     slug: "crowley",
-    kind: "Leadership at scale",
+    kind: "Complex systems",
     title: "Crowley Maritime — product quality through system and alignment",
     capabilities: ["Enterprise systems", "Cross-functional alignment", "Design governance"],
     outcome:
       "Replaced a dense legacy freight-quote form with a guided origin-to-cargo-to-contact flow, and introduced the design system this platform still runs on.",
+    layout: "copy-led",
+  },
+  {
+    slug: "gwk-ghostwriter",
+    kind: "AI product building",
+    title: "GWK Ghostwriter — an AI writing studio that remembers voice",
+    capabilities: ["AI experience", "Product direction", "Founder execution"],
+    outcome:
+      "Shipped a research-to-post workflow with long-term memory, voice rules, and source material a founder can actually run.",
     layout: "wide",
   },
 ] as const;
@@ -119,7 +120,7 @@ export const leadershipWork = {
   eyebrow: "Selected work",
   title: "Three kinds of impact hiring teams actually need.",
   intro:
-    "Zero-to-one judgement, trust in a complex financial system, and leadership that leaves a system behind. Each project links to the published case study.",
+    "Organisational influence in fintech, complex workflow systems, and AI product building. Each project links to the published case study.",
   all: { label: "View all work", href: "/work" },
 } as const;
 
@@ -183,11 +184,34 @@ export const leadershipLead = {
   ],
 } as const;
 
-export const leadershipTestimonial = {
-  eyebrow: "Leadership testimonial",
-  quote: "[ADD TESTIMONIAL ABOUT JUDGMENT, INFLUENCE, OR LEADERSHIP]",
-  attribution: "[ADD NAME · ROLE · ORGANISATION]",
-  note: "A verified quote has not been published yet. This space stays empty of invention.",
+export type LeadershipTestimonialItem = {
+  quote: string;
+  attribution: string;
+  source: string;
+};
+
+export const leadershipTestimonials = {
+  eyebrow: "What colleagues say",
+  items: [
+    {
+      quote:
+        "Raghvendra helped build a multi-disciplinary team comprising UX designers, UX researchers, animation designers, visual designers, and content researchers. He played an instrumental role in setting up a design system, which helped us replicate design decisions at scale. Raghvendra is passionate about setting up and following a UX process in his team. He has strong experience setting up UX vision and strategy and showing the business value of UX design.",
+      attribution: "Sumit Adlakha · Sr. Director of Engineering · Innovaccer",
+      source: "LinkedIn recommendation · May 2023 · managed Raghvendra directly",
+    },
+    {
+      quote:
+        "Raghvendra did great work with UX designs for our products targeted at media sales teams. He had interesting and unique ideas and always added a fresh perspective to the design thinking.",
+      attribution: "Meeta Sachdev · Co-Founder · Sagacito Technologies",
+      source: "LinkedIn recommendation · May 2023",
+    },
+    {
+      quote:
+        "Raghvendra is one of the finest UX designers who goes beyond his job duties to ensure rich user experience. His focus is to give seamless user experience, for which he does extensive user study. I have not seen anyone who has the ability to get into user shoes so easily. His designs are rich and new. He also takes care of technical details while doing the UX. Over this he has great attitude—exceptionally friendly. One of the best persons to work with.",
+      attribution: "Piyush Rajesh Gupta · Founder · The Brain Point",
+      source: "LinkedIn recommendation · May 2019 · worked on the same team",
+    },
+  ] satisfies readonly LeadershipTestimonialItem[],
 } as const;
 
 export const leadershipAbout = {

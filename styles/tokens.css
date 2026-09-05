@@ -2,7 +2,7 @@
   --navy: #0b1849;
   --green: #124d1c;
   --gold: #e4b028;
-  --mist: #ebede3;
+  --mist: #ffffff;
 
   --navy-soft: color-mix(in srgb, var(--navy) 72%, var(--mist));
   --ink: var(--navy);

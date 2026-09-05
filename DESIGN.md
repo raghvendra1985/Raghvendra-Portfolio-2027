@@ -5,7 +5,7 @@ colors:
   navy: "#0B1849"
   green: "#124D1C"
   gold: "#E4B028"
-  mist: "#EBEDE3"
+  mist: "#FFFFFF"
   paper: "#F5F4F0"
   paper-edge: "#D9D9D5"
   ink: "#0B1849"
@@ -171,7 +171,7 @@ Depth is mostly tonal (mist → surface-dim → navy) and hairline rules (`--lin
 ## 6. Do's and Don'ts
 
 ### Do
-- Keep EQTY, Ghostwriter, and Rapipay as the dominant featured three on `/work`.
+- Keep Rapipay, Crowley, and Ghostwriter as the dominant featured three on `/work` and the homepage.
 - Group remaining work by contribution; one primary group per project.
 - Show role, year, contribution, evidence type on every substantive card.
 - Prefer related / different-kind / back-to-index continuation over chronological next.

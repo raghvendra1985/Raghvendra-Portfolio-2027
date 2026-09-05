@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { animateContactForm } from "@/animations/forms";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import MagneticButton from "@/components/buttons/MagneticButton";
-import { track } from "@/lib/analytics";
+import { track, trackFunnel } from "@/lib/analytics";
 import {
   contactIntentFromQuery,
   contactIntents,
@@ -57,7 +57,7 @@ export default function ContactForm() {
   function markStarted() {
     if (startedRef.current) return;
     startedRef.current = true;
-    track("contact_form_started", { intent: intent ?? "none" });
+    trackFunnel("contact_start", { intent: intent ?? "none", source: "contact_form" });
   }
 
   function validate() {
@@ -117,17 +117,21 @@ export default function ContactForm() {
       });
       const payload = (await response.json().catch(() => null)) as { ok?: boolean } | null;
       if (response.status === 429) {
-        track("contact_form_failed", { intent, reason: "rate_limited" });
+        trackFunnel("contact_submit_failed", {
+          intent,
+          reason: "rate_limited",
+          source: "contact_form",
+        });
         setFail(contactPage.rateLimitBody);
         return;
       }
       if (!response.ok || payload?.ok !== true) {
         throw new Error("send-failed");
       }
-      track("contact_form_submitted", { intent, channel: "email" });
+      trackFunnel("contact_submit", { intent, channel: "email", source: "contact_form" });
       setSent(true);
     } catch {
-      track("contact_form_failed", { intent, reason: "network" });
+      trackFunnel("contact_submit_failed", { intent, reason: "network", source: "contact_form" });
       setFail(contactPage.failBody);
     } finally {
       setSending(false);

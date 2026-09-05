@@ -4,6 +4,7 @@ import { Manrope, Newsreader, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import ExperienceProvider from "@/components/providers/ExperienceProvider";
+import AnalyticsPathTracker from "@/components/analytics/AnalyticsPathTracker";
 import { site } from "@/lib/site";
 import { jsonLdScript, pageMetadataExtras, personJsonLd } from "@/lib/seo";
 
@@ -70,14 +71,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} ${serif.variable} ${mono.variable} h-full antialiased`}
+      className={`${display.variable} ${sans.variable} ${serif.variable} ${mono.variable} motion-ready h-full antialiased`}
     >
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{if(!sessionStorage.getItem("rs-v8-visited")&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("is-loading");setTimeout(function(){document.documentElement.classList.remove("is-loading");document.documentElement.classList.add("motion-ready");try{sessionStorage.setItem("rs-v8-visited","1")}catch(e){}},2500)}}catch(e){}`,
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLdScript(personJsonLd()) }}
@@ -87,7 +83,10 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <ExperienceProvider>{children}</ExperienceProvider>
+        <ExperienceProvider>
+          <AnalyticsPathTracker />
+          {children}
+        </ExperienceProvider>
         <Analytics />
       </body>
     </html>

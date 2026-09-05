@@ -71,8 +71,8 @@ export default function Hero() {
               href={homeHero.primary.href}
               cursor="View"
               className="w-full justify-center sm:w-auto"
-              event="project_clicked"
-              payload={{ from: "home_hero", slug: "selected" }}
+              event="hero_work_click"
+              payload={{ source: "home_hero_legacy", dest: homeHero.primary.href }}
             >
               {homeHero.primary.label}
             </TrackedMagneticButton>

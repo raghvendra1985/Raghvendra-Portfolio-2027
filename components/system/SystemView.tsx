@@ -262,6 +262,15 @@ export default function SystemView({ data }: { data: FounderOs }) {
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft">{item.body}</p>
             </article>
           ))}
+          <div data-os-item className="border-t border-line pt-8">
+            <Link
+              href="/teaching"
+              data-cursor="Open"
+              className="inline-flex min-h-11 items-center font-mono-label text-green"
+            >
+              What students say →
+            </Link>
+          </div>
         </OSModule>
 
         <OSModule

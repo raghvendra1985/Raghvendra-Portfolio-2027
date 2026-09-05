@@ -29,8 +29,8 @@ export default function PracticeLanes({ services }: { services: Service[] }) {
               <div className="relative z-[1] mt-8 flex flex-wrap items-end justify-between gap-4">
                 <TrackedLink
                   href={service.related.href}
-                  event="project_clicked"
-                  payload={{ slug: service.related.label, from: "practice" }}
+                  event="case_study_open"
+                  payload={{ slug: service.related.label, source: "home_practice" }}
                   className="relative z-[2] pointer-events-auto font-mono-label text-green underline-offset-4 hover:underline"
                 >
                   Related work: {service.related.label}

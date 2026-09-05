@@ -297,8 +297,8 @@ export default function AboutView() {
               href={aboutPage.hiringPrimary.href}
               variant="primary"
               className="w-full justify-center sm:w-auto"
-              event="contact_cta_clicked"
-              payload={{ from: "about" }}
+              event="contact_cta_click"
+              payload={{ source: "about", channel: "cta" }}
             >
               {aboutPage.hiringPrimary.label}
             </TrackedMagneticButton>
@@ -308,8 +308,8 @@ export default function AboutView() {
               variant="secondary"
               cursor="View"
               className="w-full justify-center sm:w-auto"
-              event="nav_clicked"
-              payload={{ from: "about", dest: "/work" }}
+              event="hero_work_click"
+              payload={{ source: "about", dest: "/work" }}
             >
               {aboutPage.hiringWork.label}
             </TrackedMagneticButton>

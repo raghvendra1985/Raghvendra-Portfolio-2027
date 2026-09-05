@@ -8,13 +8,21 @@ export type SuggestedQuestion = {
   modeHint?: ConciergeMode;
 };
 
+/** Featured hiring trio — keep in sync with `featuredWork` / homepage. */
+const FEATURED_WORK = ["work:nye", "work:crowley", "work:gwk-ghostwriter"] as const;
+
 export const openingQuestions: SuggestedQuestion[] = [
   {
     id: "product-leadership",
     label: "Which projects show product leadership?",
     query:
-      "product direction product leadership EQTY Sagacito contribution group featured evidence",
-    preferIds: ["work:eqty", "work:sagacito", "work:nye", "work:verizon", "experience:leadership-arc"],
+      "product direction product leadership Rapipay Crowley Ghostwriter Sagacito contribution group featured evidence",
+    preferIds: [
+      ...FEATURED_WORK,
+      "work:eqty",
+      "work:sagacito",
+      "experience:leadership-arc",
+    ],
     modeHint: "hiring",
   },
   {
@@ -38,11 +46,11 @@ export const openingQuestions: SuggestedQuestion[] = [
     query:
       "complex systems enterprise leadership Verizon Crowley Shuttl Hempel Rapipay contribution group",
     preferIds: [
-      "work:verizon",
-      "work:nye",
       "work:crowley",
+      "work:nye",
       "work:shuttl",
       "work:hempel",
+      "work:verizon",
       "experience:leadership-arc",
     ],
     modeHint: "hiring",
@@ -72,17 +80,17 @@ export const suggestedQuestions: SuggestedQuestion[] = [
   {
     id: "strongest-product",
     label: "Show me your strongest product work",
-    query: "strongest product work flagship EQTY GWK Ghostwriter Growing With Kid Bolo Buddy",
-    preferIds: ["work:eqty", "work:gwk-ghostwriter", "work:growing-with-kid", "work:bolo-buddy"],
+    query: "strongest product work flagship Rapipay Crowley GWK Ghostwriter featured",
+    preferIds: [...FEATURED_WORK, "work:eqty"],
     modeHint: "hiring",
   },
   {
     id: "fintech",
     label: "Show me fintech experience",
-    query: "fintech financial EQTY NYE Rapipay Strike currency",
+    query: "fintech financial Rapipay NYE EQTY Strike currency",
     preferIds: [
-      "work:eqty",
       "work:nye",
+      "work:eqty",
       "experience:leadership-arc",
       "work:strike",
       "work:smart-currency-exchange",
@@ -111,6 +119,7 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     preferIds: [
       "experience:leadership-arc",
       "experience:ux-lead-arc",
+      "work:nye",
       "knowledge:critique-system",
       "system:principles",
       "system:decisions",
@@ -207,11 +216,10 @@ export const suggestedQuestions: SuggestedQuestion[] = [
   {
     id: "why-hire",
     label: "Why should I hire you?",
-    query: "why hire product design leader systems AI leadership experience",
+    query: "why hire product design leader systems AI leadership Rapipay Crowley Ghostwriter",
     preferIds: [
       "about:overview",
-      "work:eqty",
-      "work:bolo-buddy",
+      ...FEATURED_WORK,
       "experience:leadership-arc",
       "system:principles",
       "system:focus",
@@ -221,14 +229,8 @@ export const suggestedQuestions: SuggestedQuestion[] = [
   {
     id: "start-here",
     label: "Where should I start?",
-    query: "where should I start flagship EQTY GWK Ghostwriter Growing With Kid Bolo Buddy about",
-    preferIds: [
-      "work:eqty",
-      "work:gwk-ghostwriter",
-      "work:growing-with-kid",
-      "work:bolo-buddy",
-      "about:overview",
-    ],
+    query: "where should I start flagship Rapipay Crowley GWK Ghostwriter about",
+    preferIds: [...FEATURED_WORK, "about:overview"],
     modeHint: "hiring",
   },
   {
@@ -274,6 +276,13 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     modeHint: "hiring",
   },
   {
+    id: "crowley",
+    label: "Show Crowley Maritime",
+    query: "Crowley Maritime freight quoting complex systems design system",
+    preferIds: ["work:crowley", "experience:leadership-arc", "system:products"],
+    modeHint: "hiring",
+  },
+  {
     id: "resume",
     label: "Where is your experience / CV?",
     query: "resume CV curriculum vitae experience career about",
@@ -311,6 +320,9 @@ export function matchSuggestedQuestion(query: string) {
   }
   if (normalized.includes("eqty")) {
     return suggestedQuestions.find((item) => item.id === "eqty");
+  }
+  if (normalized.includes("crowley") || normalized.includes("freight")) {
+    return suggestedQuestions.find((item) => item.id === "crowley");
   }
   if (normalized.includes("nye") || normalized.includes("rapipay") || normalized.includes("money app")) {
     return suggestedQuestions.find((item) => item.id === "nye-money");
