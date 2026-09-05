@@ -68,6 +68,11 @@ export type CaseStudyFrame = {
   caption: string;
   /** Defaults to image. GIFs use unoptimized Next/Image; videos belong in showreel. */
   kind?: CaseStudyMediaKind;
+  /**
+   * Tall full-page captures (e.g. marketing landing) scroll inside the frame
+   * container instead of shrinking with object-contain.
+   */
+  scrollable?: boolean;
 };
 
 export type CaseStudyShowreel = {

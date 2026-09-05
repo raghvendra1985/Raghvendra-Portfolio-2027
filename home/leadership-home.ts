@@ -51,6 +51,12 @@ export type LeadershipWorkEntry = {
   capabilities: readonly string[];
   /** Verified outcome only — must match published case-study copy. */
   outcome: string;
+  /**
+   * Homepage stack copy broken into short paragraphs for readability.
+   * Challenge/outcome labels are added in the UI — do not prefix here.
+   */
+  stackChallenge: readonly string[];
+  stackOutcome: readonly string[];
   layout: LeadershipWorkLayout;
 };
 
@@ -63,6 +69,14 @@ export const leadershipWorkMeta: readonly LeadershipWorkEntry[] = [
     capabilities: ["UX leadership", "Fintech", "Organisational alignment"],
     outcome:
       "Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.",
+    stackChallenge: [
+      "Senior Manager UX for NYE Money at Rapipay — leading the consumer experience at organisational scale.",
+      "Coverage across wallet, UPI, partner banking, and investments.",
+    ],
+    stackOutcome: [
+      "Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system.",
+      "Adopted across the product organisation.",
+    ],
     layout: "image-led",
   },
   {
@@ -72,6 +86,14 @@ export const leadershipWorkMeta: readonly LeadershipWorkEntry[] = [
     capabilities: ["Enterprise systems", "Cross-functional alignment", "Design governance"],
     outcome:
       "Replaced a dense legacy freight-quote form with a guided origin-to-cargo-to-contact flow, and introduced the design system this platform still runs on.",
+    stackChallenge: [
+      "A guided quote flow that replaced a dense legacy form — origin to cargo to contact.",
+      "Aligned with rate-engine and customs constraints.",
+    ],
+    stackOutcome: [
+      "Replaced a dense legacy freight-quote form with a guided origin-to-cargo-to-contact flow.",
+      "Introduced the design system this platform still runs on.",
+    ],
     layout: "copy-led",
   },
   {
@@ -81,6 +103,14 @@ export const leadershipWorkMeta: readonly LeadershipWorkEntry[] = [
     capabilities: ["AI experience", "Product direction", "Founder execution"],
     outcome:
       "Shipped a research-to-post workflow with long-term memory, voice rules, and source material a founder can actually run.",
+    stackChallenge: [
+      "An AI content engine built for Growing With Kid: LinkedIn posts in a personal voice.",
+      "Long-term memory, source material, idea scoring, calendar, and analytics.",
+    ],
+    stackOutcome: [
+      "Shipped a research-to-post workflow with long-term memory, voice rules, and source material.",
+      "A founder can actually run it.",
+    ],
     layout: "wide",
   },
 ] as const;

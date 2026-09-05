@@ -410,10 +410,11 @@ const caseStudyRecords: CaseStudyRecord[] = [
       },
     ],
     cover: "/assets/work/nye/cover.png",
-    productStackCount: 8,
+    productStackCount: 9,
     mediaLayout: "default",
     showreelFeaturedCount: 3,
     gallery: [
+      "/assets/work/nye/landing.png",
       "/assets/work/nye/gallery-01.jpg",
       "/assets/work/nye/gallery-02.jpg",
       "/assets/work/nye/gallery-03.jpg",
@@ -620,6 +621,12 @@ const caseStudyRecords: CaseStudyRecord[] = [
       },
     ],
     frames: [
+      {
+        src: "/assets/work/nye/landing.png",
+        scrollable: true,
+        caption:
+          "Marketing landing as the consumer entry: NYE frames everyday money — spend, move, save, invest — before the app shell takes over.",
+      },
       {
         src: "/assets/work/nye/gallery-01.jpg",
         caption:
@@ -862,13 +869,19 @@ const caseStudyRecords: CaseStudyRecord[] = [
       { label: "Open product", href: "/prototypes/gwk-ghostwriter/app.html" },
       { label: "View landing", href: "/prototypes/gwk-ghostwriter/landing.html" },
     ],
-    cover: "/assets/work/gwk-ghostwriter/cover.svg",
+    cover: "/assets/work/gwk-ghostwriter/cover.png",
+    productStackCount: 9,
+    mediaLayout: "default",
     gallery: [
-      "/assets/work/gwk-ghostwriter/gallery-01.png",
-      "/assets/work/gwk-ghostwriter/gallery-02.png",
-      "/assets/work/gwk-ghostwriter/gallery-03.png",
-      "/assets/work/gwk-ghostwriter/gallery-04.png",
-      "/assets/work/gwk-ghostwriter/gallery-05.png",
+      "/assets/work/gwk-ghostwriter/landing.png",
+      "/assets/work/gwk-ghostwriter/dashboard.png",
+      "/assets/work/gwk-ghostwriter/new-post.png",
+      "/assets/work/gwk-ghostwriter/ideas-bank.png",
+      "/assets/work/gwk-ghostwriter/knowledge.png",
+      "/assets/work/gwk-ghostwriter/memory.png",
+      "/assets/work/gwk-ghostwriter/voice.png",
+      "/assets/work/gwk-ghostwriter/calendar.png",
+      "/assets/work/gwk-ghostwriter/analytics.png",
     ],
     situation:
       "As Growing With Kid’s founder, I needed LinkedIn posts that sounded like me — grounded in source material I trusted — without rebuilding voice from a blank prompt every session. Generic AI tools forgot preferences, drifted tone, and treated research as disposable chat. The business need was a repeatable research-to-post workflow I would actually run.",
@@ -965,29 +978,50 @@ const caseStudyRecords: CaseStudyRecord[] = [
     ],
     frames: [
       {
-        src: "/assets/work/gwk-ghostwriter/gallery-01.png",
+        src: "/assets/work/gwk-ghostwriter/landing.png",
+        scrollable: true,
+        caption:
+          "Landing as the product’s conversion path — not a separate moodboard from the studio itself.",
+      },
+      {
+        src: "/assets/work/gwk-ghostwriter/dashboard.png",
         caption:
           "Dashboard as the job, not a chat log: ideas, calendar, and status replace “paste a prompt and hope.”",
       },
       {
-        src: "/assets/work/gwk-ghostwriter/gallery-02.png",
+        src: "/assets/work/gwk-ghostwriter/new-post.png",
         caption:
-          "Editor with live LinkedIn preview: what changed from generic AI is seeing the post as it will ship before approval.",
+          "Editor with live LinkedIn preview: see the post as it will ship before human approval.",
       },
       {
-        src: "/assets/work/gwk-ghostwriter/gallery-03.png",
+        src: "/assets/work/gwk-ghostwriter/ideas-bank.png",
         caption:
-          "Knowledge and sources: research stays inspectable so drafts score ideas from material you trust, not silent invention.",
+          "Ideas bank: score and queue draft angles from source material instead of starting from a blank prompt.",
       },
       {
-        src: "/assets/work/gwk-ghostwriter/gallery-04.png",
+        src: "/assets/work/gwk-ghostwriter/knowledge.png",
         caption:
-          "Memory and voice profile: preferences and feedback persist across sessions — the constraint that beats prompt theatre.",
+          "Knowledge and sources: research stays inspectable so drafts pull from material you trust, not silent invention.",
       },
       {
-        src: "/assets/work/gwk-ghostwriter/gallery-05.png",
+        src: "/assets/work/gwk-ghostwriter/memory.png",
         caption:
-          "Analytics closing the loop: performance feeds the studio so “what worked” becomes system state, not a forgotten impression.",
+          "Long-term memory: preferences, feedback, and topics persist across sessions — the constraint that beats prompt theatre.",
+      },
+      {
+        src: "/assets/work/gwk-ghostwriter/voice.png",
+        caption:
+          "Voice profile: beliefs and style rules live as system state so drafts stop drifting into generic AI-helpful tone.",
+      },
+      {
+        src: "/assets/work/gwk-ghostwriter/calendar.png",
+        caption:
+          "Calendar closes the research-to-post loop: schedule drafts while keeping publish under human approval.",
+      },
+      {
+        src: "/assets/work/gwk-ghostwriter/analytics.png",
+        caption:
+          "Analytics feed performance back into the studio so “what worked” becomes system state, not a forgotten impression.",
       },
     ],
     wouldChangeNow:
@@ -1370,7 +1404,10 @@ const caseStudyRecords: CaseStudyRecord[] = [
       },
     ],
     cover: "/assets/work/crowley/cover.webp",
+    productStackCount: 5,
+    mediaLayout: "default",
     gallery: [
+      "/assets/work/crowley/landing.png",
       "/assets/work/crowley/gallery-01.webp",
       "/assets/work/crowley/gallery-02.webp",
       "/assets/work/crowley/gallery-03.webp",
@@ -1512,6 +1549,12 @@ const caseStudyRecords: CaseStudyRecord[] = [
       },
     ],
     frames: [
+      {
+        src: "/assets/work/crowley/landing.png",
+        scrollable: true,
+        caption:
+          "Marketing landing as the commercial entry: Crowley frames logistics capability before the quote wizard takes the operational handoff.",
+      },
       {
         src: "/assets/work/crowley/gallery-01.webp",
         caption:
