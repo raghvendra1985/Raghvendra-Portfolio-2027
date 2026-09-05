@@ -61,9 +61,19 @@ export type CaseStudyDecision = {
   result: string;
 };
 
+export type CaseStudyMediaKind = "image" | "gif" | "video";
+
 export type CaseStudyFrame = {
   src: string;
   caption: string;
+  /** Defaults to image. GIFs use unoptimized Next/Image; videos belong in showreel. */
+  kind?: CaseStudyMediaKind;
+};
+
+export type CaseStudyShowreel = {
+  src: string;
+  caption: string;
+  poster?: string;
 };
 
 export type CaseStudyAtAGlance = {
@@ -116,6 +126,13 @@ type CaseStudyShared = {
   /** @deprecated Prefer frames */
   gallery?: string[];
   designSystem?: CaseStudyDesignSystemSlide[];
+  /** Curated product/motion videos — rendered as a muted showreel strip. */
+  showreel?: CaseStudyShowreel[];
+  /**
+   * When set, the first N frames render as a sticky product stack;
+   * remaining frames use the standard vertical Frames block (e.g. process photos).
+   */
+  productStackCount?: number;
   verification?: CaseStudyVerification;
 };
 

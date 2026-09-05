@@ -10,6 +10,7 @@ export type {
   CaseStudyMandate,
   CaseStudyDecision,
   CaseStudyFrame,
+  CaseStudyShowreel,
   CaseStudyAtAGlance,
   CaseStudyVerification,
   CaseStudy,
@@ -409,6 +410,7 @@ const caseStudyRecords: CaseStudyRecord[] = [
       },
     ],
     cover: "/assets/work/nye/cover.png",
+    productStackCount: 10,
     gallery: [
       "/assets/work/nye/gallery-01.jpg",
       "/assets/work/nye/gallery-02.jpg",
@@ -418,6 +420,8 @@ const caseStudyRecords: CaseStudyRecord[] = [
       "/assets/work/nye/gallery-06.jpg",
       "/assets/work/nye/gallery-07.jpg",
       "/assets/work/nye/gallery-08.jpg",
+      "/assets/work/nye/motion/loading-y-outline.gif",
+      "/assets/work/nye/motion/success-tick.gif",
       "/assets/work/nye/process-discovery.jpg",
       "/assets/work/nye/process-weekly-planning.jpg",
       "/assets/work/nye/process-ux-thematic-01.jpg",
@@ -427,6 +431,88 @@ const caseStudyRecords: CaseStudyRecord[] = [
       "/assets/work/nye/process-lifestyle-01.jpg",
       "/assets/work/nye/process-reward-recognition.jpg",
       "/assets/work/nye/process-success-stories.jpg",
+    ],
+    designSystem: [
+      {
+        src: "/assets/work/nye/design-system/color.png",
+        caption: "Color",
+        width: 2000,
+        height: 1080,
+      },
+      {
+        src: "/assets/work/nye/design-system/buttons.png",
+        caption: "Buttons",
+        width: 2000,
+        height: 1080,
+      },
+      {
+        src: "/assets/work/nye/design-system/iconography.png",
+        caption: "Iconography",
+        width: 2000,
+        height: 1080,
+      },
+      {
+        src: "/assets/work/nye/design-system/component.png",
+        caption: "Components",
+        width: 2000,
+        height: 1080,
+      },
+      {
+        src: "/assets/work/nye/design-system/grid.png",
+        caption: "Grid",
+        width: 2000,
+        height: 1080,
+      },
+      {
+        src: "/assets/work/nye/design-system/illustration.png",
+        caption: "Illustration",
+        width: 2000,
+        height: 1080,
+      },
+      {
+        src: "/assets/work/nye/design-system/guiding-principles.png",
+        caption: "Guiding principles",
+        width: 2000,
+        height: 1080,
+      },
+      {
+        src: "/assets/work/nye/design-system/process/internal-design-structure.png",
+        caption: "Internal design structure",
+        width: 2000,
+        height: 1080,
+      },
+    ],
+    showreel: [
+      {
+        src: "/assets/work/nye/video/cover-page.mp4",
+        poster: "/assets/work/nye/cover.png",
+        caption: "Cover page motion — multi-device product surface.",
+      },
+      {
+        src: "/assets/work/nye/video/showreel-mobile-02.mp4",
+        poster: "/assets/work/nye/gallery-01.jpg",
+        caption: "Mobile showreel — core money journeys.",
+      },
+      {
+        src: "/assets/work/nye/video/showreel-mobile-04.mp4",
+        poster: "/assets/work/nye/gallery-02.jpg",
+        caption: "Mobile showreel — secondary flows and states.",
+      },
+      {
+        src: "/assets/work/nye/video/showreel-grid-mobile.mp4",
+        poster: "/assets/work/nye/gallery-03.jpg",
+        caption: "Grid showreel — product surfaces in parallel.",
+      },
+      {
+        src: "/assets/work/nye/video/animated-web-screens.mp4",
+        poster: "/assets/work/nye/cover.png",
+        caption: "Animated web screens.",
+      },
+      {
+        src: "/assets/work/nye/video/phone-initial-funding.mp4",
+        poster: "/assets/work/nye/gallery-04.jpg",
+        caption: "Phone screens — initial funding journey.",
+      },
     ],
     situation:
       "A consumer trying to spend, move, save, and invest inside NYE had to learn separate product structures for UPI, prepaid cards, partner banking, and investments. The business needed one everyday money app. Internally, each product team used different onboarding patterns, terminology, states, and compliance flows — which increased design duplication and made NYE feel like several products inside one shell.",
@@ -564,6 +650,18 @@ const caseStudyRecords: CaseStudyRecord[] = [
         src: "/assets/work/nye/gallery-08.jpg",
         caption:
           "Trust at the decision: biometric unlock, PIN recovery, and compliance signals sit next to money moments where users choose to continue.",
+      },
+      {
+        src: "/assets/work/nye/motion/loading-y-outline.gif",
+        kind: "gif",
+        caption:
+          "Loading mark: Y outline motion used while money states resolve.",
+      },
+      {
+        src: "/assets/work/nye/motion/success-tick.gif",
+        kind: "gif",
+        caption:
+          "Success confirmation: shared completion cue across money journeys.",
       },
       {
         src: "/assets/work/nye/process-discovery.jpg",

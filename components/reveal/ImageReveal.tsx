@@ -43,6 +43,7 @@ export default function ImageReveal({
   }, [config, pageReady]);
 
   const isSvg = Boolean(src?.endsWith(".svg"));
+  const isGif = Boolean(src?.endsWith(".gif"));
 
   return (
     <div
@@ -59,7 +60,7 @@ export default function ImageReveal({
             fill
             priority={priority}
             sizes={sizes}
-            unoptimized={isSvg}
+            unoptimized={isSvg || isGif}
             onError={() => setFailed(true)}
             className={
               objectFit === "contain"
