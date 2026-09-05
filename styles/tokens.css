@@ -68,7 +68,7 @@
   --text-hero: clamp(2.75rem, 2.2rem + 2.2vw, 4rem);
 
   --tracking-hero: -0.035em;
-  --tracking-h1: -0.025em;
+  --tracking-h1: -0.03em;
   --tracking-h2: -0.02em;
   --tracking-h3: -0.01em;
   --tracking-label: 0.04em;

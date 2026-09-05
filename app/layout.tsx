@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { Manrope, Newsreader, Space_Mono } from "next/font/google";
+import { Gloock, Manrope, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import ExperienceProvider from "@/components/providers/ExperienceProvider";
@@ -8,27 +7,27 @@ import AnalyticsPathTracker from "@/components/analytics/AnalyticsPathTracker";
 import { site } from "@/lib/site";
 import { jsonLdScript, pageMetadataExtras, personJsonLd } from "@/lib/seo";
 
-const display = localFont({
-  src: "../Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf",
+/** Display + editorial serif — Gloock ships as a single weight (400). */
+const display = Gloock({
   variable: "--font-display",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
-  weight: "200 800",
-  fallback: ["system-ui", "sans-serif"],
-  adjustFontFallback: "Arial",
+  adjustFontFallback: true,
+});
+
+const serif = Gloock({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  adjustFontFallback: true,
 });
 
 const sans = Manrope({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  display: "swap",
-  adjustFontFallback: true,
-});
-
-const serif = Newsreader({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
   adjustFontFallback: true,
 });

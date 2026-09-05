@@ -204,7 +204,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
               </div>
               <div className="mt-4 flex items-center justify-between gap-4">
                 <p
-                  className="font-display text-[length:var(--text-h3)] font-medium leading-none tracking-[var(--tracking-h3)] text-navy"
+                  className="font-display text-[length:var(--text-h3)] font-normal leading-none tracking-[var(--tracking-h3)] text-navy"
                   aria-live="polite"
                 >
                   {String(active + 1).padStart(2, "0")}
@@ -263,7 +263,7 @@ export default function SelectedWork({ studies }: { studies: CaseStudy[] }) {
                             />
                           </div>
                         </div>
-                        <p className="font-display text-[length:var(--text-h3)] font-medium leading-none tracking-[var(--tracking-h3)] text-navy">
+                        <p className="font-display text-[length:var(--text-h3)] font-normal leading-none tracking-[var(--tracking-h3)] text-navy">
                           {String(index + 1).padStart(2, "0")}
                           <span className="font-mono-label ml-2 text-ink-soft">/ {total}</span>
                         </p>

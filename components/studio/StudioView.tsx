@@ -365,7 +365,7 @@ export default function StudioView() {
                 data-reveal-item
                 className="flex gap-4 border-t border-line py-4 first:border-t-0"
               >
-                <span className="w-6 shrink-0 font-display text-sm font-semibold text-gold">
+                <span className="w-6 shrink-0 font-display text-sm font-normal text-gold">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>

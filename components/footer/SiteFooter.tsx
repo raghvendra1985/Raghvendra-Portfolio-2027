@@ -21,23 +21,28 @@ export default function SiteFooter() {
 
   return (
     <footer ref={rootRef} className="overflow-hidden bg-navy text-mist">
-      <div className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-16 sm:py-20">
+      <div className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-12 sm:py-16 lg:py-20">
         <p
           data-footer-wordmark
-          className="break-words font-display text-[clamp(2.35rem,14vw,9rem)] leading-[0.9]"
+          className="break-words font-serif text-[clamp(2.25rem,11vw,6.5rem)] font-normal leading-[0.92] tracking-[-0.03em] text-mist"
         >
           Raghvendra
           <span className="text-gold">.</span>
         </p>
 
-        <div className="mt-12 grid gap-10 border-t border-mist/15 pt-10 sm:mt-16 md:grid-cols-2 lg:grid-cols-4">
-          <div data-footer-link>
-            <p className="max-w-xs type-body text-mist/85">{leadershipFooter.blurb}</p>
-            <p className="mt-6 type-body text-mist/80">{site.location}</p>
-            <p data-footer-status className="mt-3 flex items-start gap-2 text-base">
+        <div className="mt-10 grid gap-10 border-t border-mist/10 pt-8 sm:mt-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:pt-10">
+          <div data-footer-link className="min-w-0">
+            <p className="max-w-sm font-serif text-[length:var(--text-lead)] leading-snug text-mist/90">
+              {leadershipFooter.blurb}
+            </p>
+            <p className="mt-5 type-small text-mist/70">{site.location}</p>
+            <p
+              data-footer-status
+              className="mt-3 flex items-start gap-2 type-small text-mist/80"
+            >
               <span
                 data-status-dot
-                className="mt-2 h-2 w-2 shrink-0 rounded-full bg-green"
+                className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-green"
                 aria-hidden="true"
               />
               <span>
@@ -47,13 +52,13 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <p className="font-mono-label text-mist/85">Explore</p>
-            <ul className="mt-4 space-y-2">
+            <p className="font-mono-label text-mist/70">Explore</p>
+            <ul className="mt-4 space-y-1">
               {footerLinks.sitemap.map((link) => (
                 <li key={link.href} data-footer-link>
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-11 items-center text-base text-mist hover:text-gold"
+                    className="inline-flex min-h-10 items-center type-body text-mist/90 transition-colors hover:text-gold"
                   >
                     {link.label}
                   </Link>
@@ -63,8 +68,8 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <p className="font-mono-label text-mist/85">Connect</p>
-            <ul className="mt-4 space-y-2">
+            <p className="font-mono-label text-mist/70">Connect</p>
+            <ul className="mt-4 space-y-1">
               {footerLinks.social
                 .filter((link) => link.label !== "WhatsApp")
                 .map((link) => (
@@ -72,7 +77,7 @@ export default function SiteFooter() {
                     <a
                       href={link.href}
                       aria-label={link.ariaLabel}
-                    className="inline-flex min-h-11 items-center text-base text-mist hover:text-gold"
+                      className="inline-flex min-h-10 items-center type-body text-mist/90 transition-colors hover:text-gold"
                       {...(link.href.startsWith("http")
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
@@ -85,20 +90,20 @@ export default function SiteFooter() {
                 <ResumeCta
                   appearance="text"
                   source="footer"
-                  className="inline-flex min-h-11 items-center text-base text-mist hover:text-gold"
+                  className="inline-flex min-h-10 items-center type-body text-mist/90 transition-colors hover:text-gold"
                 />
               </li>
             </ul>
           </div>
 
           <div>
-            <p className="font-mono-label text-mist/85">Also</p>
-            <ul className="mt-4 space-y-2">
+            <p className="font-mono-label text-mist/70">Also</p>
+            <ul className="mt-4 space-y-1">
               {footerLinks.more.map((link) => (
                 <li key={link.href} data-footer-link>
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-11 items-center text-base text-mist hover:text-gold"
+                    className="inline-flex min-h-10 items-center type-body text-mist/90 transition-colors hover:text-gold"
                   >
                     {link.label}
                   </Link>
@@ -108,9 +113,8 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-2 border-t border-mist/15 pt-6 font-mono-label text-mist/60 sm:flex-row sm:flex-wrap sm:justify-between">
+        <div className="mt-12 flex flex-col gap-2 border-t border-mist/10 pt-5 type-caption text-mist/50 sm:mt-14 sm:flex-row sm:flex-wrap sm:justify-between">
           <span>© {new Date().getFullYear()} Raghvendra Singh</span>
-          <span>Charms inspired by Karthik Mahadevan</span>
           <span>Motion supports the story. It never becomes the story.</span>
         </div>
       </div>
