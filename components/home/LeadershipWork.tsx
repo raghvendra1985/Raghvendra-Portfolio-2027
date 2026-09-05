@@ -27,26 +27,77 @@ function ProjectCover({
   decorative?: boolean;
   className?: string;
 }) {
-  const src = project.study.cover;
+  const scrollableFrame =
+    "frames" in project.study
+      ? project.study.frames.find((frame) => frame.scrollable)
+      : undefined;
+  const src = scrollableFrame?.src ?? project.study.cover;
+  const scrollable = Boolean(scrollableFrame);
   const isSvg = Boolean(src?.endsWith(".svg"));
 
   return (
-    <div className={`relative overflow-hidden bg-navy ${className}`}>
+    <div
+      className={`relative bg-navy ${
+        scrollable ? "overflow-y-auto overscroll-contain" : "overflow-hidden"
+      } ${className}`}
+      data-work-cover-scroll={scrollable ? "true" : undefined}
+      tabIndex={scrollable && !decorative ? 0 : undefined}
+      aria-label={
+        scrollable && !decorative
+          ? `${project.title} — scroll to view full landing page`
+          : undefined
+      }
+    >
       {src ? (
-        <Image
-          src={src}
-          alt={decorative ? "" : project.title}
-          fill
-          priority={priority}
-          sizes="(max-width: 1024px) 100vw, 45vw"
-          unoptimized={isSvg}
-          className={
-            isSvg ? "object-contain object-center p-6" : "object-cover object-center"
-          }
-        />
+        scrollable ? (
+          <Image
+            src={src}
+            alt={decorative ? "" : project.title}
+            width={1200}
+            height={6400}
+            priority={priority}
+            sizes="(max-width: 1024px) 100vw, 45vw"
+            className="h-auto w-full"
+          />
+        ) : (
+          <Image
+            src={src}
+            alt={decorative ? "" : project.title}
+            fill
+            priority={priority}
+            sizes="(max-width: 1024px) 100vw, 45vw"
+            unoptimized={isSvg}
+            className={
+              isSvg ? "object-contain object-center p-6" : "object-cover object-center"
+            }
+          />
+        )
       ) : (
         <div className="absolute inset-0 bg-surface-dim" aria-hidden="true" />
       )}
+    </div>
+  );
+}
+
+function StackCopyBlock({
+  label,
+  paragraphs,
+}: {
+  label: string;
+  paragraphs: readonly string[];
+}) {
+  return (
+    <div className="mt-5 max-w-[48ch] space-y-2.5 text-left" data-work-stack-copy>
+      {paragraphs.map((paragraph, i) => (
+        <p key={`${label}-${i}`} className="type-body text-ink">
+          {i === 0 ? (
+            <span className="font-medium" data-work-stack-label>
+              {label}.{" "}
+            </span>
+          ) : null}
+          {paragraph}
+        </p>
+      ))}
     </div>
   );
 }
@@ -63,10 +114,10 @@ function ProjectStackCopy({
   showCta?: boolean;
 }) {
   return (
-    <>
+    <div className="text-left">
       <p className="font-mono-label text-green">{project.kind}</p>
-      <h3 className="mt-3 max-w-xl type-stack-title text-navy">{project.title}</h3>
-      <dl className="mt-5 grid gap-3 sm:grid-cols-2">
+      <h3 className="mt-3 max-w-xl text-left type-stack-title text-navy">{project.title}</h3>
+      <dl className="mt-5 grid gap-3 text-left sm:grid-cols-2">
         <div>
           <dt className="font-mono-label text-navy/60">Role</dt>
           <dd className="mt-1 type-body text-ink">{project.role}</dd>
@@ -76,14 +127,8 @@ function ProjectStackCopy({
           <dd className="mt-1 type-body text-ink">{project.scope}</dd>
         </div>
       </dl>
-      <p className="mt-5 max-w-[58ch] type-body text-ink">
-        <span className="font-medium text-navy">Challenge. </span>
-        {project.challenge}
-      </p>
-      <p className="mt-3 max-w-[58ch] type-body text-ink">
-        <span className="font-medium text-navy">Outcome. </span>
-        {project.outcome}
-      </p>
+      <StackCopyBlock label="Challenge" paragraphs={project.stackChallenge} />
+      <StackCopyBlock label="Outcome" paragraphs={project.stackOutcome} />
       <ul className="mt-5 flex flex-wrap gap-2" aria-label="Capabilities">
         {project.capabilities.map((tag) => (
           <li
@@ -110,7 +155,7 @@ function ProjectStackCopy({
       <p className="sr-only">
         Project {String(index + 1).padStart(2, "0")} of {total}
       </p>
-    </>
+    </div>
   );
 }
 
@@ -174,6 +219,11 @@ export default function LeadershipWork() {
     crossfadeWorkVisual(visuals, active, config);
   }, [active, config]);
 
+  const activeIsScrollableCover =
+    "frames" in projects[active]?.study
+      ? Boolean(projects[active]?.study.frames.some((frame) => frame.scrollable))
+      : false;
+
   return (
     <section
       ref={rootRef}
@@ -220,7 +270,7 @@ export default function LeadershipWork() {
                   priority={index === 0}
                   className="aspect-[16/10] w-full"
                 />
-                <div className="border-t border-line bg-navy px-5 py-6 text-mist sm:px-7 sm:py-8">
+                <div className="border-t border-line bg-navy px-5 py-6 text-left text-mist sm:px-7 sm:py-8">
                   <p className="type-stack-index text-gold">
                     {String(index + 1).padStart(2, "0")}
                   </p>
@@ -248,7 +298,9 @@ export default function LeadershipWork() {
                     key={`visual-${project.slug}`}
                     data-work-stack-visual
                     className={`absolute inset-0 origin-center transition-transform duration-500 ease-out ${
-                      behind ? "translate-y-3 scale-[0.96]" : "translate-y-0 scale-100"
+                      behind
+                        ? "pointer-events-none translate-y-3 scale-[0.96]"
+                        : "translate-y-0 scale-100"
                     }`}
                     aria-hidden={behind}
                   >
@@ -274,6 +326,11 @@ export default function LeadershipWork() {
                 />
               </div>
             </div>
+            {activeIsScrollableCover ? (
+              <p className="mt-2 font-mono-label text-ink-soft">
+                Scroll image to see full page
+              </p>
+            ) : null}
           </div>
 
           <ul className="flex min-w-0 flex-col" data-work-stack-list>
@@ -304,7 +361,7 @@ export default function LeadershipWork() {
                     }
                     onFocus={() => setActive(index)}
                     onMouseEnter={() => setActive(index)}
-                    className={`block min-h-[min(48vh,26rem)] px-8 py-10 xl:px-10 xl:py-12 ${panelTone}`}
+                    className={`block min-h-[min(48vh,26rem)] px-8 py-10 text-left xl:px-10 xl:py-12 ${panelTone}`}
                     aria-current={isActive ? "true" : undefined}
                   >
                     <p className="type-stack-index">

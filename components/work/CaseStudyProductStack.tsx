@@ -102,13 +102,16 @@ export default function CaseStudyProductStack({
               >
                 <div
                   className={`relative mx-auto aspect-[3/4] w-full max-w-xl md:max-w-2xl ${
-                    navy ? "bg-navy/40" : "bg-mist"
-                  }`}
+                    frame.scrollable
+                      ? "overflow-y-auto overscroll-contain"
+                      : "overflow-hidden"
+                  } ${navy ? "bg-navy/40" : "bg-mist"}`}
                 >
                   <FrameMedia
                     src={frame.src}
                     alt={`${client} — product ${index + 1}`}
                     priority={index === 0}
+                    scrollable={frame.scrollable}
                   />
                 </div>
                 <div
@@ -146,7 +149,9 @@ export default function CaseStudyProductStack({
                   key={`visual-${frame.src}`}
                   data-stack-visual
                   className={`absolute inset-0 origin-center transition-transform duration-500 ease-out ${
-                    behind ? "translate-y-4 scale-[0.94]" : "translate-y-0 scale-100"
+                    behind
+                      ? "pointer-events-none translate-y-4 scale-[0.94]"
+                      : "translate-y-0 scale-100"
                   }`}
                   aria-hidden={behind}
                 >
@@ -155,6 +160,7 @@ export default function CaseStudyProductStack({
                     alt=""
                     priority={index === 0}
                     decorative
+                    scrollable={frame.scrollable}
                   />
                 </div>
               );
@@ -172,6 +178,9 @@ export default function CaseStudyProductStack({
               />
             </div>
           </div>
+          {frames[active]?.scrollable ? (
+            <p className="mt-2 font-mono-label text-ink-soft">Scroll image to see full page</p>
+          ) : null}
           <p className="sr-only" aria-live="polite">
             {frames[active]?.caption}
           </p>
@@ -223,13 +232,39 @@ function FrameMedia({
   alt,
   priority = false,
   decorative = false,
+  scrollable = false,
 }: {
   src: string;
   alt: string;
   priority?: boolean;
   decorative?: boolean;
+  scrollable?: boolean;
 }) {
   const isGif = src.endsWith(".gif");
+
+  if (scrollable) {
+    return (
+      <div
+        data-frame-scroll
+        tabIndex={0}
+        className="absolute inset-0 overflow-y-auto overscroll-contain"
+        aria-label={
+          decorative ? "Scrollable product frame" : `${alt} — scroll to view full page`
+        }
+      >
+        <Image
+          src={src}
+          alt={decorative ? "" : alt}
+          width={1200}
+          height={6400}
+          priority={priority}
+          sizes="(max-width: 1024px) 100vw, 40vw"
+          className="h-auto w-full"
+        />
+      </div>
+    );
+  }
+
   return (
     <Image
       src={src}
