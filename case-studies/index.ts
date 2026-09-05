@@ -418,6 +418,15 @@ const caseStudyRecords: CaseStudyRecord[] = [
       "/assets/work/nye/gallery-06.jpg",
       "/assets/work/nye/gallery-07.jpg",
       "/assets/work/nye/gallery-08.jpg",
+      "/assets/work/nye/process-discovery.jpg",
+      "/assets/work/nye/process-weekly-planning.jpg",
+      "/assets/work/nye/process-ux-thematic-01.jpg",
+      "/assets/work/nye/process-ux-thematic-02.jpg",
+      "/assets/work/nye/process-ux-thematic-03.jpg",
+      "/assets/work/nye/process-stakeholder-discussion.jpg",
+      "/assets/work/nye/process-lifestyle-01.jpg",
+      "/assets/work/nye/process-reward-recognition.jpg",
+      "/assets/work/nye/process-success-stories.jpg",
     ],
     situation:
       "A consumer trying to spend, move, save, and invest inside NYE had to learn separate product structures for UPI, prepaid cards, partner banking, and investments. The business needed one everyday money app. Internally, each product team used different onboarding patterns, terminology, states, and compliance flows — which increased design duplication and made NYE feel like several products inside one shell.",
@@ -555,6 +564,51 @@ const caseStudyRecords: CaseStudyRecord[] = [
         src: "/assets/work/nye/gallery-08.jpg",
         caption:
           "Trust at the decision: biometric unlock, PIN recovery, and compliance signals sit next to money moments where users choose to continue.",
+      },
+      {
+        src: "/assets/work/nye/process-discovery.jpg",
+        caption:
+          "Discovery work: framing the problem space before squads lock patterns into product lines.",
+      },
+      {
+        src: "/assets/work/nye/process-weekly-planning.jpg",
+        caption:
+          "Weekly planning: keeping cross-squad design work visible and sequenced.",
+      },
+      {
+        src: "/assets/work/nye/process-ux-thematic-01.jpg",
+        caption:
+          "UX research thematic analysis: clustering findings into shared language for money journeys.",
+      },
+      {
+        src: "/assets/work/nye/process-ux-thematic-02.jpg",
+        caption:
+          "Thematic analysis continued: turning research notes into patterns teams can adopt.",
+      },
+      {
+        src: "/assets/work/nye/process-ux-thematic-03.jpg",
+        caption:
+          "Thematic analysis board: evidence kept visible while grammar decisions are made.",
+      },
+      {
+        src: "/assets/work/nye/process-stakeholder-discussion.jpg",
+        caption:
+          "Stakeholder discussion: aligning product, compliance, and UX on finishable journeys.",
+      },
+      {
+        src: "/assets/work/nye/process-lifestyle-01.jpg",
+        caption:
+          "Team at work: the operating context around the consumer money app.",
+      },
+      {
+        src: "/assets/work/nye/process-reward-recognition.jpg",
+        caption:
+          "Reward and recognition: how the design organisation marked progress and contribution.",
+      },
+      {
+        src: "/assets/work/nye/process-success-stories.jpg",
+        caption:
+          "Success stories: capturing organisational wins alongside the live product surface.",
       },
     ],
     wouldChangeNow:
