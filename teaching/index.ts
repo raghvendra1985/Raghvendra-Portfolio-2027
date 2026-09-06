@@ -130,7 +130,6 @@ export const teachingPage: TeachingPage = {
         height: 143,
       },
     },
-    { name: "Rapipay · NYE" },
   ],
   heroGalleryLabel: "Workshop scenes",
   heroGallery: [
@@ -159,14 +158,6 @@ export const teachingPage: TeachingPage = {
       height: 1081,
     },
     {
-      src: "/assets/testimonials/workshop-scenes/rapipay-nye-ux-research-01.jpg",
-      alt: "UX research workshop at Rapipay NYE",
-      venue: "Rapipay · NYE",
-      caption: "UX research workshop — collaborative session",
-      width: 1920,
-      height: 1080,
-    },
-    {
       src: "/assets/testimonials/workshop-scenes/dtu-mdes-02.jpg",
       alt: "M.Des UX workshop facilitation at DTU",
       venue: "DTU · M.Des",
@@ -181,14 +172,6 @@ export const teachingPage: TeachingPage = {
       caption: "Open elective — critique and making",
       width: 1920,
       height: 1440,
-    },
-    {
-      src: "/assets/testimonials/workshop-scenes/workmode-01.jpg",
-      alt: "Design process taskboard from workmode practice",
-      venue: "Workmode",
-      caption: "Workmode — design process on the board",
-      width: 1920,
-      height: 1080,
     },
     {
       src: "/assets/testimonials/workshop-scenes/ambedkar-figma-01.jpg",
@@ -215,14 +198,6 @@ export const teachingPage: TeachingPage = {
       height: 1440,
     },
     {
-      src: "/assets/testimonials/workshop-scenes/workmode-00.jpg",
-      alt: "Facilitation workmode still",
-      venue: "Workmode",
-      caption: "Workmode — facilitation in practice",
-      width: 1920,
-      height: 1080,
-    },
-    {
       src: "/assets/testimonials/workshop-scenes/iiad-classroom-ugcd-01.jpg",
       alt: "UGCD classroom session at IIAD",
       venue: "IIAD · UGCD",
@@ -245,14 +220,6 @@ export const teachingPage: TeachingPage = {
       caption: "Blender workshop — 3D in the room",
       width: 1920,
       height: 1440,
-    },
-    {
-      src: "/assets/testimonials/workshop-scenes/workmode-03.jpg",
-      alt: "Workmode facilitation moment",
-      venue: "Workmode",
-      caption: "Workmode — shared practice",
-      width: 1920,
-      height: 1081,
     },
     {
       src: "/assets/testimonials/workshop-scenes/digital-awareness-01.jpg",
@@ -279,14 +246,6 @@ export const teachingPage: TeachingPage = {
       height: 1440,
     },
     {
-      src: "/assets/testimonials/workshop-scenes/workmode-06.jpg",
-      alt: "Workmode session overview",
-      venue: "Workmode",
-      caption: "Workmode — room and process",
-      width: 1920,
-      height: 861,
-    },
-    {
       src: "/assets/testimonials/workshop-scenes/nid-kurukshetra-01.jpg",
       alt: "Concept development workshop at NID Kurukshetra",
       venue: "NID Kurukshetra",
@@ -301,14 +260,6 @@ export const teachingPage: TeachingPage = {
       caption: "IIAD 2025 batch — closing session",
       width: 1920,
       height: 1440,
-    },
-    {
-      src: "/assets/testimonials/workshop-scenes/workmode-07.jpg",
-      alt: "Workmode facilitation detail",
-      venue: "Workmode",
-      caption: "Workmode — detail from practice",
-      width: 1920,
-      height: 861,
     },
     {
       src: "/assets/testimonials/workshop-scenes/iiad-farewell-05.jpg",
