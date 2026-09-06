@@ -441,6 +441,14 @@ const caseStudyRecords: CaseStudyRecord[] = [
       "/assets/work/nye/process-lifestyle-01.jpg",
       "/assets/work/nye/process-reward-recognition.jpg",
       "/assets/work/nye/process-success-stories.jpg",
+      "/assets/work/nye/rapipay-nye-ux-research-01.jpg",
+      "/assets/work/nye/design-system/process/workmode-00.jpg",
+      "/assets/work/nye/design-system/process/workmode-01.jpg",
+      "/assets/work/nye/design-system/process/workmode-03.jpg",
+      "/assets/work/nye/design-system/process/workmode-04.jpg",
+      "/assets/work/nye/design-system/process/workmode-05.jpg",
+      "/assets/work/nye/design-system/process/workmode-06.jpg",
+      "/assets/work/nye/design-system/process/workmode-07.jpg",
     ],
     designSystem: [
       {
@@ -758,6 +766,39 @@ const caseStudyRecords: CaseStudyRecord[] = [
         src: "/assets/work/nye/process-success-stories.jpg",
         caption:
           "Success stories: capturing organisational wins alongside the live product surface.",
+      },
+      {
+        src: "/assets/work/nye/rapipay-nye-ux-research-01.jpg",
+        caption:
+          "UX research workshop at Rapipay: collaborative session work on money journeys.",
+      },
+      {
+        src: "/assets/work/nye/design-system/process/workmode-00.jpg",
+        caption: "Workmode: facilitation and shared process in the Rapipay design room.",
+      },
+      {
+        src: "/assets/work/nye/design-system/process/workmode-01.jpg",
+        caption: "Workmode: design process kept visible on the board.",
+      },
+      {
+        src: "/assets/work/nye/design-system/process/workmode-03.jpg",
+        caption: "Workmode: shared practice across the design organisation.",
+      },
+      {
+        src: "/assets/work/nye/design-system/process/workmode-04.jpg",
+        caption: "Workmode: team context around the consumer money app.",
+      },
+      {
+        src: "/assets/work/nye/design-system/process/workmode-05.jpg",
+        caption: "Workmode: operating rhythm and collaboration in situ.",
+      },
+      {
+        src: "/assets/work/nye/design-system/process/workmode-06.jpg",
+        caption: "Workmode: room and process overview.",
+      },
+      {
+        src: "/assets/work/nye/design-system/process/workmode-07.jpg",
+        caption: "Workmode: detail from day-to-day practice.",
       },
     ],
     wouldChangeNow:
