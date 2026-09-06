@@ -196,22 +196,42 @@ export const leadershipLead = {
   title: "An operating model, not a services menu.",
   intro:
     "My role changes with the organisation’s needs. I can set direction, create alignment, and remain close enough to the work to protect the quality of execution.",
+  frameworkImage: {
+    src: "/assets/system-objects/home-lead-framework.png",
+    alt: "How I lead diagram: Frame, Align, Enable, and Deliver in a cycle with feedback and learning.",
+    width: 1254,
+    height: 1254,
+  },
+  loopLabel: "Feedback & learning",
   stages: [
     {
+      id: "frame",
       title: "Frame",
+      tagline: "Clarify the problem",
       body: "Make the problem, constraints, and decision space visible so teams can move through ambiguity without waiting for a brief that never arrives.",
+      /** Hotspot on the isometric diagram — percentages of the square artboard. */
+      hotspot: { top: "4%", left: "4%", width: "44%", height: "44%" },
     },
     {
+      id: "align",
       title: "Align",
+      tagline: "Create shared direction",
       body: "Bring product, design, engineering, operations, and executives onto one experience language so the interface and the operating reality stay compatible.",
+      hotspot: { top: "4%", left: "52%", width: "44%", height: "44%" },
     },
     {
+      id: "enable",
       title: "Enable",
+      tagline: "Build team ownership",
       body: "Build critique, shared language, and enough structure that quality does not depend on one person reviewing every screen.",
+      hotspot: { top: "52%", left: "52%", width: "44%", height: "44%" },
     },
     {
+      id: "deliver",
       title: "Deliver",
+      tagline: "Protect quality. Ship.",
       body: "Stay close to execution: protect craft, catch failure modes, and ship. Leadership is responsibility for the conditions in which the work succeeds.",
+      hotspot: { top: "52%", left: "4%", width: "44%", height: "44%" },
     },
   ],
 } as const;
