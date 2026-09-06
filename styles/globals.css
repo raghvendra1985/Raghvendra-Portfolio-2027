@@ -244,10 +244,8 @@ html.motion-ready .site-content {
 }
 
 @media (min-width: 1024px) {
-  html[data-charm="hanging"] .site-content {
-    padding-right: var(--charm-corridor);
-  }
-
+  /* Charm overlays the right stage over the hero/scene — do not reserve a empty gutter.
+     Only keep nav links clear of the hang point. */
   html[data-charm="hanging"] [data-nav] [data-nav-bar] {
     padding-right: calc(var(--page-pad) + var(--charm-corridor));
   }
@@ -270,9 +268,15 @@ html.motion-ready [data-loader-root] {
   display: block;
 }
 
+.hero-headline .line-mask {
+  padding-block: 0.14em;
+}
+
 .split-line {
   display: block;
-  transform: translate3d(0, 110%, 0);
+  /* Visible by default — GSAP animates from yPercent 110. Do not park at 110% in CSS
+     or a stalled/reverted timeline leaves the headline clipped inside .line-mask. */
+  transform: none;
 }
 
 .grain {

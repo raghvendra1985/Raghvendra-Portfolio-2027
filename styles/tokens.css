@@ -51,7 +51,8 @@
   --nav-height-compact: 64px;
   --hash-offset: calc(var(--nav-height) + 12px);
   --page-pad: clamp(1.5rem, 4.5vw, 4.5rem);
-  --charm-corridor: clamp(112px, 8vw, 160px);
+  /* Dedicated right stage so the charm hangs over the hero scene, not in a gutter */
+  --charm-corridor: clamp(240px, 26vw, 360px);
   --max-width: 1440px;
 
   --weight-regular: 400;

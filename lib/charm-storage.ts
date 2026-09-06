@@ -25,7 +25,7 @@ export type CharmState = {
 
 export const DEFAULT_CHARM_STATE: CharmState = {
   id: DEFAULT_CHARM_ID,
-  hangX: 0.62,
+  hangX: 0.78,
   hidden: false,
   emoji: DEFAULT_EMOJI,
   daruma: 0,
@@ -99,11 +99,28 @@ export function subscribeCharmState(callback: (state: CharmState) => void) {
   };
 }
 
-/** Keep the hang point inside the right-hand charm corridor on desktop. */
+/** Width of the dedicated right-hand charm stage (over hero / scene). */
 export function corridorWidth(width = typeof window === "undefined" ? 1280 : window.innerWidth) {
-  return Math.min(160, Math.max(112, width * 0.08));
+  return Math.min(360, Math.max(240, width * 0.26));
 }
 
+/** Pixel bounds for the desktop charm stage along the viewport X axis. */
+export function charmStageBounds(width = typeof window === "undefined" ? 1280 : window.innerWidth) {
+  const corridor = corridorWidth(width);
+  const edge = Math.max(48, width * 0.035);
+  const minPx = width - corridor;
+  const maxPx = width - edge;
+  return {
+    minPx,
+    maxPx,
+    centerPx: (minPx + maxPx) / 2,
+  };
+}
+
+/**
+ * Keep the hang point inside the dedicated right stage so the charm
+ * overlays the hero scene rather than sitting in an empty outer gutter.
+ */
 export function clampHangX(hangX: number, width = typeof window === "undefined" ? 1280 : window.innerWidth) {
   if (width < 1024) {
     const minPx = width * 0.78;
@@ -112,6 +129,9 @@ export function clampHangX(hangX: number, width = typeof window === "undefined" 
     const clamped = Math.min(Math.max(px, Math.min(minPx, maxPx - 8)), Math.max(maxPx, minPx + 8));
     return clamped / width;
   }
-  const corridor = corridorWidth(width);
-  return (width - corridor / 2) / width;
+  const { minPx, maxPx, centerPx } = charmStageBounds(width);
+  const px = clampUnit(hangX) * width;
+  // Old installs stored a far-right gutter hang (~0.9+); snap those into stage center.
+  if (px > maxPx + 8) return centerPx / width;
+  return Math.min(Math.max(px, minPx), maxPx) / width;
 }
