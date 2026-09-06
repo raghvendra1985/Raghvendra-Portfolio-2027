@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import SectionReveal from "@/components/reveal/SectionReveal";
+import TeachingCritique from "@/components/teaching/TeachingCritique";
 import TeachingHeroCarousel from "@/components/teaching/TeachingHeroCarousel";
 import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import { animateHero } from "@/animations/hero";
@@ -107,6 +108,7 @@ export default function TeachingView() {
   return (
     <>
       <TeachingHero />
+      <TeachingCritique />
 
       <SectionReveal
         id="what-students-say"

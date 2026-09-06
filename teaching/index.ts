@@ -340,3 +340,47 @@ export const teachingPage: TeachingPage = {
   sourceNote:
     "Excerpts from UX workshop feedback collected in June 2025. Shared with participants’ permission.",
 };
+
+export const teachingPractice = {
+  eyebrow: "Shared critique",
+  title: "A table where judgment becomes a shared practice.",
+  intro:
+    "In the room I sit among participants—not above the work. Concepts move from a single idea to connected perspectives to a refined direction the group can defend together.",
+  hintLabel: "Shared critique",
+  frameworkImage: {
+    src: "/assets/system-objects/teaching-critique-table.png",
+    alt: "Shared critique diagram: an orange facilitator among participants around a table, with concepts evolving from one idea to shared judgment to refinement.",
+    width: 1254,
+    height: 1254,
+  },
+  stages: [
+    {
+      id: "facilitate",
+      title: "Facilitate",
+      tagline: "Sit among the work",
+      body: "Stay at the table with the cohort. Facilitation means holding the room so critique stays rigorous without becoming a performance for one authority.",
+      hotspot: { top: "62%", left: "34%", width: "32%", height: "30%" },
+    },
+    {
+      id: "discuss",
+      title: "Discuss",
+      tagline: "Surface the concept",
+      body: "Put one clear concept on the table. Make the idea visible enough that the group can question the problem before arguing about the solution.",
+      hotspot: { top: "28%", left: "10%", width: "30%", height: "34%" },
+    },
+    {
+      id: "judge",
+      title: "Share judgment",
+      tagline: "Connect perspectives",
+      body: "Link views across the table so feedback becomes shared language—not isolated opinions. The bridge is facilitation: naming what the group is judging and why.",
+      hotspot: { top: "22%", left: "36%", width: "30%", height: "32%" },
+    },
+    {
+      id: "refine",
+      title: "Refine",
+      tagline: "Grow the idea together",
+      body: "Move from a single sketch to a richer direction the cohort owns. Refinement is collective: more structure, clearer constraints, stronger judgment under real limits.",
+      hotspot: { top: "18%", left: "58%", width: "32%", height: "36%" },
+    },
+  ],
+} as const;
