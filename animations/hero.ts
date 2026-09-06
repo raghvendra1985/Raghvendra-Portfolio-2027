@@ -8,7 +8,6 @@ import {
   EASE_REVEAL,
   createScope,
   gsap,
-  motionBlur,
   prefersReducedMotion,
   type MotionConfig,
 } from "./motion";
@@ -80,72 +79,94 @@ export async function animateHero(
       });
     }
 
+    let tl: gsap.core.Timeline;
+
     const revealNow = () => {
+      window.clearTimeout(failsafe);
+      tl?.progress(1).kill();
       if (split?.lines?.length) {
-        gsap.set(split.lines, { yPercent: 0, y: 0, autoAlpha: 1 });
+        // Keep an explicit override so stylesheet never re-hides lines after revert races
+        gsap.set(split.lines, {
+          yPercent: 0,
+          y: 0,
+          autoAlpha: 1,
+          transform: "none",
+        });
       }
-      if (copy.length) gsap.set(copy, { autoAlpha: 1, y: 0, filter: "none" });
+      if (copy.length) {
+        gsap.set(copy, { autoAlpha: 1, y: 0, filter: "none" });
+      }
       if (ctas.length) gsap.set(ctas, { autoAlpha: 1, y: 0, scale: 1 });
       if (visual.length) gsap.set(visual, { autoAlpha: 1, y: 0, scale: 1 });
     };
 
-    const failsafe = window.setTimeout(revealNow, 1600);
-    const tl = gsap.timeline({ delay: opts.delay, defaults: { ease: EASE_ENTER } });
+    const failsafe = window.setTimeout(revealNow, 900);
+    tl = gsap.timeline({
+      delay: opts.delay,
+      defaults: { ease: EASE_ENTER },
+      onComplete: () => {
+        window.clearTimeout(failsafe);
+        if (split?.lines?.length) {
+          gsap.set(split.lines, { yPercent: 0, y: 0, transform: "none" });
+        }
+        if (copy.length) gsap.set(copy, { filter: "none" });
+      },
+    });
 
     if (split?.lines?.length) {
-      tl.fromTo(
+      // immediateRender:false — do not park lines under the mask if the timeline stalls
+      tl.from(
         split.lines,
-        { yPercent: 110, autoAlpha: 1 },
         {
-          yPercent: 0,
+          yPercent: 110,
           duration: DURATION.reveal,
           stagger: opts.lineStagger,
           force3D: true,
+          immediateRender: false,
         },
         0,
       );
     }
 
     if (copy.length) {
-      tl.fromTo(
+      tl.from(
         copy,
-        { autoAlpha: 0, y: 16, filter: motionBlur(8, config) },
         {
-          autoAlpha: 1,
-          y: 0,
-          filter: "blur(0px)",
+          autoAlpha: 0,
+          y: 16,
           duration: opts.copyDuration,
           stagger: 0.06,
+          immediateRender: false,
         },
         0.12,
       );
     }
 
     if (ctas.length) {
-      tl.fromTo(
+      tl.from(
         ctas,
-        { autoAlpha: 0, y: 12, scale: 0.985 },
         {
-          autoAlpha: 1,
-          y: 0,
-          scale: 1,
+          autoAlpha: 0,
+          y: 12,
+          scale: 0.985,
           duration: DURATION.panel,
           stagger: opts.ctaStagger,
+          immediateRender: false,
         },
         0.22,
       );
     }
 
     if (visual.length) {
-      tl.fromTo(
+      tl.from(
         visual,
-        { autoAlpha: 0, y: 24, scale: 0.985 },
         {
-          autoAlpha: 1,
-          y: 0,
-          scale: 1,
+          autoAlpha: 0,
+          y: 24,
+          scale: 0.985,
           duration: 0.9,
           ease: EASE_REVEAL,
+          immediateRender: false,
         },
         0.36,
       );

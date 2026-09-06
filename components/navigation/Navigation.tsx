@@ -137,14 +137,14 @@ export default function Navigation() {
   }
 
   const linkClass = (active: boolean) =>
-    `inline-flex min-h-11 items-center font-mono-label ${
+    `inline-flex min-h-11 items-center font-mono-label !font-semibold tracking-[0.06em] ${
       open
         ? active
           ? "text-gold"
           : "text-mist/70 hover:text-mist"
         : active
           ? "text-green"
-          : "text-ink-soft hover:text-navy"
+          : "text-navy hover:text-navy"
     }`;
 
   return (
@@ -158,7 +158,7 @@ export default function Navigation() {
         className={`group fixed inset-x-0 top-0 z-[90] border-b ${
           open
             ? "border-transparent bg-navy"
-            : "border-transparent bg-transparent data-[compact=true]:border-line data-[compact=true]:bg-mist/70"
+            : "border-transparent bg-mist backdrop-blur-none data-[compact=true]:border-line data-[compact=true]:bg-mist"
         }`}
       >
         <div
@@ -168,7 +168,7 @@ export default function Navigation() {
           <Link
             href="/"
             aria-label={`${site.name}, home`}
-            className={`shrink-0 type-lead ${open ? "text-mist" : "text-navy"}`}
+            className={`shrink-0 type-lead !font-semibold ${open ? "text-mist" : "text-navy"}`}
             data-cursor="Open"
           >
             Raghvendra

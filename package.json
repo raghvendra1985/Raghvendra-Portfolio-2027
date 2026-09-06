@@ -16,6 +16,7 @@
     "test:commerce": "node --test scripts/commerce-test.mjs"
   },
   "dependencies": {
+    "@designcodeio/threeui": "^1.2.0",
     "@react-pdf/renderer": "^4.6.1",
     "@supabase/ssr": "^0.12.4",
     "@supabase/supabase-js": "^2.112.3",

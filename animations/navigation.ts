@@ -8,8 +8,8 @@ export type NavigationOptions = {
 };
 
 /**
- * Navigation states from scroll:
- * transparent → blur → compress → hide (down) → reveal (up).
+ * Navigation scroll behavior: compact after threshold, hide on scroll down, reveal on scroll up.
+ * Background plate is owned by CSS (solid mist) — do not clear it with GSAP blur.
  */
 export function animateNavigation(
   root: HTMLElement,
@@ -32,7 +32,6 @@ export function animateNavigation(
         hidden = false;
         gsap.set(root, { yPercent: 0 });
       }
-      gsap.set(root, { backdropFilter: "blur(0px)" });
       return;
     }
 
@@ -40,11 +39,6 @@ export function animateNavigation(
     if (shouldCompact !== compact) {
       compact = shouldCompact;
       root.dataset.compact = compact ? "true" : "false";
-      gsap.to(root, {
-        backdropFilter: compact ? "blur(16px)" : "blur(0px)",
-        duration: DURATION.md,
-        ease: EASE,
-      });
     }
 
     if (config.reducedMotion) return;
