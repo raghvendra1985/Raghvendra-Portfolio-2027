@@ -30,6 +30,23 @@ body {
   letter-spacing: var(--tracking-hero);
 }
 
+/* ThreeUI CompleteShelf stage — explicit height; iframe children are absolute. */
+.studio-complete-shelf {
+  position: relative;
+  width: 100%;
+  height: min(100svh, 920px);
+  min-height: 80svh;
+  overflow: hidden;
+  background: #171a24;
+}
+
+.studio-complete-shelf .threeui-background,
+.studio-complete-shelf .landing-page-frame {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
 .font-mono-label {
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   font-size: var(--text-caption);

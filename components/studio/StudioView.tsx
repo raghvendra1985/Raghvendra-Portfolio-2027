@@ -5,7 +5,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import Image from "next/image";
 import SectionReveal from "@/components/reveal/SectionReveal";
 import ImageReveal from "@/components/reveal/ImageReveal";
-import LibraryLane from "@/components/studio/LibraryLane";
+import StudioCompleteShelf from "@/components/studio/StudioCompleteShelf";
 import StudioHover from "@/components/studio/StudioHover";
 import SystemObjectMark from "@/components/visual-language/SystemObjectMark";
 import { animateHero } from "@/animations/hero";
@@ -163,7 +163,7 @@ function StudioHero() {
 }
 
 export default function StudioView() {
-  const { habitat, motion, objects, resources, teaching } = studioPage;
+  const { habitat, motion, objects, teaching } = studioPage;
   const photoCompanions = habitat.companions.filter(
     (companion) => companionPhotos(companion).length > 0,
   );
@@ -233,32 +233,21 @@ export default function StudioView() {
 
       <SectionReveal
         id="library"
-        className="scroll-mt-28 border-t border-line px-[var(--page-pad)] py-16 sm:py-24"
+        className="scroll-mt-28 border-t border-line py-0"
       >
-        <div className="mx-auto max-w-[1440px]">
-          <div className="mb-7 flex flex-wrap items-baseline justify-between gap-3">
-            <div>
-              <h2 className="type-h2" data-reveal-item>
-                Library
-              </h2>
-              <p
-                data-reveal-item
-                className="mt-1.5 max-w-xl text-sm leading-relaxed text-ink-soft"
-              >
-                A working shelf — books, essays, podcasts, and a few objects that changed how I work
-                or live. Replace as the shelf changes.
-              </p>
-              <p className="mt-2 font-mono-label text-ink-soft" data-reveal-item>
-                Book links to Amazon are affiliate links. I earn from qualifying purchases.
-              </p>
-            </div>
-            <p className="font-mono-label text-ink-soft" data-reveal-item>
-              Hover or focus a cover for the note
-            </p>
-          </div>
-          <div data-reveal-item>
-            <LibraryLane resources={resources} />
-          </div>
+        <div className="px-[var(--page-pad)] pt-10 sm:pt-14">
+          <h2 className="type-h2" data-reveal-item>
+            Library
+          </h2>
+          <p
+            data-reveal-item
+            className="mt-1.5 max-w-xl pb-6 text-sm leading-relaxed text-ink-soft sm:pb-8"
+          >
+            Working Volumes — an interactive shelf of seven tools for making.
+          </p>
+        </div>
+        <div className="w-full">
+          <StudioCompleteShelf />
         </div>
       </SectionReveal>
 
