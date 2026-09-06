@@ -84,7 +84,7 @@ export const aboutPage: AboutPage = {
   heroDescription:
     "I began by designing graphics and physical objects, moved into digital products and enterprise systems, and eventually began building companies and teaching designers. The mediums changed. The direction did not: understand the real problem, create shared clarity, and stay close enough to the work to make it useful.",
   identity: "Product design leader · Systems thinker · Hands-on builder",
-  location: "Based in Delhi NCR, working remotely.",
+  location: "Based in Delhi NCR.",
   workspaceCaption:
     "My desk in Delhi NCR — standing desk, dual screens, boom microphone, yellow shelves, and the helmet from the morning ride.",
   stats: [
@@ -106,47 +106,62 @@ export const aboutPage: AboutPage = {
   ],
   timeline: [
     {
-      id: "founder",
-      range: "2023 — Now",
-      role: "Founder / Product Design Leader",
-      org: "EQTY · GWK Ghostwriter · Growing With Kid · Bolo Buddy",
-      context: "Building the systems, products, and ventures I once advised others to build.",
+      id: "elevate",
+      range: "May 2023 — Present",
+      role: "Principal Product Design Consultant / Product Builder",
+      org: "Elevate Innovation",
+      context:
+        "Independent consulting practice — product building, advisory work, and teaching alongside the practice.",
       owned:
-        "Through EQTY, GWK Ghostwriter, Growing With Kid, and Bolo Buddy, I work across product direction, interaction design, AI workflows, and execution. Teaching continues alongside the ventures.",
+        "Through Elevate Innovation I build and advise on product systems, including founder products (EQTY, GWK Ghostwriter, Growing With Kid, Bolo Buddy). Teaching at IIAD sits alongside this practice.",
       learned:
-        "Founder work made the feedback loop shorter: the strategy must survive contact with users, technology, operations, and the market. This chapter keeps me accountable to shipping.",
+        "Independent practice shortened the feedback loop: strategy must survive users, technology, operations, and the market. This chapter keeps me accountable to shipping.",
       evidence: { label: "Selected evidence", href: "/work/eqty" },
     },
     {
-      id: "leadership-arc",
-      range: "2019 — 2023",
-      role: "Staff UX Consultant → Senior Manager UX",
-      org: "Nagarro Technology · Rapipay Fintech",
-      context: "Learning to design through organisations, not only interfaces.",
+      id: "rapipay",
+      range: "Feb 2022 — Apr 2023",
+      role: "Senior Manager UX",
+      org: "RapiPay Fintech Pvt. Ltd",
+      context: "Employment — UX leadership for NYE Money at organisational scale.",
       owned:
-        "Across enterprise consulting and UX leadership I worked inside financial services, telecommunications, and operational platforms — including NYE Money at Rapipay, and client systems at Verizon and Crowley. The central challenge was rarely one screen; it was helping product, design, technology, and business teams make compatible decisions.",
+        "Led the consumer experience for NYE Money across wallet, UPI, partner banking, and investments. The central challenge was helping product, design, technology, and business teams share one product grammar — not only shipping individual screens.",
       learned: "This chapter taught me that alignment is part of the product.",
       evidence: { label: "Selected evidence", href: "/work/nye" },
     },
     {
+      id: "nagarro",
+      range: "Jul 2019 — Feb 2022",
+      role: "Staff UX Consultant",
+      org: "Nagarro Technology Pvt. Ltd",
+      context:
+        "Employer · enterprise product consulting. Selected client work below was delivered through Nagarro — not employment by those companies.",
+      owned:
+        "Staff consulting across enterprise delivery — systems, product practice, and cross-functional work. Selected client projects include Verizon (digital signage) and Crowley Maritime (freight quoting), delivered through Nagarro.",
+      learned:
+        "Enterprise consulting taught me to design through organisations and constraints I did not own end-to-end.",
+      evidence: { label: "Selected evidence", href: "/work/crowley" },
+    },
+    {
       id: "ux-lead-arc",
-      range: "2015 — 2019",
-      role: "UX Designer → UX Lead",
-      org: "Product & enterprise practice",
+      range: "Nov 2015 — Mar 2019",
+      role: "User Experience Designer → Lead UX Designer",
+      org: "Zopper · Sagacito Technologies · Shuttl",
       context: "Moving from individual experiences to connected product systems.",
       owned:
-        "I grew from hands-on UX execution into responsibility for product direction, critique, team quality, and cross-functional delivery.",
+        "Zopper (Nov 2015 — Sep 2016) as User Experience Designer; Sagacito Technologies (Oct 2016 — Nov 2018) as Lead UX Designer on media revenue products; Shuttl (Nov 2018 — Mar 2019) as Lead UX Designer on urban mobility surfaces.",
       learned:
-        "I began seeing how small interaction decisions accumulate into larger organisational systems. This chapter taught me to connect detail with direction.",
+        "I began seeing how small interaction decisions accumulate into larger product systems. This chapter taught me to connect detail with direction.",
+      evidence: { label: "Selected evidence", href: "/work/sagacito" },
     },
     {
       id: "product-industrial",
-      range: "2011 — 2015",
+      range: "Jan 2011 — Oct 2015",
       role: "Product & Industrial Design",
-      org: "Practice building toward systems work",
+      org: "VIP Industries (Caprese) · Klove Design · Pigeon India · Konnecting Mindz",
       context: "Discovering that useful objects begin with constraints.",
       owned:
-        "Working across product and industrial design taught me to respect materials, manufacturing, ergonomics, and real-world use.",
+        "VIP Industries — Caprese product design project (Jan 2011 — Nov 2011); Klove Design as Senior Designer / Production In-charge (Jan 2012 — May 2013); Pigeon India as Senior Designer (Jun 2013 — Oct 2015); Konnecting Mindz as freelance UX design consultant, part-time (Dec 2013 — Dec 2014, alongside Pigeon).",
       learned:
         "Unlike pixels, physical decisions cannot be endlessly revised after release. This chapter gave me a bias toward clarity, durability, and making.",
     },
@@ -154,10 +169,10 @@ export const aboutPage: AboutPage = {
       id: "foundations",
       range: "2004 — 2011",
       role: "Design Foundations",
-      org: "Early web · typographic craft",
+      org: "Pearl Academy · National Institute of Design · early web craft",
       context: "Learning to see, organise, and communicate.",
       owned:
-        "My early work in visual design, typography, and the web formed the habits that remain underneath everything I do.",
+        "Formal study and early work in visual design, typography, and the web formed the habits that remain underneath everything I do.",
       learned:
         "Attention to hierarchy, respect for the grid, and the belief that clarity is constructed. This chapter gave me my visual language.",
     },
@@ -189,7 +204,7 @@ export const aboutPage: AboutPage = {
   modes: [
     {
       title: "Lead",
-      body: "Product direction, teams, critique, and cross-functional alignment — including enterprise work at Rapipay, Verizon, and Crowley.",
+      body: "Product direction, teams, critique, and cross-functional alignment — including Rapipay employment and Nagarro client work at Verizon and Crowley.",
     },
     {
       title: "Design systems",
@@ -289,7 +304,7 @@ export const aboutPage: AboutPage = {
   },
   hiringTitle: "Product design leadership, with evidence attached.",
   hiringBody:
-    "Twenty years across visual, industrial, product, and organisational design — with recent work spanning enterprise systems, AI products, founder ventures, and design education.",
+    "Seeking full-time Design Manager or Senior Design Manager roles. Twenty years across visual, industrial, product, and organisational design — with recent work spanning Rapipay, Nagarro enterprise clients, independent practice, and design education.",
   hiringPrimary: { label: "Start a conversation", href: "/contact" },
   hiringWork: { label: "View selected work", href: "/work" },
 };

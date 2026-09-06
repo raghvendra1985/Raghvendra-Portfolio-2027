@@ -61,23 +61,23 @@ export const homeWorkCards: Record<string, HomeWorkCard> = {
     client: "Rapipay",
     title: "Leading the experience of a financial super app at organisational scale",
     role: "Senior Manager UX",
-    year: "2022",
+    year: "2022–2023",
     tags: ["Enterprise leadership", "Fintech", "Mobile"],
     problem:
       "Payments, banking, and investments were splitting into disconnected features instead of one everyday money product.",
     result:
-      "Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.",
+      "Led UX for NYE Money at Rapipay. Product is live on web and stores; portfolio screens document the engagement design approach.",
   },
   crowley: {
     client: "Crowley Maritime",
     title: "Unifying freight quoting across a fragmented supply chain",
     role: "Staff Design Consultant",
-    year: "2021",
+    year: "Nagarro",
     tags: ["Complex systems", "Enterprise", "Design systems"],
     problem:
       "A dense ~20-field quote form split shippers across trucking, ports, and brokers.",
     result:
-      "Replaced the legacy form with a guided origin-to-cargo-to-contact flow while keeping rate-engine and customs constraints intact.",
+      "Nagarro client engagement: portfolio documents a guided origin-to-cargo-to-contact quote design aligned with rate-engine and customs constraints.",
   },
   "gwk-ghostwriter": {
     client: "GWK Ghostwriter",
@@ -110,7 +110,7 @@ export const homeEnterpriseCards: Record<
   verizon: {
     client: "Verizon",
     title: "Scaling turnkey digital signage across distributed locations",
-    role: "Staff Design Consultant",
+    role: "Staff Design Consultant · Nagarro client",
     result:
       "Created a deployment and campaign model that bypasses site Wi-Fi and centralizes playback across retail, transit, and campus screens.",
   },
@@ -119,22 +119,22 @@ export const homeEnterpriseCards: Record<
     title: "Unifying payments, banking, and investments into one consumer system",
     role: "Senior Manager UX",
     result:
-      "Established a shared product language for wallet, UPI, banking, and investments inside a live financial super app.",
+      "Established a shared product-language design approach for wallet, UPI, banking, and investments. Product is live; portfolio documents the engagement design.",
   },
   crowley: {
     client: "Crowley Maritime",
     title: "Unifying freight quoting across a fragmented supply chain",
-    role: "Staff Design Consultant",
+    role: "Staff Design Consultant · Nagarro client",
     result:
-      "Created a shared workflow connecting pricing, operations, and customer quoting across previously fragmented systems.",
+      "Portfolio documents a guided quote workflow and design-system contribution with Crowley product partners during the Nagarro engagement.",
   },
 };
 
 export const homeHiring = {
   eyebrow: "Hiring",
-  title: "Looking for product design leadership?",
+  title: "Looking for Design Manager or Senior Design Manager leadership?",
   body:
-    "I work across product strategy, complex systems, AI products, DesignOps, and hands-on execution—bringing senior direction without losing contact with the work.",
+    "I’m seeking full-time roles in that family — Delhi NCR hybrid preferred; open to remote from India. I work across product strategy, complex systems, AI products, DesignOps, and hands-on execution.",
   primary: { label: "View experience", href: "/about#experience" },
 } as const;
 

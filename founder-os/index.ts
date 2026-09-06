@@ -67,7 +67,15 @@ export type DashboardItem = {
 };
 
 export type FounderOs = {
-  identity: { name: string; positioning: string; deck: string };
+  identity: {
+    name: string;
+    positioning: string;
+    deck: string;
+    /** What you are doing now — not a claim about continuing alongside employment. */
+    currentActivity: string;
+    /** Full-time seeking line — kept separate from currentActivity. */
+    seeking: string;
+  };
   dashboard: DashboardItem[];
   focus: FocusItem[];
   products: ProductItem[];
@@ -87,6 +95,10 @@ export const founderOs: FounderOs = {
     positioning:
       "An operating system for turning ambiguity into decisions, experiments, and published evidence.",
     deck: "This is how I think, build, decide, learn, and operate.",
+    currentActivity:
+      "Currently operating Elevate Innovation — building founder products and teaching through workshops and classrooms.",
+    seeking:
+      "Seeking full-time Design Manager or Senior Design Manager roles — Delhi NCR hybrid preferred; open to remote from India.",
   },
   dashboard: [
     {

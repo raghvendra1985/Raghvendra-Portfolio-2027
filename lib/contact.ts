@@ -1,5 +1,5 @@
 export const contactIntents = [
-  { id: "hiring", label: "Product leadership role" },
+  { id: "hiring", label: "Full-time design leadership role" },
   { id: "advisory", label: "Advisory or product engagement" },
   { id: "workshop", label: "Workshop or mentoring" },
   { id: "other", label: "Something else" },

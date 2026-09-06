@@ -7,10 +7,10 @@ export const site = {
   email: "hello@raghvendrasingh.com",
   linkedin: "https://www.linkedin.com/in/raghvendrasingh23/",
   whatsapp: "https://wa.me/919555909094",
-  location: "Delhi NCR, India · Working remotely",
-  status: "Open to selected opportunities",
+  location: "Delhi NCR, India",
+  status: "Seeking full-time design leadership",
   statusDetail:
-    "Remote product leadership, advisory, and thoughtfully matched collaborations.",
+    "Design Manager or Senior Design Manager roles · Delhi NCR hybrid preferred · open to remote from India.",
   /**
    * Recruiter PDF. Generated from /resume via `npm run resume:pdf`.
    */

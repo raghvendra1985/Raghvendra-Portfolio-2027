@@ -94,6 +94,12 @@ export default function HomeHero() {
               </TrackedMagneticButton>
             </div>
           </div>
+          <p
+            data-hero-copy
+            className="mt-5 max-w-[42rem] font-mono-label text-[12px] leading-relaxed tracking-[0.04em] text-navy/75 sm:mt-6 sm:text-[13px]"
+          >
+            {leadershipHero.availabilityLine}
+          </p>
         </div>
       </div>
     </section>
