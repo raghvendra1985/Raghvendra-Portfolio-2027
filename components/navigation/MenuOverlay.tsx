@@ -132,6 +132,9 @@ export default function MenuOverlay({
                 <span className="h-1.5 w-1.5 rounded-full bg-green" aria-hidden="true" />
                 {site.status}
               </p>
+              <p className="mt-2 max-w-sm text-sm leading-relaxed text-mist/65">
+                {site.statusDetail}
+              </p>
               <ul className="mt-4 flex flex-wrap gap-6">
                 {footerLinks.social.map((link) => (
                   <li key={link.label}>

@@ -55,6 +55,14 @@ export default function SystemView({ data }: { data: FounderOs }) {
         <h1 className="mt-8 max-w-4xl type-h1 text-navy" data-os-item>
           {data.identity.deck}
         </h1>
+        <div className="mt-8 max-w-2xl space-y-3" data-os-item>
+          <p className="text-base leading-relaxed text-ink-soft">
+            {data.identity.currentActivity}
+          </p>
+          <p className="text-base leading-relaxed text-ink">
+            {data.identity.seeking}
+          </p>
+        </div>
       </header>
 
       <div id="os-main" className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24">

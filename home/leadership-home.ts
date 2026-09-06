@@ -4,7 +4,9 @@ import { site } from "@/lib/site";
 export const leadershipHero = {
   name: "Raghvendra",
   headline: "Intelligent products. Systems and alignment that make them hold.",
-  roleLine: "Product Design · AI Experience · Strategy · Leadership",
+  roleLine:
+    "Open to Design Manager and Senior Design Manager roles · People and product UX leadership",
+  availabilityLine: site.statusDetail,
   primary: { label: "View selected work", href: "#work" },
   secondary: { label: "Start a conversation", href: "/contact" },
 } as const;
@@ -24,16 +26,16 @@ export const leadershipImpact = {
       term: "20 years in design",
       detail: `${site.experienceLine}. Craft, product, systems, and leadership in one arc—not a sequence of disconnected jobs.`,
     },
-    {
+      {
       term: "Rapipay / NYE Money",
       detail:
-        "Wallet, UPI, partner banking, and investments unified into one consumer system, adopted across the product organisation and shipped on web, iOS, and Android.",
+        "NYE Money is live on web, iOS, and Android. Portfolio screens document the shared-grammar design approach from the Senior Manager UX engagement; less duplicated design remains an intended benefit only.",
     },
-    {
-      term: "Crowley Maritime",
-      detail:
-        "A dense, ~20-field quoting form became a three-step flow. The design system introduced in that engagement is the system the platform still runs on.",
-    },
+      {
+        term: "Crowley Maritime",
+        detail:
+          "Nagarro client engagement: experience architecture for a three-step freight-quote flow and design-system documentation with Crowley product partners. Portfolio artifacts document the engagement design; longevity unpublished.",
+      },
     {
       term: "500+ designers taught",
       detail:
@@ -68,14 +70,14 @@ export const leadershipWorkMeta: readonly LeadershipWorkEntry[] = [
     title: "Rapipay — financial access designed around trust",
     capabilities: ["UX leadership", "Fintech", "Organisational alignment"],
     outcome:
-      "Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.",
+      "Led UX for NYE Money at Rapipay — live consumer finance product on web and stores; portfolio screens document the engagement’s shared-grammar design approach.",
     stackChallenge: [
       "Senior Manager UX for NYE Money at Rapipay — leading the consumer experience at organisational scale.",
       "Coverage across wallet, UPI, partner banking, and investments.",
     ],
     stackOutcome: [
-      "Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system.",
-      "Adopted across the product organisation.",
+      "NYE Money is live on web, iOS, and Android.",
+      "Portfolio screens document the shared-grammar design approach; less duplicated design is intended only.",
     ],
     layout: "image-led",
   },
@@ -85,14 +87,14 @@ export const leadershipWorkMeta: readonly LeadershipWorkEntry[] = [
     title: "Crowley Maritime — product quality through system and alignment",
     capabilities: ["Enterprise systems", "Cross-functional alignment", "Design governance"],
     outcome:
-      "Replaced a dense legacy freight-quote form with a guided origin-to-cargo-to-contact flow, and introduced the design system this platform still runs on.",
+      "Nagarro client work: experience architecture for a guided origin-to-cargo-to-contact quote flow, documented in portfolio artifacts with Crowley product partners.",
     stackChallenge: [
       "A guided quote flow that replaced a dense legacy form — origin to cargo to contact.",
       "Aligned with rate-engine and customs constraints.",
     ],
     stackOutcome: [
-      "Replaced a dense legacy freight-quote form with a guided origin-to-cargo-to-contact flow.",
-      "Introduced the design system this platform still runs on.",
+      "Portfolio documents the three-step quote design from the engagement.",
+      "Design-system documentation contributed with partners; longevity unpublished.",
     ],
     layout: "copy-led",
   },
@@ -259,9 +261,9 @@ export const leadershipAbout = {
 export const leadershipClose = {
   id: "hire",
   title: "Have a consequential product problem to solve?",
-  body: "I’m interested in senior and leadership opportunities where design can shape product direction, intelligent experiences, and organisational capability.",
+  body: "I’m seeking full-time Design Manager or Senior Design Manager roles where design can shape product direction, team capability, and delivery. Delhi NCR hybrid preferred; open to remote from India. Selected advisory and workshop inquiries are welcome when they fit.",
   primary: { label: "Start a conversation", href: "/contact" },
-  secondary: { label: "View résumé", href: site.resumeHref },
+  secondary: { label: "Download résumé", href: site.resumeHref },
 } as const;
 
 export const leadershipFooter = {

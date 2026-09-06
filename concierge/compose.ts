@@ -12,6 +12,7 @@ import type {
   ConciergeSource,
   RankedEntry,
 } from "./types";
+import { site } from "@/lib/site";
 
 const NO_RESULT =
   "I don't have enough published evidence to answer that confidently.";
@@ -100,9 +101,9 @@ function directAnswer(
     case "start-here":
       return `Start with ${named} — Rapipay, Crowley, and Ghostwriter. Then ask about AI, fintech, or leadership if you want a narrower path.`;
     case "about-who":
-      return `Raghvendra is a product design leader whose work moved from visual craft and industrial constraints through digital products and organisational decisions, into founder work and teaching. About holds the five chapters.`;
+      return `Raghvendra is a product design leader whose work moved from visual craft and industrial constraints through digital products and organisational decisions, into independent consulting, founder products, and teaching. About holds the career chapters.`;
     case "availability":
-      return `Open to selected product leadership, advisory, and collaborations. Contact is the next step if the work looks like a fit.`;
+      return `${site.status}. ${site.statusDetail} Contact is the next step if the role looks like a fit.`;
     case "parenting-gwk":
       return `Growing With Kid is the parenting community product — one clear job for parents, shipped as a live founder product.`;
     case "eqty":
@@ -110,14 +111,17 @@ function directAnswer(
     case "ghostwriter":
       return `GWK Ghostwriter is a shipped research-to-post writing studio with long-term memory, voice rules, and source material — not a prompt box. The case study holds the published evidence.`;
     case "nye-money":
-      return `Led UX for NYE Money at Rapipay, unifying wallet, UPI, partner banking, and investments into one consumer system adopted across the product organisation.`;
+      return `Led UX for NYE Money at Rapipay as Senior Manager UX. Portfolio screens document the engagement’s shared-grammar design approach. The consumer finance product is live on web and stores. Less duplicated design remains an intended benefit only.`;
     case "resume":
-      return `The published career path is on About — twenty years across visual, industrial, product, and organisational design, with 14+ years leading digital products and UX systems. Read the five chapters, or request a résumé from Contact.`;
+      return `The published career path is on About — twenty years across visual, industrial, product, and organisational design, with 14+ years leading digital products and UX systems. Read the chapters, or download a résumé from Contact.`;
     default:
       break;
   }
 
   const q = query.toLowerCase();
+  if (q.includes("crowley")) {
+    return `Crowley Maritime was Nagarro client work: experience architecture for a guided freight-quote flow and design-system documentation with Crowley product partners. Portfolio artifacts document the engagement design; project year and design-system longevity remain unpublished.`;
+  }
   if (q.includes("ai")) {
     return `AI product experience shows up in ${named} — with methods on System and field notes on Notes.`;
   }

@@ -386,7 +386,7 @@ const caseStudyRecords: CaseStudyRecord[] = [
     title: "A financial super app — payments, banking, and investments in one system",
     summary:
       "Senior Manager UX for NYE Money at Rapipay — leading the consumer experience at organisational scale across wallet, UPI, partner banking, and investments.",
-    year: "2022",
+    year: "2022–2023",
     category: "SaaS Products",
     industry: "Fintech · Payments",
     tags: ["Enterprise", "Fintech", "Mobile"],
@@ -394,8 +394,8 @@ const caseStudyRecords: CaseStudyRecord[] = [
     tier: "flagship",
     lane: "enterprise",
     role: "Senior Manager UX",
-    timeline: "2022",
-    engagement: "UX leadership at organisational scale",
+    timeline: "Feb 2022 — Apr 2023",
+    engagement: "UX leadership at organisational scale · Employment",
     narrativeDepth: "deep",
     href: "https://nye.money/",
     links: [
@@ -427,28 +427,16 @@ const caseStudyRecords: CaseStudyRecord[] = [
       "/assets/work/nye/motion/success-tick.gif",
       "/assets/work/nye/motion/wireframes/medium-fidelity.gif",
       "/assets/work/nye/motion/wireframes/concept-01.gif",
-      "/assets/work/nye/motion/wireframes/concept-02.gif",
-      "/assets/work/nye/motion/wireframes/concept-03.gif",
-      "/assets/work/nye/motion/wireframes/concept-04.gif",
-      "/assets/work/nye/motion/wireframes/concept-06.gif",
-      "/assets/work/nye/motion/wireframes/concept-08.gif",
       "/assets/work/nye/process-discovery.jpg",
       "/assets/work/nye/process-weekly-planning.jpg",
       "/assets/work/nye/process-ux-thematic-01.jpg",
       "/assets/work/nye/process-ux-thematic-02.jpg",
       "/assets/work/nye/process-ux-thematic-03.jpg",
       "/assets/work/nye/process-stakeholder-discussion.jpg",
-      "/assets/work/nye/process-lifestyle-01.jpg",
-      "/assets/work/nye/process-reward-recognition.jpg",
-      "/assets/work/nye/process-success-stories.jpg",
       "/assets/work/nye/rapipay-nye-ux-research-01.jpg",
       "/assets/work/nye/design-system/process/workmode-00.jpg",
       "/assets/work/nye/design-system/process/workmode-01.jpg",
-      "/assets/work/nye/design-system/process/workmode-03.jpg",
-      "/assets/work/nye/design-system/process/workmode-04.jpg",
       "/assets/work/nye/design-system/process/workmode-05.jpg",
-      "/assets/work/nye/design-system/process/workmode-06.jpg",
-      "/assets/work/nye/design-system/process/workmode-07.jpg",
     ],
     designSystem: [
       {
@@ -579,13 +567,13 @@ const caseStudyRecords: CaseStudyRecord[] = [
         },
       ],
       evidence:
-        "Cross-squad reviews showed repeated redesign of the same money states. Banking onboarding abandonment risked unfinished KYC unless progress was recoverable. Compliance reviews repeatedly flagged trust cues that lived too far from the action.",
+        "Documented research process at Rapipay included collaborative workshops and thematic-analysis boards. Visible board themes explored banking relationship questions — first association, choosing, continuing, leaving, cash management, and opportunities users wished existed — plus assumption/risk framing. Those headers show what was explored; they are not published here as validated research conclusions. Design responses from the engagement are shown in portfolio product screens (progress-led banking onboarding; trust and compliance cues placed at money decisions).",
       tradeoff:
-        "A shared language slows a single squad’s local invention — but removes duplicated work and gives compliance one pattern to review instead of four.",
+        "A shared language slows a single squad’s local invention — but was intended to remove duplicated work and give compliance one pattern to review instead of four.",
       choice:
         "Establish one consumer operating layer — spend, move, save, invest — with progress-led banking onboarding, payment journeys (Scan & Pay, UPI, Autopay, requests) in one mental model, and biometric / PIN / compliance signals held next to the money decision.",
       result:
-        "Wallet, UPI, prepaid/NCMC, partner banking, and investments shipped under one product grammar. Directional evidence: reduced pattern duplication across teams and a live super-app surface on web and stores.",
+        "Observed: NYE Money is a live Rapipay consumer finance product on web and stores. Portfolio screens from the engagement document the shared-grammar design approach under Senior Manager UX. Intended organisational benefit: less reinvented onboarding and money-state patterns across teams — not documented as an observed reduction, and not a claim about which features remain unchanged on the live product today.",
     },
     systemChangeSteps: [
       "Set the experience language and worked it through the product organisation rather than a single squad.",
@@ -605,25 +593,25 @@ const caseStudyRecords: CaseStudyRecord[] = [
       },
       {
         title: "Remaining limitation",
-        body: "Organisational adoption is never finished — new rails still need review against the grammar, and squad velocity can drift without ongoing critique.",
+        body: "A live product demonstrates that the product exists; it does not by itself prove release timing relative to employment or which current features originated in this engagement. Leadership anecdote (starting problem → intervention → observed change) and measured reduction in duplicated design remain unpublished until confirmed.",
       },
     ],
     outcomes: [
       {
-        title: "Organisational: one grammar",
-        body: "Wallet, UPI, partner banking, and investments share structure instead of splintering into separate app experiences.",
-        level: "organisational",
-        confidence: "directional",
-      },
-      {
-        title: "Business: live consumer product",
-        body: "NYE ships on web, iOS, and Android as Rapipay’s consumer finance product.",
+        title: "Observed: live consumer product",
+        body: "NYE Money is live on web, iOS, and Android as Rapipay’s consumer finance product.",
         level: "business",
         confidence: "observed",
       },
       {
-        title: "Organisational: less duplicated design",
-        body: "Shared language reduced reinvented onboarding and money-state patterns across product teams — directional, not a counted ticket metric.",
+        title: "Documented: engagement design approach",
+        body: "Portfolio screens from the engagement show the shared-grammar approach across wallet, UPI, partner banking, and investments. This documents design direction from the engagement — not an audit of today’s live feature set.",
+        level: "organisational",
+        confidence: "observed",
+      },
+      {
+        title: "Intended: less duplicated design work",
+        body: "Shared language was meant to reduce reinvented onboarding and money-state patterns across product teams. No observed reduction is published here.",
         level: "organisational",
         confidence: "directional",
       },
@@ -633,47 +621,47 @@ const caseStudyRecords: CaseStudyRecord[] = [
         src: "/assets/work/nye/landing.png",
         scrollable: true,
         caption:
-          "Marketing landing as the consumer entry: NYE frames everyday money — spend, move, save, invest — before the app shell takes over.",
+          "Marketing landing: live NYE consumer entry. Demonstrates the product exists publicly — not an audit of which current features originated in this engagement.",
       },
       {
         src: "/assets/work/nye/gallery-01.jpg",
         caption:
-          "Home as a money operating layer: spend, move, save, and invest share one entry model instead of four product hubs.",
+          "Portfolio screen from the engagement: home framed as a money operating layer — spend, move, save, invest — rather than four product hubs.",
       },
       {
         src: "/assets/work/nye/gallery-02.jpg",
         caption:
-          "Payment journey: Scan & Pay / UPI patterns keep prepaid and request states in the same mental model consumers already use for money movement.",
+          "Portfolio screen from the engagement: Scan & Pay / UPI patterns keeping prepaid and request states in one money-movement model.",
       },
       {
         src: "/assets/work/nye/gallery-03.jpg",
         caption:
-          "Wallet and card states: prepaid and NCMC held as money instruments, not isolated feature islands.",
+          "Portfolio screen from the engagement: prepaid and NCMC held as money instruments, not isolated feature islands.",
       },
       {
         src: "/assets/work/nye/gallery-04.jpg",
         caption:
-          "Banking onboarding: progress-led account opening so unfinished KYC stays recoverable — compliance stays in the flow without a dead end.",
+          "Portfolio screen from the engagement: progress-led account opening so unfinished KYC stays recoverable — compliance kept in the flow.",
       },
       {
         src: "/assets/work/nye/gallery-05.jpg",
         caption:
-          "Partner banking detail: savings and current account language matches the rest of NYE rather than a bank microsite.",
+          "Portfolio screen from the engagement: partner banking language matched to the rest of NYE rather than a bank microsite.",
       },
       {
         src: "/assets/work/nye/gallery-06.jpg",
         caption:
-          "Investments in the same grammar: digital gold vault reads as a money surface, not a bolted-on brand.",
+          "Portfolio screen from the engagement: digital gold framed as a money surface in the same grammar.",
       },
       {
         src: "/assets/work/nye/gallery-07.jpg",
         caption:
-          "Mutual fund baskets: growth products reuse navigation and trust cues from payments and banking.",
+          "Portfolio screen from the engagement: mutual fund baskets reusing navigation and trust cues from payments and banking.",
       },
       {
         src: "/assets/work/nye/gallery-08.jpg",
         caption:
-          "Trust at the decision: biometric unlock, PIN recovery, and compliance signals sit next to money moments where users choose to continue.",
+          "Portfolio screen from the engagement: biometric unlock, PIN recovery, and compliance signals placed next to money decisions.",
       },
       {
         src: "/assets/work/nye/motion/loading-y-outline.gif",
@@ -695,32 +683,7 @@ const caseStudyRecords: CaseStudyRecord[] = [
       {
         src: "/assets/work/nye/motion/wireframes/concept-01.gif",
         kind: "gif",
-        caption: "Website concept 01 — exploratory layout motion.",
-      },
-      {
-        src: "/assets/work/nye/motion/wireframes/concept-02.gif",
-        kind: "gif",
-        caption: "Website concept 02 — exploratory layout motion.",
-      },
-      {
-        src: "/assets/work/nye/motion/wireframes/concept-03.gif",
-        kind: "gif",
-        caption: "Website concept 03 — exploratory layout motion.",
-      },
-      {
-        src: "/assets/work/nye/motion/wireframes/concept-04.gif",
-        kind: "gif",
-        caption: "Website concept 04 — exploratory layout motion.",
-      },
-      {
-        src: "/assets/work/nye/motion/wireframes/concept-06.gif",
-        kind: "gif",
-        caption: "Website concept 06 — exploratory layout motion.",
-      },
-      {
-        src: "/assets/work/nye/motion/wireframes/concept-08.gif",
-        kind: "gif",
-        caption: "Website concept 08 — exploratory layout motion.",
+        caption: "Exploratory web concept — testing layout before visual lock.",
       },
       {
         src: "/assets/work/nye/process-discovery.jpg",
@@ -735,17 +698,17 @@ const caseStudyRecords: CaseStudyRecord[] = [
       {
         src: "/assets/work/nye/process-ux-thematic-01.jpg",
         caption:
-          "UX research thematic analysis: clustering findings into shared language for money journeys.",
+          "Thematic analysis board: theme headers explored for bank-relationship questions — first association, choosing, continuing, leaving, cash management, and opportunities. Headers document exploration scope; sticky-note conclusions are not transcribed as validated findings.",
       },
       {
         src: "/assets/work/nye/process-ux-thematic-02.jpg",
         caption:
-          "Thematic analysis continued: turning research notes into patterns teams can adopt.",
+          "Research facilitation: assumption/risk prompts beside the thematic analysis table — framing questions before product decisions.",
       },
       {
         src: "/assets/work/nye/process-ux-thematic-03.jpg",
         caption:
-          "Thematic analysis board: evidence kept visible while grammar decisions are made.",
+          "Thematic analysis board kept visible during the research synthesis sessions.",
       },
       {
         src: "/assets/work/nye/process-stakeholder-discussion.jpg",
@@ -753,52 +716,21 @@ const caseStudyRecords: CaseStudyRecord[] = [
           "Stakeholder discussion: aligning product, compliance, and UX on finishable journeys.",
       },
       {
-        src: "/assets/work/nye/process-lifestyle-01.jpg",
-        caption:
-          "Team at work: the operating context around the consumer money app.",
-      },
-      {
-        src: "/assets/work/nye/process-reward-recognition.jpg",
-        caption:
-          "Reward and recognition: how the design organisation marked progress and contribution.",
-      },
-      {
-        src: "/assets/work/nye/process-success-stories.jpg",
-        caption:
-          "Success stories: capturing organisational wins alongside the live product surface.",
-      },
-      {
         src: "/assets/work/nye/rapipay-nye-ux-research-01.jpg",
         caption:
-          "UX research workshop at Rapipay: collaborative session work on money journeys.",
+          "UX research workshop at Rapipay: collaborative session on money journeys (RapiPay-branded room).",
       },
       {
         src: "/assets/work/nye/design-system/process/workmode-00.jpg",
-        caption: "Workmode: facilitation and shared process in the Rapipay design room.",
+        caption: "Design room facilitation: shared process visible while the consumer money app was in flight.",
       },
       {
         src: "/assets/work/nye/design-system/process/workmode-01.jpg",
-        caption: "Workmode: design process kept visible on the board.",
-      },
-      {
-        src: "/assets/work/nye/design-system/process/workmode-03.jpg",
-        caption: "Workmode: shared practice across the design organisation.",
-      },
-      {
-        src: "/assets/work/nye/design-system/process/workmode-04.jpg",
-        caption: "Workmode: team context around the consumer money app.",
+        caption: "Process board: design work sequenced and reviewable across the organisation.",
       },
       {
         src: "/assets/work/nye/design-system/process/workmode-05.jpg",
-        caption: "Workmode: operating rhythm and collaboration in situ.",
-      },
-      {
-        src: "/assets/work/nye/design-system/process/workmode-06.jpg",
-        caption: "Workmode: room and process overview.",
-      },
-      {
-        src: "/assets/work/nye/design-system/process/workmode-07.jpg",
-        caption: "Workmode: detail from day-to-day practice.",
+        caption: "Operating rhythm: collaboration in situ around the Rapipay design practice.",
       },
     ],
     wouldChangeNow:
@@ -808,14 +740,17 @@ const caseStudyRecords: CaseStudyRecord[] = [
       problem: "Four product grammars inside one app — duplicated onboarding and trust patterns",
       mandate: "UX leadership for a shared consumer experience language across squads",
       decision: "Shared grammar with progress-led onboarding over product-line silos or one rigid template",
-      result: "Live super app on web and stores; directional reduction in duplicated design across teams",
+      result:
+        "Live product on web and stores; engagement design approach documented in portfolio screens. Less duplicated design remains an intended benefit only.",
     },
     verification: {
       status: "needs-confirmation",
       notes: [
         "Confirm exact team composition and headcount during the Rapipay engagement.",
-        "Confirm which compliance-vs-usability conflict was the decisive example.",
-        "Confirm directional adoption claims with any non-confidential organisational evidence.",
+        "Leadership anecdote pending: starting problem → intervention → observed change — do not invent.",
+        "Research-board theme headers document exploration; do not treat them as validated findings without transcribed analysis conclusions.",
+        "Live product ≠ release timing relative to employment, and ≠ attribution of current live features to this engagement without supporting evidence.",
+        "Less duplicated design remains intended only until an observed reduction is documented.",
       ],
     },
   },
@@ -1357,8 +1292,8 @@ const caseStudyRecords: CaseStudyRecord[] = [
     client: "Verizon",
     title: "Turnkey digital signage across distributed locations",
     summary:
-      "A compact media-player architecture and cloud portal for campaign playback across retail, transit, and campus screens — without depending on site Wi-Fi.",
-    year: "2021",
+      "Nagarro client engagement — a compact media-player architecture and cloud portal for campaign playback across retail, transit, and campus screens without depending on site Wi-Fi.",
+    year: "Nagarro",
     category: "Enterprise Systems",
     industry: "Telecom · Digital signage",
     tags: ["Enterprise", "Signage", "Advisory"],
@@ -1366,8 +1301,8 @@ const caseStudyRecords: CaseStudyRecord[] = [
     tier: "flagship",
     lane: "enterprise",
     role: "Staff Design Consultant",
-    timeline: "6 months",
-    engagement: "IC level",
+    timeline: "Nagarro client engagement",
+    engagement: "IC · delivered through Nagarro",
     narrativeDepth: "compact",
     cover: "/assets/work/verizon/cover.svg",
     gallery: [
@@ -1424,8 +1359,8 @@ const caseStudyRecords: CaseStudyRecord[] = [
     client: "Crowley Maritime",
     title: "Unifying freight quoting across a fragmented supply chain",
     summary:
-      "A guided quote flow that replaced a dense legacy form — origin to cargo to contact — aligned with rate-engine and customs constraints.",
-    year: "2023",
+      "Nagarro client engagement — a guided quote flow that replaced a dense legacy form — origin to cargo to contact — aligned with rate-engine and customs constraints.",
+    year: "Nagarro",
     category: "Enterprise Systems",
     industry: "Maritime · Logistics",
     tags: ["Enterprise", "Ops", "B2B"],
@@ -1433,8 +1368,8 @@ const caseStudyRecords: CaseStudyRecord[] = [
     tier: "flagship",
     lane: "enterprise",
     role: "Staff Design Consultant",
-    timeline: "1 year",
-    engagement: "Advisory",
+    timeline: "Nagarro client engagement",
+    engagement: "Advisory · delivered through Nagarro",
     narrativeDepth: "deep",
     href: "https://www.crowley.com/logistics/route/",
     links: [
@@ -1502,17 +1437,17 @@ const caseStudyRecords: CaseStudyRecord[] = [
       "Quoting was not one form — it was a fragmented operating model. Route, cargo, schedule, and customs data lived in different handoffs. Rate-engine fields and customs requirements could not be dropped; they could only be sequenced so shippers answered the right question at the right moment.",
     mandate: {
       owned:
-        "Experience architecture for the quote wizard, progressive disclosure of cargo and contact steps, and design-system direction adopted with the Crowley product team.",
+        "Experience architecture for the quote wizard (route → cargo → contact sequencing), progressive disclosure of cargo and contact steps, and design-system documentation contributed with the Crowley product team during the Nagarro engagement.",
       others:
-        "Product owned prioritisation and release sequencing. Engineering defined rate-engine and API field constraints. Compliance reviewed customs and regulatory data collection.",
+        "Product owned prioritisation and release sequencing. Engineering defined rate-engine and API field constraints. Compliance reviewed customs and regulatory data collection. Crowley owned production implementation and what remained after the engagement.",
       decisionMaker:
         "Product made final scope calls; compliance could block a step that omitted required regulatory fields.",
       team:
-        "Staff design consultant embedded with product, engineering, and compliance stakeholders across a year-long advisory engagement.",
+        "Staff design consultant embedded with Crowley product, engineering, and compliance stakeholders — engagement delivered through Nagarro. Advisory, not Crowley headcount ownership.",
       authority:
-        "Advisory authority over experience architecture and system patterns — not headcount ownership of the Crowley design org.",
+        "Advisory authority over experience architecture and system patterns during the engagement — not ownership of Crowley’s design organisation or ongoing product backlog.",
       deliveryConstraints:
-        "Had to ship against a live rate engine, existing cargo data structures, and customs rules that could not be redesigned away.",
+        "Had to design against a live rate engine, existing cargo data structures, and customs rules that could not be redesigned away.",
     },
     constraints: [
       "Rate-engine APIs required specific geographic, dimension, and schedule inputs before a price could return.",
@@ -1539,21 +1474,21 @@ const caseStudyRecords: CaseStudyRecord[] = [
         },
       ],
       evidence:
-        "Field mapping with engineering showed many fields were only valid after route and load type were known. Compliance confirmed customs constraints belonged with route selection, not as a post-quote legal review.",
+        "Engineering field-mapping showed many inputs were only valid after route and load type were known — reflected in the portfolio route-first step (gallery) before cargo detail. Compliance required customs constraints with route selection, not as a post-quote legal review — also reflected in the route-step sequencing. Cargo readiness and load type appear on the next portfolio step once geography is set. Design-system documentation artifacts (colour, grid, iconography, components, symbols) record the pattern language contributed with product partners during the engagement.",
       tradeoff:
         "Progressive disclosure adds steps and risks abandonment if each step feels empty — but it lets validation and smart defaults run where they belong, and keeps required complexity from appearing all at once.",
       choice:
-        "Ship a guided three-step wizard: origin and destination first, then cargo readiness and load type, then contact — with rate generation after the system has enough structured input.",
+        "Design a guided three-step wizard: origin and destination first, then cargo readiness and load type, then contact — with rate generation after the system has enough structured input.",
       result:
-        "Reduced a roughly 20-field form into three progressive steps while keeping rate-engine and customs requirements inside the flow. What could not be simplified stayed: maritime weight/dimension semantics and regulatory fields that engineering and compliance still required.",
+        "Portfolio artifacts document a roughly 20-field legacy form redesigned into three progressive steps while keeping rate-engine and customs requirements inside the flow. What could not be simplified stayed: maritime weight/dimension semantics and regulatory fields. This documents the engagement design — not an audit of Crowley’s current production surfaces.",
     },
     systemChangeSteps: [
       "Mapped the fragmented quote path — trucking, port, broker, and Crowley ops inputs — into one route-first sequence instead of a flat field dump.",
       "Aligned front-end fields with rate-engine constraints so geographic data, cargo dimensions, and schedule only asked for what the API could price.",
       "Embedded customs and regulatory collection into route selection so compliance failures happened before a misleading quote reached the shipper.",
       "Structured cargo details around readiness date and load type (FCL, LCL, breakbulk, vehicle) with inline validation and smart defaults.",
-      "Connected quote output into downstream execution rather than leaving pricing as a dead-end calculator.",
-      "Partnered on the design system the platform continued to use after the engagement — contributing patterns and documentation that product and engineering could adopt, not sole ownership of Crowley’s entire visual language.",
+      "Connected quote output toward downstream execution language rather than leaving pricing as a dead-end calculator.",
+      "Contributed design-system documentation (colour, grid, iconography, components, symbols) with Crowley product and engineering during the engagement — not a claim of sole authorship or post-engagement longevity.",
     ],
     iteration: [
       {
@@ -1565,28 +1500,28 @@ const caseStudyRecords: CaseStudyRecord[] = [
         body: "Maritime metrics and customs inputs could not become “simple.” The win was sequencing and validation, not pretending freight quoting was a consumer checkout.",
       },
       {
-        title: "Design-system adoption",
-        body: "System documentation (colour, grid, iconography, components) was introduced with product partners so the wizard and later surfaces shared one language. Longevity beyond the engagement reflects continued team ownership, not a one-person maintainership claim.",
+        title: "Design-system partnership",
+        body: "System documentation was contributed with product partners during the engagement so wizard and related surfaces could share one language. Longevity or continued production use after the engagement is not claimed.",
       },
     ],
     outcomes: [
       {
-        title: "Operational: three-step quote",
-        body: "Collapsed a dense legacy form into a guided route → cargo → contact flow with per-step validation.",
+        title: "Documented: three-step quote design",
+        body: "Portfolio screens show a guided route → cargo → contact flow with per-step structure replacing a dense legacy field list — the engagement design approach.",
         level: "operational",
         confidence: "observed",
       },
       {
-        title: "Organisational: shared structures",
-        body: "Unified cargo and container data structures with Product so weight and dimension metrics read as scannable interface elements, not spreadsheet columns.",
+        title: "Intended: clearer cargo structures",
+        body: "Weight and dimension metrics were meant to read as scannable interface elements with Product, not spreadsheet columns. Not published as a measured organisational outcome.",
         level: "organisational",
         confidence: "directional",
       },
       {
-        title: "Organisational: system patterns",
-        body: "Contributed design-system direction the platform continued to run on after the advisory year, adopted with Crowley product and engineering partners.",
+        title: "Documented: design-system contribution",
+        body: "Design-system documentation artifacts from the engagement record patterns contributed with Crowley product and engineering partners. Post-engagement longevity is unpublished.",
         level: "organisational",
-        confidence: "directional",
+        confidence: "observed",
       },
     ],
     frames: [
@@ -1594,27 +1529,27 @@ const caseStudyRecords: CaseStudyRecord[] = [
         src: "/assets/work/crowley/landing.png",
         scrollable: true,
         caption:
-          "Marketing landing as the commercial entry: Crowley frames logistics capability before the quote wizard takes the operational handoff.",
+          "Marketing landing as commercial entry. Demonstrates Crowley logistics framing — not an attribution of current live marketing to this engagement.",
       },
       {
         src: "/assets/work/crowley/gallery-01.webp",
         caption:
-          "Route-first step: origin and destination become the entry point so trucking, port, and network choices stop competing as a flat field list. Selected because rate and customs logic depend on geography before cargo detail.",
+          "Portfolio artifact — route-first step: origin and destination enter before cargo detail, matching rate and customs dependency on geography.",
       },
       {
         src: "/assets/work/crowley/gallery-02.webp",
         caption:
-          "Cargo step after route is known: readiness date and load type replace asking every maritime metric up front. Constraint: the rate engine only prices once load type is set.",
+          "Portfolio artifact — cargo step after route is known: readiness date and load type replace asking every maritime metric up front.",
       },
       {
         src: "/assets/work/crowley/gallery-03.webp",
         caption:
-          "Contact and rate handoff: shippers leave with a structured estimate instead of a support ticket. What users can now do — request a quote without reconstructing the spreadsheet mentally.",
+          "Portfolio artifact — contact and rate handoff: structured estimate path instead of reconstructing a spreadsheet mentally.",
       },
       {
         src: "/assets/work/crowley/gallery-04.webp",
         caption:
-          "Downstream connection: quoting feeds execution language rather than ending as a calculator. Pattern chosen so Crowley keeps one source of truth from price to move.",
+          "Portfolio artifact — quote connected toward execution language rather than ending as a calculator. Not a claim about Crowley’s current production architecture.",
       },
     ],
     wouldChangeNow:
@@ -1622,15 +1557,18 @@ const caseStudyRecords: CaseStudyRecord[] = [
     atAGlance: {
       user: "International shippers and Crowley quote operators",
       problem: "A ~20-field spreadsheet-style quote split across trucking, ports, and brokers",
-      mandate: "Experience architecture for the wizard and design-system direction with product partners",
+      mandate: "Experience architecture for the wizard and design-system documentation with product partners (via Nagarro)",
       decision: "Three-step progressive disclosure over a reskin or spreadsheet-adjacent layout",
-      result: "Guided route → cargo → contact flow that still satisfies rate-engine and customs constraints",
+      result:
+        "Portfolio documents route → cargo → contact design; longevity and project year unpublished",
     },
     verification: {
       status: "needs-confirmation",
       notes: [
+        "Confirm project-specific engagement year and duration within the Nagarro tenure (Jul 2019 — Feb 2022).",
         "Confirm any usability or A/B evidence that preferred progressive disclosure.",
-        "Confirm exact ownership wording for design-system adoption vs sole authorship.",
+        "Design-system longevity / continued production use remains unpublished until evidenced.",
+        "Portfolio artifacts document engagement design — not an audit of Crowley’s current live surfaces.",
         "Confirm production validation or instrumentation evidence if publishable.",
       ],
     },
@@ -1642,15 +1580,15 @@ const caseStudyRecords: CaseStudyRecord[] = [
     title: "An AI-driven revenue suite for perishable media inventory",
     summary:
       "Ymax, Pgov, and RevX designed as one pre-sales-to-revenue pipeline for print, TV, and digital inventory.",
-    year: "2020",
+    year: "2016–2018",
     category: "SaaS Products",
     industry: "Media · Revenue systems",
     tags: ["SaaS", "AI", "Pricing"],
     tone: "gold",
     tier: "flagship",
     lane: "enterprise",
-    role: "Lead Designer",
-    timeline: "2+ years",
+    role: "Lead UX Designer",
+    timeline: "Oct 2016 — Nov 2018",
     engagement: "Full-time employment",
     narrativeDepth: "supporting",
     cover: "/assets/work/sagacito/cover.svg",
@@ -1752,16 +1690,16 @@ const caseStudyRecords: CaseStudyRecord[] = [
     title: "An end-to-end design system for urban mobility at scale",
     summary:
       "Rider, driver, and corporate surfaces on one system — including data-over-sound check-in for congested corridors.",
-    year: "2019",
+    year: "2018–2019",
     category: "Enterprise Systems",
     industry: "Mobility · Product design",
     tags: ["Mobility", "Systems", "Field research"],
     tone: "mist",
     tier: "flagship",
     lane: "enterprise",
-    role: "Staff Design Consultant",
-    timeline: "3+ years",
-    engagement: "IC level",
+    role: "Lead UX Designer",
+    timeline: "Nov 2018 — Mar 2019",
+    engagement: "Full-time employment",
     narrativeDepth: "supporting",
     cover: "/assets/work/shuttl/cover.svg",
     gallery: [
@@ -1777,8 +1715,8 @@ const caseStudyRecords: CaseStudyRecord[] = [
       others:
         "Product owned roadmap. Engineering owned audio/data protocol feasibility. Operations owned field rollout.",
       decisionMaker: "Product on shipping check-in method; engineering on technical viability.",
-      team: "Staff design consultant with product, engineering, and ops across B2C and B2B lines.",
-      authority: "IC-level design ownership of system patterns and the check-in journey.",
+      team: "Lead UX Designer with product, engineering, and ops across B2C and B2B lines.",
+      authority: "Lead UX ownership of system patterns and the check-in journey.",
       deliveryConstraints:
         "Noise, privacy, device diversity, and intermittent connectivity in Delhi-NCR-style corridors.",
     },

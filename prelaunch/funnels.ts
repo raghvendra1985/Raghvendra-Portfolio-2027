@@ -241,7 +241,7 @@ export const clientEvaluations: EvidenceItem[] = [
     id: "founder",
     label: "Do I see founder/product-building experience?",
     verdict: "PASS",
-    evidence: `Selected Work is ${featuredNames}. About founder chapter names EQTY, Growing With Kid, Bolo Buddy.`,
+    evidence: `Selected Work is ${featuredNames}. About Elevate chapter names EQTY, Growing With Kid, Bolo Buddy.`,
     href: "/work",
   },
   {

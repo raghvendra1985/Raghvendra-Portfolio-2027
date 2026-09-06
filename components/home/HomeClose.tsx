@@ -37,7 +37,7 @@ export default function HomeClose() {
             appearance="text"
             source="home_recruiter"
             className="inline-flex min-h-12 w-full items-center justify-center border border-mist/40 px-6 font-mono-label text-mist hover:text-gold sm:w-auto"
-            label="View résumé"
+            label="Download résumé"
           />
         </div>
       </div>

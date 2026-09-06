@@ -5,6 +5,10 @@ import { site } from "../lib/site";
  * Contact, positioning, dates, employers, and claims must match
  * lib/site.ts, about/index.ts, case-studies/index.ts, and founder-os/index.ts.
  * Unverified items live in RESUME_DATA_GAPS.md — do not invent them here.
+ *
+ * Employment chronology is CV-backed (user-confirmed May 2026 draft inputs).
+ * Project-specific years for Verizon/Crowley and design-system longevity claims
+ * remain pending — omit until clarified.
  */
 
 export const resume = {
@@ -18,7 +22,7 @@ export const resume = {
   linkedinUrl: site.linkedin,
   linkedinLabel: "www.linkedin.com/in/raghvendrasingh23",
   profile:
-    "Product design leader with 20 years in design and 14+ years in digital product and UX. Work covers product strategy, complex enterprise systems, AI products, DesignOps, design systems, and hands-on product execution. Experience includes staff consulting and senior UX management at Nagarro Technology and Rapipay Fintech, selected enterprise client work at Verizon and Crowley Maritime, and founder-led products (EQTY, Growing With Kid, Bolo Buddy, GWK Ghostwriter). Prototypes and ships with AI-assisted development as a product designer — not as an ML engineer.",
+    "Product design leader with 20 years in design and 14+ years in digital product and UX — strategy, enterprise systems, AI products, DesignOps, and hands-on execution. Nagarro Technology (Staff UX Consultant, Jul 2019 — Feb 2022), RapiPay Fintech (Senior Manager UX, Feb 2022 — Apr 2023), Elevate Innovation (Principal Product Design Consultant, May 2023 — Present). Selected Nagarro client work: Verizon and Crowley Maritime. Builds founder products (EQTY, Growing With Kid, Bolo Buddy, GWK Ghostwriter) with AI-assisted development as a product designer — not an ML engineer.",
   expertise: [
     {
       label: "Product",
@@ -44,69 +48,73 @@ export const resume = {
   experience: {
     page1: [
       {
-        org: "Independent · EQTY · Growing With Kid · Bolo Buddy · GWK Ghostwriter",
-        title: "Product Design Leader / Product Builder",
-        dates: "2023 — Present",
-        meta: "Delhi NCR, India · Remote",
+        org: "Elevate Innovation",
+        title: "Principal Product Design Consultant / Product Builder",
+        dates: "May 2023 — Present",
+        meta: "Independent consulting practice · Delhi NCR · IIAD teaching alongside",
         scope:
-          "Product strategy, research, UX, AI interaction design, prototyping, product architecture, and hands-on building. Ventures are live and in motion — not claimed as proven commercial scale.",
+          "Product strategy, UX, AI interaction design, prototyping, and hands-on building. Ventures are live — not claimed as proven commercial scale.",
         bullets: [
-          "Shape EQTY as founding design partner: product strategy and experience architecture inside a modular fintech operating system — trust, workflow, and operator language.",
-          "Build Growing With Kid as a parenting community product: research, content architecture, and constraint-led UX for Indian parents (live, 2020–present).",
-          "Cofound Bolo Buddy, an AI-powered audio-first storytelling companion in Hindi, English, Hinglish, and Tamil — product, interaction design, and ongoing experimentation.",
-          "Design and prototype GWK Ghostwriter, a personal AI LinkedIn studio with long-term memory and a research-to-post workflow. Working product in the portfolio.",
+          "EQTY (founding design partner): product strategy and experience architecture for a modular fintech operating system.",
+          "Growing With Kid and Bolo Buddy: parenting community and AI audio storytelling products — research, UX, and ongoing experimentation.",
+          "GWK Ghostwriter: AI LinkedIn studio with long-term memory and a research-to-post workflow.",
         ],
       },
       {
-        org: "Rapipay Fintech",
+        org: "RapiPay Fintech Pvt. Ltd",
         title: "Senior Manager UX",
-        dates: "2022",
-        meta: "Employer · Product design leadership · NYE Money",
+        dates: "Feb 2022 — Apr 2023",
+        meta: "Employer · Employment · NYE Money",
         scope:
-          "Led the product experience for NYE Money, Rapipay’s consumer financial super app — payments, banking, and investments in one system.",
+          "Led the product experience for NYE Money — payments, banking, and investments in one consumer system.",
         bullets: [
-          "Led product design for prepaid wallet and RuPay card, UPI, NCMC transit, partner banking, digital gold, and mutual funds as one consumer surface.",
-          "Framed the product as a money operating layer — spend, move, save, invest — with security and compliance visible in the journeys, not only in legal copy.",
-          "Designed payment, banking onboarding, and investment surfaces to share one product grammar instead of splintering into disconnected features.",
-          "Shipped as Rapipay’s live consumer finance product on web, iOS, and Android.",
+          "Led product design for wallet/RuPay, UPI, NCMC, partner banking, digital gold, and mutual funds as one consumer surface.",
+          "Kept security and compliance visible in money journeys while unifying onboarding and trust patterns across squads.",
+          "Documented engagement design for NYE Money as Rapipay’s consumer finance product — live on web, iOS, and Android.",
         ],
       },
       {
-        org: "Nagarro Technology",
+        org: "Nagarro Technology Pvt. Ltd",
         title: "Staff UX Consultant",
-        dates: "2019 — 2023",
-        meta: "Employer · Enterprise product consulting · Remote / on-site as required",
+        dates: "Jul 2019 — Feb 2022",
+        meta: "Employer · Enterprise consulting · Selected clients below via Nagarro",
         scope:
-          "Staff consulting across enterprise delivery — systems, product practice, and cross-functional work. Names below are selected client/project work, not employment by those companies.",
+          "Staff consulting across enterprise delivery. Client names are project work through Nagarro — not employment by those companies. Project years omitted until confirmed.",
         bullets: [
-          "Verizon (2021, 6 months, IC): designed a turnkey digital-signage system — compact media-player architecture and a cloud campaign portal that runs without depending on site Wi-Fi.",
-          "Crowley Maritime (2023, 1 year, advisory): replaced a dense legacy freight-quote form with a guided origin-to-cargo-to-contact flow aligned with rate-engine and customs constraints; introduced the design system the platform still runs on.",
+          "Verizon (Nagarro client · IC): turnkey digital-signage architecture and cloud campaign portal without site Wi-Fi dependency.",
+          "Crowley Maritime (Nagarro client · advisory): experience architecture for a guided freight-quote flow (origin → cargo → contact); design-system documentation contributed with product partners during the engagement.",
         ],
       },
     ],
     page2: [
       {
-        org: "Sagacito",
-        title: "Lead Designer",
-        dates: "2020 · 2+ years",
-        meta: "Full-time employment · Media revenue SaaS",
-        scope:
-          "Designed Ymax, Pgov, and RevX as one pre-sales-to-revenue pipeline for perishable print, TV, and digital inventory.",
+        org: "Shuttl",
+        title: "Lead UX Designer",
+        dates: "Nov 2018 — Mar 2019",
+        meta: "Employer · Urban mobility",
         bullets: [
-          "Designed pricing, automated proposal/product-mix, and approval-guardrail workflows so sales could meet campaign needs without leaking margin on perishable inventory.",
-          "Connected pre-sales signals into revenue orchestration. The suite was implemented by major Indian media houses including Hindustan Times, Ananda Bazar Patrika, and PVR Cinemas.",
+          "Lead UX across rider, driver, and corporate surfaces, including field-constrained check-in journeys.",
         ],
       },
       {
-        org: "Product & enterprise practice",
-        title: "UX Designer to UX Lead",
-        dates: "2015 — 2019",
-        meta: "Interaction design · product clarity · team craft",
-        scope:
-          "Grew from hands-on UX into lead responsibility across product and enterprise engagements.",
+        org: "Sagacito Technologies Pvt. Ltd",
+        title: "Lead UX Designer",
+        dates: "Oct 2016 — Nov 2018",
+        meta: "Employer · Media revenue SaaS",
         bullets: [
-          "Led interaction and product UX as the practice moved from screens into systems work across product and enterprise engagements.",
-          "Selected project: Shuttl (2019, Staff Design Consultant, 3+ years) — end-to-end design system for rider, driver, and corporate mobility surfaces, including data-over-sound check-in for congested corridors.",
+          "Designed Ymax, Pgov, and RevX as one pre-sales-to-revenue pipeline for perishable print, TV, and digital inventory.",
+          "Implemented by major Indian media houses including Hindustan Times, Ananda Bazar Patrika, and PVR Cinemas.",
+        ],
+      },
+      {
+        org: "Earlier practice",
+        title: "UX Designer · Senior Designer · Product design",
+        dates: "Jan 2011 — Sep 2016",
+        meta: "Zopper · Pigeon India · Konnecting Mindz · Klove Design · VIP Caprese",
+        bullets: [
+          "Zopper – Solvy Tech (Nov 2015 — Sep 2016), User Experience Designer.",
+          "Pigeon India (Jun 2013 — Oct 2015), Senior Designer; Konnecting Mindz freelance UX part-time (Dec 2013 — Dec 2014).",
+          "Klove Design (Jan 2012 — May 2013), Senior Designer / Production In-charge; VIP Industries – Caprese product design project (Jan 2011 — Nov 2011).",
         ],
       },
     ],
@@ -114,39 +122,40 @@ export const resume = {
   selectedWork: [
     {
       name: "Verizon",
-      detail: "2021 · Client project (consulting) · Digital signage / enterprise product systems",
+      detail:
+        "Nagarro client project · Digital signage / enterprise product systems",
       href: `${site.url}/work/verizon`,
     },
     {
       name: "Crowley Maritime",
-      detail: "2023 · Client project (consulting) · Freight quoting / enterprise product",
+      detail: "Nagarro client project · Freight quoting / enterprise product",
       href: `${site.url}/work/crowley`,
     },
     {
       name: "Rapipay / NYE",
-      detail: "2022 · Employer · Fintech product experience",
+      detail: "Feb 2022 — Apr 2023 · Employer · Fintech product experience",
       href: `${site.url}/work/nye`,
     },
     {
       name: "Shuttl",
-      detail: "2019 · Staff Design Consultant · Urban mobility design system",
+      detail: "Nov 2018 — Mar 2019 · Employer · Lead UX Designer · Urban mobility",
       href: `${site.url}/work/shuttl`,
     },
     {
       name: "Hempel",
-      detail: "2022 · Advisory (3 months) · B2B procurement workshops",
+      detail: "Advisory · B2B procurement workshops",
       href: `${site.url}/work/hempel`,
     },
     {
       name: "Sagacito",
-      detail: "2020 · Employer · Media revenue SaaS",
+      detail: "Oct 2016 — Nov 2018 · Employer · Media revenue SaaS",
       href: `${site.url}/work/sagacito`,
     },
   ],
   teachingRole: {
     org: "Indian Institute of Art & Design",
     title: "Associate Professor, Communication Design",
-    dates: "Alongside founder work",
+    dates: "Alongside consulting practice",
     meta: "Design education · curriculum · mentoring",
     bullets: [
       "Teach design through decisions and production-bar critiques. Modules run as sprints, with AI literacy in practice — not as a tool tutorial.",
