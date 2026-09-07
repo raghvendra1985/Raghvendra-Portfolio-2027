@@ -123,7 +123,7 @@ function assertNoConfirmLeak(study: CaseStudy) {
   }
 }
 
-const expectedFeatured = ["nye", "crowley", "gwk-ghostwriter"];
+const expectedFeatured = ["nye-team", "nye", "crowley"];
 const actualFeatured = featuredWork.map((s) => s.slug);
 if (actualFeatured.join(",") !== expectedFeatured.join(",")) {
   errors.push(

@@ -1,10 +1,10 @@
 export const contactPage = {
   title: "Contact",
   description:
-    "Seeking full-time Design Manager or Senior Design Manager roles. Delhi NCR hybrid preferred; open to remote from India. Also open to selected advisory and workshop inquiries.",
+    "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered.",
   heroTitle: "Let’s find the structure inside the problem.",
   heroDescription:
-    "Seeking full-time Design Manager or Senior Design Manager roles. Delhi NCR hybrid preferred; open to remote from India. Also open to selected advisory and workshop inquiries.",
+    "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered.",
   intentPrompt: "What would you like to discuss?",
   intentRequired: "Choose what you would like to discuss.",
   messageLabel: "What are you trying to solve?",
@@ -29,7 +29,8 @@ export const contactPage = {
 } as const;
 
 export const intentHints: Record<string, string> = {
-  hiring: "Role, team, and what you need a Design Manager or Senior Design Manager to own.",
+  hiring:
+    "Role, team, and what you need a Head of Design, Associate Director or Principal to own.",
   advisory: "The product or system, and the decision you’re stuck on.",
   workshop: "Who it’s for, and what should be different afterwards.",
   other: "What you’re trying to solve.",

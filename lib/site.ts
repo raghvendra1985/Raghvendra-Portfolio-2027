@@ -8,9 +8,9 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/raghvendrasingh23/",
   whatsapp: "https://wa.me/919555909094",
   location: "Delhi NCR, India",
-  status: "Seeking full-time design leadership",
+  status: "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products",
   statusDetail:
-    "Design Manager or Senior Design Manager roles · Delhi NCR hybrid preferred · open to remote from India.",
+    "Delhi NCR hybrid preferred · remote from India considered.",
   /**
    * Recruiter PDF. Generated from /resume via `npm run resume:pdf`.
    */

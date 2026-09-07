@@ -98,7 +98,7 @@ export const founderOs: FounderOs = {
     currentActivity:
       "Currently operating Elevate Innovation — building founder products and teaching through workshops and classrooms.",
     seeking:
-      "Seeking full-time Design Manager or Senior Design Manager roles — Delhi NCR hybrid preferred; open to remote from India.",
+      "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered.",
   },
   dashboard: [
     {

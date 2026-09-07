@@ -127,6 +127,18 @@ type CaseStudyShared = {
   challenge?: string;
   href?: string;
   links?: { label: string; href: string }[];
+  /**
+   * Optional one-line companion study note above Situation
+   * (e.g. product study ↔ org-building study).
+   */
+  companionNote?: {
+    textBefore: string;
+    href: string;
+    label: string;
+    textAfter?: string;
+  };
+  /** Override default `${client} — ${title}` document title when set. */
+  metaTitle?: string;
   cover?: string;
   /** @deprecated Prefer frames */
   gallery?: string[];

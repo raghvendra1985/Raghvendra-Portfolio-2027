@@ -23,13 +23,13 @@ export default function SelectedImpact() {
           </div>
         </div>
         <dl
-          className="mt-8 grid gap-0 border-t border-line sm:mt-12 md:grid-cols-2 xl:grid-cols-4"
+          className="mt-8 grid gap-0 border-t border-line sm:mt-12 md:grid-cols-2 xl:grid-cols-3"
           data-reveal-item
         >
           {leadershipImpact.items.map((item) => (
             <div
               key={item.term}
-              className="border-b border-line py-7 md:px-6 md:odd:border-r md:odd:pl-0 md:even:pr-0 xl:border-b-0 xl:border-r xl:px-8 xl:py-10 xl:even:pr-8 xl:first:pl-0 xl:last:border-r-0"
+              className="border-b border-line py-7 md:px-6 md:odd:border-r md:odd:pl-0 md:even:pr-0 xl:border-b-0 xl:border-r xl:px-8 xl:py-10 xl:even:pr-8 xl:first:pl-0 xl:[&:nth-child(3n)]:border-r-0"
             >
               <dt className="font-serif text-[1.25rem] leading-snug text-navy sm:text-[1.5rem]">
                 {item.term}

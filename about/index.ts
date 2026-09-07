@@ -304,7 +304,7 @@ export const aboutPage: AboutPage = {
   },
   hiringTitle: "Product design leadership, with evidence attached.",
   hiringBody:
-    "Seeking full-time Design Manager or Senior Design Manager roles. Twenty years across visual, industrial, product, and organisational design — with recent work spanning Rapipay, Nagarro enterprise clients, independent practice, and design education.",
+    "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered. Twenty years across visual, industrial, product, and organisational design — with recent work spanning Rapipay, Nagarro enterprise clients, independent practice, and design education.",
   hiringPrimary: { label: "Start a conversation", href: "/contact" },
   hiringWork: { label: "View selected work", href: "/work" },
 };

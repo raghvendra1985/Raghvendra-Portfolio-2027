@@ -5,7 +5,7 @@ export const leadershipHero = {
   name: "Raghvendra",
   headline: "Intelligent products. Systems and alignment that make them hold.",
   roleLine:
-    "Open to Design Manager and Senior Design Manager roles · People and product UX leadership",
+    "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products",
   availabilityLine: site.statusDetail,
   primary: { label: "View selected work", href: "#work" },
   secondary: { label: "Start a conversation", href: "/contact" },
@@ -23,23 +23,30 @@ export const leadershipImpact = {
   title: "Evidence a hiring conversation can verify.",
   items: [
     {
-      term: "20 years in design",
-      detail: `${site.experienceLine}. Craft, product, systems, and leadership in one arc—not a sequence of disconnected jobs.`,
-    },
-      {
-      term: "Rapipay / NYE Money",
+      term: "11",
       detail:
-        "NYE Money is live on web, iOS, and Android. Portfolio screens document the shared-grammar design approach from the Senior Manager UX engagement; less duplicated design remains an intended benefit only.",
+        "people led across UX design, research, content, motion and marketing at Rapipay; 9 of them hired by me",
     },
-      {
-        term: "Crowley Maritime",
-        detail:
-          "Nagarro client engagement: experience architecture for a three-step freight-quote flow and design-system documentation with Crowley product partners. Portfolio artifacts document the engagement design; longevity unpublished.",
-      },
     {
-      term: "500+ designers taught",
+      term: "3",
+      detail: "platforms shipped in 14 months: NYE Money on web, iOS, Android",
+    },
+    {
+      term: "−30%",
+      detail: "design lead time at NYE, measured as Jira cycle time",
+    },
+    {
+      term: "0→1",
+      detail: "founding designer at EQTY, a modular fintech operating system",
+    },
+    {
+      term: "2",
       detail:
-        "Classrooms, workshops, and mentoring as a way to build shared language, critique, and capability—not a side identity.",
+        "enterprise systems as Staff UX Consultant at Nagarro: Verizon, Crowley Maritime",
+    },
+    {
+      term: "500+",
+      detail: "designers taught and mentored · Associate Professor, IIAD",
     },
   ],
 } as const;
@@ -47,7 +54,7 @@ export const leadershipImpact = {
 export type LeadershipWorkLayout = "image-led" | "copy-led" | "wide";
 
 export type LeadershipWorkEntry = {
-  slug: "nye" | "crowley" | "gwk-ghostwriter";
+  slug: "nye-team" | "nye" | "crowley";
   kind: string;
   title: string;
   capabilities: readonly string[];
@@ -62,8 +69,24 @@ export type LeadershipWorkEntry = {
   layout: LeadershipWorkLayout;
 };
 
-/** Same featured trio as `/work`: Rapipay → Crowley → Ghostwriter. */
+/** Same featured trio as `/work`: NYE org → NYE product → Crowley. */
 export const leadershipWorkMeta: readonly LeadershipWorkEntry[] = [
+  {
+    slug: "nye-team",
+    kind: "Design leadership",
+    title:
+      "Building the NYE design org: nine hires, one design language, three platforms",
+    capabilities: ["Design leadership", "DesignOps", "Fintech"],
+    outcome:
+      "Built the NYE design function from zero — nine hires, one design language, and a −30% design lead time — to ship on three platforms in fourteen months.",
+    stackChallenge: [
+      "Built the NYE design function from zero — nine hires, one design language, and a −30% design lead time — to ship on three platforms in fourteen months.",
+    ],
+    stackOutcome: [
+      "11 led · 9 hired · NYE Money on web, iOS and Android · design lead time −30%.",
+    ],
+    layout: "image-led",
+  },
   {
     slug: "nye",
     kind: "Enterprise leadership",
@@ -79,7 +102,7 @@ export const leadershipWorkMeta: readonly LeadershipWorkEntry[] = [
       "NYE Money is live on web, iOS, and Android.",
       "Portfolio screens document the shared-grammar design approach; less duplicated design is intended only.",
     ],
-    layout: "image-led",
+    layout: "copy-led",
   },
   {
     slug: "crowley",
@@ -95,23 +118,6 @@ export const leadershipWorkMeta: readonly LeadershipWorkEntry[] = [
     stackOutcome: [
       "Portfolio documents the three-step quote design from the engagement.",
       "Design-system documentation contributed with partners; longevity unpublished.",
-    ],
-    layout: "copy-led",
-  },
-  {
-    slug: "gwk-ghostwriter",
-    kind: "AI product building",
-    title: "GWK Ghostwriter — an AI writing studio that remembers voice",
-    capabilities: ["AI experience", "Product direction", "Founder execution"],
-    outcome:
-      "Shipped a research-to-post workflow with long-term memory, voice rules, and source material a founder can actually run.",
-    stackChallenge: [
-      "An AI content engine built for Growing With Kid: LinkedIn posts in a personal voice.",
-      "Long-term memory, source material, idea scoring, calendar, and analytics.",
-    ],
-    stackOutcome: [
-      "Shipped a research-to-post workflow with long-term memory, voice rules, and source material.",
-      "A founder can actually run it.",
     ],
     layout: "wide",
   },
@@ -152,7 +158,7 @@ export const leadershipWork = {
   eyebrow: "Selected work",
   title: "Three kinds of impact hiring teams actually need.",
   intro:
-    "Organisational influence in fintech, complex workflow systems, and AI product building. Each project links to the published case study.",
+    "Design org building in fintech, product direction at organisational scale, and complex workflow systems. Each project links to the published case study.",
   all: { label: "View all work", href: "/work" },
 } as const;
 
@@ -248,7 +254,8 @@ export const leadershipTestimonials = {
     {
       quote:
         "Raghvendra helped build a multi-disciplinary team comprising UX designers, UX researchers, animation designers, visual designers, and content researchers. He played an instrumental role in setting up a design system, which helped us replicate design decisions at scale. Raghvendra is passionate about setting up and following a UX process in his team. He has strong experience setting up UX vision and strategy and showing the business value of UX design.",
-      attribution: "Sumit Adlakha · Sr. Director of Engineering · Innovaccer",
+      attribution:
+        "Sumit Adlakha · Sr. Director of Engineering, Innovaccer · my manager at Rapipay, where we built the NYE Money team together",
       source: "LinkedIn recommendation · May 2023 · managed Raghvendra directly",
     },
     {
@@ -281,7 +288,7 @@ export const leadershipAbout = {
 export const leadershipClose = {
   id: "hire",
   title: "Have a consequential product problem to solve?",
-  body: "I’m seeking full-time Design Manager or Senior Design Manager roles where design can shape product direction, team capability, and delivery. Delhi NCR hybrid preferred; open to remote from India. Selected advisory and workshop inquiries are welcome when they fit.",
+  body: "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered.",
   primary: { label: "Start a conversation", href: "/contact" },
   secondary: { label: "Download résumé", href: site.resumeHref },
 } as const;

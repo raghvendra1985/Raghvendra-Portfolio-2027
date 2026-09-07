@@ -100,6 +100,13 @@ const workIndexBySlug: Record<string, WorkIndexMeta> = {
     evidence: "CASE STUDY",
     featuredDesignation: "Leadership and organisational influence",
   },
+  "nye-team": {
+    contributionGroup: "enterprise-leadership",
+    contribution:
+      "Built the NYE design function from zero — nine hires, one design language, and a −30% design lead time — to ship on three platforms in fourteen months.",
+    evidence: "CASE STUDY",
+    featuredDesignation: "Design leadership and DesignOps",
+  },
   sagacito: {
     contributionGroup: "product-direction",
     contribution:
@@ -398,6 +405,12 @@ const caseStudyRecords: CaseStudyRecord[] = [
     engagement: "UX leadership at organisational scale · Employment",
     narrativeDepth: "deep",
     href: "https://nye.money/",
+    companionNote: {
+      textBefore: "This is the product story. The team and operating model are in ",
+      href: "/work/nye-team",
+      label: "Building the NYE design org",
+      textAfter: ".",
+    },
     links: [
       { label: "Visit live site", href: "https://nye.money/" },
       {
@@ -751,6 +764,180 @@ const caseStudyRecords: CaseStudyRecord[] = [
         "Research-board theme headers document exploration; do not treat them as validated findings without transcribed analysis conclusions.",
         "Live product ≠ release timing relative to employment, and ≠ attribution of current live features to this engagement without supporting evidence.",
         "Less duplicated design remains intended only until an observed reduction is documented.",
+      ],
+    },
+  },
+  {
+    index: "22",
+    slug: "nye-team",
+    client: "Rapipay",
+    title:
+      "Building the NYE design org: nine hires, one design language, three platforms in fourteen months",
+    summary:
+      "How I built an 11-person design, research and marketing function at Rapipay and shipped NYE Money on three platforms in fourteen months.",
+    metaTitle: "Building the NYE design org — Raghvendra Singh",
+    year: "2022–2023",
+    category: "SaaS Products",
+    industry: "Fintech · Organisational design",
+    tags: ["Design leadership", "DesignOps", "Fintech", "Org building"],
+    tone: "navy",
+    tier: "flagship",
+    lane: "enterprise",
+    role: "Senior Manager UX · built and led the function",
+    timeline: "Feb 2022 – Apr 2023 · 14 months",
+    engagement:
+      "11 led · 9 hired (7 full-time, 2 contract) · design, research, content, motion, marketing · NYE Money on web, iOS and Android · NYE website · Design lead time −30% (Jira cycle time)",
+    narrativeDepth: "deep",
+    mediaLayout: "default",
+    cover: "/assets/work/nye-team/cover.png",
+    situation:
+      "Rapipay was building NYE — wallet, UPI, partner banking, digital gold and mutual funds — as one super app, with product squads that each owned a slice. There was no design function. Design work was scattered across squads and vendors, late revisions were eating the calendar, and the four products were drifting into four visual and verbal languages. I was hired to build the team and give NYE one experience before launch. Three problems, in the order they hurt: nobody owned the design pipeline end to end; late-stage rework was pushing timelines; and each squad had its own patterns, so the brand eroded a little with every release.",
+    people:
+      "Hiring began in my third month and ran at one to two people a month until the team was skills-complete by month nine — seven full-time hires and two contract, who together could take a flow from research to motion without waiting on a vendor. I hired for the skills the team lacked rather than the strongest portfolio in the pile: a researcher and a UX writer came in before a third product designer. Product design: Shubham Sachdeva (Sr.), Aditi Arya, and a senior product designer. Research: Richa Deo (Sr. UX Researcher). Visual & motion: Abhilash Jose (Lead), Shrineh Namdeo (Visual Designer II), a senior motion designer (contract). Content: Subalakshmi Murugesan (UX Writer), Saumya Rai (Copywriter). Marketing: a copywriter and a marketing visual designer, also reporting to me. I also took on marketing. Acquisition creative, brand and in-app experience were pulling in different directions; putting a copywriter and a marketing visual designer under the same roof as product design meant the story a customer saw in an ad was the story they met in onboarding.",
+    apparentProblem:
+      "Nobody owned the design pipeline end to end, and late-stage rework was pushing timelines.",
+    underlyingProblem:
+      "Each squad had its own patterns, so the brand eroded a little with every release — four products drifting into four visual and verbal languages.",
+    mandate: {
+      owned:
+        "Build the design function and give NYE one experience before launch — team, operating model, and design system as the alignment mechanism.",
+      others:
+        "Product owned roadmap prioritisation per squad. Engineering owned delivery capacity. Compliance owned regulatory gates.",
+      decisionMaker:
+        "Product and engineering leads made release calls; the design team owned critique, system, and research centrally.",
+      team:
+        "11 led · 9 hired (7 full-time, 2 contract) across design, research, content, motion, and marketing.",
+      authority:
+        "Senior Manager UX — built and led the function; designers embedded per squad with shared critique, system, and research.",
+      deliveryConstraints:
+        "Fintech launching under regulatory pressure; four squads shipping in parallel; no pause for a complete design system before first release.",
+    },
+    constraints: [
+      "No existing design function — work scattered across squads and vendors.",
+      "Late revisions eating the calendar before launch.",
+      "Four product languages eroding the brand with every release.",
+      "Regulatory pressure on disclosure-heavy flows such as savings-account KYC.",
+    ],
+    decision: {
+      situation:
+        "The tempting move was to hire fast and start designing screens. Structure had to come first if NYE was to launch as one experience.",
+      options: [
+        {
+          name: "Hire fast and start designing screens immediately",
+          rejectedBecause:
+            "Would scale the scatter: more designers without a shared pipeline, system, or quality rituals.",
+        },
+        {
+          name: "Build the function first, then the system, then the product",
+        },
+      ],
+      evidence:
+        "I used the Nielsen Norman Group's DesignOps model — organise, standardise, measure — as scaffolding, and adapted it to a fintech launching under regulatory pressure.",
+      tradeoff:
+        "Two months on structure delayed visible screen output — but created one team, one system, and rituals that made quality visible without routing every screen through me.",
+      choice:
+        "Build the function first, then the system, then the product — and let the team overrule the plan where the plan was wrong.",
+      result:
+        "An 11-person design, research and marketing function; NYE Money live on web, iOS and Android plus the redesigned NYE website within fourteen months of the first hire; design lead time −30% measured as Jira cycle time.",
+    },
+    systemChangeSteps: [
+      "Critique — Twice a week, more during the launch push. The designer names the decision they want challenged; we critique the decision, not the designer.",
+      "Review & sign-off — Weekly, cross-functional: product, engineering, compliance. A flow leaves the room approved or with a named owner for the fix. No silent rework.",
+      "Standups — Designers sit in their squad's standup. We killed the separate design standup within weeks; it duplicated information and delayed it.",
+      "1:1s — Weekly with each designer; fortnightly with engineering and product leads, to surface conflicts before they became escalations.",
+      "Research — Rolling, not per-feature: continuous studies in Maze and moderated sessions, with findings in a shared Confluence repository every squad could read.",
+      "Stack: Figma as the single source of truth, Maze for research, Miro for workshops, Jira and Confluence for the pipeline. The point wasn't the tools; it was that there was one of each and everyone used it.",
+      "The NYE design system was the answer to \"four products, one app\": tokens, a component library, pattern guidelines and a content style guide, built so that wallet, UPI, banking onboarding and investments shared one grammar for onboarding progress, trust cues and money decisions.",
+      "Compliance disclosures as design patterns — in-flow components the compliance team approved once. Savings-account KYC onboarding went through compliance review first time because every disclosure it used was already an approved pattern.",
+      "Five principles anchored customer-facing decisions: convenience, transparency, trust, personalisation, support. The product decisions themselves are in the NYE product case study (/work/nye).",
+    ],
+    iteration: [
+      {
+        title: "Fully centralised → embedded",
+        body: "I'd planned a central pool taking requests. Squads couldn't plan around it, so we assigned a named designer to each squad while keeping critique, system and research central. Ownership went up; queue time went down.",
+      },
+      {
+        title: "Separate design standup → squad standups",
+        body: "Dropped. The separate design standup duplicated information and delayed it.",
+      },
+      {
+        title: "Full design system up front → tokens and core components first",
+        body: "I'd scoped a complete system before the first release. The team argued for shipping a small token set and the components the first flows actually needed, then growing it. They were right — the full system would have arrived after launch.",
+      },
+      {
+        title: "Per-feature research → rolling research",
+        body: "Feature-by-feature studies couldn't keep pace with four squads. Continuous research with a shared repository could.",
+      },
+    ],
+    outcomes: [
+      {
+        title: "3",
+        body: "platforms live: NYE Money on web, iOS and Android, plus the redesigned NYE website, within fourteen months of the first hire",
+        level: "business",
+        confidence: "observed",
+      },
+      {
+        title: "−30%",
+        body: "design lead time, measured as Jira cycle time from ticket created to design approved, before and after the operating model",
+        level: "operational",
+        confidence: "company-metric",
+      },
+      {
+        title: "1×",
+        body: "compliance review for the highest-load flow (savings KYC): per-pattern approval replaced per-screen review",
+        level: "operational",
+        confidence: "observed",
+      },
+      {
+        title: "4 of 8",
+        body: "of the core team, four are now in lead or senior roles at Bajaj Life, BT Group and Alvarez & Marsal. Of the team, two now lead design or content functions — one as DVP, Digital Experience & Design at a major life insurer — and two more went on to senior product and research roles at BT Group. The team held intact through launch.",
+        level: "organisational",
+        confidence: "observed",
+      },
+    ],
+    frames: [
+      {
+        src: "/assets/work/nye-team/artefact-01.png",
+        caption:
+          "Team structure diagram — central critique, system and research; designers embedded per squad",
+      },
+      {
+        src: "/assets/work/nye-team/artefact-02.png",
+        caption:
+          "Hiring timeline — month 3 to month 9, one to two hires a month",
+      },
+      {
+        src: "/assets/work/nye-team/artefact-03.png",
+        caption: "Review & sign-off template or board",
+      },
+      {
+        src: "/assets/work/nye-team/artefact-04.png",
+        caption:
+          "Design system overview — tokens, three or four components, and the compliance-disclosure pattern with the KYC flow beside it",
+      },
+      {
+        src: "/assets/work/nye-team/artefact-05.png",
+        caption:
+          "Median design cycle time, ticket created → design approved, Feb 2022 – Apr 2023. Redrawn from sprint reports; figures indicative.",
+      },
+    ],
+    wouldChangeNow:
+      "Resistance to a centralised team is about ownership, not design. I won squad leads over by giving them a named designer and a seat in review, not by arguing about org charts. It's great to be proven wrong early. Four of my structural decisions were overturned in the first quarter, and the operating model that shipped the product was the one the team built. Evaluate people by inputs, not output. In a launch year, output is hostage to engineering capacity; judgement and craft aren't. Delayed communication is worse than delayed action. Most of the churn we removed was information arriving late, not work done badly. What I'd do differently: publish a living pattern inventory with squad ownership from month one, and count retired duplicate flows, so the organisational evidence is as visible as the product.",
+    atAGlance: {
+      user: "Product, engineering, and compliance partners shipping NYE across four squads — and everyday money consumers on the resulting app",
+      problem:
+        "No design function; late rework; four visual and verbal languages inside one super app",
+      mandate: "Build the team and give NYE one experience before launch",
+      decision:
+        "Build the function first, then the system, then the product — and let the team overrule the plan where the plan was wrong",
+      result:
+        "Nine hires, one design language, −30% design lead time, three platforms in fourteen months",
+    },
+    verification: {
+      status: "verified",
+      notes: [
+        "Team roster, −30% Jira cycle time, and alumni outcomes provided by author for this leadership case study.",
+        "Artefact frames are placeholders until final diagrams are swapped in.",
       ],
     },
   },
@@ -2144,7 +2331,7 @@ export const flagshipStudies = caseStudies.filter((study) => study.tier === "fla
 
 export const primaryStudies = caseStudies.filter((study) => study.lane === "primary");
 
-const featuredSlugs = ["nye", "crowley", "gwk-ghostwriter"] as const;
+const featuredSlugs = ["nye-team", "nye", "crowley"] as const;
 
 export const featuredWork = featuredSlugs.map((slug) => {
   const study = caseStudies.find((item) => item.slug === slug);

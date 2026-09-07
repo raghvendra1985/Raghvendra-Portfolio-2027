@@ -707,6 +707,18 @@ export default function CaseStudyView({
             data-case-situation
             className="relative z-[1] min-w-0"
           >
+            {study.companionNote ? (
+              <p className="mb-6 max-w-[58ch] type-body text-ink-soft">
+                {study.companionNote.textBefore}
+                <Link
+                  href={study.companionNote.href}
+                  className="text-navy underline decoration-line underline-offset-4 transition hover:text-gold"
+                >
+                  {study.companionNote.label}
+                </Link>
+                {study.companionNote.textAfter ?? ""}
+              </p>
+            ) : null}
             <p className="font-mono-label text-green">
               {depth === "compact" ? "Context" : "Situation"}
             </p>

@@ -99,7 +99,7 @@ function directAnswer(
     case "system-methodology":
       return `System is the methodology page — how to think, decide, build, learn, and operate. Work proves contribution across Product direction, Complex systems, AI and founder products, Enterprise leadership, and Brand and web work.`;
     case "start-here":
-      return `Start with ${named} — Rapipay, Crowley, and Ghostwriter. Then ask about AI, fintech, or leadership if you want a narrower path.`;
+      return `Start with ${named} — NYE design org, Rapipay product, and Crowley. Then ask about AI, fintech, or leadership if you want a narrower path.`;
     case "about-who":
       return `Raghvendra is a product design leader whose work moved from visual craft and industrial constraints through digital products and organisational decisions, into independent consulting, founder products, and teaching. About holds the career chapters.`;
     case "availability":
