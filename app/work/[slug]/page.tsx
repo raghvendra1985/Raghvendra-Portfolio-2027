@@ -20,7 +20,7 @@ export async function generateMetadata({
   const study = getCaseStudy(slug);
   if (!study) return {};
 
-  const title = `${study.client} — ${study.title}`;
+  const title = study.metaTitle ?? `${study.client} — ${study.title}`;
   const description = study.summary;
   const path = `/work/${study.slug}`;
   const extras = pageMetadataExtras({

@@ -9,7 +9,7 @@ export type SuggestedQuestion = {
 };
 
 /** Featured hiring trio — keep in sync with `featuredWork` / homepage. */
-const FEATURED_WORK = ["work:nye", "work:crowley", "work:gwk-ghostwriter"] as const;
+const FEATURED_WORK = ["work:nye-team", "work:nye", "work:crowley"] as const;
 
 export const openingQuestions: SuggestedQuestion[] = [
   {
@@ -47,6 +47,7 @@ export const openingQuestions: SuggestedQuestion[] = [
       "complex systems enterprise leadership Verizon Crowley Shuttl Hempel Rapipay contribution group",
     preferIds: [
       "work:crowley",
+      "work:nye-team",
       "work:nye",
       "work:shuttl",
       "work:hempel",
@@ -60,6 +61,7 @@ export const openingQuestions: SuggestedQuestion[] = [
     label: "How does he approach DesignOps?",
     query: "DesignOps operating model critique system design leadership",
     preferIds: [
+      "work:nye-team",
       "services:systems-designops",
       "knowledge:critique-system",
       "knowledge:operating-model-invisible",
@@ -69,7 +71,7 @@ export const openingQuestions: SuggestedQuestion[] = [
   {
     id: "advisory-availability",
     label: "Is he available for advisory work?",
-    query: "available advisory leadership workshops selected opportunities",
+    query: "available advisory leadership workshops open opportunities",
     preferIds: ["about:overview", "services:advisory-teaching", "services:product-leadership"],
     modeHint: "hiring",
   },
