@@ -69,6 +69,12 @@ export default function HomeHero() {
           >
             {leadershipHero.headline}
           </h1>
+          <p
+            data-hero-copy
+            className="mt-4 max-w-[38ch] type-lead text-navy/85 sm:mt-5"
+          >
+            {leadershipHero.supportLine}
+          </p>
           <div className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
             <div data-hero-cta className="w-full sm:w-auto">
               <TrackedMagneticButton

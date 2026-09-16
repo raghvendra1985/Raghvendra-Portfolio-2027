@@ -110,6 +110,80 @@ export default function TeachingView() {
       <TeachingHero />
       <TeachingCritique />
 
+      <SectionReveal className="border-t border-line px-[var(--page-pad)] py-14 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1440px]">
+          <p className="font-mono-label text-navy/80" data-reveal-item>
+            {teachingPage.offeringsEyebrow}
+          </p>
+          <h2 className="mt-4 max-w-3xl type-h2" data-reveal-item>
+            {teachingPage.offeringsTitle}
+          </h2>
+          <p
+            data-reveal-item
+            className="mt-4 max-w-[58ch] type-body text-ink-soft"
+          >
+            {teachingPage.offeringsIntro}
+          </p>
+          <div
+            className="mt-12 grid gap-0 border-t border-line sm:grid-cols-2 lg:grid-cols-4"
+            data-reveal-item
+          >
+            {teachingPage.offeringGroups.map((group) => (
+              <article
+                key={group.title}
+                className="border-b border-line py-8 sm:px-6 sm:odd:pl-0 lg:border-b-0 lg:border-r lg:px-6 lg:py-10 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
+              >
+                <h3 className="font-mono-label text-green">{group.title}</h3>
+                <ul className="mt-5 space-y-2.5">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="max-w-[28ch] text-sm leading-snug text-navy"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+          <p
+            data-reveal-item
+            className="mt-8 max-w-[62ch] font-mono-label text-[11px] leading-relaxed tracking-[0.04em] text-ink-soft"
+          >
+            {teachingPage.offeringsNote}
+          </p>
+
+          <div className="mt-14 border-t border-line pt-10" data-reveal-item>
+            <p className="font-mono-label text-navy/80">
+              {teachingPage.formatsEyebrow}
+            </p>
+            <h3 className="mt-3 type-h3 text-navy">
+              {teachingPage.formatsTitle}
+            </h3>
+            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+              {teachingPage.formats.map((format) => (
+                <li
+                  key={format}
+                  className="font-serif text-[1.15rem] leading-snug text-navy sm:text-[1.25rem]"
+                >
+                  {format}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 max-w-[62ch] font-mono-label text-[11px] leading-relaxed tracking-[0.04em] text-ink-soft">
+              {teachingPage.formatsNote}
+            </p>
+            <a
+              href={teachingPage.contactCta.href}
+              className="mt-8 inline-flex min-h-11 items-center font-mono-label text-navy hover:text-green"
+            >
+              {teachingPage.contactCta.label} →
+            </a>
+          </div>
+        </div>
+      </SectionReveal>
+
       <SectionReveal
         id="what-students-say"
         className="scroll-mt-[var(--hash-offset)] border-t border-line px-[var(--page-pad)] py-14 sm:py-20 lg:py-24"

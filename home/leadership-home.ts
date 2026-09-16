@@ -3,12 +3,13 @@ import { site } from "@/lib/site";
 
 export const leadershipHero = {
   name: "Raghvendra",
-  headline: "Intelligent products. Systems and alignment that make them hold.",
-  roleLine:
-    "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products",
+  headline: "Product Design Leader + AI-Native Builder",
+  supportLine:
+    "I frame complex problems, design product systems, and build working experiences.",
+  roleLine: "Principal / Staff Product Designer · Remote / Hybrid",
   availabilityLine: site.statusDetail,
   primary: { label: "View selected work", href: "#work" },
-  secondary: { label: "Start a conversation", href: "/contact" },
+  secondary: { label: "Work with me", href: "/contact" },
 } as const;
 
 /** Homepage hero plate — replace still/video after Grok generation. */
@@ -156,10 +157,110 @@ export function getLeadershipProjects(): LeadershipProject[] {
 
 export const leadershipWork = {
   eyebrow: "Selected work",
-  title: "Three kinds of impact hiring teams actually need.",
+  title: "Leadership, product systems, and enterprise impact.",
   intro:
     "Design org building in fintech, product direction at organisational scale, and complex workflow systems. Each project links to the published case study.",
   all: { label: "View all work", href: "/work" },
+} as const;
+
+export const leadershipCapabilities = {
+  id: "capabilities",
+  eyebrow: "Capability model",
+  title: "Lead · Design · Build · Teach",
+  intro:
+    "One operating model across career opportunities, product engagements, and teaching — not separate identities.",
+  groups: [
+    {
+      title: "Lead",
+      items: [
+        "Product direction",
+        "Design leadership",
+        "Cross-functional alignment",
+        "Design systems",
+      ],
+    },
+    {
+      title: "Design",
+      items: [
+        "Research",
+        "UX architecture",
+        "Interaction design",
+        "Complex workflows",
+      ],
+    },
+    {
+      title: "Build",
+      items: [
+        "AI-assisted development",
+        "Functional prototypes",
+        "MVPs",
+        "Product experiments",
+        "Production interfaces",
+      ],
+    },
+    {
+      title: "Teach",
+      items: [
+        "Workshops",
+        "Design education",
+        "AI for designers",
+        "Product thinking",
+      ],
+    },
+  ],
+} as const;
+
+export const leadershipBuilder = {
+  id: "builder",
+  eyebrow: "Builder",
+  title: "I don't stop at prototypes. I build.",
+  body: "I use AI-assisted development to move from product thinking to working software. This helps me test ideas earlier, collaborate with engineering at higher fidelity, and ship independent products.",
+  workflow: ["Frame", "Design", "Build", "Ship"] as const,
+  toolsLabel: "Workflow evidence",
+  tools: ["ChatGPT", "Figma", "Cursor", "GitHub", "Vercel"] as const,
+} as const;
+
+export const leadershipBuilderProof = {
+  id: "builder-proof",
+  eyebrow: "Builder proof",
+  title: "From product thinking to working software.",
+  intro:
+    "Compact evidence that design decisions can become functional products — without turning the homepage into case studies.",
+  items: [
+    {
+      label: "Idea → Working AI Product",
+      title: "GWK Ghostwriter",
+      conceived:
+        "A personal AI LinkedIn studio so founders and operators can draft in their own voice.",
+      built:
+        "Product framing, UX, and a working AI writing experience I designed and shipped.",
+      shipped: "Live prototype and landing experience for the Ghostwriter product.",
+      href: "/work/gwk-ghostwriter",
+      imageSlug: "gwk-ghostwriter" as const,
+    },
+    {
+      label: "Concept → AI Storytelling Experience",
+      title: "Bolo Buddy",
+      conceived:
+        "Culturally rooted bedtime stories for children — audio-first, not an adult app scaled down.",
+      built:
+        "Concept, product design, and the storytelling experience as a founder-built product.",
+      shipped: "Live product at bolobuddy.in.",
+      href: "/work/bolo-buddy",
+      imageSlug: "bolo-buddy" as const,
+    },
+    {
+      label: "Design → Code → Production",
+      title: "RaghvendraSingh.com",
+      conceived:
+        "A recruiter-first portfolio that also proves AI-native design-to-ship workflow.",
+      built:
+        "Visual system, information architecture, and the Next.js production site — designed and built as one workflow.",
+      shipped: "Live at raghvendrasingh.com on Vercel.",
+      href: "/",
+      imageSlug: null,
+    },
+  ],
 } as const;
 
 export const leadershipAi = {
@@ -275,8 +376,8 @@ export const leadershipTestimonials = {
 
 export const leadershipAbout = {
   eyebrow: "About",
-  title: "Twenty years across products, organisations, and classrooms.",
-  body: "I began in design craft, then moved into strategy, systems, leadership, and education—without leaving the work. Founder products keep me close to execution. Teaching more than 500 designers sharpened how I explain decisions and run critique. Today those threads sit in one practice: useful products, aligned teams, and intelligent experiences that can be trusted.",
+  title: "Product Designer → Design Leader → AI-Native Builder.",
+  body: "I began in design craft, then moved into strategy, systems, leadership, and education—without leaving the work. Founder products keep me close to execution. Teaching more than 500 designers sharpened how I explain decisions and run critique. Today those threads sit in one practice: Lead · Design · Build · Teach.",
   cta: "More about me",
   href: "/about",
   image: {
@@ -287,13 +388,27 @@ export const leadershipAbout = {
 
 export const leadershipClose = {
   id: "hire",
-  title: "Have a consequential product problem to solve?",
-  body: "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered.",
+  title: "Work with me",
+  body: "One professional identity with three engagement paths. Principal / Staff Product Designer · Remote / Hybrid — or product engagements and teaching grounded in active practice.",
+  paths: [
+    {
+      title: "Principal / Staff Product Design",
+      body: "Remote / Hybrid opportunities where product direction, systems, and hands-on craft matter.",
+    },
+    {
+      title: "Product Engagements",
+      body: "0→1 Product Design · AI Product Design · MVP Building · Product UX · Design Systems",
+    },
+    {
+      title: "Teaching & Workshops",
+      body: "Colleges · Design institutions · Corporate teams · Industry programmes",
+    },
+  ],
   primary: { label: "Start a conversation", href: "/contact" },
   secondary: { label: "Download résumé", href: site.resumeHref },
 } as const;
 
 export const leadershipFooter = {
   blurb:
-    "Designing intelligent products, and the systems and alignment that make them successful.",
+    "Product Design Leader + AI-Native Builder. Lead · Design · Build · Teach.",
 } as const;

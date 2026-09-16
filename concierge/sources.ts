@@ -205,11 +205,10 @@ function buildFrameworkEntries(): ConciergeEntry[] {
 
 function buildSystemEntries(): ConciergeEntry[] {
   const contributionGroups = [
-    "product direction",
-    "complex systems",
-    "AI and founder products",
-    "enterprise leadership",
-    "brand and web work",
+    "product and 0 to 1",
+    "founder-built products",
+    "additional earlier work",
+    "leadership and enterprise",
   ];
 
   const identity: ConciergeEntry = {
@@ -236,7 +235,7 @@ function buildSystemEntries(): ConciergeEntry[] {
       founderOs.identity.deck,
       founderOs.identity.currentActivity,
       founderOs.identity.seeking,
-      "Methodology, not a second portfolio. Contribution groups match Work: Product direction, Complex systems, AI and founder products, Enterprise leadership, and Brand and web work.",
+      "Methodology, not a second portfolio. Contribution groups match Work: Product & 0→1, Founder-Built Products, Additional / Earlier Work, plus Leadership & Enterprise featured evidence.",
       founderOs.practiceMap
         .map(
           (row) =>
@@ -266,7 +265,7 @@ function buildSystemEntries(): ConciergeEntry[] {
         break;
       case "practice":
         summary =
-          "Method to evidence — Product direction, Complex systems, AI and founder products, Enterprise leadership.";
+          "Method to evidence — Product & 0→1, Founder-Built Products, Leadership & Enterprise.";
         content = founderOs.practiceMap
           .map(
             (row) =>

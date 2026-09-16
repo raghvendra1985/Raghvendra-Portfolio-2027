@@ -29,7 +29,7 @@ export const openingQuestions: SuggestedQuestion[] = [
     id: "ai-products-built",
     label: "What is his experience with AI products?",
     query:
-      "AI and founder products GWK Ghostwriter Bolo Buddy Growing With Kid Urban Prakriti contribution",
+      "AI founder products GWK Ghostwriter Bolo Buddy Growing With Kid Urban Prakriti founder-built contribution",
     preferIds: [
       "work:gwk-ghostwriter",
       "work:bolo-buddy",
@@ -149,7 +149,7 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     id: "system-methodology",
     label: "How does his System / operating practice work?",
     query:
-      "System methodology how I think decide operate product direction complex systems AI and founder products enterprise leadership",
+      "System methodology how I think decide operate product 0 to 1 founder-built products leadership enterprise",
     preferIds: [
       "system:identity",
       "system:practice",

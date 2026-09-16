@@ -78,12 +78,12 @@ export type AboutPage = {
 export const aboutPage: AboutPage = {
   title: "About",
   description:
-    "Twenty years of learning where design actually happens — from visual craft and industrial constraints through digital products and organisational decisions, into founder work and teaching.",
+    "Product Designer → Design Leader → AI-Native Builder. Twenty years across enterprise products, startups, complex systems, design leadership, independent products, and teaching.",
   heroEyebrow: "About",
-  heroTitle: "Twenty years of learning where design actually happens.",
+  heroTitle: "Product Designer → Design Leader → AI-Native Builder.",
   heroDescription:
-    "I began by designing graphics and physical objects, moved into digital products and enterprise systems, and eventually began building companies and teaching designers. The mediums changed. The direction did not: understand the real problem, create shared clarity, and stay close enough to the work to make it useful.",
-  identity: "Product design leader · Systems thinker · Hands-on builder",
+    "I began by designing graphics and physical objects, moved into digital products and enterprise systems, then into design leadership, independent products, and teaching. The mediums changed. The direction did not: frame the real problem, design the system, and stay close enough to build what ships.",
+  identity: "Product Designer → Design Leader → AI-Native Builder",
   location: "Based in Delhi NCR.",
   workspaceCaption:
     "My desk in Delhi NCR — standing desk, dual screens, boom microphone, yellow shelves, and the helmet from the morning ride.",
@@ -207,12 +207,12 @@ export const aboutPage: AboutPage = {
       body: "Product direction, teams, critique, and cross-functional alignment — including Rapipay employment and Nagarro client work at Verizon and Crowley.",
     },
     {
-      title: "Design systems",
-      body: "Complex workflows, experience architecture, DesignOps, and scalable patterns. Organisational systems work lives here, not as a separate identity.",
+      title: "Design",
+      body: "Research, UX architecture, interaction design, complex workflows, and design systems that scale.",
     },
     {
       title: "Build",
-      body: "Founder-led and AI-native products, from framing through launch — EQTY, GWK Ghostwriter, Growing With Kid, and Bolo Buddy.",
+      body: "AI-assisted development, functional prototypes, MVPs, and founder-led products — from framing through launch.",
     },
     {
       title: "Teach",
@@ -302,9 +302,9 @@ export const aboutPage: AboutPage = {
     cta: "See the room around the work",
     href: "/studio",
   },
-  hiringTitle: "Product design leadership, with evidence attached.",
+  hiringTitle: "Principal / Staff Product Designer, with evidence attached.",
   hiringBody:
-    "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered. Twenty years across visual, industrial, product, and organisational design — with recent work spanning Rapipay, Nagarro enterprise clients, independent practice, and design education.",
-  hiringPrimary: { label: "Start a conversation", href: "/contact" },
+    "Principal / Staff Product Designer · Remote / Hybrid. Twenty years across visual, industrial, product, and organisational design — with recent work spanning Rapipay, Nagarro enterprise clients, independent product building, and design education.",
+  hiringPrimary: { label: "Work with me", href: "/contact" },
   hiringWork: { label: "View selected work", href: "/work" },
 };

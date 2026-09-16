@@ -97,7 +97,7 @@ function directAnswer(
     case "why-hire":
       return `Hire for product leadership evidenced in the featured trio — Rapipay, Crowley, and Ghostwriter — plus career eras on About and the methodology on System.`;
     case "system-methodology":
-      return `System is the methodology page — how to think, decide, build, learn, and operate. Work proves contribution across Product direction, Complex systems, AI and founder products, Enterprise leadership, and Brand and web work.`;
+      return `System is the methodology page — how to think, decide, build, learn, and operate. Work proves contribution across Product & 0→1, Founder-Built Products, Additional / Earlier Work, and Leadership & Enterprise featured evidence.`;
     case "start-here":
       return `Start with ${named} — NYE design org, Rapipay product, and Crowley. Then ask about AI, fintech, or leadership if you want a narrower path.`;
     case "about-who":

@@ -135,17 +135,17 @@ export default function KnowledgeIndex({
             />
           </span>
           <p data-hero-copy className="font-mono-label text-ink-soft">
-            04 / Notes
+            Writing
           </p>
         </div>
         <h1 data-hero-headline className="mt-6 max-w-5xl type-h1 text-navy">
-          Notes
+          Writing
         </h1>
         <p
           data-hero-copy
           className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg"
         >
-          Field notes on designing products, systems and teams—drawn from work, tested in practice.
+          Notes on product, AI, design leadership, systems, building, and teaching — drawn from work, tested in practice.
         </p>
       </header>
 

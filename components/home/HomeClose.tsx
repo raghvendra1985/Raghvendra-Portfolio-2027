@@ -11,7 +11,7 @@ export default function HomeClose() {
       id={leadershipClose.id}
       className="scroll-mt-[var(--hash-offset)] border-t border-navy bg-navy px-[var(--page-pad)] py-14 text-mist sm:py-20 lg:py-24"
     >
-      <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
+      <div className="mx-auto max-w-[1440px]">
         <div data-reveal-item className="max-w-3xl">
           <div className="flex items-center gap-4">
             <SystemObjectMark
@@ -23,7 +23,22 @@ export default function HomeClose() {
           <h2 className="mt-4 max-w-xl type-h1">{leadershipClose.title}</h2>
           <p className="mt-5 max-w-[62ch] type-lead text-mist/85">{leadershipClose.body}</p>
         </div>
-        <div data-reveal-item className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+
+        <div
+          data-reveal-item
+          className="mt-10 grid gap-6 border-t border-mist/20 pt-8 sm:grid-cols-3"
+        >
+          {leadershipClose.paths.map((path) => (
+            <article key={path.title} className="min-w-0">
+              <h3 className="type-h3 text-mist">{path.title}</h3>
+              <p className="mt-3 max-w-[36ch] text-sm leading-relaxed text-mist/75">
+                {path.body}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        <div data-reveal-item className="mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <TrackedMagneticButton
             href={leadershipClose.primary.href}
             variant="gold"

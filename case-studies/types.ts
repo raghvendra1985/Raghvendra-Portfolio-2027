@@ -16,8 +16,9 @@ export type WorkLane = "primary" | "enterprise" | "founder" | "archive";
 
 export type ContributionGroup =
   | "product-direction"
-  | "complex-systems"
   | "ai-founder"
+  | "additional"
+  | "complex-systems"
   | "enterprise-leadership"
   | "brand-and-web"
   | "archive";
@@ -59,6 +60,16 @@ export type CaseStudyDecision = {
   tradeoff: string;
   choice: string;
   result: string;
+};
+
+/** Compact founder-product narrative — shorter than enterprise case studies. */
+export type CaseStudyBuildStory = {
+  problem: string;
+  bet: string;
+  build: string;
+  stack: string;
+  ship: string;
+  learn: string;
 };
 
 export type CaseStudyMediaKind = "image" | "gif" | "video";
@@ -159,6 +170,8 @@ type CaseStudyShared = {
   mediaLayout?: "default" | "narrative-interludes" | "editorial-alternate";
   /** Cap showreel videos shown (e.g. 3 featured). */
   showreelFeaturedCount?: number;
+  /** Compact founder build narrative when present. */
+  buildStory?: CaseStudyBuildStory;
   verification?: CaseStudyVerification;
 };
 

@@ -132,9 +132,9 @@ export const homeEnterpriseCards: Record<
 
 export const homeHiring = {
   eyebrow: "Hiring",
-  title: "Looking for Head of Design, Associate Director or Principal leadership?",
+  title: "Looking for Principal / Staff Product Design leadership?",
   body:
-    "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered. I work across product strategy, complex systems, AI products, DesignOps, and hands-on execution.",
+    "Principal / Staff Product Designer · Remote / Hybrid. I work across product strategy, complex systems, AI products, DesignOps, and hands-on execution.",
   primary: { label: "View experience", href: "/about#experience" },
 } as const;
 

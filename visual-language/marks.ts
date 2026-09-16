@@ -8,11 +8,7 @@ export type SystemObjectMark = {
 };
 
 export const workGroupMarks: Record<
-  | "product-direction"
-  | "complex-systems"
-  | "ai-founder"
-  | "enterprise-leadership"
-  | "brand-and-web",
+  "product-direction" | "ai-founder" | "additional",
   SystemObjectMark
 > = {
   "product-direction": {
@@ -20,25 +16,15 @@ export const workGroupMarks: Record<
     surface: "mist",
     motion: "align",
   },
-  "complex-systems": {
-    src: "/assets/work/groups/complex-systems.png",
-    surface: "mist",
-    motion: "connect",
-  },
   "ai-founder": {
     src: "/assets/work/groups/ai-founder.png",
     surface: "mist",
     motion: "assemble",
   },
-  "enterprise-leadership": {
-    src: "/assets/work/groups/enterprise-leadership.png",
+  additional: {
+    src: "/assets/work/groups/complex-systems.png",
     surface: "mist",
     motion: "connect",
-  },
-  "brand-and-web": {
-    src: "/assets/work/groups/brand-and-web.png",
-    surface: "mist",
-    motion: "reveal",
   },
 };
 

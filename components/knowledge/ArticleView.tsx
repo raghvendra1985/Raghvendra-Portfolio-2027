@@ -68,7 +68,7 @@ export default function ArticleView({
     <article ref={rootRef}>
       <header className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-10 pt-32 sm:pt-40">
         <Link href="/knowledge" className="font-mono-label text-ink-soft">
-          ← Notes
+          ← Writing
         </Link>
         <div className="mt-8 flex items-center gap-4">
           <span data-hero-visual>

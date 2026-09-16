@@ -62,7 +62,7 @@ export function knowledgeIndexJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Notes",
+    name: "Writing",
     description:
       "Field notes on designing products, systems and teams—drawn from work, tested in practice.",
     url: `${site.url}/knowledge`,

@@ -98,7 +98,7 @@ export const founderOs: FounderOs = {
     currentActivity:
       "Currently operating Elevate Innovation — building founder products and teaching through workshops and classrooms.",
     seeking:
-      "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered.",
+      "Principal / Staff Product Designer · Remote / Hybrid. Also open to product engagements and teaching workshops.",
   },
   dashboard: [
     {
@@ -203,25 +203,17 @@ export const founderOs: FounderOs = {
   ],
   practiceMap: [
     {
-      group: "Product direction",
+      group: "Product & 0→1",
       method:
         "Share one operating model across surfaces so new work joins the system instead of restarting the product.",
       examples: [
         { label: "EQTY", href: "/work/eqty" },
         { label: "Sagacito", href: "/work/sagacito" },
-      ],
-    },
-    {
-      group: "Complex systems",
-      method:
-        "Treat platforms as shared infrastructure — patterns, states, and handoffs that survive team turnover.",
-      examples: [
         { label: "Shuttl", href: "/work/shuttl" },
-        { label: "Hempel", href: "/work/hempel" },
       ],
     },
     {
-      group: "AI and founder products",
+      group: "Founder-Built Products",
       method:
         "Ship the smallest useful version under real users; let constraint and trust edit the feature list.",
       examples: [
@@ -230,12 +222,21 @@ export const founderOs: FounderOs = {
       ],
     },
     {
-      group: "Enterprise leadership",
+      group: "Leadership & Enterprise",
       method:
         "Align product, design, and operations on one decision path when the organisation is the constraint.",
       examples: [
         { label: "Rapipay", href: "/work/nye" },
+        { label: "Crowley", href: "/work/crowley" },
+      ],
+    },
+    {
+      group: "Additional / Earlier Work",
+      method:
+        "Earlier systems and brand work that still inform how product decisions get made.",
+      examples: [
         { label: "Verizon", href: "/work/verizon" },
+        { label: "Hempel", href: "/work/hempel" },
       ],
     },
   ],

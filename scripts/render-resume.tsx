@@ -13,6 +13,7 @@ const outFile = join(outDir, "raghvendra-singh-resume.pdf");
 const required = [
   "Raghvendra Singh",
   "Product Design Leader",
+  "AI-Native Builder",
   "Nagarro Technology",
   "RapiPay Fintech",
   "Elevate Innovation",

@@ -1,10 +1,10 @@
 export const contactPage = {
   title: "Contact",
   description:
-    "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered.",
+    "Principal / Staff Product Designer · Remote / Hybrid. Product engagements and teaching workshops. Start a conversation.",
   heroTitle: "Let’s find the structure inside the problem.",
   heroDescription:
-    "Open to Head of Design, Associate Director and Principal roles — fintech, enterprise and AI-native products. Delhi NCR hybrid preferred · remote from India considered.",
+    "Principal / Staff Product Designer · Remote / Hybrid. Also open to product engagements and teaching workshops.",
   intentPrompt: "What would you like to discuss?",
   intentRequired: "Choose what you would like to discuss.",
   messageLabel: "What are you trying to solve?",
@@ -30,8 +30,9 @@ export const contactPage = {
 
 export const intentHints: Record<string, string> = {
   hiring:
-    "Role, team, and what you need a Head of Design, Associate Director or Principal to own.",
-  advisory: "The product or system, and the decision you’re stuck on.",
-  workshop: "Who it’s for, and what should be different afterwards.",
+    "Role, team, and what you need a Principal / Staff Product Designer to own.",
+  advisory:
+    "The product or system — 0→1, AI product design, MVP, Product UX, or design systems.",
+  workshop: "Who it’s for, format, and what should be different afterwards.",
   other: "What you’re trying to solve.",
 };

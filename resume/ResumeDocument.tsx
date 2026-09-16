@@ -241,9 +241,9 @@ function Header() {
 export function ResumeDocument() {
   return (
     <Document
-      title="Raghvendra Singh — Product Design Leader"
+      title="Raghvendra Singh — Product Design Leader + AI-Native Builder"
       author="Raghvendra Singh"
-      subject="Product Design Leadership resume"
+      subject="Principal / Staff Product Designer resume"
       keywords="Product Design, UX, DesignOps, AI products, Design Systems"
       language="en"
       creator="Raghvendra Singh"

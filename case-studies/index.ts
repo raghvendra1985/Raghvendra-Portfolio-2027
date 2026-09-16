@@ -9,6 +9,7 @@ export type {
   EvidencedOutcome,
   CaseStudyMandate,
   CaseStudyDecision,
+  CaseStudyBuildStory,
   CaseStudyFrame,
   CaseStudyShowreel,
   CaseStudyAtAGlance,
@@ -53,18 +54,19 @@ type CaseStudyRecord =
   | Omit<CompactCaseStudy, IndexMetaKeys>
   | Omit<LightweightCaseStudy, IndexMetaKeys>;
 
-export const contributionGroups: Exclude<ContributionGroup, "archive">[] = [
+export const contributionGroups = [
   "product-direction",
-  "complex-systems",
   "ai-founder",
-  "enterprise-leadership",
-  "brand-and-web",
-];
+  "additional",
+] as const satisfies readonly Exclude<ContributionGroup, "archive">[];
+
+export type ActiveContributionGroup = (typeof contributionGroups)[number];
 
 export const contributionGroupLabels: Record<ContributionGroup, string> = {
-  "product-direction": "Product direction",
+  "product-direction": "Product & 0→1",
+  "ai-founder": "Founder-Built Products",
+  additional: "Additional / Earlier Work",
   "complex-systems": "Complex systems",
-  "ai-founder": "AI and founder products",
   "enterprise-leadership": "Enterprise leadership",
   "brand-and-web": "Brand and web work",
   archive: "Archive",
@@ -114,37 +116,37 @@ const workIndexBySlug: Record<string, WorkIndexMeta> = {
     evidence: "CASE STUDY",
   },
   viralops: {
-    contributionGroup: "brand-and-web",
+    contributionGroup: "additional",
     contribution:
       "Protected dual-product scope and documented design decisions through an incomplete engagement without letting ambiguity erase the work.",
     evidence: "CASE STUDY",
   },
   "pacific-design-house": {
-    contributionGroup: "brand-and-web",
+    contributionGroup: "additional",
     contribution:
       "Made manufacturing capacity and ethical credentials scannable for international buyers, not buried under lookbook chrome.",
     evidence: "CASE STUDY",
   },
   "2886": {
-    contributionGroup: "brand-and-web",
+    contributionGroup: "additional",
     contribution:
       "Structured an artisan fashion site so craft technique and modern cut share one commercial journey.",
     evidence: "CASE STUDY",
   },
   shuttl: {
-    contributionGroup: "complex-systems",
+    contributionGroup: "product-direction",
     contribution:
       "Solved congested-corridor boarding with data-over-sound check-in after QR, GPS, Wi-Fi, and cellular approaches failed in the field.",
     evidence: "CASE STUDY",
   },
   hempel: {
-    contributionGroup: "complex-systems",
+    contributionGroup: "additional",
     contribution:
       "Turned procurement workshop friction into a scored roadmap that informed MyHempel’s first digital features.",
     evidence: "CASE STUDY",
   },
   obzrv: {
-    contributionGroup: "complex-systems",
+    contributionGroup: "additional",
     contribution:
       "Shipped a Gulf F&B analytics MVP in under three months to test whether operators would trust live market data over spreadsheets.",
     evidence: "CASE STUDY",
@@ -176,7 +178,7 @@ const workIndexBySlug: Record<string, WorkIndexMeta> = {
     evidence: "ARCHIVE",
   },
   verizon: {
-    contributionGroup: "enterprise-leadership",
+    contributionGroup: "additional",
     contribution:
       "Designed out-of-band LTE deployment and a central portal so signage could ship without waiting on site Wi-Fi approvals.",
     evidence: "CASE STUDY",
@@ -1008,6 +1010,18 @@ const caseStudyRecords: CaseStudyRecord[] = [
         confidence: "directional",
       },
     ],
+    buildStory: {
+      problem:
+        "Urban Indian parents facing a recurring evening decision — what advice to trust tonight — were drowning in fragmented feeds and app theatre.",
+      bet: "One clear job — clearer thinking for a recurring decision — beats a feature catalogue of parenting tools.",
+      build:
+        "Founder-built community and editorial product: newsletter, guides, and conversations before software sprawl.",
+      stack:
+        "TODO: Raghvendra to provide the verified stack used to ship Growing With Kid.",
+      ship: "Live community product at growingwithkid.com — depth over noise.",
+      learn:
+        "Constraint as editor: fewer features forced sharper jobs; software-first experiments without trust felt like theatre.",
+    },
   },
   {
     index: "04",
@@ -1196,6 +1210,18 @@ const caseStudyRecords: CaseStudyRecord[] = [
       decision: "Memory-backed studio with human approval over prompt chat or autonomous posting",
       result: "Runnable research-to-post prototype with persistent voice and source handling",
     },
+    buildStory: {
+      problem:
+        "Generic AI tools forgot voice, sources, and what worked — LinkedIn drafts drifted every session.",
+      bet: "A memory-backed research-to-post studio with human approval beats a smarter prompt box.",
+      build:
+        "Product definition, experience architecture, memory model, voice rules, research-to-post workflow, and live prototype surfaces — founder-built end to end.",
+      stack:
+        "TODO: Raghvendra to provide the verified stack (models, hosting, and tooling) used for GWK Ghostwriter.",
+      ship: "Live prototype and landing path — a runnable research-to-post studio with human approval before publish.",
+      learn:
+        "Voice rules as system state reduce drift more than longer prompts; memory without forget rules can become a junk drawer.",
+    },
     verification: {
       status: "needs-confirmation",
       notes: [
@@ -1271,6 +1297,18 @@ const caseStudyRecords: CaseStudyRecord[] = [
         confidence: "directional",
       },
     ],
+    buildStory: {
+      problem:
+        "Indian parents wanting screen-free bedtime stories in Hindi, English, Hinglish, or Tamil found Western, screen-heavy, or culturally thin alternatives.",
+      bet: "Audio-first storytelling with cultural quality controls and parent boundaries earns trust that screen-first kids’ apps cannot.",
+      build:
+        "Cofounder product design for an AI-powered, audio-first storytelling companion — language, safety, and parent controls as constraints.",
+      stack:
+        "TODO: Raghvendra to provide the verified stack used to ship Bolo Buddy.",
+      ship: "Live product at bolobuddy.in for Indian families seeking culturally rooted, screen-free bedtime stories.",
+      learn:
+        "Clear refusals — not open-ended chat, not infinite video — are part of the design; subscription pricing remains an assumption to validate.",
+    },
     verification: {
       status: "needs-confirmation",
       notes: [
@@ -2347,11 +2385,19 @@ export function isFeaturedStudy(slug: string) {
 
 /** Recruiter-weight order within each remaining-work group. */
 const remainingOrderByGroup: Record<Exclude<ContributionGroup, "archive">, string[]> = {
-  "product-direction": ["eqty", "sagacito"],
-  "complex-systems": ["shuttl", "hempel", "obzrv"],
-  "ai-founder": ["urban-prakriti", "growing-with-kid", "bolo-buddy"],
-  "enterprise-leadership": ["verizon"],
-  "brand-and-web": ["viralops", "pacific-design-house", "2886"],
+  "product-direction": ["eqty", "sagacito", "shuttl"],
+  "ai-founder": ["gwk-ghostwriter", "growing-with-kid", "bolo-buddy", "urban-prakriti"],
+  additional: [
+    "verizon",
+    "hempel",
+    "obzrv",
+    "viralops",
+    "pacific-design-house",
+    "2886",
+  ],
+  "complex-systems": [],
+  "enterprise-leadership": [],
+  "brand-and-web": [],
 };
 
 /** Remaining work on the index — excludes featured three; archive is separate. */

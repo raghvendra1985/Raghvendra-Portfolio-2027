@@ -13,7 +13,7 @@ import { site } from "../lib/site";
 
 export const resume = {
   name: site.name,
-  headline: "Product Design Leader | AI Product Builder | Systems Thinker",
+  headline: "Product Design Leader + AI-Native Builder",
   location: site.location,
   experienceLine: site.experienceLine,
   email: site.email,
@@ -22,7 +22,7 @@ export const resume = {
   linkedinUrl: site.linkedin,
   linkedinLabel: "www.linkedin.com/in/raghvendrasingh23",
   profile:
-    "Product design leader with 20 years in design and 14+ years in digital product and UX — strategy, enterprise systems, AI products, DesignOps, and hands-on execution. Nagarro Technology (Staff UX Consultant, Jul 2019 — Feb 2022), RapiPay Fintech (Senior Manager UX, Feb 2022 — Apr 2023), Elevate Innovation (Principal Product Design Consultant, May 2023 — Present). Selected Nagarro client work: Verizon and Crowley Maritime. Builds founder products (EQTY, Growing With Kid, Bolo Buddy, GWK Ghostwriter) with AI-assisted development as a product designer — not an ML engineer.",
+    "Product Design Leader + AI-Native Builder. Principal / Staff Product Designer · Remote / Hybrid. I frame complex problems, design product systems, and build working experiences. 20 years in design and 14+ years in digital product and UX — Nagarro Technology (Staff UX Consultant, Jul 2019 — Feb 2022), RapiPay Fintech (Senior Manager UX, Feb 2022 — Apr 2023), Elevate Innovation (Principal Product Design Consultant, May 2023 — Present). Selected Nagarro client work: Verizon and Crowley Maritime. Builds founder products (EQTY, Growing With Kid, Bolo Buddy, GWK Ghostwriter) with AI-assisted development as a product designer — not an ML engineer.",
   expertise: [
     {
       label: "Product",

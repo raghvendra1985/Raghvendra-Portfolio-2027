@@ -10,9 +10,9 @@ import {
 import { knowledgeIndexJsonLd } from "@/knowledge/schema";
 import { jsonLdScript, pageMetadataExtras } from "@/lib/seo";
 
-const title = "Notes";
+const title = "Writing";
 const description =
-  "Field notes on designing products, systems and teams—drawn from work, tested in practice.";
+  "Notes on product, AI, design leadership, systems, building, and teaching — drawn from work, tested in practice.";
 
 export const metadata: Metadata = {
   title,

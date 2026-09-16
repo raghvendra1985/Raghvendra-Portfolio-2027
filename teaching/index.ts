@@ -31,6 +31,11 @@ export type TeachingVenue = {
   };
 };
 
+export type TeachingOfferingGroup = {
+  title: string;
+  items: string[];
+};
+
 export type TeachingPage = {
   title: string;
   description: string;
@@ -41,21 +46,31 @@ export type TeachingPage = {
   heroVenues: TeachingVenue[];
   heroGalleryLabel: string;
   heroGallery: TeachingHeroSlide[];
+  offeringsEyebrow: string;
+  offeringsTitle: string;
+  offeringsIntro: string;
+  offeringsNote: string;
+  offeringGroups: TeachingOfferingGroup[];
+  formatsEyebrow: string;
+  formatsTitle: string;
+  formats: string[];
+  formatsNote: string;
   sectionEyebrow: string;
   sectionTitle: string;
   sectionIntro: string;
   testimonials: TeachingTestimonial[];
   sourceNote: string;
+  contactCta: { label: string; href: string };
 };
 
 export const teachingPage: TeachingPage = {
   title: "Teaching",
   description:
-    "UX workshops, classrooms, and mentoring — facilitation across design schools, with reflections from students on learning, questioning, and applying design.",
-  heroLabel: "Teaching / Facilitation",
-  heroTitle: "Workshops where critique becomes a shared practice.",
+    "Teaching what I practice — workshops and modules grounded in active product design and AI-native building. Colleges, design institutions, corporate teams, and industry programmes.",
+  heroLabel: "Teaching",
+  heroTitle: "Teaching what I practice.",
   heroDescription:
-    "I facilitate UX and concept-development sessions in design classrooms — helping students question the problem, build shared language, and apply judgment under real constraints. Recruiters evaluating teaching or workshop facilitation can see the rooms, the venues, and what students took away.",
+    "Workshops and modules come from active product-building and design practice — not from a separate educator identity. Venues, rooms, and student reflections are below; offerings are organised around AI + Design, Product, Innovation, and Professional Practice.",
   heroVenuesLabel: "Recent rooms",
   heroVenues: [
     {
@@ -339,6 +354,56 @@ export const teachingPage: TeachingPage = {
   ],
   sourceNote:
     "Excerpts from UX workshop feedback collected in June 2025. Shared with participants’ permission.",
+  offeringsEyebrow: "Offerings",
+  offeringsTitle: "Topics grounded in practice.",
+  offeringsIntro:
+    "Organised for colleges, design institutions, corporate teams, and industry programmes.",
+  offeringsNote:
+    "TODO: Raghvendra to provide which offerings are currently bookable / have been delivered.",
+  offeringGroups: [
+    {
+      title: "AI + Design",
+      items: [
+        "AI for Designers",
+        "AI + Accessibility + UX",
+        "Designing AI Products",
+        "Vibe Coding for Designers",
+      ],
+    },
+    {
+      title: "Product",
+      items: [
+        "Product Design",
+        "UX/UI",
+        "Design Systems",
+        "Future-Ready Product Designer",
+      ],
+    },
+    {
+      title: "Innovation",
+      items: [
+        "Design Thinking",
+        "Product Innovation",
+        "0→1 Product Development",
+      ],
+    },
+    {
+      title: "Professional Practice",
+      items: ["Self Awareness", "Productivity", "Industry Readiness"],
+    },
+  ],
+  formatsEyebrow: "Formats",
+  formatsTitle: "How sessions are structured.",
+  formats: [
+    "1-Day Masterclasses",
+    "2-3 Day Workshops",
+    "5-Day Intensives",
+    "14-Session Modules",
+    "Semester Electives",
+  ],
+  formatsNote:
+    "TODO: Raghvendra to confirm which formats are currently offered for each audience.",
+  contactCta: { label: "Enquire about a workshop", href: "/contact?intent=workshop" },
 };
 
 export const teachingPractice = {

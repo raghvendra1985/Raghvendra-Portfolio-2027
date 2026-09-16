@@ -16,6 +16,7 @@ import {
   featuredWork,
   getArchiveWork,
   getRemainingWorkByGroup,
+  type ActiveContributionGroup,
   type CaseStudy,
   type ContributionGroup,
 } from "@/case-studies";
@@ -273,7 +274,7 @@ function ArchiveRow({ study }: { study: CaseStudy }) {
 function GroupNav({
   groups,
 }: {
-  groups: { id: Exclude<ContributionGroup, "archive">; label: string }[];
+  groups: { id: ActiveContributionGroup; label: string }[];
 }) {
   if (!groups.length) return null;
 
@@ -333,8 +334,11 @@ export default function WorkIndex() {
     <div ref={rootRef} className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-24">
       <section aria-labelledby="featured-evidence-heading" data-reveal-item>
         <h2 id="featured-evidence-heading" className="font-section-label text-navy">
-          Featured evidence
+          Leadership & Enterprise
         </h2>
+        <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-ink-soft">
+          Design leadership, product systems, and enterprise experience hiring teams can verify.
+        </p>
         <ul className="mt-8 space-y-16 lg:space-y-24">
           {featuredWork.map((study) => (
             <li key={study.slug} data-reveal-item>

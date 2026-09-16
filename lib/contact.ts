@@ -1,7 +1,7 @@
 export const contactIntents = [
-  { id: "hiring", label: "Full-time design leadership role" },
-  { id: "advisory", label: "Advisory or product engagement" },
-  { id: "workshop", label: "Workshop or mentoring" },
+  { id: "hiring", label: "Principal / Staff Product Design" },
+  { id: "advisory", label: "Product engagement" },
+  { id: "workshop", label: "Teaching & workshops" },
   { id: "other", label: "Something else" },
 ] as const;
 

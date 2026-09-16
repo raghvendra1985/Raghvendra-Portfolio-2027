@@ -18,10 +18,7 @@ import MenuOverlay from "@/components/navigation/MenuOverlay";
 const FOCUSABLE =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-function isNavActive(pathname: string, href: string, hash: string) {
-  if (href === "/#approach") {
-    return pathname === "/" && hash === "#approach";
-  }
+function isNavActive(pathname: string, href: string, _hash: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -176,7 +173,7 @@ export default function Navigation() {
 
           <nav
             aria-label="Primary"
-            className="hidden min-[960px]:flex min-[960px]:flex-wrap min-[960px]:items-center min-[960px]:justify-end min-[960px]:gap-x-4 min-[960px]:gap-y-1 xl:gap-x-7"
+            className="hidden min-[1100px]:flex min-[1100px]:flex-wrap min-[1100px]:items-center min-[1100px]:justify-end min-[1100px]:gap-x-3 min-[1100px]:gap-y-1 xl:gap-x-6"
           >
             {primaryNavLinks.map((link) => {
               const active = isNavActive(pathname, link.href, hash);
@@ -206,11 +203,11 @@ export default function Navigation() {
               payload={{ source: "primary_nav", channel: "cta", dest: "/contact" }}
               className={linkClass(pathname === "/contact")}
             >
-              Start a conversation
+              Work with me
             </TrackedLink>
           </nav>
 
-          <div className="flex items-center gap-3 min-[960px]:hidden">
+          <div className="flex items-center gap-3 min-[1100px]:hidden">
             <MenuToggle ref={toggleRef} open={open} inverted={open} onClick={toggleMenu} />
           </div>
         </div>

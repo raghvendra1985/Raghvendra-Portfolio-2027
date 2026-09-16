@@ -19,6 +19,8 @@ import CaseStudyWireframesGrid, {
   isWireframeFrame,
 } from "@/components/work/CaseStudyWireframesGrid";
 import MagneticButton from "@/components/buttons/MagneticButton";
+import DecisionBlock from "@/components/work/DecisionBlock";
+import BuildStoryBlock from "@/components/work/BuildStoryBlock";
 import type {
   CaseStudy,
   CaseStudyAtAGlance,
@@ -184,53 +186,6 @@ function AtAGlanceBlock({ glance }: { glance: CaseStudyAtAGlance }) {
           </div>
         ))}
       </dl>
-    </section>
-  );
-}
-
-function DecisionBlock({ study }: { study: CaseStudy }) {
-  if (!("decision" in study) || !study.decision) return null;
-  const d = study.decision;
-  return (
-    <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-      <ChapterLabel>Critical decision</ChapterLabel>
-      <div className="mt-8 max-w-3xl space-y-8" data-case-chapter>
-        <div>
-          <p className="font-mono-label text-ink-soft">Situation</p>
-          <Prose className="mt-2">{d.situation}</Prose>
-        </div>
-        <div>
-          <p className="font-mono-label text-ink-soft">Options considered</p>
-          <ul className="mt-3 space-y-4">
-            {d.options.map((option) => (
-              <li key={option.name} className="border-t border-line pt-4">
-                <p className="text-base font-medium text-navy sm:text-lg">{option.name}</p>
-                {option.rejectedBecause ? (
-                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                    {option.rejectedBecause}
-                  </p>
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p className="font-mono-label text-ink-soft">Evidence</p>
-          <Prose className="mt-2">{d.evidence}</Prose>
-        </div>
-        <div>
-          <p className="font-mono-label text-ink-soft">Tradeoff</p>
-          <Prose className="mt-2">{d.tradeoff}</Prose>
-        </div>
-        <div>
-          <p className="font-mono-label text-ink-soft">Final choice</p>
-          <Prose className="mt-2">{d.choice}</Prose>
-        </div>
-        <div>
-          <p className="font-mono-label text-ink-soft">Result</p>
-          <Prose className="mt-2">{d.result}</Prose>
-        </div>
-      </div>
     </section>
   );
 }
@@ -727,6 +682,8 @@ export default function CaseStudyView({
         </div>
       </section>
 
+      {study.buildStory ? <BuildStoryBlock story={study.buildStory} /> : null}
+
       {depth === "deep" && isDeepCaseStudy(study) ? <DeepBody study={study} /> : null}
       {depth === "supporting" ? <SupportingBody study={study} /> : null}
       {depth === "compact" ? <CompactBody study={study} /> : null}
@@ -754,7 +711,7 @@ export default function CaseStudyView({
         <div className="mx-auto flex max-w-[1440px] flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="font-mono-label text-ink-soft">Have a similar challenge?</p>
-            <h2 className="mt-3 max-w-lg type-h2">Start a conversation.</h2>
+            <h2 className="mt-3 max-w-lg type-h2">Work with me.</h2>
           </div>
           <MagneticButton href="/contact">Start a conversation</MagneticButton>
         </div>
