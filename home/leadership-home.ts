@@ -394,9 +394,13 @@ export const leadershipTestimonials = {
     },
     {
       quote:
-        "Raghvendra is one of the finest UX designers who goes beyond his job duties to ensure rich user experience. His focus is to give seamless user experience, for which he does extensive user study. I have not seen anyone who has the ability to get into user shoes so easily. His designs are rich and new. He also takes care of technical details while doing the UX. Over this he has great attitude—exceptionally friendly. One of the best persons to work with.",
+        "Raghvendra is one of the finest UX designers who goes beyond his job duties to ensure rich user experience. His focus is to give seamless user experience, for which he does extensive user study. Have not seen anyone who has the ability to get into user shoes so easily. His designs are rich and new. He also takes care of technical details while doing the UX. Over this he has great attitude—exceptionally friendly. One of the best persons to work with. Will strongly recommend him if you are looking for an exceptional UX champ.",
       attribution: "Piyush Rajesh Gupta · Founder · The Brain Point",
       source: "LinkedIn recommendation · May 2019 · worked on the same team",
+      image: {
+        src: "/assets/testimonials/Testimonials_PiyushRajeshGupta.jpg",
+        alt: "Portrait of Piyush Rajesh Gupta",
+      },
     },
   ] satisfies readonly LeadershipTestimonialItem[],
 } as const;
