@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
+import MuxPlayer from "@mux/mux-player-react";
 import { animateHero } from "@/animations/hero";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { TrackedMagneticButton } from "@/components/analytics/TrackedCta";
-import { leadershipHero } from "@/home/leadership-home";
+import { homeHeroMedia, leadershipHero } from "@/home/leadership-home";
 
 export default function HomeHero() {
   const rootRef = useRef<HTMLElement>(null);
   const { config, pageReady } = useExperience();
+  const preferStill = config.reducedMotion;
 
   useEffect(() => {
     const root = rootRef.current;
@@ -35,20 +38,39 @@ export default function HomeHero() {
       ref={rootRef}
       className="relative isolate min-h-[88svh] overflow-hidden bg-mist px-[var(--page-pad)] pb-16 pt-[calc(var(--nav-height)+1.5rem)] sm:pb-24 sm:pt-36 lg:min-h-[92svh] lg:pb-28"
     >
-      <div
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 100% 0%, var(--color-accent-soft) 0%, transparent 55%)",
-        }}
-        aria-hidden
-      />
+      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
+        {preferStill ? (
+          <Image
+            src={homeHeroMedia.still}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        ) : (
+          <MuxPlayer
+            playbackId={homeHeroMedia.muxPlaybackId}
+            streamType="on-demand"
+            autoPlay="muted"
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster={homeHeroMedia.still}
+            className="home-hero-mux absolute inset-0 h-full w-full"
+            aria-hidden
+          />
+        )}
+        <div className="home-hero-scrim-x absolute inset-0" aria-hidden />
+        <div className="home-hero-scrim-y absolute inset-0" aria-hidden />
+      </div>
 
       <div className="relative z-10 mx-auto max-w-[var(--page-max)]">
         <div className="min-w-0 max-w-[40rem]">
           <p
             data-hero-copy
-            className="font-mono-label !font-semibold text-[12px] tracking-[0.08em] text-ink-soft sm:text-[13px]"
+            className="font-mono-label !font-semibold text-[12px] tracking-[0.08em] text-navy/70 sm:text-[13px]"
           >
             {leadershipHero.roleLine}
           </p>
@@ -60,7 +82,7 @@ export default function HomeHero() {
           </h1>
           <p
             data-hero-copy
-            className="mt-5 max-w-[42ch] type-lead text-ink-soft sm:mt-6"
+            className="mt-5 max-w-[42ch] type-lead text-navy/80 sm:mt-6"
           >
             {leadershipHero.supportLine}
           </p>

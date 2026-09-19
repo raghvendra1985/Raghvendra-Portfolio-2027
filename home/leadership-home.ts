@@ -12,11 +12,15 @@ export const leadershipHero = {
   secondary: { label: "About me", href: "/about" },
 } as const;
 
-/** Homepage hero plate — replace still/video after Grok generation. */
+/** Homepage hero plate — Mux stream as full-bleed editorial media. */
 export const homeHeroMedia = {
   still: "/assets/system-objects/home-hero.png",
   webm: "/assets/system-objects/home-hero.webm",
   mp4: "/assets/system-objects/home-hero.mp4",
+  /** stream.mux.com/{playbackId}.m3u8 */
+  muxPlaybackId: "T6oQJQ02cQ6N01TR6iHwZkKFkbepS34dkkIc9iukgy400g",
+  muxStreamUrl:
+    "https://stream.mux.com/T6oQJQ02cQ6N01TR6iHwZkKFkbepS34dkkIc9iukgy400g.m3u8",
 } as const;
 
 export const leadershipImpact = {
