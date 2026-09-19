@@ -10,7 +10,6 @@ import { useExperience } from "@/components/providers/ExperienceProvider";
 import { getLenis } from "@/hooks/useLenis";
 import { primaryNavLinks, site } from "@/lib/site";
 import { TrackedLink } from "@/components/analytics/TrackedCta";
-import ResumeCta from "@/components/cta/ResumeCta";
 import { useConcierge } from "@/components/concierge/ConciergeProvider";
 import MenuToggle from "@/components/navigation/MenuToggle";
 import MenuOverlay from "@/components/navigation/MenuOverlay";
@@ -137,11 +136,11 @@ export default function Navigation() {
     `inline-flex min-h-11 items-center font-mono-label !font-semibold tracking-[0.06em] ${
       open
         ? active
-          ? "text-gold"
+          ? "text-mist"
           : "text-mist/70 hover:text-mist"
         : active
-          ? "text-green"
-          : "text-navy hover:text-navy"
+          ? "text-navy underline decoration-navy/40 underline-offset-8"
+          : "text-ink-soft hover:text-navy"
     }`;
 
   return (
@@ -160,12 +159,12 @@ export default function Navigation() {
       >
         <div
           data-nav-bar
-          className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-[var(--page-pad)] py-6 group-data-[compact=true]:py-3"
+          className="mx-auto flex max-w-[var(--page-max)] items-center justify-between gap-4 px-[var(--page-pad)] py-5 group-data-[compact=true]:py-3"
         >
           <Link
             href="/"
             aria-label={`${site.name}, home`}
-            className={`shrink-0 type-lead !font-semibold ${open ? "text-mist" : "text-navy"}`}
+            className={`shrink-0 text-base font-semibold tracking-tight sm:text-lg ${open ? "text-mist" : "text-navy"}`}
             data-cursor="Open"
           >
             Raghvendra
@@ -173,7 +172,7 @@ export default function Navigation() {
 
           <nav
             aria-label="Primary"
-            className="hidden min-[1100px]:flex min-[1100px]:flex-wrap min-[1100px]:items-center min-[1100px]:justify-end min-[1100px]:gap-x-3 min-[1100px]:gap-y-1 xl:gap-x-6"
+            className="hidden min-[960px]:flex min-[960px]:items-center min-[960px]:justify-end min-[960px]:gap-x-6 lg:gap-x-8"
           >
             {primaryNavLinks.map((link) => {
               const active = isNavActive(pathname, link.href, hash);
@@ -190,24 +189,18 @@ export default function Navigation() {
                 </TrackedLink>
               );
             })}
-            <ResumeCta
-              appearance="text"
-              source="primary_nav"
-              label="Résumé"
-              className={linkClass(false)}
-            />
             <TrackedLink
               href="/contact"
               aria-current={pathname === "/contact" ? "page" : undefined}
               event="contact_cta_click"
               payload={{ source: "primary_nav", channel: "cta", dest: "/contact" }}
-              className={linkClass(pathname === "/contact")}
+              className={`${linkClass(pathname === "/contact")} !text-navy`}
             >
-              Work with me
+              Let&apos;s talk
             </TrackedLink>
           </nav>
 
-          <div className="flex items-center gap-3 min-[1100px]:hidden">
+          <div className="flex items-center gap-3 min-[960px]:hidden">
             <MenuToggle ref={toggleRef} open={open} inverted={open} onClick={toggleMenu} />
           </div>
         </div>

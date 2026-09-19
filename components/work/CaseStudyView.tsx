@@ -94,7 +94,7 @@ function splitNarrativeInterludes(study: CaseStudy) {
 
 function ChapterLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-mono-label text-green" data-case-chapter>
+    <p className="font-mono-label text-navy" data-case-chapter>
       {children}
     </p>
   );
@@ -196,12 +196,12 @@ function OutcomesBlock({ outcomes }: { outcomes: CaseStudyOutcome[] }) {
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
       <ChapterLabel>Outcome</ChapterLabel>
-      <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-8 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-3">
         {outcomes.map((outcome) => (
           <article
             key={outcome.title}
             data-case-chapter
-            className="border-t-2 border-navy pt-5"
+            className="min-w-0"
           >
             {outcome.level ? (
               <p className="font-mono-label text-ink-soft capitalize">{outcome.level}</p>
@@ -674,7 +674,7 @@ export default function CaseStudyView({
                 {study.companionNote.textAfter ?? ""}
               </p>
             ) : null}
-            <p className="font-mono-label text-green">
+            <p className="font-mono-label text-navy">
               {depth === "compact" ? "Context" : "Situation"}
             </p>
             <p className="mt-4 text-lg leading-relaxed">{situation}</p>
@@ -731,7 +731,7 @@ export default function CaseStudyView({
                   className="mt-3 block group"
                 >
                   <span className="font-mono-label text-ink-soft">{related.client}</span>
-                  <span className="mt-2 block type-h3 text-navy group-hover:text-green">
+                  <span className="mt-2 block type-h3 text-navy group-hover:text-navy/70">
                     {related.title}
                   </span>
                 </Link>
@@ -746,7 +746,7 @@ export default function CaseStudyView({
                   className="mt-3 block group"
                 >
                   <span className="font-mono-label text-ink-soft">{different.client}</span>
-                  <span className="mt-2 block type-h3 text-navy group-hover:text-green">
+                  <span className="mt-2 block type-h3 text-navy group-hover:text-navy/70">
                     {different.title}
                   </span>
                 </Link>
@@ -755,10 +755,10 @@ export default function CaseStudyView({
             <li>
               <p className="font-mono-label text-ink-soft">Back to all work</p>
               <Link href="/work" data-cursor="Open" className="mt-3 block group">
-                <span className="mt-2 block type-h3 text-navy group-hover:text-green">
+                <span className="mt-2 block type-h3 text-navy group-hover:text-navy/70">
                   Selected work
                 </span>
-                <span className="mt-2 block font-mono-label text-green">View all →</span>
+                <span className="mt-2 block font-mono-label text-navy">View all →</span>
               </Link>
             </li>
           </ul>

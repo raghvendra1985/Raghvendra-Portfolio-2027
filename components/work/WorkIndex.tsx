@@ -49,7 +49,7 @@ function CardBody({
   const copy = (
     <>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono-label text-ink-soft">
-        {featured ? <span className="text-gold">Featured</span> : null}
+        {featured ? <span className="text-navy">Featured</span> : null}
         {featured && study.featuredDesignation ? (
           <span>{study.featuredDesignation}</span>
         ) : null}
@@ -85,7 +85,7 @@ function CardBody({
       </p>
 
       {cta ? (
-        <p className="mt-4 inline-flex min-h-11 items-center font-mono-label text-green">{cta}</p>
+        <p className="mt-4 inline-flex min-h-11 items-center font-mono-label text-navy">{cta}</p>
       ) : null}
     </>
   );

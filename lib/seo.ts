@@ -12,7 +12,7 @@ export function personJsonLd() {
     name: site.name,
     url: site.url,
     email: site.email,
-    jobTitle: "Product Design Leader + AI-Native Builder",
+    jobTitle: "Principal / Staff Product Designer",
     description: site.description,
     sameAs: [site.linkedin, site.whatsapp],
     address: {

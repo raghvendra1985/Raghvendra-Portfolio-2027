@@ -10,8 +10,8 @@ html {
 }
 
 body {
-  background: var(--mist);
-  color: var(--navy);
+  background: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   font-size: var(--text-body);
   font-weight: var(--weight-regular);
@@ -70,6 +70,14 @@ body {
   font-family: var(--font-display), Georgia, "Times New Roman", serif;
   font-weight: var(--weight-regular);
   font-size: var(--text-hero);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-hero);
+}
+
+.type-display-xl {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-weight: var(--weight-regular);
+  font-size: var(--text-display-xl);
   line-height: 1.05;
   letter-spacing: var(--tracking-hero);
 }
@@ -78,7 +86,7 @@ body {
   font-family: var(--font-display), Georgia, "Times New Roman", serif;
   font-weight: var(--weight-regular);
   font-size: var(--text-h1);
-  line-height: 1.1;
+  line-height: 1.12;
   letter-spacing: var(--tracking-h1);
 }
 
@@ -86,15 +94,15 @@ body {
   font-family: var(--font-display), Georgia, "Times New Roman", serif;
   font-weight: var(--weight-regular);
   font-size: var(--text-h2);
-  line-height: 1.2;
+  line-height: 1.18;
   letter-spacing: var(--tracking-h2);
 }
 
 .type-h2 {
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  font-weight: var(--weight-medium);
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-weight: var(--weight-regular);
   font-size: var(--text-h2);
-  line-height: 1.35;
+  line-height: 1.2;
   letter-spacing: var(--tracking-h2);
 }
 

@@ -94,7 +94,7 @@ export function CaseStudyMediaGrid({
       data-case-media-grid={slot}
       aria-label={`${client} — ${label}`}
     >
-      <p className="font-mono-label text-green" data-case-chapter>
+      <p className="font-mono-label text-navy" data-case-chapter>
         {label}
       </p>
       <ul className="mt-10 grid gap-10 sm:grid-cols-2 lg:gap-12">

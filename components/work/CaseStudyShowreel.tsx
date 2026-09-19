@@ -59,7 +59,7 @@ export default function CaseStudyShowreel({
       aria-label={label}
       data-case-showreel
     >
-      <p className="font-mono-label text-green" data-case-chapter>
+      <p className="font-mono-label text-navy" data-case-chapter>
         {label}
       </p>
       <ul className="mt-10 grid gap-10 md:grid-cols-2">

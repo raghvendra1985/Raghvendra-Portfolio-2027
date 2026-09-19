@@ -30,15 +30,15 @@ export default function CapabilityModel() {
         </div>
 
         <div
-          className="mt-12 grid gap-0 border-t border-line sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-12 grid gap-0 border-t border-line sm:grid-cols-3"
           data-reveal-item
         >
           {leadershipCapabilities.groups.map((group) => (
             <article
               key={group.title}
-              className="border-b border-line py-8 sm:px-6 sm:odd:pl-0 lg:border-b-0 lg:border-r lg:px-6 lg:py-10 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
+              className="border-b border-line py-8 sm:border-b-0 sm:border-r sm:px-6 sm:py-10 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0"
             >
-              <h3 className="font-mono-label text-green">{group.title}</h3>
+              <h3 className="font-mono-label text-navy">{group.title}</h3>
               <ul className="mt-5 space-y-2.5">
                 {group.items.map((item) => (
                   <li

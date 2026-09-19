@@ -64,10 +64,10 @@ export type TeachingPage = {
 };
 
 export const teachingPage: TeachingPage = {
-  title: "Teaching",
+  title: "Teach",
   description:
-    "Teaching what I practice — workshops and modules grounded in active product design and AI-native building. Colleges, design institutions, corporate teams, and industry programmes.",
-  heroLabel: "Teaching",
+    "Knowledge design from active product practice — workshops and modules for colleges, design institutions, corporate teams, and industry programmes.",
+  heroLabel: "Teach",
   heroTitle: "Teaching what I practice.",
   heroDescription:
     "Workshops and modules come from active product-building and design practice — not from a separate educator identity. Venues, rooms, and student reflections are below; offerings are organised around AI + Design, Product, Innovation, and Professional Practice.",

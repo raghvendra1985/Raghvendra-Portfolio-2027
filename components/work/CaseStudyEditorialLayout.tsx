@@ -41,7 +41,7 @@ export default function CaseStudyEditorialLayout({
           data-case-editorial="product"
           aria-label={`${client} product`}
         >
-          <p className="font-mono-label text-green" data-case-chapter>
+          <p className="font-mono-label text-navy" data-case-chapter>
             Product
           </p>
           <ul className="mt-10 space-y-16 sm:space-y-20">
@@ -84,7 +84,7 @@ export default function CaseStudyEditorialLayout({
           data-case-editorial="motion"
           aria-label={`${client} motion`}
         >
-          <p className="font-mono-label text-green" data-case-chapter>
+          <p className="font-mono-label text-navy" data-case-chapter>
             Motion
           </p>
           <ul className="mt-8 flex flex-wrap items-end justify-start gap-8 sm:gap-10">

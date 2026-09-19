@@ -78,12 +78,12 @@ export type AboutPage = {
 export const aboutPage: AboutPage = {
   title: "About",
   description:
-    "Product Designer → Design Leader → AI-Native Builder. Twenty years across enterprise products, startups, complex systems, design leadership, independent products, and teaching.",
+    "Philosophy, practice, and experience. Product designer who builds — Principal / Staff Product Design · Remote / Hybrid.",
   heroEyebrow: "About",
-  heroTitle: "Product Designer → Design Leader → AI-Native Builder.",
+  heroTitle: "Find the structure. Design the system. Stay close enough to ship.",
   heroDescription:
     "I began by designing graphics and physical objects, moved into digital products and enterprise systems, then into design leadership, independent products, and teaching. The mediums changed. The direction did not: frame the real problem, design the system, and stay close enough to build what ships.",
-  identity: "Product Designer → Design Leader → AI-Native Builder",
+  identity: "Product designer who builds · Design · Build · Teach",
   location: "Based in Delhi NCR.",
   workspaceCaption:
     "My desk in Delhi NCR — standing desk, dual screens, boom microphone, yellow shelves, and the helmet from the morning ride.",

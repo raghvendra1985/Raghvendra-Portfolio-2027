@@ -3,13 +3,13 @@ import { site } from "@/lib/site";
 
 export const leadershipHero = {
   name: "Raghvendra",
-  headline: "Product Design Leader + AI-Native Builder",
+  headline: "Product designer who builds.",
   supportLine:
-    "I frame complex problems, design product systems, and build working experiences.",
-  roleLine: "Principal / Staff Product Designer · Remote / Hybrid",
+    "I design complex digital products, build working software, and help teams turn ambiguous problems into useful systems.",
+  roleLine: "Principal / Staff Product Design · Remote / Hybrid",
   availabilityLine: site.statusDetail,
   primary: { label: "View selected work", href: "#work" },
-  secondary: { label: "Work with me", href: "/contact" },
+  secondary: { label: "About me", href: "/about" },
 } as const;
 
 /** Homepage hero plate — replace still/video after Grok generation. */
@@ -157,34 +157,27 @@ export function getLeadershipProjects(): LeadershipProject[] {
 
 export const leadershipWork = {
   eyebrow: "Selected work",
-  title: "Leadership, product systems, and enterprise impact.",
+  title: "Substantial product problems.",
   intro:
-    "Design org building in fintech, product direction at organisational scale, and complex workflow systems. Each project links to the published case study.",
+    "Design org building in fintech, product direction at organisational scale, and complex workflow systems.",
   all: { label: "View all work", href: "/work" },
 } as const;
 
 export const leadershipCapabilities = {
   id: "capabilities",
-  eyebrow: "Capability model",
-  title: "Lead · Design · Build · Teach",
+  eyebrow: "Capabilities",
+  title: "Design. Build. Lead.",
   intro:
-    "One operating model across career opportunities, product engagements, and teaching — not separate identities.",
+    "Grouped practices — not a skill cloud. Product design stays primary.",
   groups: [
-    {
-      title: "Lead",
-      items: [
-        "Product direction",
-        "Design leadership",
-        "Cross-functional alignment",
-        "Design systems",
-      ],
-    },
     {
       title: "Design",
       items: [
-        "Research",
-        "UX architecture",
+        "Product strategy",
+        "UX",
         "Interaction design",
+        "Design systems",
+        "Research",
         "Complex workflows",
       ],
     },
@@ -192,19 +185,20 @@ export const leadershipCapabilities = {
       title: "Build",
       items: [
         "AI-assisted development",
-        "Functional prototypes",
-        "MVPs",
-        "Product experiments",
-        "Production interfaces",
+        "Rapid prototyping",
+        "Frontend implementation",
+        "AI products",
+        "0→1 building",
       ],
     },
     {
-      title: "Teach",
+      title: "Lead",
       items: [
+        "Product direction",
+        "Design leadership",
+        "Cross-functional collaboration",
+        "Teaching",
         "Workshops",
-        "Design education",
-        "AI for designers",
-        "Product thinking",
       ],
     },
   ],
@@ -212,20 +206,21 @@ export const leadershipCapabilities = {
 
 export const leadershipBuilder = {
   id: "builder",
-  eyebrow: "Builder",
-  title: "I don't stop at prototypes. I build.",
-  body: "I use AI-assisted development to move from product thinking to working software. This helps me test ideas earlier, collaborate with engineering at higher fidelity, and ship independent products.",
-  workflow: ["Frame", "Design", "Build", "Ship"] as const,
-  toolsLabel: "Workflow evidence",
-  tools: ["ChatGPT", "Figma", "Cursor", "GitHub", "Vercel"] as const,
+  eyebrow: "Build",
+  title: "From idea to working product.",
+  body: "I use AI-assisted development to move from product thinking to working software — testing ideas earlier and shipping independent products.",
+  workflow: ["Idea", "Design", "Build", "Ship"] as const,
+  toolsLabel: "Working toolkit",
+  tools: ["Figma", "ChatGPT", "Cursor", "GitHub", "Vercel"] as const,
+  cta: { label: "Explore Build", href: "/build" },
 } as const;
 
 export const leadershipBuilderProof = {
   id: "builder-proof",
   eyebrow: "Builder proof",
-  title: "From product thinking to working software.",
-  intro:
-    "Compact evidence that design decisions can become functional products — without turning the homepage into case studies.",
+  title: "Making things real.",
+  intro: "Concise builder stories — what I noticed, built, and shipped.",
+  cta: { label: "All builder work", href: "/build" },
   items: [
     {
       label: "Idea → Working AI Product",
@@ -250,17 +245,26 @@ export const leadershipBuilderProof = {
       imageSlug: "bolo-buddy" as const,
     },
     {
-      label: "Design → Code → Production",
-      title: "RaghvendraSingh.com",
+      label: "Community → Working Product",
+      title: "Growing With Kid",
       conceived:
-        "A recruiter-first portfolio that also proves AI-native design-to-ship workflow.",
+        "Parents stuck in a recurring evening decision — what advice to trust tonight.",
       built:
-        "Visual system, information architecture, and the Next.js production site — designed and built as one workflow.",
-      shipped: "Live at raghvendrasingh.com on Vercel.",
-      href: "/",
-      imageSlug: null,
+        "Founder-built community and editorial product before software sprawl.",
+      shipped: "Live at growingwithkid.com.",
+      href: "/work/growing-with-kid",
+      imageSlug: "growing-with-kid" as const,
     },
   ],
+} as const;
+
+export const leadershipTeachPreview = {
+  id: "teach-preview",
+  eyebrow: "Teach",
+  title: "Teach what you practice.",
+  body: "Workshops and modules grounded in active product design — AI for designers, product thinking, design systems, and accessibility.",
+  venues: ["NIFT Delhi", "IIAD", "NID Kurukshetra", "DTU", "Outskill"],
+  cta: { label: "Explore Teach", href: "/teaching" },
 } as const;
 
 export const leadershipAi = {
@@ -376,8 +380,8 @@ export const leadershipTestimonials = {
 
 export const leadershipAbout = {
   eyebrow: "About",
-  title: "Product Designer → Design Leader → AI-Native Builder.",
-  body: "I began in design craft, then moved into strategy, systems, leadership, and education—without leaving the work. Founder products keep me close to execution. Teaching more than 500 designers sharpened how I explain decisions and run critique. Today those threads sit in one practice: Lead · Design · Build · Teach.",
+  title: "Designer. Builder. Educator.",
+  body: "Product design remains primary. Building and teaching deepen the same practice — framing problems, designing systems, and staying close enough to ship.",
   cta: "More about me",
   href: "/about",
   image: {
@@ -388,27 +392,26 @@ export const leadershipAbout = {
 
 export const leadershipClose = {
   id: "hire",
-  title: "Work with me",
-  body: "One professional identity with three engagement paths. Principal / Staff Product Designer · Remote / Hybrid — or product engagements and teaching grounded in active practice.",
+  title: "Building something interesting?",
+  body: "Available for selected Principal / Staff opportunities, product collaborations, and workshops.",
   paths: [
     {
-      title: "Principal / Staff Product Design",
-      body: "Remote / Hybrid opportunities where product direction, systems, and hands-on craft matter.",
+      title: "Hire me",
+      body: "Principal / Staff Product Design · Remote / Hybrid",
     },
     {
-      title: "Product Engagements",
-      body: "0→1 Product Design · AI Product Design · MVP Building · Product UX · Design Systems",
+      title: "Build with me",
+      body: "Product strategy · MVP · 0→1 · Product UX · Design systems",
     },
     {
-      title: "Teaching & Workshops",
-      body: "Colleges · Design institutions · Corporate teams · Industry programmes",
+      title: "Invite me",
+      body: "Workshops · Visiting faculty · Industry sessions",
     },
   ],
-  primary: { label: "Start a conversation", href: "/contact" },
+  primary: { label: "Let's talk", href: "/contact" },
   secondary: { label: "Download résumé", href: site.resumeHref },
 } as const;
 
 export const leadershipFooter = {
-  blurb:
-    "Product Design Leader + AI-Native Builder. Lead · Design · Build · Teach.",
+  blurb: "Product designer who builds. Design · Build · Teach.",
 } as const;

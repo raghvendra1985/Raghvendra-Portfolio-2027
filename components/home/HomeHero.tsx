@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { SylvaLivingWorldScene } from "@designcodeio/threeui/components/SylvaLivingWorldScene";
-import "@designcodeio/threeui/style.css";
 import { animateHero } from "@/animations/hero";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { TrackedMagneticButton } from "@/components/analytics/TrackedCta";
@@ -11,7 +9,6 @@ import { leadershipHero } from "@/home/leadership-home";
 export default function HomeHero() {
   const rootRef = useRef<HTMLElement>(null);
   const { config, pageReady } = useExperience();
-  const allowMotion = pageReady && !config.reducedMotion;
 
   useEffect(() => {
     const root = rootRef.current;
@@ -36,46 +33,38 @@ export default function HomeHero() {
   return (
     <section
       ref={rootRef}
-      data-charm-stage
-      className="relative isolate min-h-[100svh] overflow-hidden bg-[#4a4d44] px-[var(--page-pad)] pb-10 pt-[calc(var(--nav-height)+0.75rem)] sm:pb-16 sm:pt-32 lg:pb-28 lg:pt-36"
+      className="relative isolate min-h-[88svh] overflow-hidden bg-mist px-[var(--page-pad)] pb-16 pt-[calc(var(--nav-height)+1.5rem)] sm:pb-24 sm:pt-36 lg:min-h-[92svh] lg:pb-28"
     >
-      {allowMotion ? (
-        <div
-          className="shader-frame pointer-events-auto absolute inset-0 -z-10 h-full w-full"
-          aria-hidden
-        >
-          <SylvaLivingWorldScene variant="living-green" />
-        </div>
-      ) : null}
-
-      {/* Opaque left reading band — text column stays AA+ over the living world */}
       <div
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(90deg, var(--mist) 0%, color-mix(in srgb, var(--mist) 96%, transparent) 34%, color-mix(in srgb, var(--mist) 72%, transparent) 48%, color-mix(in srgb, var(--mist) 28%, transparent) 62%, transparent 78%)",
+            "radial-gradient(ellipse 80% 60% at 100% 0%, var(--color-accent-soft) 0%, transparent 55%)",
         }}
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto max-w-[1440px]">
-        <div className="min-w-0 max-w-[42rem]">
-          <p data-hero-copy className="font-mono-label !font-semibold text-[13px] tracking-[0.08em] text-navy sm:text-sm">
+      <div className="relative z-10 mx-auto max-w-[var(--page-max)]">
+        <div className="min-w-0 max-w-[40rem]">
+          <p
+            data-hero-copy
+            className="font-mono-label !font-semibold text-[12px] tracking-[0.08em] text-ink-soft sm:text-[13px]"
+          >
             {leadershipHero.roleLine}
           </p>
           <h1
             data-hero-headline
-            className="hero-headline mt-4 max-w-[16em] font-display text-[clamp(1.85rem,1.35rem+2.8vw,3.75rem)] font-normal leading-[1.35] tracking-[-0.02em] text-navy sm:mt-5 lg:mt-6"
+            className="hero-headline mt-5 max-w-[14em] type-hero text-navy sm:mt-6"
           >
             {leadershipHero.headline}
           </h1>
           <p
             data-hero-copy
-            className="mt-4 max-w-[38ch] type-lead text-navy/85 sm:mt-5"
+            className="mt-5 max-w-[42ch] type-lead text-ink-soft sm:mt-6"
           >
             {leadershipHero.supportLine}
           </p>
-          <div className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
+          <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
             <div data-hero-cta className="w-full sm:w-auto">
               <TrackedMagneticButton
                 href={leadershipHero.primary.href}
@@ -92,20 +81,14 @@ export default function HomeHero() {
                 href={leadershipHero.secondary.href}
                 variant="secondary"
                 cursor="Open"
-                className="w-full justify-center !border-navy/60 !bg-mist/95 sm:w-auto"
-                event="contact_cta_click"
-                payload={{ source: "home_hero", channel: "cta" }}
+                className="w-full justify-center sm:w-auto"
+                event="nav_clicked"
+                payload={{ surface: "home_hero", dest: leadershipHero.secondary.href }}
               >
                 {leadershipHero.secondary.label}
               </TrackedMagneticButton>
             </div>
           </div>
-          <p
-            data-hero-copy
-            className="mt-5 max-w-[42rem] font-mono-label text-[12px] leading-relaxed tracking-[0.04em] text-navy/75 sm:mt-6 sm:text-[13px]"
-          >
-            {leadershipHero.availabilityLine}
-          </p>
         </div>
       </div>
     </section>

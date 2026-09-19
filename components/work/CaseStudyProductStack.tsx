@@ -85,7 +85,7 @@ export default function CaseStudyProductStack({
       className="mx-auto max-w-[1440px] min-w-0 px-[var(--page-pad)] pb-20"
       aria-label={`${client} product frames`}
     >
-      <p className="font-mono-label text-green" data-case-chapter>
+      <p className="font-mono-label text-navy" data-case-chapter>
         {label}
       </p>
 

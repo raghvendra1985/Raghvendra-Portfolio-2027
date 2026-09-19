@@ -35,13 +35,20 @@ export default function BuilderProof() {
             <p className="mt-4 max-w-[58ch] type-body text-ink-soft">
               {leadershipBuilderProof.intro}
             </p>
+            {"cta" in leadershipBuilderProof && leadershipBuilderProof.cta ? (
+              <Link
+                href={leadershipBuilderProof.cta.href}
+                className="mt-4 inline-flex min-h-11 items-center font-mono-label text-navy hover:underline"
+              >
+                {leadershipBuilderProof.cta.label} →
+              </Link>
+            ) : null}
           </div>
         </div>
 
         <ul className="mt-12 space-y-0 border-t border-line" data-reveal-item>
           {leadershipBuilderProof.items.map((item) => {
             const href = item.href;
-            const isExternalPortfolio = href === "/";
             return (
               <li
                 key={item.title}
@@ -62,9 +69,9 @@ export default function BuilderProof() {
                   />
                 </Link>
                 <div className="min-w-0 self-center">
-                  <p className="font-mono-label text-green">{item.label}</p>
+                  <p className="font-mono-label text-navy">{item.label}</p>
                   <h3 className="mt-3 type-h3 text-navy">
-                    <Link href={href} className="hover:text-green">
+                    <Link href={href} className="hover:underline">
                       {item.title}
                     </Link>
                   </h3>
@@ -96,11 +103,9 @@ export default function BuilderProof() {
                   </dl>
                   <Link
                     href={href}
-                    className="mt-6 inline-flex min-h-11 items-center font-mono-label text-navy hover:text-green"
+                    className="mt-6 inline-flex min-h-11 items-center font-mono-label text-navy hover:underline"
                   >
-                    {isExternalPortfolio
-                      ? "You’re looking at it →"
-                      : "Read case study →"}
+                    Read case study →
                   </Link>
                 </div>
               </li>

@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/about",
     "/work",
+    "/build",
     "/approach",
     "/system",
     "/studio",

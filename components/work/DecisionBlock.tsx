@@ -1,4 +1,5 @@
 import type { CaseStudy, CaseStudyDecision } from "@/case-studies";
+import { InsightBlock } from "@/components/work/storytelling";
 
 function Prose({
   children,
@@ -18,9 +19,24 @@ function ChapterLabel({ children }: { children: React.ReactNode }) {
   return <p className="font-section-label text-navy">{children}</p>;
 }
 
-export function DecisionBlockContent({ decision }: { decision: CaseStudyDecision }) {
+const insightSlugs = new Set(["nye", "nye-team", "crowley"]);
+
+export function DecisionBlockContent({
+  decision,
+  showInsight = false,
+}: {
+  decision: CaseStudyDecision;
+  showInsight?: boolean;
+}) {
   return (
     <div className="mt-8 max-w-3xl space-y-8" data-case-chapter>
+      {showInsight ? (
+        <InsightBlock
+          observation={decision.evidence}
+          insight={decision.tradeoff}
+          response={decision.choice}
+        />
+      ) : null}
       <div>
         <p className="font-mono-label text-ink-soft">Situation</p>
         <Prose className="mt-2">{decision.situation}</Prose>
@@ -65,7 +81,10 @@ export default function DecisionBlock({ study }: { study: CaseStudy }) {
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
       <ChapterLabel>Critical decision</ChapterLabel>
-      <DecisionBlockContent decision={study.decision} />
+      <DecisionBlockContent
+        decision={study.decision}
+        showInsight={insightSlugs.has(study.slug)}
+      />
     </section>
   );
 }

@@ -1,12 +1,12 @@
 export const contactPage = {
   title: "Contact",
   description:
-    "Principal / Staff Product Designer · Remote / Hybrid. Product engagements and teaching workshops. Start a conversation.",
-  heroTitle: "Let’s find the structure inside the problem.",
+    "Hire me, build with me, or invite me to teach. Principal / Staff Product Design · Remote / Hybrid.",
+  heroTitle: "Let’s talk.",
   heroDescription:
-    "Principal / Staff Product Designer · Remote / Hybrid. Also open to product engagements and teaching workshops.",
-  intentPrompt: "What would you like to discuss?",
-  intentRequired: "Choose what you would like to discuss.",
+    "Three ways in: hire me for Principal / Staff Product Design, build with me on a product engagement, or invite me to teach.",
+  intentPrompt: "How should we start?",
+  intentRequired: "Choose a path.",
   messageLabel: "What are you trying to solve?",
   organisationLabel: "Organisation",
   emailLabel: "Work email",

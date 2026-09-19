@@ -1,23 +1,36 @@
 :root {
-  --navy: #0b1849;
+  /* Portfolio V2 semantic shell */
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-text-secondary: #666666;
+  --color-surface: #f6f6f6;
+  --color-dark: #111111;
+  --color-brand: #000080;
+  --color-accent-soft: #e6ecff;
+  --color-brand-3: color-mix(in srgb, var(--color-brand) 3%, var(--color-bg));
+  --color-brand-5: color-mix(in srgb, var(--color-brand) 5%, var(--color-bg));
+  --color-brand-8: color-mix(in srgb, var(--color-brand) 8%, var(--color-bg));
+
+  /* Legacy aliases — map to V2 shell so existing Tailwind classes keep working */
+  --navy: var(--color-brand);
   --green: #124d1c;
-  --gold: #e4b028;
-  --mist: #ffffff;
+  --gold: #000080;
+  --mist: var(--color-bg);
 
-  --navy-soft: color-mix(in srgb, var(--navy) 72%, var(--mist));
-  --ink: var(--navy);
-  --ink-soft: color-mix(in srgb, var(--navy) 78%, var(--mist));
-  --line: color-mix(in srgb, var(--navy) 12%, transparent);
-  --line-strong: color-mix(in srgb, var(--navy) 28%, transparent);
-  --surface: var(--mist);
-  --surface-dim: color-mix(in srgb, var(--navy) 4%, var(--mist));
+  --navy-soft: color-mix(in srgb, var(--color-brand) 72%, var(--color-bg));
+  --ink: var(--color-text);
+  --ink-soft: var(--color-text-secondary);
+  --line: color-mix(in srgb, var(--color-brand) 12%, transparent);
+  --line-strong: color-mix(in srgb, var(--color-brand) 28%, transparent);
+  --surface: var(--color-bg);
+  --surface-dim: var(--color-surface);
 
-  --motion-instant: 100ms;
-  --motion-fast: 180ms;
-  --motion-ui: 240ms;
+  --motion-instant: 150ms;
+  --motion-fast: 200ms;
+  --motion-ui: 300ms;
   --motion-panel: 420ms;
-  --motion-reveal: 700ms;
-  --motion-story: 1100ms;
+  --motion-reveal: 600ms;
+  --motion-story: 800ms;
   --motion-atmosphere: 14000ms;
 
   --duration-xs: var(--motion-instant);
@@ -35,63 +48,66 @@
   --ease-out: var(--ease-reveal);
   --ease-physical: var(--ease-reveal);
 
-  --focus: var(--gold);
+  --focus: var(--color-brand);
 
-  --paper: #f5f4f0;
-  --paper-edge: #d9d9d5;
-  --object-shadow: 0 4px 16px color-mix(in srgb, var(--navy) 10%, transparent);
-  --object-shadow-lift: 0 12px 28px color-mix(in srgb, var(--navy) 16%, transparent);
-  --shadow-low: 0 4px 10px color-mix(in srgb, var(--navy) 12%, transparent);
-  --shadow-low-compact: 0 4px 4px color-mix(in srgb, var(--navy) 16%, transparent);
+  --paper: var(--color-surface);
+  --paper-edge: #e2e2e2;
+  --object-shadow: 0 4px 16px color-mix(in srgb, var(--color-text) 8%, transparent);
+  --object-shadow-lift: 0 12px 28px color-mix(in srgb, var(--color-text) 12%, transparent);
+  --shadow-low: 0 4px 10px color-mix(in srgb, var(--color-text) 8%, transparent);
+  --shadow-low-compact: 0 4px 4px color-mix(in srgb, var(--color-text) 10%, transparent);
   --shadow-mid:
-    4px 6px 8px -2px color-mix(in srgb, var(--navy) 22%, transparent),
-    -4px -1px 8px -2px color-mix(in srgb, var(--navy) 16%, transparent);
+    4px 6px 8px -2px color-mix(in srgb, var(--color-text) 12%, transparent),
+    -4px -1px 8px -2px color-mix(in srgb, var(--color-text) 8%, transparent);
 
-  --nav-height: 88px;
+  --nav-height: 80px;
   --nav-height-compact: 64px;
   --hash-offset: calc(var(--nav-height) + 12px);
-  --page-pad: clamp(1.5rem, 4.5vw, 4.5rem);
-  /* Dedicated right stage so the charm hangs over the hero scene, not in a gutter */
+  --page-pad: clamp(1rem, 4vw, 2.5rem);
+  --gutter-desktop: 40px;
+  --gutter-tablet: 24px;
+  --gutter-mobile: 16px;
   --charm-corridor: clamp(240px, 26vw, 360px);
   --max-width: 1440px;
+  --page-max: 1440px;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
 
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-strong: 600;
 
-  --text-caption: 0.8125rem;
+  /* V2 type scale */
+  --text-caption: 0.75rem;
   --text-small: 0.875rem;
-  --text-body: clamp(1.125rem, 1.08rem + 0.25vw, 1.375rem);
-  --text-lead: clamp(1.1875rem, 1.12rem + 0.22vw, 1.375rem);
+  --text-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --text-lead: clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem);
   --text-h3: clamp(1.5rem, 1.35rem + 0.6vw, 2rem);
-  --text-h2: clamp(1.875rem, 1.65rem + 0.7vw, 2.5rem);
-  --text-h1: clamp(2.5rem, 2.1rem + 1.6vw, 3.5rem);
-  --text-hero: clamp(2.75rem, 2.2rem + 2.2vw, 4rem);
+  --text-h2: clamp(2.25rem, 1.9rem + 1.2vw, 3.5rem);
+  --text-h1: clamp(2.75rem, 2.2rem + 1.8vw, 4.5rem);
+  --text-hero: clamp(3rem, 2.2rem + 2.8vw, 6rem);
+  --text-display-xl: clamp(4rem, 3rem + 4vw, 7.5rem);
 
-  --tracking-hero: -0.035em;
-  --tracking-h1: -0.03em;
-  --tracking-h2: -0.02em;
-  --tracking-h3: -0.01em;
-  --tracking-label: 0.04em;
+  --tracking-hero: -0.04em;
+  --tracking-h1: -0.035em;
+  --tracking-h2: -0.03em;
+  --tracking-h3: -0.015em;
+  --tracking-label: 0.06em;
 }
 
 @media (max-width: 1023px) {
   :root {
-    --ink-soft: color-mix(in srgb, var(--navy) 82%, var(--mist));
-    /* +2px readability bump for mobile / tablet; desktop clamps unchanged */
-    --text-caption: 0.9375rem;
-    --text-small: 1rem;
-    --text-body: clamp(1.25rem, 1.2rem + 0.25vw, 1.5rem);
-    --text-lead: clamp(1.3125rem, 1.24rem + 0.22vw, 1.5rem);
-    --text-h3: clamp(1.625rem, 1.475rem + 0.6vw, 2.125rem);
-    --text-h2: clamp(2rem, 1.775rem + 0.7vw, 2.625rem);
-    --text-h1: clamp(2.625rem, 2.225rem + 1.6vw, 3.625rem);
-    --text-hero: clamp(2.875rem, 2.325rem + 2.2vw, 4.125rem);
+    --page-pad: clamp(1rem, 5vw, 1.5rem);
   }
 }
 
 @theme inline {
   --color-navy: var(--navy);
+  --color-brand: var(--color-brand);
   --color-green: var(--green);
   --color-gold: var(--gold);
   --color-mist: var(--mist);
@@ -104,6 +120,7 @@
   --color-surface-dim: var(--surface-dim);
   --color-paper: var(--paper);
   --color-paper-edge: var(--paper-edge);
+  --color-accent-soft: var(--color-accent-soft);
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);

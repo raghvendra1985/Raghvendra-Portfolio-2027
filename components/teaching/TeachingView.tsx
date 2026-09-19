@@ -50,9 +50,9 @@ function TeachingHero() {
                 surface={systemMarks.teaching.surface}
               />
             </span>
-            <p data-hero-copy className="font-mono-label text-gold">
-              {teachingPage.heroLabel}
-            </p>
+          <p data-hero-copy className="font-mono-label text-navy">
+            {teachingPage.heroLabel}
+          </p>
           </div>
           <h1
             data-hero-headline
@@ -133,7 +133,7 @@ export default function TeachingView() {
                 key={group.title}
                 className="border-b border-line py-8 sm:px-6 sm:odd:pl-0 lg:border-b-0 lg:border-r lg:px-6 lg:py-10 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
               >
-                <h3 className="font-mono-label text-green">{group.title}</h3>
+                <h3 className="font-mono-label text-navy">{group.title}</h3>
                 <ul className="mt-5 space-y-2.5">
                   {group.items.map((item) => (
                     <li
@@ -176,7 +176,7 @@ export default function TeachingView() {
             </p>
             <a
               href={teachingPage.contactCta.href}
-              className="mt-8 inline-flex min-h-11 items-center font-mono-label text-navy hover:text-green"
+              className="mt-8 inline-flex min-h-11 items-center font-mono-label text-navy hover:underline"
             >
               {teachingPage.contactCta.label} →
             </a>

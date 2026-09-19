@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Gloock, Manrope, Space_Mono } from "next/font/google";
+import { Libre_Baskerville, Figtree } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import ExperienceProvider from "@/components/providers/ExperienceProvider";
@@ -7,35 +7,28 @@ import AnalyticsPathTracker from "@/components/analytics/AnalyticsPathTracker";
 import { site } from "@/lib/site";
 import { jsonLdScript, pageMetadataExtras, personJsonLd } from "@/lib/seo";
 
-/** Display + editorial serif — Gloock ships as a single weight (400). */
-const display = Gloock({
+/** Editorial display — Libre Baskerville for heroes, statements, quotes. */
+const display = Libre_Baskerville({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "700"],
   display: "swap",
   adjustFontFallback: true,
 });
 
-const serif = Gloock({
+const serif = Libre_Baskerville({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "700"],
   display: "swap",
   adjustFontFallback: true,
 });
 
-const sans = Manrope({
+/** Interface / body — Figtree. */
+const sans = Figtree({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-  adjustFontFallback: true,
-});
-
-const mono = Space_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
   adjustFontFallback: true,
 });
@@ -70,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} ${serif.variable} ${mono.variable} motion-ready h-full antialiased`}
+      className={`${display.variable} ${sans.variable} ${serif.variable} motion-ready h-full antialiased`}
     >
       <head>
         <script

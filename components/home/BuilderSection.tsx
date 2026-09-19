@@ -55,6 +55,14 @@ export default function BuilderSection() {
             <p className="mt-2 max-w-[42ch] text-sm leading-relaxed text-ink-soft">
               {leadershipBuilder.tools.join(" · ")}
             </p>
+            {"cta" in leadershipBuilder && leadershipBuilder.cta ? (
+              <a
+                href={leadershipBuilder.cta.href}
+                className="mt-8 inline-flex min-h-11 items-center font-mono-label text-navy hover:underline"
+              >
+                {leadershipBuilder.cta.label} →
+              </a>
+            ) : null}
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ export default function CaseStudyWireframesGrid({
       data-case-editorial="wireframes"
       aria-label={`${client} wireframes`}
     >
-      <p className="font-mono-label text-green" data-case-chapter>
+      <p className="font-mono-label text-navy" data-case-chapter>
         Wireframes
       </p>
       <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
