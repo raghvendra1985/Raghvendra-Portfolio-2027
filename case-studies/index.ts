@@ -962,8 +962,9 @@ const caseStudyRecords: CaseStudyRecord[] = [
     engagement: "Founder venture",
     narrativeDepth: "compact",
     href: "https://www.growingwithkid.com",
-    cover: "/assets/work/growing-with-kid/cover.svg",
+    cover: "/assets/work/growing-with-kid/cover.png",
     gallery: [
+      "/assets/work/growing-with-kid/cover.png",
       "/assets/work/growing-with-kid/gallery-01.svg",
       "/assets/work/growing-with-kid/gallery-02.svg",
       "/assets/work/growing-with-kid/gallery-03.svg",
@@ -980,6 +981,11 @@ const caseStudyRecords: CaseStudyRecord[] = [
       "Keep the product small on purpose: one voice, one audience, one promise, so trust can compound; failed assumption was that more modules would equal more retention.",
     ],
     frames: [
+      {
+        src: "/assets/work/growing-with-kid/cover.png",
+        caption:
+          "Growing With Kid product surface — less screen, more stories for Indian families.",
+      },
       {
         src: "/assets/work/growing-with-kid/gallery-01.svg",
         caption:
@@ -1249,8 +1255,9 @@ const caseStudyRecords: CaseStudyRecord[] = [
     engagement: "Founder venture",
     narrativeDepth: "compact",
     href: "https://www.bolobuddy.in",
-    cover: "/assets/work/bolo-buddy/cover.svg",
+    cover: "/assets/work/bolo-buddy/cover.png",
     gallery: [
+      "/assets/work/bolo-buddy/cover.png",
       "/assets/work/bolo-buddy/gallery-01.svg",
       "/assets/work/bolo-buddy/gallery-02.svg",
       "/assets/work/bolo-buddy/gallery-03.svg",
@@ -1267,6 +1274,11 @@ const caseStudyRecords: CaseStudyRecord[] = [
       "Child-safety and parent controls as product constraints: Bolo Buddy deliberately refuses to become open-ended chat, infinite video, or unsupervised generative play.",
     ],
     frames: [
+      {
+        src: "/assets/work/bolo-buddy/cover.png",
+        caption:
+          "Bolo Buddy — stories that listen; play that feels for Indian bedtime.",
+      },
       {
         src: "/assets/work/bolo-buddy/gallery-01.svg",
         caption:

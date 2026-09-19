@@ -56,7 +56,7 @@ export const buildPage = {
       learning:
         "Constraint as editor: fewer features forced sharper jobs.",
       href: "/work/growing-with-kid",
-      cover: "/assets/work/growing-with-kid/cover.svg",
+      cover: "/assets/work/growing-with-kid/cover.png",
     },
     {
       slug: "bolo-buddy",
@@ -72,7 +72,7 @@ export const buildPage = {
       learning:
         "Clear refusals — not open-ended chat, not infinite video — are part of the design.",
       href: "/work/bolo-buddy",
-      cover: "/assets/work/bolo-buddy/cover.svg",
+      cover: "/assets/work/bolo-buddy/cover.png",
     },
   ] satisfies BuildProject[],
   close: {

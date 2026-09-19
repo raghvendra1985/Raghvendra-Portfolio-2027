@@ -15,6 +15,8 @@
   --navy: var(--color-brand);
   --green: #124d1c;
   --gold: #000080;
+  /* Interactive hover fill — distinct from brand navy */
+  --yellow: #ffe14a;
   --mist: var(--color-bg);
 
   --navy-soft: color-mix(in srgb, var(--color-brand) 72%, var(--color-bg));
@@ -110,6 +112,7 @@
   --color-brand: var(--color-brand);
   --color-green: var(--green);
   --color-gold: var(--gold);
+  --color-yellow: var(--yellow);
   --color-mist: var(--mist);
   --color-navy-soft: var(--navy-soft);
   --color-ink: var(--ink);

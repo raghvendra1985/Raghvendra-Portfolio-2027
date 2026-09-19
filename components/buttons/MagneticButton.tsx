@@ -61,7 +61,7 @@ export default function MagneticButton({
       <span
         data-button-fill
         className={`pointer-events-none absolute inset-0 -z-10 origin-left ${
-          variant === "gold" ? "bg-mist" : "bg-gold"
+          variant === "gold" ? "bg-mist" : "bg-yellow"
         }`}
         aria-hidden="true"
       />

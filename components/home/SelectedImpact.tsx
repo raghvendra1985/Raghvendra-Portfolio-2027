@@ -29,12 +29,14 @@ export default function SelectedImpact() {
           {leadershipImpact.items.map((item) => (
             <div
               key={item.term}
-              className="border-b border-line py-7 md:px-6 md:odd:border-r md:odd:pl-0 md:even:pr-0 xl:border-b-0 xl:border-r xl:px-8 xl:py-10 xl:even:pr-8 xl:first:pl-0 xl:[&:nth-child(3n)]:border-r-0"
+              className="flex flex-col border-b border-line py-7 md:border-r md:px-6 md:py-8 md:[&:nth-child(odd)]:pl-0 md:[&:nth-child(even)]:border-r-0 md:[&:nth-child(even)]:pr-0 xl:border-b-0 xl:px-8 xl:py-10 xl:[&:nth-child(3n)]:border-r-0 xl:[&:nth-child(3n)]:pr-0 xl:[&:nth-child(3n+1)]:pl-0 xl:[&:nth-child(even)]:border-r xl:[&:nth-child(even)]:pr-8"
             >
-              <dt className="font-serif text-[1.25rem] leading-snug text-navy sm:text-[1.5rem]">
+              <dt className="min-h-[1.35em] font-serif text-[1.5rem] leading-none text-navy sm:text-[1.75rem]">
                 {item.term}
               </dt>
-              <dd className="mt-3 max-w-[36ch] type-body text-ink-soft sm:mt-4">{item.detail}</dd>
+              <dd className="mt-3 max-w-[36ch] type-body text-ink-soft sm:mt-4">
+                {item.detail}
+              </dd>
             </div>
           ))}
         </dl>

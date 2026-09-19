@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import MuxPlayer from "@mux/mux-player-react";
 import { animateHero } from "@/animations/hero";
 import { useExperience } from "@/components/providers/ExperienceProvider";
@@ -39,29 +38,18 @@ export default function HomeHero() {
       className="relative isolate min-h-[88svh] overflow-hidden bg-mist px-[var(--page-pad)] pb-16 pt-[calc(var(--nav-height)+1.5rem)] sm:pb-24 sm:pt-36 lg:min-h-[92svh] lg:pb-28"
     >
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
-        {preferStill ? (
-          <Image
-            src={homeHeroMedia.still}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        ) : (
-          <MuxPlayer
-            playbackId={homeHeroMedia.muxPlaybackId}
-            streamType="on-demand"
-            autoPlay="muted"
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            poster={homeHeroMedia.still}
-            className="home-hero-mux absolute inset-0 h-full w-full"
-            aria-hidden
-          />
-        )}
+        <MuxPlayer
+          playbackId={homeHeroMedia.muxPlaybackId}
+          streamType="on-demand"
+          autoPlay={preferStill ? false : "muted"}
+          loop={!preferStill}
+          muted
+          playsInline
+          preload="metadata"
+          poster={homeHeroMedia.poster}
+          className="home-hero-mux absolute inset-0 h-full w-full"
+          aria-hidden
+        />
         <div className="home-hero-scrim-x absolute inset-0" aria-hidden />
         <div className="home-hero-scrim-y absolute inset-0" aria-hidden />
       </div>

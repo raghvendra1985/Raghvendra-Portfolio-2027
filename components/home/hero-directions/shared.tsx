@@ -65,11 +65,12 @@ export function WireObject({
       aria-hidden
     >
       <Image
-        src={homeHeroMedia.still}
+        src={homeHeroMedia.poster}
         alt=""
         fill
+        unoptimized
         sizes={large ? "(min-width: 1024px) 45vw, 90vw" : "96px"}
-        className={`object-contain object-center ${large ? "opacity-90" : "opacity-80"}`}
+        className={`object-cover object-center ${large ? "opacity-90" : "opacity-80"}`}
       />
       <span
         className={`pointer-events-none absolute left-3 top-3 z-[1] font-mono-label ${
