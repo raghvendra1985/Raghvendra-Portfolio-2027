@@ -221,7 +221,10 @@ export function animateCharm(handles: PendulumHandles, options: PendulumOptions)
     if (caption) {
       caption.style.transform = `translate(${grabWorldX * m}px, ${grabWorldY * m + originY + halfGrab + 8}px) translate(-50%, 0)`;
     }
-    if (switcher) {
+    if (switcher && onSwitch) {
+      switcher.style.transform = `translate(${grabWorldX * m}px, ${grabWorldY * m + originY + halfGrab + 44}px) translate(-50%, 0)`;
+      switcher.style.display = "";
+    } else if (switcher) {
       switcher.style.display = "none";
     }
   };

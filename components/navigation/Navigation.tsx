@@ -13,6 +13,7 @@ import { TrackedLink } from "@/components/analytics/TrackedCta";
 import { useConcierge } from "@/components/concierge/ConciergeProvider";
 import MenuToggle from "@/components/navigation/MenuToggle";
 import MenuOverlay from "@/components/navigation/MenuOverlay";
+import DesktopCharmMenu from "@/components/navigation/DesktopCharmMenu";
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -198,6 +199,7 @@ export default function Navigation() {
             >
               Let&apos;s talk
             </TrackedLink>
+            <DesktopCharmMenu />
           </nav>
 
           <div className="flex items-center gap-3 min-[960px]:hidden">

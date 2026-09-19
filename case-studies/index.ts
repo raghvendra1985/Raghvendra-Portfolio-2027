@@ -426,7 +426,7 @@ const caseStudyRecords: CaseStudyRecord[] = [
     ],
     cover: "/assets/work/nye/cover.png",
     productStackCount: 9,
-    mediaLayout: "default",
+    mediaLayout: "narrative-interludes",
     showreelFeaturedCount: 3,
     gallery: [
       "/assets/work/nye/landing.png",
@@ -1048,7 +1048,7 @@ const caseStudyRecords: CaseStudyRecord[] = [
     ],
     cover: "/assets/work/gwk-ghostwriter/cover.png",
     productStackCount: 9,
-    mediaLayout: "default",
+    mediaLayout: "narrative-interludes",
     gallery: [
       "/assets/work/gwk-ghostwriter/landing.png",
       "/assets/work/gwk-ghostwriter/dashboard.png",
@@ -1606,7 +1606,7 @@ const caseStudyRecords: CaseStudyRecord[] = [
     ],
     cover: "/assets/work/crowley/cover.webp",
     productStackCount: 5,
-    mediaLayout: "default",
+    mediaLayout: "narrative-interludes",
     gallery: [
       "/assets/work/crowley/landing.png",
       "/assets/work/crowley/gallery-01.webp",

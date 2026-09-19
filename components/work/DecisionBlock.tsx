@@ -16,27 +16,19 @@ function Prose({
 }
 
 function ChapterLabel({ children }: { children: React.ReactNode }) {
-  return <p className="font-section-label text-navy">{children}</p>;
+  return <p className="font-mono-label text-navy">{children}</p>;
 }
-
-const insightSlugs = new Set(["nye", "nye-team", "crowley"]);
 
 export function DecisionBlockContent({
   decision,
-  showInsight = false,
+  compact = false,
 }: {
   decision: CaseStudyDecision;
-  showInsight?: boolean;
+  /** When true: Observation→Insight→Response triad + Result; skip duplicated Evidence/Tradeoff/Choice. */
+  compact?: boolean;
 }) {
   return (
     <div className="mt-8 max-w-3xl space-y-8" data-case-chapter>
-      {showInsight ? (
-        <InsightBlock
-          observation={decision.evidence}
-          insight={decision.tradeoff}
-          response={decision.choice}
-        />
-      ) : null}
       <div>
         <p className="font-mono-label text-ink-soft">Situation</p>
         <Prose className="mt-2">{decision.situation}</Prose>
@@ -56,35 +48,50 @@ export function DecisionBlockContent({
           ))}
         </ul>
       </div>
-      <div>
-        <p className="font-mono-label text-ink-soft">Evidence</p>
-        <Prose className="mt-2">{decision.evidence}</Prose>
-      </div>
-      <div>
-        <p className="font-mono-label text-ink-soft">Tradeoff</p>
-        <Prose className="mt-2">{decision.tradeoff}</Prose>
-      </div>
-      <div>
-        <p className="font-mono-label text-ink-soft">Final choice</p>
-        <Prose className="mt-2">{decision.choice}</Prose>
-      </div>
-      <div>
-        <p className="font-mono-label text-ink-soft">Result</p>
-        <Prose className="mt-2">{decision.result}</Prose>
-      </div>
+      {compact ? (
+        <>
+          <InsightBlock
+            observation={decision.evidence}
+            insight={decision.tradeoff}
+            response={decision.choice}
+          />
+          <div>
+            <p className="font-mono-label text-ink-soft">Result</p>
+            <Prose className="mt-2">{decision.result}</Prose>
+          </div>
+        </>
+      ) : (
+        <>
+          <div>
+            <p className="font-mono-label text-ink-soft">Evidence</p>
+            <Prose className="mt-2">{decision.evidence}</Prose>
+          </div>
+          <div>
+            <p className="font-mono-label text-ink-soft">Tradeoff</p>
+            <Prose className="mt-2">{decision.tradeoff}</Prose>
+          </div>
+          <div>
+            <p className="font-mono-label text-ink-soft">Final choice</p>
+            <Prose className="mt-2">{decision.choice}</Prose>
+          </div>
+          <div>
+            <p className="font-mono-label text-ink-soft">Result</p>
+            <Prose className="mt-2">{decision.result}</Prose>
+          </div>
+        </>
+      )}
     </div>
   );
 }
 
 export default function DecisionBlock({ study }: { study: CaseStudy }) {
   if (!("decision" in study) || !study.decision) return null;
+  const useTriad =
+    study.narrativeDepth === "deep" || study.narrativeDepth === "supporting";
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
       <ChapterLabel>Critical decision</ChapterLabel>
-      <DecisionBlockContent
-        decision={study.decision}
-        showInsight={insightSlugs.has(study.slug)}
-      />
+      <DecisionBlockContent decision={study.decision} compact={useTriad} />
     </section>
   );
 }

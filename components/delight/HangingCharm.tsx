@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import {
   animateCharm,
@@ -17,6 +17,7 @@ import {
   DARUMA_LABELS,
   getCharm,
   getCharmArt,
+  nextCharmId,
   nextDaruma,
   nextDrishti,
   nextEmoji,
@@ -100,6 +101,16 @@ export default function HangingCharm() {
   coveredRef.current = covered;
   const art = getCharmArt(state.id);
   const charmName = getCharm(state.id).name;
+
+  const switchCharm = useCallback(
+    (step: number) => {
+      if (coveredRef.current) return;
+      const next = nextCharmId(idRef.current, step);
+      update({ id: next, hidden: false });
+      track("charm_switched", { id: next, step });
+    },
+    [update],
+  );
 
   function playRitual() {
     const id = idRef.current;
@@ -186,9 +197,10 @@ export default function HangingCharm() {
           track("charm_flicked", { id: idRef.current });
         },
         onRitual: () => playRitual(),
+        onSwitch: (step) => switchCharm(step),
       },
     );
-  }, [hidden, config, update]);
+  }, [hidden, config, update, switchCharm]);
 
   if (hidden) return null;
 
@@ -196,10 +208,11 @@ export default function HangingCharm() {
     clampHangX(state.hangX) * (typeof window === "undefined" ? 1280 : window.innerWidth);
   const [frameW, frameH] = art.frame;
   const imageY = -art.attach * frameH;
+  const grabInteractive = !covered;
 
   return (
     <div
-      className={`pointer-events-none fixed inset-0 z-[86] ${covered ? "opacity-0" : ""}`}
+      className={`fixed inset-0 z-[70] ${covered ? "pointer-events-none opacity-0" : "pointer-events-none"}`}
       aria-hidden={covered}
     >
       <svg className="absolute inset-0 h-full w-full overflow-visible" aria-hidden="true">
@@ -299,16 +312,45 @@ export default function HangingCharm() {
         ref={charmRef}
         id="charm-grab"
         type="button"
-        tabIndex={covered ? -1 : 0}
-        disabled={covered}
+        tabIndex={grabInteractive ? 0 : -1}
+        disabled={!grabInteractive}
         aria-label={`${charmName} charm. Grab, drag, or flick it. Double-click for a ritual.`}
-        className="pointer-events-auto absolute left-0 top-0 cursor-grab touch-none select-none rounded-full bg-transparent p-0 active:cursor-grabbing"
+        className={`absolute left-0 top-0 cursor-grab touch-none select-none rounded-full bg-transparent p-0 active:cursor-grabbing ${
+          grabInteractive ? "pointer-events-auto" : "pointer-events-none"
+        }`}
         style={{
           height: CHARM_SIZE,
           width: CHARM_SIZE,
           transform: `translate(${restX - CHARM_SIZE / 2}px, ${STRING_LENGTH}px)`,
         }}
       />
+      <div
+        className={`absolute left-0 top-0 flex gap-1 ${
+          grabInteractive ? "pointer-events-auto" : "pointer-events-none"
+        }`}
+        style={{
+          transform: `translate(${restX - 36}px, ${STRING_LENGTH + CHARM_SIZE + 10}px)`,
+        }}
+      >
+        <button
+          type="button"
+          aria-label="Previous charm"
+          disabled={!grabInteractive}
+          onClick={() => switchCharm(-1)}
+          className="inline-flex size-8 items-center justify-center border border-navy/25 bg-mist/90 font-mono-label text-[11px] text-navy hover:border-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          aria-label="Next charm"
+          disabled={!grabInteractive}
+          onClick={() => switchCharm(1)}
+          className="inline-flex size-8 items-center justify-center border border-navy/25 bg-mist/90 font-mono-label text-[11px] text-navy hover:border-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+        >
+          →
+        </button>
+      </div>
       <span
         ref={captionRef}
         className="absolute left-0 top-0 whitespace-nowrap font-mono-label text-[9px] text-navy"

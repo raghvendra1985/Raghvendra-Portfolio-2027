@@ -19,31 +19,31 @@ export default function BuilderProof() {
       className="scroll-mt-[var(--hash-offset)] border-t border-line px-[var(--page-pad)] py-14 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-[1440px]">
-        <div className="flex items-center gap-4" data-reveal-item>
-          <SystemObjectMark
-            src={homeMarks.work.src}
-            motion={homeMarks.work.motion}
-            surface={homeMarks.work.surface}
-          />
-          <div>
+        <div data-reveal-item>
+          <div className="flex items-center gap-4">
+            <SystemObjectMark
+              src={homeMarks.work.src}
+              motion={homeMarks.work.motion}
+              surface={homeMarks.work.surface}
+            />
             <p className="font-mono-label text-navy/80">
               {leadershipBuilderProof.eyebrow}
             </p>
-            <h2 className="mt-4 max-w-3xl type-h2">
-              {leadershipBuilderProof.title}
-            </h2>
-            <p className="mt-4 max-w-[58ch] type-body text-ink-soft">
-              {leadershipBuilderProof.intro}
-            </p>
-            {"cta" in leadershipBuilderProof && leadershipBuilderProof.cta ? (
-              <Link
-                href={leadershipBuilderProof.cta.href}
-                className="mt-4 inline-flex min-h-11 items-center font-mono-label text-navy hover:underline"
-              >
-                {leadershipBuilderProof.cta.label} →
-              </Link>
-            ) : null}
           </div>
+          <h2 className="mt-4 max-w-3xl type-h2">
+            {leadershipBuilderProof.title}
+          </h2>
+          <p className="mt-4 max-w-[58ch] type-body text-ink-soft">
+            {leadershipBuilderProof.intro}
+          </p>
+          {"cta" in leadershipBuilderProof && leadershipBuilderProof.cta ? (
+            <Link
+              href={leadershipBuilderProof.cta.href}
+              className="mt-4 inline-flex min-h-11 items-center font-mono-label text-navy hover:underline"
+            >
+              {leadershipBuilderProof.cta.label} →
+            </Link>
+          ) : null}
         </div>
 
         <ul className="mt-12 space-y-0 border-t border-line" data-reveal-item>

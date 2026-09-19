@@ -10,11 +10,21 @@ const fields: { key: keyof CaseStudyBuildStory; label: string }[] = [
 ];
 
 export default function BuildStoryBlock({ story }: { story: CaseStudyBuildStory }) {
+  const visible = fields.filter(({ key }) => {
+    const value = story[key];
+    return (
+      Boolean(value) &&
+      !value.startsWith("[CONTENT REQUIRED]") &&
+      !value.startsWith("TODO:")
+    );
+  });
+  if (!visible.length) return null;
+
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
-      <p className="font-section-label text-navy">Build story</p>
+      <p className="font-mono-label text-navy">Build story</p>
       <dl className="mt-8 grid max-w-3xl gap-8 sm:grid-cols-2" data-case-chapter>
-        {fields.map(({ key, label }) => (
+        {visible.map(({ key, label }) => (
           <div key={key} className="border-t border-line pt-4">
             <dt className="font-mono-label text-ink-soft">{label}</dt>
             <dd className="mt-2 text-sm leading-relaxed text-navy sm:text-base">

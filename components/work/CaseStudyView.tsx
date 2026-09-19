@@ -21,6 +21,7 @@ import CaseStudyWireframesGrid, {
 import MagneticButton from "@/components/buttons/MagneticButton";
 import DecisionBlock from "@/components/work/DecisionBlock";
 import BuildStoryBlock from "@/components/work/BuildStoryBlock";
+import { ScreenSequence, StatBlock } from "@/components/work/storytelling";
 import type {
   CaseStudy,
   CaseStudyAtAGlance,
@@ -190,39 +191,76 @@ function AtAGlanceBlock({ glance }: { glance: CaseStudyAtAGlance }) {
   );
 }
 
+function isStatOutcome(outcome: CaseStudyOutcome) {
+  const title = outcome.title.trim();
+  if (title.length > 12) return false;
+  return /^[\d−\-–+%×x/of\s]+$/i.test(title) || /^\d/.test(title);
+}
+
 function OutcomesBlock({ outcomes }: { outcomes: CaseStudyOutcome[] }) {
   if (!outcomes.length) return null;
   const showFootnote = outcomes.some((o) => o.confidence === "company-metric");
+  const asStats = outcomes.every(isStatOutcome);
+
   return (
     <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
       <ChapterLabel>Outcome</ChapterLabel>
-      <div className="mt-8 grid gap-8 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-3">
-        {outcomes.map((outcome) => (
-          <article
-            key={outcome.title}
-            data-case-chapter
-            className="min-w-0"
-          >
-            {outcome.level ? (
-              <p className="font-mono-label text-ink-soft capitalize">{outcome.level}</p>
-            ) : null}
-            <h2
-              className={`max-w-[22ch] type-h3 text-navy ${outcome.level ? "mt-2" : ""}`}
-            >
-              {outcome.title}
-            </h2>
-            <p className="mt-3 max-w-[36rem] text-sm leading-snug text-ink-soft">
-              {outcome.body}
-            </p>
-          </article>
-        ))}
-      </div>
+      {asStats ? (
+        <StatBlock
+          className="mt-8"
+          stats={outcomes.map((outcome) => ({
+            value: outcome.title,
+            label: outcome.level ? outcome.level : "Evidence",
+            note: outcome.body,
+          }))}
+        />
+      ) : (
+        <div className="mt-8 grid gap-8 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-3">
+          {outcomes.map((outcome) => (
+            <article key={outcome.title} data-case-chapter className="min-w-0">
+              {outcome.level ? (
+                <p className="font-mono-label text-ink-soft capitalize">{outcome.level}</p>
+              ) : null}
+              <h2
+                className={`max-w-[22ch] type-h3 text-navy ${outcome.level ? "mt-2" : ""}`}
+              >
+                {outcome.title}
+              </h2>
+              <p className="mt-3 max-w-[36rem] text-sm leading-snug text-ink-soft">
+                {outcome.body}
+              </p>
+            </article>
+          ))}
+        </div>
+      )}
       {showFootnote ? (
         <p className="mt-8 max-w-2xl text-sm leading-relaxed text-ink-soft">
           Scale figures describe the operating context. Personal contributions are stated
           separately.
         </p>
       ) : null}
+    </section>
+  );
+}
+
+function CrowleySequence({ study }: { study: CaseStudy }) {
+  if (study.slug !== "crowley") return null;
+  const frames = resolveFrames(study).filter((frame) =>
+    /gallery-0[123]\.webp$/.test(frame.src),
+  );
+  if (frames.length < 3) return null;
+  return (
+    <section className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-20">
+      <ChapterLabel>Quote sequence</ChapterLabel>
+      <ScreenSequence
+        className="mt-8"
+        aspect="landscape"
+        screens={frames.map((frame, index) => ({
+          src: frame.src,
+          alt: `${study.client} — step ${index + 1}`,
+          caption: frame.caption,
+        }))}
+      />
     </section>
   );
 }
@@ -261,7 +299,7 @@ function FramesBlock({
                   parallax={surface.parallax}
                 />
                 {frame.caption ? (
-                  <figcaption className="mt-4 max-w-3xl type-lead text-navy">
+                  <figcaption className="mt-4 max-w-[48ch] text-sm leading-relaxed text-ink-soft">
                     {frame.caption}
                   </figcaption>
                 ) : null}
@@ -398,6 +436,8 @@ function DeepBody({ study }: { study: DeepCaseStudy }) {
       ) : null}
 
       <DecisionBlock study={study} />
+
+      {study.slug === "crowley" ? <CrowleySequence study={study} /> : null}
 
       {interludes ? (
         <CaseStudyFrameInterlude

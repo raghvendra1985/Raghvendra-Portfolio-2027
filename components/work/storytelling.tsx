@@ -161,25 +161,31 @@ export function InterfaceGallery({
 export function ScreenSequence({
   screens,
   className = "",
+  aspect = "portrait",
 }: {
   screens: readonly GalleryImage[];
   className?: string;
+  aspect?: "portrait" | "landscape";
 }) {
   if (!screens.length) return null;
+  const ratio = aspect === "landscape" ? "aspect-[16/10]" : "aspect-[9/16]";
   return (
     <ol className={`flex gap-4 overflow-x-auto pb-2 ${className}`}>
       {screens.map((screen, index) => (
-        <li key={screen.src} className="w-[min(72vw,280px)] shrink-0">
+        <li
+          key={screen.src}
+          className={`shrink-0 ${aspect === "landscape" ? "w-[min(78vw,320px)]" : "w-[min(72vw,280px)]"}`}
+        >
           <p className="font-mono-label text-[11px] text-navy/55">
             {String(index + 1).padStart(2, "0")}
           </p>
-          <div className="relative mt-2 aspect-[9/16] overflow-hidden bg-surface">
+          <div className={`relative mt-2 overflow-hidden bg-surface ${ratio}`}>
             <Image
               src={screen.src}
               alt={screen.alt}
               fill
               className="object-cover"
-              sizes="280px"
+              sizes={aspect === "landscape" ? "320px" : "280px"}
             />
           </div>
           {screen.caption ? (

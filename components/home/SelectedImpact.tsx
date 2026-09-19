@@ -7,20 +7,20 @@ export default function SelectedImpact() {
   return (
     <SectionReveal className="border-t border-line bg-paper px-[var(--page-pad)] py-14 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-[1440px]">
-        <div className="flex items-center gap-4" data-reveal-item>
-          <SystemObjectMark
-            src={homeMarks.impact.src}
-            motion={homeMarks.impact.motion}
-            surface={homeMarks.impact.surface}
-          />
-          <div>
+        <div data-reveal-item>
+          <div className="flex items-center gap-4">
+            <SystemObjectMark
+              src={homeMarks.impact.src}
+              motion={homeMarks.impact.motion}
+              surface={homeMarks.impact.surface}
+            />
             <p className="font-mono-label text-navy/80">
               {leadershipImpact.eyebrow}
             </p>
-            <h2 className="mt-4 max-w-3xl type-h2">
-              {leadershipImpact.title}
-            </h2>
           </div>
+          <h2 className="mt-4 max-w-3xl type-h2">
+            {leadershipImpact.title}
+          </h2>
         </div>
         <dl
           className="mt-8 grid gap-0 border-t border-line sm:mt-12 md:grid-cols-2 xl:grid-cols-3"
