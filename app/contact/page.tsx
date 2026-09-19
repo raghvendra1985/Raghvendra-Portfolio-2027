@@ -30,6 +30,21 @@ export default function ContactPage() {
         mark={pageMarks.contact}
       />
 
+      <div className="mx-auto max-w-[1440px] px-[var(--page-pad)] pb-10 sm:pb-12">
+        <div className="relative aspect-[21/9] w-full overflow-hidden bg-surface">
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src={contactPage.heroVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden
+          />
+        </div>
+      </div>
+
       <SectionReveal
         charmRest
         charmDense

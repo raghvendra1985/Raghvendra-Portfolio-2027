@@ -5,6 +5,8 @@ export const contactPage = {
   heroTitle: "Let’s talk.",
   heroDescription:
     "Three ways in: hire me for Principal / Staff Product Design, build with me on a product engagement, or invite me to teach.",
+  heroVideo:
+    "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260702_051048_5ef213b5-26db-4da8-b604-7ef823760b6b.mp4",
   intentPrompt: "How should we start?",
   intentRequired: "Choose a path.",
   messageLabel: "What are you trying to solve?",
