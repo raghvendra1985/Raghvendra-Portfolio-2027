@@ -112,7 +112,7 @@ function Prose({
 }) {
   return (
     <p
-      className={`text-base leading-relaxed sm:text-lg ${className}`}
+      className={`type-lead leading-relaxed ${className}`}
       data-case-chapter={chapter ? true : undefined}
     >
       {children}
@@ -133,7 +133,7 @@ function NumberedRail({ steps }: { steps: string[] }) {
           <span className="font-mono-label text-gold">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <p className="text-base leading-relaxed sm:text-lg">{step}</p>
+          <p className="type-lead leading-relaxed">{step}</p>
         </li>
       ))}
     </ol>
@@ -158,7 +158,7 @@ function MandateBlock({ study }: { study: CaseStudy }) {
         {rows.map((row) => (
           <div key={row.label} data-case-chapter>
             <dt className="font-mono-label text-ink-soft">{row.label}</dt>
-            <dd className="mt-2 text-base leading-relaxed">{row.value}</dd>
+            <dd className="mt-2 type-body leading-relaxed">{row.value}</dd>
           </div>
         ))}
       </dl>
@@ -181,7 +181,7 @@ function AtAGlanceBlock({ glance }: { glance: CaseStudyAtAGlance }) {
         {rows.map((row) => (
           <div key={row.label} data-case-chapter>
             <dt className="font-mono-label text-ink-soft">{row.label}</dt>
-            <dd className="mt-2 text-sm leading-relaxed text-navy sm:text-base">
+            <dd className="mt-2 type-body leading-relaxed text-navy">
               {row.value}
             </dd>
           </div>
@@ -226,7 +226,7 @@ function OutcomesBlock({ outcomes }: { outcomes: CaseStudyOutcome[] }) {
               >
                 {outcome.title}
               </h2>
-              <p className="mt-3 max-w-[36rem] text-sm leading-snug text-ink-soft">
+              <p className="mt-3 max-w-[36rem] type-body leading-snug text-ink-soft">
                 {outcome.body}
               </p>
             </article>
@@ -234,7 +234,7 @@ function OutcomesBlock({ outcomes }: { outcomes: CaseStudyOutcome[] }) {
         </div>
       )}
       {showFootnote ? (
-        <p className="mt-8 max-w-2xl text-sm leading-relaxed text-ink-soft">
+        <p className="mt-8 max-w-2xl type-body leading-relaxed text-ink-soft">
           Scale figures describe the operating context. Personal contributions are stated
           separately.
         </p>
@@ -299,7 +299,7 @@ function FramesBlock({
                   parallax={surface.parallax}
                 />
                 {frame.caption ? (
-                  <figcaption className="mt-4 max-w-[48ch] text-sm leading-relaxed text-ink-soft">
+                  <figcaption className="mt-4 max-w-[48ch] type-body leading-relaxed text-ink-soft">
                     {frame.caption}
                   </figcaption>
                 ) : null}
@@ -427,7 +427,7 @@ function DeepBody({ study }: { study: DeepCaseStudy }) {
           <ChapterLabel>Constraints</ChapterLabel>
           <ul className="mt-8 space-y-4" data-case-chapter>
             {study.constraints.map((item) => (
-              <li key={item} className="border-t border-line pt-4 text-base leading-relaxed sm:text-lg">
+              <li key={item} className="border-t border-line pt-4 type-lead leading-relaxed">
                 {item}
               </li>
             ))}
@@ -658,15 +658,15 @@ export default function CaseStudyView({
         >
           <div>
             <dt className="font-mono-label text-ink-soft">Role</dt>
-            <dd className="mt-2 text-sm">{study.role}</dd>
+            <dd className="mt-2 type-body">{study.role}</dd>
           </div>
           <div>
             <dt className="font-mono-label text-ink-soft">Timeline</dt>
-            <dd className="mt-2 text-sm">{study.timeline}</dd>
+            <dd className="mt-2 type-body">{study.timeline}</dd>
           </div>
           <div>
             <dt className="font-mono-label text-ink-soft">Engagement</dt>
-            <dd className="mt-2 text-sm">{study.engagement}</dd>
+            <dd className="mt-2 type-body">{study.engagement}</dd>
           </div>
         </dl>
       </section>

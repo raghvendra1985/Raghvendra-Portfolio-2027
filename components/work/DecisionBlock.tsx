@@ -9,7 +9,7 @@ function Prose({
   className?: string;
 }) {
   return (
-    <p className={`text-base leading-relaxed text-ink-soft sm:text-lg ${className}`}>
+    <p className={`type-lead leading-relaxed text-ink-soft ${className}`}>
       {children}
     </p>
   );
@@ -38,9 +38,9 @@ export function DecisionBlockContent({
         <ul className="mt-3 space-y-4">
           {decision.options.map((option) => (
             <li key={option.name} className="border-t border-line pt-4">
-              <p className="text-base font-medium text-navy sm:text-lg">{option.name}</p>
+              <p className="type-body font-medium text-navy">{option.name}</p>
               {option.rejectedBecause ? (
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                <p className="mt-2 type-body leading-relaxed text-ink-soft">
                   {option.rejectedBecause}
                 </p>
               ) : null}

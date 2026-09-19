@@ -163,29 +163,29 @@ body {
 
 @media (max-width: 1023px) {
   .text-sm {
-    font-size: 1rem;
+    font-size: var(--text-body);
     line-height: 1.65;
   }
 
   .text-base {
-    font-size: calc(1rem + 0.125rem);
+    font-size: var(--text-lead);
     line-height: 1.6;
   }
 
   .text-lg {
-    font-size: calc(1.125rem + 0.125rem);
+    font-size: calc(var(--text-lead) + 0.0625rem);
     line-height: 1.55;
   }
 
   .text-xl {
-    font-size: calc(1.25rem + 0.125rem);
+    font-size: calc(var(--text-lead) + 0.125rem);
     line-height: 1.5;
   }
 
   .text-\[10px\],
   .text-\[11px\],
   .text-\[12px\] {
-    font-size: 0.75rem;
+    font-size: var(--text-caption);
     line-height: 1.45;
   }
 }

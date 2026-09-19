@@ -27,7 +27,7 @@ export default function BuildStoryBlock({ story }: { story: CaseStudyBuildStory 
         {visible.map(({ key, label }) => (
           <div key={key} className="border-t border-line pt-4">
             <dt className="font-mono-label text-ink-soft">{label}</dt>
-            <dd className="mt-2 text-sm leading-relaxed text-navy sm:text-base">
+            <dd className="mt-2 type-body leading-relaxed text-navy">
               {story[key]}
             </dd>
           </div>

@@ -8,6 +8,9 @@ import { footerLinks, site } from "@/lib/site";
 import ResumeCta from "@/components/cta/ResumeCta";
 import { leadershipFooter } from "@/home/leadership-home";
 
+const FOOTER_VIDEO_SRC =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_204103_f607742e-09da-4cf5-bb06-4e67b0a531de.mp4";
+
 export default function SiteFooter() {
   const rootRef = useRef<HTMLElement>(null);
   const { config } = useExperience();
@@ -22,6 +25,22 @@ export default function SiteFooter() {
   return (
     <footer ref={rootRef} className="overflow-hidden bg-navy text-mist">
       <div className="mx-auto max-w-[1440px] px-[var(--page-pad)] py-12 sm:py-16 lg:py-20">
+        <div
+          data-footer-video
+          className="relative mb-10 aspect-[21/9] w-full overflow-hidden bg-navy sm:mb-12 lg:mb-14"
+        >
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src={FOOTER_VIDEO_SRC}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden
+          />
+        </div>
+
         <p
           data-footer-wordmark
           className="break-words font-serif text-[clamp(2.25rem,11vw,6.5rem)] font-normal leading-[0.92] tracking-[-0.03em] text-mist"

@@ -21,11 +21,11 @@ export function StatBlock({
       {stats.map((stat) => (
         <li key={`${stat.value}-${stat.label}`}>
           <p className="type-h2 text-navy">{stat.value}</p>
-          <p className="mt-2 font-mono-label text-[11px] text-navy/70">
+          <p className="mt-2 font-mono-label text-navy/70">
             {stat.label}
           </p>
           {stat.note ? (
-            <p className="mt-2 max-w-[36ch] text-sm leading-relaxed text-ink-soft">
+            <p className="mt-2 max-w-[36ch] type-body leading-relaxed text-ink-soft">
               {stat.note}
             </p>
           ) : null}
@@ -61,8 +61,8 @@ export function InsightBlock({
           key={row.label}
           className={`sm:p-6 ${index > 0 ? "sm:border-l sm:border-line" : ""}`}
         >
-          <p className="font-mono-label text-[11px] text-navy/60">{row.label}</p>
-          <p className="mt-3 text-sm leading-relaxed text-ink-soft">{row.body}</p>
+          <p className="font-mono-label text-navy/60">{row.label}</p>
+          <p className="mt-3 type-body leading-relaxed text-ink-soft">{row.body}</p>
         </div>
       ))}
     </div>
@@ -78,9 +78,9 @@ export function ChapterNumber({
 }) {
   return (
     <div className="flex items-baseline gap-3">
-      <span className="font-mono-label text-[11px] text-navy/55">{number}</span>
+      <span className="font-mono-label text-navy/55">{number}</span>
       {label ? (
-        <span className="font-mono-label text-[11px] text-navy/80">{label}</span>
+        <span className="font-mono-label text-navy/80">{label}</span>
       ) : null}
     </div>
   );
@@ -109,9 +109,9 @@ export function DefinitionBlock({
 }) {
   return (
     <div className={`border-l-2 border-navy pl-5 ${className}`}>
-      <p className="font-mono-label text-[11px] text-navy/60">Definition</p>
+      <p className="font-mono-label text-navy/60">Definition</p>
       <h3 className="mt-2 type-h3 text-navy">{term}</h3>
-      <p className="mt-3 max-w-[48ch] text-sm leading-relaxed text-ink-soft">
+      <p className="mt-3 max-w-[48ch] type-body leading-relaxed text-ink-soft">
         {body}
       </p>
     </div>
@@ -147,7 +147,7 @@ export function InterfaceGallery({
               />
             </div>
             {image.caption ? (
-              <figcaption className="mt-3 max-w-[48ch] text-sm leading-relaxed text-ink-soft">
+              <figcaption className="mt-3 max-w-[48ch] type-small leading-relaxed text-ink-soft">
                 {image.caption}
               </figcaption>
             ) : null}
@@ -176,7 +176,7 @@ export function ScreenSequence({
           key={screen.src}
           className={`shrink-0 ${aspect === "landscape" ? "w-[min(78vw,320px)]" : "w-[min(72vw,280px)]"}`}
         >
-          <p className="font-mono-label text-[11px] text-navy/55">
+          <p className="font-mono-label text-navy/55">
             {String(index + 1).padStart(2, "0")}
           </p>
           <div className={`relative mt-2 overflow-hidden bg-surface ${ratio}`}>
@@ -189,7 +189,7 @@ export function ScreenSequence({
             />
           </div>
           {screen.caption ? (
-            <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+            <p className="mt-3 type-small leading-relaxed text-ink-soft">
               {screen.caption}
             </p>
           ) : null}
@@ -215,7 +215,7 @@ export function BeforeAfter({
         { label: "After", image: after },
       ].map((column) => (
         <figure key={column.label}>
-          <p className="font-mono-label text-[11px] text-navy/60">{column.label}</p>
+          <p className="font-mono-label text-navy/60">{column.label}</p>
           <div className="relative mt-2 aspect-[16/10] overflow-hidden bg-surface">
             <Image
               src={column.image.src}
@@ -226,7 +226,7 @@ export function BeforeAfter({
             />
           </div>
           {column.image.caption ? (
-            <figcaption className="mt-3 text-sm leading-relaxed text-ink-soft">
+            <figcaption className="mt-3 type-small leading-relaxed text-ink-soft">
               {column.image.caption}
             </figcaption>
           ) : null}
