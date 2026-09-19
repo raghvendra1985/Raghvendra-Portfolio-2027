@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import type { LeadershipTestimonialItem } from "@/home/leadership-home";
 
@@ -92,9 +93,24 @@ export default function TestimonialCarousel({
               </p>
               <figcaption className="mt-8">
                 <cite className="not-italic">
-                  <p className="font-mono-label text-navy/80">{item.attribution}</p>
+                  <span className="flex items-start gap-3">
+                    {item.image ? (
+                      <span className="relative mt-0.5 block size-14 shrink-0 overflow-hidden bg-surface-dim sm:size-16">
+                        <Image
+                          src={item.image.src}
+                          alt={item.image.alt}
+                          fill
+                          sizes="64px"
+                          className="object-cover object-center"
+                        />
+                      </span>
+                    ) : null}
+                    <span className="min-w-0">
+                      <p className="font-mono-label text-navy/80">{item.attribution}</p>
+                      <p className="mt-2 font-mono-label text-ink-soft">{item.source}</p>
+                    </span>
+                  </span>
                 </cite>
-                <p className="mt-2 font-mono-label text-ink-soft">{item.source}</p>
               </figcaption>
             </blockquote>
           </figure>

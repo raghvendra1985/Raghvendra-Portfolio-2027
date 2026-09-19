@@ -351,6 +351,10 @@ export type LeadershipTestimonialItem = {
   quote: string;
   attribution: string;
   source: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
 };
 
 export const leadershipTestimonials = {
@@ -358,16 +362,35 @@ export const leadershipTestimonials = {
   items: [
     {
       quote:
+        "I had the opportunity to work with Raghvendra when he hired me into the NYE design team at Rapipay. In less than a year, he grew it from scratch into a well-rounded design, research and content function. What stood out to me was his approach to critiques — the focus was always on the thinking behind a decision, rather than just the screen. Early alignment with Product and Engineering also helped us move faster and avoid unnecessary rework. He also supported the establishment of a strong design system, turning recurring challenges into reusable patterns rather than solving the same problems across individual screens. Most importantly, he listened. Some of the early structural decisions changed because the team challenged them and he was open to letting the better idea win. Working with him gave me valuable lessons in leadership, collaboration and creating an environment where people have the space to do their best work.",
+      attribution:
+        "Shubham Sachdeva · DVP — Digital Experience & Design, Bajaj Life · reported to Raghvendra on the NYE design team at Rapipay",
+      source: "LinkedIn recommendation · September 2026 · reported to Raghvendra directly",
+      image: {
+        src: "/assets/testimonials/Testimonials_ShubhamSachdeva.jpg",
+        alt: "Portrait of Shubham Sachdeva",
+      },
+    },
+    {
+      quote:
         "Raghvendra helped build a multi-disciplinary team comprising UX designers, UX researchers, animation designers, visual designers, and content researchers. He played an instrumental role in setting up a design system, which helped us replicate design decisions at scale. Raghvendra is passionate about setting up and following a UX process in his team. He has strong experience setting up UX vision and strategy and showing the business value of UX design.",
       attribution:
         "Sumit Adlakha · Sr. Director of Engineering, Innovaccer · my manager at Rapipay, where we built the NYE Money team together",
       source: "LinkedIn recommendation · May 2023 · managed Raghvendra directly",
+      image: {
+        src: "/assets/testimonials/Testimonials_SumitAdlakha.jpg",
+        alt: "Portrait of Sumit Adlakha",
+      },
     },
     {
       quote:
         "Raghvendra did great work with UX designs for our products targeted at media sales teams. He had interesting and unique ideas and always added a fresh perspective to the design thinking.",
       attribution: "Meeta Sachdev · Co-Founder · Sagacito Technologies",
       source: "LinkedIn recommendation · May 2023",
+      image: {
+        src: "/assets/testimonials/Testimonials_MeetaSachdev.jpg",
+        alt: "Portrait of Meeta Sachdev",
+      },
     },
     {
       quote:
