@@ -1,0 +1,30 @@
+---
+description: Raghvendra portfolio project rules and shared skill routing
+alwaysApply: true
+---
+
+# Portfolio
+
+Use the shared operating system at:
+https://github.com/raghvendra1985/raghvendra-skill-stack
+
+## Relevant shared skills
+
+Use product-strategy, ux-case-study, design-system, ai-build-auditor, founder-content, pre-ship-check, and vengeance-ui-reference as appropriate.
+
+## Portfolio purpose
+
+Present Raghvendra Singh for Principal / Staff Product Design, AI product building, design systems, product strategy, consulting, workshops, and selected founder work.
+
+## Project guardrails
+
+- Optimize for recruiter and client comprehension before visual novelty.
+- Show decisions, constraints, evidence, and outcomes instead of decorative process.
+- Never invent research, metrics, responsibilities, experiments, or business impact.
+- Keep founder products concise unless evidence supports a deeper case study.
+- Preserve clear paths to case studies, resume, and contact.
+- Treat accessibility, responsive behavior, performance, and SEO as release requirements.
+- Use VengeanceUI only as an optional implementation reference.
+- Do not change analytics, deployment, routing, or production configuration unless required by the task.
+- Before shipping, run available typecheck, lint, tests, and production build.
+- Report any skipped verification.
