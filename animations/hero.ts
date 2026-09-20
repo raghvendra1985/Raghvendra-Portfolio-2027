@@ -79,8 +79,6 @@ export async function animateHero(
       });
     }
 
-    let tl: gsap.core.Timeline;
-
     const revealNow = () => {
       window.clearTimeout(failsafe);
       tl?.progress(1).kill();
@@ -101,7 +99,7 @@ export async function animateHero(
     };
 
     const failsafe = window.setTimeout(revealNow, 900);
-    tl = gsap.timeline({
+    const tl = gsap.timeline({
       delay: opts.delay,
       defaults: { ease: EASE_ENTER },
       onComplete: () => {
