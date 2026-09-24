@@ -13,35 +13,47 @@ colors:
   focus: "#E4B028"
 typography:
   display:
-    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
-    fontSize: "clamp(2.75rem, 2.2rem + 2.2vw, 4rem)"
+    fontFamily: "Libre Baskerville, Georgia, Times New Roman, serif"
+    fontSize: "clamp(2.75rem, 2rem + 3.2vw, 7.5rem)"
     fontWeight: 400
-    lineHeight: 1.05
-    letterSpacing: "-0.035em"
+    lineHeight: 1.3
+    letterSpacing: "-0.04em"
   headline:
-    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
-    fontSize: "clamp(2.5rem, 2.1rem + 1.6vw, 3.5rem)"
+    fontFamily: "Libre Baskerville, Georgia, Times New Roman, serif"
+    fontSize: "clamp(2.25rem, 1.85rem + 1.55vw, 3.75rem)"
     fontWeight: 400
-    lineHeight: 1.1
-    letterSpacing: "-0.025em"
+    lineHeight: 1.3
+    letterSpacing: "-0.04em"
   title:
-    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
-    fontSize: "clamp(1.875rem, 1.65rem + 0.7vw, 2.5rem)"
+    fontFamily: "Libre Baskerville, Georgia, Times New Roman, serif"
+    fontSize: "clamp(2rem, 1.7rem + 1.35vw, 3.5rem)"
     fontWeight: 400
-    lineHeight: 1.15
-    letterSpacing: "-0.02em"
+    lineHeight: 1.3
+    letterSpacing: "-0.04em"
+  h3:
+    fontFamily: "Libre Baskerville, Georgia, Times New Roman, serif"
+    fontSize: "clamp(1.75rem, 1.5rem + 0.95vw, 2.75rem)"
+    fontWeight: 400
+    lineHeight: 1.3
+    letterSpacing: "-0.04em"
+  h4:
+    fontFamily: "Libre Baskerville, Georgia, Times New Roman, serif"
+    fontSize: "clamp(1.5rem, 1.35rem + 0.55vw, 2rem)"
+    fontWeight: 400
+    lineHeight: 1.3
+    letterSpacing: "-0.03em"
   body:
-    fontFamily: "Manrope, system-ui, -apple-system, sans-serif"
-    fontSize: "clamp(1.125rem, 1.08rem + 0.25vw, 1.375rem)"
+    fontFamily: "Figtree, system-ui, -apple-system, sans-serif"
+    fontSize: "1.25rem"
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.4
     letterSpacing: "normal"
   label:
-    fontFamily: "Manrope, system-ui, -apple-system, sans-serif"
-    fontSize: "0.8125rem"
+    fontFamily: "Figtree, system-ui, -apple-system, sans-serif"
+    fontSize: "0.875rem"
     fontWeight: 500
     lineHeight: 1.4
-    letterSpacing: "0.04em"
+    letterSpacing: "0.06em"
 rounded:
   none: "0px"
   charm: "8px"
@@ -89,7 +101,7 @@ The system rejects cream-as-personality, purple-glow kits, dashboard shells, and
 **Key Characteristics:**
 
 - Mist body, navy ink, green for progress cues, gold for focus and featured signals
-- Bricolage Grotesque display + Manrope body/UI; uppercase tracked labels in Manrope (not a second mono face for chrome)
+- Libre Baskerville display + Figtree body/UI; uppercase tracked labels in Figtree (not a second mono face for chrome)
 - Square corners on interactive chrome; radius reserved for charm objects
 - Page pad and 1440 max width; charm corridor reserved on desktop
 - Motion only via shared animation modules; reduced-motion alternatives required
@@ -117,21 +129,22 @@ A restrained four-colour brand on mist ground. Accents stay scarce so gold and g
 
 ## 3. Typography
 
-**Display Font:** Bricolage Grotesque (local OFL variable, system-ui fallback)  
-**Body Font:** Manrope  
-**Label Font:** Manrope uppercase tracked (`font-mono-label`) — Space Mono is reserved for product runtime / code, not site chrome.
+**Display Font:** Libre Baskerville (Google Fonts via `next/font`, Georgia / Times New Roman fallback)  
+**Body Font:** Figtree  
+**Label Font:** Figtree uppercase tracked (`font-mono-label`) — Space Mono is reserved for product runtime / code, not site chrome.
 
-**Character:** Display is quiet and large, not shouty. Labels are operational and uppercase. Body stays readable at editorial length (prefer ≤75ch for long prose).
+**Character:** Display is quiet and large (weight 400), not shouty. Labels are operational and uppercase. Body stays readable at editorial length (prefer ≤75ch for long prose). Hierarchy is size within one serif face — not a second display family.
 
 ### Hierarchy
-- **Display / Hero** (`type-hero`, clamp ≤4rem, tracking ≥ -0.035em): Homepage and major page openings.
-- **Headline** (`type-h1`): Page heroes and case-study titles.
-- **Title** (`type-h2` / `type-h3`): Section and card titles; featured work cards may use `type-h2`.
-- **Body** (`type-lead` / body size): Supporting sentences and contribution lines.
-- **Label** (`font-mono-label` / `font-section-label`): Evidence types, roles, section names. Section labels are stronger weight than field labels.
+- **Display / Hero** (`type-hero` / `type-display-xl`, fluid up to 120px / 7.5rem, line-height 1.3, tracking -0.04em): Homepage and major page openings.
+- **Headline** (`type-h1`, up to 60px / 3.75rem): Page heroes and case-study titles.
+- **Title** (`type-h2`, up to 56px / 3.5rem): Section titles; featured work cards may use `type-h2`.
+- **Subtitle** (`type-h3`, up to 44px / 2.75rem) / **H4** (`type-h4`, up to 32px / 2rem): Card and nested headings — Libre Baskerville 400, same as larger levels.
+- **Body** (`type-body` 20px / 1.25rem, line-height 1.4; `type-lead` up to 24px): Supporting sentences and contribution lines.
+- **Label** (`font-mono-label` / `font-section-label` / `type-caption` 14px): Evidence types, roles, section names. Section labels are stronger weight than field labels.
 
 ### Named Rules
-**The One Display Face Rule.** Do not introduce a second display family for Work or elsewhere. Hierarchy is size and weight, not a new font.
+**The One Display Face Rule.** Do not introduce a second display family for Work or elsewhere. Hierarchy is size and weight, not a new font. All heading levels use Libre Baskerville at weight 400.
 
 ## 4. Elevation
 
