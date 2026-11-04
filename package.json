@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "motion": "^14.9.0"
+  },
+  "name": "elevate-thrive-consulting",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs --dist",
+    "test": "node --test *.test.cjs verify.cjs"
+  }
+}

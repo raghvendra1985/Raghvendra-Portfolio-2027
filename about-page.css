@@ -1,0 +1,40 @@
+/* About page: quiet chapter/card system aligned with home + services. Page-scoped. */
+.about-page{--a-blue:#0022cb;--a-ink:#0b1430;--a-muted:#536173;--a-line:#dce3ef;--a-tint:#f4f6fc}
+.about-page .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.about-page main .eyebrow{color:var(--a-blue);font-size:.78rem;letter-spacing:.12em;font-weight:700}
+.about-page main h2 span,.about-page main h1 span{color:var(--a-muted)}
+.about-page main p,.about-page main li{color:var(--a-ink)}
+.about-page a:focus-visible,.about-page button:focus-visible,.about-page summary:focus-visible{outline:3px solid var(--a-blue);outline-offset:3px;border-radius:4px}
+.about-page main section+section{scroll-margin-top:96px}
+/* Hero */
+.about-page .about-intro-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.about-page .about-portrait{width:100%;max-width:360px;height:auto;border-radius:20px;justify-self:end}
+.about-page .practice-pills li{color:var(--a-ink);border:1px solid var(--a-line);background:#fff}
+/* Credentials & cards */
+.about-page .credentials-grid article,.about-page .editorial-grid article,.about-page .principles-timeline>li,.about-page .career-list>li{background:#fff;border:1px solid var(--a-line);border-radius:16px;padding:24px;box-shadow:none}
+.about-page .credentials-grid article strong{color:var(--a-blue)}
+.about-page .founder{background:var(--a-tint)}
+.about-page .founder,.about-page .founder *{color:var(--a-ink)}
+.about-page .founder .eyebrow{color:var(--a-blue)}
+.about-page .founder h2 span{color:var(--a-muted)}
+.about-page .editorial-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.about-page .editorial-grid article>span{color:var(--a-blue);font-size:.75rem;font-weight:700;letter-spacing:.1em}
+/* Career: static chapter list replaces sticky scroll atlas */
+.about-page .career-list{list-style:none;margin:32px 0 16px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;counter-reset:none}
+.about-page .career-list>li{display:flex;flex-direction:column;gap:6px;border-top:4px solid var(--a-blue)}
+.about-page .career-list h3{margin:0;font-size:1.2rem}
+.about-page .career-date{margin:0;font-size:.8rem;font-weight:700;letter-spacing:.08em;color:var(--a-blue)!important}
+.about-page .career-org{margin:0;font-weight:600;color:var(--a-muted)!important}
+.about-page .career-list .text-link{margin-top:auto;padding-top:8px}
+.about-page .source-caption{color:var(--a-muted)}
+.about-page .teaching-photo-grid img{border-radius:16px}
+.about-page figcaption{color:var(--a-muted)}
+/* Principles: static 4-col grid, no scroll highlight/dimming */
+.about-page .principles-timeline{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:32px}
+.about-page .principles-timeline::before,.about-page .principles-timeline::after{display:none!important}
+.about-page .principles-timeline>li{opacity:1!important;transform:none!important;filter:none!important;position:relative;margin:0}
+.about-page .principles-timeline>li>span{display:inline-block;color:var(--a-blue);font-weight:700;margin-bottom:8px}
+.about-page .about-questions summary{cursor:pointer;color:var(--a-ink)}
+@media (max-width:900px){.about-page .career-list,.about-page .principles-timeline{grid-template-columns:repeat(2,minmax(0,1fr))}.about-page .editorial-grid{grid-template-columns:1fr}}
+@media (max-width:640px){.about-page .about-intro-grid,.about-page .career-list,.about-page .principles-timeline{grid-template-columns:1fr}.about-page .about-portrait{justify-self:start;max-width:240px;order:-1}}
+@media (prefers-reduced-motion:reduce){.about-page *,.about-page *::before,.about-page *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

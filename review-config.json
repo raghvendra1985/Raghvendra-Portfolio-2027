@@ -1,0 +1,79 @@
+{
+  "ai-opportunity-audit": [
+    "Choose one task you can measure.",
+    "List three recurring tasks, pick one with approved inputs and a reviewable output, and record a baseline before testing.",
+    "Illustrative example: drafting internal meeting summaries. A person checked actions and owners. The draft was quicker, but missed an owner; the team chose Revise and added an owner check. No measured client result is claimed.",
+    "product-decision-canvas",
+    "Turn the uncertainty into a testable decision."
+  ],
+  "product-decision-canvas": [
+    "Write one assumption and its decision rule.",
+    "Pick a user decision, write what you believe will help, and define evidence that would make you continue, revise or stop.",
+    "Illustrative example: a paper onboarding prototype. Participants misunderstood the first instruction, so the designer revised the wording rather than declaring the idea validated. This does not establish market demand.",
+    "ai-workflow-starter-kit",
+    "Turn a tested method into a repeatable workflow."
+  ],
+  "ai-workflow-starter-kit": [
+    "Define one workflow and three tests.",
+    "Write the input, approved context, output format and human review criteria. Choose three varied, non-sensitive inputs.",
+    "Illustrative example: grouping synthetic interview notes. Two inputs produced supported themes; one invented a quote. The practitioner chose Stop for automatic sharing and retained human review. This is not a model benchmark.",
+    "ai-opportunity-audit",
+    "Assess where a reliable workflow could create useful value."
+  ],
+  "design-thinking-workshop": [
+    "Observe one everyday task and separate three observations from interpretations.",
+    "Observe one everyday task and separate three observations from interpretations.",
+    "Illustrative workshop example: a student observes confusion at a library returns desk. They test a paper sign and a revised service handoff before proposing an app.",
+    "design-process-workshop",
+    "Continue your practice with the next workshop worksheet."
+  ],
+  "design-process-workshop": [
+    "Choose one project decision and list known facts, assumptions and missing evidence.",
+    "Choose one project decision and list known facts, assumptions and missing evidence.",
+    "Illustrative workshop example: a team maps an onboarding problem, interviews users about the task, and tests a prototype. The method changes when the evidence contradicts the original brief.",
+    "concept-design-workshop",
+    "Continue your practice with the next workshop worksheet."
+  ],
+  "concept-design-workshop": [
+    "Write three concepts that differ in mechanism, not just styling.",
+    "Write three concepts that differ in mechanism, not just styling.",
+    "Illustrative workshop example: three ways to improve a public waiting experience use seating information, an assisted queue and a physical token. The team tests the uncertainty behind each direction.",
+    "design-thinking-workshop",
+    "Continue your practice with the next workshop worksheet."
+  ],
+  "design-elective-workshop": [
+    "Choose one unfamiliar medium and make a small study with one deliberate constraint.",
+    "Choose one unfamiliar medium and make a small study with one deliberate constraint.",
+    "Illustrative workshop example: a product designer studies sound cues through a paper-and-audio prototype, then explains where a cue could help or overload an interface.",
+    "concept-design-workshop",
+    "Continue your practice with the next workshop worksheet."
+  ],
+  "portfolio-development-workshop": [
+    "Pick one project and write the problem, your role and strongest decision in three sentences.",
+    "Pick one project and write the problem, your role and strongest decision in three sentences.",
+    "Illustrative workshop example: a student replaces a gallery of polished screens with a short account of the decision, prototype test and remaining uncertainty. No fabricated business impact is added.",
+    "ux-ui-design-workshop",
+    "Continue your practice with the next workshop worksheet."
+  ],
+  "ux-ui-design-workshop": [
+    "Map one user task including success, error and recovery before drawing detailed screens.",
+    "Map one user task including success, error and recovery before drawing detailed screens.",
+    "Illustrative workshop example: a booking prototype includes an unavailable-date state and an accessible error message. A task-based review reveals an unclear label, which is revised before adding visual polish.",
+    "portfolio-development-workshop",
+    "Continue your practice with the next workshop worksheet."
+  ],
+  "game-design-workshop": [
+    "Create one paper turn with a choice, feedback and a consequence.",
+    "Create one paper turn with a choice, feedback and a consequence.",
+    "Illustrative workshop example: a paper resource-sharing game reveals that one strategy always wins. The designer changes the cost of a repeated action and observes another round.",
+    "design-elective-workshop",
+    "Continue your practice with the next workshop worksheet."
+  ],
+  "data-visualisation-workshop": [
+    "Write one audience question and list the units, missing values and limitations of a small dataset.",
+    "Write one audience question and list the units, missing values and limitations of a small dataset.",
+    "Illustrative workshop example: a small synthetic dataset compares travel times across modes. A bar chart with units and a table communicates the comparison; the designer does not imply the data represents a whole city.",
+    "design-process-workshop",
+    "Continue your practice with the next workshop worksheet."
+  ]
+}

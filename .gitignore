@@ -1,0 +1,23 @@
+node_modules/
+dist/
+.vercel/
+.env*
+.DS_Store
+*.log
+*.bak
+*.backup
+*~
+.agents/
+.codex/
+.critiquito-tmp/
+ElevateThrive-private/
+*private*/
+nurture*/
+# paid worksheets (never commit)
+downloads/ai-workflow-starter-kit.*
+downloads/design-process-workshop.*
+downloads/concept-design-workshop.*
+downloads/design-elective-workshop.*
+downloads/ux-ui-design-workshop.*
+downloads/game-design-workshop.*
+downloads/data-visualisation-workshop.*

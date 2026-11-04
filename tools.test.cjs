@@ -1,0 +1,5 @@
+const {test}=require('node:test'),assert=require('node:assert/strict');const {makeDesignPrompts,chooseDifferent,diagnosticResult,juryQuestions,critiqueDeck}=require('./tools.js');
+test('prompt library has exactly 100 unique usable prompts across ten contexts',()=>{const p=makeDesignPrompts();assert.equal(p.length,100);assert.equal(new Set(p.map(x=>x.text)).size,100);assert.equal(new Set(p.map(x=>x.context)).size,10);assert.deepEqual(p.map(x=>x.id),Array.from({length:100},(_,i)=>i+1))});
+test('draw avoids immediately repeating a prompt and handles a one-card deck',()=>{assert.equal(chooseDifferent(['a','b'],'a',()=>0),'b');assert.equal(chooseDifferent(['a'],'a',()=>0),'a');assert.equal(chooseDifferent([],null),null)});
+test('reflection recommends least-practised dimensions and preserves ties',()=>{const r=diagnosticResult([0,0,3,3,2,2,0,0]);assert.deepEqual(r.next,['Observation','Reflection']);assert.equal(r.scores[1].value,6)});
+test('rehearsal and critique have distinct original questions',()=>{assert.equal(juryQuestions.length,12);assert.equal(new Set(juryQuestions).size,12);assert.equal(critiqueDeck.length,24);assert.equal(new Set(critiqueDeck).size,24)});

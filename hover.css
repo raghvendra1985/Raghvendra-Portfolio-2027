@@ -1,0 +1,32 @@
+/* Action feedback; desktop hover is optional, keyboard feedback is equivalent. */
+.button>span[aria-hidden]{display:inline-block;transition:transform 180ms cubic-bezier(.22,1,.36,1)}
+.button{transition:background-color 180ms ease-out,box-shadow 180ms ease-out}
+.resource-card:has(a),[data-library] article:has(a){transition:transform 200ms cubic-bezier(.22,1,.36,1),border-color 180ms ease-out,box-shadow 200ms ease-out}
+.side-panel nav a{position:relative;width:fit-content;max-width:100%;transition:opacity 150ms ease-out,translate 150ms cubic-bezier(.22,1,.36,1)}
+.side-panel nav a::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 150ms ease-out}
+.choice-options span{transition:background-color 150ms ease-out,border-color 150ms ease-out,color 150ms ease-out}
+a[download],footer nav a,footer>a:not(.brand){text-decoration:underline;text-decoration-color:transparent;text-underline-offset:5px;transition:text-decoration-color 150ms ease-out}
+@media(hover:hover) and (pointer:fine){
+ .button:not(:disabled):hover{box-shadow:0 6px 22px #0022cb2e;background-color:#001aa3}
+ .button:not(:disabled):hover>span[aria-hidden]{transform:translateX(3px)}
+ .resource-card:has(a):hover,[data-library] article:has(a):hover{transform:translateY(-3px);border-color:#0022cb80;box-shadow:0 12px 28px #0022cb18}
+ .side-panel nav a:hover{translate:3px 0;opacity:1}.side-panel nav a:hover::after{transform:scaleX(1)}
+ .choice-options label:hover input:not(:checked)+span{background:#edf5ff;border-color:#0022cb80;color:#001aa3}
+ a[download]:hover,footer nav a:hover,footer>a:not(.brand):hover{text-decoration-color:currentColor}
+}
+.button:focus-visible{box-shadow:0 6px 22px #0022cb2e}
+.button:focus-visible>span[aria-hidden]{transform:translateX(3px)}
+.resource-card:has(a):focus-within,[data-library] article:has(a):focus-within{border-color:#0022cb80;box-shadow:0 12px 28px #0022cb18}
+.side-panel nav a:focus-visible::after{transform:scaleX(1)}
+.choice-options input:not(:checked):focus-visible+span{background:#edf5ff;border-color:#0022cb;color:#001aa3}
+a[download]:focus-visible,footer nav a:focus-visible,footer>a:not(.brand):focus-visible{text-decoration-color:currentColor}
+/* Override older ungated menu translation on touch and reduced-motion devices. */
+@media(hover:none),(pointer:coarse){.side-panel nav a:hover{translate:0;opacity:1}}
+@media(prefers-reduced-motion:reduce){
+ .button,.button>span[aria-hidden],.resource-card:has(a),[data-library] article:has(a),.side-panel nav a,.side-panel nav a::after,.choice-options span,a[download],footer a{transition:none!important}
+ .button:hover>span[aria-hidden],.button:focus-visible>span[aria-hidden],.resource-card:has(a):hover,[data-library] article:has(a):hover{transform:none!important}
+ .side-panel nav a:hover{translate:0!important}
+}
+html.motion-static .button>span[aria-hidden],html.motion-static .resource-card:has(a),html.motion-static [data-library] article:has(a){transform:none!important}
+html:not(.reference-motion) .button:hover>span[aria-hidden],html:not(.reference-motion) .button:focus-visible>span[aria-hidden],html:not(.reference-motion) .resource-card:has(a):hover,html:not(.reference-motion) [data-library] article:has(a):hover{transform:none!important}
+html:not(.reference-motion) .side-panel nav a:hover{translate:0!important}

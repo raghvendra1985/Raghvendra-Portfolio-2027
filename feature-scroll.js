@@ -1,0 +1,13 @@
+function featureScrollState(progress,count=3){const p=Math.max(0,Math.min(1,progress));return {index:Math.min(count-1,Math.floor(p*count)),fraction:p===1?1:(p*count)%1}}
+if(typeof module!=='undefined')module.exports={featureScrollState};
+if(typeof document!=='undefined')document.querySelectorAll('[data-feature-scroll="true"]').forEach(root=>{
+ const track=root.parentElement,tabs=[...root.querySelectorAll('[role=tab]')],panels=[...root.querySelectorAll('[role=tabpanel]')],visuals=[...root.querySelectorAll('.feature-visual')],heads=[...root.querySelectorAll('.feature-heading span')],media=matchMedia('(prefers-reduced-motion: reduce)');
+ let index=0,fraction=0,queued=false;const reduced=()=>media.matches||!document.documentElement.classList.contains('reference-motion');
+ root.querySelector('.feature-controls span').textContent='Scroll to explore 01 → 02 → 03 · or choose a step';
+ function render(){root.dataset.activeStep=String(index);tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(index===i));tab.tabIndex=index===i?0:-1;tab.style.setProperty('--step-progress',String(i<index?1:i===index?fraction:0))});panels.forEach((p,i)=>p.hidden=i!==index);visuals.forEach((v,i)=>{v.classList.toggle('is-active',i===index);v.classList.toggle('is-built',i<=index)});heads.forEach((h,i)=>h.classList.toggle('is-active',i===index));root.classList.add('feature-paused');root.classList.toggle('feature-reduced',reduced())}
+ function measure(){const top=Math.min(96,innerHeight-root.offsetHeight-16);root.style.setProperty('--feature-sticky-top',top+'px');track.style.setProperty('--feature-content-height',root.offsetHeight+'px');return top}
+ function update(){queued=false;const top=measure();if(reduced()){fraction=1;render();return}if(panels.some(p=>p.contains(document.activeElement)))return;const rect=track.getBoundingClientRect(),distance=Math.max(1,track.offsetHeight-root.offsetHeight);({index,fraction}=featureScrollState((top-rect.top)/distance,tabs.length));render()}
+ function schedule(){if(!queued){queued=true;requestAnimationFrame(update)}}
+ tabs.forEach((tab,i)=>{const select=n=>{index=(n+tabs.length)%tabs.length;fraction=1;render()};tab.addEventListener('click',()=>select(i));tab.addEventListener('keydown',e=>{let n;if(e.key==='ArrowRight')n=index+1;if(e.key==='ArrowLeft')n=index-1;if(e.key==='Home')n=0;if(e.key==='End')n=tabs.length-1;if(n!==undefined){e.preventDefault();select(n);tabs[index].focus()}})});
+ addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});media.addEventListener('change',schedule);new MutationObserver(schedule).observe(document.documentElement,{attributes:true,attributeFilter:['class']});new ResizeObserver(schedule).observe(root);render();schedule();
+});

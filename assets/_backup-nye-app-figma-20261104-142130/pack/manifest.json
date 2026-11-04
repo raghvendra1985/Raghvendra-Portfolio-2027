@@ -1,0 +1,17 @@
+{
+  "note": "Figma MCP renders at 1x native size (360px-wide mobile frames); artefacts upscaled 2x with Lanczos to reach a longer edge of at least 1000px.",
+  "files": {
+    "cover-1600x1000.png": {"type":"collage","sources":[
+      {"fileKey":"BNI8SbmwPzQHf7VQHRuZVh","nodeId":"7:50","name":"walkthrough_screen_one"},
+      {"fileKey":"BNI8SbmwPzQHf7VQHRuZVh","nodeId":"14:6577","name":"Home/Homepage/NoOpenAccounts (top 760px)"},
+      {"fileKey":"BNI8SbmwPzQHf7VQHRuZVh","nodeId":"7:6378","name":"wallet landing screen"},
+      {"fileKey":"OumzcfHnr2rdyiI2scvyEE","nodeId":"4966:4743","name":"Onboarding/Jana-NTB/OpenNYEBankAccount/vKYCSuccess"}],
+      "notes":"4 real mobile screens on a #F4F2F8 background"},
+    "project-nye.png": {"type":"copy of cover-1600x1000.png"},
+    "artefact-01.png": {"fileKey":"BNI8SbmwPzQHf7VQHRuZVh","nodeId":"14:6577","name":"Home/Homepage/NoOpenAccounts","notes":"mobile home, 360x940 rendered at 2x"},
+    "artefact-02.png": {"fileKey":"BNI8SbmwPzQHf7VQHRuZVh","nodeId":"7:1566","name":"Registration/SetPIN","notes":"registration, PIN set step"},
+    "artefact-03.png": {"fileKey":"BNI8SbmwPzQHf7VQHRuZVh","nodeId":"7:6378","name":"wallet landing screen","notes":"steps to activate the NYE Prepaid (PPI) card"},
+    "artefact-04.png": {"fileKey":"OumzcfHnr2rdyiI2scvyEE","nodeId":"4966:4743","name":"Onboarding/Jana-NTB/OpenNYEBankAccount/vKYCSuccess","notes":"CASA savings account opened (Jana SFB); sample data in the design"},
+    "artefact-05.png": {"fileKey":"HUWV3grSwyMny10Yg0Pb8X","nodeId":"1458:7874","name":"Onboarding/NYELoans/LoanOffer","notes":"desktop web, 1366x768; no mobile loan screens exist in NYE-APP Loan page (it only has a title frame)"}
+  }
+}

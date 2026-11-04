@@ -1,0 +1,51 @@
+{
+  "reviewed": "2026-11-02",
+  "projects": [
+    {
+      "slug": "nye-team",
+      "name": "NYE Money \u00b7 RapiPay",
+      "tag": "Design leadership \u00b7 Employment",
+      "image": "../work/nye-team/multi-device-cover.png",
+      "alt": "NYE Money shown on desktop, tablet and phone",
+      "problem": "Create a coherent consumer experience across parallel fintech squads.",
+      "role": "Senior Manager UX; built the design function and its shared operating model.",
+      "deliverable": "Design team, shared design language and cross-functional review practices.",
+      "outcome": "NYE Money delivered on web, iOS and Android.",
+      "url": "https://www.raghvendrasingh.com/work/nye-team",
+      "imageNote": "User-supplied 1600 \u00d7 1000 Figma cover. Supporting product screenshots show mobile home, PIN setup and prepaid activation. No verified historical organisational artefacts were available for this revision."
+    },
+    {
+      "slug": "crowley",
+      "name": "Crowley Maritime",
+      "tag": "Enterprise systems \u00b7 Through Nagarro",
+      "image": "project-crowley.webp",
+      "alt": "Crowley Maritime freight-quoting design from Raghvendra\u2019s portfolio",
+      "problem": "Make a dense freight-quoting flow easier to navigate under rate and customs constraints.",
+      "role": "Staff Design Consultant on the Nagarro client engagement.",
+      "deliverable": "A route \u2192 cargo \u2192 contact sequence and design-system documentation.",
+      "outcome": "The portfolio documents the three-step quote design and its decisions.",
+      "url": "https://www.raghvendrasingh.com/work/crowley"
+    },
+    {
+      "slug": "gwk-ghostwriter",
+      "name": "GWK Ghostwriter",
+      "tag": "Applied AI \u00b7 Founder-built product",
+      "image": "project-ghostwriter.png",
+      "alt": "GWK Ghostwriter personal AI writing studio from Raghvendra\u2019s portfolio",
+      "problem": "Keep voice and source material consistent across research-to-post sessions.",
+      "role": "Founder and product builder; owned the experience, memory model and voice rules.",
+      "deliverable": "A writing studio with research, drafts, memory and human review.",
+      "outcome": "A runnable prototype and landing experience are documented in the portfolio.",
+      "url": "https://www.raghvendrasingh.com/work/gwk-ghostwriter"
+    }
+  ],
+  "careerSource": "https://www.raghvendrasingh.com/about",
+  "teachingSource": "https://www.raghvendrasingh.com/teaching",
+  "scope": "Public portfolio statements; no additional performance metrics or endorsement claims added.",
+  "nyeProductEvidence": {
+    "cover": "/assets/work/nye/landing-entry.jpg",
+    "coverSource": "Crop of existing NYE marketing capture",
+    "coverBytes": 110813,
+    "note": "Marketing frames and selected research and component evidence document the design approach. Reduced duplication is intended and unpublished."
+  }
+}

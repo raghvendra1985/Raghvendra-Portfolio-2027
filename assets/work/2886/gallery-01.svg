@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="2886 Craft">
+  <rect width="1200" height="800" fill="#0B1849"/>
+  <rect x="80" y="80" width="1040" height="640" fill="none" stroke="#EBEDE3" stroke-opacity="0.35"/>
+  <text x="120" y="180" font-family="ui-monospace, monospace" font-size="22" letter-spacing="6" fill="#E4B028">01</text>
+  <text x="120" y="420" font-family="Georgia, serif" font-size="72" fill="#EBEDE3">Craft</text>
+  <text x="120" y="660" font-family="ui-monospace, monospace" font-size="20" letter-spacing="4" fill="#EBEDE3" fill-opacity="0.6">2886</text>
+</svg>

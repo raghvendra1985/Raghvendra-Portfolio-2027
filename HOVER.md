@@ -1,0 +1,3 @@
+# Hover feedback
+Five approved patterns implemented in hover.css: CTA glow/arrow180ms, linked card border/lift200ms, panel-link shift/underline150ms, unselected pill tint150ms, download/footer underline150ms. Movement gated by fine-pointer hover; focus alternatives retain outlines and highlights; OS reduced motion and page Reduce motion suppress movement. Static cards and timeline remain unaffected.
+Browser verified card matrix translateY(-3px) and blue border, then transform:none under the page reduced-motion setting. Existing21 tests passed. Editable Figma examples: https://www.figma.com/design/COnVXaFAjobjJuCojMAz44?node-id=54-81

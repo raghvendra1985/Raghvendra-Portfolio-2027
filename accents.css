@@ -1,0 +1,19 @@
+/* Elevate Thrive brand accents. Supplied logo artwork remains unchanged. */
+:root{--accent-1:#0022cb;--accent-2:#eed200;--blue:var(--accent-1);--color-primary:var(--accent-1);--color-secondary:var(--accent-2)}
+.panel-navigation .header .menu,.panel-close{background:var(--accent-2);color:#0a1a33}
+.panel-navigation .header .menu:hover,.panel-close:hover{background:#dac000;color:#0a1a33}
+.loader-track:after{background:var(--accent-2)}
+.side-panel nav a::after{background:var(--accent-2)}
+.side-panel nav a[aria-current=page]{text-decoration-color:var(--accent-2)}
+#reading-progress{background:linear-gradient(90deg,var(--accent-2),var(--accent-1))}
+::selection{background:var(--accent-2);color:#0a1a33}
+/* Yellow selection follows the reversible vertical timeline activation. */
+.reference-motion .timeline>li.is-active{border-color:var(--accent-2);box-shadow:inset 4px 0 0 var(--accent-2),8px 8px 16px #00000014}
+.reference-motion .timeline>li.is-active::before{background:var(--accent-2);border-color:var(--accent-1);box-shadow:0 0 0 4px #eed20033}
+.reference-motion .timeline>li.is-active>span{color:#0a1a33;background:var(--accent-2);border-radius:6px;padding:3px 7px;box-decoration-break:clone}
+.timeline>li::before{transition:translate 700ms ease-out,background-color 180ms ease-out,box-shadow 180ms ease-out}
+@media(prefers-reduced-motion:reduce){.timeline>li::before{transition:none}}
+/* Keep the track and animated fill behind the step circles. */
+.timeline{isolation:isolate}
+.timeline::before,.timeline::after{z-index:-1}
+.timeline>li{z-index:0}

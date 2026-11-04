@@ -1,0 +1,37 @@
+.career-atlas { display:grid; gap:16px; margin-top:24px; }
+.career-atlas [hidden] { display:none; }
+.atlas-nav { display:grid; gap:6px; align-content:start; }
+.atlas-nav button { display:grid; gap:2px; padding:9px 12px; min-height:44px; text-align:left; font:inherit; color:#0a1a33; background:#f4f6ff; border:0; border-inline-start:4px solid transparent; border-radius:8px; cursor:pointer; }
+.atlas-nav button span,.atlas-caption { font-size:.875rem; color:#46516d; }
+.atlas-nav button[aria-pressed="true"] { border-inline-start-color:#0022cb; background:#e8edff; }
+.atlas-nav button:focus-visible { outline:3px solid #0022cb; outline-offset:2px; }
+.atlas-story { min-width:0; background:#f4f6ff; border-radius:22px; padding:clamp(16px,3vw,32px); }
+.atlas-stage { position:relative; height:clamp(160px,30vw,290px); overflow:hidden; border-radius:14px; background:#e6ebff; }
+.atlas-frame { position:absolute; inset:12% 10%; display:grid; place-items:center; color:#0022cb; opacity:0; transform:translateY(var(--atlas-y,0)) scale(var(--atlas-scale,.65)); transition:transform 330ms ease,opacity 270ms ease; }
+.atlas-frame img,.atlas-frame svg { display:block; width:100%; height:100%; min-height:0; object-fit:contain; }
+.atlas-frame.is-near { opacity:.28; }
+.atlas-frame.is-active { opacity:1; z-index:1; }
+.atlas-frame.is-active svg { animation:atlas-settle 420ms ease-out; }
+@keyframes atlas-settle { from { transform:scale(.93); } to { transform:scale(1); } }
+.atlas-chapters article { padding-block:16px; }
+.atlas-chapters h3 { margin-bottom:8px; }
+@media(min-width:750px) { .career-atlas { grid-template-columns:minmax(210px,1fr) minmax(0,2fr); } }
+@media(prefers-reduced-motion:reduce) { .atlas-frame { transition:none; } .atlas-frame.is-active svg { animation:none; } }
+html:has(#motion-toggle[aria-pressed="true"]) .atlas-frame { transition:none; }
+html:has(#motion-toggle[aria-pressed="true"]) .atlas-frame.is-active svg { animation:none; }
+
+.atlas-track.is-scroll-linked::after { content:""; display:block; height:150svh; }
+.is-scroll-linked .career-atlas { position:sticky; top:calc(var(--header, 72px) + 12px); }
+.is-scroll-linked .atlas-frame { transition:none; }
+.is-scroll-linked .atlas-frame.is-active svg { animation:none; }
+.is-scroll-linked .atlas-chapters { min-height:190px; }
+@media(max-width:749px) {
+  .is-scroll-linked .atlas-nav { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .is-scroll-linked .atlas-nav button { padding:6px 8px; font-size:.82rem; }
+  .is-scroll-linked .atlas-stage { height:clamp(110px,19svh,150px); }
+  .is-scroll-linked .atlas-chapters { min-height:0; }
+}
+@media(max-height:640px) {
+  .is-scroll-linked .atlas-stage { height:110px; }
+  .is-scroll-linked .atlas-nav button { padding-block:4px; }
+}

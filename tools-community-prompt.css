@@ -1,0 +1,17 @@
+.cp-backdrop{position:fixed;inset:0;background:rgba(10,10,20,.55);z-index:9990;display:flex;align-items:flex-end;justify-content:center;padding:16px}
+@media(min-width:720px){.cp-backdrop{align-items:center}}
+.cp-backdrop[hidden]{display:none}
+.cp-dialog{background:#fff;color:#16161d;max-width:520px;width:100%;border-radius:16px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:cp-in .25s ease-out}
+.cp-dialog h2{font-size:1.6rem;line-height:1.2;margin:.25rem 0 .75rem}
+.cp-dialog .cp-eyebrow{font-size:.85rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#1f5d3a;margin:0}
+.cp-dialog ul{margin:0 0 1.25rem;padding-left:1.2rem;line-height:1.55}
+.cp-actions{display:flex;flex-wrap:wrap;gap:12px}
+.cp-actions a,.cp-actions button{min-height:48px;padding:12px 20px;border-radius:999px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.cp-join{background:#0b6b3a;color:#fff;border:2px solid #0b6b3a}
+.cp-join:hover{background:#08502b}
+.cp-later{background:#fff;color:#16161d;border:2px solid #16161d}
+.cp-dialog a:focus-visible,.cp-dialog button:focus-visible{outline:3px solid #1a4fd6;outline-offset:3px}
+.cp-note{font-size:.9rem;color:#4a4a55;margin:1rem 0 0}
+@keyframes cp-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.cp-dialog{animation:none}}
+html.reduce-motion .cp-dialog{animation:none}

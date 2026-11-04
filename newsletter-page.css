@@ -1,0 +1,42 @@
+/* Newsletter page: quiet card/tint system aligned with home/services/about. Page-scoped. */
+.newsletter-page{--n-blue:#0022cb;--n-ink:#0b1430;--n-muted:#536173;--n-line:#dce3ef;--n-tint:#f4f6fc}
+.newsletter-page main .eyebrow{color:var(--n-blue);font-size:.78rem;letter-spacing:.12em;font-weight:700}
+.newsletter-page :is(a,button,input,select,textarea):focus-visible{outline:3px solid var(--n-blue);outline-offset:3px;border-radius:8px}
+.nl-band{background:var(--n-tint);padding:72px 0}
+.nl-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px;align-items:start}
+.nl-band h2,.nl-library h2{font-size:clamp(26px,3vw,34px);line-height:1.15;color:var(--n-ink);margin:0 0 20px}
+.nl-paths{list-style:none;padding:0;margin:0;display:grid;gap:16px}
+.nl-paths li{background:#fff;border:1px solid var(--n-line);border-radius:20px;padding:22px 24px}
+.nl-paths p{margin:0;line-height:1.6;color:var(--n-ink)}
+.nl-kicker{font-size:.78rem!important;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--n-blue)!important;margin-bottom:6px!important}
+.newsletter-page .demo-form{margin:0;background:#fff;border:1px solid var(--n-line);border-radius:22px;box-shadow:none;padding:28px}
+.newsletter-page .demo-form label{color:var(--n-ink);font-weight:600;margin-block:16px}
+.newsletter-page .demo-form input:not([type=checkbox]),.newsletter-page select,.newsletter-page [data-search]{background:#fff;border:1px solid #6b7686;min-height:48px}
+.newsletter-page ::placeholder{color:#5b6576;opacity:1}
+.newsletter-page .check{font-weight:400!important;line-height:1.5}
+.newsletter-page .check input{accent-color:var(--n-blue);margin-top:2px;min-height:0!important}
+.nl-note{background:#fff7e0;border:1px solid #e8c766;border-radius:12px;padding:12px 14px;margin:0 0 8px;color:#4a3800;line-height:1.5}
+.nl-req,.nl-small{color:var(--n-muted);font-weight:400}
+.nl-small{font-size:.92rem;line-height:1.5}
+.nl-status:not(:empty){margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--n-tint);color:var(--n-ink)}
+.nl-library{padding-block:72px}
+.nl-lede{color:var(--n-muted);max-width:68ch;line-height:1.6;margin:0 0 24px}
+.nl-filters{display:grid;grid-template-columns:2fr 1fr auto;gap:16px;align-items:end;margin-bottom:28px}
+.nl-filters label{margin:0!important;font-weight:600;color:var(--n-ink)}
+.nl-count{margin:0 0 12px;color:var(--n-muted);white-space:nowrap}
+.nl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-bottom:56px}
+.nl-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.newsletter-page .resource-card{position:relative;display:flex;flex-direction:column;margin:0;padding:24px;border:1px solid var(--n-line);border-radius:22px;box-shadow:none;background:#fff;transition:border-color .16s,box-shadow .16s}
+.nl-grid-2 .resource-card{background:var(--n-tint)}
+.newsletter-page .resource-card:hover,.newsletter-page .resource-card:focus-within{border-color:var(--n-blue);box-shadow:0 12px 28px #0b143014}
+.newsletter-page .resource-card h3{font-size:22px;line-height:1.25;margin:4px 0 10px}
+.newsletter-page .resource-card h3 a{color:var(--n-ink);text-decoration:none}
+.newsletter-page .resource-card h3 a::after{content:"";position:absolute;inset:0;border-radius:22px}
+.newsletter-page .resource-card h3 a:focus-visible{outline:none}
+.newsletter-page .resource-card:has(h3 a:focus-visible){outline:3px solid var(--n-blue);outline-offset:3px}
+.newsletter-page .resource-card p{color:var(--n-muted);line-height:1.55;margin:0 0 12px}
+.newsletter-page .resource-card .text-link{margin-top:auto;color:var(--n-blue);font-weight:700}
+.newsletter-page .collection-heading{margin-top:0}
+@media(max-width:960px){.nl-split{grid-template-columns:1fr;gap:40px}.nl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.nl-band,.nl-library{padding-block:48px}.nl-grid,.nl-grid-2{grid-template-columns:1fr}.nl-filters{grid-template-columns:1fr}.newsletter-page .demo-form{padding:20px}}
+@media(prefers-reduced-motion:reduce){.newsletter-page *{transition:none!important;animation:none!important}}

@@ -1,0 +1,46 @@
+[
+  {
+    "file": "project-nye.png",
+    "source": "Figma collage 1600x1000 of 4 NYE mobile screens: BNI8SbmwPzQHf7VQHRuZVh 7:50 walkthrough, 14:6577 home, 7:6378 wallet landing; OumzcfHnr2rdyiI2scvyEE 4966:4743 vKYC success (CASA)",
+    "contentType": "image/png",
+    "bytes": 564670,
+    "updated": "2026-11-04"
+  },
+  {
+    "file": "project-crowley.webp",
+    "source": "https://www.raghvendrasingh.com/_next/image?url=%2Fassets%2Fwork%2Fcrowley%2Fcover.webp&w=3840&q=75",
+    "contentType": "image/webp",
+    "bytes": 129396
+  },
+  {
+    "file": "project-ghostwriter.png",
+    "source": "https://www.raghvendrasingh.com/_next/image?url=%2Fassets%2Fwork%2Fgwk-ghostwriter%2Fcover.png&w=1920&q=75",
+    "contentType": "image/png",
+    "bytes": 58679
+  },
+  {
+    "file": "teaching-nift.jpg",
+    "source": "https://www.raghvendrasingh.com/_next/image?url=%2Fassets%2Ftestimonials%2Fworkshop-scenes%2Fnift-delhi-06.jpg&w=1920&q=75",
+    "contentType": "image/jpeg",
+    "bytes": 204259
+  },
+  {
+    "file": "teaching-nid.jpg",
+    "source": "https://www.raghvendrasingh.com/_next/image?url=%2Fassets%2Ftestimonials%2Fworkshop-scenes%2Fnid-openelective-02.jpg&w=3840&q=75",
+    "contentType": "image/jpeg",
+    "bytes": 189243
+  },
+  {
+    "file": "../work/nye-team/multi-device-cover.png",
+    "source": "User-supplied NYE multi-device Figma cover",
+    "alt": "NYE Money shown on desktop, tablet and phone",
+    "contentType": "image/png",
+    "bytes": 620021
+  },
+  {
+    "file": "../work/nye/landing-entry.jpg",
+    "source": "Top crop of original NYE public marketing capture at assets/work/nye/landing.png",
+    "contentType": "image/jpeg",
+    "bytes": 110813
+  }
+]

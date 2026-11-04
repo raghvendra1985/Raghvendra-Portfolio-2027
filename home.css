@@ -1,0 +1,134 @@
+/* Homepage-only layer aligned with work/case-layout.css + work/work-index.css. Scoped to body.home-page. */
+.home-page{--h-blue:#0022cb;--h-ink:#0b1430;--h-muted:#536173;--h-line:#dce3ef;--h-tint:#f4f6fc}
+.home-page .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* Skip link: large, visible on focus */
+.home-page .skip{top:-200px;left:16px;min-height:48px;display:inline-flex;align-items:center;padding:12px 22px;border-radius:999px;font-weight:700;color:var(--h-blue);border:3px solid var(--h-blue);box-shadow:0 8px 24px #0022cb30}
+.home-page .skip:focus,.home-page .skip:focus-visible{top:12px}
+.home-page #main-content:focus{outline:none}
+/* Chapter kickers */
+.home-page main .eyebrow{color:var(--h-blue);font-size:.78rem;letter-spacing:.12em;font-weight:700;margin-bottom:16px}
+.home-page .founder .eyebrow{color:#c8d6ff}
+.home-page main h2 span{color:var(--h-muted)}
+.home-page .founder h2 span{color:#b9c9e6}
+.home-page a:focus-visible,.home-page button:focus-visible{outline:3px solid var(--h-blue);outline-offset:3px;border-radius:8px}
+.home-page .founder a:focus-visible,.home-page .home-contact-band a:focus-visible{outline-color:#fff}
+/* Hero CTAs */
+.home-page .hero .actions .text-link{display:inline-flex;align-items:center;min-height:52px;padding:12px 24px;border:2px solid var(--h-blue);border-radius:999px;color:var(--h-blue);font-weight:600}
+.home-page .hero .actions .text-link:hover{background:#eef1ff}
+/* Discovery cards */
+.home-page .discovery-start>p:not(.eyebrow){color:var(--h-muted)}
+.home-page .discovery-link{border-radius:22px;border-color:var(--h-line);background:#fff;transition:border-color .16s,box-shadow .16s,transform .16s}
+.home-page .discovery-link>span{color:var(--h-muted)}
+.home-page .discovery-link:hover,.home-page .discovery-link:focus-visible{border-color:var(--h-blue);box-shadow:0 12px 28px #0b143014,inset 0 -4px #eed200;transform:translateY(-2px)}
+.home-page .discovery-link:focus-visible{outline:3px solid var(--h-blue);outline-offset:3px}
+/* Meet Raghvendra */
+.home-page .entry-proof{background:var(--h-tint);border:1px solid var(--h-line);border-radius:24px;padding:clamp(24px,4vw,48px);margin-block:clamp(40px,6vw,72px)}
+.home-page .entry-portrait{border-radius:20px;width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.home-page .open-to-note{font-size:.88rem;line-height:1.55;color:var(--h-muted);border-left:3px solid var(--h-line);padding-left:12px;max-width:60ch}
+.home-page .entry-proof .actions .text-link{color:var(--h-blue);font-weight:600;min-height:44px;display:inline-flex;align-items:center}
+/* Services: static 3-card grid */
+.home-page .home-services{background:var(--h-tint)}
+.home-service-grid{list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.home-service-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--h-line);border-radius:22px;padding:24px;transition:border-color .16s,box-shadow .16s}
+.home-service-card:hover,.home-service-card:focus-within{border-color:var(--h-blue);box-shadow:0 12px 28px #0b143014}
+.home-service-card .feature-visual{height:170px;border-radius:16px;background:var(--h-tint);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.home-card-kicker{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--h-blue);margin:0 0 10px}
+.home-service-card h3{font-size:24px;line-height:1.2;margin:0 0 12px;color:var(--h-ink)}
+.home-service-card p:not(.home-card-kicker){font-size:15.5px;line-height:1.6;color:var(--h-muted)}
+.home-card-link{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:10px 20px;border-radius:999px;background:var(--h-blue);color:#fff;font-weight:600;font-size:15px;align-self:flex-start}
+.home-card-link:hover{background:#0019a0}
+.home-note{font-size:.85rem;color:var(--h-muted);margin:16px 0 0}
+.opportunity-map{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:150px}.opportunity-map i{display:block;width:64px;height:44px;border-radius:12px;background:#d9def8}.opportunity-map i:last-child{background:var(--h-blue);box-shadow:0 0 0 4px #eed200}
+.prototype-window{width:170px;background:#fff;border:1px solid #dedee5;border-radius:16px;padding:16px}.prototype-window i{display:block;height:9px;background:#e8e8ee;border-radius:8px;margin:10px 0}.prototype-window i:last-child{width:55%;height:24px;background:var(--h-blue)}
+.workflow-nodes{display:flex;align-items:center;gap:8px}.workflow-nodes i{width:44px;height:44px;border:1px solid #0022cb44;border-radius:12px;background:#fff;display:grid;place-items:center;font-style:normal;color:var(--h-blue)}.workflow-nodes i:last-child{background:#eed200;color:#0a1a33}
+/* Process */
+.home-page .process li{background:#fff;border:1px solid var(--h-line);border-top:4px solid var(--h-blue);border-radius:20px;padding:22px}
+.home-page .process li>span{font-weight:700}
+.home-page .process h3{margin:14px 0 6px}
+.home-page .process p{color:var(--h-muted)}
+/* Evidence: portfolio-card style */
+.home-page .project-evidence-grid{align-items:stretch}
+.home-page .project-evidence-card{border-radius:22px;border-color:var(--h-line);display:flex;flex-direction:column;transition:border-color .16s,box-shadow .16s,transform .16s}
+.home-page .project-evidence-card:hover,.home-page .project-evidence-card:focus-within{border-color:var(--h-blue);box-shadow:0 14px 32px #0b143018;transform:translateY(-3px)}
+.home-page .project-evidence-copy{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+.home-page .project-evidence-copy .eyebrow{margin-bottom:6px}
+.home-page .project-evidence-copy h3{font-size:24px;margin:4px 0 8px}
+.home-page .project-evidence-copy dt{font-size:.72rem;margin-top:14px}
+.home-page .project-evidence-copy dd{font-size:14.5px;line-height:1.55;color:var(--h-muted);margin-top:4px}
+.home-page .project-evidence-copy .text-link{margin-top:auto;padding-top:18px;color:var(--h-blue);font-weight:600}
+.home-page .evidence-intro{color:var(--h-muted)}
+/* Workshops chips */
+.home-workshops{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.home-workshops a{display:inline-flex;align-items:center;min-height:48px;padding:10px 22px;border:1px solid var(--h-line);border-radius:999px;background:#fff;color:var(--h-ink);font-size:15px;font-weight:600;transition:border-color .16s,background .16s}
+.home-workshops a:hover,.home-workshops a:focus-visible{border-color:var(--h-blue);background:#eef1ff;color:var(--h-blue)}
+/* Contact band */
+.home-page .home-contact{background:#fff;padding-block:clamp(48px,7vw,96px)}
+.home-contact-band{background:linear-gradient(135deg,#0022cb 0%,#0b1430 100%);color:#fff;border-radius:24px;padding:clamp(36px,6vw,72px)}
+.home-page .home-contact-band .eyebrow{color:#dbe3ff}
+.home-page .home-contact-band h2{color:#fff}
+.home-page .home-contact-band p:not(.eyebrow){color:#e3e9ff}
+.home-page .home-contact-band .button{background:#fff;color:var(--h-blue)}
+.home-page .home-contact-band .button:hover{background:#eef1ff}
+.home-page .home-contact-band .email{color:#fff;text-decoration:underline;min-height:44px;display:flex;align-items:center}
+@media(max-width:900px){.home-service-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.home-page .entry-proof{padding:22px}.home-page .entry-portrait{max-width:180px}.home-card-link{align-self:stretch}}
+@media(prefers-reduced-motion:reduce){.home-page *{transition:none!important}.home-page .discovery-link:hover,.home-page .project-evidence-card:hover{transform:none}}
+
+/* Homepage decisions: scannable process grid + no tall hero pin */
+.home-page .home-process{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+  margin:48px 0 0;
+  padding:0!important;
+  list-style:none;
+  max-width:none;
+  position:static;
+}
+.home-page .home-process::before,
+.home-page .home-process::after{display:none!important;content:none!important}
+.home-page .home-process>li{
+  position:relative;
+  margin:0;
+  padding:22px 20px 24px;
+  border:1px solid var(--h-line,#dce3ef);
+  border-radius:20px;
+  border-top:4px solid var(--h-blue,#0022cb);
+  background:#fff;
+  box-shadow:0 12px 32px -24px rgba(10,26,51,.35);
+  opacity:1!important;
+  translate:none!important;
+  --timeline-shift:0px!important;
+}
+.home-page .home-process>li::before{display:none!important;content:none!important}
+.home-page .home-process>li>span{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:40px;min-height:40px;padding:0 10px;border-radius:999px;
+  background:#eef1ff;color:var(--h-blue,#0022cb);
+  font:700 0.95rem/1 'Space Grotesk',sans-serif;letter-spacing:0;
+}
+.home-page .home-process h3{font-size:1.25rem;margin:14px 0 6px}
+.home-page .home-process p{margin:0;color:var(--h-muted,#536173);font-size:0.95rem;max-width:none}
+@media(max-width:900px){
+  .home-page .home-process{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+  .home-page .home-process{grid-template-columns:1fr}
+}
+
+/* Kill homepage hero scroll-pinning: one screen, then content */
+html.motion-on body.home-page .hero,
+body.home-page.motion-on .hero,
+.motion-on .home-page .hero,
+.home-page .hero{
+  height:auto!important;
+  min-height:0!important;
+}
+.home-page .hero .stage{
+  position:relative!important;
+  top:auto!important;
+  height:auto!important;
+  min-height:min(720px,92svh);
+}
+.home-page .hero-controls .scroll-hint{opacity:.7}
+.home-page .world{pointer-events:none;opacity:.9}

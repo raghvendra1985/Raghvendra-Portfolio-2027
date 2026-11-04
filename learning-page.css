@@ -1,0 +1,43 @@
+/* Learning page: quiet card/tint system aligned with home/services/about/newsletter. Page-scoped. */
+.learning-page{--l-blue:#0022cb;--l-ink:#0b1430;--l-muted:#4f5b6e;--l-line:#dce3ef;--l-tint:#f4f6fc}
+.learning-page .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.learning-page main .eyebrow{color:var(--l-blue);font-size:.78rem;letter-spacing:.12em;font-weight:700}
+.learning-page :is(a,button,summary):focus-visible{outline:3px solid var(--l-blue);outline-offset:3px;border-radius:8px}
+.learning-page main .text-link{color:var(--l-blue);font-weight:700}
+/* Workshop topics: two static cards (no sticky scroll) */
+.lp-workshops{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:28px}
+.lp-workshops .workshop-entry{display:flex;flex-direction:column;gap:0;margin:0;background:#fff;border:1px solid var(--l-line);border-radius:22px;overflow:hidden;transition:border-color .16s,box-shadow .16s}
+.lp-workshops .workshop-entry:hover,.lp-workshops .workshop-entry:focus-within{border-color:var(--l-blue);box-shadow:0 12px 28px #0b143014}
+.lp-workshops .workshop-entry img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:top;border-radius:0;background:var(--l-tint);border-bottom:1px solid var(--l-line)}
+.lp-workshops .workshop-entry>div{display:flex;flex-direction:column;gap:10px;padding:24px;flex:1}
+.lp-workshops h3{font-size:24px;line-height:1.2;color:var(--l-ink);margin:0}
+.lp-workshops p{color:var(--l-muted);line-height:1.6;margin:0}
+.lp-workshops .text-link{margin-top:auto;padding-top:6px}
+/* Course library on tint band */
+.lp-band{background:var(--l-tint)}
+.learning-page .course-intro{color:var(--l-muted)}
+.learning-page .practice-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;align-items:stretch}
+.learning-page .course-preview{display:flex;flex-direction:column;margin:0;padding:20px;background:#fff;border:1px solid var(--l-line);border-radius:22px;box-shadow:none;transition:border-color .16s,box-shadow .16s}
+.learning-page .course-preview:hover,.learning-page .course-preview:focus-within{border-color:var(--l-blue);box-shadow:0 12px 28px #0b143014}
+.learning-page .practice-image{aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#eef1fa;margin-bottom:16px}
+.learning-page .practice-image img{width:100%;height:100%;display:block;object-fit:cover;object-position:top}
+.learning-page .course-icon{display:none}
+.learning-page .course-format{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-blue);margin:0 0 6px}
+.learning-page .course-preview h3{font-size:20px;line-height:1.25;color:var(--l-ink);margin:0 0 8px}
+.learning-page .course-preview>p{color:var(--l-muted);line-height:1.55}
+.learning-page .course-preview details{margin-top:auto;border-top:1px solid var(--l-line);padding-top:12px}
+.learning-page .course-preview summary{cursor:pointer;font-weight:700;color:var(--l-blue);min-height:44px;display:flex;align-items:center}
+.learning-page .course-preview :is(.text-link,.course-enquiry){display:inline-flex;align-items:center;min-height:44px}
+.learning-page .course-enquiry{color:var(--l-ink);text-decoration:underline;text-underline-offset:3px}
+/* Process as 4-col cards (no scroll-driven dimming) */
+.lp-process{list-style:none;padding:0;margin:32px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.lp-process li{background:#fff;border:1px solid var(--l-line);border-radius:20px;padding:24px;opacity:1!important;translate:none!important}
+.lp-process li::before,.lp-process::before,.lp-process::after{content:none!important}
+.lp-process span{display:inline-block;font-weight:700;color:var(--l-ink);background:#eed200;border-radius:6px;padding:2px 8px;font-size:.85rem}
+.lp-process h3{margin:14px 0 6px;color:var(--l-ink)}
+.lp-process p{margin:0;color:var(--l-muted);line-height:1.55}
+.learning-page .caption{color:var(--l-muted)}
+.learning-page .faqs summary{min-height:44px;cursor:pointer}
+@media(max-width:1100px){.learning-page .practice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lp-process{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.lp-workshops,.learning-page .practice-grid,.lp-process{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.learning-page *{transition:none!important;animation:none!important}}
