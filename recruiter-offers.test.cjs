@@ -4,23 +4,27 @@ const fs = require('node:fs');
 
 const pages = ['index.html', 'work/index.html', 'about/index.html'];
 
-test('recruiter strip uses the published contact paths and no CV file', () => {
+test('recruiter strip links the CV, LinkedIn, and email, and marks booking as a placeholder', () => {
+  assert.equal(fs.existsSync(__dirname + '/cv.pdf'), true);
   for (const page of pages) {
     const html = fs.readFileSync(__dirname + '/' + page, 'utf8');
-    assert.match(html, /Principal \/ Staff Product Designer/);
-    assert.match(html, /14\+ years in product and service organisations/);
-    assert.match(html, /mailto:hello@raghvendrasingh.com\?subject=CV%20request/);
-    assert.match(html, /https:\/\/www\.linkedin\.com\/in\/raghvendrasingh23\//);
-    assert.equal(html.includes('/cv.pdf'), false, page);
-    assert.equal(html.includes('calendly.com'), false, page);
-    assert.match(html, /data-calendly hidden/);
-    assert.match(html, /not published on this site yet/);
+    const strip = html.match(/<aside class="role-strip"[\s\S]*?<\/aside>/)[0];
+    assert.match(strip, /Open to remote Staff\/Principal Product Designer roles\./);
+    assert.match(strip, /href="\/cv\.pdf"/);
+    assert.match(strip, /Download CV/);
+    assert.match(strip, /href="https:\/\/www\.linkedin\.com\/in\/raghvendrasingh23\/"/);
+    assert.match(strip, /href="mailto:hello@raghvendrasingh.com"/);
+    assert.match(strip, /Book 20 min — placeholder until a Calendly URL is set\./);
+    assert.match(strip, /data-calendly hidden/);
+    assert.equal(strip.includes('calendly.com'), false, page);
+    assert.equal(/Dubai|can start immediately|Head of Design/.test(strip), false, page);
   }
 });
 
 test('booking stays off until a real https URL is pasted', () => {
   const js = fs.readFileSync(__dirname + '/recruiter.js', 'utf8');
   assert.match(js, /window\.ET_CALENDLY_URL = ''/);
+  assert.match(js, /TODO: paste Raghvendra's Calendly URL/);
   assert.equal(js.includes('calendly.com/'), false);
 });
 

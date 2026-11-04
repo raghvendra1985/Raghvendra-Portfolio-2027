@@ -1,7 +1,7 @@
 /* Intent gate, per-path CTAs, and the on-demand 60-sec tour.
    No chat agent. Get access stays hidden until a real flag exists:
    <body data-get-access="live"> and/or data-get-access-url="/kit/">.
-   A CV file is not published; recruiter contact is email only. */
+   The published CV is /cv.pdf. Booking stays off until ET_CALENDLY_URL is set. */
 (function (root) {
   const EMAIL = 'hello@raghvendrasingh.com';
   const LINKEDIN = 'https://www.linkedin.com/in/raghvendrasingh23/';
@@ -17,7 +17,7 @@
       { id: 'decision', path: '/work/nye-team/', selector: '#decision', title: 'A decision', body: 'The decision: structure before more screens. The trade-off is time before visible UI.' },
       { id: 'outcome', path: '/work/nye-team/', selector: '#outcome', title: 'Outcome', body: 'Published outcome only: the team hired, the shared system, and the platforms shipped.' },
       { id: 'teams', path: '/about/', selector: '.about-working', title: 'With teams', body: 'Strategy and execution, with review points and human judgement left in the work.' },
-      { id: 'contact', path: '/work/', selector: '[data-recruiter-contact]', title: 'Contact', body: 'Email hello@raghvendrasingh.com. No CV file is published — ask by email.' }
+      { id: 'contact', path: '/work/', selector: '[data-recruiter-contact]', title: 'Contact', body: 'Download the CV at /cv.pdf, or email hello@raghvendrasingh.com.' }
     ],
     client: [
       { id: 'hero', path: '/services/', selector: '.inner-hero', title: 'What I do', body: 'AI strategy, product design, and automation for a practical next step.' },
@@ -80,7 +80,7 @@
     const page = pageKey(path);
     if (!page || !isAudience(intent)) return null;
     if (intent === 'recruiter') {
-      return { label: 'Email me', href: MAILTO, hero: 'No CV file is published on this site.' };
+      return { label: 'Download CV', href: '/cv.pdf', hero: 'Open to remote Staff/Principal Product Designer roles.' };
     }
     if (intent === 'client') {
       return {
@@ -304,7 +304,9 @@
     const note = doc.createElement('p');
     note.className = 'intent-cv-note';
     note.setAttribute('data-recruiter-contact', '');
-    note.append('CV is not published as a file. Email ');
+    const cv = doc.createElement('a');
+    cv.href = '/cv.pdf';
+    cv.textContent = 'Download CV';
     const mail = doc.createElement('a');
     mail.href = 'mailto:' + EMAIL;
     mail.textContent = EMAIL;
@@ -313,7 +315,7 @@
     linkedin.target = '_blank';
     linkedin.rel = 'noopener noreferrer';
     linkedin.textContent = 'LinkedIn';
-    note.append(mail, ' to request it. ', linkedin, '.');
+    note.append(cv, '. Email ', mail, '. ', linkedin, '.');
     return note;
   }
 

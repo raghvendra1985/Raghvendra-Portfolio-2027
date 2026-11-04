@@ -51,12 +51,11 @@ test('tour scripts are 6, 6, and 5 with Get access hidden until a flag or URL', 
   assert.equal(et.visibleBeats('student', { url: null }).length, 4);
 });
 
-test('recruiter CTA is email only and client and student CTAs hit real targets', () => {
+test('recruiter CTA downloads the published CV and client and student CTAs hit real targets', () => {
   const hiring = et.ctaFor('recruiter', '/work/');
-  assert.equal(hiring.label, 'Email me');
-  assert.equal(hiring.href, 'mailto:hello@raghvendrasingh.com?subject=Hiring%20enquiry');
-  assert.equal(hiring.href.includes('.pdf'), false);
-  assert.match(hiring.hero, /No CV file is published on this site/);
+  assert.equal(hiring.label, 'Download CV');
+  assert.equal(hiring.href, '/cv.pdf');
+  assert.match(hiring.hero, /Open to remote Staff\/Principal Product Designer roles/);
   assert.equal(et.ctaFor('client', '/services/').href, '#enquiry');
   assert.equal(et.ctaFor('client', '/work/').href, '/services/#enquiry');
   assert.equal(et.ctaFor('client', '/services/').label, 'Start a project');
@@ -71,7 +70,8 @@ test('tour copy does not invent prices, a CV file, or a chat handoff', () => {
   const live = ['recruiter', 'client', 'student'].flatMap((intent) => et.visibleBeats(intent));
   const text = live.map((beat) => beat.title + ' ' + beat.body).join('\n');
   assert.equal(/₹/.test(text), false);
-  assert.equal(/\.pdf|book 20|testimonial|whatsapp\.com|ask me anything/i.test(text), false);
+  assert.equal(/book 20|testimonial|whatsapp\.com|ask me anything/i.test(text), false);
+  assert.equal(text.replaceAll('/cv.pdf', '').includes('.pdf'), false);
   const access = et.visibleBeats('student', { flag: 'live' }).find((beat) => beat.id === 'access');
   assert.match(access.body, /₹399/);
   assert.match(access.body, /₹499/);
