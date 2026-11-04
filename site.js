@@ -27,3 +27,13 @@ if (brief) {
     document.querySelector('#brief-status').textContent = 'Your email draft is ready to open. Review and send it in your email app. If the app did not open, use the email draft link below.';
   });
 }
+if (typeof document.createElement === 'function' && document.head && !document.querySelector('script[src*="/intent.js"]')) {
+  const intentStyle = document.createElement('link');
+  intentStyle.rel = 'stylesheet';
+  intentStyle.href = '/intent.css?v=intent-1';
+  document.head.appendChild(intentStyle);
+  const intentScript = document.createElement('script');
+  intentScript.src = '/intent.js?v=intent-1';
+  intentScript.dataset.etIntent = '1';
+  document.head.appendChild(intentScript);
+}
