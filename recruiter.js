@@ -1,16 +1,13 @@
-/* Booking link for the recruiter strip and founder offers.
-   TODO: paste Raghvendra's Calendly URL below. Leave it empty until then.
-   Static pages cannot read the CALENDLY_URL env var; this constant is the switch.
-   The CV download is /cv.pdf. */
-window.ET_CALENDLY_URL = '';
+/* Public 20-minute intro call. Static pages cannot read CALENDLY_URL,
+   so this constant is what the Book 20 min controls use. */
+window.ET_CALENDLY_URL = 'https://calendly.com/raghvendradesign2012/20-min-intro-call';
 (function () {
   var url = window.ET_CALENDLY_URL || '';
   if (!/^https:\/\//.test(url)) return;
   document.querySelectorAll('[data-calendly]').forEach(function (link) {
     link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
     link.hidden = false;
-  });
-  document.querySelectorAll('.role-book-placeholder').forEach(function (note) {
-    note.hidden = true;
   });
 })();

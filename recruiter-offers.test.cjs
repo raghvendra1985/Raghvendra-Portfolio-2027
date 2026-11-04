@@ -14,18 +14,19 @@ test('recruiter strip links the CV, LinkedIn, and email, and marks booking as a 
     assert.match(strip, /Download CV/);
     assert.match(strip, /href="https:\/\/www\.linkedin\.com\/in\/raghvendrasingh23\/"/);
     assert.match(strip, /href="mailto:hello@raghvendrasingh.com"/);
-    assert.match(strip, /Book 20 min — placeholder until a Calendly URL is set\./);
-    assert.match(strip, /data-calendly hidden/);
-    assert.equal(strip.includes('calendly.com'), false, page);
+    assert.match(strip, /href="https:\/\/calendly\.com\/raghvendradesign2012\/20-min-intro-call"/);
+    assert.match(strip, />Book 20 min</);
+    assert.equal(strip.includes('placeholder until a Calendly'), false, page);
     assert.equal(/Dubai|can start immediately|Head of Design/.test(strip), false, page);
   }
 });
 
-test('booking stays off until a real https URL is pasted', () => {
+test('booking uses the published 20-minute Calendly link', () => {
   const js = fs.readFileSync(__dirname + '/recruiter.js', 'utf8');
-  assert.match(js, /window\.ET_CALENDLY_URL = ''/);
-  assert.match(js, /TODO: paste Raghvendra's Calendly URL/);
-  assert.equal(js.includes('calendly.com/'), false);
+  assert.match(js, /window\.ET_CALENDLY_URL = 'https:\/\/calendly\.com\/raghvendradesign2012\/20-min-intro-call'/);
+  const services = fs.readFileSync(__dirname + '/services/index.html', 'utf8');
+  const offers = services.slice(services.indexOf('id="founder-offers"'), services.indexOf('id="enquiry"'));
+  assert.equal((offers.match(/raghvendradesign2012\/20-min-intro-call/g) || []).length, 3);
 });
 
 test('founder offers point at enquiry and do not list a price', () => {

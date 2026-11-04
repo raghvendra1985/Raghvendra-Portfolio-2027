@@ -1,7 +1,7 @@
 /* Intent gate, per-path CTAs, and the on-demand 60-sec tour.
    No chat agent. Get access stays hidden until a real flag exists:
    <body data-get-access="live"> and/or data-get-access-url="/kit/">.
-   The published CV is /cv.pdf. Booking stays off until ET_CALENDLY_URL is set. */
+   The published CV is /cv.pdf. Book 20 min uses ET_CALENDLY_URL. */
 (function (root) {
   const EMAIL = 'hello@raghvendrasingh.com';
   const LINKEDIN = 'https://www.linkedin.com/in/raghvendrasingh23/';
