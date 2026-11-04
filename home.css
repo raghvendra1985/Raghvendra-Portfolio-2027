@@ -131,4 +131,6 @@ body.home-page.motion-on .hero,
   min-height:min(720px,92svh);
 }
 .home-page .hero-controls .scroll-hint{opacity:.7}
-.home-page .world{pointer-events:none;opacity:.9}
+.home-page .world{display:block;pointer-events:none;opacity:.9}
+.home-page .panel[data-hero-art]{opacity:1;transform:translateX(-50%);aspect-ratio:340/236;width:min(340px,calc(100% - 48px))}
+.home-page .panel[data-hero-art] svg{display:block;width:100%;height:auto;aspect-ratio:340/210}
