@@ -14,11 +14,22 @@ test('recruiter strip links the CV, LinkedIn, and email, and marks booking as a 
     assert.match(strip, /Download CV/);
     assert.match(strip, /href="https:\/\/www\.linkedin\.com\/in\/raghvendrasingh23\/"/);
     assert.match(strip, /href="mailto:hello@raghvendrasingh.com"/);
+    assert.match(strip, /href="tel:\+919555909094"/);
+    assert.match(strip, /\+91 95559 09094/);
     assert.match(strip, /href="https:\/\/calendly\.com\/raghvendradesign2012\/20-min-intro-call"/);
     assert.match(strip, />Book 20 min</);
     assert.equal(strip.includes('placeholder until a Calendly'), false, page);
     assert.equal(/Dubai|can start immediately|Head of Design/.test(strip), false, page);
   }
+});
+
+test('published CV and case studies keep the shareable phone and client names', () => {
+  const pdf = fs.readFileSync(__dirname + '/cv.pdf');
+  assert.equal(pdf.subarray(0, 5).toString(), '%PDF-');
+  assert.equal(pdf.length > 100000, true);
+  assert.match(fs.readFileSync(__dirname + '/work/crowley/index.html', 'utf8'), /Crowley/);
+  assert.match(fs.readFileSync(__dirname + '/work/verizon/index.html', 'utf8'), /Verizon/);
+  assert.match(fs.readFileSync(__dirname + '/services/index.html', 'utf8'), /Crowley Maritime/);
 });
 
 test('booking uses the published 20-minute Calendly link', () => {
