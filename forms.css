@@ -2,23 +2,26 @@
 #project-brief,.demo-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding:40px;background:#fff;border:1px solid #0000000d;border-radius:28px;box-shadow:8px 8px 16px #00000014;color:#1d1d1f}
 #project-brief>* ,.demo-form>*{min-width:0;margin:0}
 #project-brief>.field-row{display:contents}
-#project-brief>label,#project-brief>p,#project-brief>.button,#project-brief>.choice-group,.demo-form>p,.demo-form>.check,.demo-form>.choice-group,.demo-form>button{grid-column:1/-1}
-#project-brief label,.demo-form label:not(.check),.choice-group legend{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;line-height:1.5;color:#535353}
-#project-brief input,#project-brief select,#project-brief textarea,.demo-form input:not([type=checkbox]),.demo-form select{display:block;width:100%;min-height:52px;padding:12px 16px;margin-top:8px;border:1px solid #00000014;border-radius:12px;background:#ececf0;color:#1d1d1f;font:400 17px/1.5 'Space Grotesk',sans-serif;letter-spacing:normal;text-transform:none;box-shadow:none;transition:border-color .18s,box-shadow .18s}
+#project-brief>label,#project-brief>p,#project-brief>.button,#project-brief>.choice-group,#project-brief>.consent-set,.demo-form>p,.demo-form>.check,.demo-form>.choice-group,.demo-form>button{grid-column:1/-1}
+#project-brief label,.demo-form label:not(.check),.choice-group legend,#project-brief .consent-set legend{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;line-height:1.5;color:#535353}
+#project-brief input:not([type=checkbox]):not([type=hidden]),#project-brief select,#project-brief textarea,.demo-form input:not([type=checkbox]),.demo-form select{display:block;width:100%;min-height:52px;padding:12px 16px;margin-top:8px;border:1px solid #00000014;border-radius:12px;background:#ececf0;color:#1d1d1f;font:400 17px/1.5 'Space Grotesk',sans-serif;letter-spacing:normal;text-transform:none;box-shadow:none;transition:border-color .18s,box-shadow .18s}
 #project-brief textarea{min-height:144px;resize:vertical}
 #project-brief input:focus-visible,#project-brief select:focus-visible,#project-brief textarea:focus-visible,.demo-form input:focus-visible{outline:2px solid #0022cb;outline-offset:3px;border-color:#0022cb}
 #project-brief .button,.demo-form .button{justify-self:start;width:auto;min-height:56px;padding:16px 28px;border:0;border-radius:980px;background:#0022cb;color:#fff;font-size:17px;font-weight:400;letter-spacing:normal;transition:background .18s,opacity .18s}
 #project-brief .button:hover,.demo-form .button:hover{background:#001aa3}
 .demo-form .button:disabled{opacity:.5;cursor:not-allowed}
 .demo-form>p{font-size:15px;line-height:1.6;color:#666}
-.demo-form .check{display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.6;letter-spacing:normal;text-transform:none;font-weight:400;color:#1d1d1f;margin:0;cursor:pointer}
-.demo-form .check input{width:20px;height:20px;margin:3px 0 0;accent-color:#0022cb;flex:none}
+.demo-form .check,#project-brief .check{display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.6;letter-spacing:normal;text-transform:none;font-weight:400;color:#1d1d1f;margin:0;cursor:pointer}
+.demo-form .check input,#project-brief .check input{width:20px;height:20px;min-height:20px;margin:3px 0 0;padding:0;accent-color:#0022cb;flex:none;background:#fff}
+#project-brief .consent-set{border:0;padding:0;margin:0;display:grid;gap:12px}
+#project-brief .consent-set p{margin:0;font-size:15px;line-height:1.6;letter-spacing:normal;text-transform:none;font-weight:400;color:#33405b}
+#project-brief .consent-set a{color:#0022cb;font-weight:600}
 .choice-group{border:0;padding:0;margin:0;min-width:0}.choice-group legend{padding:0;margin-bottom:8px}.choice-options{display:flex;gap:8px;flex-wrap:wrap}.choice-options label{position:relative;cursor:pointer}.choice-options input{position:absolute!important;opacity:0!important;width:1px!important;height:1px!important;min-height:0!important;padding:0!important;margin:0!important}.choice-options span{display:flex;align-items:center;justify-content:center;min-height:44px;padding:9px 16px;border-radius:28px;background:#fff;border:1px solid #0000001a;box-shadow:8px 8px 16px #00000014;color:#666;font:700 13px/1.4 'Space Grotesk',sans-serif;letter-spacing:.12em;text-transform:uppercase}.choice-options input:checked+span{background:#0022cb;border-color:#0022cb;color:#fff}.choice-options input:focus-visible+span{outline:3px solid #0022cb;outline-offset:3px}
 #project-brief [hidden],.demo-form [hidden]{display:none!important}
 @media(max-width:639px){#project-brief,.demo-form{grid-template-columns:1fr;padding:24px;gap:24px}.demo-form .button{max-width:100%;font-size:16px}.choice-options span{font-size:12px}}
 @media(prefers-reduced-motion:reduce){#project-brief *,.demo-form *{transition:none!important}}
 .demo-form>label,#project-brief label,.demo-form .choice-options label{margin:0}
-.demo-form input:not([type=checkbox]):not([type=radio]),#project-brief input:not([type=radio]),.demo-form select,#project-brief select{height:52px}
+.demo-form input:not([type=checkbox]):not([type=radio]),#project-brief input:not([type=radio]):not([type=checkbox]):not([type=hidden]),.demo-form select,#project-brief select{height:52px}
 .demo-form .choice-options label,#project-brief .choice-options label{display:block;margin:0}
 .demo-form [role=status]:empty{display:none}
 #project-brief>.form-field{grid-column:1/-1}
