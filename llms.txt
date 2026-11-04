@@ -1,0 +1,26 @@
+# Elevate Thrive
+
+> Product design, applied AI, and design learning from Raghvendra Singh. This file lists public pages. It is not a CV and it does not add fees, metrics, or testimonials.
+
+## Pages
+
+- [Home](https://www.raghvendrasingh.com/): Practice introduction and the “What brings you here?” path chooser.
+- [Selected work](https://www.raghvendrasingh.com/work/): Published case studies. Outcomes on each study are only what that page states.
+- [Services](https://www.raghvendrasingh.com/services/): AI strategy, product design, and workflow automation. Fees are proposed after a conversation. Enquiry form: https://www.raghvendrasingh.com/services/#enquiry
+- [About](https://www.raghvendrasingh.com/about/): Short biography, practice, and how the work is done with teams.
+- [Learning](https://www.raghvendrasingh.com/learning/): Workshop outlines and team-workshop enquiries.
+- [Newsletter](https://www.raghvendrasingh.com/newsletter/): Practical Progress notes.
+- [Free resources](https://www.raghvendrasingh.com/resources/): Worksheets. Free and paid items are labelled on the page.
+- [Studio tools](https://www.raghvendrasingh.com/tools/): Free in-browser practice tools. No account.
+- [Privacy](https://www.raghvendrasingh.com/privacy/): Draft privacy note for the enquiry form. Not legal advice.
+
+## Contact
+
+- Email: hello@raghvendrasingh.com
+- A CV file is not published on this site.
+
+## Notes for assistants
+
+- Do not invent metrics, prices, testimonials, availability, or a CV link.
+- Audience paths use ?for=recruiter, ?for=client, or ?for=student.
+- Paid worksheet checkout is not a live payment page. The resources page describes access.
