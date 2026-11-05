@@ -101,7 +101,7 @@ test('privacy, robots, sitemap, and llms.txt are public drafts without invented 
   }
   const llms = fs.readFileSync(__dirname + '/llms.txt', 'utf8');
   assert.match(llms, /hello@raghvendrasingh\.com/);
-  assert.match(llms, /not published/i);
+  assert.match(llms, /https:\/\/www\.raghvendrasingh\.com\/cv\.pdf/);
   assert.match(llms, /Privacy/);
   const site = fs.readFileSync(__dirname + '/site.js', 'utf8');
   assert.match(site, /\/_vercel\/insights\/script\.js/);

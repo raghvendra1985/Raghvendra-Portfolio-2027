@@ -34,29 +34,30 @@ test('tour scripts are 6, 6, and 5 with Get access hidden until a flag or URL', 
   assert.equal(et.visibleBeats('recruiter').length, 6);
   assert.equal(et.visibleBeats('client').length, 6);
   const hidden = et.visibleBeats('student', {});
-  assert.equal(hidden.length, 4);
+  assert.equal(hidden.length, 5);
+  assert.equal(hidden[0].id, 'teaching');
+  assert.equal(hidden[0].hash, '#teaching');
   assert.equal(hidden.some((beat) => beat.id === 'access'), false);
   const flagged = et.visibleBeats('student', { flag: 'live' });
-  assert.equal(flagged.length, 5);
-  assert.equal(flagged[4].id, 'access');
-  assert.equal(flagged[4].path, '/resources/');
+  assert.equal(flagged.length, 6);
+  assert.equal(flagged[5].id, 'access');
+  assert.equal(flagged[5].path, '/resources/');
   const linked = et.visibleBeats('student', { url: '/kit/' });
-  assert.equal(linked[4].path, '/kit/');
+  assert.equal(linked[5].path, '/kit/');
   const external = et.visibleBeats('student', { url: 'https://example.com/kit' });
-  assert.equal(external[4].external, 'https://example.com/kit');
+  assert.equal(external[5].external, 'https://example.com/kit');
   const blocked = et.visibleBeats('student', { url: '//evil.example/kit' });
-  assert.equal(blocked[4].path, '/resources/');
-  assert.equal(blocked[4].external, undefined);
-  assert.equal(et.visibleBeats('student', { on: true }).length, 5);
-  assert.equal(et.visibleBeats('student', { url: null }).length, 4);
+  assert.equal(blocked[5].path, '/resources/');
+  assert.equal(blocked[5].external, undefined);
+  assert.equal(et.visibleBeats('student', { on: true }).length, 6);
+  assert.equal(et.visibleBeats('student', { url: null }).length, 5);
 });
 
-test('recruiter CTA is email only and client and student CTAs hit real targets', () => {
+test('recruiter CTA downloads the published CV and client and student CTAs hit real targets', () => {
   const hiring = et.ctaFor('recruiter', '/work/');
-  assert.equal(hiring.label, 'Email me');
-  assert.equal(hiring.href, 'mailto:hello@raghvendrasingh.com?subject=Hiring%20enquiry');
-  assert.equal(hiring.href.includes('.pdf'), false);
-  assert.match(hiring.hero, /No CV file is published on this site/);
+  assert.equal(hiring.label, 'Download CV');
+  assert.equal(hiring.href, '/cv.pdf');
+  assert.match(hiring.hero, /Open to remote Staff\/Principal Product Designer roles/);
   assert.equal(et.ctaFor('client', '/services/').href, '#enquiry');
   assert.equal(et.ctaFor('client', '/work/').href, '/services/#enquiry');
   assert.equal(et.ctaFor('client', '/services/').label, 'Start a project');
@@ -71,7 +72,8 @@ test('tour copy does not invent prices, a CV file, or a chat handoff', () => {
   const live = ['recruiter', 'client', 'student'].flatMap((intent) => et.visibleBeats(intent));
   const text = live.map((beat) => beat.title + ' ' + beat.body).join('\n');
   assert.equal(/₹/.test(text), false);
-  assert.equal(/\.pdf|book 20|testimonial|whatsapp\.com|ask me anything/i.test(text), false);
+  assert.equal(/book 20|testimonial|whatsapp\.com|ask me anything/i.test(text), false);
+  assert.equal(text.replaceAll('/cv.pdf', '').includes('.pdf'), false);
   const access = et.visibleBeats('student', { flag: 'live' }).find((beat) => beat.id === 'access');
   assert.match(access.body, /₹399/);
   assert.match(access.body, /₹499/);
@@ -102,7 +104,7 @@ test('homepage chooser points at the three intents and keeps browsing on the pag
   assert.match(html, /What brings you here\?/);
   assert.match(html, /href="\/work\/\?for=recruiter"/);
   assert.match(html, /href="\/services\/\?for=client"/);
-  assert.match(html, /href="\/tools\/\?for=student"/);
+  assert.match(html, /href="\/\?for=student#teaching"/);
   assert.match(html, /data-intent="browsing"/);
   assert.equal(html.includes('Improve my portfolio'), false);
 });

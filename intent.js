@@ -1,7 +1,7 @@
 /* Intent gate, per-path CTAs, and the on-demand 60-sec tour.
    No chat agent. Get access stays hidden until a real flag exists:
    <body data-get-access="live"> and/or data-get-access-url="/kit/">.
-   A CV file is not published; recruiter contact is email only. */
+   The published CV is /cv.pdf. Book 20 min uses ET_CALENDLY_URL. */
 (function (root) {
   const EMAIL = 'hello@raghvendrasingh.com';
   const LINKEDIN = 'https://www.linkedin.com/in/raghvendrasingh23/';
@@ -17,7 +17,7 @@
       { id: 'decision', path: '/work/nye-team/', selector: '#decision', title: 'A decision', body: 'The decision: structure before more screens. The trade-off is time before visible UI.' },
       { id: 'outcome', path: '/work/nye-team/', selector: '#outcome', title: 'Outcome', body: 'Published outcome only: the team hired, the shared system, and the platforms shipped.' },
       { id: 'teams', path: '/about/', selector: '.about-working', title: 'With teams', body: 'Strategy and execution, with review points and human judgement left in the work.' },
-      { id: 'contact', path: '/work/', selector: '[data-recruiter-contact]', title: 'Contact', body: 'Email hello@raghvendrasingh.com. No CV file is published — ask by email.' }
+      { id: 'contact', path: '/work/', selector: '[data-recruiter-contact]', title: 'Contact', body: 'Download the CV at /cv.pdf, or email hello@raghvendrasingh.com.' }
     ],
     client: [
       { id: 'hero', path: '/services/', selector: '.inner-hero', title: 'What I do', body: 'AI strategy, product design, and automation for a practical next step.' },
@@ -28,11 +28,12 @@
       { id: 'enquiry', path: '/services/', hash: '#enquiry', selector: '#enquiry', title: 'Start', body: 'Start in this form, or email hello@raghvendrasingh.com.' }
     ],
     student: [
+      { id: 'teaching', path: '/', hash: '#teaching', selector: '#teaching', title: 'Teaching', body: 'Courses and studios for learners, plus curriculum work for faculty and teams.' },
       { id: 'tool', path: '/tools/', selector: '[data-tool-card]', title: 'A free tool', body: 'Pick one free studio tool and open it. No account and no purchase.' },
       { id: 'whatsapp', path: '/tools/', selector: '#tools-library-title', title: 'After one use', body: 'After you use a tool, an optional WhatsApp invite may appear. Dismiss it if you want.' },
-      { id: 'resources', path: '/resources/', selector: '[data-library]', title: 'Worksheets', body: 'Four worksheets are free. Paid ones are labelled. Checkout is not live.' },
+      { id: 'resources', path: '/resources/', selector: '[data-library]', title: 'Worksheets', body: 'Four worksheets are free. Paid ones offer India and international checkout. Files are emailed after payment.' },
       { id: 'learning', path: '/learning/', selector: '#course-outlines', title: 'Workshops', body: 'Course outlines for practice. Team workshops are arranged by enquiry.' },
-      { id: 'access', gated: true, path: '/resources/', selector: '[data-library]', title: 'Get access', body: 'Paid worksheets are listed at ₹399 (list ₹499). Open only the published link.' }
+      { id: 'access', gated: true, path: '/resources/', selector: '[data-library]', title: 'Get access', body: 'Paid worksheets are ₹399 in India (list ₹499) or $4.99 international. Files are emailed after payment. International checkout is in test mode.' }
     ]
   };
 
@@ -80,7 +81,7 @@
     const page = pageKey(path);
     if (!page || !isAudience(intent)) return null;
     if (intent === 'recruiter') {
-      return { label: 'Email me', href: MAILTO, hero: 'No CV file is published on this site.' };
+      return { label: 'Download CV', href: '/cv.pdf', hero: 'Open to remote Staff/Principal Product Designer roles.' };
     }
     if (intent === 'client') {
       return {
@@ -304,7 +305,9 @@
     const note = doc.createElement('p');
     note.className = 'intent-cv-note';
     note.setAttribute('data-recruiter-contact', '');
-    note.append('CV is not published as a file. Email ');
+    const cv = doc.createElement('a');
+    cv.href = '/cv.pdf';
+    cv.textContent = 'Download CV';
     const mail = doc.createElement('a');
     mail.href = 'mailto:' + EMAIL;
     mail.textContent = EMAIL;
@@ -313,7 +316,7 @@
     linkedin.target = '_blank';
     linkedin.rel = 'noopener noreferrer';
     linkedin.textContent = 'LinkedIn';
-    note.append(mail, ' to request it. ', linkedin, '.');
+    note.append(cv, '. Email ', mail, '. ', linkedin, '.');
     return note;
   }
 

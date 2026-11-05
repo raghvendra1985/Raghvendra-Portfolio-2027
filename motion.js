@@ -6,11 +6,14 @@ const diagrams = [
 ];
 const titles = ['Strategy / Opportunity map', 'Product / Experience design', 'Systems / Connected workflows'];
 const lane = document.querySelector('#panels');
+const isHome = !!(document.body && document.body.classList && document.body.classList.contains('home-page'));
+if (!(isHome && lane.children.length)) {
 for (let i = 0; i < 10; i++) {
   const panel = document.createElement('div');
   panel.className = 'panel';
   panel.innerHTML = `<div class="window-bar"><i></i><i></i><i></i><span>elevate thrive / ${titles[i % 3]}</span></div>${diagrams[i % 3]}`;
   lane.append(panel);
+}
 }
 document.querySelectorAll('[data-art]').forEach(el => { el.innerHTML = diagrams[Number(el.dataset.art)]; });
 const hero = document.querySelector('.hero');
@@ -26,6 +29,7 @@ let scheduled = false;
 const clamp = (n, a = 0, b = 1) => Math.min(b, Math.max(a, n));
 function render() {
   scheduled = false;
+  if (document.body && document.body.classList && document.body.classList.contains('home-page')) return;
   if (!document.documentElement.classList.contains('motion-on')) return;
   // A single scroll-derived timeline: no elapsed-time animation or accumulated deltas.
   const distance = hero.offsetHeight - stage.offsetHeight;
