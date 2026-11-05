@@ -29,7 +29,10 @@ test('published CV and case studies keep the shareable phone and client names', 
   assert.equal(pdf.length > 100000, true);
   assert.match(fs.readFileSync(__dirname + '/work/crowley/index.html', 'utf8'), /Crowley/);
   assert.match(fs.readFileSync(__dirname + '/work/verizon/index.html', 'utf8'), /Verizon/);
-  assert.match(fs.readFileSync(__dirname + '/services/index.html', 'utf8'), /Crowley Maritime/);
+  const services = fs.readFileSync(__dirname + '/services/index.html', 'utf8');
+  assert.match(services, /href="\/work\/crowley\/"/);
+  assert.match(services, /Unifying freight quoting across a fragmented supply chain/);
+  assert.match(services, /href="\/work\/verizon\/"/);
 });
 
 test('booking uses the published 20-minute Calendly link', () => {
@@ -55,7 +58,7 @@ test('founder offers point at enquiry and do not list a price', () => {
 });
 
 test('featured cases label role, scope, decision, and outcome without new percentages', () => {
-  const featured = ['index.html', 'services/index.html', 'work/nye-team/index.html', 'work/crowley/index.html', 'work/gwk-ghostwriter/index.html', 'work/strike-money/index.html', 'work/viralops/index.html'];
+  const featured = ['index.html', 'work/nye-team/index.html', 'work/crowley/index.html', 'work/gwk-ghostwriter/index.html', 'work/strike-money/index.html', 'work/viralops/index.html'];
   for (const page of featured) {
     const html = fs.readFileSync(__dirname + '/' + page, 'utf8');
     for (const field of ['Role', 'Scope', 'Decision', 'Outcome']) {
@@ -64,4 +67,16 @@ test('featured cases label role, scope, decision, and outcome without new percen
     const slots = [...html.matchAll(/<dt>(?:Role|Scope|Decision|Outcome)<\/dt><dd>(.*?)<\/dd>/g)].map((match) => match[1]);
     assert.equal(slots.some((slot) => slot.includes('%')), false, page);
   }
+});
+
+test('the services page lists every published case study', () => {
+  const work = fs.readFileSync(__dirname + '/work/index.html', 'utf8');
+  const services = fs.readFileSync(__dirname + '/services/index.html', 'utf8');
+  const start = services.indexOf('id="services-evidence"');
+  const section = services.slice(start, services.indexOf('</section>', start));
+  const expected = [...work.matchAll(/href="(\/work\/[a-z0-9-]+\/)"/g)].map((match) => match[1]);
+  const listed = [...section.matchAll(/href="(\/work\/[a-z0-9-]+\/)"/g)].map((match) => match[1]);
+  assert.deepEqual(listed, expected);
+  assert.equal(listed.length, 17);
+  assert.equal(section.includes('Selected practice'), false);
 });

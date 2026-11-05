@@ -36,6 +36,9 @@
 @media(prefers-reduced-motion:reduce){.wi-card,.wi-thumb img,.wi-arrow{transition:none}.wi-card:hover,.wi-card:hover .wi-thumb img{transform:none}}
 
 
+.svc-work-list .wi-toolbar{border-top:0;padding-top:4px}
+.svc-work-list .wi-count{margin:0 0 8px}
+.svc-work-list h2.wi-title{font-size:clamp(1.1rem,1.5vw,1.3rem);letter-spacing:-.01em;line-height:1.25}
 .wi-thumb:has(img[src$=".svg"]){background:#0b1430}
 .wi-thumb img[src$=".svg"]{object-fit:contain;object-position:center;transform:none}
 .wi-card:hover .wi-thumb img[src$=".svg"]{transform:none}

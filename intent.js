@@ -22,7 +22,7 @@
     client: [
       { id: 'hero', path: '/services/', selector: '.inner-hero', title: 'What I do', body: 'AI strategy, product design, and automation for a practical next step.' },
       { id: 'offers', path: '/services/', selector: '#opportunity', title: 'Offers', body: 'Three shapes: AI strategy, product design, and workflow automation.' },
-      { id: 'case', path: '/services/', selector: '#services-evidence', title: 'Relevant work', body: 'Selected practice. Open a case study when it matches your problem.' },
+      { id: 'case', path: '/services/', selector: '#services-evidence', title: 'Relevant work', body: 'Every published case study is listed here. Open one when it matches your problem.' },
       { id: 'process', path: '/services/', selector: '.services-process', title: 'Process', body: 'Discover, diagnose, design, deliver. Timing is set in a proposal, not here.' },
       { id: 'pricing', path: '/services/', selector: '.faqs', title: 'Pricing', body: 'No public starting price. Scope and fees are proposed after a conversation.' },
       { id: 'enquiry', path: '/services/', hash: '#enquiry', selector: '#enquiry', title: 'Start', body: 'Start in this form, or email hello@raghvendrasingh.com.' }
