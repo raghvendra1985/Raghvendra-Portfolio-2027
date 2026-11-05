@@ -31,9 +31,9 @@
       { id: 'teaching', path: '/', hash: '#teaching', selector: '#teaching', title: 'Teaching', body: 'Courses and studios for learners, plus curriculum work for faculty and teams.' },
       { id: 'tool', path: '/tools/', selector: '[data-tool-card]', title: 'A free tool', body: 'Pick one free studio tool and open it. No account and no purchase.' },
       { id: 'whatsapp', path: '/tools/', selector: '#tools-library-title', title: 'After one use', body: 'After you use a tool, an optional WhatsApp invite may appear. Dismiss it if you want.' },
-      { id: 'resources', path: '/resources/', selector: '[data-library]', title: 'Worksheets', body: 'Four worksheets are free. Paid ones are labelled. Checkout is not live.' },
+      { id: 'resources', path: '/resources/', selector: '[data-library]', title: 'Worksheets', body: 'Four worksheets are free. Paid ones offer India and international checkout. Files are emailed after payment.' },
       { id: 'learning', path: '/learning/', selector: '#course-outlines', title: 'Workshops', body: 'Course outlines for practice. Team workshops are arranged by enquiry.' },
-      { id: 'access', gated: true, path: '/resources/', selector: '[data-library]', title: 'Get access', body: 'Paid worksheets are listed at ₹399 (list ₹499). Open only the published link.' }
+      { id: 'access', gated: true, path: '/resources/', selector: '[data-library]', title: 'Get access', body: 'Paid worksheets are ₹399 in India (list ₹499) or $4.99 international. Files are emailed after payment. International checkout is in test mode.' }
     ]
   };
 
