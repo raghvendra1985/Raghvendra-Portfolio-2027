@@ -7,7 +7,8 @@ const institutions = ['NIFT Delhi', 'NID Gandhinagar', 'NID Kurukshetra', 'Chitk
 function section(html) {
   const start = html.indexOf('id="teaching"');
   assert.equal(start > 0, true);
-  return html.slice(start, start + 2800);
+  const next = html.indexOf('<section', start + 20);
+  return html.slice(start, next > start ? next : start + 12000);
 }
 
 test('homepage and about teaching blocks use the supplied copy', () => {
@@ -28,6 +29,16 @@ test('homepage and about teaching blocks use the supplied copy', () => {
     assert.match(block, /href="https:\/\/calendly\.com\/raghvendradesign2012\/20-min-intro-call"/);
     assert.match(block, /href="mailto:hello@raghvendrasingh.com"/);
     assert.equal(/500\+|1,000|1000 students/.test(block), false);
+    for (const file of ['nift.png', 'nid-mark.png', 'chitkara.png', 'dtu.png', 'dtu-design.png', 'uid.png', 'wud.png', 'lexicon.png']) {
+      assert.match(block, new RegExp('/assets/teaching/' + file));
+    }
+    assert.equal(block.includes('nid-lockup'), false);
+    assert.equal(block.includes('outskill'), false);
+    assert.equal(block.includes('udit'), false);
+    assert.match(block, /alt="National Institute of Fashion Technology, Delhi"/);
+    assert.match(block, /alt="Unitedworld Institute of Design \(UID\)"/);
+    assert.match(block, /class="text-only"><span>Ambedkar University/);
+    assert.match(block, /class="text-only"><span>Jain University/);
   }
 });
 

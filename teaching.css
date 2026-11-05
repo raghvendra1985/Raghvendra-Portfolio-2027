@@ -2,8 +2,15 @@
 .teaching-band h2{max-width:16ch}
 .teaching-lead{max-width:68ch;font-size:18px;line-height:1.55;color:#243044}
 .teaching-kicker{margin:8px 0 12px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0022cb}
-.teaching-institutions{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px;padding:0;list-style:none}
-.teaching-institutions li{padding:8px 12px;border:1px solid #d6deec;border-bottom:3px solid #eed200;border-radius:999px;background:#fff;font-size:14px;line-height:1.35;font-weight:600}
+.teaching-institutions{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px;margin:0 0 20px;padding:0;list-style:none}
+.teaching-institutions li{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:8px;min-height:148px;margin:0;padding:14px 12px 12px;border:1px solid #d6deec;border-bottom:3px solid #eed200;border-radius:16px;background:#fff;text-align:center}
+.teaching-institutions img{display:block;width:auto;max-width:100%;height:56px;object-fit:contain}
+.teaching-institutions .has-pair{grid-column:span 2;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center}
+.teaching-institutions .has-pair span{flex-basis:100%}
+.teaching-institutions .logo-dark img{height:64px;padding:4px;border-radius:8px;background:#111}
+.teaching-institutions span{font-size:13px;line-height:1.35;font-weight:600;color:#1d1d1f}
+.teaching-institutions .text-only{justify-content:center}
+.teaching-institutions .text-only span{font-size:15px}
 .teaching-role{max-width:68ch;font-weight:600}
 .teaching-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:8px 0 24px}
 .teaching-groups article{padding:20px;border:1px solid #d6deec;border-radius:20px;background:#fff}
@@ -12,5 +19,6 @@
 .teaching-position{max-width:68ch;font-size:17px;line-height:1.5}
 .teaching-actions{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
 .teaching-actions .button{min-height:48px}
+@media(max-width:640px){.teaching-institutions{grid-template-columns:1fr 1fr}.teaching-institutions .has-pair{grid-column:1 / -1}}
 @media(max-width:900px){.teaching-groups{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.teaching-institutions li,.teaching-groups article{transition:none}}
