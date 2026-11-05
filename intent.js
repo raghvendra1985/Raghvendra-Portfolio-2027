@@ -28,6 +28,7 @@
       { id: 'enquiry', path: '/services/', hash: '#enquiry', selector: '#enquiry', title: 'Start', body: 'Start in this form, or email hello@raghvendrasingh.com.' }
     ],
     student: [
+      { id: 'teaching', path: '/', hash: '#teaching', selector: '#teaching', title: 'Teaching', body: 'Courses and studios for learners, plus curriculum work for faculty and teams.' },
       { id: 'tool', path: '/tools/', selector: '[data-tool-card]', title: 'A free tool', body: 'Pick one free studio tool and open it. No account and no purchase.' },
       { id: 'whatsapp', path: '/tools/', selector: '#tools-library-title', title: 'After one use', body: 'After you use a tool, an optional WhatsApp invite may appear. Dismiss it if you want.' },
       { id: 'resources', path: '/resources/', selector: '[data-library]', title: 'Worksheets', body: 'Four worksheets are free. Paid ones are labelled. Checkout is not live.' },

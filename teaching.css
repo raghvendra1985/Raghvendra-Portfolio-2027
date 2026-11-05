@@ -1,0 +1,16 @@
+.teaching-band{scroll-margin-top:96px}
+.teaching-band h2{max-width:16ch}
+.teaching-lead{max-width:68ch;font-size:18px;line-height:1.55;color:#243044}
+.teaching-kicker{margin:8px 0 12px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0022cb}
+.teaching-institutions{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px;padding:0;list-style:none}
+.teaching-institutions li{padding:8px 12px;border:1px solid #d6deec;border-bottom:3px solid #eed200;border-radius:999px;background:#fff;font-size:14px;line-height:1.35;font-weight:600}
+.teaching-role{max-width:68ch;font-weight:600}
+.teaching-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:8px 0 24px}
+.teaching-groups article{padding:20px;border:1px solid #d6deec;border-radius:20px;background:#fff}
+.teaching-groups h3{margin:0 0 10px;font-size:22px;color:#0022cb}
+.teaching-groups p{margin:0;font-size:15px;line-height:1.55;color:#33405b}
+.teaching-position{max-width:68ch;font-size:17px;line-height:1.5}
+.teaching-actions{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.teaching-actions .button{min-height:48px}
+@media(max-width:900px){.teaching-groups{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.teaching-institutions li,.teaching-groups article{transition:none}}

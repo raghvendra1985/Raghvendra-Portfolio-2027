@@ -22,5 +22,6 @@
 ## Notes for assistants
 
 - Do not invent metrics, prices, testimonials, availability, or a CV link.
+- Teaching on the homepage (#teaching) and About lists guest-faculty institutions and IIAD. The CV states 500+ students. Do not add other headcounts.
 - Audience paths use ?for=recruiter, ?for=client, or ?for=student.
 - Paid worksheet checkout is not a live payment page. The resources page describes access.
