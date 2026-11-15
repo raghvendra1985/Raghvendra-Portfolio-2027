@@ -1107,3 +1107,49 @@
   border-color: var(--cobalt);
   color: var(--cobalt);
 }
+
+
+/* ============================================================
+   PERSONA QUICK-FILTER PILLS (RESOURCES PAGE)
+   ============================================================ */
+.rp-persona-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0 24px;
+}
+.rp-persona-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-right: 4px;
+}
+.rp-persona-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.rp-persona-pill:hover {
+  background: var(--cobalt-tint);
+  border-color: var(--border-pale);
+  color: var(--cobalt);
+}
+.rp-persona-pill.active {
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(0, 34, 203, 0.2);
+}
