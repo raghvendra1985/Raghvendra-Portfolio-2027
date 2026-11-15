@@ -1651,3 +1651,145 @@
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
+
+/* ════════════════════════════════════════════════════════════
+   TESTIMONIALS & CLASSROOM EVIDENCE GALLERY
+════════════════════════════════════════════════════════════ */
+.testimonials-section {
+  background: #ffffff;
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+}
+.testimonials-header {
+  margin-bottom: 36px;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.testimonial-card {
+  background: var(--bg-alt, #f7f9fc);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.testimonial-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(11, 20, 48, 0.06);
+}
+.testimonial-role-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cobalt, #0022cb);
+  background: var(--cobalt-tint, #e6eaff);
+  padding: 4px 10px;
+  border-radius: 99px;
+  width: fit-content;
+  margin-bottom: 14px;
+}
+.testimonial-quote {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #1e293b;
+  margin: 0 0 20px;
+  flex: 1;
+}
+.testimonial-author-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+.testimonial-author-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.testimonial-author-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+.testimonial-author-title {
+  font-size: 12px;
+  color: #64748b;
+  margin: 2px 0 0;
+}
+
+/* Classroom & Live Sessions Evidence Gallery */
+.classroom-evidence-section {
+  background: var(--bg-alt, #f7f9fc);
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.classroom-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+.classroom-evidence-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.classroom-evidence-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+.classroom-evidence-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.classroom-pill {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--cobalt, #0022cb);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.classroom-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+.classroom-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #64748b;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .testimonials-grid,
+  .classroom-evidence-grid {
+    grid-template-columns: 1fr;
+  }
+}
