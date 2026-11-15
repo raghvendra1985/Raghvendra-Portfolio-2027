@@ -996,3 +996,114 @@
 .lanyard-cta-btn:hover {
   opacity: 0.9;
 }
+
+
+/* ============================================================
+   ENGAGEMENT & ADVISORY MATRIX (ABOUT PAGE)
+   ============================================================ */
+.engagement-matrix-section {
+  padding: 80px 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+.engagement-matrix-header {
+  margin-bottom: 48px;
+}
+.engagement-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+.engagement-card {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 28px;
+  border-radius: var(--r-card);
+  border: 1px solid var(--border);
+  background: var(--bg-alt, #f8fafc);
+  transition: all 0.2s ease;
+  position: relative;
+}
+.engagement-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--cobalt);
+  box-shadow: 0 12px 32px rgba(0, 34, 203, 0.08);
+}
+.engagement-card.featured {
+  background: var(--cobalt-tint);
+  border-color: var(--cobalt);
+}
+.engagement-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cobalt);
+  margin-bottom: 16px;
+}
+.engagement-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
+}
+.engagement-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0 0 24px;
+}
+.engagement-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+.engagement-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.45;
+}
+.engagement-point svg {
+  flex-shrink: 0;
+  color: var(--cobalt);
+  margin-top: 2px;
+}
+.engagement-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 20px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+.engagement-cta.primary {
+  background: var(--cobalt);
+  color: var(--white);
+}
+.engagement-cta.primary:hover {
+  background: var(--cobalt-hover);
+}
+.engagement-cta.secondary {
+  background: var(--white);
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+.engagement-cta.secondary:hover {
+  background: var(--cobalt-tint);
+  border-color: var(--cobalt);
+  color: var(--cobalt);
+}
