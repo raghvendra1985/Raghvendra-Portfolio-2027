@@ -391,6 +391,30 @@
   
 
 <!-- ════════════════════════════════════════════
+     FREE WORKSHEET LEAD MAGNET MODAL
+════════════════════════════════════════════ -->
+<div id="lead-magnet-modal" class="lead-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
+  <div class="lead-modal-container">
+    <button type="button" class="lead-modal-close" id="close-lead-modal-btn" aria-label="Close dialog">✕</button>
+    <span class="lead-modal-eyebrow">Instant Free Toolkit</span>
+    <h3 class="lead-modal-title" id="lead-modal-title">Get Free Toolkit &amp; Notion Canvas</h3>
+    <p class="lead-modal-desc">Enter where we should email your editable Notion template, step-by-step canvas, and printable PDF:</p>
+    <form class="lead-modal-form" id="lead-magnet-form">
+      <label>
+        Your Name
+        <input type="text" id="lead-name" name="name" placeholder="e.g. Alex Sharma" required>
+      </label>
+      <label>
+        Email Address
+        <input type="email" id="lead-email" name="email" placeholder="alex@company.com" required>
+      </label>
+      <button type="submit" class="lead-modal-btn" id="lead-submit-btn">Download PDF &amp; Send Templates →</button>
+      <p class="lead-modal-note">Zero spam. You'll also receive occasional design &amp; AI workflow notes. Unsubscribe anytime.</p>
+    </form>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
      PURCHASE CONFIRMATION & DELIGHT MODAL
 ════════════════════════════════════════════ -->
 <div id="purchase-delight-modal" class="purchase-delight-overlay" role="dialog" aria-modal="true" aria-labelledby="delight-title">
@@ -478,12 +502,94 @@
   const buyBtns = document.querySelectorAll(".rp-buy");
   buyBtns.forEach(btn => {
     btn.addEventListener("click", function(e) {
-      const card = this.closest("article");
+      const card = this.closest("article") || this.closest(".all-access-bundle-banner");
       const title = card ? card.querySelector("h3")?.textContent : "Workshop Masterclass";
       // Open checkout in new tab as configured, and launch delight showcase in current tab
       openDelight(title);
     });
   });
+
+  // Lead Magnet Modal for Free Worksheets
+  const leadModal = document.getElementById("lead-magnet-modal");
+  const closeLeadBtn = document.getElementById("close-lead-modal-btn");
+  const leadForm = document.getElementById("lead-magnet-form");
+  let pendingDownloadUrl = "";
+  let pendingItemTitle = "";
+
+  function openLeadModal(title, downloadUrl) {
+    pendingItemTitle = title || "Free Toolkit";
+    pendingDownloadUrl = downloadUrl || "/downloads/ai-opportunity-audit.pdf";
+    document.getElementById("lead-modal-title").textContent = "Get " + pendingItemTitle;
+    leadModal.classList.add("open");
+    document.body.style.overflow = "hidden";
+    const nameInput = document.getElementById("lead-name");
+    if (nameInput) setTimeout(() => nameInput.focus(), 100);
+  }
+
+  function closeLeadModal() {
+    leadModal.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  if (closeLeadBtn) closeLeadBtn.addEventListener("click", closeLeadModal);
+  if (leadModal) {
+    leadModal.addEventListener("click", (e) => {
+      if (e.target === leadModal) closeLeadModal();
+    });
+  }
+
+  // Intercept direct PDF download clicks on free cards
+  const freeDownloadLinks = document.querySelectorAll(".rp-quick-download");
+  freeDownloadLinks.forEach(link => {
+    link.addEventListener("click", function(e) {
+      // Check if user already provided email in this session
+      if (sessionStorage.getItem("et_lead_captured")) {
+        return; // Allow direct download
+      }
+      e.preventDefault();
+      const card = this.closest("article");
+      const title = card ? card.querySelector("h3")?.textContent : "Free Toolkit";
+      openLeadModal(title, this.href);
+    });
+  });
+
+  if (leadForm) {
+    leadForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("lead-name").value;
+      const email = document.getElementById("lead-email").value;
+      if (!name || !email) return;
+
+      sessionStorage.setItem("et_lead_captured", "1");
+      closeLeadModal();
+
+      // Trigger actual download via a hidden link
+      const tempLink = document.createElement("a");
+      tempLink.href = pendingDownloadUrl;
+      tempLink.download = "";
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+
+      // Trigger Delight modal for instant reward
+      openDelight(pendingItemTitle, pendingDownloadUrl);
+
+      // Asynchronously submit lead to enquiry endpoint
+      try {
+        fetch("/api/enquiry", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            interest: "Workflow Automation",
+            challenge: "Free Toolkit Download: " + pendingItemTitle,
+            consent: { reply: true, updates: true, whatsapp: false }
+          })
+        }).catch(() => {});
+      } catch (err) {}
+    });
+  }
 
   // Check URL query for automated return from checkout (e.g. ?purchase=success or ?status=paid)
   const params = new URLSearchParams(window.location.search);
