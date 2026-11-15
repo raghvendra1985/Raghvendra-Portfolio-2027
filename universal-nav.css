@@ -1153,3 +1153,87 @@
   color: var(--white);
   box-shadow: 0 2px 8px rgba(0, 34, 203, 0.2);
 }
+
+
+/* ============================================================
+   WORK PAGE: SYSTEMS ARTIFACTS AT A GLANCE
+   ============================================================ */
+.work-artifacts-band {
+  background: var(--bg-alt, #fafbfc);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 28px 24px;
+  margin: 28px 0 36px;
+  box-shadow: 0 4px 16px rgba(0, 34, 203, 0.04);
+}
+.work-artifacts-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.work-artifacts-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+.work-artifacts-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+.work-artifacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.work-artifact-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  color: inherit;
+}
+.work-artifact-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--cobalt);
+  box-shadow: 0 6px 18px rgba(0, 34, 203, 0.08);
+}
+.work-artifact-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cobalt);
+  margin-bottom: 6px;
+}
+.work-artifact-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 6px;
+  line-height: 1.35;
+}
+.work-artifact-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin: 0 0 12px;
+  flex-grow: 1;
+}
+.work-artifact-stat {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cobalt);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
