@@ -16,7 +16,7 @@
       <span class="hn-avatar" aria-hidden="true"><img src="/assets/logo-mark.png" alt="Raghvendra Singh" width="38" height="38"></span>
       <span>
         <span class="hn-name">Raghvendra Singh</span>
-        <span class="hn-title">Principal Product Designer · Associate Professor, IIAD</span>
+        
       </span>
     </a>
 
@@ -340,4 +340,108 @@
   })();
   </script>
   
+
+<!-- ════════════════════════════════════════════
+     PURCHASE CONFIRMATION & DELIGHT MODAL
+════════════════════════════════════════════ -->
+<div id="purchase-delight-modal" class="purchase-delight-overlay" role="dialog" aria-modal="true" aria-labelledby="delight-title">
+  <div class="purchase-delight-card">
+    <button type="button" class="purchase-delight-close" id="close-delight-btn" aria-label="Close delight showcase">Close ✕</button>
+    <div style="text-align:center;">
+      <span class="purchase-delight-badge">🎉 Visual Delight · Product Access Activated</span>
+      <h2 id="delight-title" class="purchase-delight-title">Your Masterclass Pass is Ready!</h2>
+      <p class="purchase-delight-lead">Your enrollment has been initialized. Here is your collectible physical lanyard pass with instant syllabus access.</p>
+    </div>
+
+    <!-- 3D Lanyard Modal Card -->
+    <div style="display:flex;justify-content:center;margin:20px auto 30px;">
+      <div class="lanyard-card-wrap" style="width:300px;">
+        <div class="lanyard-strap" style="height:60px;" aria-hidden="true"></div>
+        <div class="lanyard-clip" aria-hidden="true"></div>
+        <div class="lanyard-badge flipped" id="delight-badge" tabindex="0" role="button" aria-label="Interactive Lanyard Badge">
+          <div class="lanyard-face lanyard-face-front">
+            <div class="lanyard-hole"></div>
+            <img class="lanyard-badge-thumb" src="/assets/previews/worksheet-ai-workflow-starter-kit.png" alt="Product Pass">
+            <span class="lanyard-badge-tier">Verified Passholder</span>
+            <h3 class="lanyard-badge-title" id="delight-card-title">AI Workflow Masterclass</h3>
+            <div class="lanyard-badge-price" style="color:#0f172a;">Full Access Granted</div>
+            <p class="lanyard-badge-desc">Check your registered email for your high-res files, templates, and Notion dashboard link.</p>
+            <span class="lanyard-flip-hint">Click badge to inspect ↻</span>
+          </div>
+          <div class="lanyard-face lanyard-face-back">
+            <div>
+              <div class="lanyard-hole"></div>
+              <h3 class="lanyard-back-title">Welcome to the Studio Lab</h3>
+              <p class="lanyard-back-bio">You now have perpetual access to this masterclass curriculum, autonomous agents code, and production prompts.</p>
+              <div class="lanyard-back-tags">
+                <span class="lanyard-back-tag">Verified Buyer</span>
+                <span class="lanyard-back-tag">All Deliverables</span>
+                <span class="lanyard-back-tag">Direct Support</span>
+              </div>
+            </div>
+            <a class="lanyard-cta-btn" id="delight-action-link" href="/downloads/ai-opportunity-audit.pdf" download>Download Toolkit (PDF) ⭳</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <p style="font-size:13px;color:#94a3b8;margin:0 0 16px;">Files have also been dispatched to your email address via Razorpay/Dodo.</p>
+      <button type="button" class="button small" id="done-delight-btn" style="background:#38bdf8;color:#0f172a;border:none;font-weight:700;padding:10px 24px;">Got It — Continue Browsing</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const modal = document.getElementById("purchase-delight-modal");
+  const closeBtn = document.getElementById("close-delight-btn");
+  const doneBtn = document.getElementById("done-delight-btn");
+  const badge = document.getElementById("delight-badge");
+
+  function openDelight(title, link) {
+    if (title) document.getElementById("delight-card-title").textContent = title;
+    if (link) document.getElementById("delight-action-link").href = link;
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDelight() {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  if (closeBtn) closeBtn.addEventListener("click", closeDelight);
+  if (doneBtn) doneBtn.addEventListener("click", closeDelight);
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeDelight();
+    });
+  }
+
+  if (badge) {
+    badge.addEventListener("click", () => {
+      badge.classList.toggle("flipped");
+    });
+  }
+
+  // Intercept Buy button clicks on paid items to launch delight
+  const buyBtns = document.querySelectorAll(".rp-buy");
+  buyBtns.forEach(btn => {
+    btn.addEventListener("click", function(e) {
+      const card = this.closest("article");
+      const title = card ? card.querySelector("h3")?.textContent : "Workshop Masterclass";
+      // Open checkout in new tab as configured, and launch delight showcase in current tab
+      openDelight(title);
+    });
+  });
+
+  // Check URL query for automated return from checkout (e.g. ?purchase=success or ?status=paid)
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("purchase") === "success" || params.get("status") === "paid" || params.get("bought") === "true") {
+    openDelight();
+  }
+})();
+</script>
+
 </body></html>
