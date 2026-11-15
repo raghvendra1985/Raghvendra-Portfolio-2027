@@ -43,7 +43,14 @@ if (brief) {
     if (form.elements.source) {
       const path = location.pathname || '/services/';
       const intent = fromQuery || stored;
-      form.elements.source.value = intent ? path + '?for=' + intent : path;
+      let attrTag = '';
+      try {
+        const attr = JSON.parse(sessionStorage.getItem('ht_attribution') || '{}');
+        if (attr.source && attr.source !== 'direct') {
+          attrTag = ' [' + attr.source + (attr.campaign && attr.campaign !== 'organic' ? '/' + attr.campaign : '') + ']';
+        }
+      } catch (e) {}
+      form.elements.source.value = (intent ? path + '?for=' + intent : path) + attrTag;
     }
   }
   function openDraft(data) {
@@ -114,6 +121,38 @@ if (typeof document.createElement === 'function') {
     insights.src = '/_vercel/insights/script.js';
     document.head.append(queue, insights);
   }
+
+  // Universal Attribution Tracking (Referrers & UTMs)
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const rawRef = document.referrer ? new URL(document.referrer).hostname.toLowerCase() : 'direct';
+    let detectedSource = 'direct';
+    if (rawRef.includes('linkedin')) detectedSource = 'linkedin';
+    else if (rawRef.includes('instagram')) detectedSource = 'instagram';
+    else if (rawRef.includes('google')) detectedSource = 'google_search';
+    else if (rawRef.includes('twitter') || rawRef.includes('t.co') || rawRef.includes('x.com')) detectedSource = 'twitter';
+    else if (rawRef.includes('substack')) detectedSource = 'substack';
+    else if (rawRef !== 'direct' && !rawRef.includes(window.location.hostname)) detectedSource = rawRef;
+
+    const source = params.get('utm_source') || detectedSource;
+    const medium = params.get('utm_medium') || (source === 'direct' ? 'direct' : 'referral');
+    const campaign = params.get('utm_campaign') || 'organic';
+
+    if (!sessionStorage.getItem('ht_attribution') || params.get('utm_source')) {
+      const attributionData = {
+        source,
+        medium,
+        campaign,
+        landingPage: window.location.pathname,
+        referrerHost: rawRef,
+        timestamp: new Date().toISOString()
+      };
+      sessionStorage.setItem('ht_attribution', JSON.stringify(attributionData));
+      if (window.va) {
+        window.va('event', { name: 'visitor_attribution', data: attributionData });
+      }
+    }
+  } catch (err) {}
 }
 if (typeof document.createElement === 'function' && document.head && !document.querySelector('script[src*="/intent.js"]')) {
   const intentStyle = document.createElement('link');
