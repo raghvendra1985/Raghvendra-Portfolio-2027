@@ -293,3 +293,161 @@
   .hn-inner { padding: 0 16px; }
   .hx-drawer { padding: 24px; }
 }
+
+/* ============================================================
+   CASE STUDY IMPACT HEADER (Task 2.1)
+   Above-the-fold component: Role & Scope, Scale, Business Outcome
+   ============================================================ */
+.case-impact-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  background: var(--cobalt-tint);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 24px;
+  margin: 28px 0 32px;
+  box-shadow: 0 4px 16px rgba(0, 34, 203, 0.04);
+}
+.case-impact-col {
+  display: flex;
+  flex-direction: column;
+}
+.case-impact-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cobalt);
+  margin-bottom: 8px;
+}
+.case-impact-val {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.case-impact-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ============================================================
+   CURATED LEARNING TRACKS (Task 2.2)
+   3 Tracks: Track A (Decisions), Track B (AI Craft), Track C (Portfolio)
+   ============================================================ */
+.learning-tracks-section {
+  padding: 32px 0 20px;
+}
+.learning-tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.learning-track-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.learning-track-card:hover {
+  border-color: var(--cobalt-pale);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 34, 203, 0.05);
+}
+.learning-track-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cobalt);
+  background: var(--cobalt-tint);
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  margin-bottom: 12px;
+}
+.learning-track-title {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+.learning-track-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+.learning-track-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+.learning-track-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cobalt);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.learning-track-link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   TOOL & PRODUCT ACTION BADGES (Task 3.1)
+   Action pills: [Try Live App ↗], [Audit Heuristic ↗], [Read Story →]
+   ============================================================ */
+.tp-action-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.tp-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.tp-badge-primary {
+  background: var(--cobalt);
+  color: var(--white);
+}
+.tp-badge-primary:hover {
+  background: var(--cobalt-hover);
+  color: var(--white);
+}
+.tp-badge-outline {
+  background: var(--cobalt-tint);
+  border: 1px solid var(--border-pale);
+  color: var(--cobalt);
+}
+.tp-badge-outline:hover {
+  background: var(--cobalt-pale);
+}
