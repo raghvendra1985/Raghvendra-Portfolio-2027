@@ -453,3 +453,33 @@
 .tp-badge-outline:hover {
   background: var(--cobalt-pale);
 }
+
+
+.hn-resume-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.hn-resume-link:hover {
+  background: var(--cobalt-tint);
+  border-color: var(--border-pale);
+  color: var(--cobalt);
+}
+.hn-resume-link svg {
+  flex-shrink: 0;
+}
+@media (max-width: 640px) {
+  .hn-resume-link {
+    display: none;
+  }
+}
