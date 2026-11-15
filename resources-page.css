@@ -46,3 +46,43 @@
 .resources-page .rp-launch s{color:var(--r-muted)}
 @media (max-width:960px){.resources-page .rp-filters{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.resources-page .rp-filters{grid-template-columns:1fr}}
+
+/* Force guide-link and guide-body to render properly */
+.resources-page .guide-link {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  padding: 10px !important;
+  border-radius: inherit !important;
+  text-decoration: none !important;
+  color: var(--r-ink) !important;
+}
+.resources-page .guide-body {
+  display: flex !important;
+  flex: 1 !important;
+  flex-direction: column !important;
+  padding: 16px 10px 10px !important;
+  gap: 8px !important;
+}
+
+.resources-page .guide-cover-link {
+  display: block;
+  text-decoration: none;
+  border-radius: 15px;
+}
+.resources-page .guide-card {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 10px !important;
+}
+.resources-page .guide-card .guide-body {
+  display: flex !important;
+  flex: 1 !important;
+  flex-direction: column !important;
+  padding: 16px 10px 10px !important;
+  gap: 8px !important;
+}
+.resources-page .guide-card h3 a:hover {
+  color: var(--r-blue) !important;
+  text-decoration: underline !important;
+}
