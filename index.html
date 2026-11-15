@@ -14,6 +14,31 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#FFFFFF">
+
+<!-- Vercel Web Analytics & Visitor Attribution Tracking -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+(function() {
+  // Capture UTM parameters & Referrer attribution into sessionStorage
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const referrer = document.referrer ? new URL(document.referrer).hostname : "direct";
+    const utmSource = urlParams.get("utm_source") || (referrer.includes("instagram") ? "instagram" : referrer.includes("linkedin") ? "linkedin" : referrer.includes("google") ? "google_search" : referrer);
+    const utmMedium = urlParams.get("utm_medium") || "referral";
+    const utmCampaign = urlParams.get("utm_campaign") || "organic";
+
+    if (!sessionStorage.getItem("ht_attribution")) {
+      const data = { source: utmSource, medium: utmMedium, campaign: utmCampaign, landedAt: new Date().toISOString(), page: window.location.pathname };
+      sessionStorage.setItem("ht_attribution", JSON.stringify(data));
+      if (window.va) window.va("event", { name: "lead_attribution", data: data });
+    }
+  } catch (err) {}
+})();
+</script>
+
 </head>
 <body id="top" class="home-page">
 <a class="skip" href="#main-content">Skip to content</a>
@@ -496,6 +521,73 @@
       const ox = Math.cos(angle) * dist;
       const oy = Math.sin(angle) * dist;
       pupil.setAttribute("transform", `translate(${ox}, ${oy})`);
+    });
+  });
+})();
+</script>
+
+
+<!-- ════════════════════════════════════════════
+     AI AGENT MASCOT INTELLIGENT COMPANION FOOTER
+════════════════════════════════════════════ -->
+<section class="ai-agent-footer" id="ai-agent-companion" aria-label="AI Studio Concierge">
+  <div class="ai-agent-footer-inner">
+    <div class="ai-agent-card">
+      <div class="ai-agent-card-head">
+        <div class="ai-agent-identity">
+          <div class="ai-agent-avatar-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+            <span class="ai-agent-status-dot"></span>
+          </div>
+          <div class="ai-agent-meta">
+            <h4>Studio Concierge AI · Agent Mascot</h4>
+            <p>Trained on Raghvendra’s design heuristics, case studies &amp; masterclasses</p>
+          </div>
+        </div>
+        <span class="ai-agent-state-pill" id="mascot-state">● Active Listening</span>
+      </div>
+
+      <div class="ai-agent-balloon" id="mascot-dialogue">
+        Welcome to the studio. Whether you are looking to hire a <strong>Staff/Principal Product Designer</strong>, evaluate an early-stage startup UX architecture, or enroll in an AI-Native product workshop, pick an intent below to route your query instantly:
+      </div>
+
+      <div class="ai-agent-prompt-options">
+        <button type="button" class="ai-agent-prompt-btn" data-reply="Looking for executive seniority? Raghvendra brings 14+ years scaling products across Nagarro, RapiPay, and NID pedagogy. Click [Recruiter View (30s)] in the top bar to inspect credentials, or download the verified CV PDF directly." data-state="Recruiter Signal">👔 I am a Recruiter / Hiring Leader</button>
+        <button type="button" class="ai-agent-prompt-btn" data-reply="Building an early-stage venture? Raghvendra offers fractional design advisory and 2-day UX decision architecture audits. Check the 3-Tier Engagement Matrix on /about/ to explore sparring models." data-state="Advisory Match">🚀 I am a Founder or Tech Lead</button>
+        <button type="button" class="ai-agent-prompt-btn" data-reply="Looking to level up your design practice? Check the 3D Lanyard Rail on /resources/ featuring 4 free downloadable toolkits and 7 premium masterclasses with zero slop." data-state="Upskilling Path">🎓 I am a Student / Upskiller</button>
+        <button type="button" class="ai-agent-prompt-btn" data-reply="Test your current product commitment boundaries right now using the live Product Decision Evaluator on /tools/." data-state="Utility Launch">⚡ Take me to Studio Tools</button>
+      </div>
+    </div>
+
+    <div class="ai-agent-footer-nav">
+      <div style="font-size:13px;color:#666666;">
+        © 2026 Raghvendra Singh · Elevate Thrive Consulting. All rights reserved.
+      </div>
+      <div class="ai-agent-footer-links">
+        <a href="/work/">01. Work</a>
+        <a href="/resources/">02. Knowledge</a>
+        <a href="/tools/">03. Systems</a>
+        <a href="/about/">04. About</a>
+        <a href="/cv.pdf">Resume (PDF) ↗</a>
+        <a href="https://www.linkedin.com/in/raghvendrasingh23/" target="_blank" rel="noopener noreferrer">LinkedIn (19.2k+) ↗</a>
+        <a href="mailto:hello@raghvendrasingh.com">Contact →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const dialogue = document.getElementById("mascot-dialogue");
+  const statePill = document.getElementById("mascot-state");
+  const promptBtns = document.querySelectorAll(".ai-agent-prompt-btn");
+
+  promptBtns.forEach(btn => {
+    btn.addEventListener("click", function() {
+      const reply = this.getAttribute("data-reply");
+      const state = this.getAttribute("data-state") || "Ready";
+      if (dialogue && reply) dialogue.innerHTML = reply;
+      if (statePill) statePill.textContent = "● " + state;
     });
   });
 })();

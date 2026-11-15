@@ -1477,3 +1477,143 @@
   max-width: 620px;
   line-height: 1.5;
 }
+
+
+/* ============================================================
+   AI AGENT MASCOT INTELLIGENT FOOTER (General Sans & Mascot States)
+   ============================================================ */
+.ai-agent-footer {
+  position: relative;
+  background: #ffffff;
+  color: #000000;
+  border-top: 1px solid #e5e5e5;
+  padding: 64px 24px 48px;
+}
+.ai-agent-footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.ai-agent-card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.07) 0px 1px 3px 0px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.ai-agent-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.ai-agent-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ai-agent-avatar-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #0033ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 51, 255, 0.25);
+  position: relative;
+}
+.ai-agent-status-dot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2px solid #ffffff;
+}
+.ai-agent-meta h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 2px;
+  letter-spacing: -0.3px;
+}
+.ai-agent-meta p {
+  font-size: 12px;
+  color: #666666;
+  margin: 0;
+}
+.ai-agent-state-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #ffc799;
+  color: #000000;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.ai-agent-balloon {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 18px 20px;
+  font-size: 14px;
+  color: #000000;
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+.ai-agent-prompt-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ai-agent-prompt-btn {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ai-agent-prompt-btn:hover {
+  border-color: #0033ff;
+  color: #0033ff;
+  background: rgba(0, 51, 255, 0.04);
+}
+.ai-agent-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e5e5;
+}
+.ai-agent-footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.ai-agent-footer-links a {
+  color: #666666;
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.ai-agent-footer-links a:hover {
+  color: #0033ff;
+}

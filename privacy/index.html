@@ -22,6 +22,31 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/universal-nav.css">
 <script src="/universal-nav.js" defer></script>
+
+<!-- Vercel Web Analytics & Visitor Attribution Tracking -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+(function() {
+  // Capture UTM parameters & Referrer attribution into sessionStorage
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const referrer = document.referrer ? new URL(document.referrer).hostname : "direct";
+    const utmSource = urlParams.get("utm_source") || (referrer.includes("instagram") ? "instagram" : referrer.includes("linkedin") ? "linkedin" : referrer.includes("google") ? "google_search" : referrer);
+    const utmMedium = urlParams.get("utm_medium") || "referral";
+    const utmCampaign = urlParams.get("utm_campaign") || "organic";
+
+    if (!sessionStorage.getItem("ht_attribution")) {
+      const data = { source: utmSource, medium: utmMedium, campaign: utmCampaign, landedAt: new Date().toISOString(), page: window.location.pathname };
+      sessionStorage.setItem("ht_attribution", JSON.stringify(data));
+      if (window.va) window.va("event", { name: "lead_attribution", data: data });
+    }
+  } catch (err) {}
+})();
+</script>
+
 </head>
 <body id="top" class="inner-page">
 <a class="skip" href="#main-content">Skip to content</a>
