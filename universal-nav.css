@@ -1617,3 +1617,37 @@
 .ai-agent-footer-links a:hover {
   color: #0033ff;
 }
+
+
+/* Crisp alignment for minimalist nav bar */
+.hn-identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  line-height: 1;
+}
+.hn-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.hn-avatar img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+.hn-name {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
