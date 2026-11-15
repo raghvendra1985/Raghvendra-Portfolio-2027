@@ -902,6 +902,11 @@
   box-shadow: 0 4px 14px rgba(0, 34, 203, 0.15);
   margin-bottom: 14px;
 }
+.lanyard-badge-thumb.contain {
+  object-fit: contain;
+  background: #ffffff;
+  padding: 6px;
+}
 .lanyard-badge-tier {
   font-size: 11px;
   font-weight: 700;
