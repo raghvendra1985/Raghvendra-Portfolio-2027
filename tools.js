@@ -19,7 +19,31 @@ if(typeof document!=='undefined')(()=>{
  button(result,'Download editable practice notes (.md)',exportText);root.append(result,status);
  function timer(parent,seconds){let remaining=seconds,handle=null;const row=el('div',undefined,'tool-timer'),display=el('span');display.setAttribute('role','timer');function paint(){display.textContent=Math.floor(remaining/60)+':'+String(remaining%60).padStart(2,'0')}function pause(){if(handle){clearInterval(handle);handle=null}start.textContent='Start / resume timer'}const start=button(row,'Start / resume timer',()=>{if(handle){pause();return}if(!remaining)remaining=seconds;start.textContent='Pause timer';handle=setInterval(()=>{remaining--;paint();if(remaining<=0){pause();status.textContent='Time is up. Finish your thought, then review it. No answer was submitted.'}},1000)});button(row,'Reset timer',()=>{pause();remaining=seconds;paint()});row.prepend(display);parent.append(row);paint();document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});return ()=>{pause();remaining=seconds;paint()}}
  const type=cfg.type;
- if(type==='rehearsal'){
+ if(type==='evaluator'){
+  const target=field(work,'Which feature or flow are you evaluating?','input');
+  const criteria=[
+    {title:'01. Choice Clarity', q:'Is the primary user commitment obvious within 3 seconds without parsing secondary visual noise?'},
+    {title:'02. Error Recovery & Reversibility', q:'Can the user inspect, undo, or gracefully correct downstream consequences before irreversible commitment?'},
+    {title:'03. Context Inference vs Manual Labor', q:'Does the system infer known parameters instead of demanding exhaustive manual re-entry?'},
+    {title:'04. State Visibility & Latency', q:'Does the interface unambiguously communicate async queues, background sync, and pending dependencies?'}
+  ];
+  const selects=criteria.map(c=>field(work,c.title+' — '+c.q,'select',[{label:'Choose assessment',value:''},{label:'Deficit — high friction / unhandled (0 pts)',value:'0'},{label:'Partial — visible but ambiguous (1 pt)',value:'1'},{label:'Robust — resilient & transparent (2 pts)',value:'2'}]));
+  button(work,'Calculate Decision Score & Diagnostic',()=>{
+    const blank=selects.find(s=>s.value==='');
+    if(blank){blank.focus();status.textContent='Score all four decision criteria first.';return}
+    const scores=selects.map(s=>Number(s.value));
+    const total=Math.round((scores.reduce((a,b)=>a+b,0)/8)*100);
+    let diagnosis='';
+    if(total>=85){
+      diagnosis='EXEMPLARY DECISION ARCHITECTURE ('+total+'/100)\nThis flow is structured around clean operational decision boundaries rather than superficial screen layouts.\nRecommendation: Maintain your intake and recovery model. Prioritize continuous telemetry and micro-edge case testing.';
+    }else if(total>=60){
+      diagnosis='MODERATE OPERATIONAL FRICTION ('+total+'/100)\nThe interface looks refined visually, but introduces cognitive hesitation under real-world pressure.\nRecommendation: Audit the areas scored 0 or 1. Introduce visible checkpoints and eliminate repetitive manual inputs.';
+    }else{
+      diagnosis='CRITICAL DECISION DEFICIT ('+total+'/100)\nThis flow is operating as a screen layout rather than an accountable system of validated user decisions.\nRecommendation: Pause visual styling. Re-architect underlying state transitions, intake queues, and error recovery contracts first.';
+    }
+    show('Target: '+(target.value.trim()||'Feature / Flow')+'\n\n'+diagnosis+'\n\nBREAKDOWN\n'+criteria.map((c,i)=>c.title+': '+(scores[i]===2?'Robust (2/2)':scores[i]===1?'Partial (1/2)':'Deficit (0/2)')+'\n'+c.q).join('\n\n')+'\n\nPhilosophy: "Stop designing screens. Start designing decisions."');
+  });
+ }else if(type==='rehearsal'){
   el;let index=0;const answers=Array(12).fill('');work.append(el('p','Answer before revealing the review angle. The timer is optional; it never submits or advances your answer.'));const count=el('p'),question=el('h2');work.append(count,question);const response=field(work,'Rehearse your answer');const reset=timer(work,90),angle=el('p');angle.hidden=true;work.append(angle);button(work,'Reveal a review angle',()=>{angle.hidden=false;angle.textContent=juryAngles[index]});const nav=el('div',undefined,'tool-actions');function update(){count.textContent='Question '+(index+1)+' of 12';question.textContent=juryQuestions[index];response.value=answers[index];angle.hidden=true;reset()}function move(n){answers[index]=response.value;index=(n+12)%12;update()}button(nav,'Previous question',()=>move(index-1));button(nav,'Next question',()=>move(index+1));button(nav,'Create rehearsal notes',()=>{answers[index]=response.value;show(juryQuestions.map((q,i)=>(i+1)+'. '+q+'\n'+(answers[i]||'Not answered')).join('\n\n'))});work.append(nav);update();
  }else if(type==='portfolio'){
   const project=field(work,'Which case study are you reviewing?','input');const criteria=['The problem and intended audience are clear.','My role is distinct from collaborators’ contributions.','Constraints and trade-offs are visible.','Key decisions are supported by evidence.','Alternatives and reasons for rejecting them are shown.','Evaluation is described with its limitations.','Metrics are sourced, or absence of measurement is stated.','I have permission to share the material and credited others.'];const checks=criteria.map(t=>{const label=el('label',t,'tool-check'),input=el('input');input.type='checkbox';label.prepend(input);work.append(label);return input});const evidence=field(work,'Evidence or sections that need work');button(work,'Create case-study audit',()=>{if(!project.value.trim()){project.focus();status.textContent='Name the case study first.';return}const missing=criteria.filter((_,i)=>!checks[i].checked);show('Case study: '+project.value+'\n\nSelf-reported coverage: '+checks.filter(c=>c.checked).length+' of 8 criteria. This is not a portfolio quality score.\n\nReview next:\n'+(missing.length?missing.map(t=>'• '+t).join('\n'):'All criteria marked covered. Ask a reviewer to test whether the evidence is convincing.')+'\n\nEvidence / revisions:\n'+evidence.value)});
