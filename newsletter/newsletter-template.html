@@ -3,11 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Practical Progress — Elevate Thrive Newsletter Template</title>
+  <title>Practical Progress — Elevate Thrive</title>
   <style>
     /* ══════════════════════════════════════════════════════════
-       ELEVATE THRIVE BRAND NEWSLETTER TEMPLATE (HTML EMAIL COMPATIBLE)
-       Palette: Cobalt #0022cb, Deep Slate #0b1430, Muted #536173, Tint #f4f6fc, Accent #eed200
+       BRAND GUIDELINES V4.0 ALIGNED NEWSLETTER SYSTEM
+       Palette:
+         - Ink: #1D1D1F (Primary text & deep contrast headers)
+         - Cobalt: #0022CB (Primary brand action & headline accents)
+         - Yellow: #FFE000 (Logo secondary & high-conversion tags)
+         - Surface: #F5F5F7 (Clean secondary canvas)
+         - White: #FFFFFF (Clean card canvas)
+         - Grid lines: #E2E8F0 / #DCE3EF
        ══════════════════════════════════════════════════════════ */
     body, table, td, p, a, li, blockquote {
       -webkit-text-size-adjust: 100%;
@@ -17,269 +23,473 @@
       margin: 0;
       padding: 0;
       width: 100% !important;
-      background-color: #f4f6fc;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: #0b1430;
+      background-color: #F5F5F7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #1D1D1F;
       line-height: 1.6;
     }
     .wrapper {
       width: 100%;
       table-layout: fixed;
-      background-color: #f4f6fc;
-      padding: 40px 16px;
+      background-color: #F5F5F7;
+      padding: 36px 12px;
     }
     .main-container {
       max-width: 620px;
       margin: 0 auto;
-      background-color: #ffffff;
-      border-radius: 16px;
+      background-color: #FFFFFF;
+      border: 1px solid #DCE3EF;
+      border-radius: 12px;
       overflow: hidden;
-      border: 1px solid #dce3ef;
-      box-shadow: 0 4px 20px rgba(11, 20, 48, 0.04);
+      box-shadow: 0 8px 30px rgba(29, 29, 31, 0.05);
     }
-    /* Header */
-    .header-bar {
-      background-color: #0b1430;
-      padding: 24px 32px;
-      border-bottom: 3px solid #eed200;
+    
+    /* Top Bar with Precision Brand Pattern Accent */
+    .top-pattern-strip {
+      height: 6px;
+      background: linear-gradient(90deg, #0022CB 0%, #0022CB 75%, #FFE000 75%, #FFE000 100%);
+    }
+
+    /* Brand Header */
+    .header-box {
+      padding: 24px 32px 20px;
+      background-color: #FFFFFF;
+      border-bottom: 1px solid #F0F2F6;
     }
     .header-table {
       width: 100%;
     }
-    .brand-title {
-      color: #ffffff;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin: 0;
+    .brand-mark {
+      display: inline-block;
+      vertical-align: middle;
+      width: 32px;
+      height: 32px;
+      margin-right: 12px;
+    }
+    .brand-mark img {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
+    .brand-name {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #1D1D1F;
       text-decoration: none;
     }
-    .brand-sub {
-      color: #a0aec0;
-      font-size: 12px;
+    .brand-tagline {
+      font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      margin-top: 3px;
+      color: #536173;
+      margin-top: 2px;
     }
-    .issue-pill {
-      background: rgba(255, 255, 255, 0.12);
-      color: #eed200;
+    .issue-badge {
+      background: #F5F5F7;
+      border: 1px solid #DCE3EF;
+      color: #0022CB;
       font-size: 11px;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 20px;
       text-align: right;
-      display: inline-block;
+      letter-spacing: 0.03em;
     }
-    /* Content Body */
-    .content-body {
+
+    /* Editorial Content Area */
+    .content-box {
       padding: 36px 32px 28px;
     }
     .eyebrow {
-      color: #0022cb;
-      font-size: 12px;
+      color: #0022CB;
+      font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       margin-bottom: 8px;
     }
     h1 {
-      color: #0b1430;
-      font-size: 26px;
+      font-size: 27px;
       line-height: 1.25;
       font-weight: 800;
-      margin: 0 0 16px;
       letter-spacing: -0.02em;
+      color: #1D1D1F;
+      margin: 0 0 18px;
     }
     p {
-      color: #334155;
+      color: #3A3A3C;
       font-size: 15px;
-      line-height: 1.65;
+      line-height: 1.68;
       margin: 0 0 16px;
     }
-    /* Callout Box / One Actionable Idea */
-    .action-box {
-      background-color: #f4f6fc;
-      border-left: 4px solid #0022cb;
-      border-radius: 0 12px 12px 0;
-      padding: 20px 24px;
+    p strong {
+      color: #1D1D1F;
+    }
+
+    /* Method Callout Box (Brand Guidelines "Ground & Direct") */
+    .method-card {
+      background-color: #F5F5F7;
+      border-left: 4px solid #0022CB;
+      padding: 20px 22px;
+      border-radius: 0 8px 8px 0;
       margin: 28px 0;
     }
-    .action-kicker {
-      color: #0022cb;
+    .method-kicker {
       font-size: 11px;
       font-weight: 700;
+      color: #0022CB;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin-bottom: 4px;
     }
-    .action-title {
+    .method-title {
       font-size: 16px;
       font-weight: 700;
-      color: #0b1430;
+      color: #1D1D1F;
       margin: 0 0 8px;
     }
-    .action-desc {
-      color: #475569;
+    .method-desc {
       font-size: 14px;
+      line-height: 1.6;
+      color: #4A4A4F;
       margin: 0;
-      line-height: 1.55;
     }
-    /* CTA Button */
-    .btn-container {
-      margin: 28px 0;
-      text-align: left;
+
+    /* ══════════════════════════════════════════════════════════
+       HIGH-CONVERTING PAID PRODUCT PROMOTION MODULE
+       Positioned directly below high-value editorial insight
+       ══════════════════════════════════════════════════════════ */
+    .paid-product-box {
+      background: #FFFFFF;
+      border: 2px solid #0022CB;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 36px 0 28px;
+      position: relative;
+      box-shadow: 0 6px 20px rgba(0, 34, 203, 0.06);
     }
-    .btn {
+    .paid-badge {
       display: inline-block;
-      background-color: #0022cb;
-      color: #ffffff !important;
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.01em;
+      background: #FFE000;
+      color: #1D1D1F;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 9px;
+      border-radius: 4px;
+      margin-bottom: 12px;
     }
-    /* Divider */
-    .divider {
-      height: 1px;
-      background-color: #e2e8f0;
-      margin: 28px 0;
+    .product-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #1D1D1F;
+      margin: 0 0 8px;
+      line-height: 1.3;
     }
-    /* Author signature */
-    .author-card {
+    .product-summary {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #4A4A4F;
+      margin: 0 0 16px;
+    }
+    .product-checklist {
+      margin: 0 0 20px;
+      padding: 0;
+      list-style: none;
+    }
+    .product-checklist li {
+      font-size: 13px;
+      color: #1D1D1F;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+    }
+    .product-checklist li::before {
+      content: "✔";
+      color: #0022CB;
+      font-weight: 800;
+      margin-right: 8px;
+    }
+    .price-row {
       display: table;
       width: 100%;
-      margin-top: 24px;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 16px;
     }
-    .author-avatar {
+    .price-col {
       display: table-cell;
-      width: 50px;
-      vertical-align: top;
+      vertical-align: middle;
     }
-    .author-avatar img {
-      width: 44px;
-      height: 44px;
+    .price-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1D1D1F;
+    }
+    .price-was {
+      font-size: 13px;
+      text-decoration: line-through;
+      color: #8E8E93;
+      margin-right: 6px;
+    }
+    .price-sub {
+      font-size: 11px;
+      color: #536173;
+    }
+    .cta-col {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: right;
+    }
+    .btn-buy-primary {
+      display: inline-block;
+      background-color: #0022CB;
+      color: #FFFFFF !important;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 34, 203, 0.25);
+    }
+    .btn-buy-secondary {
+      display: inline-block;
+      background-color: #FFFFFF;
+      color: #0022CB !important;
+      border: 1px solid #0022CB;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 9px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-left: 6px;
+    }
+
+    /* Founder Sign-off Block */
+    .divider {
+      height: 1px;
+      background: #E2E8F0;
+      margin: 32px 0 24px;
+    }
+    .author-table {
+      width: 100%;
+    }
+    .author-img {
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       display: block;
-      border: 2px solid #eed200;
-    }
-    .author-info {
-      display: table-cell;
-      vertical-align: top;
-      padding-left: 12px;
+      border: 2px solid #0022CB;
     }
     .author-name {
       font-size: 14px;
-      font-weight: 700;
-      color: #0b1430;
+      font-weight: 800;
+      color: #1D1D1F;
       margin: 0;
     }
-    .author-role {
+    .author-cred {
       font-size: 12px;
-      color: #64748b;
-      margin: 2px 0 0;
-      line-height: 1.4;
+      color: #536173;
+      margin: 3px 0 0;
+      line-height: 1.45;
     }
+
+    /* Strategic Advisory Banner (High-Ticket Upsell) */
+    .advisory-banner {
+      background-color: #1D1D1F;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-top: 24px;
+      display: table;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .advisory-text {
+      display: table-cell;
+      vertical-align: middle;
+      color: #FFFFFF;
+      font-size: 13px;
+      padding-right: 12px;
+    }
+    .advisory-text strong {
+      color: #FFE000;
+      display: block;
+      font-size: 13.5px;
+      margin-bottom: 2px;
+    }
+    .advisory-btn-col {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .advisory-btn {
+      background: #FFFFFF;
+      color: #1D1D1F !important;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
     /* Footer */
-    .footer-bar {
-      background-color: #f8fafc;
-      border-top: 1px solid #e2e8f0;
+    .footer-box {
+      background-color: #F5F5F7;
+      border-top: 1px solid #DCE3EF;
       padding: 24px 32px;
       text-align: center;
     }
-    .footer-text {
-      color: #64748b;
+    .footer-desc {
       font-size: 12px;
+      color: #6E6E73;
       line-height: 1.6;
-      margin: 0 0 10px;
+      margin: 0 0 12px;
     }
-    .footer-links a {
-      color: #0022cb;
+    .footer-nav a {
+      color: #0022CB;
       text-decoration: underline;
       font-size: 12px;
       margin: 0 8px;
     }
+
     @media only screen and (max-width: 600px) {
-      .content-body {
-        padding: 24px 20px !important;
-      }
-      .header-bar {
-        padding: 20px !important;
-      }
-      h1 {
-        font-size: 22px !important;
-      }
+      .header-box { padding: 18px 20px !important; }
+      .content-box { padding: 24px 20px !important; }
+      .paid-product-box { padding: 18px !important; }
+      .price-row, .advisory-banner { display: block !important; }
+      .price-col, .cta-col, .advisory-text, .advisory-btn-col { display: block !important; text-align: left !important; width: 100% !important; }
+      .cta-col, .advisory-btn-col { margin-top: 14px !important; }
+      .btn-buy-primary, .btn-buy-secondary, .advisory-btn { display: block !important; text-align: center !important; margin: 6px 0 !important; }
     }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <div class="main-container">
-      
-      <!-- Brand Header -->
-      <div class="header-bar">
+
+      <!-- Precision Brand Pattern Strip -->
+      <div class="top-pattern-strip"></div>
+
+      <!-- Brand Header Lockup -->
+      <div class="header-box">
         <table class="header-table" role="presentation" border="0" cellpadding="0" cellspacing="0">
           <tr>
             <td>
-              <div class="brand-title">Practical Progress</div>
-              <div class="brand-sub">Elevate Thrive Consulting</div>
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="brand-mark">
+                    <img src="https://www.raghvendrasingh.com/assets/logo-mark.png" alt="Raghvendra Singh Brand Mark" width="32" height="32">
+                  </td>
+                  <td>
+                    <div class="brand-name">Raghvendra Singh</div>
+                    <div class="brand-tagline">Product Design · Applied AI · Teaching</div>
+                  </td>
+                </tr>
+              </table>
             </td>
             <td align="right">
-              <span class="issue-pill">Issue #01 · Bi-Weekly</span>
+              <span class="issue-badge">Issue #01 · Bi-Weekly</span>
             </td>
           </tr>
         </table>
       </div>
 
-      <!-- Main Edition Body -->
-      <div class="content-body">
-        <div class="eyebrow">Design Leadership &amp; Applied AI</div>
-        <h1>Stop Designing Screens. Start Designing Decisions.</h1>
-        
-        <p>Most design challenges inside growing companies are rarely screen problems. They are decision problems wearing a visual disguise.</p>
+      <!-- Main Editorial Body -->
+      <div class="content-box">
+        <div class="eyebrow">Practical Progress · Issue #01</div>
+        <h1>Design Useful Products. Stop Designing Screens.</h1>
 
-        <p>When four product squads are shipping features in parallel, alignment breaks down not because designers lack craft, but because no one agreed on the boundary conditions: who owns what definition of done, what trade-offs are accepted, and how uncertainty is documented.</p>
+        <p>Most design bottlenecks in scaling technology organizations are not aesthetic defects—they are unaddressed decision problems masquerading as interface revisions.</p>
 
-        <!-- Method Spotlight Callout -->
-        <div class="action-box">
-          <div class="action-kicker">The One Method To Try This Week</div>
-          <div class="action-title">The Three-Input Verification Gate</div>
-          <div class="action-desc">
-            Before handing any AI prompt or automated workflow to your engineering squad, run three deliberately diverse, non-sensitive test inputs. Log every hallucination, revise constraints, and establish human review criteria before code is committed.
+        <p>When multiple product squads ship concurrently, consistency collapses because boundary conditions remain undefined: what tradeoffs are sanctioned, who validates the outputs, and where uncertainty must be retained rather than masked.</p>
+
+        <!-- Method Card (Grounded & Direct) -->
+        <div class="method-card">
+          <div class="method-kicker">Core Practice · Try This Week</div>
+          <div class="method-title">The 3-Input Verification Checkpoint</div>
+          <div class="method-desc">
+            Before deploying any automated workflow or generative prompt, benchmark three deliberately diverse, non-sensitive inputs. Document hallucinations, refine operational constraints, and establish clear human verification gates before code is frozen.
           </div>
         </div>
 
-        <p>In our latest case study breakdown, we walk through how we hired 9 cross-functional designers, unified 3 platforms (Web, iOS, Android), and established an operating model that launched NYE Money across 10M+ users.</p>
+        <p>During my tenure scaling the design organization at NYE Money across 10M+ users, we eliminated circular revisions by standardizing disclosures and reusable evaluation criteria across web, iOS, and Android squads.</p>
 
-        <div class="btn-container">
-          <a href="https://www.raghvendrasingh.com/work/nye-team/" class="btn" target="_blank">Read the Full Case Study →</a>
+        <!-- ══════════════════════════════════════════════════════════
+             PAID PRODUCT ENGINE: Practical AI Starter Kit & Toolkits
+             ══════════════════════════════════════════════════════════ -->
+        <div class="paid-product-box">
+          <span class="paid-badge">Featured Framework · Complete Toolkit</span>
+          <div class="product-title">Practical AI Workflow Starter Kit</div>
+          <div class="product-summary">
+            A comprehensive, field-tested toolkit designed for product leaders and design teams to build, stress-test, and deploy predictable AI workflows without regulatory or quality drift.
+          </div>
+          
+          <ul class="product-checklist">
+            <li>Print-ready, high-resolution A4 Framework PDF</li>
+            <li>Fully editable, interactive HTML workspace file</li>
+            <li>5-step evaluation protocol + human verification scorecard</li>
+            <li>Immediate email delivery with lifetime template updates</li>
+          </ul>
+
+          <div class="price-row">
+            <div class="price-col">
+              <span class="price-was">₹499</span>
+              <span class="price-val">₹399</span>
+              <span style="color:#536173;font-size:13px;font-weight:600"> / $4.99 USD</span>
+              <div class="price-sub">Instant delivery via email after payment</div>
+            </div>
+            <div class="cta-col">
+              <a href="https://rzp.io/rzp/6zN91wN" class="btn-buy-primary" target="_blank" rel="noopener">Get India Access (₹399) →</a>
+              <a href="https://test.checkout.dodopayments.com/buy/pdt_0NrGQJAY0aJw0E0fPKMDk?quantity=1" class="btn-buy-secondary" target="_blank" rel="noopener">International ($4.99) →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- High-Ticket Upsell: 1-on-1 Strategic Advisory -->
+        <div class="advisory-banner">
+          <div class="advisory-text">
+            <strong>Need Strategic Advisory or an AI Opportunity Audit?</strong>
+            Book a 90-minute private leadership session with Raghvendra Singh to unblock product, AI, and design org architecture.
+          </div>
+          <div class="advisory-btn-col">
+            <a href="https://www.raghvendrasingh.com/services/#advisory-checkout" class="advisory-btn" target="_blank">Book Advisory →</a>
+          </div>
         </div>
 
         <div class="divider"></div>
 
-        <!-- Author Signature -->
-        <div class="author-card">
-          <div class="author-avatar">
-            <img src="https://www.raghvendrasingh.com/assets/logo-mark.png" alt="Raghvendra Singh">
-          </div>
-          <div class="author-info">
-            <div class="author-name">Raghvendra Singh</div>
-            <div class="author-role">Founder, Elevate Thrive · Associate Professor, Communication Design at IIAD · Former UX Lead at NYE &amp; Nagarro</div>
-          </div>
-        </div>
+        <!-- Author Pedigree & Signature -->
+        <table class="author-table" role="presentation" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="58" valign="top">
+              <img src="https://www.raghvendrasingh.com/assets/logo-mark.png" alt="Raghvendra Singh" class="author-img">
+            </td>
+            <td valign="top" style="padding-left: 12px;">
+              <div class="author-name">Raghvendra Singh</div>
+              <div class="author-cred">
+                NID Alumnus · Associate Professor, Communication Design at IIAD (2024–2026)<br>
+                Former UX Lead at NYE Money &amp; Staff Consultant at Nagarro
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
 
-      <!-- Clean Footer -->
-      <div class="footer-bar">
-        <p class="footer-text">
-          You are receiving this because you subscribed to <strong>Practical Progress</strong> on raghvendrasingh.com or LinkedIn.
+      <!-- Compliant Brand Footer -->
+      <div class="footer-box">
+        <p class="footer-desc">
+          Published by <strong>Elevate Thrive Consulting</strong> · Written by Raghvendra Singh.<br>
+          Delivered bi-weekly to designers, product leaders, and practitioners.
         </p>
-        <div class="footer-links">
-          <a href="https://www.raghvendrasingh.com/resources/">Free Worksheets</a>
-          <a href="https://www.raghvendrasingh.com/tools/">Studio Tools</a>
+        <div class="footer-nav">
+          <a href="https://www.raghvendrasingh.com/resources/">All 11 Worksheets</a>
+          <a href="https://www.raghvendrasingh.com/tools/ai-readiness-scorecard/">AI Readiness Scorecard</a>
+          <a href="https://www.raghvendrasingh.com/work/">Case Studies</a>
           <a href="{{unsubscribe_link}}">Unsubscribe in 1 click</a>
         </div>
       </div>
