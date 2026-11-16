@@ -34,3 +34,87 @@
 .case-arc-caption { margin:12px auto; }
 @media(prefers-reduced-motion:reduce) { .case-arc-stage img { transition:none; } }
 html:has(#motion-toggle[aria-pressed="true"]) .case-arc-stage img { transition:none; }
+
+/* Interactive Comparison & Design System Tabs */
+.case-tabs-widget {
+  margin: 32px 0;
+  background: #ffffff;
+  border: 1px solid #dce3f1;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(11, 20, 48, 0.04);
+}
+.case-tabs-nav {
+  display: flex;
+  background: #f4f6fc;
+  border-bottom: 1px solid #dce3f1;
+  overflow-x: auto;
+}
+.case-tab-btn {
+  padding: 14px 20px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a5568;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.case-tab-btn:hover {
+  color: #0022cb;
+}
+.case-tab-btn.active {
+  color: #0022cb;
+  background: #ffffff;
+  border-bottom-color: #0022cb;
+  font-weight: 700;
+}
+.case-tab-pane {
+  display: none;
+  padding: 24px;
+}
+.case-tab-pane.active {
+  display: block;
+}
+.case-tab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.case-tab-pane img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.case-tab-meta h4 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #0b1430;
+}
+.case-tab-meta p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4a5568;
+}
+.case-tab-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #eef2ff;
+  color: #0022cb;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+@media (max-width: 768px) {
+  .case-tab-grid {
+    grid-template-columns: 1fr;
+  }
+}

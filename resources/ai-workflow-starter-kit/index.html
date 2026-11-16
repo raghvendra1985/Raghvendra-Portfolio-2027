@@ -117,4 +117,34 @@
     </div>
   </aside>
 </div>
+
+<!-- Sticky Action Bar for Paid Worksheet -->
+<div class="worksheet-sticky-bar" id="worksheet-sticky-bar" aria-label="Quick purchase bar">
+  <div class="worksheet-sticky-inner">
+    <div class="worksheet-sticky-info">
+      <div class="worksheet-sticky-title">Practical AI Workflow Starter Kit</div>
+      <div class="worksheet-sticky-meta">Full PDF &amp; Editable HTML Toolkit · <strong>₹399 / $4.99</strong></div>
+    </div>
+    <div class="worksheet-sticky-actions">
+      <a class="worksheet-sticky-btn worksheet-sticky-btn-india" href="https://rzp.io/rzp/6zN91wN" target="_blank" rel="noopener noreferrer">India · ₹399</a>
+      <a class="worksheet-sticky-btn worksheet-sticky-btn-intl" href="https://test.checkout.dodopayments.com/buy/pdt_0NrGQJAY0aJw0E0fPKMDk?quantity=1" target="_blank" rel="noopener noreferrer">Intl · $4.99</a>
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+  const bar = document.getElementById("worksheet-sticky-bar");
+  if (!bar) return;
+  const onScroll = () => {
+    if (window.scrollY > 320) {
+      bar.classList.add("visible");
+    } else {
+      bar.classList.remove("visible");
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
 </body></html>

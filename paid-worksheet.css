@@ -9,3 +9,113 @@
 .pay-choices{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:.75rem 0}
 .pay-choices .pay-intl{background:#fff;color:#0022cb;border:2px solid #0022cb;box-shadow:inset 0 -3px #eed200}
 .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Sticky Action Bar for Paid Worksheets */
+.worksheet-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(11, 20, 48, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 24px;
+  z-index: 990;
+  transform: translateY(110%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+}
+.worksheet-sticky-bar.visible {
+  transform: translateY(0);
+}
+.worksheet-sticky-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.worksheet-sticky-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.worksheet-sticky-title {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.worksheet-sticky-meta {
+  color: #a0aec0;
+  font-size: 12px;
+}
+.worksheet-sticky-meta strong {
+  color: #eed200;
+  font-weight: 700;
+}
+.worksheet-sticky-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.worksheet-sticky-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  min-height: 40px;
+}
+.worksheet-sticky-btn-india {
+  background: #0022cb;
+  color: #ffffff;
+  border: 1px solid #3355ff;
+}
+.worksheet-sticky-btn-india:hover {
+  background: #001aa3;
+}
+.worksheet-sticky-btn-intl {
+  background: #ffffff;
+  color: #0b1430;
+  border: 1px solid #e2e8f0;
+}
+.worksheet-sticky-btn-intl:hover {
+  background: #f4f6fc;
+}
+@media (max-width: 640px) {
+  .worksheet-sticky-bar {
+    padding: 10px 14px;
+  }
+  .worksheet-sticky-title {
+    display: none;
+  }
+  .worksheet-sticky-info {
+    font-size: 11px;
+  }
+  .worksheet-sticky-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .worksheet-sticky-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .worksheet-sticky-actions .worksheet-sticky-btn {
+    flex: 1;
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
