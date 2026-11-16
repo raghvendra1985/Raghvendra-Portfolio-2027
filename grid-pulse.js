@@ -213,7 +213,10 @@
       }
     };
 
+    const isTouchOnly = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
     const onMove = event => {
+      // Conserve battery on touch devices if user is just tapping or scrolling
+      if (event.pointerType === "touch" && isTouchOnly) return;
       const bounds = container.getBoundingClientRect();
       if (
         event.clientX >= bounds.left &&

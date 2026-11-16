@@ -154,3 +154,9 @@
 .case-layout .case-sources ul{padding-left:20px}
 .case-layout>p:last-child{margin-top:24px}
 .case-layout section.case-chapter{border-bottom:1px solid var(--case-line)}
+
+/* Active chapter highlighting */
+.case-layout .case-chapters a.is-active {
+  background: #0022cb !important;
+  color: #ffffff !important;
+}

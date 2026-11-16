@@ -53,3 +53,42 @@
     initNav();
   }
 })();
+
+// Case Study Chapter ScrollSpy
+(function() {
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+  const nav = document.querySelector(".case-chapters");
+  if (!nav) return;
+  const links = Array.from(nav.querySelectorAll("a[href^=\"#\"]"));
+  if (!links.length) return;
+
+  const targets = links.map(link => {
+    const id = link.getAttribute("href").slice(1);
+    return document.getElementById(id);
+  }).filter(Boolean);
+
+  if (!("IntersectionObserver" in window)) return;
+
+  let activeId = "";
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        activeId = entry.target.id;
+      }
+    });
+    if (activeId) {
+      links.forEach(link => {
+        if (link.getAttribute("href") === "#" + activeId) {
+          link.classList.add("is-active");
+        } else {
+          link.classList.remove("is-active");
+        }
+      });
+    }
+  }, {
+    rootMargin: "-20% 0px -65% 0px",
+    threshold: 0
+  });
+
+  targets.forEach(target => observer.observe(target));
+})();
