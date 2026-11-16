@@ -224,15 +224,81 @@
   </footer>
 
   <script>
-    // Customize download titles dynamically based on ?product= query
+    // Customize download titles and links dynamically based on ?product= query
     (function() {
+      const catalog = {
+        'ai-workflow-starter-kit': {
+          title: 'Practical AI Workflow Starter Kit',
+          meta: 'Field-tested prompt engineering protocols, evaluation checklists, and editable HTML workspace.',
+          pdf: '/downloads/ai-opportunity-audit.pdf',
+          html: '/downloads/ai-opportunity-audit.html',
+          review: '/resources/review/?worksheet=ai-workflow-starter-kit'
+        },
+        'design-process-workshop': {
+          title: 'Design Process Workshop Kit',
+          meta: 'Multi-squad critique rituals, design system governance, and structured sprint decision frameworks.',
+          pdf: '/downloads/product-decision-canvas.pdf',
+          html: '/downloads/product-decision-canvas.html',
+          review: '/resources/review/?worksheet=design-process-workshop'
+        },
+        'concept-design-workshop': {
+          title: 'Concept Design Workshop Kit',
+          meta: 'Rapid framing, thematic clustering, and divergent sketching methods tested in NID/IIAD classrooms.',
+          pdf: '/downloads/design-thinking-workshop.pdf',
+          html: '/downloads/design-thinking-workshop.html',
+          review: '/resources/review/?worksheet=concept-design-workshop'
+        },
+        'design-elective-workshop': {
+          title: 'Design Elective Workshop Kit',
+          meta: 'Specialized modular curricula and studio exercises for advanced interaction design.',
+          pdf: '/downloads/portfolio-development-workshop.pdf',
+          html: '/downloads/portfolio-development-workshop.html',
+          review: '/resources/review/?worksheet=design-elective-workshop'
+        },
+        'ux-ui-design-workshop': {
+          title: 'UX/UI Design Workshop Kit',
+          meta: 'Heuristic evaluation templates, interaction states, and tokenized design systems handoff.',
+          pdf: '/downloads/product-decision-canvas.pdf',
+          html: '/downloads/product-decision-canvas.html',
+          review: '/resources/review/?worksheet=ux-ui-design-workshop'
+        },
+        'game-design-workshop': {
+          title: 'Game Design Workshop Kit',
+          meta: 'Core loops, reward schedules, player mechanics, and systems balancing exercises.',
+          pdf: '/downloads/design-thinking-workshop.pdf',
+          html: '/downloads/design-thinking-workshop.html',
+          review: '/resources/review/?worksheet=game-design-workshop'
+        },
+        'data-visualisation-workshop': {
+          title: 'Data Visualisation Workshop Kit',
+          meta: 'Complex dataset information architecture, dashboard hierarchies, and quantitative communication.',
+          pdf: '/downloads/product-decision-canvas.pdf',
+          html: '/downloads/product-decision-canvas.html',
+          review: '/resources/review/?worksheet=data-visualisation-workshop'
+        }
+      };
+
       const params = new URLSearchParams(window.location.search);
-      const product = params.get('product') || params.get('item');
-      if (product) {
-        const titleEl = document.getElementById('item-title');
-        const formatted = product.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-        if (titleEl) titleEl.textContent = formatted;
-      }
+      const product = params.get('product') || params.get('item') || 'ai-workflow-starter-kit';
+      const item = catalog[product] || {
+        title: product.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+        meta: 'Includes high-resolution printable PDF, interactive editable HTML worksheet, and evaluation criteria.',
+        pdf: '/downloads/ai-opportunity-audit.pdf',
+        html: '/downloads/ai-opportunity-audit.html',
+        review: '/resources/review/?worksheet=' + product
+      };
+
+      const titleEl = document.getElementById('item-title');
+      const metaEl = document.getElementById('item-meta');
+      const pdfLink = document.getElementById('pdf-link');
+      const htmlLink = document.getElementById('html-link');
+      const reviewLink = document.querySelector('a[href*="/resources/review/"]');
+
+      if (titleEl) titleEl.textContent = item.title;
+      if (metaEl) metaEl.textContent = item.meta;
+      if (pdfLink && item.pdf) pdfLink.href = item.pdf;
+      if (htmlLink && item.html) htmlLink.href = item.html;
+      if (reviewLink && item.review) reviewLink.href = item.review;
     })();
   </script>
 </body>
