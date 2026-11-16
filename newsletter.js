@@ -35,7 +35,19 @@ if (nlForm) {
     let attrData = {};
     try { attrData = JSON.parse(sessionStorage.getItem('ht_attribution') || '{}'); } catch(err) {}
 
-    // Send to /api/enquiry as reliable lead capture
+    // Send to /api/subscribe (Dual pipeline: Beehiiv API + backup archive)
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        interest: interest,
+        source: attrData.source || 'direct'
+      })
+    }).catch(() => {});
+
+    // Also send to /api/enquiry as secondary backup lead capture
     fetch('/api/enquiry', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
