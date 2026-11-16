@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical Progress — Elevate Thrive Newsletter Template</title>
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       ELEVATE THRIVE BRAND NEWSLETTER TEMPLATE (HTML EMAIL COMPATIBLE)
+       Palette: Cobalt #0022cb, Deep Slate #0b1430, Muted #536173, Tint #f4f6fc, Accent #eed200
+       ══════════════════════════════════════════════════════════ */
+    body, table, td, p, a, li, blockquote {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100% !important;
+      background-color: #f4f6fc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #0b1430;
+      line-height: 1.6;
+    }
+    .wrapper {
+      width: 100%;
+      table-layout: fixed;
+      background-color: #f4f6fc;
+      padding: 40px 16px;
+    }
+    .main-container {
+      max-width: 620px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #dce3ef;
+      box-shadow: 0 4px 20px rgba(11, 20, 48, 0.04);
+    }
+    /* Header */
+    .header-bar {
+      background-color: #0b1430;
+      padding: 24px 32px;
+      border-bottom: 3px solid #eed200;
+    }
+    .header-table {
+      width: 100%;
+    }
+    .brand-title {
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0;
+      text-decoration: none;
+    }
+    .brand-sub {
+      color: #a0aec0;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 3px;
+    }
+    .issue-pill {
+      background: rgba(255, 255, 255, 0.12);
+      color: #eed200;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-align: right;
+      display: inline-block;
+    }
+    /* Content Body */
+    .content-body {
+      padding: 36px 32px 28px;
+    }
+    .eyebrow {
+      color: #0022cb;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+    h1 {
+      color: #0b1430;
+      font-size: 26px;
+      line-height: 1.25;
+      font-weight: 800;
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+    }
+    p {
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.65;
+      margin: 0 0 16px;
+    }
+    /* Callout Box / One Actionable Idea */
+    .action-box {
+      background-color: #f4f6fc;
+      border-left: 4px solid #0022cb;
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+    .action-kicker {
+      color: #0022cb;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .action-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0b1430;
+      margin: 0 0 8px;
+    }
+    .action-desc {
+      color: #475569;
+      font-size: 14px;
+      margin: 0;
+      line-height: 1.55;
+    }
+    /* CTA Button */
+    .btn-container {
+      margin: 28px 0;
+      text-align: left;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #0022cb;
+      color: #ffffff !important;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    /* Divider */
+    .divider {
+      height: 1px;
+      background-color: #e2e8f0;
+      margin: 28px 0;
+    }
+    /* Author signature */
+    .author-card {
+      display: table;
+      width: 100%;
+      margin-top: 24px;
+    }
+    .author-avatar {
+      display: table-cell;
+      width: 50px;
+      vertical-align: top;
+    }
+    .author-avatar img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: block;
+      border: 2px solid #eed200;
+    }
+    .author-info {
+      display: table-cell;
+      vertical-align: top;
+      padding-left: 12px;
+    }
+    .author-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0b1430;
+      margin: 0;
+    }
+    .author-role {
+      font-size: 12px;
+      color: #64748b;
+      margin: 2px 0 0;
+      line-height: 1.4;
+    }
+    /* Footer */
+    .footer-bar {
+      background-color: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 24px 32px;
+      text-align: center;
+    }
+    .footer-text {
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.6;
+      margin: 0 0 10px;
+    }
+    .footer-links a {
+      color: #0022cb;
+      text-decoration: underline;
+      font-size: 12px;
+      margin: 0 8px;
+    }
+    @media only screen and (max-width: 600px) {
+      .content-body {
+        padding: 24px 20px !important;
+      }
+      .header-bar {
+        padding: 20px !important;
+      }
+      h1 {
+        font-size: 22px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="main-container">
+      
+      <!-- Brand Header -->
+      <div class="header-bar">
+        <table class="header-table" role="presentation" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td>
+              <div class="brand-title">Practical Progress</div>
+              <div class="brand-sub">Elevate Thrive Consulting</div>
+            </td>
+            <td align="right">
+              <span class="issue-pill">Issue #01 · Bi-Weekly</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Main Edition Body -->
+      <div class="content-body">
+        <div class="eyebrow">Design Leadership &amp; Applied AI</div>
+        <h1>Stop Designing Screens. Start Designing Decisions.</h1>
+        
+        <p>Most design challenges inside growing companies are rarely screen problems. They are decision problems wearing a visual disguise.</p>
+
+        <p>When four product squads are shipping features in parallel, alignment breaks down not because designers lack craft, but because no one agreed on the boundary conditions: who owns what definition of done, what trade-offs are accepted, and how uncertainty is documented.</p>
+
+        <!-- Method Spotlight Callout -->
+        <div class="action-box">
+          <div class="action-kicker">The One Method To Try This Week</div>
+          <div class="action-title">The Three-Input Verification Gate</div>
+          <div class="action-desc">
+            Before handing any AI prompt or automated workflow to your engineering squad, run three deliberately diverse, non-sensitive test inputs. Log every hallucination, revise constraints, and establish human review criteria before code is committed.
+          </div>
+        </div>
+
+        <p>In our latest case study breakdown, we walk through how we hired 9 cross-functional designers, unified 3 platforms (Web, iOS, Android), and established an operating model that launched NYE Money across 10M+ users.</p>
+
+        <div class="btn-container">
+          <a href="https://www.raghvendrasingh.com/work/nye-team/" class="btn" target="_blank">Read the Full Case Study →</a>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Author Signature -->
+        <div class="author-card">
+          <div class="author-avatar">
+            <img src="https://www.raghvendrasingh.com/assets/logo-mark.png" alt="Raghvendra Singh">
+          </div>
+          <div class="author-info">
+            <div class="author-name">Raghvendra Singh</div>
+            <div class="author-role">Founder, Elevate Thrive · Associate Professor, Communication Design at IIAD · Former UX Lead at NYE &amp; Nagarro</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clean Footer -->
+      <div class="footer-bar">
+        <p class="footer-text">
+          You are receiving this because you subscribed to <strong>Practical Progress</strong> on raghvendrasingh.com or LinkedIn.
+        </p>
+        <div class="footer-links">
+          <a href="https://www.raghvendrasingh.com/resources/">Free Worksheets</a>
+          <a href="https://www.raghvendrasingh.com/tools/">Studio Tools</a>
+          <a href="{{unsubscribe_link}}">Unsubscribe in 1 click</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
