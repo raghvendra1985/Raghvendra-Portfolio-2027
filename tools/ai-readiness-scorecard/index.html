@@ -1,169 +1,692 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI &amp; Product Workflow Readiness Scorecard — Elevate Thrive</title><meta name="description" content="A 2-minute diagnostic assessment for founders, design leads, and product teams to evaluate their AI workflow maturity and eliminate brittle AI slop."><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/universal-nav.css"><link rel="icon" href="/favicon.ico" sizes="any"><script src="/universal-nav.js" defer></script><script src="/site.js" defer></script><style>
-.scorecard-hero { max-width: 800px; margin: 40px auto 32px; text-align: center; padding: 0 20px; }
-.scorecard-badge { display: inline-block; background: #e6eaff; color: #0022cb; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 12px; }
-.scorecard-title { font-size: clamp(28px, 4vw, 42px); line-height: 1.15; font-weight: 800; color: #0b1430; margin: 0 0 14px; }
-.scorecard-lead { font-size: 16px; line-height: 1.6; color: #475569; margin: 0; }
-.scorecard-box { max-width: 720px; margin: 0 auto 64px; background: #ffffff; border: 1px solid #dce3ef; border-radius: 24px; padding: 36px 32px; box-shadow: 0 12px 32px rgba(11, 20, 48, 0.05); }
-.score-step { display: none; }
-.score-step.active { display: block; }
-.score-step-eyebrow { font-size: 12px; font-weight: 700; color: #0022cb; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; display: block; }
-.score-question { font-size: 20px; font-weight: 700; color: #0b1430; margin: 0 0 20px; line-height: 1.35; }
-.score-options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
-.score-opt-label { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 1.5px solid #e2e8f0; border-radius: 14px; cursor: pointer; transition: all 0.15s ease; font-size: 14.5px; line-height: 1.5; color: #1e293b; }
-.score-opt-label:hover { border-color: #0022cb; background: #f8fafc; }
-.score-opt-label input { margin-top: 3px; accent-color: #0022cb; }
-.score-nav-bar { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 20px; }
-.score-progress { font-size: 12px; font-weight: 600; color: #64748b; }
-.score-btn { background: #0022cb; color: #ffffff; border: none; padding: 12px 24px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.15s; }
-.score-btn:hover { background: #001a99; }
-.score-btn.secondary { background: #f1f5f9; color: #33415b; }
-.score-btn.secondary:hover { background: #e2e8f0; }
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI &amp; Product Workflow Readiness Scorecard — Elevate Thrive</title>
+  <meta name="description" content="A 2-minute diagnostic assessment for founders, design leads, and product teams to evaluate their AI workflow maturity and eliminate brittle AI slop.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/reference-style.css?v=timeline-alignment-1">
+  <link rel="stylesheet" href="/universal-nav.css">
+  <link rel="stylesheet" href="/footer.css?v=1">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#FFFFFF">
+  <script src="/universal-nav.js" defer></script>
+  <script src="/branding.js?v=style2" defer></script>
+  <script src="/site.js" defer></script>
 
-/* Result Box */
-.score-result { display: none; text-align: center; }
-.score-result.active { display: block; }
-.score-gauge { width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, #ffffff 60%, transparent 62%), conic-gradient(#0022cb var(--pct, 70%), #e2e8f0 0); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 34, 203, 0.15); }
-.score-gauge-val { font-size: 34px; font-weight: 800; color: #0b1430; }
-.score-result-tier { font-size: 22px; font-weight: 800; color: #0b1430; margin: 0 0 10px; }
-.score-result-desc { font-size: 15px; line-height: 1.6; color: #475569; max-width: 540px; margin: 0 auto 28px; }
-.score-cta-card { background: linear-gradient(135deg, #0b1430 0%, #001a99 100%); color: #ffffff; border-radius: 18px; padding: 28px; text-align: left; margin-top: 24px; }
-.score-cta-card h4 { font-size: 18px; margin: 0 0 8px; color: #ffffff; }
-.score-cta-card p { font-size: 13.5px; line-height: 1.55; color: #cbd5e1; margin: 0 0 16px; }
-.score-cta-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-.score-cta-btn { background: #38bdf8; color: #0b1430 !important; font-weight: 700; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-size: 13.5px; }
-.score-cta-btn-alt { background: transparent; color: #ffffff !important; border: 1.5px solid rgba(255,255,255,0.4); font-weight: 600; padding: 9px 18px; border-radius: 8px; text-decoration: none; font-size: 13.5px; }
-</style></head><body class="inner-page"><a class="skip" href="#main-content">Skip to content</a><div class="hn-bar" role="banner"><div class="hn-inner"><a href="/" class="hn-identity" aria-label="Raghvendra Singh — home"><span class="hn-avatar" aria-hidden="true"><img src="/assets/logo-mark.png" alt="Raghvendra Singh" width="38" height="38"></span><span class="hn-name">Raghvendra Singh</span></a><nav class="hn-nav" aria-label="Main navigation"><a href="/work/">01. Work</a><a href="/resources/">02. Knowledge</a><a href="/tools/" class="active">03. Systems</a><a href="/about/">04. About</a></nav><div class="hn-actions"><button class="hn-cta" id="open-drawer-btn" aria-expanded="false" aria-controls="hx-drawer"><span class="hn-pulse" aria-hidden="true"></span><span>Recruiter View (30s)</span></button></div></div></div><main id="main-content"><section class="scorecard-hero"><span class="scorecard-badge">Diagnostic Micro-Tool</span><h1 class="scorecard-title">AI &amp; Product Workflow Readiness Scorecard</h1><p class="scorecard-lead">5 focused questions to diagnose your team's AI maturity, locate workflow bottlenecks, and establish zero-slop systems.</p></section><div class="scorecard-box" id="scorecard-container">
-<!-- Step 1 -->
-<div class="score-step active" data-step="1">
-  <span class="score-step-eyebrow">Question 1 of 5 · Tooling &amp; AI Integration</span>
-  <h2 class="score-question">How does your team currently integrate AI into day-to-day work?</h2>
-  <div class="score-options">
-    <label class="score-opt-label"><input type="radio" name="q1" value="1"> <span><strong>Ad-hoc Prompts:</strong> Individuals paste tasks into ChatGPT/Claude with no shared templates or standards.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q1" value="2"> <span><strong>Basic Prompts Library:</strong> We have shared prompts and basic wrappers, but outputs frequently require manual clean-up.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q1" value="3"> <span><strong>Integrated AI Workflows:</strong> LLMs are connected to specific tasks with deterministic evaluation and structured data.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q1" value="4"> <span><strong>Multi-Agent Architecture:</strong> Autonomous agents orchestrate multi-step research, generation, and code with explicit human review gates.</span></label>
-  </div>
-  <div class="score-nav-bar"><span class="score-progress">Step 1 of 5</span><button type="button" class="score-btn" onclick="nextStep(1)">Continue →</button></div>
-</div>
+  <!-- Vercel Web Analytics & Visitor Attribution Tracking -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 
-<!-- Step 2 -->
-<div class="score-step" data-step="2">
-  <span class="score-step-eyebrow">Question 2 of 5 · Design Decisions &amp; Validation</span>
-  <h2 class="score-question">Where do product and interface decisions get validated before shipping?</h2>
-  <div class="score-options">
-    <label class="score-opt-label"><input type="radio" name="q2" value="1"> <span><strong>Founder/Lead Gut-Feel:</strong> Decisions are made based on internal opinion without formal heuristic evaluation.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q2" value="2"> <span><strong>Qualitative Feedback:</strong> Occasional user interviews or stakeholder check-ins, but fragmented across sprints.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q2" value="3"> <span><strong>Structured Hypotheses:</strong> Every feature begins with an explicit hypothesis matrix and measurable success metrics.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q2" value="4"> <span><strong>Continuous Discovery:</strong> Automated telemetry, behavioral telemetry, and task-completion testing integrated into deployment.</span></label>
-  </div>
-  <div class="score-nav-bar"><button type="button" class="score-btn secondary" onclick="prevStep(2)">← Back</button><span class="score-progress">Step 2 of 5</span><button type="button" class="score-btn" onclick="nextStep(2)">Continue →</button></div>
-</div>
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       SCORECARD PAGE STYLES — STRICT BRAND GUIDELINES V4.0
+       Palette: Ink #1D1D1F, Cobalt #0022CB, Yellow #FFE000, Surface #F5F5F7
+       ══════════════════════════════════════════════════════════ */
+    body.scorecard-page {
+      background-color: #F5F5F7;
+      color: #1D1D1F;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .scorecard-main {
+      flex: 1 0 auto;
+      padding-bottom: 80px;
+    }
+    .scorecard-wrap {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Hero Header */
+    .scorecard-hero {
+      text-align: center;
+      padding: 56px 0 36px;
+    }
+    .scorecard-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFFFFF;
+      border: 1px solid #DCE3EF;
+      color: #0022CB;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(11, 20, 48, 0.04);
+    }
+    .scorecard-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0022CB;
+    }
+    .scorecard-title {
+      font-size: clamp(30px, 4.5vw, 46px);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #1D1D1F;
+      margin: 0 0 16px;
+    }
+    .scorecard-lead {
+      font-size: clamp(15px, 1.8vw, 17px);
+      line-height: 1.6;
+      color: #536173;
+      max-width: 640px;
+      margin: 0 auto;
+    }
 
-<!-- Step 3 -->
-<div class="score-step" data-step="3">
-  <span class="score-step-eyebrow">Question 3 of 5 · Systems &amp; Token Governance</span>
-  <h2 class="score-question">How are design systems and UI states managed between design and engineering?</h2>
-  <div class="score-options">
-    <label class="score-opt-label"><input type="radio" name="q3" value="1"> <span><strong>Disconnected Mockups:</strong> Figma screens are handed off; engineers rebuild UI with slight visual deviations.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q3" value="2"> <span><strong>Figma Component Library:</strong> Shared UI library exists in design, but state coverage and code parity are inconsistent.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q3" value="3"> <span><strong>Tokenized Design System:</strong> Color, typography, and spacing tokens synchronized between Figma and production CSS.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q3" value="4"> <span><strong>Governed Multi-Platform System:</strong> Automated visual regression tests, code connect, and strict state coverage across platforms.</span></label>
-  </div>
-  <div class="score-nav-bar"><button type="button" class="score-btn secondary" onclick="prevStep(3)">← Back</button><span class="score-progress">Step 3 of 5</span><button type="button" class="score-btn" onclick="nextStep(3)">Continue →</button></div>
-</div>
+    /* Diagnostic Card Box */
+    .scorecard-card {
+      background: #FFFFFF;
+      border: 1px solid #DCE3EF;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 30px rgba(29, 29, 31, 0.04);
+      margin-bottom: 40px;
+      position: relative;
+    }
 
-<!-- Step 4 -->
-<div class="score-step" data-step="4">
-  <span class="score-step-eyebrow">Question 4 of 5 · Workflow Bottlenecks</span>
-  <h2 class="score-question">What causes the most friction or lost time in your product delivery cycle?</h2>
-  <div class="score-options">
-    <label class="score-opt-label"><input type="radio" name="q4" value="1"> <span><strong>Ambiguous Problem Statements:</strong> Building features only to realize the core user need was misunderstood.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q4" value="2"> <span><strong>Manual Repetitive Sprints:</strong> Spending hours on routine copywriting, asset generation, or manual testing.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q4" value="3"> <span><strong>Handoff &amp; Edge Cases:</strong> Engineers discovering missing states (empty, loading, error, permissions) post-design.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q4" value="4"> <span><strong>Fast But Brittle:</strong> AI tools create lots of content quickly, but QA spends twice as long verifying accuracy.</span></label>
-  </div>
-  <div class="score-nav-bar"><button type="button" class="score-btn secondary" onclick="prevStep(4)">← Back</button><span class="score-progress">Step 4 of 5</span><button type="button" class="score-btn" onclick="nextStep(4)">Continue →</button></div>
-</div>
+    /* Step Progress Indicator Bar */
+    .score-progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .score-progress-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0022CB;
+    }
+    .score-progress-count {
+      font-size: 13px;
+      font-weight: 600;
+      color: #536173;
+    }
+    .score-meter-track {
+      width: 100%;
+      height: 6px;
+      background: #F0F2F6;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .score-meter-fill {
+      height: 100%;
+      background: #0022CB;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 99px;
+    }
 
-<!-- Step 5 -->
-<div class="score-step" data-step="5">
-  <span class="score-step-eyebrow">Question 5 of 5 · Human Review &amp; Quality Gates</span>
-  <h2 class="score-question">Where does human judgement intervene in your automated workflows?</h2>
-  <div class="score-options">
-    <label class="score-opt-label"><input type="radio" name="q5" value="1"> <span><strong>No Clear Gate:</strong> Outputs go live or to clients with minimal or ad-hoc checking.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q5" value="2"> <span><strong>Manual Signoff Bottleneck:</strong> One senior lead must manually review everything before it can ship.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q5" value="3"> <span><strong>Explicit Checkpoints:</strong> Clear boundaries where machines generate options and humans make the final commit.</span></label>
-    <label class="score-opt-label"><input type="radio" name="q5" value="4"> <span><strong>Deterministic Guardrails:</strong> Automated policy checks catch common errors; human review focuses only on high-leverage craft.</span></label>
-  </div>
-  <div class="score-nav-bar"><button type="button" class="score-btn secondary" onclick="prevStep(5)">← Back</button><span class="score-progress">Step 5 of 5</span><button type="button" class="score-btn" onclick="calculateScore()">Calculate My Scorecard ⚡</button></div>
-</div>
+    /* Steps */
+    .score-step {
+      display: none;
+    }
+    .score-step.active {
+      display: block;
+      animation: fadeInStep 0.25s ease-out;
+    }
+    @keyframes fadeInStep {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-<!-- Results View -->
-<div class="score-result" id="score-result-view">
-  <div class="score-gauge" id="score-gauge-ring"><span class="score-gauge-val" id="score-val">76%</span></div>
-  <h3 class="score-result-tier" id="score-tier">Maturity Level: Emergent AI Practitioner</h3>
-  <p class="score-result-desc" id="score-desc">Your team is actively experimenting with AI and modern design tools, but lacks structured evaluation harnesses and token governance to prevent brittle outputs.</p>
+    .score-question {
+      font-size: clamp(20px, 2.5vw, 24px);
+      font-weight: 800;
+      color: #1D1D1F;
+      margin: 0 0 24px;
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+    }
 
-  <div class="score-cta-card">
-    <h4>Recommended Next Steps:</h4>
-    <p>1. Start with the free <strong>AI Opportunity &amp; Workflow Audit Canvas</strong>.<br>2. Explore the <strong>Practical AI Workflow Starter Kit (₹399)</strong> for deterministic prompt harnesses.<br>3. Or book a <strong>90-Minute Executive Advisory Session</strong> with Raghvendra Singh for a direct teardown.</p>
-    <div class="score-cta-actions">
-      <a href="/resources/ai-opportunity-audit/" class="score-cta-btn">Download Free AI Audit Canvas ↗</a>
-      <a href="/services/#executive-advisory" class="score-cta-btn-alt">Book 90-Min Strategy Teardown ↗</a>
-      <a href="/resources/" class="score-cta-btn-alt">Browse All 11 Toolkits ↗</a>
+    /* Option Radios (Clean Interactive Tiles) */
+    .score-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .score-opt-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: #1D1D1F;
+      background: #FFFFFF;
+    }
+    .score-opt-label:hover {
+      border-color: #0022CB;
+      background: #F8FAFC;
+    }
+    .score-opt-label.selected {
+      border-color: #0022CB;
+      background: #F4F6FC;
+      box-shadow: 0 0 0 1px #0022CB;
+    }
+    .score-opt-label input[type="radio"] {
+      margin-top: 3px;
+      width: 18px;
+      height: 18px;
+      accent-color: #0022CB;
+      flex-shrink: 0;
+    }
+    .score-opt-label strong {
+      color: #1D1D1F;
+      font-weight: 700;
+    }
+
+    /* Footer Nav Buttons */
+    .score-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 24px;
+    }
+    .score-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #0022CB;
+      color: #FFFFFF !important;
+      border: 1px solid #0022CB;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.16s ease;
+    }
+    .score-btn:hover {
+      background: #001AA3;
+      border-color: #001AA3;
+    }
+    .score-btn.secondary {
+      background: #FFFFFF;
+      color: #1D1D1F !important;
+      border: 1px solid #DCE3EF;
+    }
+    .score-btn.secondary:hover {
+      background: #F5F5F7;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       DIAGNOSTIC RESULTS DASHBOARD VIEW
+       ══════════════════════════════════════════════════════════ */
+    .score-result {
+      display: none;
+      text-align: center;
+      padding: 10px 0;
+    }
+    .score-result.active {
+      display: block;
+      animation: fadeInStep 0.3s ease-out;
+    }
+
+    /* Dynamic Circular Score Gauge */
+    .score-gauge {
+      width: 136px;
+      height: 136px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #FFFFFF 62%, transparent 63%), conic-gradient(#0022CB var(--pct, 70%), #E2E8F0 0);
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 28px rgba(0, 34, 203, 0.12);
+    }
+    .score-gauge-val {
+      font-size: 36px;
+      font-weight: 800;
+      color: #1D1D1F;
+      letter-spacing: -0.02em;
+    }
+    .score-result-tier {
+      font-size: 24px;
+      font-weight: 800;
+      color: #1D1D1F;
+      margin: 0 0 10px;
+    }
+    .score-result-desc {
+      font-size: 15px;
+      line-height: 1.65;
+      color: #536173;
+      max-width: 580px;
+      margin: 0 auto 32px;
+    }
+
+    /* Tailored Action & Conversion Box */
+    .score-action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      text-align: left;
+      margin-top: 28px;
+    }
+    .score-solution-card {
+      background: #F5F5F7;
+      border: 1px solid #DCE3EF;
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .score-solution-card.featured {
+      background: #FFFFFF;
+      border: 2px solid #0022CB;
+      box-shadow: 0 8px 24px rgba(0, 34, 203, 0.08);
+      position: relative;
+    }
+    .score-solution-badge {
+      display: inline-block;
+      background: #FFE000;
+      color: #1D1D1F;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      align-self: flex-start;
+    }
+    .score-solution-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #1D1D1F;
+      margin: 0 0 8px;
+    }
+    .score-solution-desc {
+      font-size: 13.5px;
+      color: #536173;
+      line-height: 1.55;
+      margin: 0 0 20px;
+      flex-grow: 1;
+    }
+    .score-solution-price {
+      font-size: 16px;
+      font-weight: 800;
+      color: #1D1D1F;
+      margin-bottom: 14px;
+    }
+    .score-solution-price s {
+      color: #8E8E93;
+      font-size: 13px;
+      margin-right: 4px;
+    }
+
+    /* Retake Button */
+    .retake-btn {
+      margin-top: 28px;
+      background: transparent;
+      border: none;
+      color: #536173;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    @media (max-width: 680px) {
+      .scorecard-card { padding: 24px 18px; }
+      .score-action-grid { grid-template-columns: 1fr; }
+      .score-nav-bar { flex-direction: column-reverse; gap: 12px; }
+      .score-nav-bar .score-btn { width: 100%; }
+    }
+  </style>
+</head>
+
+<body class="inner-page scorecard-page">
+  <a class="skip" href="#main-content">Skip to content</a>
+
+  <!-- ════════════════════════════════════════════
+       STICKY PERSONA NAV BAR
+  ════════════════════════════════════════════ -->
+  <div class="hn-bar" role="banner">
+    <div class="hn-inner">
+      <a href="/" class="hn-identity" aria-label="Raghvendra Singh — home">
+        <span class="hn-avatar" aria-hidden="true"><img src="/assets/logo-mark.png" alt="Raghvendra Singh" width="38" height="38"></span>
+        <span class="hn-name">Raghvendra Singh</span>
+      </a>
+
+      <nav class="hn-nav" aria-label="Main navigation">
+        <a href="/work/">01. Work</a>
+        <a href="/resources/">02. Knowledge</a>
+        <a href="/tools/" class="active">03. Systems</a>
+        <a href="/about/">04. About</a>
+      </nav>
+
+      <div class="hn-actions">
+        <button class="hn-cta" id="open-drawer-btn" aria-expanded="false" aria-controls="hx-drawer">
+          <span class="hn-pulse" aria-hidden="true"></span>
+          <span>Recruiter View (30s)</span>
+        </button>
+      </div>
     </div>
   </div>
-</div>
-</div></main><footer class="centered-footer"><div class="footer-inner"><a class="brand footer-logo" href="/" aria-label="Elevate Thrive home"><img src="/assets/logo-footer-final.png" alt="ElevateThrive Consulting" width="1356" height="300" loading="lazy"></a><nav class="footer-pages" aria-label="Footer navigation"><a href="/">Home</a><a href="/services/">Services</a><a href="/about/">About</a><a href="/learning/">Learning</a><a href="/newsletter/">Newsletter</a><a href="/resources/">Free Resources</a><a href="/tools/">Studio tools</a></nav><div class="footer-bottom"><small>© 2026 Elevate Thrive Consulting</small><div class="footer-utilities"><button id="motion-toggle" type="button" aria-pressed="false">Reduce motion</button><a href="#top">Back to top ↑</a></div></div></div></footer><script>
-let answers = {};
-function nextStep(current) {
-  const selected = document.querySelector(`input[name="q${current}"]:checked`);
-  if (!selected) {
-    alert("Please select an option before continuing.");
-    return;
-  }
-  answers[`q${current}`] = parseInt(selected.value, 10);
-  document.querySelector(`.score-step[data-step="${current}"]`).classList.remove("active");
-  document.querySelector(`.score-step[data-step="${current+1}"]`).classList.add("active");
-}
-function prevStep(current) {
-  document.querySelector(`.score-step[data-step="${current}"]`).classList.remove("active");
-  document.querySelector(`.score-step[data-step="${current-1}"]`).classList.add("active");
-}
-function calculateScore() {
-  const selected = document.querySelector(`input[name="q5"]:checked`);
-  if (!selected) {
-    alert("Please select an option before continuing.");
-    return;
-  }
-  answers["q5"] = parseInt(selected.value, 10);
-  document.querySelector(`.score-step[data-step="5"]`).classList.remove("active");
 
-  const total = (answers.q1 || 2) + (answers.q2 || 2) + (answers.q3 || 2) + (answers.q4 || 2) + (answers.q5 || 2);
-  const percentage = Math.round((total / 20) * 100);
+  <main id="main-content" class="scorecard-main">
+    <div class="scorecard-wrap">
+      
+      <!-- Hero Introduction -->
+      <section class="scorecard-hero">
+        <span class="scorecard-badge">Diagnostic Micro-Tool</span>
+        <h1 class="scorecard-title">AI &amp; Product Workflow Readiness Scorecard</h1>
+        <p class="scorecard-lead">5 focused questions to diagnose your team's AI maturity, locate workflow bottlenecks, and establish zero-slop systems.</p>
+      </section>
 
-  document.getElementById("score-val").textContent = percentage + "%";
-  document.getElementById("score-gauge-ring").style.setProperty("--pct", percentage + "%");
+      <!-- Interactive Multi-Step Assessment Card -->
+      <div class="scorecard-card" id="scorecard-container">
+        
+        <!-- Live Progress Meter -->
+        <div class="score-progress-header">
+          <span class="score-progress-label" id="score-step-indicator">Question 1 of 5</span>
+          <span class="score-progress-count" id="score-meter-pct">20% Completed</span>
+        </div>
+        <div class="score-meter-track" aria-hidden="true">
+          <div class="score-meter-fill" id="score-meter-bar" style="width: 20%;"></div>
+        </div>
 
-  let tier = "Level 2: Emergent AI Practice";
-  let desc = "Your team understands the value of modern design and AI, but work is slowed down by manual verification and disconnected tool handoffs.";
-  if (percentage >= 80) {
-    tier = "Level 4: Autonomous Systems & High Governance";
-    desc = "You operate with high discipline, tokenized workflows, and strict human-in-the-loop review boundaries.";
-  } else if (percentage >= 60) {
-    tier = "Level 3: Structured Workflow Integrator";
-    desc = "You have established repeatable routines, but still face friction scaling systems across cross-functional teams.";
-  } else if (percentage < 45) {
-    tier = "Level 1: Ad-Hoc & Exploratory";
-    desc = "Prompting and design decisions are largely ad-hoc. Implementing a structured opportunity map will produce immediate 5x time savings.";
-  }
+        <!-- Step 1 -->
+        <div class="score-step active" data-step="1">
+          <h2 class="score-question">How does your team currently integrate AI into day-to-day work?</h2>
+          <div class="score-options">
+            <label class="score-opt-label"><input type="radio" name="q1" value="1"> <span><strong>Ad-hoc Prompts:</strong> Individuals paste tasks into ChatGPT/Claude with no shared templates or standards.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q1" value="2"> <span><strong>Basic Prompts Library:</strong> We have shared prompts and basic wrappers, but outputs frequently require manual clean-up.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q1" value="3"> <span><strong>Integrated AI Workflows:</strong> LLMs are connected to specific tasks with deterministic evaluation and structured data.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q1" value="4"> <span><strong>Multi-Agent Architecture:</strong> Autonomous agents orchestrate multi-step research, generation, and code with explicit human review gates.</span></label>
+          </div>
+          <div class="score-nav-bar">
+            <span></span>
+            <button type="button" class="score-btn" onclick="nextStep(1)">Continue →</button>
+          </div>
+        </div>
 
-  document.getElementById("score-tier").textContent = tier;
-  document.getElementById("score-desc").textContent = desc;
-  document.getElementById("score-result-view").classList.add("active");
+        <!-- Step 2 -->
+        <div class="score-step" data-step="2">
+          <h2 class="score-question">Where do product and interface decisions get validated before shipping?</h2>
+          <div class="score-options">
+            <label class="score-opt-label"><input type="radio" name="q2" value="1"> <span><strong>Founder/Lead Gut-Feel:</strong> Decisions are made based on internal opinion without formal heuristic evaluation.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q2" value="2"> <span><strong>Qualitative Feedback:</strong> Occasional user interviews or stakeholder check-ins, but fragmented across sprints.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q2" value="3"> <span><strong>Structured Hypotheses:</strong> Every feature begins with an explicit hypothesis matrix and measurable success metrics.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q2" value="4"> <span><strong>Continuous Discovery:</strong> Automated telemetry, behavioral metrics, and task-completion testing integrated into deployment.</span></label>
+          </div>
+          <div class="score-nav-bar">
+            <button type="button" class="score-btn secondary" onclick="prevStep(2)">← Back</button>
+            <button type="button" class="score-btn" onclick="nextStep(2)">Continue →</button>
+          </div>
+        </div>
 
-  // Track event in Vercel & PostHog
-  if (window.va) window.va("event", { name: "scorecard_completed", data: { score: percentage, tier: tier } });
-  if (window.posthog) window.posthog.capture("scorecard_completed", { score: percentage, tier: tier });
-}
-</script></body></html>
+        <!-- Step 3 -->
+        <div class="score-step" data-step="3">
+          <h2 class="score-question">How are design systems and UI states managed between design and engineering?</h2>
+          <div class="score-options">
+            <label class="score-opt-label"><input type="radio" name="q3" value="1"> <span><strong>Disconnected Mockups:</strong> Figma screens are handed off; engineers rebuild UI with slight visual deviations.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q3" value="2"> <span><strong>Figma Component Library:</strong> Shared UI library exists in design, but state coverage and code parity are inconsistent.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q3" value="3"> <span><strong>Tokenized Design System:</strong> Color, typography, and spacing tokens synchronized between Figma and production CSS.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q3" value="4"> <span><strong>Governed Multi-Platform System:</strong> Automated visual regression tests, code connect, and strict state coverage across platforms.</span></label>
+          </div>
+          <div class="score-nav-bar">
+            <button type="button" class="score-btn secondary" onclick="prevStep(3)">← Back</button>
+            <button type="button" class="score-btn" onclick="nextStep(3)">Continue →</button>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="score-step" data-step="4">
+          <h2 class="score-question">What causes the most friction or lost time in your product delivery cycle?</h2>
+          <div class="score-options">
+            <label class="score-opt-label"><input type="radio" name="q4" value="1"> <span><strong>Ambiguous Problem Statements:</strong> Building features only to realize the core user need was misunderstood.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q4" value="2"> <span><strong>Manual Repetitive Sprints:</strong> Spending hours on routine copywriting, asset generation, or manual testing.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q4" value="3"> <span><strong>Handoff &amp; Edge Cases:</strong> Engineers discovering missing states (empty, loading, error, permissions) post-design.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q4" value="4"> <span><strong>Fast But Brittle:</strong> AI tools create content quickly, but QA spends twice as long verifying accuracy.</span></label>
+          </div>
+          <div class="score-nav-bar">
+            <button type="button" class="score-btn secondary" onclick="prevStep(4)">← Back</button>
+            <button type="button" class="score-btn" onclick="nextStep(4)">Continue →</button>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="score-step" data-step="5">
+          <h2 class="score-question">Where does human judgement intervene in your automated workflows?</h2>
+          <div class="score-options">
+            <label class="score-opt-label"><input type="radio" name="q5" value="1"> <span><strong>No Clear Gate:</strong> Outputs go live or to clients with minimal or ad-hoc checking.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q5" value="2"> <span><strong>Manual Signoff Bottleneck:</strong> One senior lead must manually review everything before it can ship.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q5" value="3"> <span><strong>Explicit Checkpoints:</strong> Clear boundaries where machines generate options and humans make the final commit.</span></label>
+            <label class="score-opt-label"><input type="radio" name="q5" value="4"> <span><strong>Deterministic Guardrails:</strong> Automated policy checks catch common errors; human review focuses only on high-leverage craft.</span></label>
+          </div>
+          <div class="score-nav-bar">
+            <button type="button" class="score-btn secondary" onclick="prevStep(5)">← Back</button>
+            <button type="button" class="score-btn" onclick="calculateScore()">Calculate My Scorecard ⚡</button>
+          </div>
+        </div>
+
+        <!-- Results Dashboard View -->
+        <div class="score-result" id="score-result-view">
+          <div class="score-gauge" id="score-gauge-ring">
+            <span class="score-gauge-val" id="score-val">75%</span>
+          </div>
+          <h3 class="score-result-tier" id="score-tier">Level 3: Structured Workflow Integrator</h3>
+          <p class="score-result-desc" id="score-desc">You have established repeatable routines, but still face friction scaling systems across cross-functional teams.</p>
+
+          <!-- Tailored Solution Grid (Product Conversion Engine) -->
+          <div class="score-action-grid">
+            
+            <!-- Solution 1: Practical AI Starter Kit -->
+            <div class="score-solution-card featured">
+              <span class="score-solution-badge">Recommended Toolkit</span>
+              <div class="score-solution-title">Practical AI Workflow Starter Kit</div>
+              <div class="score-solution-desc">Field-tested prompt engineering protocols, evaluation checklists, and editable HTML worksheets to eliminate brittle outputs.</div>
+              <div class="score-solution-price"><s>₹499</s> ₹399 / $4.99 USD</div>
+              <a href="/resources/ai-workflow-starter-kit/" class="score-btn" style="text-align:center">Get The Kit (₹399) →</a>
+            </div>
+
+            <!-- Solution 2: 90-Min Strategic Advisory -->
+            <div class="score-solution-card">
+              <span class="score-solution-badge" style="background:#E2E8F0;color:#1D1D1F">High-Impact Advisory</span>
+              <div class="score-solution-title">90-Minute Executive Advisory</div>
+              <div class="score-solution-desc">Direct teardown of your team's AI workflow, design ops bottlenecks, and multi-squad governance with Raghvendra Singh.</div>
+              <div class="score-solution-price">₹12,500 / $149 USD</div>
+              <a href="/services/#advisory-checkout" class="score-btn secondary" style="text-align:center">Book 90-Min Advisory →</a>
+            </div>
+
+          </div>
+
+          <button type="button" class="retake-btn" onclick="retakeScorecard()">↺ Retake Diagnostic Assessment</button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Branded Clean Footer -->
+  <footer class="centered-footer">
+    <div class="footer-inner">
+      <a class="brand footer-logo" href="/" aria-label="Elevate Thrive home">
+        <img src="/assets/logo-footer-final.png" alt="ElevateThrive Consulting" width="1356" height="300" loading="lazy">
+      </a>
+      <nav class="footer-pages" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <a href="/services/">Services</a>
+        <a href="/about/">About</a>
+        <a href="/learning/">Learning</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/resources/">Free Resources</a>
+        <a href="/tools/">Studio tools</a>
+      </nav>
+      <div class="footer-bottom">
+        <small>© 2026 Elevate Thrive Consulting</small>
+        <div class="footer-utilities">
+          <button id="motion-toggle" type="button" aria-pressed="false">Reduce motion</button>
+          <a href="#top">Back to top ↑</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════
+       EXECUTIVE BRIEFING DRAWER
+  ════════════════════════════════════════════ -->
+  <div id="hx-overlay" class="hx-overlay" role="dialog" aria-modal="true" aria-label="Executive Briefing">
+    <aside id="hx-drawer" class="hx-drawer">
+      <div class="hx-drawer-head">
+        <div class="hx-drawer-brand">
+          <span class="hn-avatar" style="width:28px;height:28px" aria-hidden="true"><img src="/assets/logo-mark.png" alt="" width="28" height="28"></span>
+          <span class="hx-drawer-label">Executive Briefing</span>
+        </div>
+        <button id="close-drawer-btn" class="hx-drawer-close" aria-label="Close executive briefing">✕ Close</button>
+      </div>
+
+      <div class="hx-drawer-name-block">
+        <div class="hx-drawer-avail-label">30-Second Signal</div>
+        <div class="hx-drawer-name">Raghvendra Singh</div>
+        <div class="hx-drawer-role">Principal Product Designer · Associate Professor at IIAD</div>
+      </div>
+
+      <div class="hx-drawer-avail">
+        <div class="hx-drawer-avail-label">Current Status</div>
+        <div class="hx-drawer-avail-text">
+          Open to <strong>remote Staff / Principal Product Designer roles</strong>, strategic advisory &amp; consulting.
+        </div>
+      </div>
+
+      <div class="hx-drawer-stats">
+        <div class="hx-drawer-stat">
+          <div class="hx-drawer-stat-val">14+</div>
+          <div class="hx-drawer-stat-lbl">Years Experience</div>
+        </div>
+        <div class="hx-drawer-stat">
+          <div class="hx-drawer-stat-val">10M+</div>
+          <div class="hx-drawer-stat-lbl">Scale Handled</div>
+        </div>
+      </div>
+
+      <div class="hx-drawer-ctas">
+        <a href="/cv.pdf" class="hx-drawer-cta-primary" download>Download 1-Page CV (PDF) ↓</a>
+        <a href="https://www.linkedin.com/in/raghvendrasingh23/" class="hx-drawer-cta-secondary" target="_blank" rel="noopener noreferrer">View LinkedIn Profile ↗</a>
+        <a href="https://calendly.com/raghvendradesign2012/20-min-intro-call" class="hx-drawer-cta-secondary" target="_blank" rel="noopener noreferrer">Book 20-Min Intro Call ↗</a>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    let answers = {};
+
+    // Selectable Option Visual State
+    document.querySelectorAll('.score-opt-label').forEach(label => {
+      label.addEventListener('click', function() {
+        const parent = this.closest('.score-options');
+        parent.querySelectorAll('.score-opt-label').forEach(l => l.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+
+    function updateProgress(step) {
+      const pct = step * 20;
+      document.getElementById('score-step-indicator').textContent = `Question ${step} of 5`;
+      document.getElementById('score-meter-pct').textContent = `${pct}% Completed`;
+      document.getElementById('score-meter-bar').style.width = `${pct}%`;
+    }
+
+    function nextStep(current) {
+      const selected = document.querySelector(`input[name="q${current}"]:checked`);
+      if (!selected) {
+        alert("Please select an option before continuing.");
+        return;
+      }
+      answers[`q${current}`] = parseInt(selected.value, 10);
+      document.querySelector(`.score-step[data-step="${current}"]`).classList.remove("active");
+      document.querySelector(`.score-step[data-step="${current+1}"]`).classList.add("active");
+      updateProgress(current + 1);
+    }
+
+    function prevStep(current) {
+      document.querySelector(`.score-step[data-step="${current}"]`).classList.remove("active");
+      document.querySelector(`.score-step[data-step="${current-1}"]`).classList.add("active");
+      updateProgress(current - 1);
+    }
+
+    function calculateScore() {
+      const selected = document.querySelector(`input[name="q5"]:checked`);
+      if (!selected) {
+        alert("Please select an option before continuing.");
+        return;
+      }
+      answers["q5"] = parseInt(selected.value, 10);
+      document.querySelector(`.score-step[data-step="5"]`).classList.remove("active");
+
+      // Hide Progress Header in Results
+      document.querySelector('.score-progress-header').style.display = 'none';
+      document.querySelector('.score-meter-track').style.display = 'none';
+
+      const total = (answers.q1 || 2) + (answers.q2 || 2) + (answers.q3 || 2) + (answers.q4 || 2) + (answers.q5 || 2);
+      const percentage = Math.round((total / 20) * 100);
+
+      document.getElementById("score-val").textContent = percentage + "%";
+      document.getElementById("score-gauge-ring").style.setProperty("--pct", percentage + "%");
+
+      let tier = "Level 2: Emergent AI Practice";
+      let desc = "Your team understands the value of modern design and AI, but work is slowed down by manual verification and disconnected tool handoffs.";
+      if (percentage >= 80) {
+        tier = "Level 4: Autonomous Systems & High Governance";
+        desc = "You operate with high discipline, tokenized workflows, and strict human-in-the-loop review boundaries.";
+      } else if (percentage >= 60) {
+        tier = "Level 3: Structured Workflow Integrator";
+        desc = "You have established repeatable routines, but still face friction scaling systems across cross-functional teams.";
+      } else if (percentage < 45) {
+        tier = "Level 1: Ad-Hoc & Exploratory";
+        desc = "Prompting and design decisions are largely ad-hoc. Implementing a structured opportunity map will produce immediate 5x time savings.";
+      }
+
+      document.getElementById("score-tier").textContent = tier;
+      document.getElementById("score-desc").textContent = desc;
+      document.getElementById("score-result-view").classList.add("active");
+
+      // Track event in Vercel & PostHog
+      if (window.va) window.va("event", { name: "scorecard_completed", data: { score: percentage, tier: tier } });
+      if (window.posthog) window.posthog.capture("scorecard_completed", { score: percentage, tier: tier });
+    }
+
+    function retakeScorecard() {
+      answers = {};
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+      document.querySelectorAll('.score-opt-label').forEach(l => l.classList.remove('selected'));
+      document.getElementById("score-result-view").classList.remove("active");
+      document.querySelector('.score-progress-header').style.display = 'flex';
+      document.querySelector('.score-meter-track').style.display = 'block';
+      updateProgress(1);
+      document.querySelector(`.score-step[data-step="1"]`).classList.add("active");
+    }
+  </script>
+</body>
+</html>
