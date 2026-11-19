@@ -1,0 +1,259 @@
+/* Charcoal dark mode. Yellow accent. Light colors are unchanged outside this query. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ink: #F5F5F7;
+    --blue: #ffe100;
+    --brand: #ffe100;
+    --muted: #A9AEB8;
+    --line: #2A2D34;
+    --surface: #1B1D22;
+    --cobalt: #ffe100;
+    --cobalt-hover: #ffe100;
+    --cobalt-pale: #1B1D22;
+    --cobalt-tint: #1B1D22;
+    --muted-2: #A9AEB8;
+    --border: #2A2D34;
+    --border-pale: #2A2D34;
+    --white: #1B1D22;
+    --bg: #111214;
+    --h-blue: #ffe100;
+    --h-ink: #F5F5F7;
+    --h-muted: #A9AEB8;
+    --h-line: #2A2D34;
+    --h-tint: #1B1D22;
+    --n-blue: #ffe100;
+    --n-ink: #F5F5F7;
+    --n-muted: #A9AEB8;
+    --n-line: #2A2D34;
+    --n-tint: #1B1D22;
+  }
+
+  html,
+  body {
+    background: #111214;
+    color: #F5F5F7;
+  }
+
+  .hn-bar {
+    background: rgba(17, 18, 20, 0.94);
+    border-bottom-color: #2A2D34;
+  }
+  .hn-nav a { color: #A9AEB8; }
+  .hn-nav a:hover,
+  .hn-nav a.active { color: #ffe100; background: #1B1D22; }
+  .hn-cta {
+    background: #1B1D22;
+    color: #ffe100;
+    border-color: #ffe100;
+  }
+  .hn-cta:hover { background: #1B1D22; }
+  .hn-pulse { background: #ffe100; }
+
+  .hx-drawer { background: #1B1D22; color: #F5F5F7; border-color: #2A2D34; }
+  .hx-overlay { background: rgba(17, 18, 20, 0.72); }
+  .hx-drawer-head,
+  .hx-drawer-nav-section { border-color: #2A2D34; }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  summary:focus-visible {
+    outline: 3px solid #ffe100;
+    outline-offset: 3px;
+  }
+
+  .button,
+  .btn-cobalt,
+  .hx-drawer-cta-primary,
+  .case-layout .case-chip-primary,
+  .case-badge,
+  .choice-options input:checked + span {
+    background: #ffe100;
+    color: #111214;
+    border-color: #ffe100;
+  }
+  .button:hover,
+  .btn-cobalt:hover,
+  .case-layout .case-chip-primary:hover {
+    background: #ffe100;
+    color: #111214;
+  }
+  .btn-ghost,
+  .btn-outline,
+  .hx-drawer-cta-secondary,
+  .case-layout .case-chip {
+    background: #1B1D22;
+    color: #ffe100;
+    border-color: #2A2D34;
+  }
+  .text-link,
+  .breadcrumb a,
+  .service a,
+  .hn-nav a.active,
+  h1 span,
+  h2 span,
+  .hx-h1 span {
+    color: #ffe100;
+  }
+
+  main p a,
+  main li a,
+  .case-layout p a,
+  .case-layout li a,
+  .reading a {
+    color: #ffe100;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  footer,
+  footer.centered-footer {
+    background: #111214;
+    color: #A9AEB8;
+  }
+  .centered-footer .footer-bottom,
+  footer { border-color: #2A2D34; }
+  .centered-footer .footer-logo img {
+    filter: brightness(0) invert(0.95);
+  }
+
+  input,
+  select,
+  textarea {
+    background: #1B1D22;
+    color: #F5F5F7;
+    border-color: #2A2D34;
+  }
+
+  .header,
+  .header.is-dark,
+  .header.is-dark nav {
+    background: #111214;
+    color: #F5F5F7;
+    border-color: #2A2D34;
+  }
+  .header.is-dark nav a:hover,
+  .header.is-dark nav a[aria-current="page"] { color: #ffe100; }
+  .hero-loader { background: #111214; color: #F5F5F7; }
+  .founder { background: #1B1D22; color: #F5F5F7; }
+  .founder h2 span,
+  .founder .eyebrow,
+  .founder .split > div > p:not(.eyebrow):not(.founder-name) { color: #A9AEB8; }
+
+  .offering-section,
+  .services,
+  .contact,
+  .enquiry-section,
+  .service,
+  .workshop-card,
+  .resource-card,
+  .demo-form,
+  #project-brief {
+    background: #1B1D22;
+    color: #F5F5F7;
+    border-color: #2A2D34;
+  }
+  .offering { border-color: #2A2D34; }
+
+  .case-layout {
+    --case-blue: #ffe100;
+    --case-ink: #F5F5F7;
+    --case-muted: #A9AEB8;
+    --case-line: #2A2D34;
+    --case-tint: #1B1D22;
+    color: #F5F5F7;
+  }
+  .case-study section { border-color: #2A2D34; }
+  .case-layout .case-eyebrow,
+  .case-layout .case-note,
+  .case-layout .case-constraints li,
+  .case-layout .case-oir > div,
+  .case-steps li > span,
+  .case-dcards li > span,
+  .case-layout .case-seq li > p:first-child,
+  .case-steps-auto li::before {
+    background: #1B1D22;
+    color: #ffe100;
+  }
+  .case-chapters {
+    background: rgba(17, 18, 20, 0.94);
+    border-color: #2A2D34;
+  }
+  .case-layout .case-meta > div,
+  .case-layout .case-frame,
+  .case-layout .case-glance-grid > div,
+  .case-layout .case-options li,
+  .case-layout .case-cards3 li,
+  .case-layout .case-outcome-grid article,
+  .case-layout .case-gallery figure,
+  .case-layout .case-reels figure,
+  .case-layout .case-gallery > figure,
+  .case-layout .case-dcards li,
+  .case-layout .case-seq li,
+  .case-chapter,
+  .case-layout .case-brief-grid > section,
+  .case-layout .case-surface,
+  .case-layout .case-glance {
+    background: #1B1D22;
+    color: #F5F5F7;
+    border-color: #2A2D34;
+  }
+  .case-layout .case-options li.case-chosen { background: #1B1D22; color: #F5F5F7; }
+  .case-layout .case-result {
+    background: #111214;
+    color: #F5F5F7;
+    border: 1px solid #2A2D34;
+  }
+  .case-cta-band {
+    background: #1B1D22;
+    color: #F5F5F7;
+    border: 1px solid #2A2D34;
+  }
+  .case-layout .case-cta-band .case-chip-primary {
+    background: #ffe100;
+    color: #111214;
+    border-color: #ffe100;
+  }
+  .case-layout .case-chip { color: #ffe100; }
+
+  .case-study a {
+    color: #ffe100;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+  .case-study a.case-chip,
+  .case-study a.button,
+  .case-study a.case-chip-primary {
+    text-decoration: none;
+  }
+  .case-study a:focus-visible { outline-color: #ffe100; }
+
+  html body .et-pill,
+  html body .et-next {
+    background: #ffe100;
+    color: #111214;
+  }
+  html body .et-pill:hover,
+  html body .et-next:hover { background: #ffe100; color: #111214; }
+  .et-card {
+    background: #1B1D22;
+    color: #F5F5F7;
+    border-color: #2A2D34;
+  }
+  .et-step,
+  #et-tour-body { color: #A9AEB8; }
+  .et-text,
+  .intent-browse,
+  .intent-cv-note a {
+    color: #ffe100;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+  .intent-status,
+  .intent-line,
+  .intent-cv-note { color: #A9AEB8; }
+  .et-tour-target { outline-color: #ffe100; }
+}
