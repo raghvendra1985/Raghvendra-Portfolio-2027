@@ -1,8 +1,10 @@
-.on-repeat{padding:72px 0 24px;color:#111214}
+.on-repeat{padding:72px 0 24px;color:#111214;overflow-x:clip}
 .on-repeat-wrap{width:min(1200px,calc(100% - 48px));margin:0 auto}
 .on-repeat-chapter{margin:0 0 8px;font-family:"Space Grotesk",var(--font-display),sans-serif;font-size:13px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:#111214}
 .on-repeat h2{margin:0 0 8px;font-family:"Space Grotesk",var(--font-display),sans-serif;font-size:clamp(32px,5vw,56px);letter-spacing:-.03em}
 .on-repeat-intro{margin:0 0 8px;max-width:42ch;color:#536173;font-family:Inter,var(--font-body),sans-serif}
+.on-repeat-more{margin:4px 0 0;font-family:"Space Grotesk",var(--font-display),sans-serif;font-weight:650}
+.on-repeat-more a{color:#111214}
 .on-repeat-shelf{--p:0;display:flex;align-items:flex-end;gap:0;padding:36px 12px 20px;overflow:visible}
 .on-repeat-item{--tilt:calc((var(--i) - 3.5) * 2.4deg);position:relative;display:block;flex:0 0 148px;margin-left:-26px;aspect-ratio:1;text-decoration:none;transform:translateX(calc((1 - var(--p)) * (var(--i) - 3.5) * -22px)) rotate(calc(var(--tilt) * var(--p)));opacity:calc(.4 + .6 * var(--p));transition:transform .16s ease,opacity .16s ease}
 .on-repeat-item:first-child{margin-left:0}
@@ -20,13 +22,12 @@
 .on-repeat-shelf{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:20px 20px 16px;margin:0}
 .on-repeat-item{flex:0 0 72vw;max-width:220px;margin-left:0;scroll-snap-align:start;transform:none;opacity:1}
 }
-@media(prefers-color-scheme:dark){
-.on-repeat{color:#F5F5F7}
-.on-repeat-chapter{color:#ffe100}
-.on-repeat-intro{color:#A9AEB8}
-.on-repeat-item:focus-visible{outline-color:#ffe100}
-.on-repeat-item img{border-color:#F5F5F7;box-shadow:5px 6px 0 #000}
-}
+html[data-theme="dark"] .on-repeat{color:#F5F5F7}
+html[data-theme="dark"] .on-repeat-chapter{color:#ffe100}
+html[data-theme="dark"] .on-repeat-intro,
+html[data-theme="dark"] .on-repeat-more a{color:#A9AEB8}
+html[data-theme="dark"] .on-repeat-item:focus-visible{outline-color:#ffe100}
+html[data-theme="dark"] .on-repeat-item img{border-color:#F5F5F7;box-shadow:5px 6px 0 #000}
 html.rs-zen .on-repeat{opacity:.25;pointer-events:none}
 @media(prefers-reduced-motion:reduce){
 .on-repeat-item,.on-repeat-disc{transition:none!important;animation:none!important}

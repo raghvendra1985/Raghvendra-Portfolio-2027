@@ -6,7 +6,7 @@
 })(typeof window !== 'undefined' ? window : globalThis, function () {
   function musicIntro(tracks) {
     const n = (tracks || []).length;
-    return n + (n === 1 ? ' song' : ' songs') + ' on rotation, mostly while designing.';
+    return n + (n === 1 ? ' song' : ' songs') + ' on repeat, mostly while designing.';
   }
   function musicWhere(url) {
     const value = String(url || '');

@@ -20,5 +20,5 @@
 @keyframes tw{50%{transform:rotate(-28deg)}}
 .thrive.is-hidden,body.is-menu-open .thrive,body:has(#navigation.open,.hx-overlay.open,.dn-grow-panel.is-open,#et-tour:not([hidden]),[data-coach]:not([hidden])) .thrive,html[data-mascot=off] .thrive{visibility:hidden;opacity:0;pointer-events:none}
 @media(max-width:700px){.thrive{--s:28px;top:auto;left:8px;bottom:calc(12px + env(safe-area-inset-bottom));width:28px;height:28px}.tr{display:none}.thrive:not(.is-awake){visibility:hidden;opacity:0;pointer-events:none}}
-@media(prefers-color-scheme:dark){.tr{background:#2A2D34}.hit:focus-visible{outline-color:#ffe100}}
+html[data-theme="dark"] .tr{background:#2A2D34}html[data-theme="dark"] .hit:focus-visible{outline-color:#ffe100}
 @media(prefers-reduced-motion:reduce),html:has(#motion-toggle[aria-pressed=true]){.thrive,.thrive *{animation:none!important;transition:none!important}}

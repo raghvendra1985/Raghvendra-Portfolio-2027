@@ -1,0 +1,12 @@
+.ch{height:150vh;overflow:clip}
+.ch-pin{position:sticky;top:84px;height:calc(100vh - 108px);display:grid;place-items:center}
+.ch-card{width:min(1100px,calc(100% - 48px));min-height:52vh;display:grid;place-items:center;margin:0;background:#F5F5F7;color:#111214;border:2px solid #111214;transform-origin:center;will-change:transform}
+.ch-card p{margin:0;font-family:"Space Grotesk",var(--font-display),sans-serif;font-weight:650;font-size:clamp(40px,7vw,88px);letter-spacing:-.04em;text-align:center}
+html[data-theme="dark"] .ch-card{background:#1B1D22;color:#ffe100;border-color:#ffe100;box-shadow:none}
+html.rs-zen .ch{opacity:.25;pointer-events:none}
+@media(prefers-reduced-motion:reduce){
+.ch{height:auto}
+.ch-pin{position:static;height:auto;padding:28px 0}
+.ch-card{min-height:0;padding:28px 16px;transform:none!important;border-radius:0!important;box-shadow:none!important}
+}
+@media(max-width:700px){.ch{height:120vh}.ch-card{width:calc(100% - 28px);min-height:42vh}.ch-card p{font-size:clamp(32px,10vw,48px)}}
