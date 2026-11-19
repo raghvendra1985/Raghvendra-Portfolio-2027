@@ -1,4 +1,6 @@
 /* Intent gate, per-path CTAs, and the on-demand 60-sec tour.
+   Opening the tour (pill or an existing ?tour=1 deep link) autoplays every
+   step. Pause, Back, Skip, Next, and Close stay available. No beat copy changes.
    No chat agent. Get access stays hidden until a real flag exists:
    <body data-get-access="live"> and/or data-get-access-url="/kit/">.
    The published CV is /cv.pdf. Book 20 min uses ET_CALENDLY_URL. */
@@ -147,6 +149,61 @@
     return Boolean(mediaMatches || ariaPressed === 'true' || ariaPressed === true);
   }
 
+  var TOUR_TARGET_MS = 60000;
+  var MIN_BEAT_MS = 7000;
+
+  function beatLength(beat) {
+    return (((beat && beat.title) || '') + ' ' + ((beat && beat.body) || '')).trim().length;
+  }
+
+  function beatDurations(beats) {
+    var list = Array.isArray(beats) ? beats : [];
+    if (!list.length) return [];
+    var explicit = list.map(function (beat) {
+      var value = beat && Number(beat.duration);
+      return value > 0 && isFinite(value) ? Math.round(value) : 0;
+    });
+    var dynamicIdx = [];
+    explicit.forEach(function (ms, index) { if (!ms) dynamicIdx.push(index); });
+    var result = explicit.slice();
+    if (!dynamicIdx.length) return result;
+    var weights = dynamicIdx.map(function (index) { return Math.max(beatLength(list[index]), 1); });
+    var weightSum = weights.reduce(function (sum, weight) { return sum + weight; }, 0);
+    var fixedSum = explicit.reduce(function (sum, ms) { return sum + ms; }, 0);
+    var budget = Math.max(TOUR_TARGET_MS - fixedSum, dynamicIdx.length * MIN_BEAT_MS);
+    var shares = weights.map(function (weight) { return budget * weight / weightSum; });
+    if (budget >= dynamicIdx.length * MIN_BEAT_MS) {
+      var guard = 0;
+      while (shares.some(function (ms) { return ms < MIN_BEAT_MS - 0.5; }) && guard < 8) {
+        guard += 1;
+        var deficit = 0;
+        var flex = 0;
+        shares.forEach(function (ms) {
+          if (ms < MIN_BEAT_MS) deficit += MIN_BEAT_MS - ms;
+          else flex += ms - MIN_BEAT_MS;
+        });
+        if (flex <= 0) break;
+        shares = shares.map(function (ms) {
+          if (ms < MIN_BEAT_MS) return MIN_BEAT_MS;
+          return ms - (ms - MIN_BEAT_MS) * (deficit / flex);
+        });
+      }
+    }
+    if (!fixedSum) {
+      var shareSum = shares.reduce(function (sum, ms) { return sum + ms; }, 0);
+      if (shareSum > 0) shares = shares.map(function (ms) { return ms * (budget / shareSum); });
+    }
+    var rounded = shares.map(function (ms) { return Math.round(ms); });
+    if (!fixedSum) {
+      var drift = budget - rounded.reduce(function (sum, ms) { return sum + ms; }, 0);
+      var longest = 0;
+      rounded.forEach(function (ms, index) { if (ms > rounded[longest]) longest = index; });
+      rounded[longest] += drift;
+    }
+    dynamicIdx.forEach(function (beatIndex, index) { result[beatIndex] = rounded[index]; });
+    return result;
+  }
+
   function beatUrl(beat, intent) {
     const params = new URLSearchParams();
     params.set('for', intent);
@@ -171,6 +228,7 @@
     visibleBeats: visibleBeats,
     inferredTour: inferredTour,
     motionReduced: motionReduced,
+    beatDurations: beatDurations,
     beatUrl: beatUrl
   };
 
@@ -352,24 +410,59 @@
     card.setAttribute('aria-labelledby', 'et-tour-title');
     card.setAttribute('aria-describedby', 'et-tour-body');
     card.tabIndex = -1;
+    const head = document.createElement('div');
+    head.className = 'et-head';
     const stepEl = document.createElement('p');
     stepEl.className = 'et-step';
     stepEl.id = 'et-tour-step';
+    const statusEl = document.createElement('p');
+    statusEl.className = 'et-status';
+    statusEl.id = 'et-tour-status';
+    statusEl.setAttribute('aria-hidden', 'true');
+    const close = button('Close', 'et-text et-close');
+    close.id = 'et-tour-close';
+    close.setAttribute('aria-label', 'Close the tour');
+    head.append(stepEl, statusEl, close);
+    const progress = document.createElement('div');
+    progress.className = 'et-progress';
+    progress.id = 'et-tour-progress';
+    progress.setAttribute('role', 'progressbar');
+    progress.setAttribute('aria-valuemin', '1');
+    progress.setAttribute('aria-valuemax', '1');
+    progress.setAttribute('aria-valuenow', '1');
+    progress.setAttribute('aria-labelledby', 'et-tour-step');
+    const fill = document.createElement('span');
+    fill.className = 'et-progress-fill';
+    progress.appendChild(fill);
     const titleEl = document.createElement('h2');
     titleEl.id = 'et-tour-title';
     titleEl.tabIndex = -1;
     const bodyEl = document.createElement('p');
     bodyEl.id = 'et-tour-body';
+    const live = document.createElement('div');
+    live.id = 'et-tour-live';
+    live.className = 'et-sr';
+    live.setAttribute('aria-live', 'polite');
+    live.setAttribute('aria-atomic', 'true');
     const actions = document.createElement('div');
     actions.className = 'et-actions';
+    const pause = button('Pause', 'et-pause');
+    pause.id = 'et-tour-pause';
+    pause.setAttribute('aria-pressed', 'false');
+    pause.setAttribute('aria-label', 'Pause the tour');
     const back = button('Back', 'et-text');
     const skip = button('Skip', 'et-text');
     skip.setAttribute('aria-label', 'Skip the tour');
     const next = button('Next', 'et-next');
-    actions.append(back, skip, next);
-    card.append(stepEl, titleEl, bodyEl, actions);
+    actions.append(pause, back, skip, next);
+    card.append(head, progress, titleEl, bodyEl, live, actions);
     document.body.append(pill, card);
-    return { pill: pill, card: card, stepEl: stepEl, titleEl: titleEl, bodyEl: bodyEl, back: back, skip: skip, next: next, highlighted: null, state: null };
+    return {
+      pill: pill, card: card, stepEl: stepEl, statusEl: statusEl, titleEl: titleEl, bodyEl: bodyEl,
+      live: live, progress: progress, fill: fill, pause: pause, close: close, back: back, skip: skip, next: next,
+      highlighted: null, state: null, holds: new Set(), suppressTransient: false,
+      clock: { timer: 0, frame: 0, remaining: 0, deadline: 0, token: 0 }
+    };
   }
 
   function button(label, className) {
@@ -390,6 +483,30 @@
     ui.next.addEventListener('click', function () { onNext(ui); });
     ui.back.addEventListener('click', function () { onBack(ui); });
     ui.skip.addEventListener('click', function () { closeTour(ui); });
+    ui.close.addEventListener('click', function () { closeTour(ui); });
+    ui.pause.addEventListener('click', function () {
+      if (ui.pause.getAttribute('aria-pressed') === 'true') userPlay(ui);
+      else userPause(ui);
+    });
+    ui.card.addEventListener('pointermove', function () {
+      if (ui.suppressTransient || ui.card.hidden) return;
+      hold(ui, 'hover');
+    });
+    ui.card.addEventListener('pointerleave', function () {
+      ui.suppressTransient = false;
+      release(ui, 'hover');
+    });
+    ui.card.addEventListener('focusin', function (event) {
+      if (ui.card.hidden) return;
+      const onPause = event.target.closest && event.target.closest('#et-tour-pause');
+      if (onPause && ui.suppressTransient) return;
+      if (!onPause) ui.suppressTransient = false;
+      hold(ui, 'focus');
+    });
+    ui.card.addEventListener('focusout', function (event) {
+      if (ui.card.contains(event.relatedTarget)) return;
+      release(ui, 'focus');
+    });
     ui.card.addEventListener('keydown', function (event) {
       if (event.key === 'ArrowRight') { event.preventDefault(); onNext(ui); }
       if (event.key === 'ArrowLeft') { event.preventDefault(); onBack(ui); }
@@ -398,6 +515,11 @@
       if (event.key !== 'Escape' || ui.card.hidden) return;
       event.preventDefault();
       closeTour(ui);
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (ui.card.hidden || !ui.state) return;
+      if (document.hidden) hold(ui, 'hidden');
+      else release(ui, 'hidden');
     });
   }
 
@@ -438,21 +560,28 @@
     ui.back.hidden = step === 0;
     ui.next.textContent = !here ? 'Go to this stop' : beat.external && last ? 'Open Get access' : last ? 'Done' : 'Next';
     ui.state = { intent: tour, step: step, beats: beats };
+    const wasHidden = ui.card.hidden;
     ui.card.hidden = false;
     ui.pill.setAttribute('aria-expanded', 'true');
-    ui.card.focus();
+    if (wasHidden) ui.suppressTransient = false;
+    startClock(ui);
+    announceStep(ui, step, beats, beat);
   }
 
   function onNext(ui) {
     const state = ui.state;
     if (!state) return;
     const beat = state.beats[state.step];
-    if (beat.external && state.step === state.beats.length - 1 && samePlace(beat)) {
+    const last = state.step >= state.beats.length - 1;
+    if (beat.external && last && samePlace(beat)) {
+      stopClock(ui);
       location.assign(beat.external);
       return;
     }
-    if (!samePlace(beat)) { go(beat, state.intent, state.step); return; }
-    if (state.step >= state.beats.length - 1) { closeTour(ui); return; }
+    if (!samePlace(beat)) { depart(ui, beat, state.intent, state.step); return; }
+    if (last) { closeTour(ui); return; }
+    const nextBeat = state.beats[state.step + 1];
+    if (!samePlace(nextBeat)) { depart(ui, nextBeat, state.intent, state.step + 1); return; }
     renderStep(ui, state.step + 1, state.beats, state.intent);
   }
 
@@ -460,18 +589,173 @@
     const state = ui.state;
     if (!state || state.step === 0) return;
     const prev = state.beats[state.step - 1];
-    if (!samePlace(prev)) { go(prev, state.intent, state.step - 1); return; }
+    if (!samePlace(prev)) { depart(ui, prev, state.intent, state.step - 1); return; }
     renderStep(ui, state.step - 1, state.beats, state.intent);
   }
 
   function closeTour(ui) {
+    stopClock(ui);
     clearHighlight(ui);
     ui.card.hidden = true;
     ui.state = null;
+    ui.live.textContent = '';
     ui.pill.setAttribute('aria-expanded', 'false');
     clearTourSession();
     stripTourParam();
     ui.pill.focus();
+  }
+
+  function depart(ui, beat, tour, step) {
+    stopClock(ui);
+    go(beat, tour, step);
+  }
+
+  function clockNow() {
+    return window.performance && performance.now ? performance.now() : Date.now();
+  }
+
+  function reducedNow() {
+    const toggle = document.getElementById('motion-toggle');
+    return motionReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches, toggle && toggle.getAttribute('aria-pressed'));
+  }
+
+  function hold(ui, reason) {
+    if (ui.holds.has(reason)) return;
+    ui.holds.add(reason);
+    freezeClock(ui);
+    syncPause(ui);
+  }
+
+  function release(ui, reason) {
+    if (!ui.holds.has(reason)) return;
+    ui.holds.delete(reason);
+    syncPause(ui);
+    if (!ui.holds.size) armClock(ui);
+  }
+
+  function userPause(ui) {
+    ui.suppressTransient = false;
+    hold(ui, 'user');
+  }
+
+  function userPlay(ui) {
+    ui.holds.delete('user');
+    ui.holds.delete('hover');
+    ui.holds.delete('focus');
+    ui.suppressTransient = true;
+    syncPause(ui);
+    armClock(ui);
+  }
+
+  function syncPause(ui) {
+    const userPaused = ui.holds.has('user');
+    const paused = ui.holds.size > 0;
+    ui.pause.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
+    ui.pause.textContent = userPaused ? 'Play' : 'Pause';
+    ui.pause.setAttribute('aria-label', userPaused ? 'Play the tour' : 'Pause the tour');
+    ui.card.dataset.playback = paused ? 'paused' : 'playing';
+    ui.statusEl.textContent = paused ? 'Paused' : '';
+    if (ui.state) paintProgress(ui);
+  }
+
+  function clearTimers(ui) {
+    const clock = ui.clock;
+    if (clock.timer) clearTimeout(clock.timer);
+    if (clock.frame) cancelAnimationFrame(clock.frame);
+    clock.timer = 0;
+    clock.frame = 0;
+  }
+
+  function freezeClock(ui) {
+    const clock = ui.clock;
+    if (clock.deadline) clock.remaining = Math.max(0, clock.deadline - clockNow());
+    clock.deadline = 0;
+    clearTimers(ui);
+    paintProgress(ui);
+  }
+
+  function stopClock(ui) {
+    ui.clock.token += 1;
+    ui.holds.clear();
+    ui.suppressTransient = false;
+    ui.clock.deadline = 0;
+    ui.clock.remaining = 0;
+    clearTimers(ui);
+    syncPause(ui);
+  }
+
+  function startClock(ui) {
+    const clock = ui.clock;
+    clock.token += 1;
+    clock.deadline = 0;
+    clearTimers(ui);
+    const durs = beatDurations(ui.state.beats);
+    clock.remaining = durs[ui.state.step] || MIN_BEAT_MS;
+    syncPause(ui);
+    armClock(ui);
+  }
+
+  function armClock(ui) {
+    const clock = ui.clock;
+    if (!ui.state || ui.card.hidden || ui.holds.size || clock.timer) {
+      paintProgress(ui);
+      return;
+    }
+    const token = clock.token;
+    clock.deadline = clockNow() + clock.remaining;
+    clock.timer = setTimeout(function () {
+      clock.timer = 0;
+      clock.deadline = 0;
+      clock.remaining = 0;
+      if (token !== ui.clock.token || !ui.state || ui.card.hidden) return;
+      onNext(ui);
+    }, Math.max(0, clock.remaining));
+    // Reduced motion still advances. The bar jumps by step instead of easing.
+    if (reducedNow()) paintProgress(ui);
+    else tickClock(ui);
+  }
+
+  function tickClock(ui) {
+    paintProgress(ui);
+    if (!ui.clock.timer || reducedNow()) return;
+    ui.clock.frame = requestAnimationFrame(function () { tickClock(ui); });
+  }
+
+  function remainingMs(ui) {
+    const clock = ui.clock;
+    if (clock.deadline) return Math.max(0, clock.deadline - clockNow());
+    return clock.remaining;
+  }
+
+  function paintProgress(ui) {
+    const state = ui.state;
+    if (!state || !ui.progress) return;
+    const count = state.beats.length || 1;
+    const step = state.step;
+    const durs = beatDurations(state.beats);
+    const total = durs.reduce(function (sum, ms) { return sum + ms; }, 0) || 1;
+    let ratio;
+    if (reducedNow()) ratio = (step + 1) / count;
+    else {
+      const done = durs.slice(0, step).reduce(function (sum, ms) { return sum + ms; }, 0);
+      const into = Math.min(durs[step] || 0, Math.max(0, (durs[step] || 0) - remainingMs(ui)));
+      ratio = Math.min(1, (done + into) / total);
+    }
+    ui.fill.style.width = (Math.max(0, ratio) * 100).toFixed(2) + '%';
+    ui.progress.setAttribute('aria-valuemax', String(count));
+    ui.progress.setAttribute('aria-valuenow', String(step + 1));
+    const paused = ui.holds.size > 0 ? ', paused' : '';
+    ui.progress.setAttribute('aria-valuetext', 'Step ' + (step + 1) + ' of ' + count + paused);
+  }
+
+  function announceStep(ui, step, beats, beat) {
+    const message = 'Step ' + (step + 1) + ' of ' + beats.length + '. ' + beat.title + '. ' + beat.body;
+    ui.live.textContent = '';
+    const token = ui.clock.token;
+    setTimeout(function () {
+      if (token !== ui.clock.token || !ui.state || ui.state.step !== step) return;
+      ui.live.textContent = message;
+    }, 60);
   }
 
   function samePlace(beat) {
