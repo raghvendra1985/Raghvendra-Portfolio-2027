@@ -1,0 +1,13 @@
+{
+  "_comment": "Fill this in with Raghvendra's own listening. Each track needs title, artist, cover (a local path such as /assets/music/cover-01.svg), and url (Spotify, YouTube, or Apple Music). note is optional. The eight entries below are placeholders only: do not replace them with guessed artists or tracks.",
+  "tracks": [
+    {"title": "Track title", "artist": "Artist", "cover": "/assets/music/cover-01.svg", "url": "#", "note": "Placeholder"},
+    {"title": "Track title", "artist": "Artist", "cover": "/assets/music/cover-02.svg", "url": "#", "note": "Placeholder"},
+    {"title": "Track title", "artist": "Artist", "cover": "/assets/music/cover-03.svg", "url": "#", "note": "Placeholder"},
+    {"title": "Track title", "artist": "Artist", "cover": "/assets/music/cover-04.svg", "url": "#", "note": "Placeholder"},
+    {"title": "Track title", "artist": "Artist", "cover": "/assets/music/cover-05.svg", "url": "#", "note": "Placeholder"},
+    {"title": "Track title", "artist": "Artist", "cover": "/assets/music/cover-06.svg", "url": "#", "note": "Placeholder"},
+    {"title": "Track title", "artist": "Artist", "cover": "/assets/music/cover-07.svg", "url": "#", "note": "Placeholder"},
+    {"title": "Track title", "artist": "Artist", "cover": "/assets/music/cover-08.svg", "url": "#", "note": "Placeholder"}
+  ]
+}
