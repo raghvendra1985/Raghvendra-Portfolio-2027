@@ -47,6 +47,19 @@
   gap: 12px;
   text-decoration: none;
 }
+.hn-identity picture {
+  display: block;
+  line-height: 0;
+}
+.hn-logo {
+  height: 51px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .hn-logo { height: 41px; }
+}
 .hn-avatar {
   display: flex;
   align-items: center;
