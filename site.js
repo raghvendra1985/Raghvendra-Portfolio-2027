@@ -194,3 +194,36 @@ if (typeof document.createElement === 'function' && document.head && !document.q
   intentScript.dataset.etIntent = '1';
   document.head.appendChild(intentScript);
 }
+if (typeof document.createElement === 'function' && document.head && !document.querySelector('link[href*="mascot.css"]')) {
+  const mascotCss = document.createElement('link');
+  mascotCss.rel = 'stylesheet';
+  mascotCss.href = '/mascot.css';
+  const delightCss = document.createElement('link');
+  delightCss.rel = 'stylesheet';
+  delightCss.href = '/delights.css';
+  const mascotJs = document.createElement('script');
+  mascotJs.src = '/mascot.js';
+  mascotJs.defer = true;
+  document.head.append(mascotCss, delightCss, mascotJs);
+}
+if (typeof document.createElement === 'function' && document.head && !document.querySelector('script[src*="/theme.js"]')) {
+  const themeCss = document.createElement('link');
+  themeCss.rel = 'stylesheet';
+  themeCss.href = '/theme.css';
+  const extra = ['/surprise.css', '/chapters.css'].map(function (href) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    return link;
+  });
+  const themeJs = document.createElement('script');
+  themeJs.src = '/theme.js';
+  themeJs.defer = true;
+  const surpriseJs = document.createElement('script');
+  surpriseJs.src = '/surprise.js';
+  surpriseJs.defer = true;
+  const chaptersJs = document.createElement('script');
+  chaptersJs.src = '/chapters.js';
+  chaptersJs.defer = true;
+  document.head.append(themeCss, extra[0], extra[1], themeJs, surpriseJs, chaptersJs);
+}

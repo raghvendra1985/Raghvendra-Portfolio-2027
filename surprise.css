@@ -1,0 +1,36 @@
+.rs-charm{position:fixed;z-index:66;right:16px;bottom:calc(76px + env(safe-area-inset-bottom));width:64px;height:72px;padding:0;border:0;background:transparent;cursor:pointer}
+.rs-charm svg{width:64px;height:64px;display:block}
+.rs-charm span{position:absolute;right:70px;bottom:18px;padding:4px 8px;border-radius:6px;background:#111214;color:#ffe100;font:650 12px/1.2 "Space Grotesk",sans-serif;white-space:nowrap}
+.rs-charm.is-pop svg{animation:rs-pop .18s ease}
+@keyframes rs-pop{40%{transform:scale(1.08,.9)}100%{transform:scale(1)}}
+.rs-stage{position:fixed;inset:0;z-index:80}
+.rs-dim{position:absolute;inset:0;border:0;background:rgba(17,18,20,.45);backdrop-filter:blur(6px);cursor:pointer}
+.rs-spark{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(#ffe100 1.2px,transparent 1.4px);background-size:90px 110px;opacity:.7}
+.rs-rib{position:absolute;background:#ffe100;box-shadow:0 0 0 3px #c9b000;pointer-events:none}
+.rs-rib-y{left:50%;top:0;bottom:0;width:22px;margin-left:-11px;transform-origin:center;animation:rs-y .22s ease}
+.rs-rib-x{top:46%;left:0;right:0;height:22px;margin-top:-11px;transform-origin:center;animation:rs-x .22s ease}
+@keyframes rs-y{from{transform:scaleY(.2)}to{transform:scaleY(1)}}
+@keyframes rs-x{from{transform:scaleX(.2)}to{transform:scaleX(1)}}
+.rs-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,calc(100% - 36px));padding:36px 22px 20px;border:2px solid #111214;border-radius:8px;background:#f6f1e6;color:#111214;box-shadow:8px 8px 0 #111214;font-family:Inter,var(--font-body),sans-serif}
+.rs-card h2{margin:8px 0;font-family:"Space Grotesk",sans-serif;font-size:28px;letter-spacing:-.03em}
+.rs-card mark{background:linear-gradient(#ffe100,#ffe100) center 80%/100% .35em no-repeat;color:inherit}
+.rs-tag{position:absolute;left:-8px;top:-18px;margin:0;padding:8px 10px;transform:rotate(-6deg);background:#fff;border:2px solid #111214;font:12px/1.3 ui-monospace,monospace;box-shadow:3px 3px 0 #111214}
+.rs-x{position:absolute;top:8px;right:8px;width:36px;height:36px;border:2px solid #111214;background:#fff;font-size:20px;cursor:pointer}
+.rs-bow{position:absolute;left:50%;top:-16px;width:28px;height:18px;margin-left:-14px;background:#ffe100;border:2px solid #c9b000;border-radius:8px 8px 2px 2px}
+.rs-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.rs-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.rs-hi,.rs-tour{min-height:44px;padding:0 14px;border-radius:99px;font-family:"Space Grotesk",sans-serif;font-weight:650;cursor:pointer}
+.rs-hi{display:inline-flex;align-items:center;background:#ffe100;color:#111214;text-decoration:none}
+.rs-tour{border:2px solid #111214;background:transparent;color:#111214}
+.rs-card :focus-visible{outline:3px solid #111214;outline-offset:2px}
+html[data-theme="dark"] .rs-card{background:#1B1D22;color:#F5F5F7;border-color:#F5F5F7;box-shadow:8px 8px 0 #000}
+html[data-theme="dark"] .rs-tag,.html[data-theme="dark"] .rs-x{background:#1B1D22;color:#F5F5F7;border-color:#ffe100}
+html[data-theme="dark"] .rs-tour{color:#F5F5F7;border-color:#ffe100}
+html[data-theme="dark"] .rs-card :focus-visible{outline-color:#ffe100}
+html.rs-zen .rs-charm{opacity:.25;pointer-events:none}
+@media(prefers-reduced-motion:reduce){
+.rs-charm.is-pop svg,.rs-rib,.rs-bow{animation:none!important;transition:none!important}
+.rs-stage{animation:rs-fade .16s linear}
+}
+@keyframes rs-fade{from{opacity:0}to{opacity:1}}
+@media(max-width:700px){.rs-charm{bottom:calc(84px + env(safe-area-inset-bottom))}.rs-charm span{display:none}.rs-card h2{font-size:24px}}

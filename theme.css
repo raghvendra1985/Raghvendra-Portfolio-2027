@@ -1,0 +1,25 @@
+.rs-head-tools{position:absolute;z-index:6;top:50%;right:16px;transform:translateY(-50%);display:flex;align-items:center;gap:8px}
+.hn-inner{padding-right:250px}
+.rs-pilot{display:inline-flex;align-items:center;height:44px;padding:0 14px;border-radius:99px;background:#ffe100;color:#111214;font-family:"Space Grotesk",var(--font-display),sans-serif;font-weight:650;font-size:13px;text-decoration:none;white-space:nowrap}
+.rs-pilot .short{display:none}
+.rs-zen,.rs-theme{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #2A2D34;border-radius:99px;background:#fff;color:#111214;cursor:pointer}
+.rs-zen svg,.rs-theme svg{width:20px;height:20px}
+.rs-theme .sun{display:none}
+.rs-theme[aria-pressed="true"] .moon{display:none}
+.rs-theme[aria-pressed="true"] .sun{display:block}
+.rs-pilot,.rs-zen,.rs-theme{transition:transform .16s ease,background-color .16s ease,color .16s ease}
+.rs-pilot:focus-visible,.rs-zen:focus-visible,.rs-theme:focus-visible{outline:3px solid #111214;outline-offset:2px}
+html[data-theme="dark"] .rs-zen,html[data-theme="dark"] .rs-theme{background:#1B1D22;color:#F5F5F7;border-color:#ffe100}
+html[data-theme="dark"] .rs-pilot:focus-visible,html[data-theme="dark"] .rs-zen:focus-visible,html[data-theme="dark"] .rs-theme:focus-visible{outline-color:#ffe100}
+@media(max-width:1099px){.rs-head-tools{right:128px}}
+@media(max-width:760px){
+.hn-bar{display:flex;flex-direction:column}
+.hn-inner{width:100%;height:auto;min-height:60px;padding:8px 12px;box-sizing:border-box}
+.rs-head-tools{position:static;transform:none;width:100%;justify-content:flex-end;padding:0 12px 8px;box-sizing:border-box}
+.rs-pilot .long{display:none}
+.rs-pilot .short{display:inline}
+.rs-pilot{height:44px;padding:0 12px}
+}
+html.rs-zen .hn-identity,html.rs-zen .hn-nav,html.rs-zen .hn-cta,html.rs-zen .rs-pilot,html.rs-zen .rs-theme,html.rs-zen .thrive,html.rs-zen .et-pill,html.rs-zen #et-tour-pill,html.rs-zen footer,html.rs-zen .on-repeat,html.rs-zen .ch,html.rs-zen .rs-charm,html.rs-zen [data-coach],html.rs-zen .coach-mark,html.rs-zen .dn-rail,html.rs-zen .dn-rail-desktop,html.rs-zen .dn-rail-mobile,html.rs-zen .hx-case-card,html.rs-zen .hx-persona-card,html.rs-zen .teaching-institutions li,html.rs-zen .teaching-groups article,html.rs-zen .entry-portrait{opacity:.25;pointer-events:none}
+html.rs-zen .rs-zen{opacity:1;pointer-events:auto}
+@media(prefers-reduced-motion:reduce){.rs-pilot,.rs-zen,.rs-theme,html.rs-zen .hn-identity,html.rs-zen .thrive,html.rs-zen .ch{transition:none}}

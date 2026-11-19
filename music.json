@@ -1,0 +1,18 @@
+{
+  "_comment": "Real listening list. cover files are local Spotify oEmbed thumbnails. To add a track, set title, artist, cover, and url to https://open.spotify.com/track/<id>.",
+  "playlist": "https://open.spotify.com/playlist/37i9dQZF1E4CVBplrZZah6",
+  "tracks": [
+    {"title": "Socha Hai", "artist": "Farhan Akhtar", "cover": "/assets/music/cover-01.jpg", "url": "https://open.spotify.com/track/7IjnfuMNfdrAXbefurdIIR"},
+    {"title": "Dil Chahta Hai", "artist": "Shankar Mahadevan", "cover": "/assets/music/cover-02.jpg", "url": "https://open.spotify.com/track/2r1CHpKRDdzHGJScn5UqjX"},
+    {"title": "Rock On!!", "artist": "Farhan Akhtar", "cover": "/assets/music/cover-03.jpg", "url": "https://open.spotify.com/track/6fABlNfAOylt7ZxfX8K1XL"},
+    {"title": "O Sanam", "artist": "Lucky Ali", "cover": "/assets/music/cover-04.jpg", "url": "https://open.spotify.com/track/5oYRr51VatOtkFeEOursuZ"},
+    {"title": "Kabhi Kabhi Aditi", "artist": "Rashid Ali", "cover": "/assets/music/cover-05.jpg", "url": "https://open.spotify.com/track/3APdIdF8H0jsxSuGOqXedS"},
+    {"title": "Sinbad The Sailor", "artist": "Farhan Akhtar, Raman Mahadevan", "cover": "/assets/music/cover-06.jpg", "url": "https://open.spotify.com/track/03VTytguq5MS6e3x03y5i1"},
+    {"title": "Wake Up Sid!", "artist": "Shankar-Ehsaan-Loy", "cover": "/assets/music/cover-07.jpg", "url": "https://open.spotify.com/track/4M6CGErPaHO1z0vTOd4KMv"},
+    {"title": "Safarnama", "artist": "Lucky Ali", "cover": "/assets/music/cover-08.jpg", "url": "https://open.spotify.com/track/6w458kA8WOAIZr1ublxnK9"},
+    {"title": "Udd Gaye", "artist": "Ritviz", "cover": "/assets/music/cover-09.jpg", "url": "https://open.spotify.com/track/5ZsAhuQ24mWHiduaxJqnhW"},
+    {"title": "Zingaat", "artist": "Ajay-Atul", "cover": "/assets/music/cover-10.jpg", "url": "https://open.spotify.com/track/6rDCSTANJ05fi9nDoEYRFu"},
+    {"title": "Senorita", "artist": "Farhan Akhtar, Hrithik Roshan, Abhay Deol", "cover": "/assets/music/cover-11.jpg", "url": "https://open.spotify.com/track/3TAhWtQnpoL5Vl9VQPl9fU"},
+    {"title": "Aaj Kal Zindagi", "artist": "Shankar-Ehsaan-Loy", "cover": "/assets/music/cover-12.jpg", "url": "https://open.spotify.com/track/1aY9jprCwAISYDrdXj9JYo"}
+  ]
+}
