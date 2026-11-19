@@ -55,6 +55,16 @@
   gap: 12px;
   text-decoration: none;
 }
+.hn-identity picture {
+  display: block;
+  line-height: 0;
+}
+.hn-logo {
+  height: 51px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
 .hn-avatar {
   display: flex;
   align-items: center;
@@ -702,9 +712,18 @@
 .hx-drawer-cta-secondary:hover { background: var(--border); }
 
 /* ---- Responsive tweaks -------------------------------- */
+@media (max-width: 840px) and (min-width: 768px) {
+  /* Desktop lockup is 212px. With the nav and Recruiter View pill, 32px insets overflow the bar just above 768px. */
+  .hn-inner { padding-left: 16px; padding-right: 16px; }
+}
 @media (max-width: 640px) {
   .hx-hero { padding: 48px 0 56px; }
   .hx-case-card { padding: 24px 20px; }
   .hx-eval-widget { padding: 24px 20px; }
   .hn-inner { padding: 0 20px; }
+}
+@media (max-width: 600px) {
+  .hn-logo { height: 41px; }
+  /* 179px lockup plus the full Recruiter View pill needs a tighter inset at 390px. Bar stays 72px. */
+  .hn-inner { padding: 0 12px; gap: 8px; }
 }

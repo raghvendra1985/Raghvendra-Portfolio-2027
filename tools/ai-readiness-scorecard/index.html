@@ -363,6 +363,8 @@
       .score-nav-bar .score-btn { width: 100%; }
     }
   </style>
+<link rel="stylesheet" href="/type.css">
+<link rel="stylesheet" href="/dark-mode.css">
 </head>
 
 <body class="inner-page scorecard-page">
@@ -373,9 +375,13 @@
   ════════════════════════════════════════════ -->
   <div class="hn-bar" role="banner">
     <div class="hn-inner">
-      <a href="/" class="hn-identity" aria-label="Raghvendra Singh — home">
-        <span class="hn-avatar" aria-hidden="true"><img src="/assets/logo-mark.png" alt="Raghvendra Singh" width="38" height="38"></span>
-        <span class="hn-name">Raghvendra Singh</span>
+      <a href="/" class="hn-identity" aria-label="Elevate Thrive by Raghvendra Singh">
+        <picture>
+          <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="/assets/logo-et-c-mobile-dark.svg">
+          <source media="(prefers-color-scheme: dark)" srcset="/assets/logo-et-c-dark.svg">
+          <source media="(max-width: 600px)" srcset="/assets/logo-et-c-mobile.svg">
+          <img class="hn-logo" src="/assets/logo-et-c-light.svg" alt="Elevate Thrive by Raghvendra Singh" width="212" height="51">
+        </picture>
       </a>
 
       <nav class="hn-nav" aria-label="Main navigation">

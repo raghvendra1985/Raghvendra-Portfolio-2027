@@ -1,0 +1,103 @@
+/* Space Grotesk for display; Inter for reading text. Light and dark. */
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/inter-latin-400.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/inter-latin-500.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/inter-latin-600.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --font-body: Inter, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", Inter, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6,
+.hx-h1,
+.hx-persona-h3,
+.hx-work-h2,
+.hx-case-h3,
+.hx-metric-value,
+.hx-eval-h2,
+.hx-eval-title-txt,
+.hx-eval-score-num,
+.hx-drawer-name,
+.hx-drawer-stat-val,
+.hn-name,
+.hn-nav,
+.hn-nav a,
+.case-impact-val,
+.learning-track-title,
+.doodle-wordmark-text,
+.lanyard-badge-price,
+.work-artifact-stat,
+.faqs summary,
+.feature-heading,
+.lanyard-heading {
+  font-family: var(--font-display);
+}
+
+button,
+.button,
+.btn-cobalt,
+.btn-ghost,
+.btn-outline,
+.hn-cta,
+input,
+textarea,
+select,
+label,
+p,
+li,
+dd,
+figcaption,
+caption,
+.caption,
+.hx-lede,
+.intro {
+  font-family: var(--font-body);
+}
+
+/* Reading text stays 17px / 1.6, including viewports under 700px. */
+body,
+.intro,
+.hx-lede,
+.service p,
+.process p,
+.contact p:not(.eyebrow),
+.editorial-grid p,
+.workshop-card p,
+.workshop-card li,
+.offering-body p,
+.offering-body li,
+.case-layout p,
+.case-layout li,
+.case-layout dd,
+.case-study p,
+.hx-persona-p {
+  font-size: 17px;
+  line-height: 1.6;
+}
