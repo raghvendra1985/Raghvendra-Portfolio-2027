@@ -1,0 +1,19 @@
+@media(hover:hover) and (pointer:fine){
+.wi-card,.hx-case-card,.work-artifact-card{transition:transform .18s ease;transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.wi-card:hover,.hx-case-card:hover,.work-artifact-card:hover{transform:perspective(700px) translateY(-3px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.wi-title,.hx-case-h3,.work-artifact-name,.hn-nav a,.dn-grow-list a{position:relative}
+.wi-title:after,.hx-case-h3:after,.work-artifact-name:after,.hn-nav a:after,.dn-grow-list a:after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:#ffe100;transform:scaleX(0);transform-origin:left;transition:transform .16s ease;pointer-events:none}
+.wi-card:hover .wi-title:after,.hx-case-card:hover .hx-case-h3:after,.work-artifact-card:hover .work-artifact-name:after,.hn-nav a:hover:after,.dn-grow-list a:hover:after{transform:scaleX(1)}
+.button:hover,.btn-cobalt:hover,.hx-drawer-cta-primary:hover{animation:delight-pop .18s ease}
+.button:hover>span[aria-hidden],.btn-cobalt:hover>span[aria-hidden]{transform:translateX(4px);transition:transform .16s ease}
+@keyframes delight-pop{45%{transform:scale(1.045,.95)}}
+.hn-logo{transition:transform .18s ease}
+.hn-identity:hover .hn-logo,.dn-mark:hover .hn-logo{transform:translateY(-3px)}
+.wi-thumb,.case-frame,.case-image{overflow:hidden}
+.wi-thumb img,.case-frame img,.case-image img{transition:transform .2s ease}
+.wi-card:hover .wi-thumb img:not([src$=".svg"]),.case-frame:hover img,.case-image:hover img{transform:scale(1.045)}
+}
+@media(prefers-reduced-motion:reduce),html:has(#motion-toggle[aria-pressed=true]){
+.wi-card,.hx-case-card,.work-artifact-card,.button,.btn-cobalt,.hn-logo,.wi-thumb img,.case-frame img{animation:none!important;transition:none!important;transform:none!important}
+.wi-title:after,.hx-case-h3:after,.work-artifact-name:after,.hn-nav a:after{transform:scaleX(0)!important}
+}

@@ -194,3 +194,15 @@ if (typeof document.createElement === 'function' && document.head && !document.q
   intentScript.dataset.etIntent = '1';
   document.head.appendChild(intentScript);
 }
+if (typeof document.createElement === 'function' && document.head && !document.querySelector('link[href*="mascot.css"]')) {
+  const mascotCss = document.createElement('link');
+  mascotCss.rel = 'stylesheet';
+  mascotCss.href = '/mascot.css';
+  const delightCss = document.createElement('link');
+  delightCss.rel = 'stylesheet';
+  delightCss.href = '/delights.css';
+  const mascotJs = document.createElement('script');
+  mascotJs.src = '/mascot.js';
+  mascotJs.defer = true;
+  document.head.append(mascotCss, delightCss, mascotJs);
+}
