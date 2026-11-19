@@ -187,10 +187,10 @@ if (typeof document.createElement === 'function') {
 if (typeof document.createElement === 'function' && document.head && !document.querySelector('script[src*="/intent.js"]')) {
   const intentStyle = document.createElement('link');
   intentStyle.rel = 'stylesheet';
-  intentStyle.href = '/intent.css?v=intent-1';
+  intentStyle.href = '/intent.css?v=tour-autoplay';
   document.head.appendChild(intentStyle);
   const intentScript = document.createElement('script');
-  intentScript.src = '/intent.js?v=intent-1';
+  intentScript.src = '/intent.js?v=tour-autoplay';
   intentScript.dataset.etIntent = '1';
   document.head.appendChild(intentScript);
 }

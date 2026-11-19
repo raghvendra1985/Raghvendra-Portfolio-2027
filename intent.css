@@ -24,14 +24,24 @@
   padding: 16px 16px 12px; background: #fff; color: #0a1a33;
   border: 1px solid #ccd5e7; border-radius: 20px; box-shadow: 0 18px 50px #0a1a3326;
 }
-.et-step { margin: 0 0 6px; font-size: 12px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; color: #596779; }
+.et-head { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; }
+.et-step { margin: 0; font-size: 12px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; color: #596779; }
+.et-status { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #0022cb; }
+.et-status:empty { display: none; }
+.et-close { margin-left: auto; }
+.et-progress { height: 4px; margin: 0 0 12px; border-radius: 99px; background: #e6ecf7; overflow: hidden; }
+.et-progress-fill { display: block; height: 100%; width: 0; background: #0022cb; border-radius: 99px; }
 .et-card h2 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.03em; }
 .et-card:focus { outline: none; }
+.et-card :focus-visible { outline: 2px solid #0022cb; outline-offset: 2px; }
 #et-tour-body { margin: 0 0 14px; font-size: 15px; line-height: 1.45; color: #243044; }
-.et-actions { display: flex; align-items: center; gap: 4px; }
+.et-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; row-gap: 8px; }
 .et-next { margin-left: auto; min-height: 44px; padding: 8px 16px; border: 0; border-radius: 99px; background: #0022cb; color: #fff; font-weight: 600; }
 .et-next:hover { background: #001a9e; }
+.et-pause { min-height: 44px; padding: 8px 12px; border-radius: 99px; border: 1.5px solid #0022cb; background: #fff; color: #0022cb; font-weight: 600; }
+.et-pause[aria-pressed="true"] { background: #0022cb; color: #fff; }
 .et-text { min-height: 44px; padding: 8px 10px; border: 0; background: transparent; color: #0022cb; font-weight: 600; }
+.et-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .et-tour-target { outline: 3px solid #0022cb; outline-offset: 6px; border-radius: 16px; scroll-margin: 120px; }
 
 @media (max-width: 700px) {
@@ -39,5 +49,6 @@
   .et-card { left: 16px; width: auto; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .et-pill, .et-card, .et-tour-target, .discovery-link[aria-current="true"] { transition: none; animation: none; }
+  .et-pill, .et-card, .et-tour-target, .et-progress-fill, .discovery-link[aria-current="true"] { transition: none; animation: none; }
 }
+html:has(#motion-toggle[aria-pressed="true"]) .et-progress-fill { transition: none; animation: none; }

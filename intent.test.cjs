@@ -90,6 +90,30 @@ test('page default tour follows the section unless a path or browsing choice exi
   assert.equal(et.inferredTour('', '/'), '');
 });
 
+test('autoplay timings follow copy length and total about one minute', () => {
+  for (const intent of ['recruiter', 'client', 'student']) {
+    const beats = et.visibleBeats(intent);
+    const durations = et.beatDurations(beats);
+    assert.equal(durations.length, beats.length);
+    assert.equal(durations.reduce((sum, ms) => sum + ms, 0), 60000);
+    for (const ms of durations) assert.ok(ms >= 7000 && ms < 20000);
+    const lengths = beats.map((beat) => (beat.title + beat.body).length);
+    const shortest = lengths.indexOf(Math.min(...lengths));
+    const longest = lengths.indexOf(Math.max(...lengths));
+    assert.ok(durations[longest] >= durations[shortest]);
+  }
+  const gated = et.visibleBeats('student', { flag: 'live' });
+  assert.equal(et.beatDurations(gated).reduce((sum, ms) => sum + ms, 0), 60000);
+  const custom = et.beatDurations([
+    { title: 'A', body: 'short', duration: 4000 },
+    { title: 'B', body: 'a much longer sentence about the work itself' }
+  ]);
+  assert.equal(custom[0], 4000);
+  assert.ok(custom[1] >= 7000);
+  assert.equal(et.beatDurations([]).length, 0);
+  assert.equal(et.visibleBeats('client').map((beat) => beat.id).join(','), 'hero,offers,case,process,pricing,enquiry');
+});
+
 test('cross-page tour links carry the intent and do not open on a plain visit', () => {
   const beat = et.visibleBeats('recruiter')[0];
   const url = et.beatUrl(beat, 'recruiter');
