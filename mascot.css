@@ -1,0 +1,24 @@
+.thrive{--s:32px;--tilt:0deg;--hop:0px;--eye:1;--glance:0px;position:fixed;z-index:58;left:0;top:84px;bottom:18px;width:var(--s);pointer-events:none;color:#111214}
+@media(min-width:1360px){.thrive{--s:40px;left:8px}}
+.tr{position:absolute;left:calc(var(--s)/2 - 1px);top:calc(var(--s)/2);bottom:calc(var(--s)/2);width:2px;border-radius:2px;background:rgba(17,18,20,.28)}
+.mv,.hit,.svg{width:var(--s);height:var(--s)}
+.mv{position:absolute;left:0;top:0}
+.hit{position:relative;display:grid;place-items:center;margin:0;padding:0;border:0;background:0 0;cursor:pointer;pointer-events:auto}
+.hit:focus-visible{outline:3px solid #111214;outline-offset:3px}
+.svg{display:block;overflow:visible}
+.pose{transform:rotate(var(--tilt)) translateY(var(--hop));transform-origin:20px 28px;transition:transform .16s ease}
+.pose>path:not(.arm){fill:#ffe100;stroke:#111214;stroke-width:2;stroke-linejoin:round}
+.eyes{fill:#111214;transform:translateX(var(--glance)) scaleY(var(--eye));transform-box:fill-box;transform-origin:center;transition:transform .14s ease}
+.thrive.is-blink,.thrive.is-sleep{--eye:.15}
+.thrive.is-sleep .pose{transform:rotate(11deg)}
+.thrive.is-peek .pose{transform:rotate(-16deg) translate(-2px,2px)}
+.thrive.is-hop .pose{transform:rotate(var(--tilt)) translateY(-9px)}
+.thrive.is-cheer .pose{animation:th .2s ease}
+@keyframes th{50%{transform:rotate(calc(var(--tilt) + 8deg)) translateY(-8px)}}
+.arm{fill:none;stroke:#111214;stroke-width:2;opacity:0;transform-origin:28px 24px}
+.thrive.is-done .arm{opacity:1;animation:tw .18s ease-in-out 3}
+@keyframes tw{50%{transform:rotate(-28deg)}}
+.thrive.is-hidden,body.is-menu-open .thrive,body:has(#navigation.open,.hx-overlay.open,.dn-grow-panel.is-open,#et-tour:not([hidden]),[data-coach]:not([hidden])) .thrive,html[data-mascot=off] .thrive{visibility:hidden;opacity:0;pointer-events:none}
+@media(max-width:700px){.thrive{--s:28px;top:auto;left:8px;bottom:calc(12px + env(safe-area-inset-bottom));width:28px;height:28px}.tr{display:none}.thrive:not(.is-awake){visibility:hidden;opacity:0;pointer-events:none}}
+html[data-theme="dark"] .tr{background:#2A2D34}html[data-theme="dark"] .hit:focus-visible{outline-color:#ffe100}
+@media(prefers-reduced-motion:reduce),html:has(#motion-toggle[aria-pressed=true]){.thrive,.thrive *{animation:none!important;transition:none!important}}
