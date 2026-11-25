@@ -164,6 +164,9 @@ test('the home page includes the coach files and nothing else owns the storage k
   const html = fs.readFileSync(__dirname + '/index.html', 'utf8');
   assert.match(html, /href="\/coach\.css"/);
   assert.match(html, /src="\/coach\.js"/);
+  assert.match(html, /src="\/direction-nav\.js"/);
+  const nav = fs.readFileSync(__dirname + '/direction-nav.js', 'utf8');
+  assert.match(nav, /setAttribute\('data-coach-anchor', 'menu'\)/);
   const css = fs.readFileSync(__dirname + '/coach.css', 'utf8');
   assert.match(css, /#1B1D22/);
   assert.match(css, /#111214/);

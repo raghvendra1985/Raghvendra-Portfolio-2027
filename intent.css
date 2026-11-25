@@ -52,3 +52,10 @@
   .et-pill, .et-card, .et-tour-target, .et-progress-fill, .discovery-link[aria-current="true"] { transition: none; animation: none; }
 }
 html:has(#motion-toggle[aria-pressed="true"]) .et-progress-fill { transition: none; animation: none; }
+
+/* Direction nav opens a menu. Hide the tour pill only — autoplay is unchanged. */
+body.is-menu-open .et-pill {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
