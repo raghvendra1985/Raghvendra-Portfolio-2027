@@ -1,0 +1,25 @@
+/* Coach marks. Light canvas; charcoal tokens in the dark query. 160ms ease, no page overlay. */
+.rs-coach{position:fixed;z-index:210;width:min(320px,calc(100vw - 24px));margin:0;padding:14px 14px 12px;border:1px solid #d8dee8;border-radius:16px;background:#fff;color:#111214;box-shadow:0 12px 32px #11121429;font-family:var(--font-body),Inter,"Segoe UI",sans-serif;font-size:15px;line-height:1.45;opacity:0;transform:translateY(6px);transition:opacity 160ms ease,transform 160ms ease}
+.rs-coach.is-on{opacity:1;transform:none}
+.rs-coach.is-static,.rs-coach-ring.is-static{transform:none;transition:none}
+.rs-coach-count{margin:0 0 6px;font-size:12px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:#3c4452}
+.rs-coach h2{margin:0 0 6px;font-family:var(--font-display),"Space Grotesk",Inter,sans-serif;font-size:18px;font-weight:600;letter-spacing:-.03em;line-height:1.2;color:#111214}
+#rs-coach-body{margin:0;color:#111214}
+.rs-coach-actions{display:flex;align-items:center;gap:8px;margin-top:12px}
+.rs-coach-skip,.rs-coach-next{font-family:inherit;cursor:pointer}
+.rs-coach-skip{min-height:44px;padding:8px 2px;border:0;background:transparent;color:#111214;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.rs-coach-next{margin-left:auto;min-height:44px;padding:8px 18px;border:0;border-radius:999px;background:#ffe100;color:#111214;font-size:15px;font-weight:650}
+.rs-coach-next:hover{background:#f0d400}
+.rs-coach :focus-visible{outline:3px solid #111214;outline-offset:3px}
+.rs-coach-live{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.rs-coach-ring{position:fixed;z-index:205;box-sizing:border-box;pointer-events:none;border:2px solid #111214;box-shadow:0 0 0 3px #ffe100,0 0 0 8px #ffe10059;background:transparent;opacity:0;transition:opacity 160ms ease}
+.rs-coach-ring.is-on{opacity:1}
+@media (prefers-color-scheme:dark){
+  .rs-coach{background:#1B1D22;color:#F5F5F7;border-color:#2A2D34;box-shadow:0 16px 36px #0006}
+  .rs-coach-count{color:#A9AEB8}
+  .rs-coach h2,#rs-coach-body,.rs-coach-skip{color:#F5F5F7}
+  .rs-coach-next,.rs-coach-next:hover{background:#ffe100;color:#111214}
+  .rs-coach :focus-visible{outline-color:#ffe100}
+  .rs-coach-next:focus-visible{outline-color:#F5F5F7}
+}
+@media (prefers-reduced-motion:reduce){.rs-coach,.rs-coach-ring{transition:none;animation:none;transform:none}}

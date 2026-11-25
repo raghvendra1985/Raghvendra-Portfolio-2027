@@ -451,6 +451,7 @@
     }
     var menu = menuButton(doc, 'dn-glass dn-menu-btn');
     menu.id = 'dn-compact-menu';
+    menu.setAttribute('data-coach-anchor', 'menu');
     menu.setAttribute('aria-controls', 'dn-panel-sheet');
     menu.setAttribute('aria-label', 'Menu');
     compact.appendChild(recruiter);
